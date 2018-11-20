@@ -1,0 +1,14 @@
+﻿  Navigation.cpp
+  Cell.cpp
+  Buffer_Terrain.cpp
+d:\학원\repositories\d3dxframework\engine\codes\buffer_terrain.cpp(167): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+d:\학원\repositories\d3dxframework\engine\codes\buffer_terrain.cpp(169): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+d:\학원\repositories\d3dxframework\engine\codes\buffer_terrain.cpp(192): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+d:\학원\repositories\d3dxframework\engine\codes\buffer_terrain.cpp(194): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  Management.cpp
+  Component_Manager.cpp
+  코드를 생성하고 있습니다...
+  Engine.vcxproj -> D:\학원\Repositories\D3DXFrameWork\Engine\Default\..\Bin\Engine.dll
+  Engine.vcxproj -> ..\Bin\Engine.pdb (Full PDB)

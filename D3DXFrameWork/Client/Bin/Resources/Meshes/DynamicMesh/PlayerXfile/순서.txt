@@ -1,0 +1,27 @@
+0 APT_SitIdle_Breath
+1 APT_SitIdle_HandMove
+2 APT_GetUp_DeadPool
+3 APT_SitDown_DeadPool_x
+4 Idle_NoGun00
+5 Idle_NoGun01
+6 Idle_NoGun02
+7 Idle_NoGun03
+8 Idle_NoGun04
+9 Idle_NoGun05
+10 Idle_NoGun06
+11 NoGun_Walk_F
+12 NoGun_Walk_FL
+13 NoGun_Walk_FR
+14 NoGun_Walk_L
+15 NoGun_Walk_R
+16 NoGun_Walk_B
+
+
+
+
+1. 꾹 누르고 있으면 반복 재생 되는 경우
+2. 한번만 눌러도 끝까지 재생되는 경우
+3. 끝나기 전에 누르면 다른 애니메이션으로 전이되는 경우
+4. 
+
+52.5 // 12

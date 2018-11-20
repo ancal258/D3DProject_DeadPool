@@ -1,0 +1,4 @@
+0 ~ 6 : IDLE
+7 : Gun IDLE
+8~11 : Light Sword
+12: Sword Idle
