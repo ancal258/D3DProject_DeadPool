@@ -129,6 +129,9 @@
     <ClInclude Include="..\Headers\Camera_Cinematic.h">
       <Filter>02.GameObject\03.For.Public\Camera\Cinematic</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\Event_Cube.h">
+      <Filter>02.GameObject\00.For.Static\02.Event_Cube</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -172,6 +175,9 @@
     </ClCompile>
     <ClCompile Include="..\Codes\Camera_Cinematic.cpp">
       <Filter>02.GameObject\03.For.Public\Camera\Cinematic</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Event_Cube.cpp">
+      <Filter>02.GameObject\00.For.Static\02.Event_Cube</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

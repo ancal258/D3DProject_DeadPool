@@ -25,6 +25,10 @@ private:
 	CManagement*				m_pManagement = nullptr;
 	LPDIRECT3DDEVICE9			m_pGraphic_Device = nullptr;
 	CRenderer*					m_pRenderer = nullptr;
+private: // Frame
+	_ulong						m_dwRenderCnt = 0;
+	_float						m_fTimeAcc = 0.f;
+	_tchar						m_szFPS[128] = L"";
 private:
 	HRESULT Ready_Default_Setting(CGraphic_Device::WINMODE eMode, const _uint& iBackCX, const _uint& iBackCY);	
 	HRESULT Ready_Static_Component();

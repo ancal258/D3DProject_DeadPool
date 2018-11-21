@@ -1,2 +1,8 @@
-﻿  Client.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Default\..\Bin\Client.exe
+﻿  Player.cpp
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\player.cpp(106): warning C4305: '인수': 'double'에서 'const Engine::_float'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\player.cpp(321): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\player.cpp(322): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\player.cpp(324): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\player.cpp(451): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  Client.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Default\..\Bin\Client.exe
   Client.vcxproj -> ..\Bin\Client.pdb (Full PDB)

@@ -172,6 +172,7 @@
     <ClInclude Include="..\Headers\Constant.h" />
     <ClInclude Include="..\Headers\Defines.h" />
     <ClInclude Include="..\Headers\DP_Sword.h" />
+    <ClInclude Include="..\Headers\Event_Cube.h" />
     <ClInclude Include="..\Headers\MainApp.h" />
     <ClInclude Include="..\Headers\Player.h" />
     <ClInclude Include="..\Headers\Scene_Logo.h" />
@@ -190,6 +191,7 @@
     <ClCompile Include="..\Codes\Camera_Debug.cpp" />
     <ClCompile Include="..\Codes\Camera_Target.cpp" />
     <ClCompile Include="..\Codes\DP_Sword.cpp" />
+    <ClCompile Include="..\Codes\Event_Cube.cpp" />
     <ClCompile Include="..\Codes\MainApp.cpp" />
     <ClCompile Include="..\Codes\Player.cpp" />
     <ClCompile Include="..\Codes\Scene_Logo.cpp" />
