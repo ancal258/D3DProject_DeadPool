@@ -18,6 +18,8 @@ public:
 	void Set_VecPointNav(vector<_vec3>* pVecPoint) {
 		m_Page_Navigation.Set_VecPointNav(pVecPoint);
 	}
+	void Add_CamPoint(_vec3 vPoint) {
+		m_Page_CinemaCam.Add_CamPoint(vPoint);	}
 public:
 	CSheet();
 	CSheet(UINT nIDCaption, CWnd* pParentWnd = NULL, UINT iSelectPage = 0);

@@ -66,6 +66,21 @@ HRESULT CInput_Device::Picking_ToMesh(CMesh_Static * pStaticMeshCom, CTransform 
 	return NOERROR;
 }
 
+HRESULT CInput_Device::Picking_ToCollider(LPD3DXMESH pMesh, CTransform * pTransformCom, BOOL * pHit)
+{
+	_float		fU, fV, fDist;
+	_vec3		vRayPos, vRayDir;
+	_matrix     matWorld = *pTransformCom->Get_WorldMatrix();
+	D3DXVec3Normalize(&m_vRayDir, &m_vRayDir);
+	D3DXMatrixInverse(&matWorld, nullptr, &matWorld);
+	D3DXVec3TransformCoord(&vRayPos, &m_vRayPos, &matWorld);
+	D3DXVec3TransformNormal(&vRayDir, &m_vRayDir, &matWorld);
+
+	if (FAILED(D3DXIntersect(pMesh, &vRayPos, &vRayDir, (BOOL*)pHit, nullptr, &fU, &fV, &fDist, nullptr, nullptr)))
+		return E_FAIL;
+	return NOERROR;
+}
+
 HRESULT CInput_Device::SetUp_Picking()
 {
 	LPDIRECT3DDEVICE9 pGraphic_Device = CGraphic_Device::GetInstance()->Get_GraphicDev();

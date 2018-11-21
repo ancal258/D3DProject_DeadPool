@@ -40,7 +40,7 @@ HRESULT CPlayer::Ready_GameObject()
 	m_fMouseSence = 3.f;
 	m_pTransformCom->Scaling(0.05f, 0.05f, 0.05f);
 	//m_pTransformCom->Set_AngleY(D3DXToRadian(0));
-	//m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(15, 0.f, 13));
+	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(5, 0.f, 5));
 	//m_pTransformCom->Go_Straight(0.8,1);
 	m_pInput_Device = CInput_Device::GetInstance();
 	m_pInput_Device->AddRef();
@@ -51,11 +51,11 @@ HRESULT CPlayer::Ready_GameObject()
 	m_pHandMatrix[1] = m_pMeshCom->Get_FrameMatrixByName("R_Weapon01_Wpn_XW");
 	if (nullptr == m_pHandMatrix[1])
 		return E_FAIL;
-	m_pRootMatrix = m_pMeshCom->Get_FrameMatrixByName("C_Root_Reference_XR");
+	m_pRootMatrix = m_pMeshCom->Get_FrameMatrixByName("C_Root_Reference_XR"); 
 	if (nullptr == m_pRootMatrix)
 		return E_FAIL;
 
-	m_pMeshCom->Set_AnimationSet(SIT_IDLE_BREATH);
+	m_pMeshCom->Set_AnimationSet(NOGUN_IDLE00);
 	return NOERROR;
 }
 
@@ -81,10 +81,17 @@ _int CPlayer::Update_GameObject(const _float & fTimeDelta)
 	}
 	if (m_pInput_Device->Get_DIKeyState(DIK_NUMPAD3) & 0x8000)
 	{
+		Load_CamData(L"ChairCam.dat");
+
 		m_Camera_State = CAMERA_CINEMATIC;
 		m_pCamera_Debug->Set_IsCameraOn(false);
 		m_pCamera_Target->Set_IsCameraOn(false);
 		m_pCamera_Cinematic->Set_IsCameraOn(true);
+	}
+
+	if (m_pInput_Device->Get_DIKeyState(DIK_NUMPAD4) & 0x8000)
+	{
+		Load_CamData(L"TVCam.dat");
 	}
 
 	if (m_pInput_Device->Get_DIKeyState(DIK_UP) & 0x8000)
@@ -113,7 +120,7 @@ _int CPlayer::Update_GameObject(const _float & fTimeDelta)
 	else
 	{
 		int iIndex = rand() % 6 + 4;
-		m_pMeshCom->Set_AnimationSet(SIT_IDLE_BREATH);
+		m_pMeshCom->Set_AnimationSet(NOGUN_IDLE00);
 	}
 	
 
@@ -297,8 +304,8 @@ HRESULT CPlayer::SetUp_Camera()
 	if (nullptr == m_pCamera_Cinematic)
 	{
 		m_pCamera_Cinematic = (CCamera_Cinematic*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Camera", 2);
-		if (FAILED(SetUp_CameraMove())) // 나중에 FilePath 받아서 만들자.
-			return E_FAIL;
+		//if (FAILED(SetUp_CameraMove())) // 나중에 FilePath 받아서 만들자.
+		//	return E_FAIL;
 	}
 	return NOERROR;
 }
@@ -415,6 +422,42 @@ HRESULT CPlayer::Update_HandMatrix()
 	m_CombinedHandMatrix[0] = *m_pHandMatrix[0] * *m_pTransformCom->Get_WorldMatrix();
 	m_CombinedHandMatrix[1] = *m_pHandMatrix[1] * *m_pTransformCom->Get_WorldMatrix();
 	m_CombinedRootMatrix = *m_pRootMatrix * *m_pTransformCom->Get_WorldMatrix();
+	return NOERROR;
+}
+
+HRESULT CPlayer::Load_CamData(const _tchar * pFileName)
+{
+
+	_tchar szFilePath[128];// = ;
+	ZeroMemory(szFilePath, sizeof(_tchar) * 128);
+	lstrcpy(szFilePath, L"../Bin/DataFiles/");
+	lstrcat(szFilePath, pFileName);
+
+	HANDLE			hFile = CreateFile(szFilePath, GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+	if (0 == hFile)
+		return E_FAIL;
+
+	_ulong			dwByte = 0;
+	_uint iNumPoints = 0;
+	_float fTime = 0;
+	_vec3 vLookAt;
+	_vec3 vPoint;
+	vector<_vec3> vecEye;
+
+
+	ReadFile(hFile, &iNumPoints, sizeof(_uint), &dwByte, nullptr);
+	ReadFile(hFile, &fTime, sizeof(_float), &dwByte, nullptr);
+	ReadFile(hFile, &vLookAt, sizeof(_vec3), &dwByte, nullptr);
+	for (int i = 0; i < iNumPoints; ++i)
+	{
+		ReadFile(hFile, &vPoint, sizeof(_vec3), &dwByte, nullptr);
+		vecEye.push_back(vPoint);
+	}
+
+	CloseHandle(hFile);
+
+	m_pCamera_Cinematic->SetUp_CameraMove(vecEye, vLookAt, fTime);
+
 	return NOERROR;
 }
 

@@ -67,6 +67,9 @@
     <Filter Include="02.GameObject\03.For.Public\Camera\Cinematic">
       <UniqueIdentifier>{89b6ec5e-599f-4fa7-a5a9-aae7ad4f1b37}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\00.For.Static\02.Event_Cube">
+      <UniqueIdentifier>{de30eaa8-aaea-4d67-97d3-474189e70e82}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />

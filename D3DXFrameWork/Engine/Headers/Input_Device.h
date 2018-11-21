@@ -32,8 +32,9 @@ public:
 	HRESULT Ready_Input_Device(HINSTANCE hInst, HWND hWnd);
 	HRESULT Inquire_Input_State();
 	_bool Picking_ToBuffer(CVIBuffer* pBufferCom, CTransform* pTransformCom, _vec3* pCollPos);
-	_bool Picking_ToBuffer(CVIBuffer* pBufferCom, CTransform* pTransformCom,CNavigation* pNavigation , _vec3* pCollPos);
+	_bool Picking_ToBuffer(CVIBuffer* pBufferCom, CTransform* pTransformCom, CNavigation* pNavigation, _vec3* pCollPos);
 	HRESULT Picking_ToMesh(CMesh_Static * pStaticMeshCom, CTransform * pTransformCom, BOOL* pHit);
+	HRESULT Picking_ToCollider(LPD3DXMESH pMesh, CTransform * pTransformCom, BOOL* pHit);
 	HRESULT SetUp_Picking();
 private:
 	HWND							m_hWnd = 0;

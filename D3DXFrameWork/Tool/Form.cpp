@@ -89,6 +89,11 @@ void CForm::Set_VecPointNav(vector<_vec3>* pVecPoint)
 	m_pSheet->Set_VecPointNav(pVecPoint);
 }
 
+void CForm::Add_CamPoint(_vec3 vPoint)
+{
+	m_pSheet->Add_CamPoint(vPoint);
+}
+
 void CForm::OnDestroy()
 {
 	CFormView::OnDestroy();

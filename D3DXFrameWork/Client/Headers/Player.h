@@ -78,7 +78,7 @@ private:
 	HRESULT Ready_Component();
 	HRESULT   SetUp_ConstantTable(LPD3DXEFFECT pEffect);
 	HRESULT Update_HandMatrix();
-
+	HRESULT Load_CamData(const _tchar * pFileName);
 public:
 	static CPlayer* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone_GameObject();

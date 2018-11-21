@@ -1,14 +1,5 @@
-﻿  건너뛰고 있습니다... (관련된 변경 내용 없음)
-  ToolView.cpp
-  ToolDoc.cpp
-  Tool.cpp
-  Sheet.cpp
-  Page_Terrain.cpp
-  Page_Object.cpp
-  Page_Navigation.cpp
-  Page_CinemaCam.cpp
-  Page_Animation.cpp
-  MainFrm.cpp
-  Form.cpp
-  Tool.vcxproj -> C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Tool\.\Bin\Tool.exe
+﻿  Page_CinemaCam.cpp
+d:\github\d3dproject_deadpool\d3dxframework\tool\campoint.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+d:\github\d3dproject_deadpool\d3dxframework\tool\page_cinemacam.cpp(191): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  Tool.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Tool\.\Bin\Tool.exe
   Tool.vcxproj -> .\Bin\Tool.pdb (Partial PDB)

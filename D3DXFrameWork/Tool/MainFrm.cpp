@@ -103,6 +103,10 @@ void CMainFrame::Set_VecPointNav(vector<_vec3>* pVecPoint)
 {
 	m_pFormView->Set_VecPointNav(pVecPoint);
 }
+void CMainFrame::Add_CamPoint(_vec3 vPoint)
+{
+	m_pFormView->Add_CamPoint(vPoint);
+}
 #endif //_DEBUG
 
 

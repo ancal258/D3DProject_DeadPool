@@ -201,6 +201,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CamPoint.h" />
     <ClInclude Include="Defines.h" />
     <ClInclude Include="Form.h" />
     <ClInclude Include="MainFrm.h" />
@@ -223,6 +224,7 @@
     <ClInclude Include="ToolView.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CamPoint.cpp" />
     <ClCompile Include="Form.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="Page_Animation.cpp" />

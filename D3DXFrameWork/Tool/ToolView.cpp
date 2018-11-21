@@ -22,7 +22,7 @@
 #include "ToolTerrain.h"
 #include "ToolCamera.h"
 #include "Player.h"
-
+#include "CamPoint.h"
 
 #include "Static_Object.h"
 
@@ -234,6 +234,8 @@ HRESULT CToolView::Ready_GameObject_Prototype_Static()
 	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Terrain", CToolTerrain::Create(m_pGraphic_Device))))
 		return E_FAIL;
 	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Camera", CToolCamera::Create(m_pGraphic_Device))))
+		return E_FAIL;
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_CamPoint", CCamPoint::Create(m_pGraphic_Device))))
 		return E_FAIL;
 	return NOERROR;
 }
@@ -485,7 +487,6 @@ void CToolView::OnInitialUpdate()
 
 	if (FAILED(CGraphic_Device::GetInstance()->Ready_Graphic_Device(m_hWnd, CGraphic_Device::MODE_WIN, g_iBackCX, g_iBackCY, &m_pGraphic_Device)))
 		return;
-
 	// For.Input_Device
 
 	HINSTANCE hInst = AfxGetInstanceHandle();
@@ -560,6 +561,12 @@ void CToolView::OnLButtonUp(UINT nFlags, CPoint point)
 			vector<_vec3>* pVecPoint = ((CToolTerrain*)pTerrain)->Get_vecPoint();
 			CMainFrame*		pMainFrame = (CMainFrame*)AfxGetMainWnd();
 			pMainFrame->Set_VecPointNav(pVecPoint);
+		}
+		if (STATE_ADD_CAM == ((CToolTerrain*)pTerrain)->Get_MouseState())
+		{
+			_vec3 PickingPoint = ((CToolTerrain*)pTerrain)->Get_PickingPoint();
+			CMainFrame*		pMainFrame = (CMainFrame*)AfxGetMainWnd();
+			pMainFrame->Add_CamPoint(PickingPoint);
 		}
 	}
 	CView::OnLButtonUp(nFlags, point);

@@ -37,6 +37,8 @@ public:
 	const _matrix* Get_WorldMatrixPointer() const {
 		return m_pWorldMatrix;
 	}
+	const LPD3DXMESH Get_Mesh() {
+		return m_pMesh;	}
 public:
 	HRESULT Ready_Collider(TYPE eType);
 

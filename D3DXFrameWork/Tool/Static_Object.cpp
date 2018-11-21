@@ -188,7 +188,7 @@ void CStatic_Object::Render_GameObject()
 	const CGameObject* pTerrain = CObject_Manager::GetInstance()->Get_ObjectPointer(0, L"Layer_Terrain", 0);
 	if (STATE_END != ((CToolTerrain*)pTerrain)->Get_MouseState())
 	{
-		m_pColliderCom->Render_Collider();
+		//m_pColliderCom->Render_Collider();
 	}
 }
 

@@ -40,6 +40,7 @@ public:
 public:
 	void Set_PickingPoint(_vec3 vPickingPoint);
 	void Set_VecPointNav(vector<_vec3>* pVecPoint);
+	void Add_CamPoint(_vec3 vPoint);
 private:
 	CSheet*			m_pSheet = nullptr;
 
