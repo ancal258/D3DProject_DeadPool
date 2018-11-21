@@ -1,4 +1,0 @@
-﻿  Player.cpp
-d:\학원\repositories\d3dxframework\client\codes\player.cpp(70): warning C4305: '인수': 'double'에서 'const Engine::_float'(으)로 잘립니다.
-  Client.vcxproj -> D:\학원\Repositories\D3DXFrameWork\Client\Default\..\Bin\Client.exe
-  Client.vcxproj -> ..\Bin\Client.pdb (Full PDB)
