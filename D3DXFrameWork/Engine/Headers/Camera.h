@@ -16,6 +16,8 @@ public:
 		m_Camera_Desc = Camera_Desc; }
 	void Set_ProjectionDesc(const PROJDESC& Projection_Desc) {
 		m_Projection_Desc = Projection_Desc; }
+	void Set_IsCameraOn(_bool isCameraOn) {
+		m_isCameraOn = isCameraOn; }
 public:
 	_byte Get_DIKState(_ubyte byKeyID) {
 		return m_pInput_Device->Get_DIKeyState(byKeyID); }
@@ -36,6 +38,8 @@ protected:
 	_matrix				m_matWorld;
 	_matrix				m_matView;
 	CAMERADESC			m_Camera_Desc;
+protected:
+	_bool				m_isCameraOn = false;
 protected:
 	_matrix				m_matProj;
 	PROJDESC			m_Projection_Desc;

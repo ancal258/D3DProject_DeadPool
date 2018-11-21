@@ -4,6 +4,10 @@
 #include "Object_Manager.h"
 #include "Light_Manager.h"
 #include "Input_Device.h"
+#include "Camera_Cinematic.h"
+#include "Camera_Debug.h"
+#include "Camera_Target.h"
+
 
 _USING(Client)
 
@@ -36,8 +40,10 @@ HRESULT CPlayer::Ready_GameObject()
 	m_fMouseSence = 3.f;
 	m_pTransformCom->Scaling(0.05f, 0.05f, 0.05f);
 	//m_pTransformCom->Set_AngleY(D3DXToRadian(0));
-	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(5, 0.f, 5));
-
+	//m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(15, 0.f, 13));
+	//m_pTransformCom->Go_Straight(0.8,1);
+	m_pInput_Device = CInput_Device::GetInstance();
+	m_pInput_Device->AddRef();
 
 	m_pHandMatrix[0] = m_pMeshCom->Get_FrameMatrixByName("L_Weapon01_Wpn_XW");
 	if (nullptr == m_pHandMatrix[0])
@@ -55,27 +61,52 @@ HRESULT CPlayer::Ready_GameObject()
 
 _int CPlayer::Update_GameObject(const _float & fTimeDelta)
 {
+	// Camera SetUp
+	if (FAILED(SetUp_Camera()))
+		return -1;
 
-	if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_UP) & 0x8000)
+	if (m_pInput_Device->Get_DIKeyState(DIK_NUMPAD1) & 0x8000)
+	{
+		m_Camera_State = CAMERA_DEBUG;
+		m_pCamera_Debug->Set_IsCameraOn(true);
+		m_pCamera_Target->Set_IsCameraOn(false);
+		m_pCamera_Cinematic->Set_IsCameraOn(false);
+	}
+	if (m_pInput_Device->Get_DIKeyState(DIK_NUMPAD2) & 0x8000)
+	{
+		m_Camera_State = CAMERA_TARGET;
+		m_pCamera_Debug->Set_IsCameraOn(false);
+		m_pCamera_Target->Set_IsCameraOn(true);
+		m_pCamera_Cinematic->Set_IsCameraOn(false);
+	}
+	if (m_pInput_Device->Get_DIKeyState(DIK_NUMPAD3) & 0x8000)
+	{
+		m_Camera_State = CAMERA_CINEMATIC;
+		m_pCamera_Debug->Set_IsCameraOn(false);
+		m_pCamera_Target->Set_IsCameraOn(false);
+		m_pCamera_Cinematic->Set_IsCameraOn(true);
+	}
+
+	if (m_pInput_Device->Get_DIKeyState(DIK_UP) & 0x8000)
 	{
 		m_pMeshCom->Set_AnimationSet(NOGUN_WALK_F);
 		m_pNavigationCom->Move_OnNavigation(m_pTransformCom, 8.7f, fTimeDelta*0.9f);
 
 	}
-	else if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_DOWN) & 0x8000)
+	else if (m_pInput_Device->Get_DIKeyState(DIK_DOWN) & 0x8000)
 	{
 		m_pMeshCom->Set_AnimationSet(NOGUN_WALK_B);
 		m_pTransformCom->Go_Straight(-23.3, fTimeDelta*0.9f);
 	}
-	else if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_Q) & 0x8000)
+	else if (m_pInput_Device->Get_DIKeyState(DIK_Q) & 0x8000)
 	{
 		m_pMeshCom->Set_AnimationSet(NOGUN_WALK_FL);
 	}
-	else if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_E) & 0x8000)
+	else if (m_pInput_Device->Get_DIKeyState(DIK_E) & 0x8000)
 	{
 		m_pMeshCom->Set_AnimationSet(NOGUN_WALK_FR);
 	}
-	else if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_R) & 0x8000)
+	else if (m_pInput_Device->Get_DIKeyState(DIK_R) & 0x8000)
 	{
 		m_pMeshCom->Set_AnimationSet(SIT_GETUP);
 	}
@@ -87,32 +118,38 @@ _int CPlayer::Update_GameObject(const _float & fTimeDelta)
 	
 
 	// Debug
-	if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_RIGHT) & 0x8000)
+	if (m_Camera_State != CAMERA_TARGET)
 	{
-		m_pTransformCom->RotationY(D3DXToRadian(90.0f), fTimeDelta);
+		if (m_pInput_Device->Get_DIKeyState(DIK_RIGHT) & 0x8000)
+		{
+			m_pTransformCom->RotationY(D3DXToRadian(90.0f), fTimeDelta);
+		}
+		if (m_pInput_Device->Get_DIKeyState(DIK_LEFT) & 0x8000)
+		{
+			m_pTransformCom->RotationY(D3DXToRadian(-90.0f), fTimeDelta);
+		}
 	}
-	if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_LEFT) & 0x8000)
+	else
 	{
-		m_pTransformCom->RotationY(D3DXToRadian(-90.0f), fTimeDelta);
-	}
+		if (m_dwMouseMove[0] = CInput_Device::GetInstance()->Get_DIMouseMove(CInput_Device::DIMM_X))
+		{
+		   m_pTransformCom->RotationY(D3DXToRadian(m_dwMouseMove[0] * m_fMouseSence) , fTimeDelta);
+		}
 
+		if (m_dwMouseMove[1] = CInput_Device::GetInstance()->Get_DIMouseMove(CInput_Device::DIMM_Y))
+		{
+		 //  m_pTransformCom->RotationX(D3DXToRadian(m_dwMouseMove[1] * m_fMouseSence), fTimeDelta);
+		}
+	}
 
 
 	// Release
-	//if (m_dwMouseMove = CInput_Device::GetInstance()->Get_DIMouseMove(CInput_Device::DIMM_X))
-	//{
-	//   m_pTransformCom->RotationY(D3DXToRadian(m_dwMouseMove * m_fMouseSence) , fTimeDelta);
-	//}
-
-	//if (m_dwMouseMove = CInput_Device::GetInstance()->Get_DIMouseMove(CInput_Device::DIMM_Y))
-	//{
-	//   //m_pTransformCom->RotationY(D3DXToRadian(MouseMove * m_fMouseSence), fTimeDelta);
-	//}
 
 
 	Update_HandMatrix();
 
 	m_pMeshCom->Play_AnimationSet(fTimeDelta*0.9f);
+
 
 	return _int();
 }
@@ -249,6 +286,40 @@ void CPlayer::Render_Axis()
 	Safe_Release(pLine);
 }
 
+HRESULT CPlayer::SetUp_Camera()
+{
+	if (nullptr == m_pCamera_Debug)
+		m_pCamera_Debug = (CCamera_Debug*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Camera", 0);
+
+	if (nullptr == m_pCamera_Target)
+		m_pCamera_Target = (CCamera_Target*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Camera", 1);
+
+	if (nullptr == m_pCamera_Cinematic)
+	{
+		m_pCamera_Cinematic = (CCamera_Cinematic*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Camera", 2);
+		if (FAILED(SetUp_CameraMove())) // 나중에 FilePath 받아서 만들자.
+			return E_FAIL;
+	}
+	return NOERROR;
+}
+
+HRESULT CPlayer::SetUp_CameraMove()
+{
+
+	
+
+	vector<_vec3> vecEye;
+	vecEye.push_back(_vec3(24, 30, 1.7f));
+	vecEye.push_back(_vec3(23, 20, 24));
+	vecEye.push_back(_vec3(46.28, 10, 23.12));
+	vecEye.push_back(_vec3(61.73, 20, 12.86));
+
+	m_pCamera_Cinematic->SetUp_CameraMove(vecEye, _vec3(42, 10, 12.86), 10);
+
+
+	return NOERROR;
+}
+
 HRESULT CPlayer::Ready_Component()
 {
 	CComponent_Manager*         pComponent_Manager = CComponent_Manager::GetInstance();
@@ -381,6 +452,7 @@ void CPlayer::Free()
 	Safe_Release(m_pShaderCom);
 	Safe_Release(m_pNavigationCom);
 	Safe_Release(m_pColliderCom);
+	Safe_Release(m_pInput_Device);
 
 	CGameObject::Free();
 }

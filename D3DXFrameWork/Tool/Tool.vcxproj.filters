@@ -68,6 +68,9 @@
     <Filter Include="00.View\FormView\Sheet\Page_Navigation">
       <UniqueIdentifier>{487c021c-f943-49bb-aaf6-069beb58c560}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00.View\FormView\Sheet\Page_CinemaCam">
+      <UniqueIdentifier>{69349994-e755-40b1-86d0-822a6ec249c9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -130,6 +133,9 @@
     <ClInclude Include="Page_Navigation.h">
       <Filter>00.View\FormView\Sheet\Page_Navigation</Filter>
     </ClInclude>
+    <ClInclude Include="Page_CinemaCam.h">
+      <Filter>00.View\FormView\Sheet\Page_CinemaCam</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -179,6 +185,9 @@
     </ClCompile>
     <ClCompile Include="Page_Navigation.cpp">
       <Filter>00.View\FormView\Sheet\Page_Navigation</Filter>
+    </ClCompile>
+    <ClCompile Include="Page_CinemaCam.cpp">
+      <Filter>00.View\FormView\Sheet\Page_CinemaCam</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

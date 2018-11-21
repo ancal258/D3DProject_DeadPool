@@ -4,7 +4,7 @@
 #include "Page_Object.h"
 #include "Page_Animation.h"
 #include "Page_Navigation.h"
-
+#include "Page_CinemaCam.h"
 
 // CSheet
 
@@ -28,6 +28,7 @@ private:
 	CPage_Object			m_Page_Object;
 	CPage_Animation			m_Page_Animation;
 	CPage_Navigation		m_Page_Navigation;
+	CPage_CinemaCam			m_Page_CinemaCam;
 protected:
 	DECLARE_MESSAGE_MAP()
 };

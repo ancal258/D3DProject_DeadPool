@@ -17,7 +17,7 @@
 #include <algorithm>
 
 #include <d3d9.h>
-#include <d3dx9.h>
+#include <d3dx9.h> 
 /*
 #ifdef _DEBUG 
 #ifndef DBG_NEW 

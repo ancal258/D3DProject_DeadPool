@@ -35,9 +35,12 @@ HRESULT CCamera_Cinematic::Ready_GameObject()
 
 _int CCamera_Cinematic::Update_GameObject(const _float & fTimeDelta)
 {
+	if (false == m_isCameraOn)
+		return 0;
 	if (4 * m_iCurrentIndex >= m_vecEyePoints.size())
 	{
 		m_iCurrentIndex = 0;
+		m_dlCurrentOffset = 1;
 	}
 
 	m_dlCurrentOffset += (fTimeDelta / m_fTime);
@@ -79,6 +82,7 @@ void CCamera_Cinematic::SetUp_CameraMove(vector<_vec3> vecEyePoints, _vec3 vLook
 	m_vecEyePoints = vecEyePoints;
 	m_Camera_Desc.vEye = m_vecEyePoints[0];
 	m_fTime = fTime;
+	m_dlCurrentOffset = 0;
 }
 
 _vec3 CCamera_Cinematic::Bezier4(_vec3 vPoint_1, _vec3 vPoint_2, _vec3 vPoint_3, _vec3 vPoint_4, double Offset)

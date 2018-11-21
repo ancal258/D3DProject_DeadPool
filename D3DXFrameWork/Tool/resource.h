@@ -11,6 +11,7 @@
 #define IDD_FORM                        313
 #define IDD_PAGE_ANIMATION              314
 #define IDD_PAGE_NAVIGATION             315
+#define IDD_PAGE_CINEMACAM              316
 #define IDC_BUTTON1                     1000
 #define IDC_EDIT1                       1001
 #define IDC_EDIT2                       1002
@@ -63,6 +64,7 @@
 #define IDD_PICTURE3                    1029
 #define IDD_PICTURE4                    1030
 #define IDC_LIST1                       1032
+#define IDC_LIST3                       1033
 #define IDC_SLIDER1                     1034
 #define IDC_LIST2                       1037
 #define IDC_CHECK1                      1038
@@ -72,9 +74,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        322
+#define _APS_NEXT_RESOURCE_VALUE        323
 #define _APS_NEXT_COMMAND_VALUE         32771
 #define _APS_NEXT_CONTROL_VALUE         1040
-#define _APS_NEXT_SYMED_VALUE           316
+#define _APS_NEXT_SYMED_VALUE           317
 #endif
 #endif

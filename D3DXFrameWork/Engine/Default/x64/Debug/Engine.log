@@ -1,0 +1,2 @@
+﻿  Frame.cpp
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\headers\engine_defines.h(20): fatal error C1083: 포함 파일을 열 수 없습니다. 'd3dx9.h': No such file or directory

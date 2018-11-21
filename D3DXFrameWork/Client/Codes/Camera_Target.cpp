@@ -35,6 +35,9 @@ HRESULT CCamera_Target::Ready_GameObject()
 
 _int CCamera_Target::Update_GameObject(const _float & fTimeDelta)
 {
+	if (false == m_isCameraOn)
+		return 0;
+
 	_vec3 vTargetPos = m_pTargetWorldMatrix->m[3];
 	m_Camera_Desc.vEye = vTargetPos;
 	//m_Camera_Desc.vEye.x += 3.f;
@@ -49,11 +52,19 @@ _int CCamera_Target::Update_GameObject(const _float & fTimeDelta)
 	_vec3		vDist;
 	if (0 != m_pTargetMouseMove)
 	{
-		m_fAngle += D3DXToRadian(*m_pTargetMouseMove * 3.f) * fTimeDelta;
-		D3DXMatrixRotationY(&matRotY, m_fAngle);
+		_float tmp;
+		m_fAngle[1] += D3DXToRadian(m_pTargetMouseMove[1] * 3.f) * fTimeDelta;
+		D3DXMatrixRotationX(&matRotY, m_fAngle[1]);
 		memcpy(&matRotY.m[3], &m_Camera_Desc.vAt, sizeof(_vec3));
 		vDist = m_Camera_Desc.vEye - m_Camera_Desc.vAt;
 		D3DXVec3TransformCoord(&m_Camera_Desc.vEye, &vDist, &matRotY);
+
+		m_fAngle[0] += D3DXToRadian(m_pTargetMouseMove[0] * 3.f) * fTimeDelta;
+		D3DXMatrixRotationY(&matRotY, m_fAngle[0]);
+		memcpy(&matRotY.m[3], &m_Camera_Desc.vAt, sizeof(_vec3));
+		vDist = m_Camera_Desc.vEye - m_Camera_Desc.vAt;
+		D3DXVec3TransformCoord(&m_Camera_Desc.vEye, &vDist, &matRotY);
+
 	}
 	return CCamera::Update_GameObject(fTimeDelta);
 }

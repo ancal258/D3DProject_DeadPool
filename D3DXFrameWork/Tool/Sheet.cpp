@@ -16,6 +16,7 @@ CSheet::CSheet()
 	AddPage(&m_Page_Object);
 	AddPage(&m_Page_Animation);
 	AddPage(&m_Page_Navigation);
+	AddPage(&m_Page_CinemaCam);
 }
 
 CSheet::CSheet(UINT nIDCaption, CWnd* pParentWnd, UINT iSelectPage)
@@ -36,6 +37,7 @@ CSheet::~CSheet()
 	m_Page_Object.DestroyWindow();
 	m_Page_Animation.DestroyWindow();
 	m_Page_Navigation.DestroyWindow();
+	m_Page_CinemaCam.DestroyWindow();
 }
 
 

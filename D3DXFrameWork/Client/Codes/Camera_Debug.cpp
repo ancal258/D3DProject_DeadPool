@@ -28,12 +28,15 @@ HRESULT CCamera_Debug::Ready_GameObject_Prototype()
 HRESULT CCamera_Debug::Ready_GameObject()
 {
 	m_fCamSpeed = 10.f;
-
+	m_isCameraOn = true;
 	return NOERROR;
 }
 
 _int CCamera_Debug::Update_GameObject(const _float & fTimeDelta)
 {
+	if (false == m_isCameraOn)
+		return 0;
+
 	LPDIRECT3DDEVICE9 pGraphic_Device = Get_Graphic_Device();
 	if (nullptr == pGraphic_Device)
 		return -1;

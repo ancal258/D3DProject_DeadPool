@@ -31,14 +31,14 @@ HRESULT CScene_Stage::Ready_Scene()
 	if (FAILED(Ready_Stage_Prototype_GameObject()))
 		return E_FAIL;
 
-	//if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Debug", L"Layer_Camera")))
-	//	return E_FAIL;
+	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Debug", L"Layer_Camera")))
+		return E_FAIL;
 
 	if (FAILED(Ready_Layer_Player(L"Layer_Player")))
 		return E_FAIL;
 
-	//if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Target", L"Layer_Camera")))
-	//	return E_FAIL;
+	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Target", L"Layer_Camera")))
+		return E_FAIL;
 
 	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Cinematic", L"Layer_Camera")))
 		return E_FAIL;
@@ -460,7 +460,7 @@ HRESULT CScene_Stage::Ready_Layer_BackGround(const _tchar* pLayerTag)
 HRESULT CScene_Stage::SetUp_CameraMove()
 {
 
-	const CCamera_Cinematic* pCamera = (CCamera_Cinematic*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Camera", 0);
+	const CCamera_Cinematic* pCamera = (CCamera_Cinematic*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Camera", 2);
 
 	vector<_vec3> vecEye;
 	vecEye.push_back(_vec3(40, 30, 10));
