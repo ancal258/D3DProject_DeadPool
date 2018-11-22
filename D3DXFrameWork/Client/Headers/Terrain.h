@@ -9,7 +9,6 @@ class CRenderer;
 class CBuffer_Terrain;
 class CTexture;
 class CShader;
-class CBrush;
 class CPicking;
 _END
 
@@ -33,7 +32,6 @@ private:
 	CBuffer_Terrain*	m_pBufferCom = nullptr;
 	CTexture*			m_pTextureCom = nullptr;
 	CTexture*			m_pFilterCom = nullptr;
-	CTexture*			m_pBrushCom = nullptr;
 	CShader*			m_pShaderCom = nullptr;
 	CPicking*			m_pPickingCom = nullptr;
 private:

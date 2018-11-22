@@ -46,7 +46,7 @@ _int CMainApp::Update_MainApp(const _float & fTimeDelta)
 
 	CInput_Device::GetInstance()->Inquire_Input_State();	
 
-	m_fTimeAcc += fTimeDelta;
+
 	return m_pManagement->Update_Management(fTimeDelta);
 }
 
@@ -69,15 +69,7 @@ void CMainApp::Render_MainApp()
 	m_pGraphic_Device->EndScene();
 	m_pGraphic_Device->Present(nullptr, nullptr, 0, nullptr);
 
-	++m_dwRenderCnt;
 
-	if (1.f <= m_fTimeAcc)
-	{
-		wsprintf(m_szFPS, L"fps:%d", m_dwRenderCnt);
-		m_dwRenderCnt = 0;
-		m_fTimeAcc = 0.f;
-	}
-	SetWindowText(g_hWnd, m_szFPS);
 
 }
 

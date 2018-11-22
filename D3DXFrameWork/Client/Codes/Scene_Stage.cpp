@@ -21,6 +21,7 @@ HRESULT CScene_Stage::Ready_Scene()
 
 _int CScene_Stage::Update_Scene(const _float & fTimeDelta)
 {
+	m_fTimeAcc += fTimeDelta;
 
 	return CScene::Update_Scene(fTimeDelta);
 }
@@ -32,7 +33,15 @@ _int CScene_Stage::LastUpdate_Scene(const _float & fTimeDelta)
 
 void CScene_Stage::Render_Scene()
 {
+	++m_dwRenderCnt;
 
+	if (1.f <= m_fTimeAcc)
+	{
+		wsprintf(m_szFPS, L"fps:%d", m_dwRenderCnt);
+		m_dwRenderCnt = 0;
+		m_fTimeAcc = 0.f;
+	}
+	SetWindowText(g_hWnd, m_szFPS);
 }
 
 

@@ -10,6 +10,7 @@
 #include "Player.h"
 #include "DP_Sword.h"
 #include "Static_Object.h"
+#include "Event_Cube.h"
 
 CLoading::CLoading(LPDIRECT3DDEVICE9 pGraphicDev)
 	:m_pGraphic_Device(pGraphicDev)
@@ -51,7 +52,7 @@ HRESULT CLoading::Ready_Loading(SCENEID eSceneID)
 
 HRESULT CLoading::Loading_Stage_APT()
 {
-
+	SetWindowText(g_hWnd, L"Loading...");
 
 	if (FAILED(Ready_LightInfo()))
 		return E_FAIL;
@@ -77,8 +78,8 @@ HRESULT CLoading::Loading_Stage_APT()
 		return E_FAIL;
 	SetUp_CameraMove();
 
-	if (FAILED(Ready_Layer_Test(L"Layer_Test")))
-		return E_FAIL;
+	//if (FAILED(Ready_Layer_Test(L"Layer_Test")))
+	//	return E_FAIL;
 
 	if (FAILED(Ready_Layer_BackGround(L"Layer_BackGround")))
 		return E_FAIL;
@@ -86,8 +87,35 @@ HRESULT CLoading::Loading_Stage_APT()
 	if (FAILED(Load_Static_Object(L"../Bin/DataFiles/StaticO11bject1.dat")))
 		return E_FAIL;
 
+
+	// 큐브 툴에서 만들 예정
+	CGameObject* pCube = nullptr;
+
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Event_Cube", SCENE_STAGE, L"Layer_Event_Cube", &pCube)))
+		return E_FAIL;
+
+	_matrix	matTmp;
+	D3DXMatrixIdentity(&matTmp);
+	matTmp.m[3][0] = 15;
+	matTmp.m[3][2] = 10;
+	((CEvent_Cube*)pCube)->Set_StateInfo(&(_vec3)matTmp.m[0], &(_vec3)matTmp.m[1], &(_vec3)matTmp.m[2], &(_vec3)matTmp.m[3]);
+	((CEvent_Cube*)pCube)->Set_EventNum(0);
+
+
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Event_Cube", SCENE_STAGE, L"Layer_Event_Cube", &pCube)))
+		return E_FAIL;
+
+	D3DXMatrixIdentity(&matTmp);
+	matTmp.m[3][0] = 5;
+	matTmp.m[3][2] = 10;
+	((CEvent_Cube*)pCube)->Set_StateInfo(&(_vec3)matTmp.m[0], &(_vec3)matTmp.m[1], &(_vec3)matTmp.m[2], &(_vec3)matTmp.m[3]);
+	((CEvent_Cube*)pCube)->Set_EventNum(1);
+
 	//MCIWndClose(m_hVideo);
 	m_isFinish = true;
+
+	SetWindowText(g_hWnd, L"Complete");
+
 	return NOERROR;
 }
 
@@ -132,10 +160,6 @@ HRESULT CLoading::Ready_Stage_Prototype_Component()
 
 	// For.Component_Texture_Filter
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_Filter", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/Terrain/Filter.bmp"))))
-		return E_FAIL;
-
-	// For.Component_Texture_Brush
-	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_Brush", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/Terrain/Brush.png"))))
 		return E_FAIL;
 
 	// For.Component_Buffer_Terrain	
@@ -187,8 +211,6 @@ HRESULT CLoading::Ready_Stage_Prototype_GameObject()
 	// For.GameObject_Sword_Right
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Sword_Right", CDP_Sword::Create(Get_Graphic_Device(), 1))))
 		return E_FAIL;
-
-
 	// For.GameObject_Another_Sofa
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Another_Sofa", CStatic_Object::Create(Get_Graphic_Device(), L"Component_Mesh_Another_Sofa"))))
 		return E_FAIL;
@@ -274,7 +296,9 @@ HRESULT CLoading::Ready_Stage_Prototype_GameObject()
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Wooden_DoorFrame", CStatic_Object::Create(Get_Graphic_Device(), L"Component_Mesh_Wooden_DoorFrame"))))
 		return E_FAIL;
 	// ---------------------추가된 놈들
-
+	// For.GameObject_Event_Cube
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Event_Cube", CEvent_Cube::Create(Get_Graphic_Device()))))
+		return E_FAIL;
 
 
 
@@ -438,6 +462,8 @@ HRESULT CLoading::Ready_Layer_BackGround(const _tchar * pLayerTag)
 	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Terrain", SCENE_STAGE, pLayerTag)))
 		return E_FAIL;
 
+
+	
 	return NOERROR;
 }
 

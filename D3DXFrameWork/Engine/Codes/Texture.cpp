@@ -87,8 +87,8 @@ void CTexture::Free()
 		_ulong		dwRefCnt = 0;
 		if (dwRefCnt = Safe_Release(pTexture))
 		{
-			if(false == is_Clone())
-				MessageBox(0, m_szFileName, nullptr, MB_OK);
+			//if(false == is_Clone())
+			//	MessageBox(0, m_szFileName, nullptr, MB_OK);
 		}
 
 	}

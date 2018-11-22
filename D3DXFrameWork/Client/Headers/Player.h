@@ -28,6 +28,11 @@ private:
 		NOGUN_WALK_F, NOGUN_WALK_FL, NOGUN_WALK_FR, NOGUN_WALK_L, NOGUN_WALK_R, NOGUN_WALK_B
 	};
 private:
+	enum STATE_EVENT
+	{
+		EVENT_CHAIR, EVENT_TV, EVENT_END
+	};
+private:
 	explicit CPlayer(LPDIRECT3DDEVICE9 pGraphic_Device);
 	explicit CPlayer(const CPlayer& rhs);
 	virtual ~CPlayer() = default;
@@ -39,16 +44,21 @@ public:
 	const _long* Get_MouseMove() const {
 		return m_dwMouseMove;
 	}
+	void Set_EventNum(_uint iEventNum) {
+		m_iEventNum = iEventNum;
+	}
 public:
 	virtual HRESULT Ready_GameObject_Prototype();
 	virtual HRESULT Ready_GameObject();
 	virtual _int Update_GameObject(const _float& fTimeDelta);
 	virtual _int LastUpdate_GameObject(const _float& fTimeDelta);
 	virtual void Render_GameObject();
+public:
+	HRESULT SetUp_CameraMove();
 private:
 	void Render_Axis();
 	HRESULT SetUp_Camera();
-	HRESULT SetUp_CameraMove();
+
 private:
 	CTransform*         m_pTransformCom = nullptr;
 	CRenderer*			m_pRendererCom = nullptr;
@@ -61,24 +71,28 @@ private:
 private:
 	_float            m_fMouseSence = 0;
 	_long            m_dwMouseMove[2] = { 0 };
-
 	//Camera
 private:
 	CCamera_Cinematic* m_pCamera_Cinematic = nullptr;
 	CCamera_Debug* m_pCamera_Debug = nullptr;
 	CCamera_Target* m_pCamera_Target = nullptr;
 	STATE_CAMERA	m_Camera_State = CAMERA_DEBUG;
+	_uint			m_iEventNum = 0;
+
+
 	//Matrix
 private:
 	_matrix            m_CombinedHandMatrix[2];
 	const _matrix*      m_pHandMatrix[2];
 	_matrix            m_CombinedRootMatrix;
 	const _matrix*      m_pRootMatrix;
+
 private:
 	HRESULT Ready_Component();
 	HRESULT   SetUp_ConstantTable(LPD3DXEFFECT pEffect);
 	HRESULT Update_HandMatrix();
 	HRESULT Load_CamData(const _tchar * pFileName);
+
 public:
 	static CPlayer* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone_GameObject();

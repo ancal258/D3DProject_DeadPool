@@ -149,12 +149,6 @@ HRESULT CTerrain::Ready_Component()
 	if (FAILED(Add_Component(L"Com_Filter", m_pFilterCom)))
 		return E_FAIL;
 
-
-	// For.Com_Filter
-	m_pBrushCom = (CTexture*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Texture_Brush");
-	if (FAILED(Add_Component(L"Com_Brush", m_pBrushCom)))
-		return E_FAIL;
-
 	// For.Com_Picking
 	m_pPickingCom = (CPicking*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Picking");
 	if (FAILED(Add_Component(L"Com_Picking", m_pPickingCom)))
@@ -214,7 +208,6 @@ HRESULT CTerrain::SetUp_ConstantTable(LPD3DXEFFECT pEffect)
 	// m_pFilterCom->SetUp_OnShader(pEffect, "g_FilterTexture");
 	pEffect->SetTexture("g_FilterTexture", m_pFilterTexture);
 
-	m_pBrushCom->SetUp_OnShader(pEffect, "g_BrushTexture");
 
 
 	Safe_Release(pEffect);
@@ -252,7 +245,6 @@ void CTerrain::Free()
 {
 	Safe_Release(m_pPickingCom);
 	Safe_Release(m_pFilterTexture);
-	Safe_Release(m_pBrushCom);
 	Safe_Release(m_pTransformCom);
 	Safe_Release(m_pBufferCom);
 	Safe_Release(m_pRendererCom);

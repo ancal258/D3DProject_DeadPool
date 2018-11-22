@@ -80,14 +80,24 @@ _int CPlayer::Update_GameObject(const _float & fTimeDelta)
 		m_pCamera_Target->Set_IsCameraOn(true);
 		m_pCamera_Cinematic->Set_IsCameraOn(false);
 	}
-	if (m_pInput_Device->Get_DIKeyState(DIK_NUMPAD3) & 0x8000)
-	{
-		Load_CamData(L"ChairCam.dat");
+	//if (m_pInput_Device->Get_DIKeyState(DIK_NUMPAD3) & 0x8000)
+	//{
+	//	Load_CamData(L"ChairCam.dat");
+	//	m_Camera_State = CAMERA_CINEMATIC;
+	//	m_pCamera_Debug->Set_IsCameraOn(false);
+	//	m_pCamera_Target->Set_IsCameraOn(false);
+	//	m_pCamera_Cinematic->Set_IsCameraOn(true);
+	//}
 
-		m_Camera_State = CAMERA_CINEMATIC;
-		m_pCamera_Debug->Set_IsCameraOn(false);
-		m_pCamera_Target->Set_IsCameraOn(false);
-		m_pCamera_Cinematic->Set_IsCameraOn(true);
+	if (CAMERA_CINEMATIC == m_Camera_State)
+	{
+		if (true == m_pCamera_Cinematic->Get_Finish())
+		{
+			m_Camera_State = CAMERA_TARGET;
+			m_pCamera_Debug->Set_IsCameraOn(false);
+			m_pCamera_Target->Set_IsCameraOn(true);
+			m_pCamera_Cinematic->Set_IsCameraOn(false);
+		}
 	}
 
 	if (m_pInput_Device->Get_DIKeyState(DIK_NUMPAD4) & 0x8000)
@@ -313,17 +323,19 @@ HRESULT CPlayer::SetUp_Camera()
 
 HRESULT CPlayer::SetUp_CameraMove()
 {
+	if (EVENT_CHAIR == m_iEventNum)
+	{
+		Load_CamData(L"ChairCam.dat");
+	}
+	if (EVENT_TV == m_iEventNum)
+	{
+		Load_CamData(L"TVCam.dat");
+	}
 
-	
-
-	vector<_vec3> vecEye;
-	vecEye.push_back(_vec3(24, 30, 1.7f));
-	vecEye.push_back(_vec3(23, 20, 24));
-	vecEye.push_back(_vec3(46.28, 10, 23.12));
-	vecEye.push_back(_vec3(61.73, 20, 12.86));
-
-	m_pCamera_Cinematic->SetUp_CameraMove(vecEye, _vec3(42, 10, 12.86), 10);
-
+	m_Camera_State = CAMERA_CINEMATIC;
+	m_pCamera_Debug->Set_IsCameraOn(false);
+	m_pCamera_Target->Set_IsCameraOn(false);
+	m_pCamera_Cinematic->Set_IsCameraOn(true);
 
 	return NOERROR;
 }

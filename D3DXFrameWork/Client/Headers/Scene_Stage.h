@@ -15,6 +15,11 @@ public:
 	virtual _int Update_Scene(const _float& fTimeDelta);
 	virtual _int LastUpdate_Scene(const _float& fTimeDelta);
 	virtual void Render_Scene();
+
+private: // Frame
+	_ulong						m_dwRenderCnt = 0;
+	_float						m_fTimeAcc = 0.f;
+	_tchar						m_szFPS[128] = L"";
 //private:
 //	HRESULT Ready_LightInfo();
 //private:

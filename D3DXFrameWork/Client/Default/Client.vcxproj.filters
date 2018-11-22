@@ -135,14 +135,14 @@
     <ClInclude Include="..\Headers\Camera_Cinematic.h">
       <Filter>02.GameObject\03.For.Public\Camera\Cinematic</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\Event_Cube.h">
-      <Filter>02.GameObject\00.For.Static\02.Event_Cube</Filter>
-    </ClInclude>
     <ClInclude Include="..\Headers\Loading.h">
       <Filter>01.Scene\99.Loading</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Scene_Intro.h">
       <Filter>01.Scene\00.Scene_Intro</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Event_Cube.h">
+      <Filter>02.GameObject\00.For.Static\02.Event_Cube</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -188,14 +188,14 @@
     <ClCompile Include="..\Codes\Camera_Cinematic.cpp">
       <Filter>02.GameObject\03.For.Public\Camera\Cinematic</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\Event_Cube.cpp">
-      <Filter>02.GameObject\00.For.Static\02.Event_Cube</Filter>
-    </ClCompile>
     <ClCompile Include="..\Codes\Loading.cpp">
       <Filter>01.Scene\99.Loading</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Scene_Intro.cpp">
       <Filter>01.Scene\00.Scene_Intro</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Event_Cube.cpp">
+      <Filter>02.GameObject\00.For.Static\02.Event_Cube</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

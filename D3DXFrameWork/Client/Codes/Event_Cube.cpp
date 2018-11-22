@@ -4,6 +4,7 @@
 #include "Object_Manager.h"
 #include "Input_Device.h"
 #include "Light_Manager.h"
+#include "Player.h"
 
 CEvent_Cube::CEvent_Cube(LPDIRECT3DDEVICE9 pGraphic_Device)
 	:CGameObject(pGraphic_Device)
@@ -54,9 +55,15 @@ _int CEvent_Cube::LastUpdate_GameObject(const _float & fTimeDelta)
 		return -1;
 
 	// 디버깅용. 실제론 return true일 때 마다 특정 행동을 취해주자.
-	if (true == m_pColliderCom->Collision_OBB((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider")))
-	{
 
+	if (false == m_isCol)
+	{
+		if (true == m_pColliderCom->Collision_OBB((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider")))
+		{
+			m_isCol = true;
+			((CPlayer*)pPlayer)->Set_EventNum(m_iEventNum);
+			((CPlayer*)pPlayer)->SetUp_CameraMove();
+		}
 	}
 
 
@@ -84,17 +91,17 @@ HRESULT CEvent_Cube::Ready_Component()
 	pComponent_Manager->AddRef();
 
 	// For.Com_Transform
-	m_pTransformCom = (CTransform*)pComponent_Manager->Clone_Component(0, L"Component_Transform");
+	m_pTransformCom = (CTransform*)pComponent_Manager->Clone_Component(SCENE_STATIC, L"Component_Transform");
 	if (FAILED(Add_Component(L"Com_Transform", m_pTransformCom)))
 		return E_FAIL;
 
 	// For.Com_Renderer
-	m_pRendererCom = (CRenderer*)pComponent_Manager->Clone_Component(0, L"Component_Renderer");
+	m_pRendererCom = (CRenderer*)pComponent_Manager->Clone_Component(SCENE_STATIC, L"Component_Renderer");
 	if (FAILED(Add_Component(L"Com_Renderer", m_pRendererCom)))
 		return E_FAIL;
 
 	// For.Com_Collider
-	m_pColliderCom = (CCollider*)pComponent_Manager->Clone_Component(0, L"Component_Collider_Sphere");
+	m_pColliderCom = (CCollider*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Collider_Box");
 	if (FAILED(Add_Component(L"Com_Collider", m_pColliderCom)))
 		return E_FAIL;
 	m_pColliderCom->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(2, 2, 2), &_vec3(0, 0, 0), &_vec3(0, 0, 0));
@@ -175,6 +182,7 @@ void CEvent_Cube::Free()
 {
 	Safe_Release(m_pTransformCom);
 	Safe_Release(m_pRendererCom);
+	Safe_Release(m_pColliderCom);
 
 	CGameObject::Free();
 }

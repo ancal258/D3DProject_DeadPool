@@ -39,8 +39,9 @@ _int CCamera_Cinematic::Update_GameObject(const _float & fTimeDelta)
 		return 0;
 	if (4 * m_iCurrentIndex >= m_vecEyePoints.size())
 	{
-		//m_iCurrentIndex = 0;
+		// 카메라 끝 시점
 		m_dlCurrentOffset = 1;
+		m_isFinish = true;
 	}
 	else
 	{

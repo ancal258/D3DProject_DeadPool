@@ -12,6 +12,13 @@ private:
 	explicit CCamera_Cinematic(const CCamera_Cinematic& rhs);
 	virtual ~CCamera_Cinematic() = default;
 public:
+	_bool Get_Finish() {
+		return m_isFinish;	}
+	void Set_IsCameraOn(_bool isCameraOn) {
+		m_isFinish = false;
+		m_isCameraOn = isCameraOn;
+	}
+public:
 	virtual HRESULT Ready_GameObject_Prototype();
 	virtual HRESULT Ready_GameObject();
 	virtual _int Update_GameObject(const _float& fTimeDelta);
@@ -27,6 +34,7 @@ private:
 	vector<_vec3>		m_vecEyePoints;
 	_uint				m_iCurrentIndex = 0;
 	_double				m_dlCurrentOffset = 0;
+	_bool				m_isFinish = false;
 	_float				m_fTime = 0; // 걸릴 시간
 public:
 	static CCamera_Cinematic* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
