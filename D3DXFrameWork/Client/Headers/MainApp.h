@@ -7,6 +7,7 @@
 _BEGIN(Engine)
 class CManagement;
 class CRenderer;
+class CScene;
 _END
 
 _BEGIN(Client)
@@ -29,6 +30,10 @@ private: // Frame
 	_ulong						m_dwRenderCnt = 0;
 	_float						m_fTimeAcc = 0.f;
 	_tchar						m_szFPS[128] = L"";
+private:
+	CScene*						m_pScene = nullptr;
+	_bool						m_isFinish = false;
+
 private:
 	HRESULT Ready_Default_Setting(CGraphic_Device::WINMODE eMode, const _uint& iBackCX, const _uint& iBackCY);	
 	HRESULT Ready_Static_Component();

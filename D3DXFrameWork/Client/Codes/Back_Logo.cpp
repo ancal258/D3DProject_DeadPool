@@ -32,6 +32,7 @@ HRESULT CBack_Logo::Ready_GameObject()
 
 
 
+
 	return NOERROR;
 }
 

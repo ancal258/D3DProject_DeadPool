@@ -13,9 +13,6 @@
     <Filter Include="01.Scene">
       <UniqueIdentifier>{42e941d6-d694-4224-94fc-22ff9c32abc2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Scene\00.Scene_Logo">
-      <UniqueIdentifier>{a2d9847b-8bf7-463e-9373-e9246864ea2d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.GameObject">
       <UniqueIdentifier>{68d69059-9dee-4ee9-a8c3-5e35185bcbef}</UniqueIdentifier>
     </Filter>
@@ -33,9 +30,6 @@
     </Filter>
     <Filter Include="97.ShaderFiles">
       <UniqueIdentifier>{ba19640f-2b3a-4eea-b6c9-5a5fef13b932}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\01.Scene_Stage">
-      <UniqueIdentifier>{8980710a-8fb1-4e81-957b-e72d910f2557}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.GameObject\02.For.Stage\00.Terrain">
       <UniqueIdentifier>{d4ebe4c4-c72e-48de-a417-8e28ece1f001}</UniqueIdentifier>
@@ -73,6 +67,15 @@
     <Filter Include="01.Scene\99.Loading">
       <UniqueIdentifier>{e6adbf55-65f3-4412-81fe-d3cc9fd29457}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Scene\00.Scene_Intro">
+      <UniqueIdentifier>{6a6ee42b-37bb-4161-b71f-fbe41fafd9e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\01.Scene_Logo">
+      <UniqueIdentifier>{a2d9847b-8bf7-463e-9373-e9246864ea2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\02.Scene_Stage">
+      <UniqueIdentifier>{8980710a-8fb1-4e81-957b-e72d910f2557}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -100,13 +103,13 @@
       <Filter>00.MainApp</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Scene_Logo.h">
-      <Filter>01.Scene\00.Scene_Logo</Filter>
+      <Filter>01.Scene\01.Scene_Logo</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Back_Logo.h">
       <Filter>02.GameObject\01.For.Logo\00.BackGround</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Scene_Stage.h">
-      <Filter>01.Scene\01.Scene_Stage</Filter>
+      <Filter>01.Scene\02.Scene_Stage</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Terrain.h">
       <Filter>02.GameObject\02.For.Stage\00.Terrain</Filter>
@@ -138,6 +141,9 @@
     <ClInclude Include="..\Headers\Loading.h">
       <Filter>01.Scene\99.Loading</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\Scene_Intro.h">
+      <Filter>01.Scene\00.Scene_Intro</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -150,13 +156,13 @@
       <Filter>00.MainApp</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Scene_Logo.cpp">
-      <Filter>01.Scene\00.Scene_Logo</Filter>
+      <Filter>01.Scene\01.Scene_Logo</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Back_Logo.cpp">
       <Filter>02.GameObject\01.For.Logo\00.BackGround</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Scene_Stage.cpp">
-      <Filter>01.Scene\01.Scene_Stage</Filter>
+      <Filter>01.Scene\02.Scene_Stage</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Terrain.cpp">
       <Filter>02.GameObject\02.For.Stage\00.Terrain</Filter>
@@ -187,6 +193,9 @@
     </ClCompile>
     <ClCompile Include="..\Codes\Loading.cpp">
       <Filter>01.Scene\99.Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Scene_Intro.cpp">
+      <Filter>01.Scene\00.Scene_Intro</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

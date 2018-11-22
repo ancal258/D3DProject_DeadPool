@@ -60,8 +60,6 @@ private:
 	SCENEID						m_eSceneID;
 	HANDLE						m_hThread;
 	CRITICAL_SECTION			m_Critical_Section;
-private:
-	HWND				m_hVideo = 0;
 
 private:
 	_tchar						m_szString[128];

@@ -24,6 +24,8 @@ private:
 private:
 	CLoading*		m_pLoading = nullptr;
 
+private:
+	HWND				m_hVideo = 0;
 public:
 	static CScene_Logo* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 protected:

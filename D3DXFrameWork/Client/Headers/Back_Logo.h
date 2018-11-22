@@ -32,6 +32,7 @@ private:
 	CTexture*			m_pTextureCom = nullptr;
 	CShader*			m_pShaderCom = nullptr;
 
+	HWND				m_hVideo = 0;
 private:
 	HRESULT Ready_Component();
 	HRESULT	SetUp_ConstantTable(LPD3DXEFFECT pEffect);

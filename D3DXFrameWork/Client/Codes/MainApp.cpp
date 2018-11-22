@@ -4,6 +4,7 @@
 #include "Input_Device.h"
 #include "Component_Manager.h"
 #include "Scene_Logo.h"
+#include "Scene_Intro.h"
 #include "Camera_Debug.h"
 #include "Camera_Target.h"
 #include "Camera_Cinematic.h"
@@ -170,7 +171,8 @@ HRESULT CMainApp::Ready_Start_Scene(SCENEID eID)
 	case SCENE_LOGO:
 		pScene = CScene_Logo::Create(m_pGraphic_Device);
 		break;
-	case SCENE_STAGE:
+	case SCENE_INTRO:
+		pScene = CScene_Intro::Create(m_pGraphic_Device);
 		break;
 	}
 
