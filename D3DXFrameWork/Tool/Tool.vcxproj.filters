@@ -74,6 +74,9 @@
     <Filter Include="02.GameObject\04.CamPoint">
       <UniqueIdentifier>{dba3f165-92ea-4300-9677-f6dc07dbe0cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\05.EventCube">
+      <UniqueIdentifier>{5ce87419-2eef-45af-a1a9-8543edb5f278}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -142,6 +145,9 @@
     <ClInclude Include="CamPoint.h">
       <Filter>02.GameObject\04.CamPoint</Filter>
     </ClInclude>
+    <ClInclude Include="EventCube.h">
+      <Filter>02.GameObject\05.EventCube</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -197,6 +203,9 @@
     </ClCompile>
     <ClCompile Include="CamPoint.cpp">
       <Filter>02.GameObject\04.CamPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="EventCube.cpp">
+      <Filter>02.GameObject\05.EventCube</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

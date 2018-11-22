@@ -87,29 +87,11 @@ HRESULT CLoading::Loading_Stage_APT()
 	if (FAILED(Load_Static_Object(L"../Bin/DataFiles/StaticO11bject1.dat")))
 		return E_FAIL;
 
-
-	// 큐브 툴에서 만들 예정
-	CGameObject* pCube = nullptr;
-
-	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Event_Cube", SCENE_STAGE, L"Layer_Event_Cube", &pCube)))
+	//현재 테스트 케이스
+	if (FAILED(Load_Event_Cube(L"../Bin/DataFiles/EventCube_APT.dat")))
 		return E_FAIL;
 
-	_matrix	matTmp;
-	D3DXMatrixIdentity(&matTmp);
-	matTmp.m[3][0] = 15;
-	matTmp.m[3][2] = 10;
-	((CEvent_Cube*)pCube)->Set_StateInfo(&(_vec3)matTmp.m[0], &(_vec3)matTmp.m[1], &(_vec3)matTmp.m[2], &(_vec3)matTmp.m[3]);
-	((CEvent_Cube*)pCube)->Set_EventNum(0);
 
-
-	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Event_Cube", SCENE_STAGE, L"Layer_Event_Cube", &pCube)))
-		return E_FAIL;
-
-	D3DXMatrixIdentity(&matTmp);
-	matTmp.m[3][0] = 5;
-	matTmp.m[3][2] = 10;
-	((CEvent_Cube*)pCube)->Set_StateInfo(&(_vec3)matTmp.m[0], &(_vec3)matTmp.m[1], &(_vec3)matTmp.m[2], &(_vec3)matTmp.m[3]);
-	((CEvent_Cube*)pCube)->Set_EventNum(1);
 
 	//MCIWndClose(m_hVideo);
 	m_isFinish = true;
@@ -467,13 +449,13 @@ HRESULT CLoading::Ready_Layer_BackGround(const _tchar * pLayerTag)
 	return NOERROR;
 }
 
-HRESULT CLoading::Load_Static_Object(const _tchar * pPathTag)
+HRESULT CLoading::Load_Static_Object(const _tchar * pFilePath)
 {
 
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	_ulong			dwByte = 0;
 	CGameObject* pStatic_Object = nullptr;
-	HANDLE			hFile = CreateFile(pPathTag, GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+	HANDLE			hFile = CreateFile(pFilePath, GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 	if (0 == hFile)
 		return E_FAIL;
 
@@ -490,6 +472,47 @@ HRESULT CLoading::Load_Static_Object(const _tchar * pPathTag)
 		if (FAILED(Add_Object(SCENE_STAGE, ObjectInfo.szPrototype_Tag, SCENE_STAGE, L"Layer_Load", &pStatic_Object)))
 			return E_FAIL;
 		((CStatic_Object*)pStatic_Object)->Set_StateInfo(&ObjectInfo.vRight, &ObjectInfo.vUp, &ObjectInfo.vLook, &ObjectInfo.vPos);
+	}
+
+	CloseHandle(hFile);
+
+	return NOERROR;
+}
+
+HRESULT CLoading::Load_Event_Cube(const _tchar * pFilePath)
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	CGameObject* pCube = nullptr;
+	_ulong		dwByte = 0;
+	HANDLE			hFile = CreateFile(pFilePath, GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+	if (0 == hFile)
+		return E_FAIL;
+
+	//WriteFile(hFile, &pEventTag, sizeof(_tchar) * MAX_PATH, &dwByte, nullptr);
+	//WriteFile(hFile, &((CEventCube*)EventCube)->Get_ObjectInfo(), sizeof(_vec3), &dwByte, nullptr);
+	for (;;)
+	{
+		_tchar pEventTag[128];
+		_vec3 vPosition;
+		_matrix matTmp;
+		D3DXMatrixIdentity(&matTmp);
+
+		ReadFile(hFile, &pEventTag, sizeof(_tchar) * 128, &dwByte, nullptr);
+		ReadFile(hFile, &vPosition, sizeof(_vec3), &dwByte, nullptr);
+
+		if (0 == dwByte)
+		{
+			break;
+		}
+		if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Event_Cube", SCENE_STAGE, L"Layer_Event_Cube", &pCube)))
+			return E_FAIL;
+
+		matTmp.m[3][0] = vPosition.x;
+		matTmp.m[3][1] = vPosition.y;
+		matTmp.m[3][2] = vPosition.z;
+		((CEvent_Cube*)pCube)->Set_StateInfo(&(_vec3)matTmp.m[0], &(_vec3)matTmp.m[1], &(_vec3)matTmp.m[2], &(_vec3)matTmp.m[3]);
+		((CEvent_Cube*)pCube)->Set_EventTag(pEventTag);
+
 	}
 
 	CloseHandle(hFile);

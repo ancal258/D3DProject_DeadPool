@@ -100,11 +100,6 @@ _int CPlayer::Update_GameObject(const _float & fTimeDelta)
 		}
 	}
 
-	if (m_pInput_Device->Get_DIKeyState(DIK_NUMPAD4) & 0x8000)
-	{
-		Load_CamData(L"TVCam.dat");
-	}
-
 	if (m_pInput_Device->Get_DIKeyState(DIK_UP) & 0x8000)
 	{
 		m_pMeshCom->Set_AnimationSet(NOGUN_WALK_F);
@@ -323,15 +318,7 @@ HRESULT CPlayer::SetUp_Camera()
 
 HRESULT CPlayer::SetUp_CameraMove()
 {
-	if (EVENT_CHAIR == m_iEventNum)
-	{
-		Load_CamData(L"ChairCam.dat");
-	}
-	if (EVENT_TV == m_iEventNum)
-	{
-		Load_CamData(L"TVCam.dat");
-	}
-
+	Load_CamData(m_pEventTag);
 	m_Camera_State = CAMERA_CINEMATIC;
 	m_pCamera_Debug->Set_IsCameraOn(false);
 	m_pCamera_Target->Set_IsCameraOn(false);

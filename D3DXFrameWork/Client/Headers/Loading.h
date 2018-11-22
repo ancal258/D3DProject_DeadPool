@@ -49,7 +49,8 @@ private:
 	HRESULT Ready_Layer_Player(const _tchar* pLayerTag);
 	HRESULT Ready_Layer_BackGround(const _tchar* pLayerTag); // 로고에서 실제 사용하기위한 객체 생성.
 private:
-	HRESULT Load_Static_Object(const _tchar* pPathTag);
+	HRESULT Load_Static_Object(const _tchar* pFilePath);
+	HRESULT Load_Event_Cube(const _tchar* pFilePath);
 private:
 	HRESULT SetUp_CameraMove();
 private:

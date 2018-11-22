@@ -41,10 +41,12 @@ public:
 private:
 	//°¢ °´Ã¼
 	vector<CGameObject*>		m_vecCamPoints;
+	vector<CGameObject*>		m_vecEventCube;
 	//Save/Load
 	vector<vector<CGameObject*>> m_vvSaveWorks;
 	vector<CGameObject*>		m_vecLookAt;
 	vector<_float>				m_vTimes;
+	vector<CString>				m_vecEventTag;
 	LPD3DXMESH					m_pMesh = nullptr;
 	LPD3DXBUFFER				m_pAdjacency = nullptr;
 public:
@@ -54,4 +56,9 @@ public:
 	afx_msg void OnBnClickedButton1();
 	virtual BOOL OnSetActive();
 	CListBox m_PointList;
+	CListBox m_EventList;
+	CString m_szEventTag;
+	afx_msg void OnBnClickedButton2();
+	afx_msg void OnBnClickedButton8();
+	afx_msg void OnBnClickedButton9();
 };

@@ -28,11 +28,6 @@ private:
 		NOGUN_WALK_F, NOGUN_WALK_FL, NOGUN_WALK_FR, NOGUN_WALK_L, NOGUN_WALK_R, NOGUN_WALK_B
 	};
 private:
-	enum STATE_EVENT
-	{
-		EVENT_CHAIR, EVENT_TV, EVENT_END
-	};
-private:
 	explicit CPlayer(LPDIRECT3DDEVICE9 pGraphic_Device);
 	explicit CPlayer(const CPlayer& rhs);
 	virtual ~CPlayer() = default;
@@ -44,8 +39,8 @@ public:
 	const _long* Get_MouseMove() const {
 		return m_dwMouseMove;
 	}
-	void Set_EventNum(_uint iEventNum) {
-		m_iEventNum = iEventNum;
+	void Set_EventTag(const _tchar* pEventTag) {
+		m_pEventTag = pEventTag;
 	}
 public:
 	virtual HRESULT Ready_GameObject_Prototype();
@@ -77,7 +72,7 @@ private:
 	CCamera_Debug* m_pCamera_Debug = nullptr;
 	CCamera_Target* m_pCamera_Target = nullptr;
 	STATE_CAMERA	m_Camera_State = CAMERA_DEBUG;
-	_uint			m_iEventNum = 0;
+	const _tchar*	m_pEventTag = nullptr;
 
 
 	//Matrix

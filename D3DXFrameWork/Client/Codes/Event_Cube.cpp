@@ -61,7 +61,7 @@ _int CEvent_Cube::LastUpdate_GameObject(const _float & fTimeDelta)
 		if (true == m_pColliderCom->Collision_OBB((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider")))
 		{
 			m_isCol = true;
-			((CPlayer*)pPlayer)->Set_EventNum(m_iEventNum);
+			((CPlayer*)pPlayer)->Set_EventTag(m_pEventTag);
 			((CPlayer*)pPlayer)->SetUp_CameraMove();
 		}
 	}
@@ -104,7 +104,7 @@ HRESULT CEvent_Cube::Ready_Component()
 	m_pColliderCom = (CCollider*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Collider_Box");
 	if (FAILED(Add_Component(L"Com_Collider", m_pColliderCom)))
 		return E_FAIL;
-	m_pColliderCom->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(2, 2, 2), &_vec3(0, 0, 0), &_vec3(0, 0, 0));
+	m_pColliderCom->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(2, 2, 2), &_vec3(0, 0, 0), &_vec3(0, 2, 0));
 	m_pMesh = m_pColliderCom->Get_Mesh();
 	Safe_Release(pComponent_Manager);
 

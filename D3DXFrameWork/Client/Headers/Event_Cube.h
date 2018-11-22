@@ -24,9 +24,8 @@ public:
 	_bool Get_ClickedObject() {
 		return m_isCol;
 	}
-	void Set_EventNum(_uint iEventNum) {
-		m_iEventNum = iEventNum;}
-
+	void Set_EventTag(_tchar* pEventTag) {
+		lstrcpy(m_pEventTag, pEventTag); }
 public:
 	void Set_StateInfo(_vec3* pRight, _vec3* pUp, _vec3* vLook, _vec3* vPos);
 public:
@@ -43,7 +42,7 @@ private:
 	LPD3DXMESH				m_pMesh = nullptr;
 private:
 	BOOL				m_isCol = false;
-	_uint				m_iEventNum = 0;
+	_tchar				m_pEventTag[128] = { 0 };
 private:
 	HRESULT Ready_Component();
 	HRESULT SetUp_ConstantTable(LPD3DXEFFECT pEffect);

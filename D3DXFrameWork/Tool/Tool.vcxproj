@@ -203,6 +203,7 @@
   <ItemGroup>
     <ClInclude Include="CamPoint.h" />
     <ClInclude Include="Defines.h" />
+    <ClInclude Include="EventCube.h" />
     <ClInclude Include="Form.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Page_Animation.h" />
@@ -225,6 +226,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CamPoint.cpp" />
+    <ClCompile Include="EventCube.cpp" />
     <ClCompile Include="Form.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="Page_Animation.cpp" />
