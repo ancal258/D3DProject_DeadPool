@@ -38,7 +38,7 @@ HRESULT CPlayer::Ready_GameObject()
 	if (FAILED(Ready_Component()))
 		return E_FAIL;
 	m_fMouseSence = 3.f;
-	m_pTransformCom->Scaling(0.05f, 0.05f, 0.05f);
+	m_pTransformCom->Scaling(0.05f, 0.05f, 0.05f); 
 	//m_pTransformCom->Set_AngleY(D3DXToRadian(0));
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(5, 0.f, 5));
 	//m_pTransformCom->Go_Straight(0.8,1);
@@ -54,6 +54,7 @@ HRESULT CPlayer::Ready_GameObject()
 	m_pRootMatrix = m_pMeshCom->Get_FrameMatrixByName("C_Root_Reference_XR"); 
 	if (nullptr == m_pRootMatrix)
 		return E_FAIL;
+	Update_HandMatrix();
 
 	m_pMeshCom->Set_AnimationSet(NOGUN_IDLE00);
 	return NOERROR;

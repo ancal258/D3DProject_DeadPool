@@ -263,16 +263,17 @@ _bool CCollider::Collision_OBB(const CCollider * pTargetCollider)
 	for (size_t i = 0; i < 2; ++i)
 	{
 		for (size_t j = 0; j < 3; ++j)
+
 		{
 			fDistance[0] = fabs(D3DXVec3Dot(&vCenterDir, &tOBB[i].vAlignAxis[j]));
 
-			fDistance[1] = fabs(D3DXVec3Dot(&tOBB[0].vProjDir[0], &tOBB[0].vAlignAxis[j]))
-				+ fabs(D3DXVec3Dot(&tOBB[0].vProjDir[1], &tOBB[0].vAlignAxis[j]))
-				+ fabs(D3DXVec3Dot(&tOBB[0].vProjDir[2], &tOBB[0].vAlignAxis[j]));
+			fDistance[1] = fabs(D3DXVec3Dot(&tOBB[0].vProjDir[0], &tOBB[i].vAlignAxis[j]))
+				+ fabs(D3DXVec3Dot(&tOBB[0].vProjDir[1], &tOBB[i].vAlignAxis[j]))
+				+ fabs(D3DXVec3Dot(&tOBB[0].vProjDir[2], &tOBB[i].vAlignAxis[j]));
 
-			fDistance[2] = fabs(D3DXVec3Dot(&tOBB[1].vProjDir[0], &tOBB[0].vAlignAxis[j]))
-				+ fabs(D3DXVec3Dot(&tOBB[1].vProjDir[1], &tOBB[0].vAlignAxis[j]))
-				+ fabs(D3DXVec3Dot(&tOBB[1].vProjDir[2], &tOBB[0].vAlignAxis[j]));
+			fDistance[2] = fabs(D3DXVec3Dot(&tOBB[1].vProjDir[0], &tOBB[i].vAlignAxis[j]))
+				+ fabs(D3DXVec3Dot(&tOBB[1].vProjDir[1], &tOBB[i].vAlignAxis[j]))
+				+ fabs(D3DXVec3Dot(&tOBB[1].vProjDir[2], &tOBB[i].vAlignAxis[j]));
 
 			if (fDistance[0] > fDistance[1] + fDistance[2])
 				return m_isColl = false;

@@ -9,3 +9,7 @@ using namespace std;
 using namespace Client;
 
 
+#include <Vfw.h>
+#pragma comment(lib,"vfw32.lib")
+
+#include <process.h>

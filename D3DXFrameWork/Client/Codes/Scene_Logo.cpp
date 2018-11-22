@@ -4,6 +4,7 @@
 #include "Back_Logo.h"
 #include "Scene_Stage.h"
 #include "Management.h"
+#include "Loading.h"
 
 _USING(Client)
 
@@ -24,6 +25,11 @@ HRESULT CScene_Logo::Ready_Scene()
 	if (FAILED(Ready_Layer_BackGround(L"Layer_BackGround")))
 		return E_FAIL;
 
+	m_pLoading = CLoading::Create(Get_Graphic_Device(), SCENE_STAGE);
+	if (nullptr == m_pLoading)
+		return E_FAIL;
+
+
 	return NOERROR;
 }
 
@@ -36,6 +42,10 @@ _int CScene_Logo::Update_Scene(const _float & fTimeDelta)
 
 	if (pInput_Device->Get_DIKeyState(DIK_RETURN) & 0x80)
 	{
+		if (false == m_pLoading->Get_Finish())
+			return 0;
+
+
 		CScene*		pNewScene = CScene_Stage::Create(Get_Graphic_Device());
 		if (nullptr == pNewScene)
 			return -1;
@@ -112,6 +122,8 @@ CScene_Logo * CScene_Logo::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 }
 void CScene_Logo::Free()
 {
+	Safe_Release(m_pLoading);
+
 	if (FAILED(CObject_Manager::GetInstance()->Clear_Object(SCENE_LOGO)))
 		return;
 

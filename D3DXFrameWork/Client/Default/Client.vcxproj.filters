@@ -70,6 +70,9 @@
     <Filter Include="02.GameObject\00.For.Static\02.Event_Cube">
       <UniqueIdentifier>{de30eaa8-aaea-4d67-97d3-474189e70e82}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Scene\99.Loading">
+      <UniqueIdentifier>{e6adbf55-65f3-4412-81fe-d3cc9fd29457}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -132,6 +135,9 @@
     <ClInclude Include="..\Headers\Event_Cube.h">
       <Filter>02.GameObject\00.For.Static\02.Event_Cube</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\Loading.h">
+      <Filter>01.Scene\99.Loading</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -178,6 +184,9 @@
     </ClCompile>
     <ClCompile Include="..\Codes\Event_Cube.cpp">
       <Filter>02.GameObject\00.For.Static\02.Event_Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Loading.cpp">
+      <Filter>01.Scene\99.Loading</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

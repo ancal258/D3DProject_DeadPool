@@ -2,6 +2,8 @@
 #include "..\Headers\Back_Logo.h"
 #include "Component_Manager.h"
 
+
+
 _USING(Client)
 
 CBack_Logo::CBack_Logo(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -27,6 +29,8 @@ HRESULT CBack_Logo::Ready_GameObject()
 		return E_FAIL;
 
 	m_pTransformCom->Scaling(2.f, 2.f, 2.f);
+
+
 
 	return NOERROR;
 }
