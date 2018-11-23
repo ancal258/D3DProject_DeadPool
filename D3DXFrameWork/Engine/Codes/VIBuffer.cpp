@@ -22,6 +22,7 @@ CVIBuffer::CVIBuffer(const CVIBuffer & rhs)
 	, m_iNumPolygons(rhs.m_iNumPolygons)
 	, m_IndicesFormat(rhs.m_IndicesFormat)
 	, m_pVertices(rhs.m_pVertices)
+	, m_pIndices(rhs.m_pIndices)
 {
 	m_pVB->AddRef();
 	m_pIB->AddRef();
@@ -51,7 +52,10 @@ void CVIBuffer::Free()
 	Safe_Release(m_pIB);
 
 	if (false == is_Clone())
+	{
+		Safe_Delete_Array(m_pIndices);
 		Safe_Delete_Array(m_pVertices);
+	}
 
 	CComponent::Free();
 }

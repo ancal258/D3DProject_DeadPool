@@ -1,6 +1,5 @@
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\vc140.pdb
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\vc140.idb
-c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\graphic_device.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\hierarchyloader.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\input_device.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\layer.obj
@@ -12,6 +11,7 @@ c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\mesh_
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\navigation.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\object_manager.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\picking.obj
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\quadtree.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\renderer.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\scene.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\shader.obj
@@ -34,7 +34,9 @@ c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\compo
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\component_manager.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\frame.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\frame_manager.obj
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\frustum.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\gameobject.obj
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\graphic_device.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\bin\shader_collider.cso
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\bin\engine.lib
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\bin\engine.exp

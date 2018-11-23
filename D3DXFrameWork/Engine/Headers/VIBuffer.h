@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Component.h"
+#include "Frustum.h"
 
 _BEGIN(Engine)
 
@@ -24,10 +25,15 @@ public:
 
 public:
 	HRESULT Ready_VIBuffer();
+	virtual void Culling_ToFrustum(CFrustum* pFrustum, D3DXPLANE* pPlanes) {}
+	virtual void Culling_ToQuadTree(CFrustum* pFrustum, D3DXPLANE* pPlanes) {}
+
 	virtual _bool Picking_ToBuffer(const _vec3* pRayPos, const _vec3* pRayDir, const CTransform* pTransCom, _vec3* pOut) { return false; }
 	virtual _bool Picking_ToBuffer(const _vec3* pRayPos, const _vec3* pRayDir, const CTransform* pTransCom, CNavigation* pNavigation, _vec3* pOut) { return false; }
 protected:
 	_vec3*								m_pVertices = nullptr;
+	void*								m_pIndices = nullptr;
+
 protected:
 	LPDIRECT3DVERTEXBUFFER9				m_pVB = nullptr;
 	_uint								m_iStride = 0;

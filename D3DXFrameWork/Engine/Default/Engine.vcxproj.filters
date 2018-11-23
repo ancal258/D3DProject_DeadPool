@@ -142,6 +142,12 @@
     <Filter Include="01.Utility\03.For.Component\Component\Mesh\Mesh_Dynamic\Animation">
       <UniqueIdentifier>{2d6a4873-2a9b-4368-a4cc-126554da6426}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Utility\03.For.Component\Component\Frustum">
+      <UniqueIdentifier>{6cb0feb2-c489-4d15-8358-2316feb1f098}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\03.For.Component\Component\VIBuffer\Terrain\QuadTree">
+      <UniqueIdentifier>{cd05abd8-1855-4b0e-b4f7-5f7dd0ab121e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Headers\Base.h">
@@ -268,6 +274,12 @@
     <ClInclude Include="..\Headers\Animation.h">
       <Filter>01.Utility\03.For.Component\Component\Mesh\Mesh_Dynamic\Animation</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\Frustum.h">
+      <Filter>01.Utility\03.For.Component\Component\Frustum</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\QuadTree.h">
+      <Filter>01.Utility\03.For.Component\Component\VIBuffer\Terrain\QuadTree</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Codes\Base.cpp">
@@ -374,6 +386,12 @@
     </ClCompile>
     <ClCompile Include="..\Codes\Animation.cpp">
       <Filter>01.Utility\03.For.Component\Component\Mesh\Mesh_Dynamic\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Frustum.cpp">
+      <Filter>01.Utility\03.For.Component\Component\Frustum</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\QuadTree.cpp">
+      <Filter>01.Utility\03.For.Component\Component\VIBuffer\Terrain\QuadTree</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

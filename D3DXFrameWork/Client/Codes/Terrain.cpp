@@ -1,8 +1,10 @@
 #include "stdafx.h"
 #include "..\Headers\Terrain.h"
 #include "Component_Manager.h"
+#include "Object_Manager.h"
 #include "Light_Manager.h"
 #include "Input_Device.h"
+#include "Camera_Debug.h"
 
 _USING(Client)
 
@@ -49,15 +51,20 @@ HRESULT CTerrain::Ready_GameObject()
 
 _int CTerrain::Update_GameObject(const _float & fTimeDelta)
 {
-	_vec3		vOut;
 
-	if (GetKeyState(VK_LBUTTON) & 0x8000)
-	{
-		if (true == CInput_Device::GetInstance()->Picking_ToBuffer(m_pBufferCom, m_pTransformCom, &vOut))
-			int a = 10;
-	}
+	CObject_Manager*		pObject_Manager = CObject_Manager::GetInstance();
+	if (nullptr == pObject_Manager)
+		return -1;
+	pObject_Manager->AddRef();
 
+	// 카메라객체의 주소를 얻어온다.
+	CCamera_Debug*	pCamera = (CCamera_Debug*)pObject_Manager->Get_ObjectPointer(SCENE_STAGE, L"Layer_Camera", 0);
+	if (nullptr == pCamera)
+		return -1;
 
+	pCamera->Culling_ToQuadTree(m_pTransformCom, m_pBufferCom);
+
+	Safe_Release(pObject_Manager);
 
 	return _int();
 }

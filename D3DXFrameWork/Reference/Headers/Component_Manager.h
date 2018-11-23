@@ -16,6 +16,7 @@
 #include "Mesh_Dynamic.h"
 #include "Collider.h"
 #include "Navigation.h"
+#include "Frustum.h"
 _BEGIN(Engine)
 
 class _ENGINE_DLL CComponent_Manager final : public CBase

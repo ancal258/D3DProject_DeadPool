@@ -108,7 +108,7 @@ HRESULT CDP_Sword::Ready_Component()
 	m_pRendererCom = (CRenderer*)pComponent_Manager->Clone_Component(SCENE_STATIC, L"Component_Renderer");
 	if (FAILED(Add_Component(L"Com_Renderer", m_pRendererCom)))
 		return E_FAIL;
-
+		
 	// For.Com_Mesh
 	m_pMeshCom = (CMesh_Static*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Mesh_Sword");
 	if (FAILED(Add_Component(L"Com_Mesh", m_pMeshCom)))

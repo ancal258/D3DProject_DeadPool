@@ -1,0 +1,12 @@
+AlphaTestEnable
+AlphaFunc = Greater // 보다 큰 경우
+AlphaRef = 0x1f // 정수 0~255
+
+
+이펙트들은 Depth( 카메라로 부터의 깊이 )를 설정해서 
+Depth가 큰 애들 부터 그려줘야 한다.
+
+GameObject 클래스에서 Depth 계산
+이펙트 해당 클래스에서 호출
+Renderer도 봐야댐
+

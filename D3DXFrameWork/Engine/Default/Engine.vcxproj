@@ -184,6 +184,7 @@
     <ClInclude Include="..\Headers\Engine_Typedef.h" />
     <ClInclude Include="..\Headers\Frame.h" />
     <ClInclude Include="..\Headers\Frame_Manager.h" />
+    <ClInclude Include="..\Headers\Frustum.h" />
     <ClInclude Include="..\Headers\GameObject.h" />
     <ClInclude Include="..\Headers\Graphic_Device.h" />
     <ClInclude Include="..\Headers\HierarchyLoader.h" />
@@ -197,6 +198,7 @@
     <ClInclude Include="..\Headers\Navigation.h" />
     <ClInclude Include="..\Headers\Object_Manager.h" />
     <ClInclude Include="..\Headers\Picking.h" />
+    <ClInclude Include="..\Headers\QuadTree.h" />
     <ClInclude Include="..\Headers\Renderer.h" />
     <ClInclude Include="..\Headers\Scene.h" />
     <ClInclude Include="..\Headers\Shader.h" />
@@ -222,6 +224,7 @@
     <ClCompile Include="..\Codes\Component_Manager.cpp" />
     <ClCompile Include="..\Codes\Frame.cpp" />
     <ClCompile Include="..\Codes\Frame_Manager.cpp" />
+    <ClCompile Include="..\Codes\Frustum.cpp" />
     <ClCompile Include="..\Codes\GameObject.cpp" />
     <ClCompile Include="..\Codes\Graphic_Device.cpp" />
     <ClCompile Include="..\Codes\HierarchyLoader.cpp" />
@@ -235,6 +238,7 @@
     <ClCompile Include="..\Codes\Navigation.cpp" />
     <ClCompile Include="..\Codes\Object_Manager.cpp" />
     <ClCompile Include="..\Codes\Picking.cpp" />
+    <ClCompile Include="..\Codes\QuadTree.cpp" />
     <ClCompile Include="..\Codes\Renderer.cpp" />
     <ClCompile Include="..\Codes\Scene.cpp" />
     <ClCompile Include="..\Codes\Shader.cpp" />

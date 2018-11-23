@@ -31,6 +31,7 @@ private:
 	CScene*						m_pScene = nullptr;
 	_bool						m_isFinish = false;
 
+	_uint						m_iSceneID = 0;
 private:
 	HRESULT Ready_Default_Setting(CGraphic_Device::WINMODE eMode, const _uint& iBackCX, const _uint& iBackCY);	
 	HRESULT Ready_Static_Component();

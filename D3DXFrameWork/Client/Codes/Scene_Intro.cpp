@@ -17,14 +17,14 @@ CScene_Intro::CScene_Intro(LPDIRECT3DDEVICE9 pGraphic_Device)
 HRESULT CScene_Intro::Ready_Scene()
 {
 
-	//m_hVideo = MCIWndCreate(g_hWnd, 0, WS_VISIBLE | WS_CHILD | MCIWNDF_NOPLAYBAR, L"../Bin/Resources/Video/Marvel Intro HD.wmv");
-	//if (0 == m_hVideo)
-	//	return E_FAIL;
+	m_hVideo = MCIWndCreate(g_hWnd, 0, WS_VISIBLE | WS_CHILD | MCIWNDF_NOPLAYBAR, L"../Bin/Resources/Video/Marvel Intro HD.wmv");
+	if (0 == m_hVideo)
+		return E_FAIL;
 
-	//MoveWindow(m_hVideo, 0, 0, g_iBackCX, g_iBackCY, FALSE);
-	//SetWindowPos(m_hVideo, HWND_TOPMOST, 0, 0, g_iBackCX, g_iBackCY, SWP_NOZORDER);
+	MoveWindow(m_hVideo, 0, 0, g_iBackCX, g_iBackCY, FALSE);
+	SetWindowPos(m_hVideo, HWND_TOPMOST, 0, 0, g_iBackCX, g_iBackCY, SWP_NOZORDER);
 
-	//MCIWndPlay(m_hVideo);
+	MCIWndPlay(m_hVideo);
 
 
 	return NOERROR;
@@ -33,15 +33,21 @@ HRESULT CScene_Intro::Ready_Scene()
 
 _int CScene_Intro::Update_Scene(const _float & fTimeDelta)
 {
-	CInput_Device*	pInput_Device = Get_Input_Device();
 
-	if (nullptr == pInput_Device)
-		return -1;
 
-	if (pInput_Device->Get_DIKeyState(DIK_RETURN) & 0x80)
+
+	return 0;
+
+	//return CScene::Update_Scene(fTimeDelta);
+}
+
+_int CScene_Intro::LastUpdate_Scene(const _float & fTimeDelta)
+{
+
+
+	if (SCENE_LOGO == m_iSceneID)
 	{
-		//MCIWndDestroy(m_hVideo);
-
+		MCIWndDestroy(m_hVideo);
 		CScene*		pNewScene = CScene_Logo::Create(Get_Graphic_Device());
 		if (nullptr == pNewScene)
 			return -1;
@@ -51,13 +57,18 @@ _int CScene_Intro::Update_Scene(const _float & fTimeDelta)
 
 		return 0;
 	}
-	return 0;
+	CInput_Device*	pInput_Device = Get_Input_Device();
+	pInput_Device->AddRef();
 
-	//return CScene::Update_Scene(fTimeDelta);
-}
+	if (nullptr == pInput_Device)
+		return -1;
 
-_int CScene_Intro::LastUpdate_Scene(const _float & fTimeDelta)
-{
+	if (pInput_Device->Get_DIKeyState(DIK_RETURN) & 0x80)
+	{
+		m_iSceneID = SCENE_LOGO;
+	}
+
+	Safe_Release(pInput_Device);
 	return 0;
 	//return CScene::LastUpdate_Scene(fTimeDelta);
 }

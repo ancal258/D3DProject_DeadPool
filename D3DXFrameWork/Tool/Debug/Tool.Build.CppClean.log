@@ -2,9 +2,12 @@ c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\debug\tool.pch
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\debug\vc140.pdb
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\debug\vc140.idb
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\debug\stdafx.obj
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\debug\campoint.obj
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\debug\eventcube.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\debug\form.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\debug\mainfrm.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\debug\page_animation.obj
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\debug\page_cinemacam.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\debug\page_navigation.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\debug\page_object.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\debug\page_terrain.obj
@@ -17,7 +20,6 @@ c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\debug\toolcamera.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\debug\tooldoc.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\debug\toolterrain.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\debug\toolview.obj
-c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\debug\page_cinemacam.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\bin\shader_staticmesh.cso
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\bin\shader_terrain.cso
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\bin\tool.ilk

@@ -65,10 +65,10 @@ HRESULT CLoading::Loading_Stage_APT()
 	if (FAILED(Ready_Stage_Prototype_GameObject()))
 		return E_FAIL;
 
-	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Debug", L"Layer_Camera")))
-		return E_FAIL;
 
 	if (FAILED(Ready_Layer_Player(L"Layer_Player")))
+		return E_FAIL;
+	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Debug", L"Layer_Camera")))
 		return E_FAIL;
 
 	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Target", L"Layer_Camera")))

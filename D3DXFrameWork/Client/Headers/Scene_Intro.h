@@ -12,6 +12,9 @@ private:
 	explicit CScene_Intro(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual ~CScene_Intro() = default;
 public:
+	_uint Get_SceneID() {
+		return m_iSceneID;	}
+public:
 	virtual HRESULT Ready_Scene();
 	virtual _int Update_Scene(const _float& fTimeDelta);
 	virtual _int LastUpdate_Scene(const _float& fTimeDelta);
@@ -21,6 +24,7 @@ public:
 private:
 	HWND				m_hVideo = 0;
 	_bool				m_isFinish = false;
+	_uint				m_iSceneID = SCENE_INTRO;
 public:
 	static CScene_Intro* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 protected:

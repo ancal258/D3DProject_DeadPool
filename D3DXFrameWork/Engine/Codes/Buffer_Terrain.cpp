@@ -2,6 +2,7 @@
 #include "Picking.h"
 #include "Transform.h"
 #include "Navigation.h"
+#include "QuadTree.h"
 
 CBuffer_Terrain::CBuffer_Terrain(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CVIBuffer(pGraphic_Device)
@@ -13,8 +14,9 @@ CBuffer_Terrain::CBuffer_Terrain(const CBuffer_Terrain & rhs)
 	, m_pPixel(rhs.m_pPixel)	
 	, m_fInterval(rhs.m_fInterval)
 	, m_pIsNavigation(rhs.m_pIsNavigation)
+	, m_pQuadTree(rhs.m_pQuadTree)
 {
-
+	m_pQuadTree->AddRef();
 }
 
 HRESULT CBuffer_Terrain::Ready_VIBuffer(const _uint& iNumVertexX, const _uint& iNumVertexZ, const _float& fInterval)
@@ -154,6 +156,7 @@ HRESULT CBuffer_Terrain::Ready_VIBuffer(const _tchar * pHeightMapPath, const _fl
 	// For.Index Buffer
 	m_iPolygonSize = sizeof(POLYGON32);
 	m_iNumPolygons = (m_ih.biWidth - 1) * (m_ih.biHeight - 1) * 2;
+	m_pIndices = new POLYGON32[m_iNumPolygons];
 	m_IndicesFormat = D3DFMT_INDEX32;
 
 	if (FAILED(CVIBuffer::Ready_VIBuffer()))
@@ -233,6 +236,10 @@ HRESULT CBuffer_Terrain::Ready_VIBuffer(const _tchar * pHeightMapPath, const _fl
 	m_pVB->Unlock();
 
 	m_pIB->Unlock();
+
+	m_pQuadTree = CQuadTree::Create(Get_Graphic_Device(), m_pVertices, m_iNumVerticesX, m_iNumVerticesZ);
+	if (nullptr == m_pQuadTree)
+		return E_FAIL;
 
 	return NOERROR;
 }
@@ -409,6 +416,92 @@ void CBuffer_Terrain::Render_VIBuffer()
 	Safe_Release(pGraphic_Device);
 }
 
+void CBuffer_Terrain::Culling_ToFrustum(CFrustum* pFrustum, D3DXPLANE * pPlanes)
+{
+	_uint		iIndices[4] = { 0 };
+
+	_bool		isIn[4] = { false };
+
+	POLYGON32*	pIndices = (POLYGON32*)m_pIndices;
+
+	_ulong		dwNumPolygon = 0;
+
+
+	for (size_t i = 0; i < m_iNumVerticesZ - 1; i++)
+	{
+		for (size_t j = 0; j < m_iNumVerticesX - 1; j++)
+		{
+			size_t iIndex = i * m_iNumVerticesX + j;
+
+			iIndices[0] = iIndex + m_iNumVerticesX;
+			iIndices[1] = iIndex + m_iNumVerticesX + 1;
+			iIndices[2] = iIndex + 1;
+			iIndices[3] = iIndex;
+
+			isIn[0] = pFrustum->is_InFrustum(pPlanes, &m_pVertices[iIndices[0]], 0.0f);
+			isIn[1] = pFrustum->is_InFrustum(pPlanes, &m_pVertices[iIndices[1]], 0.0f);
+			isIn[2] = pFrustum->is_InFrustum(pPlanes, &m_pVertices[iIndices[2]], 0.0f);
+			isIn[3] = pFrustum->is_InFrustum(pPlanes, &m_pVertices[iIndices[3]], 0.0f);
+
+			// 오른쪽 위에 삼각형이 절두체 안에 있니?!
+			if (true == isIn[0] &&
+				true == isIn[1] &&
+				true == isIn[2])
+			{
+				pIndices[dwNumPolygon]._1 = iIndices[0];
+				pIndices[dwNumPolygon]._2 = iIndices[1];
+				pIndices[dwNumPolygon]._3 = iIndices[2];
+				++dwNumPolygon;
+			}
+
+
+
+			// 왼쪽 아래 삼각형이 절두체 안에 있니?!
+			if (true == isIn[0] &&
+				true == isIn[2] &&
+				true == isIn[3])
+			{
+				pIndices[dwNumPolygon]._1 = iIndices[0];
+				pIndices[dwNumPolygon]._2 = iIndices[2];
+				pIndices[dwNumPolygon]._3 = iIndices[3];
+				++dwNumPolygon;
+			}
+		}
+	}
+
+	POLYGON32*		pOriIndices = nullptr;
+
+	m_pIB->Lock(0, 0, (void**)&pOriIndices, 0);
+
+	memcpy(pOriIndices, pIndices, sizeof(POLYGON32) * dwNumPolygon);
+
+	m_pIB->Unlock();
+
+	m_iNumPolygons = dwNumPolygon;
+}
+void CBuffer_Terrain::Culling_ToQuadTree(CFrustum * pFrustum, D3DXPLANE * pPlanes)
+{
+	_uint		iIndices[4] = { 0 };
+
+	_bool		isIn[4] = { false };
+
+	POLYGON32*	pIndices = (POLYGON32*)m_pIndices;
+
+	_ulong		dwNumPolygon = 0;
+
+	m_pQuadTree->Culling(pFrustum, pPlanes, pIndices, &dwNumPolygon);
+
+	POLYGON32*		pOriIndices = nullptr;
+
+	m_pIB->Lock(0, 0, (void**)&pOriIndices, 0);
+
+	memcpy(pOriIndices, pIndices, sizeof(POLYGON32) * dwNumPolygon);
+
+	m_pIB->Unlock();
+
+	m_iNumPolygons = dwNumPolygon;
+}
+
 void CBuffer_Terrain::Draw_ToBuffer(_vec3* pOut)
 {
 	VTXNORTEX*			pVertices = nullptr;
@@ -571,6 +664,7 @@ void CBuffer_Terrain::Free()
 {
 	if(false == is_Clone())
 		Safe_Delete_Array(m_pPixel);
-	
+
+	Safe_Release(m_pQuadTree);
 	CVIBuffer::Free();
 }

@@ -250,6 +250,7 @@ technique Default_Device
 
 	pass Shade_Phong
 	{		
+		//FillMode = WireFrame;
 		VertexShader = compile vs_3_0 VS_MAIN_PHONG();
 		PixelShader = compile ps_3_0 PS_MAIN_PHONG();
 	}

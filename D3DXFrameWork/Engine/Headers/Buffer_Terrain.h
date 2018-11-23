@@ -3,7 +3,7 @@
 #include "VIBuffer.h"
 
 _BEGIN(Engine)
-
+class CQuadTree;
 class CPicking;
 class CTransform;
 class CNavigation;
@@ -24,9 +24,14 @@ public:
 	HRESULT Ready_VIBuffer(const _uint& iNumVertexX, const _uint& iNumVertexZ, const _float& fInterval);
 	HRESULT Ready_VIBuffer(const _tchar* pHeightMapPath, const _float& fInterval);
 	_vec3 SetHeight_OnTerrain(const _vec3* pPosition, const CTransform* pTransform_Terrain) const;
+	virtual void Render_VIBuffer();
+private:
 	virtual _bool Picking_ToBuffer(const _vec3* pRayPos, const _vec3* pRayDir, const CTransform* pTransCom, _vec3* pOut);
 	virtual _bool Picking_ToBuffer(const _vec3* pRayPos, const _vec3* pRayDir, const CTransform* pTransCom, CNavigation* pNavigation , _vec3* pOut);
-	virtual void Render_VIBuffer();
+private:
+	virtual void Culling_ToFrustum(CFrustum* pFrustum, D3DXPLANE* pPlanes) override;
+	virtual void Culling_ToQuadTree(CFrustum* pFrustum, D3DXPLANE* pPlanes) override;
+
 private:
 	BITMAPFILEHEADER			m_fh;
 	BITMAPINFOHEADER			m_ih;
@@ -34,6 +39,8 @@ private:
 
 private:
 	_float						m_fInterval = 0.f;
+	CQuadTree*					m_pQuadTree = nullptr;
+
 	_ulong*						m_pPixel = nullptr;
 	_float						m_fRadius = 0;
 	_float						m_fPower = 0;

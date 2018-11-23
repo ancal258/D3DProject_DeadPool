@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "..\Headers\Camera_Debug.h"
-
+#include "Component_Manager.h"
 _USING(Client)
 
 CCamera_Debug::CCamera_Debug(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -29,6 +29,8 @@ HRESULT CCamera_Debug::Ready_GameObject()
 {
 	m_fCamSpeed = 10.f;
 	m_isCameraOn = true;
+	if (FAILED(Ready_Component()))
+		return E_FAIL;
 	return NOERROR;
 }
 
@@ -117,6 +119,8 @@ _int CCamera_Debug::Update_GameObject(const _float & fTimeDelta)
 
 		m_Camera_Desc.vAt = m_Camera_Desc.vEye + vLook;
 	}
+	if (nullptr != m_pFrustumCom)
+		m_pFrustumCom->Update_Frustum(&m_matView, &m_matProj);
 
 	Safe_Release(pGraphic_Device);
 
@@ -131,6 +135,42 @@ _int CCamera_Debug::LastUpdate_GameObject(const _float & fTimeDelta)
 void CCamera_Debug::Render_GameObject()
 {
 
+}
+
+_bool CCamera_Debug::Culling_ToFrustum(CTransform * pTransform, CVIBuffer * pBuffer, const _float& fRadius)
+{
+	if (nullptr == m_pFrustumCom)
+		return false;
+
+	return m_pFrustumCom->Culling_ToFrustum(pTransform, pBuffer, fRadius);
+}
+
+_bool CCamera_Debug::Culling_ToQuadTree(CTransform * pTransform, CVIBuffer * pBuffer, const _float & fRadius)
+{
+	if (nullptr == m_pFrustumCom)
+		return false;
+
+	return m_pFrustumCom->Culling_ToQuadTree(pTransform, pBuffer, fRadius);
+}
+
+HRESULT CCamera_Debug::Ready_Component()
+{
+	CComponent_Manager*		pComponent_Manager = CComponent_Manager::GetInstance();
+	if (nullptr == pComponent_Manager)
+		return E_FAIL;
+
+	pComponent_Manager->AddRef();
+
+	// For.Com_Frustum
+	m_pFrustumCom = (CFrustum*)pComponent_Manager->Clone_Component(SCENE_STATIC, L"Component_Frustum");
+	if (nullptr == m_pFrustumCom)
+		return E_FAIL;
+	if (FAILED(Add_Component(L"Com_Frustum", m_pFrustumCom)))
+		return E_FAIL;
+
+	Safe_Release(pComponent_Manager);
+
+	return NOERROR;
 }
 
 HRESULT CCamera_Debug::SetUp_CameraInfo(CAMERADESC CamDesc, PROJDESC ProjDesc)
@@ -172,6 +212,7 @@ CGameObject * CCamera_Debug::Clone_GameObject()
 
 void CCamera_Debug::Free()
 {
+	Safe_Release(m_pFrustumCom);
 	CCamera::Free();
 }
 
