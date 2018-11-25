@@ -35,6 +35,7 @@ public:
 public:
 	HRESULT Ready_Loading(SCENEID eSceneID);
 	HRESULT Loading_Stage_APT();
+	HRESULT Loading_Stage_FIELD();
 	//HRESULT Loading_();
 private:
 	HRESULT Ready_LightInfo();

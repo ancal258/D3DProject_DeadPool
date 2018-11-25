@@ -11,13 +11,13 @@
 #include "DP_Sword.h"
 #include "Static_Object.h"
 #include "Event_Cube.h"
+#include "Effect.h"
+#include "Dog.h"
 
 CLoading::CLoading(LPDIRECT3DDEVICE9 pGraphicDev)
 	:m_pGraphic_Device(pGraphicDev)
 	,m_pObject_Manager(CObject_Manager::GetInstance())
 {
-	m_pObject_Manager->AddRef();
-	m_pGraphic_Device->AddRef();
 }
 
 HRESULT CLoading::Add_Object_Prototype(const _uint & iSceneID, const _tchar * pProtoTag, CGameObject * pPrototype)
@@ -52,7 +52,7 @@ HRESULT CLoading::Ready_Loading(SCENEID eSceneID)
 
 HRESULT CLoading::Loading_Stage_APT()
 {
-	SetWindowText(g_hWnd, L"Loading...");
+	//SetWindowText(g_hWnd, L"Loading...");
 
 	if (FAILED(Ready_LightInfo()))
 		return E_FAIL;
@@ -64,8 +64,6 @@ HRESULT CLoading::Loading_Stage_APT()
 
 	if (FAILED(Ready_Stage_Prototype_GameObject()))
 		return E_FAIL;
-
-
 	if (FAILED(Ready_Layer_Player(L"Layer_Player")))
 		return E_FAIL;
 	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Debug", L"Layer_Camera")))
@@ -78,9 +76,6 @@ HRESULT CLoading::Loading_Stage_APT()
 		return E_FAIL;
 	SetUp_CameraMove();
 
-	//if (FAILED(Ready_Layer_Test(L"Layer_Test")))
-	//	return E_FAIL;
-
 	if (FAILED(Ready_Layer_BackGround(L"Layer_BackGround")))
 		return E_FAIL;
 
@@ -91,13 +86,26 @@ HRESULT CLoading::Loading_Stage_APT()
 	if (FAILED(Load_Event_Cube(L"../Bin/DataFiles/EventCube_APT.dat")))
 		return E_FAIL;
 
+	//Dog
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Dog", SCENE_STAGE, L"Layer_Dog")))
+		return E_FAIL;
 
+	//for (size_t i = 0; i < 40; i++)
+	//{
+	//	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Effect", SCENE_STAGE, L"Layer_Effect")))
+	//		return E_FAIL;
+	//}
 
 	//MCIWndClose(m_hVideo);
 	m_isFinish = true;
 
 	SetWindowText(g_hWnd, L"Complete");
 
+	return NOERROR;
+}
+
+HRESULT CLoading::Loading_Stage_FIELD()
+{
 	return NOERROR;
 }
 
@@ -132,8 +140,11 @@ HRESULT CLoading::Ready_Stage_Prototype_Component()
 	// For.Component_Shader_Mesh
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Shader_Mesh", CShader::Create(Get_Graphic_Device(), L"../Bin/ShaderFiles/Shader_Mesh.fx"))))
 		return E_FAIL;
-	// For.Component_Shader_Mesh
+	// For.Component_Shader_Collider
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Shader_Collider", CShader::Create(Get_Graphic_Device(), L"../Bin/ShaderFiles/Shader_Collider.fx"))))
+		return E_FAIL;
+	// For.Component_Shader_Effect
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Shader_Effect", CShader::Create(Get_Graphic_Device(), L"../Bin/ShaderFiles/Shader_Effect.fx"))))
 		return E_FAIL;
 
 	// For.Component_Texture_Terrain
@@ -142,6 +153,10 @@ HRESULT CLoading::Ready_Stage_Prototype_Component()
 
 	// For.Component_Texture_Filter
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_Filter", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/Terrain/Filter.bmp"))))
+		return E_FAIL;
+
+	// For.Component_Texture_Effect
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_Effect", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/Explosion/Explosion%d.png", 90))))
 		return E_FAIL;
 
 	// For.Component_Buffer_Terrain	
@@ -158,12 +173,11 @@ HRESULT CLoading::Ready_Stage_Prototype_Component()
 	// For.Component_Collider_Sphere
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Collider_Sphere", CCollider::Create(Get_Graphic_Device(), CCollider::TYPE_SPHERE))))
 		return E_FAIL;
-
-	// For.Component_Mesh_Stone
-	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Stone", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/TombStone/", L"TombStone.x"))))
-		return E_FAIL;
 	// For.Component_Mesh_Player
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Player", CMesh_Dynamic::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/DynamicMesh/PlayerXFile/", L"DP_APT_00.x"))))
+		return E_FAIL;
+	// For.Component_Mesh_Player
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Dog", CMesh_Dynamic::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/DynamicMesh/Dog/", L"DP_DOG.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_Sword
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Sword", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/Sword/", L"DeadPool_Sword.x"))))
@@ -277,12 +291,22 @@ HRESULT CLoading::Ready_Stage_Prototype_GameObject()
 	// For.GameObject_Wooden_DoorFrame
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Wooden_DoorFrame", CStatic_Object::Create(Get_Graphic_Device(), L"Component_Mesh_Wooden_DoorFrame"))))
 		return E_FAIL;
+	// For.GameObject_Celling
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Celling", CStatic_Object::Create(Get_Graphic_Device(), L"Component_Mesh_Celling"))))
+		return E_FAIL;
 	// ---------------------Ãß°¡µÈ ³ðµé
+
+	// For.GameObject_Event_Cube
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Dog", CDog::Create(Get_Graphic_Device()))))
+		return E_FAIL;
 	// For.GameObject_Event_Cube
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Event_Cube", CEvent_Cube::Create(Get_Graphic_Device()))))
 		return E_FAIL;
+	// For.GameObject_Effect
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototye_Effect", CEffect::Create(Get_Graphic_Device()))))
+		return E_FAIL;
 
-
+	return NOERROR;
 
 	return NOERROR;
 }
@@ -378,6 +402,9 @@ HRESULT CLoading::Ready_Componet_Prototype_SceneAPT()
 		return E_FAIL;
 	// For.Component_Mesh_Wooden_DoorFrame
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Wooden_DoorFrame", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Wooden_DoorFrame.x"))))
+		return E_FAIL;
+	// For.Component_Celling
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Celling", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/",L"Celling.x"))))
 		return E_FAIL;
 	Safe_Release(pComponent_Manager);
 
@@ -550,8 +577,8 @@ _uint CLoading::Thread_Main(void * pArg)
 	case SCENE_STAGE:
 		hr = pLoading->Loading_Stage_APT();
 		break;
-	//case SCENE_DEFENCE:
-	//	hr = pLoading->Loading_Resource_Stage();
+	case SCENE_FIELD:
+		hr = pLoading->Loading_Stage_FIELD();
 		break;
 	}
 
@@ -586,8 +613,5 @@ void CLoading::Free()
 	DeleteCriticalSection(&m_Critical_Section);
 
 	CloseHandle(m_hThread);
-
-	Safe_Release(m_pObject_Manager);
-	Safe_Release(m_pGraphic_Device);
 
 }

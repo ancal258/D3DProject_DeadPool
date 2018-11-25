@@ -106,6 +106,14 @@ HRESULT CMesh_Dynamic::Set_AnimationSet(const _uint & iIndex)
 	return m_pAniCtrl->Set_AnimationSet(iIndex);
 }
 
+_bool CMesh_Dynamic::Is_Finish()
+{
+	if (nullptr == m_pAniCtrl)
+		return E_FAIL;
+
+	return m_pAniCtrl->Is_Finish();
+}
+
 void CMesh_Dynamic::Play_AnimationSet(const _float & fTimeDelta)
 {
 	if (nullptr == m_pAniCtrl)
@@ -113,6 +121,20 @@ void CMesh_Dynamic::Play_AnimationSet(const _float & fTimeDelta)
 
 	m_pAniCtrl->Play_AnimationSet(fTimeDelta);
 	Update_CombinedTransformationMatrix((D3DXFRAME_DERIVED*)m_pRootFrame, m_matPivot);
+}
+
+void CMesh_Dynamic::Set_TrackPosition(DOUBLE dlPosition)
+{
+	if (nullptr == m_pAniCtrl)
+		return;
+	m_pAniCtrl->Set_TrackPosition(dlPosition);
+}
+
+DOUBLE CMesh_Dynamic::Get_TrackPeriod()
+{
+	if (nullptr == m_pAniCtrl)
+		return 0;
+	return m_pAniCtrl->Get_TrackPeriod();
 }
 
 

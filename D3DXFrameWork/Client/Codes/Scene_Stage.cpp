@@ -1,8 +1,9 @@
 #include "stdafx.h"
 #include "..\Headers\Scene_Stage.h"
 #include "Component_Manager.h"
-
-
+#include "Scene_Field.h"
+#include "Management.h"
+#include "Loading.h"
 
 _USING(Client)
 
@@ -21,6 +22,26 @@ HRESULT CScene_Stage::Ready_Scene()
 
 _int CScene_Stage::Update_Scene(const _float & fTimeDelta)
 {
+	CInput_Device*	pInput_Device = Get_Input_Device();
+	if (nullptr == pInput_Device)
+		return -1;
+
+	if (pInput_Device->Get_DIKeyState(DIK_L) & 0x80)
+	{
+		m_pLoading = CLoading::Create(Get_Graphic_Device(), SCENE_FIELD);
+		if (nullptr == m_pLoading)
+			return E_FAIL;
+
+		CScene*		pNewScene = CScene_Field::Create(Get_Graphic_Device());
+		if (nullptr == pNewScene)
+			return -1;
+
+		if (FAILED(CManagement::GetInstance()->SetUp_CurrentScene(pNewScene)))
+			return -1;
+
+		return 0;
+	}
+
 	m_fTimeAcc += fTimeDelta;
 
 	return CScene::Update_Scene(fTimeDelta);
@@ -59,5 +80,11 @@ CScene_Stage * CScene_Stage::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 }
 void CScene_Stage::Free()
 {
+	if (FAILED(CObject_Manager::GetInstance()->Clear_Object(SCENE_STAGE)))
+		return;
+
+	if (FAILED(CComponent_Manager::GetInstance()->Clear_Component(SCENE_STAGE)))
+		return;
+
 	CScene::Free();
 }

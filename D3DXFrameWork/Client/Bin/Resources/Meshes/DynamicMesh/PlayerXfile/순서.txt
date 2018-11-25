@@ -15,6 +15,7 @@
 14 NoGun_Walk_L
 15 NoGun_Walk_R
 16 NoGun_Walk_B
+17 DP_InteractDOG
 
 
 
@@ -23,5 +24,3 @@
 2. 한번만 눌러도 끝까지 재생되는 경우
 3. 끝나기 전에 누르면 다른 애니메이션으로 전이되는 경우
 4. 
-
-52.5 // 12

@@ -58,11 +58,11 @@ _int CTerrain::Update_GameObject(const _float & fTimeDelta)
 	pObject_Manager->AddRef();
 
 	// 카메라객체의 주소를 얻어온다.
-	CCamera_Debug*	pCamera = (CCamera_Debug*)pObject_Manager->Get_ObjectPointer(SCENE_STAGE, L"Layer_Camera", 0);
-	if (nullptr == pCamera)
-		return -1;
+	//CCamera_Debug*	pCamera = (CCamera_Debug*)pObject_Manager->Get_ObjectPointer(SCENE_STAGE, L"Layer_Camera", 0);
+	//if (nullptr == pCamera)
+	//	return -1;
 
-	pCamera->Culling_ToQuadTree(m_pTransformCom, m_pBufferCom);
+	//pCamera->Culling_ToQuadTree(m_pTransformCom, m_pBufferCom);
 
 	Safe_Release(pObject_Manager);
 

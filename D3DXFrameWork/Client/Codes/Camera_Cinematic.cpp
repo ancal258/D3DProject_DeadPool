@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "..\Headers\Camera_Cinematic.h"
-#include "Player.h"
 
 _USING(Client)
 

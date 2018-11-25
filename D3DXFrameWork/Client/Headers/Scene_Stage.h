@@ -4,7 +4,7 @@
 #include "Scene.h"
 
 _BEGIN(Client)
-
+class CLoading;
 class CScene_Stage final : public CScene
 {
 private:
@@ -20,6 +20,8 @@ private: // Frame
 	_ulong						m_dwRenderCnt = 0;
 	_float						m_fTimeAcc = 0.f;
 	_tchar						m_szFPS[128] = L"";
+	CLoading*					m_pLoading = nullptr;
+
 public:
 	static CScene_Stage* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 protected:

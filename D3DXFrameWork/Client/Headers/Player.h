@@ -17,6 +17,7 @@ _BEGIN(Client)
 class CCamera_Cinematic;
 class CCamera_Debug;
 class CCamera_Target;
+class CAnimator;
 class CPlayer final : public CGameObject
 {
 private:
@@ -25,7 +26,7 @@ private:
 	enum ANIM_APT {
 		SIT_IDLE_BREATH, SIT_IDLE_HANDMOVE, SIT_GETUP, SIT_SITDOWN,
 		NOGUN_IDLE00, NOGUN_IDLE01, NOGUN_IDLE02, NOGUN_IDLE03, NOGUN_IDLE04, NOGUN_IDLE05, NOGUN_IDLE06,
-		NOGUN_WALK_F, NOGUN_WALK_FL, NOGUN_WALK_FR, NOGUN_WALK_L, NOGUN_WALK_R, NOGUN_WALK_B
+		NOGUN_WALK_F, NOGUN_WALK_FL, NOGUN_WALK_FR, NOGUN_WALK_L, NOGUN_WALK_R, NOGUN_WALK_B , INTERACT_DOG
 	};
 private:
 	explicit CPlayer(LPDIRECT3DDEVICE9 pGraphic_Device);
@@ -49,10 +50,11 @@ public:
 	virtual _int LastUpdate_GameObject(const _float& fTimeDelta);
 	virtual void Render_GameObject();
 public:
+	void Camera_Update(const _float& fTimeDelta);
 	HRESULT SetUp_CameraMove();
+	HRESULT SetUp_Camera();
 private:
 	void Render_Axis();
-	HRESULT SetUp_Camera();
 
 private:
 	CTransform*         m_pTransformCom = nullptr;
@@ -62,6 +64,7 @@ private:
 	CCollider*			m_pColliderCom = nullptr;
 	CNavigation*		m_pNavigationCom = nullptr;
 	CInput_Device*		m_pInput_Device = nullptr;
+	CAnimator*			m_pAnimator = nullptr;
 	//Mouse
 private:
 	_float            m_fMouseSence = 0;

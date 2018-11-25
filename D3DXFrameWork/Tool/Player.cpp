@@ -17,6 +17,16 @@ CPlayer::CPlayer(const CPlayer & rhs)
 
 }
 
+void CPlayer::Set_TrackPosition(DOUBLE dlTrackPosition)
+{
+	m_pMeshCom->Set_TrackPosition(dlTrackPosition);
+}
+
+DOUBLE CPlayer::Get_TrackPeriod()
+{
+	return	m_pMeshCom->Get_TrackPeriod();
+}
+
 HRESULT CPlayer::Ready_GameObject_Prototype()
 {
 	return NOERROR;
@@ -70,20 +80,20 @@ _int CPlayer::Update_GameObject(const _float & fTimeDelta)
 	//}
 	
 
+	m_pMeshCom->Set_AnimationSet(m_iAnimationIndex);
 	if (true == m_isPlay)
 	{
-		m_pMeshCom->Set_AnimationSet(m_iAnimationIndex);
 		m_pTransformCom->Go_Straight(m_fSpeed, m_fTimeDelta);
 
 		if ((m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION))->z > m_fArrived)
 			m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(0, 0, 0));
+		m_pMeshCom->Play_AnimationSet(m_fTimeDelta);
 	}
 	else
 	{
 		m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(0, 0, 0));
 	}
 
-	m_pMeshCom->Play_AnimationSet(m_fTimeDelta);
 	return _int();
 }
 

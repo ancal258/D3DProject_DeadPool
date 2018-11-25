@@ -29,7 +29,7 @@ HRESULT CCamera_Target::Ready_GameObject_Prototype()
 HRESULT CCamera_Target::Ready_GameObject()
 {
 	m_fCamSpeed = 10.f;
-
+	m_fAngle[0] = D3DXToRadian(48.f);
 	return NOERROR;
 }
 
@@ -42,7 +42,7 @@ _int CCamera_Target::Update_GameObject(const _float & fTimeDelta)
 	m_Camera_Desc.vEye = vTargetPos;
 	//m_Camera_Desc.vEye.x += 3.f;
 	m_Camera_Desc.vEye.y = 10.f;
-	m_Camera_Desc.vEye.z -= 5.f;
+	m_Camera_Desc.vEye.z -= 8.f;
 
 	_vec3 vLook = vTargetPos - m_Camera_Desc.vEye;
 	m_Camera_Desc.vAt = m_Camera_Desc.vEye + vLook;

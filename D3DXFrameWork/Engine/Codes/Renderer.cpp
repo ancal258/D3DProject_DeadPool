@@ -57,8 +57,15 @@ void CRenderer::Render_NoneAlpha()
 	m_RenderList[RENDER_NONEALPHA].clear();
 }
 
+_bool Sort(CGameObject * pSour, CGameObject * pDest)
+{
+	return pSour->Get_ViewDepth() > pDest->Get_ViewDepth();
+}
+
 void CRenderer::Render_Alpha()
 {
+	m_RenderList[RENDER_ALPHA].sort(Sort);
+
 	for (auto& pGameObject : m_RenderList[RENDER_ALPHA])
 	{
 		pGameObject->Render_GameObject();

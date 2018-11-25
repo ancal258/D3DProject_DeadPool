@@ -67,6 +67,19 @@ void CGameObject::Render_GameObject()
 {
 }
 
+void CGameObject::Compute_ViewDepth(const _vec3 * pWorldPos)
+{
+	_matrix		matView;
+
+	Get_Transform(D3DTS_VIEW, &matView);
+
+	D3DXMatrixInverse(&matView, nullptr, &matView);
+
+	_vec3		vDir = *pWorldPos - *(_vec3*)&matView.m[3][0];
+
+	m_fDepth = D3DXVec3Length(&vDir);
+}
+
 CComponent * CGameObject::Find_Component(const _tchar * pComponentTag) const
 {
 	auto	iter = find_if(m_mapComponent.begin(), m_mapComponent.end(), CFinder_Tag(pComponentTag));

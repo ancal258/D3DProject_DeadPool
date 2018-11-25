@@ -117,6 +117,11 @@ HRESULT CBuffer_Terrain::Ready_VIBuffer(const _uint& iNumVertexX, const _uint& i
 	m_pVB->Unlock();
 	m_pIB->Unlock();
 
+
+	m_pQuadTree = CQuadTree::Create(Get_Graphic_Device(), m_pVertices, m_iNumVerticesX, m_iNumVerticesZ);
+	if (nullptr == m_pQuadTree)
+		return E_FAIL;
+
 	return NOERROR;
 }
 

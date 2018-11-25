@@ -21,6 +21,8 @@ public:
 	CComponent* Get_ComponentPointer(const _tchar* pComponentTag) const;
 	HRESULT Get_Transform(D3DTRANSFORMSTATETYPE eType, _matrix* pMatrix) {
 		return m_pGraphic_Device->GetTransform(eType, pMatrix); }	
+	_float Get_ViewDepth() const {
+		return m_fDepth;}
 public:
 	_bool Get_Lived() {
 		return m_isLived; }
@@ -37,8 +39,12 @@ public:
 	virtual _int Update_GameObject(const _float& fTimeDelta);
 	virtual _int LastUpdate_GameObject(const _float& fTimeDelta);
 	virtual void Render_GameObject();
+protected:
+	void Compute_ViewDepth(const _vec3* pWorldPos);
 private:
-	LPDIRECT3DDEVICE9			m_pGraphic_Device;
+	LPDIRECT3DDEVICE9			m_pGraphic_Device;	
+	_float						m_fDepth;
+
 private:
 	map<const _tchar*, CComponent*>			m_mapComponent;
 	typedef map<const _tchar*, CComponent*>	MAPCOMPONENT;

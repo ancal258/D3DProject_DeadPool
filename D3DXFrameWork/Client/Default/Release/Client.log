@@ -1,15 +1,15 @@
 ﻿FXC : warning X4717: Effects deprecated for D3DCompiler_47
   
-  compilation object save succeeded; see C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\Shader_Collider.cso
+  compilation object save succeeded; see D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\Shader_Collider.cso
 FXC : warning X4717: Effects deprecated for D3DCompiler_47
   
-  compilation object save succeeded; see C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\Shader_Logo.cso
+  compilation object save succeeded; see D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\Shader_Logo.cso
 FXC : warning X4717: Effects deprecated for D3DCompiler_47
   
-  compilation object save succeeded; see C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\Shader_Mesh.cso
+  compilation object save succeeded; see D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\Shader_Mesh.cso
 FXC : warning X4717: Effects deprecated for D3DCompiler_47
   
-  compilation object save succeeded; see C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\Shader_Terrain.cso
+  compilation object save succeeded; see D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\Shader_Terrain.cso
   stdafx.cpp
   Back_Logo.cpp
   Camera_Cinematic.cpp
@@ -23,9 +23,9 @@ FXC : warning X4717: Effects deprecated for D3DCompiler_47
 ..\Codes\Camera_Target.cpp(55): warning C4101: 'tmp' :참조되지 않은 지역 변수입니다.
   DP_Sword.cpp
   Event_Cube.cpp
-C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Event_Cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Event_Cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
   Loading.cpp
-C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Event_Cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Event_Cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
   MainApp.cpp
   Player.cpp
 ..\Codes\Player.cpp(112): warning C4305: '인수': 'double'에서 'const Engine::_float'(으)로 잘립니다.
@@ -38,7 +38,9 @@ C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Event_Cube.
   Test.cpp
   Client.cpp
   코드를 생성하고 있습니다.
-  All 400 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  398 of 398 functions (100.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
-  Client.vcxproj -> C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Default\..\Bin\Client.exe
+  Client.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Default\..\Bin\Client.exe
   Client.vcxproj -> ..\Bin\Client.pdb (Full PDB)

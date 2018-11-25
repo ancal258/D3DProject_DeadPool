@@ -22,6 +22,8 @@ HRESULT CAnimationCtrl::Ready_AnimationCtrl()
 	return NOERROR;
 }
 
+
+// 애니메이션이 바뀔 때 마다 처리됨.
 HRESULT CAnimationCtrl::Set_AnimationSet(const _uint & iIndex)
 {
 	if (m_iOldAniIdx == iIndex)
@@ -48,8 +50,8 @@ HRESULT CAnimationCtrl::Set_AnimationSet(const _uint & iIndex)
 	// 트랙의 위치를 가져온다.  트랙이 재생되는 시간과 단위가 같다.
 	// 현재 애니메이션 셋을 전체 재생하는데 걸리는 시간. 
 	m_dlPeriod = pAniSet->GetPeriod();
-
-
+	ZeroMemory(&m_TrackDesc, sizeof(D3DXTRACK_DESC));
+	
 
 	Safe_Release(pAniSet);
 
@@ -82,6 +84,17 @@ HRESULT CAnimationCtrl::Set_AnimationSet(const _uint & iIndex)
 	return NOERROR;
 }
 
+_bool CAnimationCtrl::Is_Finish()
+{
+	if (m_TrackDesc.Enable == FALSE)
+		return false;
+
+	if (m_dlPeriod <= m_TrackDesc.Position + 0.3f)
+		return true;
+	return false;
+}
+
+// 매 프레임 처리됨
 void CAnimationCtrl::Play_AnimationSet(const _float & fTimeDelta)
 {
 	if (nullptr == m_pAniCtrl)
@@ -92,6 +105,11 @@ void CAnimationCtrl::Play_AnimationSet(const _float & fTimeDelta)
 
 	m_fTimeAcc += fTimeDelta;
 	m_pAniCtrl->AdvanceTime(fTimeDelta, nullptr);
+}
+
+void CAnimationCtrl::Set_TrackPosition(DOUBLE dlPosition)
+{
+	m_pAniCtrl->SetTrackPosition(m_iCurrentTrack,dlPosition);
 }
 
 CAnimationCtrl * CAnimationCtrl::Create(LPD3DXANIMATIONCONTROLLER pAniCtrl)

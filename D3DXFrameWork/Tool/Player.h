@@ -26,6 +26,8 @@ public:
 		m_isPlay = true;}
 	void Set_Stop() {
 		m_isPlay = false;}
+	void Set_TrackPosition(DOUBLE dlTrackPosition);
+	DOUBLE Get_TrackPeriod();
 public:
 	virtual HRESULT Ready_GameObject_Prototype();
 	virtual HRESULT Ready_GameObject();

@@ -85,9 +85,9 @@ HRESULT CToolView::Ready_Componet_Prototype_Static()
 		return E_FAIL;
 	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Shader_Mesh", CShader::Create(m_pGraphic_Device, L"Bin/ShaderFiles/Shader_StaticMesh.fx"))))
 		return E_FAIL;
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Texture_Terrain", CTexture::Create(m_pGraphic_Device, CTexture::TYPE_GENERAL, L"Bin/Resources/Textures/Terrain/Grass_%d.tga", 4))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Texture_Terrain", CTexture::Create(m_pGraphic_Device, CTexture::TYPE_GENERAL, L"../Client/Bin/Resources/Textures/Terrain/Grass_%d.tga", 4))))
 		return E_FAIL;
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Texture_Filter", CTexture::Create(m_pGraphic_Device, CTexture::TYPE_GENERAL, L"Bin/Splatting.bmp"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Texture_Filter", CTexture::Create(m_pGraphic_Device, CTexture::TYPE_GENERAL, L"../Client/Bin/Splatting.bmp"))))
 		return E_FAIL;
 	// For.Component_Collider_Box
 	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Collider_Box", CCollider::Create(m_pGraphic_Device, CCollider::TYPE_BOUNDINGBOX))))
@@ -96,7 +96,7 @@ HRESULT CToolView::Ready_Componet_Prototype_Static()
 	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Collider_Sphere", CCollider::Create(m_pGraphic_Device, CCollider::TYPE_SPHERE))))
 		return E_FAIL;
 	// For.Component_Navigation
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Navigation", CNavigation::Create(m_pGraphic_Device, L"../Bin/Data/Navigation.dat"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Navigation", CNavigation::Create(m_pGraphic_Device, L"../../Client/Bin/Data/Navigation.dat"))))
 		return E_FAIL;
 	return NOERROR;
 }
@@ -104,88 +104,91 @@ HRESULT CToolView::Ready_Componet_Prototype_Static()
 HRESULT CToolView::Ready_Componet_Prototype_SceneAPT()
 {
 	// For.Component_Mesh_Another_Sofa
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Another_Sofa", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Another_Sofa.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Another_Sofa", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Another_Sofa.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_Another_BigSofa
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Another_BigSofa", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Another_BigSofa.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Another_BigSofa", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Another_BigSofa.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_Bicycle
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Bicycle", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Bicycle.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Bicycle", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Bicycle.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_BookCase
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_BookCase", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"BookCase.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_BookCase", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"BookCase.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_DogPoolBed
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_DogPoolBed", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"DogPoolBed.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_DogPoolBed", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"DogPoolBed.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_DP_Bed_01
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_DP_Bed_01", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"DP_Bed_01.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_DP_Bed_01", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"DP_Bed_01.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_DP_Bed_02
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_DP_Bed_02", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"DP_Bed_02.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_DP_Bed_02", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"DP_Bed_02.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_DP_Sofa
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_DP_Sofa", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"DP_Sofa.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_DP_Sofa", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"DP_Sofa.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_KitchenTable
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_KitchenTable", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"KitchenTable.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_KitchenTable", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"KitchenTable.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_NeonSign_01
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_NeonSign_01", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"NeonSign_01.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_NeonSign_01", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"NeonSign_01.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_NeonSign_02
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_NeonSign_02", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"NeonSign_02.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_NeonSign_02", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"NeonSign_02.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_NeonSign_03
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_NeonSign_03", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"NeonSign_03.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_NeonSign_03", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"NeonSign_03.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_NeonSign_04
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_NeonSign_04", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"NeonSign_04.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_NeonSign_04", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"NeonSign_04.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_Poster_01
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Poster_01", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Poster_01.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Poster_01", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Poster_01.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_Poster_02
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Poster_02", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Poster_02.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Poster_02", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Poster_02.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_RubberDuckie
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_RubberDuckie", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"RubberDuckie.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_RubberDuckie", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"RubberDuckie.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_Rug
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Rug", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Rug.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Rug", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Rug.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_TV
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_TV", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"TV.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_TV", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"TV.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_TV_Remote
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_TV_Remote", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"TV_Remote.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_TV_Remote", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"TV_Remote.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_Wall_01
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Wall_01", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Wall_01.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Wall_01", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Wall_01.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_Wall_01b
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Wall_01b", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Wall_01b.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Wall_01b", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Wall_01b.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_Wall_Corner
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Wall_Corner", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Wall_Corner.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Wall_Corner", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Wall_Corner.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_Wall_SideBoard
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Wall_SideBoard", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Wall_SideBoard.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Wall_SideBoard", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Wall_SideBoard.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_Wall_SideBoardTopSide
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Wall_SideBoardTopSide", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Wall_SideBoardTopSide.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Wall_SideBoardTopSide", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Wall_SideBoardTopSide.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_Weight_Barbel
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Weight_Barbel", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Weight_Barbel.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Weight_Barbel", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Weight_Barbel.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_Weight_Bench
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Weight_Bench", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Weight_Bench.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Weight_Bench", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Weight_Bench.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_Wooden_Door
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Wooden_Door", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Wooden_Door.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Wooden_Door", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Wooden_Door.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_Wooden_DoorFrame
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Wooden_DoorFrame", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Wooden_DoorFrame.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Wooden_DoorFrame", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Wooden_DoorFrame.x"))))
+		return E_FAIL;
+	// For.Component_Mesh_Wooden_DoorFrame
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Celling", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Celling.x"))))
 		return E_FAIL;
 
 	return NOERROR;
@@ -199,16 +202,13 @@ HRESULT CToolView::Ready_Componet_Prototype_SceneMap()
 HRESULT CToolView::Ready_Componet_Prototype_SceneStatic()
 {
 	// For.Component_Mesh_Player
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Player", CMesh_Dynamic::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/DynamicMesh/PlayerXFile/", L"DP_APT_00.x"))))
-		return E_FAIL;
-	// For.Component_Mesh_Tree
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Stone", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/Tree/", L"Tree01.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Player", CMesh_Dynamic::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/DynamicMesh/PlayerXFile/", L"DP_APT_00.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_Rock_Wall
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Rock_Wall", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/Rock/", L"Rock_Wall_01.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Rock_Wall", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/Rock/", L"Rock_Wall_01.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_Rock_Bridge
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Rock_Bridge", CMesh_Static::Create(m_pGraphic_Device, L"Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/Rock/", L"Rock_Bridge_01.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Rock_Bridge", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/Rock/", L"Rock_Bridge_01.x"))))
 		return E_FAIL;
 
 
@@ -329,7 +329,10 @@ HRESULT CToolView::Ready_GameObject_Prototype_SceneAPT()
 	// For.GameObject_Wooden_DoorFrame
 	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Wooden_DoorFrame", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_Wooden_DoorFrame"))))
 		return E_FAIL;
-
+	// For.GameObject_Wooden_DoorFrame
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Celling", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_Celling"))))
+		return E_FAIL;
+	
 	return NOERROR;
 }
 
@@ -340,9 +343,6 @@ HRESULT CToolView::Ready_GameObject_Prototype_SceneMap()
 
 HRESULT CToolView::Ready_GameObject_Prototype_SceneStatic()
 {
-	// For.GameObject_Test
-	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Test", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_Weight_Barbel"))))
-		return E_FAIL;
 	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Rock_Bridge", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_Rock_Bridge"))))
 		return E_FAIL;
 	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Rock_Wall", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_Rock_Wall"))))

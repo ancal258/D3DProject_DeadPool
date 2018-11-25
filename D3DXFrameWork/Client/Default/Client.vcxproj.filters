@@ -79,7 +79,16 @@
     <Filter Include="01.Scene\02.Scene_Stage\00.Scene_APT">
       <UniqueIdentifier>{2eb7b2d3-58c9-4475-a53f-2e89075f7d6d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Scene\02.Scene_Stage\01.Scene_">
+    <Filter Include="02.GameObject\02.For.Stage\03.Effect">
+      <UniqueIdentifier>{95eaa733-37fe-47b9-97b5-7d1a528837ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\04.Dog">
+      <UniqueIdentifier>{86f842d2-fbab-4209-9e7c-005ee523d4ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\01.Player\Animator">
+      <UniqueIdentifier>{7158ddbb-568d-48f0-bccd-21097a1b4f4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\02.Scene_Stage\01.Scene_Field">
       <UniqueIdentifier>{c1ec52a9-c4ef-43b3-8316-34851aed0eda}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -150,6 +159,18 @@
     <ClInclude Include="..\Headers\Scene_Stage.h">
       <Filter>01.Scene\02.Scene_Stage\00.Scene_APT</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\Effect.h">
+      <Filter>02.GameObject\02.For.Stage\03.Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Dog.h">
+      <Filter>02.GameObject\02.For.Stage\04.Dog</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Animator.h">
+      <Filter>02.GameObject\02.For.Stage\01.Player\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Scene_Field.h">
+      <Filter>01.Scene\02.Scene_Stage\01.Scene_Field</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -203,6 +224,18 @@
     <ClCompile Include="..\Codes\Scene_Stage.cpp">
       <Filter>01.Scene\02.Scene_Stage\00.Scene_APT</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\Effect.cpp">
+      <Filter>02.GameObject\02.For.Stage\03.Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Dog.cpp">
+      <Filter>02.GameObject\02.For.Stage\04.Dog</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Animator.cpp">
+      <Filter>02.GameObject\02.For.Stage\01.Player\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Scene_Field.cpp">
+      <Filter>01.Scene\02.Scene_Stage\01.Scene_Field</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -228,6 +261,9 @@
       <Filter>97.ShaderFiles</Filter>
     </FxCompile>
     <FxCompile Include="..\Bin\ShaderFiles\Shader_Collider.fx">
+      <Filter>97.ShaderFiles</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_Effect.fx">
       <Filter>97.ShaderFiles</Filter>
     </FxCompile>
   </ItemGroup>

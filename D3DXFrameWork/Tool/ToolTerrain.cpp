@@ -73,13 +73,13 @@ HRESULT CToolTerrain::Save_HeightMap()
 
 	m_pFilterTexture->UnlockRect(0);
 
-	D3DXSaveTextureToFile(L"Bin/Height.bmp", D3DXIFF_BMP, m_pFilterTexture, nullptr);
+	D3DXSaveTextureToFile(L"../Client/Bin/Height.bmp", D3DXIFF_BMP, m_pFilterTexture, nullptr);
 	return NOERROR;
 }
 
 HRESULT CToolTerrain::Load_SplattingMap()
 {
-	D3DXCreateTextureFromFileEx(Get_Graphic_Device(), L"Bin/Splatting.bmp", m_iWidth, m_iHeight, 1, 0, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, D3DX_DEFAULT, D3DX_DEFAULT, 0, nullptr, nullptr, &m_pSplattingTexture);
+	D3DXCreateTextureFromFileEx(Get_Graphic_Device(), L"../Client/Bin/Splatting.bmp", m_iWidth, m_iHeight, 1, 0, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, D3DX_DEFAULT, D3DX_DEFAULT, 0, nullptr, nullptr, &m_pSplattingTexture);
 	return NOERROR;
 }
 

@@ -56,20 +56,20 @@ _int CStatic_Object::LastUpdate_GameObject(const _float & fTimeDelta)
 	
 	m_pTransformCom->Update_Matrix();
 
-	CCamera_Debug*	pCamera = (CCamera_Debug*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Camera", 0);
-	if (nullptr == pCamera)
+	//CCamera_Debug*	pCamera = (CCamera_Debug*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Camera", 0);
+	//if (nullptr == pCamera)
+	//	return -1;
+
+	//_float fRadius = 0.f;
+
+	//fRadius = max(m_pMeshCom->Get_MaxPoint()->x, m_pMeshCom->Get_MaxPoint()->y);
+	//fRadius = max(fRadius, m_pMeshCom->Get_MaxPoint()->z);
+
+	//if (false == pCamera->Culling_ToFrustum(m_pTransformCom, nullptr, fRadius))
+	//{
+	if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
 		return -1;
-
-	_float fRadius = 0.f;
-
-	fRadius = max(m_pMeshCom->Get_MaxPoint()->x, m_pMeshCom->Get_MaxPoint()->y);
-	fRadius = max(fRadius, m_pMeshCom->Get_MaxPoint()->z);
-
-	if (false == pCamera->Culling_ToFrustum(m_pTransformCom, nullptr, fRadius))
-	{
-		if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
-			return -1;
-	}
+	//}
 
 	CObject_Manager* pObject_Manager = CObject_Manager::GetInstance();
 	if (nullptr == pObject_Manager)

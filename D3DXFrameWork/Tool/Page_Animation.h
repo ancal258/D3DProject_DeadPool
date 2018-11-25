@@ -40,4 +40,9 @@ public:
 	float m_fSpeed;
 	float m_fArrived;
 	float m_fTimeDelta;
+	float m_fFrame;
+	afx_msg void OnBnClickedButton5();
+	afx_msg void OnNMReleasedcaptureSlider1(NMHDR *pNMHDR, LRESULT *pResult);
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
 };

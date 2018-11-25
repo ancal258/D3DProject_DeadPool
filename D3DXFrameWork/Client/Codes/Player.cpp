@@ -8,6 +8,8 @@
 #include "Camera_Debug.h"
 #include "Camera_Target.h"
 
+#include "Animator.h"
+
 
 _USING(Client)
 
@@ -39,8 +41,9 @@ HRESULT CPlayer::Ready_GameObject()
 		return E_FAIL;
 	m_fMouseSence = 3.f;
 	m_pTransformCom->Scaling(0.05f, 0.05f, 0.05f); 
-	//m_pTransformCom->Set_AngleY(D3DXToRadian(0));
-	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(5, 0.f, 5));
+	m_pTransformCom->Set_AngleY(D3DXToRadian(48));
+	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(16.0f, 0.f, 13.73f));
+	//m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(54, 0.f, 12.65f));
 	//m_pTransformCom->Go_Straight(0.8,1);
 	m_pInput_Device = CInput_Device::GetInstance();
 	m_pInput_Device->AddRef();
@@ -56,111 +59,20 @@ HRESULT CPlayer::Ready_GameObject()
 		return E_FAIL;
 	Update_HandMatrix();
 
-	m_pMeshCom->Set_AnimationSet(NOGUN_IDLE00);
+	m_pMeshCom->Set_AnimationSet(SIT_IDLE_BREATH);
 	return NOERROR;
 }
 
 _int CPlayer::Update_GameObject(const _float & fTimeDelta)
 {
-	// Camera SetUp
-	if (FAILED(SetUp_Camera()))
-		return -1;
-
-	if (m_pInput_Device->Get_DIKeyState(DIK_NUMPAD1) & 0x8000)
-	{
-		m_Camera_State = CAMERA_DEBUG;
-		m_pCamera_Debug->Set_IsCameraOn(true);
-		m_pCamera_Target->Set_IsCameraOn(false);
-		m_pCamera_Cinematic->Set_IsCameraOn(false);
-	}
-	if (m_pInput_Device->Get_DIKeyState(DIK_NUMPAD2) & 0x8000)
-	{
-		m_Camera_State = CAMERA_TARGET;
-		m_pCamera_Debug->Set_IsCameraOn(false);
-		m_pCamera_Target->Set_IsCameraOn(true);
-		m_pCamera_Cinematic->Set_IsCameraOn(false);
-	}
-	//if (m_pInput_Device->Get_DIKeyState(DIK_NUMPAD3) & 0x8000)
-	//{
-	//	Load_CamData(L"ChairCam.dat");
-	//	m_Camera_State = CAMERA_CINEMATIC;
-	//	m_pCamera_Debug->Set_IsCameraOn(false);
-	//	m_pCamera_Target->Set_IsCameraOn(false);
-	//	m_pCamera_Cinematic->Set_IsCameraOn(true);
-	//}
-
-	if (CAMERA_CINEMATIC == m_Camera_State)
-	{
-		if (true == m_pCamera_Cinematic->Get_Finish())
-		{
-			m_Camera_State = CAMERA_TARGET;
-			m_pCamera_Debug->Set_IsCameraOn(false);
-			m_pCamera_Target->Set_IsCameraOn(true);
-			m_pCamera_Cinematic->Set_IsCameraOn(false);
-		}
-	}
-
-	if (m_pInput_Device->Get_DIKeyState(DIK_UP) & 0x8000)
-	{
-		m_pMeshCom->Set_AnimationSet(NOGUN_WALK_F);
-		m_pNavigationCom->Move_OnNavigation(m_pTransformCom, 8.7f, fTimeDelta*0.9f);
-
-	}
-	else if (m_pInput_Device->Get_DIKeyState(DIK_DOWN) & 0x8000)
-	{
-		m_pMeshCom->Set_AnimationSet(NOGUN_WALK_B);
-		m_pTransformCom->Go_Straight(-23.3, fTimeDelta*0.9f);
-	}
-	else if (m_pInput_Device->Get_DIKeyState(DIK_Q) & 0x8000)
-	{
-		m_pMeshCom->Set_AnimationSet(NOGUN_WALK_FL);
-	}
-	else if (m_pInput_Device->Get_DIKeyState(DIK_E) & 0x8000)
-	{
-		m_pMeshCom->Set_AnimationSet(NOGUN_WALK_FR);
-	}
-	else if (m_pInput_Device->Get_DIKeyState(DIK_R) & 0x8000)
-	{
-		m_pMeshCom->Set_AnimationSet(SIT_GETUP);
-	}
-	else
-	{
-		int iIndex = rand() % 6 + 4;
-		m_pMeshCom->Set_AnimationSet(NOGUN_IDLE00);
-	}
-	
-
-	// Debug
-	if (m_Camera_State != CAMERA_TARGET)
-	{
-		if (m_pInput_Device->Get_DIKeyState(DIK_RIGHT) & 0x8000)
-		{
-			m_pTransformCom->RotationY(D3DXToRadian(90.0f), fTimeDelta);
-		}
-		if (m_pInput_Device->Get_DIKeyState(DIK_LEFT) & 0x8000)
-		{
-			m_pTransformCom->RotationY(D3DXToRadian(-90.0f), fTimeDelta);
-		}
-	}
-	else
-	{
-		if (m_dwMouseMove[0] = CInput_Device::GetInstance()->Get_DIMouseMove(CInput_Device::DIMM_X))
-		{
-		   m_pTransformCom->RotationY(D3DXToRadian(m_dwMouseMove[0] * m_fMouseSence) , fTimeDelta);
-		}
-
-		if (m_dwMouseMove[1] = CInput_Device::GetInstance()->Get_DIMouseMove(CInput_Device::DIMM_Y))
-		{
-		 //  m_pTransformCom->RotationX(D3DXToRadian(m_dwMouseMove[1] * m_fMouseSence), fTimeDelta);
-		}
-	}
+	Camera_Update(fTimeDelta);
+	m_pAnimator->Update_Animation(fTimeDelta);
 
 
-	// Release
+
 
 
 	Update_HandMatrix();
-
 	m_pMeshCom->Play_AnimationSet(fTimeDelta*0.9f);
 
 
@@ -244,7 +156,7 @@ void CPlayer::Render_GameObject()
 
 	//m_pColliderCom->Render_Collider();
 
-	Render_Axis();
+	//Render_Axis();
 
 }
 
@@ -316,6 +228,65 @@ HRESULT CPlayer::SetUp_Camera()
 	return NOERROR;
 }
 
+void CPlayer::Camera_Update(const _float& fTimeDelta)
+{
+	// Camera SetUp
+	if (FAILED(SetUp_Camera()))
+		return;
+
+	if (m_pInput_Device->Get_DIKeyState(DIK_NUMPAD1) & 0x8000)
+	{
+		m_Camera_State = CAMERA_DEBUG;
+		m_pCamera_Debug->Set_IsCameraOn(true);
+		m_pCamera_Target->Set_IsCameraOn(false);
+		m_pCamera_Cinematic->Set_IsCameraOn(false);
+	}
+	if (m_pInput_Device->Get_DIKeyState(DIK_NUMPAD2) & 0x8000)
+	{
+		m_Camera_State = CAMERA_TARGET;
+		m_pCamera_Debug->Set_IsCameraOn(false);
+		m_pCamera_Target->Set_IsCameraOn(true);
+		m_pCamera_Cinematic->Set_IsCameraOn(false);
+	}
+
+	if (CAMERA_CINEMATIC == m_Camera_State)
+	{
+		if (true == m_pCamera_Cinematic->Get_Finish())
+		{
+			m_Camera_State = CAMERA_TARGET;
+			m_pCamera_Debug->Set_IsCameraOn(false);
+			m_pCamera_Target->Set_IsCameraOn(true);
+			m_pCamera_Cinematic->Set_IsCameraOn(false);
+		}
+	}
+
+
+	// Debug
+	if (m_Camera_State != CAMERA_TARGET)
+	{
+		if (m_pInput_Device->Get_DIKeyState(DIK_RIGHT) & 0x8000)
+		{
+			m_pTransformCom->RotationY(D3DXToRadian(90.0f), fTimeDelta);
+		}
+		if (m_pInput_Device->Get_DIKeyState(DIK_LEFT) & 0x8000)
+		{
+			m_pTransformCom->RotationY(D3DXToRadian(-90.0f), fTimeDelta);
+		}
+	}
+	else
+	{
+		if (m_dwMouseMove[0] = CInput_Device::GetInstance()->Get_DIMouseMove(CInput_Device::DIMM_X))
+		{
+			m_pTransformCom->RotationY(D3DXToRadian(m_dwMouseMove[0] * m_fMouseSence), fTimeDelta);
+		}
+
+		if (m_dwMouseMove[1] = CInput_Device::GetInstance()->Get_DIMouseMove(CInput_Device::DIMM_Y))
+		{
+			//  m_pTransformCom->RotationX(D3DXToRadian(m_dwMouseMove[1] * m_fMouseSence), fTimeDelta);
+		}
+	}
+}
+
 HRESULT CPlayer::SetUp_CameraMove()
 {
 	Load_CamData(m_pEventTag);
@@ -366,6 +337,8 @@ HRESULT CPlayer::Ready_Component()
 	if (FAILED(Add_Component(L"Com_Collider", m_pColliderCom)))
 		return E_FAIL;
 	m_pColliderCom->SetUp_Collider(&m_CombinedRootMatrix, &_vec3(50, 140, 50), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f, 70.f, 0.f));
+
+	m_pAnimator = CAnimator::Create(Get_Graphic_Device(), m_pMeshCom, m_pTransformCom, m_pNavigationCom);
 
 	Safe_Release(pComponent_Manager);
 
@@ -489,6 +462,7 @@ CGameObject * CPlayer::Clone_GameObject()
 
 void CPlayer::Free()
 {
+	Safe_Release(m_pAnimator);
 	Safe_Release(m_pTransformCom);
 	Safe_Release(m_pMeshCom);
 	Safe_Release(m_pRendererCom);

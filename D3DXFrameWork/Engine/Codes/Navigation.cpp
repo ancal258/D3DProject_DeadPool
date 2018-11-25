@@ -79,7 +79,7 @@ _bool CNavigation::Move_OnNavigation(CTransform * pTransformCom, const _float & 
 	}
 	else
 	{
-
+		int a = 0;
 	}
 
 

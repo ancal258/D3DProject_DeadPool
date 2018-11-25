@@ -529,6 +529,20 @@ void CPage_Object::Create_Object_APT(_uint iIndex)
 			((CStatic_Object*)pMesh)->Set_Position(&_vec3(0, 0, 0));
 			((CStatic_Object*)pMesh)->Set_Scale(&_vec3(m_fMeshSize, m_fMeshSize, m_fMeshSize));
 		}
+	case MESH_CELLING:
+		if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_Celling", L"Layer_Static_APT", &pMesh)))
+			return;
+		if (nullptr != pMesh)
+		{
+			wsprintf(szMeshName, L"Celling_%d", iMeshCntArray[MESH_CELLING]);
+
+			vGameObject.push_back(pMesh); // 오브젝트 메쉬들 추가될때마다 컨테이너에 저장, 파일 저장 할 때 순회하면서 데이터 저장.
+			m_MeshListBox.AddString(szMeshName);
+			++iMeshCntArray[MESH_CELLING];
+			((CStatic_Object*)pMesh)->Set_PrototypeTag(L"Prototype_Celling");
+			((CStatic_Object*)pMesh)->Set_Position(&_vec3(0, 0, 0));
+			((CStatic_Object*)pMesh)->Set_Scale(&_vec3(m_fMeshSize, m_fMeshSize, m_fMeshSize));
+		}
 		break;
 	default:
 		break;
@@ -549,21 +563,6 @@ void CPage_Object::Create_Object_STATIC(_uint iIndex)
 
 	switch (iIndex)
 	{
-	case MESH_TEST:
-		if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_Test", L"Layer_Test", &pMesh)))
-			return;
-		if (nullptr != pMesh)
-		{
-			wsprintf(szMeshName, L"MESH_TEST_%d", iMeshCntArray[MESH_TEST]);
-
-			vGameObject.push_back(pMesh); // 오브젝트 메쉬들 추가될때마다 컨테이너에 저장, 파일 저장 할 때 순회하면서 데이터 저장.
-			m_MeshListBox.AddString(szMeshName);
-			++iMeshCntArray[MESH_TEST];
-			((CStatic_Object*)pMesh)->Set_PrototypeTag(L"Prototype_Test");
-			((CStatic_Object*)pMesh)->Set_Position(&_vec3(0, 0, 0));
-			((CStatic_Object*)pMesh)->Set_Scale(&_vec3(m_fMeshSize, m_fMeshSize, m_fMeshSize));
-		}
-		break;
 	case MESH_ROCK_BRIDGE:
 		if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_Rock_Bridge", L"Layer_Rock_Bridge", &pMesh)))
 			return;
@@ -656,6 +655,7 @@ BOOL CPage_Object::OnInitDialog()
 	m_APTCombo.AddString(L"25. Weight_Bench");
 	m_APTCombo.AddString(L"26. Door");
 	m_APTCombo.AddString(L"27. Door_Frame");
+	m_APTCombo.AddString(L"28. Celling");
 
 
 	m_STATICCombo.AddString(L"00.MESH_TEST");

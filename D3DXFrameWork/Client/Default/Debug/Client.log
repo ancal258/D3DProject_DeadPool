@@ -1,42 +1,4 @@
-﻿FXC : warning X4717: Effects deprecated for D3DCompiler_47
-  
-  compilation object save succeeded; see C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\Shader_Collider.cso
-FXC : warning X4717: Effects deprecated for D3DCompiler_47
-  
-  compilation object save succeeded; see C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\Shader_Logo.cso
-FXC : warning X4717: Effects deprecated for D3DCompiler_47
-  
-  compilation object save succeeded; see C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\Shader_Mesh.cso
-FXC : warning X4717: Effects deprecated for D3DCompiler_47
-  
-  compilation object save succeeded; see C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\Shader_Terrain.cso
-  stdafx.cpp
-  Client.cpp
-  Test.cpp
-  Terrain.cpp
-  Static_Object.cpp
-  Scene_Stage.cpp
-  Scene_Logo.cpp
-  Scene_Intro.cpp
-  Player.cpp
-c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\codes\player.cpp(112): warning C4305: '인수': 'double'에서 'const Engine::_float'(으)로 잘립니다.
-c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\codes\player.cpp(451): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-  MainApp.cpp
-  Loading.cpp
-c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\headers\event_cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
-  Event_Cube.cpp
-c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\headers\event_cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
-  DP_Sword.cpp
-  Camera_Target.cpp
-c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\codes\camera_target.cpp(55): warning C4101: 'tmp' :참조되지 않은 지역 변수입니다.
-  Camera_Debug.cpp
-c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\codes\camera_debug.cpp(51): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\codes\camera_debug.cpp(52): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Camera_Cinematic.cpp
-c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\codes\camera_cinematic.cpp(102): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\codes\camera_cinematic.cpp(103): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\codes\camera_cinematic.cpp(104): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Back_Logo.cpp
-  코드를 생성하고 있습니다...
-  Client.vcxproj -> C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Default\..\Bin\Client.exe
+﻿  Loading.cpp
+d:\github\d3dproject_deadpool\d3dxframework\client\headers\event_cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+  Client.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Default\..\Bin\Client.exe
   Client.vcxproj -> ..\Bin\Client.pdb (Full PDB)

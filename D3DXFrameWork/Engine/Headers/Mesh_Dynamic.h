@@ -19,7 +19,10 @@ public:
 	HRESULT Ready_Mesh(const _tchar* pFilePath, const _tchar* pFileName);
 	void Render_Mesh(LPD3DXEFFECT pEffect);
 	HRESULT Set_AnimationSet(const _uint& iIndex);
+	_bool Is_Finish();
 	void Play_AnimationSet(const _float& fTimeDelta);
+	void Set_TrackPosition(DOUBLE dlPosition);
+	DOUBLE Get_TrackPeriod();
 private:
 	CHierarchyLoader*						m_pLoader = nullptr;
 	D3DXFRAME*								m_pRootFrame = nullptr;

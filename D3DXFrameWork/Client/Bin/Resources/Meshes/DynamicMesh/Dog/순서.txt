@@ -1,0 +1,7 @@
+1. Dog_Idle_01
+2. Dog_Idle_02
+3. Dog_Idle_03
+4. Dog_Idle_04
+5. Dog_Idle_05
+6. Dog_Idle_06
+7. Dog_InteratctDP

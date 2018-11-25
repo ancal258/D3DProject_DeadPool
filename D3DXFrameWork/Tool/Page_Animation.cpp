@@ -24,6 +24,7 @@ CPage_Animation::CPage_Animation()
 	, m_fSpeed(0)
 	, m_fArrived(0)
 	, m_fTimeDelta(0)
+	, m_fFrame(0)
 {
 
 }
@@ -40,6 +41,7 @@ void CPage_Animation::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_EDIT4, m_fSpeed);
 	DDX_Text(pDX, IDC_EDIT15, m_fArrived);
 	DDX_Text(pDX, IDC_EDIT16, m_fTimeDelta);
+	DDX_Text(pDX, IDC_EDIT2, m_fFrame);
 }
 
 
@@ -49,17 +51,27 @@ BEGIN_MESSAGE_MAP(CPage_Animation, CPropertyPage)
 	ON_BN_CLICKED(IDC_BUTTON1, &CPage_Animation::OnBnClickedButton1)
 	ON_BN_CLICKED(IDC_BUTTON6, &CPage_Animation::OnBnClickedButton6)
 	ON_BN_CLICKED(IDC_BUTTON10, &CPage_Animation::OnBnClickedButton10)
+	ON_BN_CLICKED(IDC_BUTTON5, &CPage_Animation::OnBnClickedButton5)
+	ON_NOTIFY(NM_RELEASEDCAPTURE, IDC_SLIDER1, &CPage_Animation::OnNMReleasedcaptureSlider1)
+	ON_WM_LBUTTONDOWN()
+	ON_WM_LBUTTONUP()
 END_MESSAGE_MAP()
 
 
 // CPage_Animation 메시지 처리기입니다.
 
 
-void CPage_Animation::OnNMCustomdrawSlider1(NMHDR *pNMHDR, LRESULT *pResult)
+void CPage_Animation::OnNMCustomdrawSlider1(NMHDR *pNMHDR, LRESULT *pResult) // 컨트롤러
 {
 	LPNMCUSTOMDRAW pNMCD = reinterpret_cast<LPNMCUSTOMDRAW>(pNMHDR);
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	*pResult = 0;
+	m_fFrame = (float)m_SliderCtrl.GetPos();
+	if (nullptr != m_pMesh)
+	{
+		((CPlayer*)m_pMesh)->Set_TrackPosition(m_fFrame * 0.01f);
+	}
+	UpdateData(0);
 }
 
 
@@ -75,7 +87,7 @@ BOOL CPage_Animation::OnInitDialog()
 	// Set Max Value of Range
 	m_SliderCtrl.SetRangeMax(255);
 	// Set Position(value)
-	m_SliderCtrl.SetPos(100);
+	m_SliderCtrl.SetPos(0);
 
 	// set tick frequency *need to Tick Marks and Auto Ticks set True*
 	m_SliderCtrl.SetTicFreq(10);
@@ -105,8 +117,10 @@ void CPage_Animation::OnBnClickedButton1() // Animation Index Setting
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	UpdateData(1);
-	if(nullptr != m_pMesh)
-		((CPlayer*)m_pMesh)->Set_AnimationInfo(m_fTimeDelta,m_fSpeed, m_fArrived, m_iAnimationIndex);
+	if (nullptr != m_pMesh)
+	{
+		((CPlayer*)m_pMesh)->Set_AnimationInfo(m_fTimeDelta, m_fSpeed, m_fArrived, m_iAnimationIndex);
+	}
 }
 
 
@@ -124,4 +138,47 @@ void CPage_Animation::OnBnClickedButton10() // Animation & Move Stop
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	if (nullptr != m_pMesh)
 		((CPlayer*)m_pMesh)->Set_Stop();
+}
+
+
+void CPage_Animation::OnBnClickedButton5() // After Setting
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	if (nullptr != m_pMesh)
+	{
+		DOUBLE dlPosition = ((CPlayer*)m_pMesh)->Get_TrackPeriod();
+
+		// Set Range
+		m_SliderCtrl.SetRange(0, dlPosition * 100);
+		// Set Min Value of Range
+		m_SliderCtrl.SetRangeMin(0);
+		// Set Max Value of Range
+		m_SliderCtrl.SetRangeMax(dlPosition * 100);
+		// Set Position(value)
+		m_SliderCtrl.SetPos(0);
+	}
+}
+
+
+void CPage_Animation::OnNMReleasedcaptureSlider1(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	*pResult = 0;
+
+}
+
+
+void CPage_Animation::OnLButtonDown(UINT nFlags, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+
+	CPropertyPage::OnLButtonDown(nFlags, point);
+}
+
+
+void CPage_Animation::OnLButtonUp(UINT nFlags, CPoint point)
+{
+	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
+
+	CPropertyPage::OnLButtonUp(nFlags, point);
 }
