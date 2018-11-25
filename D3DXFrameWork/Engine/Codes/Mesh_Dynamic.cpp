@@ -137,6 +137,13 @@ DOUBLE CMesh_Dynamic::Get_TrackPeriod()
 	return m_pAniCtrl->Get_TrackPeriod();
 }
 
+_bool CMesh_Dynamic::Get_ChangeMatrix()
+{
+	if (nullptr == m_pAniCtrl)
+		return false;
+	return m_pAniCtrl->Get_ChangeMatrix();
+}
+
 
 HRESULT CMesh_Dynamic::Update_CombinedTransformationMatrix(D3DXFRAME_DERIVED * pFrame, D3DXMATRIX matParent)
 {

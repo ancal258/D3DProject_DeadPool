@@ -40,15 +40,23 @@ public:
 private:
 	HRESULT Ready_LightInfo();
 private:
-	HRESULT Ready_Stage_Prototype_Component(); // Stage에서 쓰기위한 원형 컴포넌트생성
-	HRESULT Ready_Stage_Prototype_GameObject(); // Stage에서 쓰기위한 원형 객체 생성.
-	HRESULT Ready_Componet_Prototype_SceneAPT(); // APT에서 쓰기 위한 Static_Mesh 원형 생성
+	HRESULT Ready_Static_Prototype_Component(); // Static으로 쓰기위한 원형 컴포넌트생성
 
+	HRESULT Ready_Stage_Prototype_GameObject_SceneAPT(); // APT에서 쓰기위한 원형 객체 생성.
+	HRESULT Ready_Componet_Prototype_SceneAPT(); // APT에서 쓰기 위한 Mesh 원형 생성
+
+	HRESULT Ready_Stage_Prototype_GameObject_SceneFIELD(); // FIELD에서 쓰기위한 원형 객체 생성.
+	HRESULT Ready_Component_Prototype_SceneFIELD(); // FIELD에서 쓰기 위한 Mesh 원형 생성
 private:
 	HRESULT Ready_Layer_Camera(const _tchar * pProtoName, const _tchar* pLayerTag);
 	HRESULT Ready_Layer_Test(const _tchar* pLayerTag);
+
 	HRESULT Ready_Layer_Player(const _tchar* pLayerTag);
-	HRESULT Ready_Layer_BackGround(const _tchar* pLayerTag); // 로고에서 실제 사용하기위한 객체 생성.
+	HRESULT Ready_Layer_BackGround(const _tchar* pLayerTag); // APT 터레인 실제 사용하기위한 객체 생성.
+
+
+	HRESULT Ready_Layer_Player_FIELD(const _tchar* pLayerTag); // FIELD 플레이어 / 칼
+	HRESULT Ready_Layer_BackGround_FIELD(const _tchar* pLayerTag); // FIELD 터레인
 private:
 	HRESULT Load_Static_Object(const _tchar* pFilePath);
 	HRESULT Load_Event_Cube(const _tchar* pFilePath);

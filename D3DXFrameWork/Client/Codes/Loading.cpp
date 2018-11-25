@@ -57,12 +57,12 @@ HRESULT CLoading::Loading_Stage_APT()
 	if (FAILED(Ready_LightInfo()))
 		return E_FAIL;
 
-	if (FAILED(Ready_Stage_Prototype_Component()))
+	if (FAILED(Ready_Static_Prototype_Component()))
 		return E_FAIL;
 	if (FAILED(Ready_Componet_Prototype_SceneAPT()))
 		return E_FAIL;
 
-	if (FAILED(Ready_Stage_Prototype_GameObject()))
+	if (FAILED(Ready_Stage_Prototype_GameObject_SceneAPT()))
 		return E_FAIL;
 	if (FAILED(Ready_Layer_Player(L"Layer_Player")))
 		return E_FAIL;
@@ -106,6 +106,26 @@ HRESULT CLoading::Loading_Stage_APT()
 
 HRESULT CLoading::Loading_Stage_FIELD()
 {
+	if (FAILED(Ready_Static_Prototype_Component()))
+		return E_FAIL;
+	if (FAILED(Ready_Component_Prototype_SceneFIELD()))
+		return E_FAIL;
+	if (FAILED(Ready_Stage_Prototype_GameObject_SceneFIELD()))
+		return E_FAIL;
+	if (FAILED(Ready_Layer_Player_FIELD(L"Layer_Player")))
+		return E_FAIL;
+	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Debug", L"Layer_Camera")))
+		return E_FAIL;
+
+	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Target", L"Layer_Camera")))
+		return E_FAIL;
+
+	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Cinematic", L"Layer_Camera")))
+		return E_FAIL;
+	SetUp_CameraMove();
+	if (FAILED(Ready_Layer_BackGround_FIELD(L"Layer_BackGround")))
+		return E_FAIL;
+
 	return NOERROR;
 }
 
@@ -126,7 +146,7 @@ HRESULT CLoading::Ready_LightInfo()
 	return NOERROR;
 }
 
-HRESULT CLoading::Ready_Stage_Prototype_Component()
+HRESULT CLoading::Ready_Static_Prototype_Component()
 {
 	CComponent_Manager*		pComponent_Manager = CComponent_Manager::GetInstance();
 	if (nullptr == pComponent_Manager)
@@ -173,15 +193,8 @@ HRESULT CLoading::Ready_Stage_Prototype_Component()
 	// For.Component_Collider_Sphere
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Collider_Sphere", CCollider::Create(Get_Graphic_Device(), CCollider::TYPE_SPHERE))))
 		return E_FAIL;
-	// For.Component_Mesh_Player
-	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Player", CMesh_Dynamic::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/DynamicMesh/PlayerXFile/", L"DP_APT_00.x"))))
-		return E_FAIL;
-	// For.Component_Mesh_Player
-	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Dog", CMesh_Dynamic::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/DynamicMesh/Dog/", L"DP_DOG.x"))))
-		return E_FAIL;
-	// For.Component_Mesh_Sword
-	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Sword", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/Sword/", L"DeadPool_Sword.x"))))
-		return E_FAIL;
+
+
 	// For.Component_Picking
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Picking", CPicking::Create(Get_Graphic_Device()))))
 		return E_FAIL;
@@ -193,19 +206,13 @@ HRESULT CLoading::Ready_Stage_Prototype_Component()
 	return NOERROR;
 }
 
-HRESULT CLoading::Ready_Stage_Prototype_GameObject()
+HRESULT CLoading::Ready_Stage_Prototype_GameObject_SceneAPT()
 {
 	// For.GameObject_Terrain
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Terrain", CTerrain::Create(Get_Graphic_Device()))))
 		return E_FAIL;
 	// For.GameObject_Player
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Player", CPlayer::Create(Get_Graphic_Device()))))
-		return E_FAIL;
-	// For.GameObject_Sword_Left
-	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Sword_Left", CDP_Sword::Create(Get_Graphic_Device(), 0))))
-		return E_FAIL;
-	// For.GameObject_Sword_Right
-	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Sword_Right", CDP_Sword::Create(Get_Graphic_Device(), 1))))
 		return E_FAIL;
 	// For.GameObject_Another_Sofa
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Another_Sofa", CStatic_Object::Create(Get_Graphic_Device(), L"Component_Mesh_Another_Sofa"))))
@@ -307,8 +314,6 @@ HRESULT CLoading::Ready_Stage_Prototype_GameObject()
 		return E_FAIL;
 
 	return NOERROR;
-
-	return NOERROR;
 }
 
 HRESULT CLoading::Ready_Componet_Prototype_SceneAPT()
@@ -406,6 +411,51 @@ HRESULT CLoading::Ready_Componet_Prototype_SceneAPT()
 	// For.Component_Celling
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Celling", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/",L"Celling.x"))))
 		return E_FAIL;
+
+	// For.Component_Mesh_Dog
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Dog", CMesh_Dynamic::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/DynamicMesh/Dog/", L"DP_DOG.x"))))
+		return E_FAIL;
+	// For.Component_Mesh_Player
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Player", CMesh_Dynamic::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/DynamicMesh/PlayerXFile/", L"DP_APT_00.x"))))
+		return E_FAIL;
+	Safe_Release(pComponent_Manager);
+
+	return NOERROR;
+}
+
+HRESULT CLoading::Ready_Stage_Prototype_GameObject_SceneFIELD()
+{
+	// For.GameObject_Terrain
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Terrain", CTerrain::Create(Get_Graphic_Device()))))
+		return E_FAIL;
+	// For.GameObject_Player
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Player", CPlayer::Create(Get_Graphic_Device()))))
+		return E_FAIL;
+
+	// For.GameObject_Sword_Left
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Sword_Left", CDP_Sword::Create(Get_Graphic_Device(), 0))))
+		return E_FAIL;
+	// For.GameObject_Sword_Right
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Sword_Right", CDP_Sword::Create(Get_Graphic_Device(), 1))))
+		return E_FAIL;
+	return NOERROR;
+}
+
+HRESULT CLoading::Ready_Component_Prototype_SceneFIELD()
+{
+	CComponent_Manager*		pComponent_Manager = CComponent_Manager::GetInstance();
+	if (nullptr == pComponent_Manager)
+		return E_FAIL;
+	pComponent_Manager->AddRef();
+
+	// For.Component_Mesh_Player
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Player", CMesh_Dynamic::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/DynamicMesh/PlayerXFile/", L"DP_Field.x"))))
+		return E_FAIL;
+
+	// For.Component_Mesh_Sword
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Sword", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/Sword/", L"DeadPool_Sword.x"))))
+		return E_FAIL;
+
 	Safe_Release(pComponent_Manager);
 
 	return NOERROR;
@@ -454,9 +504,11 @@ HRESULT CLoading::Ready_Layer_Test(const _tchar * pLayerTag)
 
 HRESULT CLoading::Ready_Layer_Player(const _tchar * pLayerTag)
 {
-	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Player", SCENE_STAGE, pLayerTag)))
+	CGameObject* pGameObject;
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Player", SCENE_STAGE, pLayerTag,&pGameObject)))
 		return E_FAIL;
-	//// For.Sword
+	((CPlayer*)pGameObject)->SetUp_StageInfo(0);
+	//// For.Sword 
 	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Sword_Left", SCENE_STAGE, pLayerTag)))
 	//	return E_FAIL;
 	//// For.Sword
@@ -473,6 +525,34 @@ HRESULT CLoading::Ready_Layer_BackGround(const _tchar * pLayerTag)
 
 
 	
+	return NOERROR;
+}
+
+HRESULT CLoading::Ready_Layer_Player_FIELD(const _tchar * pLayerTag)
+{
+	CGameObject* pGameObject = nullptr;
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Player", SCENE_STAGE, pLayerTag, &pGameObject)))
+		return E_FAIL;
+	((CPlayer*)pGameObject)->SetUp_StageInfo(1);
+	// For.Sword
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Sword_Left", SCENE_STAGE, pLayerTag)))
+		return E_FAIL;
+	// For.Sword
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Sword_Right", SCENE_STAGE, pLayerTag)))
+		return E_FAIL;
+	return NOERROR;
+}
+
+HRESULT CLoading::Ready_Layer_BackGround_FIELD(const _tchar * pLayerTag)
+{
+	// Height맵 따로 받아서 다시 해주자. 테스트용.
+
+	// For.Terrain
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Terrain", SCENE_STAGE, pLayerTag)))
+		return E_FAIL;
+
+
+
 	return NOERROR;
 }
 

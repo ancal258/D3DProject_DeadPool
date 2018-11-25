@@ -18,13 +18,16 @@ public:
 	void Set_TrackPosition(DOUBLE dlPosition);
 	DOUBLE Get_TrackPeriod() {
 		return m_dlPeriod;	}
+	_bool Get_ChangeMatrix() {
+		return m_isChangeMatrix;
+	}
 private:
 	LPD3DXANIMATIONCONTROLLER		m_pAniCtrl = nullptr;
 	_uint							m_iOldAniIdx = 0;
 	_uint							m_iCurrentTrack = 0;
 	_uint							m_iNewTrack = 1;
 	_float							m_fTimeAcc = 0.f; // Acc : ´©Àû
-
+	_bool							m_isChangeMatrix = false;
 
 	D3DXTRACK_DESC					m_TrackDesc;
 	DOUBLE							m_dlPeriod = 0;

@@ -7,7 +7,6 @@
 #include "Camera_Cinematic.h"
 #include "Camera_Debug.h"
 #include "Camera_Target.h"
-
 #include "Animator.h"
 
 
@@ -41,8 +40,6 @@ HRESULT CPlayer::Ready_GameObject()
 		return E_FAIL;
 	m_fMouseSence = 3.f;
 	m_pTransformCom->Scaling(0.05f, 0.05f, 0.05f); 
-	m_pTransformCom->Set_AngleY(D3DXToRadian(48));
-	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(16.0f, 0.f, 13.73f));
 	//m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(54, 0.f, 12.65f));
 	//m_pTransformCom->Go_Straight(0.8,1);
 	m_pInput_Device = CInput_Device::GetInstance();
@@ -66,8 +63,15 @@ HRESULT CPlayer::Ready_GameObject()
 _int CPlayer::Update_GameObject(const _float & fTimeDelta)
 {
 	Camera_Update(fTimeDelta);
-	m_pAnimator->Update_Animation(fTimeDelta);
-
+	
+	//Stage APT Animation
+	if(0 == m_iStageNum)
+		m_pAnimator->Update_Animation(fTimeDelta);
+	if (1 == m_iStageNum)
+	{
+		m_pAnimator->SetUp_RootMatrix(&m_CombinedRootMatrix);
+		m_pAnimator->Update_Animation_FIELD(fTimeDelta);
+	}
 
 
 
@@ -225,6 +229,25 @@ HRESULT CPlayer::SetUp_Camera()
 		//if (FAILED(SetUp_CameraMove())) // 나중에 FilePath 받아서 만들자.
 		//	return E_FAIL;
 	}
+	return NOERROR;
+}
+
+HRESULT CPlayer::SetUp_StageInfo(_uint iStage)
+{
+	m_iStageNum = iStage;
+
+	if (0 == m_iStageNum)
+	{
+		m_pTransformCom->Set_AngleY(D3DXToRadian(48));
+		m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(16.0f, 0.f, 13.73f));
+	}
+
+	if (1 == m_iStageNum)
+	{
+		m_pTransformCom->Set_AngleY(D3DXToRadian(48));
+		m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(15.f, 0.f, 15.f));
+	}
+
 	return NOERROR;
 }
 

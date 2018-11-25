@@ -20,17 +20,25 @@ private:
 		SIT_IDLE_BREATH, SIT_IDLE_HANDMOVE, SIT_GETUP, SIT_SITDOWN,
 		NOGUN_IDLE00, NOGUN_IDLE01, NOGUN_IDLE02, NOGUN_IDLE03, NOGUN_IDLE04, NOGUN_IDLE05, NOGUN_IDLE06,
 		NOGUN_WALK_F, NOGUN_WALK_FL, NOGUN_WALK_FR, NOGUN_WALK_L, NOGUN_WALK_R, NOGUN_WALK_B, INTERACT_DOG,
-
 		ANIM_END
+	};
+	enum ANIM_FIELD {
+		SWORD_IDLE, SWORLD_LIGHT_01, SWORLD_LIGHT_02, SWORLD_LIGHT_03, SWORLD_HEAVY_01, SWORLD_HEAVY_02, SWORLD_HEAVY_03,
+
+		FIELD_END
 	};
 private:
 	explicit CAnimator(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual ~CAnimator() = default;
 public:
 	HRESULT Ready_Animator(CMesh_Dynamic* pMeshCom, CTransform* pTransformCom, CNavigation* pNavigationCom);
-
+public:
+	void SetUp_RootMatrix(_matrix* pRootMatrix) {
+		m_CombinedRootMatrix = pRootMatrix;
+	}
 public:
 	void Update_Animation(const _float & fTimeDelta);
+	void Update_Animation_FIELD(const _float & fTimeDelta);
 	
 	//HRESULT SetUp_OneButtonAnimation()
 
@@ -42,6 +50,9 @@ private:
 	CTransform*         m_pTransformCom = nullptr;
 	CNavigation*		m_pNavigationCom = nullptr;
 	_bool				m_ArrayAnimState[ANIM_END] = { 0 };
+	_bool				m_ArrayFieldState[FIELD_END] = { 0 };
+	_matrix*             m_CombinedRootMatrix;
+
 public:
 	static CAnimator* Create(LPDIRECT3DDEVICE9 pGraphic_Device,CMesh_Dynamic* pMeshCom, CTransform* pTransformCom, CNavigation* pNavigationCom);
 protected:

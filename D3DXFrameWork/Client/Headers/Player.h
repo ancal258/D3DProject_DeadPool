@@ -53,9 +53,11 @@ public:
 	void Camera_Update(const _float& fTimeDelta);
 	HRESULT SetUp_CameraMove();
 	HRESULT SetUp_Camera();
+	HRESULT SetUp_StageInfo(_uint iStage);
 private:
 	void Render_Axis();
-
+private:
+	_uint				m_iStageNum = 0;
 private:
 	CTransform*         m_pTransformCom = nullptr;
 	CRenderer*			m_pRendererCom = nullptr;

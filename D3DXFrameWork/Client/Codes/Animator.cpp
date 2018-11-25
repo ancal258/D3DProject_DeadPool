@@ -73,6 +73,64 @@ void CAnimator::Update_Animation(const _float & fTimeDelta)
 
 }
 
+void CAnimator::Update_Animation_FIELD(const _float & fTimeDelta)
+{
+
+	if (m_ArrayFieldState[SWORLD_LIGHT_01] == true)
+	{
+		m_pMeshCom->Set_AnimationSet(SWORLD_LIGHT_01);
+		if (true == m_pMeshCom->Is_Finish())
+			m_ArrayFieldState[SWORLD_LIGHT_01] = false;
+	}
+	if (m_ArrayFieldState[SWORLD_LIGHT_02] == true)
+	{
+		m_pMeshCom->Set_AnimationSet(SWORLD_LIGHT_02);
+		if (true == m_pMeshCom->Is_Finish())
+			m_ArrayFieldState[SWORLD_LIGHT_02] = false;
+	}
+	if (m_ArrayFieldState[SWORLD_LIGHT_03] == true)
+	{
+		m_pMeshCom->Set_AnimationSet(SWORLD_LIGHT_03);
+		if (true == m_pMeshCom->Is_Finish())
+			m_ArrayFieldState[SWORLD_LIGHT_03] = false;
+	}
+
+
+	if (m_pInput_Device->Get_DIKeyState(DIK_Q) & 0x8000)
+	{
+		m_ArrayFieldState[SWORLD_LIGHT_01] = true;
+	}
+	else if (m_pInput_Device->Get_DIKeyState(DIK_E) & 0x8000)
+	{
+		m_ArrayFieldState[SWORLD_LIGHT_02] = true;
+	}
+	else if (m_pInput_Device->Get_DIKeyState(DIK_R) & 0x8000)
+	{
+		m_ArrayFieldState[SWORLD_LIGHT_03] = true;
+	}
+
+
+
+	if (true == m_pMeshCom->Get_ChangeMatrix())
+	{
+		m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &(_vec3)m_CombinedRootMatrix->m[3]);
+	}
+
+
+
+		//m_pMeshCom->Set_AnimationSet(SWORLD_LIGHT_01);
+		//m_pMeshCom->Set_AnimationSet(SWORLD_LIGHT_02);
+		//m_pMeshCom->Set_AnimationSet(SWORLD_LIGHT_03);
+
+	for (size_t i = 0; i < FIELD_END; i++)
+	{
+		if (true == m_ArrayFieldState[i])
+			return;
+	}
+	m_pMeshCom->Set_AnimationSet(SWORD_IDLE);
+
+}
+
 CAnimator * CAnimator::Create(LPDIRECT3DDEVICE9 pGraphic_Device, CMesh_Dynamic* pMeshCom, CTransform* pTransformCom, CNavigation* pNavigationCom)
 {
 	CAnimator*      pInstance = new CAnimator(pGraphic_Device);

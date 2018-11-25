@@ -543,7 +543,7 @@ void CBuffer_Terrain::Draw_ToBuffer(_vec3* pOut)
 
 void CBuffer_Terrain::Draw_ToTexture(_vec3 * pOut)
 {
-	D3DXCreateTextureFromFileEx(Get_Graphic_Device(), L"Bin/Splatting.bmp", m_iNumVerticesX, m_iNumVerticesZ, 1, 0, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, D3DX_DEFAULT, D3DX_DEFAULT, 0, nullptr, nullptr, &m_pSplattingTexture);
+	D3DXCreateTextureFromFileEx(Get_Graphic_Device(), L"../Client/Bin/Splatting.bmp", m_iNumVerticesX, m_iNumVerticesZ, 1, 0, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, D3DX_DEFAULT, D3DX_DEFAULT, 0, nullptr, nullptr, &m_pSplattingTexture);
 	D3DLOCKED_RECT		LockRect;
 	ZeroMemory(&LockRect, sizeof(D3DLOCKED_RECT));
 
@@ -589,7 +589,7 @@ void CBuffer_Terrain::Draw_ToTexture(_vec3 * pOut)
 	}
 
 	m_pSplattingTexture->UnlockRect(0);
-	D3DXSaveTextureToFile(L"Bin/Splatting.bmp", D3DXIFF_BMP, m_pSplattingTexture, nullptr);
+	D3DXSaveTextureToFile(L"../Client/Bin/Splatting.bmp", D3DXIFF_BMP, m_pSplattingTexture, nullptr);
 
 	return;
 }

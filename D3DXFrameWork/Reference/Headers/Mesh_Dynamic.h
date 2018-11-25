@@ -23,6 +23,7 @@ public:
 	void Play_AnimationSet(const _float& fTimeDelta);
 	void Set_TrackPosition(DOUBLE dlPosition);
 	DOUBLE Get_TrackPeriod();
+	_bool Get_ChangeMatrix();
 private:
 	CHierarchyLoader*						m_pLoader = nullptr;
 	D3DXFRAME*								m_pRootFrame = nullptr;

@@ -1,5 +1,3 @@
-﻿  Mesh_Dynamic.cpp
-d:\github\d3dproject_deadpool\d3dxframework\engine\codes\mesh_dynamic.cpp(112): warning C4305: 'return': 'HRESULT'에서 'Engine::_bool'(으)로 잘립니다.
-     ..\Bin\Engine.lib 라이브러리 및 ..\Bin\Engine.exp 개체를 생성하고 있습니다.
+﻿  AnimationCtrl.cpp
   Engine.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Engine\Default\..\Bin\Engine.dll
   Engine.vcxproj -> ..\Bin\Engine.pdb (Full PDB)
