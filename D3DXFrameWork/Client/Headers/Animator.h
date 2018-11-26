@@ -39,7 +39,7 @@ public:
 public:
 	void Update_Animation(const _float & fTimeDelta);
 	void Update_Animation_FIELD(const _float & fTimeDelta);
-	
+	void Input_Push_Back(_uint iIndex);
 	//HRESULT SetUp_OneButtonAnimation()
 
 private:
@@ -52,6 +52,7 @@ private:
 	_bool				m_ArrayAnimState[ANIM_END] = { 0 };
 	_bool				m_ArrayFieldState[FIELD_END] = { 0 };
 	_matrix*            m_CombinedRootMatrix;
+
 
 private:
 	list<_uint>			m_ReservationList;

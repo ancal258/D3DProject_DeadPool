@@ -77,7 +77,6 @@ _int CPlayer::Update_GameObject(const _float & fTimeDelta)
 
 
 	Update_HandMatrix();
-	m_pMeshCom->Play_AnimationSet(fTimeDelta*0.9f);
 
 
 	return _int();

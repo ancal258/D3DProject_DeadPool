@@ -28,7 +28,6 @@ HRESULT CAnimationCtrl::Set_AnimationSet(const _uint & iIndex)
 {
 	if (m_iOldAniIdx == iIndex)
 	{
-		m_isChangeMatrix = false;
 		return NOERROR;
 	}
 	if (nullptr == m_pAniCtrl)
@@ -111,8 +110,8 @@ void CAnimationCtrl::Play_AnimationSet(const _float & fTimeDelta)
 	if (FAILED(m_pAniCtrl->GetTrackDesc(m_iCurrentTrack, &m_TrackDesc))) // 어디까지 재생되었니?
 		return;
 
-	double fTmpBefore = m_TrackDesc.Position / m_dlPeriod;
-	double fTmpAfter = (m_TrackDesc.Position + fTimeDelta) / m_dlPeriod;
+	DOUBLE fTmpBefore = (m_TrackDesc.Position + fTimeDelta) / m_dlPeriod * 1.3f;
+	DOUBLE fTmpAfter = (m_TrackDesc.Position + fTimeDelta * 2) / m_dlPeriod * 1.3f;
 
 	_int iComputeBA = (_int)fTmpAfter - (_int)fTmpBefore;
 	if (iComputeBA >= 1)

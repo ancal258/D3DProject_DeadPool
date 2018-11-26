@@ -38,12 +38,12 @@ void CAnimator::Update_Animation(const _float & fTimeDelta)
 	if (m_pInput_Device->Get_DIKeyState(DIK_UP) & 0x8000)
 	{
 		m_pMeshCom->Set_AnimationSet(NOGUN_WALK_F);
-		m_pNavigationCom->Move_OnNavigation(m_pTransformCom, 8.7f, fTimeDelta*0.9f);
+		m_pNavigationCom->Move_OnNavigation(m_pTransformCom, 8.7f, fTimeDelta);
 	}
 	else if (m_pInput_Device->Get_DIKeyState(DIK_DOWN) & 0x8000)
 	{
 		m_pMeshCom->Set_AnimationSet(NOGUN_WALK_B);
-		m_pTransformCom->Go_Straight(-23.3, fTimeDelta*0.9f);
+		m_pTransformCom->Go_Straight(-23.3, fTimeDelta);
 	}
 	else if (m_pInput_Device->Get_DIKeyState(DIK_Q) & 0x8000)
 	{
@@ -71,55 +71,30 @@ void CAnimator::Update_Animation(const _float & fTimeDelta)
 	}
 
 
+	m_pMeshCom->Play_AnimationSet(fTimeDelta);
 }
 
 void CAnimator::Update_Animation_FIELD(const _float & fTimeDelta)
 {
 
-	//if (m_ArrayFieldState[SWORLD_LIGHT_01] == true)
-	//{
-	//	m_pMeshCom->Set_AnimationSet(SWORLD_LIGHT_01);
-	//	if (true == m_pMeshCom->Is_Finish())
-	//		m_ArrayFieldState[SWORLD_LIGHT_01] = false;
-	//}
-	//if (m_ArrayFieldState[SWORLD_LIGHT_02] == true)
-	//{
-	//	m_pMeshCom->Set_AnimationSet(SWORLD_LIGHT_02);
-	//	if (true == m_pMeshCom->Is_Finish())
-	//		m_ArrayFieldState[SWORLD_LIGHT_02] = false;
-	//}
-	//if (m_ArrayFieldState[SWORLD_LIGHT_03] == true)
-	//{
-	//	m_pMeshCom->Set_AnimationSet(SWORLD_LIGHT_03);
-	//	if (true == m_pMeshCom->Is_Finish())
-	//		m_ArrayFieldState[SWORLD_LIGHT_03] = false;
-	//}
-
-
-	//if (m_pInput_Device->Get_DIKeyState(DIK_Q) & 0x8000)
-	//{
-	//	m_ArrayFieldState[SWORLD_LIGHT_01] = true;
-	//}
-	//else if (m_pInput_Device->Get_DIKeyState(DIK_E) & 0x8000)
-	//{
-	//	m_ArrayFieldState[SWORLD_LIGHT_02] = true;
-	//}
-	//else if (m_pInput_Device->Get_DIKeyState(DIK_R) & 0x8000)
-	//{
-	//	m_ArrayFieldState[SWORLD_LIGHT_03] = true;
-	//}
-
 	if (m_pInput_Device->Get_DIKeyState(DIK_Q) & 0x8000)
 	{
-		m_ReservationList.push_back(SWORLD_LIGHT_01);
+		Input_Push_Back(SWORLD_LIGHT_01);
 	}
 	if (m_pInput_Device->Get_DIKeyState(DIK_E) & 0x8000)
 	{
-		m_ReservationList.push_back(SWORLD_LIGHT_02);
+		Input_Push_Back(SWORLD_LIGHT_02);
 	}
 	if (m_pInput_Device->Get_DIKeyState(DIK_R) & 0x8000)
 	{
-		m_ReservationList.push_back(SWORLD_LIGHT_03);
+		Input_Push_Back(SWORLD_LIGHT_03);
+	}
+
+	if (true == m_pMeshCom->Get_ChangeMatrix())
+	{
+		if (m_ReservationList.size() != 0)
+			m_ReservationList.erase(m_ReservationList.begin());
+		m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &(_vec3)m_CombinedRootMatrix->m[3]);
 	}
 
 	if (m_ReservationList.size() == 0)
@@ -129,31 +104,22 @@ void CAnimator::Update_Animation_FIELD(const _float & fTimeDelta)
 		m_pMeshCom->Set_AnimationSet(*m_ReservationList.begin());
 	}
 
-	if (true == m_pMeshCom->Is_Finish())
-	{
-		if (m_ReservationList.size() != 0)
-			m_ReservationList.erase(m_ReservationList.begin());
-	}
 
 
-	if (true == m_pMeshCom->Get_ChangeMatrix())
-	{
-		m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &(_vec3)m_CombinedRootMatrix->m[3]);
-	}
+	m_pMeshCom->Play_AnimationSet(fTimeDelta);
 
 
 
-		//m_pMeshCom->Set_AnimationSet(SWORLD_LIGHT_01);
-		//m_pMeshCom->Set_AnimationSet(SWORLD_LIGHT_02);
-		//m_pMeshCom->Set_AnimationSet(SWORLD_LIGHT_03);
+}
 
-	//for (size_t i = 0; i < FIELD_END; i++)
-	//{
-	//	if (true == m_ArrayFieldState[i])
-	//		return;
-	//}
+void CAnimator::Input_Push_Back(_uint iIndex)
+{
+	if (m_ReservationList.size() == 0)
+		m_ReservationList.push_back(iIndex);
 
-
+	_uint iTmp = *(--m_ReservationList.end());
+	if (iTmp != iIndex)
+		m_ReservationList.push_back(iIndex);
 }
 
 CAnimator * CAnimator::Create(LPDIRECT3DDEVICE9 pGraphic_Device, CMesh_Dynamic* pMeshCom, CTransform* pTransformCom, CNavigation* pNavigationCom)
