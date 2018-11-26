@@ -41,7 +41,7 @@ public:
 	void Update_Animation_FIELD(const _float & fTimeDelta);
 	void Input_Push_Back(_uint iIndex);
 	//HRESULT SetUp_OneButtonAnimation()
-
+	void SetUp_Position();
 private:
 	LPDIRECT3DDEVICE9 m_pGraphic_Device = nullptr;
 	CInput_Device* m_pInput_Device = nullptr;

@@ -1,11 +1,11 @@
 #pragma once
 
 #include "Base.h"
-
 _BEGIN(Engine)
 
 class CAnimationCtrl : public CBase
 {
+	typedef void(*CallBack)(void);
 private:
 	explicit CAnimationCtrl(LPD3DXANIMATIONCONTROLLER pAniCtrl);
 	explicit CAnimationCtrl(const CAnimationCtrl &rhs);
@@ -21,6 +21,8 @@ public:
 	_bool Get_ChangeMatrix() {
 		return m_isChangeMatrix;
 	}
+	void Set_CallBack(CallBack Func) {
+		m_Func = Func;	}
 private:
 	LPD3DXANIMATIONCONTROLLER		m_pAniCtrl = nullptr;
 	_uint							m_iOldAniIdx = 0;
@@ -32,6 +34,8 @@ private:
 	D3DXTRACK_DESC					m_TrackDesc;
 	DOUBLE							m_dlPeriod = 0;
 	DOUBLE							m_dlCurrentPeriod = 0;
+
+	CallBack						m_Func;
 public:
 	static CAnimationCtrl* Create(LPD3DXANIMATIONCONTROLLER pAniCtrl);
 	static CAnimationCtrl* Create(const CAnimationCtrl &rhs);

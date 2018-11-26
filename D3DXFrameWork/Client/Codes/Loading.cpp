@@ -99,7 +99,7 @@ HRESULT CLoading::Loading_Stage_APT()
 	//MCIWndClose(m_hVideo);
 	m_isFinish = true;
 
-	SetWindowText(g_hWnd, L"Complete");
+	//SetWindowText(g_hWnd, L"Complete");
 
 	return NOERROR;
 }

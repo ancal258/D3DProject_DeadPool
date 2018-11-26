@@ -14,6 +14,10 @@ CAnimator::CAnimator(LPDIRECT3DDEVICE9 pGraphic_Device)
 	m_pGraphic_Device->AddRef();
 }
 
+void Func() {
+	//pAnimator->SetUp_Position();
+}
+
 HRESULT CAnimator::Ready_Animator(CMesh_Dynamic* pMeshCom, CTransform* pTransformCom, CNavigation* pNavigationCom)
 {
 	m_pMeshCom = pMeshCom;
@@ -23,6 +27,7 @@ HRESULT CAnimator::Ready_Animator(CMesh_Dynamic* pMeshCom, CTransform* pTransfor
 	m_pNavigationCom = pNavigationCom;
 	m_pNavigationCom->AddRef();
 
+	m_pMeshCom->Set_CallBack(Func);
 	return NOERROR;
 }
 
@@ -101,15 +106,12 @@ void CAnimator::Update_Animation_FIELD(const _float & fTimeDelta)
 		m_pMeshCom->Set_AnimationSet(SWORD_IDLE);
 	else
 	{ 
-		m_pMeshCom->Set_AnimationSet(*m_ReservationList.begin());
+		m_pMeshCom->Set_AnimationSet(*m_ReservationList.begin()); 
 	}
 
 
 
 	m_pMeshCom->Play_AnimationSet(fTimeDelta);
-
-
-
 }
 
 void CAnimator::Input_Push_Back(_uint iIndex)
@@ -120,6 +122,13 @@ void CAnimator::Input_Push_Back(_uint iIndex)
 	_uint iTmp = *(--m_ReservationList.end());
 	if (iTmp != iIndex)
 		m_ReservationList.push_back(iIndex);
+}
+
+void CAnimator::SetUp_Position()
+{
+	if (m_ReservationList.size() != 0)
+		m_ReservationList.erase(m_ReservationList.begin());
+	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &(_vec3)m_CombinedRootMatrix->m[3]);
 }
 
 CAnimator * CAnimator::Create(LPDIRECT3DDEVICE9 pGraphic_Device, CMesh_Dynamic* pMeshCom, CTransform* pTransformCom, CNavigation* pNavigationCom)

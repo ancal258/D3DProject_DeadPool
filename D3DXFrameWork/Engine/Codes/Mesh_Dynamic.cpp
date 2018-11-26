@@ -123,6 +123,11 @@ void CMesh_Dynamic::Play_AnimationSet(const _float & fTimeDelta)
 	Update_CombinedTransformationMatrix((D3DXFRAME_DERIVED*)m_pRootFrame, m_matPivot);
 }
 
+void CMesh_Dynamic::Set_CallBack(CallBack Func)
+{
+	m_pAniCtrl->Set_CallBack(Func);
+}
+
 void CMesh_Dynamic::Set_TrackPosition(DOUBLE dlPosition)
 {
 	if (nullptr == m_pAniCtrl)
