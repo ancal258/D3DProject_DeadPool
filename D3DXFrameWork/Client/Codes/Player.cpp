@@ -158,7 +158,7 @@ void CPlayer::Render_GameObject()
 
 	//m_pNavigationCom->Render_Navigation();
 
-	//m_pColliderCom->Render_Collider();
+	m_pColliderCom->Render_Collider();
 
 	//Render_Axis();
 

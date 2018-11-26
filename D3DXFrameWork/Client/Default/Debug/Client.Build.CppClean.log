@@ -2,15 +2,18 @@ c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\default\debug\clien
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\default\debug\vc140.pdb
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\default\debug\vc140.idb
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\default\debug\stdafx.obj
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\default\debug\animator.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\default\debug\back_logo.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\default\debug\camera_cinematic.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\default\debug\camera_debug.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\default\debug\camera_target.obj
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\default\debug\dog.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\default\debug\dp_sword.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\default\debug\event_cube.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\default\debug\loading.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\default\debug\mainapp.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\default\debug\player.obj
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\default\debug\scene_field.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\default\debug\scene_intro.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\default\debug\scene_logo.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\default\debug\scene_stage.obj
@@ -18,7 +21,9 @@ c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\default\debug\stati
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\default\debug\terrain.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\default\debug\test.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\default\debug\client.obj
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\default\debug\effect.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\bin\shader_collider.cso
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\bin\shader_effect.cso
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\bin\shader_logo.cso
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\bin\shader_mesh.cso
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\bin\shader_terrain.cso
@@ -26,6 +31,7 @@ c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\bin\client.ilk
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\bin\client.exe
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\bin\client.pdb
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\default\debug\client.res
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\default\debug\loading.obj.enc
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\default\..\bin\client.exe
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\default\debug\client.tlog\cl.command.1.tlog
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\default\debug\client.tlog\cl.read.1.tlog

@@ -20,7 +20,6 @@ c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\timer
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\timer_manager.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\transform.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\vibuffer.obj
-c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\animation.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\animationctrl.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\base.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\buffer_collider.obj
@@ -44,6 +43,7 @@ c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\bin\engine.ilk
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\bin\engine.dll
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\bin\engine.pdb
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\engine.res
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\animation.obj
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\..\bin\engine.dll
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\engine.tlog\cl.command.1.tlog
 c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\default\debug\engine.tlog\cl.read.1.tlog

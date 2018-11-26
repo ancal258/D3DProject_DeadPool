@@ -51,7 +51,10 @@ private:
 	CNavigation*		m_pNavigationCom = nullptr;
 	_bool				m_ArrayAnimState[ANIM_END] = { 0 };
 	_bool				m_ArrayFieldState[FIELD_END] = { 0 };
-	_matrix*             m_CombinedRootMatrix;
+	_matrix*            m_CombinedRootMatrix;
+
+private:
+	list<_uint>			m_ReservationList;
 
 public:
 	static CAnimator* Create(LPDIRECT3DDEVICE9 pGraphic_Device,CMesh_Dynamic* pMeshCom, CTransform* pTransformCom, CNavigation* pNavigationCom);

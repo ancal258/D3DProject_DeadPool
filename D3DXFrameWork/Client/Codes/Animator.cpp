@@ -76,39 +76,64 @@ void CAnimator::Update_Animation(const _float & fTimeDelta)
 void CAnimator::Update_Animation_FIELD(const _float & fTimeDelta)
 {
 
-	if (m_ArrayFieldState[SWORLD_LIGHT_01] == true)
-	{
-		m_pMeshCom->Set_AnimationSet(SWORLD_LIGHT_01);
-		if (true == m_pMeshCom->Is_Finish())
-			m_ArrayFieldState[SWORLD_LIGHT_01] = false;
-	}
-	if (m_ArrayFieldState[SWORLD_LIGHT_02] == true)
-	{
-		m_pMeshCom->Set_AnimationSet(SWORLD_LIGHT_02);
-		if (true == m_pMeshCom->Is_Finish())
-			m_ArrayFieldState[SWORLD_LIGHT_02] = false;
-	}
-	if (m_ArrayFieldState[SWORLD_LIGHT_03] == true)
-	{
-		m_pMeshCom->Set_AnimationSet(SWORLD_LIGHT_03);
-		if (true == m_pMeshCom->Is_Finish())
-			m_ArrayFieldState[SWORLD_LIGHT_03] = false;
-	}
+	//if (m_ArrayFieldState[SWORLD_LIGHT_01] == true)
+	//{
+	//	m_pMeshCom->Set_AnimationSet(SWORLD_LIGHT_01);
+	//	if (true == m_pMeshCom->Is_Finish())
+	//		m_ArrayFieldState[SWORLD_LIGHT_01] = false;
+	//}
+	//if (m_ArrayFieldState[SWORLD_LIGHT_02] == true)
+	//{
+	//	m_pMeshCom->Set_AnimationSet(SWORLD_LIGHT_02);
+	//	if (true == m_pMeshCom->Is_Finish())
+	//		m_ArrayFieldState[SWORLD_LIGHT_02] = false;
+	//}
+	//if (m_ArrayFieldState[SWORLD_LIGHT_03] == true)
+	//{
+	//	m_pMeshCom->Set_AnimationSet(SWORLD_LIGHT_03);
+	//	if (true == m_pMeshCom->Is_Finish())
+	//		m_ArrayFieldState[SWORLD_LIGHT_03] = false;
+	//}
 
+
+	//if (m_pInput_Device->Get_DIKeyState(DIK_Q) & 0x8000)
+	//{
+	//	m_ArrayFieldState[SWORLD_LIGHT_01] = true;
+	//}
+	//else if (m_pInput_Device->Get_DIKeyState(DIK_E) & 0x8000)
+	//{
+	//	m_ArrayFieldState[SWORLD_LIGHT_02] = true;
+	//}
+	//else if (m_pInput_Device->Get_DIKeyState(DIK_R) & 0x8000)
+	//{
+	//	m_ArrayFieldState[SWORLD_LIGHT_03] = true;
+	//}
 
 	if (m_pInput_Device->Get_DIKeyState(DIK_Q) & 0x8000)
 	{
-		m_ArrayFieldState[SWORLD_LIGHT_01] = true;
+		m_ReservationList.push_back(SWORLD_LIGHT_01);
 	}
-	else if (m_pInput_Device->Get_DIKeyState(DIK_E) & 0x8000)
+	if (m_pInput_Device->Get_DIKeyState(DIK_E) & 0x8000)
 	{
-		m_ArrayFieldState[SWORLD_LIGHT_02] = true;
+		m_ReservationList.push_back(SWORLD_LIGHT_02);
 	}
-	else if (m_pInput_Device->Get_DIKeyState(DIK_R) & 0x8000)
+	if (m_pInput_Device->Get_DIKeyState(DIK_R) & 0x8000)
 	{
-		m_ArrayFieldState[SWORLD_LIGHT_03] = true;
+		m_ReservationList.push_back(SWORLD_LIGHT_03);
 	}
 
+	if (m_ReservationList.size() == 0)
+		m_pMeshCom->Set_AnimationSet(SWORD_IDLE);
+	else
+	{ 
+		m_pMeshCom->Set_AnimationSet(*m_ReservationList.begin());
+	}
+
+	if (true == m_pMeshCom->Is_Finish())
+	{
+		if (m_ReservationList.size() != 0)
+			m_ReservationList.erase(m_ReservationList.begin());
+	}
 
 
 	if (true == m_pMeshCom->Get_ChangeMatrix())
@@ -122,12 +147,12 @@ void CAnimator::Update_Animation_FIELD(const _float & fTimeDelta)
 		//m_pMeshCom->Set_AnimationSet(SWORLD_LIGHT_02);
 		//m_pMeshCom->Set_AnimationSet(SWORLD_LIGHT_03);
 
-	for (size_t i = 0; i < FIELD_END; i++)
-	{
-		if (true == m_ArrayFieldState[i])
-			return;
-	}
-	m_pMeshCom->Set_AnimationSet(SWORD_IDLE);
+	//for (size_t i = 0; i < FIELD_END; i++)
+	//{
+	//	if (true == m_ArrayFieldState[i])
+	//		return;
+	//}
+
 
 }
 

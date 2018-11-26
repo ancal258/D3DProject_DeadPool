@@ -40,6 +40,23 @@ _int CEffect::Update_GameObject(const _float & fTimeDelta)
 
 	Compute_ViewDepth(m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION));
 
+	_matrix		matView;
+	Get_Transform(D3DTS_VIEW, &matView);
+
+	// 카메라 회전상태의 역변환 상태로 갖고 있는다.
+	_matrix		matBill;
+	D3DXMatrixIdentity(&matBill);
+
+	memcpy(&matBill.m[0][0], &matView.m[0][0], sizeof(_vec3));
+	memcpy(&matBill.m[1][0], &matView.m[1][0], sizeof(_vec3));
+	memcpy(&matBill.m[2][0], &matView.m[2][0], sizeof(_vec3));
+
+	D3DXMatrixInverse(&matBill, nullptr, &matBill);
+
+	m_pTransformCom->Set_StateInfo(CTransform::STATE_RIGHT, (_vec3*)&matBill.m[0][0]);
+	m_pTransformCom->Set_StateInfo(CTransform::STATE_UP, (_vec3*)&matBill.m[1][0]);
+	m_pTransformCom->Set_StateInfo(CTransform::STATE_LOOK, (_vec3*)&matBill.m[2][0]);
+
 	return _int();
 }
 

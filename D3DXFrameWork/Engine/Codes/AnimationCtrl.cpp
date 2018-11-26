@@ -80,8 +80,8 @@ HRESULT CAnimationCtrl::Set_AnimationSet(const _uint & iIndex)
 	m_pAniCtrl->SetTrackPosition(m_iNewTrack, 0.0);
 
 	m_iCurrentTrack = m_iNewTrack;
-	l
-	m_isChangeMatrix = true;
+	
+	//m_isChangeMatrix = true;
 
 	return NOERROR;
 }
@@ -93,7 +93,7 @@ _bool CAnimationCtrl::Is_Finish()
 
 	if (m_dlPeriod <= m_TrackDesc.Position + 0.3f)
 	{
-		m_isChangeMatrix = true;
+		//m_isChangeMatrix = true;
 		return true;
 	}
 
@@ -103,14 +103,28 @@ _bool CAnimationCtrl::Is_Finish()
 // 매 프레임 처리됨
 void CAnimationCtrl::Play_AnimationSet(const _float & fTimeDelta)
 {
+
+
 	if (nullptr == m_pAniCtrl)
 		return;
 
 	if (FAILED(m_pAniCtrl->GetTrackDesc(m_iCurrentTrack, &m_TrackDesc))) // 어디까지 재생되었니?
 		return;
-	m_isChangeMatrix = false;
+
+	double fTmpBefore = m_TrackDesc.Position / m_dlPeriod;
+	double fTmpAfter = (m_TrackDesc.Position + fTimeDelta) / m_dlPeriod;
+
+	_int iComputeBA = (_int)fTmpAfter - (_int)fTmpBefore;
+	if (iComputeBA >= 1)
+		m_isChangeMatrix = true;
+	else
+		m_isChangeMatrix = false;
+
 	m_fTimeAcc += fTimeDelta;
 	m_pAniCtrl->AdvanceTime(fTimeDelta, nullptr);
+
+
+
 }
 
 void CAnimationCtrl::Set_TrackPosition(DOUBLE dlPosition)

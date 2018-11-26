@@ -6,4 +6,3 @@ xcopy /y .\Engine\Bin\*.dll				.\Client\Bin\
 xcopy /y .\Engine\Bin\*.dll				.\Tool\Bin\
 xcopy /y .\Engine\Bin\ShaderFiles\*.fx			.\Client\Bin\ShaderFiles\
 xcopy /y .\Tool\Bin\*.bmp				.\Client\Bin\Resources\Textures\Terrain\
-xcopy /y .\Tool\Bin\Splatting.bmp			.\Client\Bin\

@@ -1,4 +1,2 @@
-﻿  Animator.cpp
-d:\github\d3dproject_deadpool\d3dxframework\client\codes\animator.cpp(46): warning C4305: '인수': 'double'에서 'const Engine::_float'(으)로 잘립니다.
-  Client.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Default\..\Bin\Client.exe
+﻿  Client.vcxproj -> C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Default\..\Bin\Client.exe
   Client.vcxproj -> ..\Bin\Client.pdb (Full PDB)
