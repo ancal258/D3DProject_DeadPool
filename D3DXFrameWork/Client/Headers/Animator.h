@@ -24,7 +24,7 @@ private:
 	};
 	enum ANIM_FIELD {
 		SWORD_IDLE, SWORLD_LIGHT_01, SWORLD_LIGHT_02, SWORLD_LIGHT_03, SWORLD_HEAVY_01, SWORLD_HEAVY_02, SWORLD_HEAVY_03,
-
+		//SWORLD_LIGHT_05, SWORLD_LIGHT_04,SWORLD_LIGHT_03, SWORLD_LIGHT_02, SWORLD_LIGHT_01,SWORD_IDLE,
 		FIELD_END
 	};
 private:
@@ -32,6 +32,7 @@ private:
 	virtual ~CAnimator() = default;
 public:
 	HRESULT Ready_Animator(CMesh_Dynamic* pMeshCom, CTransform* pTransformCom, CNavigation* pNavigationCom);
+	void Ready_Pair();
 public:
 	void SetUp_RootMatrix(_matrix* pRootMatrix) {
 		m_CombinedRootMatrix = pRootMatrix;
@@ -39,7 +40,13 @@ public:
 public:
 	void Update_Animation(const _float & fTimeDelta);
 	void Update_Animation_FIELD(const _float & fTimeDelta);
+	void Last_Update_Animation_FIELD(const _float & fTimeDelta);
 	void Input_Push_Back(_uint iIndex);
+	//HRESULT SetUp_OneButtonAnimation()
+private: // CallBack
+	void AnimFinish();
+	_bool CheckPair(_uint iFirst, _uint iSecond);
+
 private:
 	LPDIRECT3DDEVICE9 m_pGraphic_Device = nullptr;
 	CInput_Device* m_pInput_Device = nullptr;
@@ -49,9 +56,11 @@ private:
 	CNavigation*		m_pNavigationCom = nullptr;
 	_bool				m_ArrayAnimState[ANIM_END] = { 0 };
 	_bool				m_ArrayFieldState[FIELD_END] = { 0 };
-	_matrix*            m_CombinedRootMatrix;
+	_matrix*            m_CombinedRootMatrix = nullptr;
+	_bool				m_isChange = false;
 
-
+	vector<pair<_uint,_uint>>		m_vecBlendPair;
+	
 private:
 	list<_uint>			m_ReservationList;
 

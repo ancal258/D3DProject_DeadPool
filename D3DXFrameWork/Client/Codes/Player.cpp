@@ -57,6 +57,9 @@ HRESULT CPlayer::Ready_GameObject()
 	Update_HandMatrix();
 
 	m_pMeshCom->Set_AnimationSet(SIT_IDLE_BREATH);
+	D3DXMatrixIdentity(&m_RealMatrix);
+	m_pAnimator->SetUp_RootMatrix(&m_RealMatrix);
+
 	return NOERROR;
 }
 
@@ -65,17 +68,15 @@ _int CPlayer::Update_GameObject(const _float & fTimeDelta)
 	Camera_Update(fTimeDelta);
 	
 	//Stage APT Animation
-	if(0 == m_iStageNum)
-		m_pAnimator->Update_Animation(fTimeDelta);
-	if (1 == m_iStageNum)
+	if (nullptr != m_pAnimator)
 	{
-		m_pAnimator->SetUp_RootMatrix(&m_CombinedRootMatrix);
-		m_pAnimator->Update_Animation_FIELD(fTimeDelta);
+		if (0 == m_iStageNum)
+			m_pAnimator->Update_Animation(fTimeDelta);
+		if (1 == m_iStageNum)
+		{
+			m_pAnimator->Update_Animation_FIELD(fTimeDelta);
+		}
 	}
-
-
-
-
 	Update_HandMatrix();
 
 
@@ -114,12 +115,26 @@ _int CPlayer::LastUpdate_GameObject(const _float & fTimeDelta)
 		return -1;
 	}
 
-	_vec3      vPosition = pBufferCom->SetHeight_OnTerrain(m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION), pTransformCom);
+	if (1 == m_iStageNum)
+	{
+		if (nullptr != m_pAnimator)
+		{
+			m_pAnimator->Last_Update_Animation_FIELD(fTimeDelta);
+		}
+	}
+
+
+	m_RealMatrix = *m_pTransformCom->Get_WorldMatrix();
+	m_RealMatrix.m[3][0] = m_CombinedRootMatrix.m[3][0];
+	m_RealMatrix.m[3][2] = m_CombinedRootMatrix.m[3][2];
+
+	_vec3      vPosition = *m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION);
+	*(_vec3*)m_RealMatrix.m[3] = pBufferCom->SetHeight_OnTerrain((_vec3*)m_RealMatrix.m[3], pTransformCom);
+	vPosition.y = (*(_vec3*)m_RealMatrix.m[3]).y;
+
 
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &vPosition);
-
 	m_pTransformCom->Update_Matrix();
-
 
 	if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
 		return -1;
@@ -157,7 +172,7 @@ void CPlayer::Render_GameObject()
 
 	//m_pNavigationCom->Render_Navigation();
 
-	//m_pColliderCom->Render_Collider();
+	m_pColliderCom->Render_Collider();
 
 	//Render_Axis();
 
@@ -256,32 +271,36 @@ void CPlayer::Camera_Update(const _float& fTimeDelta)
 	if (FAILED(SetUp_Camera()))
 		return;
 
-	if (m_pInput_Device->Get_DIKeyState(DIK_NUMPAD1) & 0x8000)
+	if (nullptr != m_pCamera_Debug&&
+		nullptr != m_pCamera_Target&&
+		nullptr != m_pCamera_Cinematic)
 	{
-		m_Camera_State = CAMERA_DEBUG;
-		m_pCamera_Debug->Set_IsCameraOn(true);
-		m_pCamera_Target->Set_IsCameraOn(false);
-		m_pCamera_Cinematic->Set_IsCameraOn(false);
-	}
-	if (m_pInput_Device->Get_DIKeyState(DIK_NUMPAD2) & 0x8000)
-	{
-		m_Camera_State = CAMERA_TARGET;
-		m_pCamera_Debug->Set_IsCameraOn(false);
-		m_pCamera_Target->Set_IsCameraOn(true);
-		m_pCamera_Cinematic->Set_IsCameraOn(false);
-	}
-
-	if (CAMERA_CINEMATIC == m_Camera_State)
-	{
-		if (true == m_pCamera_Cinematic->Get_Finish())
+		if (m_pInput_Device->Get_DIKeyState(DIK_NUMPAD1) & 0x8000)
+		{
+			m_Camera_State = CAMERA_DEBUG;
+			m_pCamera_Debug->Set_IsCameraOn(true);
+			m_pCamera_Target->Set_IsCameraOn(false);
+			m_pCamera_Cinematic->Set_IsCameraOn(false);
+		}
+		if (m_pInput_Device->Get_DIKeyState(DIK_NUMPAD2) & 0x8000)
 		{
 			m_Camera_State = CAMERA_TARGET;
 			m_pCamera_Debug->Set_IsCameraOn(false);
 			m_pCamera_Target->Set_IsCameraOn(true);
 			m_pCamera_Cinematic->Set_IsCameraOn(false);
 		}
-	}
 
+		if (CAMERA_CINEMATIC == m_Camera_State)
+		{
+			if (true == m_pCamera_Cinematic->Get_Finish())
+			{
+				m_Camera_State = CAMERA_TARGET;
+				m_pCamera_Debug->Set_IsCameraOn(false);
+				m_pCamera_Target->Set_IsCameraOn(true);
+				m_pCamera_Cinematic->Set_IsCameraOn(false);
+			}
+		}
+	}
 
 	// Debug
 	if (m_Camera_State != CAMERA_TARGET)
@@ -311,12 +330,16 @@ void CPlayer::Camera_Update(const _float& fTimeDelta)
 
 HRESULT CPlayer::SetUp_CameraMove()
 {
-	Load_CamData(m_pEventTag);
-	m_Camera_State = CAMERA_CINEMATIC;
-	m_pCamera_Debug->Set_IsCameraOn(false);
-	m_pCamera_Target->Set_IsCameraOn(false);
-	m_pCamera_Cinematic->Set_IsCameraOn(true);
-
+	if (nullptr != m_pCamera_Debug&&
+		nullptr != m_pCamera_Target&&
+		nullptr != m_pCamera_Cinematic)
+	{
+		Load_CamData(m_pEventTag);
+		m_Camera_State = CAMERA_CINEMATIC;
+		m_pCamera_Debug->Set_IsCameraOn(false);
+		m_pCamera_Target->Set_IsCameraOn(false);
+		m_pCamera_Cinematic->Set_IsCameraOn(true);
+	}
 	return NOERROR;
 }
 

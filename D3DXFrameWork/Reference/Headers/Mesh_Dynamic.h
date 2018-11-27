@@ -8,26 +8,24 @@ class CAnimationCtrl;
 class CHierarchyLoader;
 class _ENGINE_DLL CMesh_Dynamic final : public CComponent
 {
-	typedef void(*CallBack)(void);
-
 private:
 	explicit CMesh_Dynamic(LPDIRECT3DDEVICE9 pGraphic_Device);
 	explicit CMesh_Dynamic(const CMesh_Dynamic& rhs);
 	virtual ~CMesh_Dynamic() = default;
 public:
-	void Set_TrackPosition(DOUBLE dlPosition);
-	HRESULT Set_AnimationSet(const _uint& iIndex);
 	const _matrix* Get_FrameMatrixByName(const char* pFrameName);
-	DOUBLE Get_TrackPeriod();
-	_bool Get_ChangeMatrix();
 
 public:
 	HRESULT Ready_Mesh(const _tchar* pFilePath, const _tchar* pFileName);
 	void Render_Mesh(LPD3DXEFFECT pEffect);
+	HRESULT Set_AnimationSet(const _uint& iIndex);
 	_bool Is_Finish();
 	void Play_AnimationSet(const _float& fTimeDelta);
-
-	void Set_CallBack(CallBack Func);
+	void Set_TrackPosition(DOUBLE dlPosition);
+	DOUBLE Get_TrackPeriod();
+	_bool Get_ChangeMatrix();
+	void RegistCallbackFunc(function<void(void)> callbackFunc);
+	void RegistCallbackCheckPair(function<_bool(_uint, _uint)> callbackCheckPair);
 private:
 	CHierarchyLoader*						m_pLoader = nullptr;
 	D3DXFRAME*								m_pRootFrame = nullptr;

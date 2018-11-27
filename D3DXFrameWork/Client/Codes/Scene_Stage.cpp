@@ -38,7 +38,6 @@ _int CScene_Stage::Update_Scene(const _float & fTimeDelta)
 
 		if (FAILED(CManagement::GetInstance()->SetUp_CurrentScene(pNewScene)))
 			return -1;
-
 		return 0;
 	}
 

@@ -14,7 +14,6 @@ CAnimator::CAnimator(LPDIRECT3DDEVICE9 pGraphic_Device)
 	m_pGraphic_Device->AddRef();
 }
 
-
 HRESULT CAnimator::Ready_Animator(CMesh_Dynamic* pMeshCom, CTransform* pTransformCom, CNavigation* pNavigationCom)
 {
 	m_pMeshCom = pMeshCom;
@@ -23,11 +22,28 @@ HRESULT CAnimator::Ready_Animator(CMesh_Dynamic* pMeshCom, CTransform* pTransfor
 	m_pTransformCom->AddRef();
 	m_pNavigationCom = pNavigationCom;
 	m_pNavigationCom->AddRef();
+	m_pMeshCom->RegistCallbackFunc(bind(&CAnimator::AnimFinish, this));
+	m_pMeshCom->RegistCallbackCheckPair(bind(&CAnimator::CheckPair, this, placeholders::_1, placeholders::_2));
+	Ready_Pair();
 	return NOERROR;
+}
+
+void CAnimator::Ready_Pair()
+{
+	//SIT_IDLE_BREATH, SIT_IDLE_HANDMOVE, SIT_GETUP, SIT_SITDOWN,
+	//	NOGUN_IDLE00, NOGUN_IDLE01, NOGUN_IDLE02, NOGUN_IDLE03, NOGUN_IDLE04, NOGUN_IDLE05, NOGUN_IDLE06,
+	//	NOGUN_WALK_F, NOGUN_WALK_FL, NOGUN_WALK_FR, NOGUN_WALK_L, NOGUN_WALK_R, NOGUN_WALK_B, INTERACT_DOG,
+	//	ANIM_END
+	pair<_uint, _uint> p1 = make_pair(NOGUN_IDLE00, NOGUN_WALK_F);
+	pair<_uint, _uint> p2 = make_pair(NOGUN_WALK_F,NOGUN_IDLE00);
+
+	m_vecBlendPair.push_back(p1);
+	m_vecBlendPair.push_back(p2);
 }
 
 void CAnimator::Update_Animation(const _float & fTimeDelta)
 {
+	m_isChange = true;
 	if (m_ArrayAnimState[SIT_GETUP] == true)
 	{
 		m_pMeshCom->Set_AnimationSet(SIT_GETUP);
@@ -71,6 +87,7 @@ void CAnimator::Update_Animation(const _float & fTimeDelta)
 	}
 
 
+
 	m_pMeshCom->Play_AnimationSet(fTimeDelta);
 }
 
@@ -90,23 +107,25 @@ void CAnimator::Update_Animation_FIELD(const _float & fTimeDelta)
 		Input_Push_Back(SWORLD_LIGHT_03);
 	}
 
-	if (true == m_pMeshCom->Get_ChangeMatrix())
-	{
-		if (m_ReservationList.size() != 0)
-			m_ReservationList.erase(m_ReservationList.begin());
-		m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &(_vec3)m_CombinedRootMatrix->m[3]);
-	}
 
 	if (m_ReservationList.size() == 0)
+	{
 		m_pMeshCom->Set_AnimationSet(SWORD_IDLE);
+	}
 	else
-	{ 
-		m_pMeshCom->Set_AnimationSet(*m_ReservationList.begin()); 
+	{
+		m_pMeshCom->Set_AnimationSet(*m_ReservationList.begin());
 	}
 
-
-
 	m_pMeshCom->Play_AnimationSet(fTimeDelta);
+
+
+
+
+}
+
+void CAnimator::Last_Update_Animation_FIELD(const _float & fTimeDelta)
+{
 }
 
 void CAnimator::Input_Push_Back(_uint iIndex)
@@ -117,6 +136,34 @@ void CAnimator::Input_Push_Back(_uint iIndex)
 	_uint iTmp = *(--m_ReservationList.end());
 	if (iTmp != iIndex)
 		m_ReservationList.push_back(iIndex);
+}
+
+void CAnimator::AnimFinish()
+{
+	if (true != m_isChange)
+	{
+		if (m_ReservationList.size() != 0)
+		{
+			m_ReservationList.erase(m_ReservationList.begin());
+		}
+		m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &(_vec3)m_CombinedRootMatrix->m[3]);
+		m_pTransformCom->Update_Matrix();
+
+		m_pMeshCom->Set_AnimationSet(SWORD_IDLE);
+	}
+}
+
+_bool CAnimator::CheckPair(_uint iFirst, _uint iSecond)
+{
+	for (auto& Pair : m_vecBlendPair)
+	{
+		if (Pair.first == iFirst)
+		{
+			if (Pair.second == iSecond)
+				return true;
+		}
+	}
+	return false;
 }
 
 CAnimator * CAnimator::Create(LPDIRECT3DDEVICE9 pGraphic_Device, CMesh_Dynamic* pMeshCom, CTransform* pTransformCom, CNavigation* pNavigationCom)

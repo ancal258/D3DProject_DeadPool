@@ -109,7 +109,7 @@ HRESULT CMesh_Dynamic::Set_AnimationSet(const _uint & iIndex)
 _bool CMesh_Dynamic::Is_Finish()
 {
 	if (nullptr == m_pAniCtrl)
-		return E_FAIL;
+		return false;
 
 	return m_pAniCtrl->Is_Finish();
 }
@@ -122,6 +122,7 @@ void CMesh_Dynamic::Play_AnimationSet(const _float & fTimeDelta)
 	m_pAniCtrl->Play_AnimationSet(fTimeDelta);
 	Update_CombinedTransformationMatrix((D3DXFRAME_DERIVED*)m_pRootFrame, m_matPivot);
 }
+
 void CMesh_Dynamic::Set_TrackPosition(DOUBLE dlPosition)
 {
 	if (nullptr == m_pAniCtrl)
@@ -140,7 +141,17 @@ _bool CMesh_Dynamic::Get_ChangeMatrix()
 {
 	if (nullptr == m_pAniCtrl)
 		return false;
-	return m_pAniCtrl->Get_ChangeMatrix();
+	return false;
+}
+
+void CMesh_Dynamic::RegistCallbackFunc(function<void(void)> callbackFunc)
+{
+	m_pAniCtrl->RegistCallbackFunc(callbackFunc);
+}
+
+void CMesh_Dynamic::RegistCallbackCheckPair(function<_bool(_uint, _uint)> callbackCheckPair)
+{
+	m_pAniCtrl->RegistCallbackCheckPair(callbackCheckPair);
 }
 
 

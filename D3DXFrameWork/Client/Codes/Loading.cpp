@@ -2,7 +2,8 @@
 #include "..\Headers\Loading.h"
 #include "Component_Manager.h"
 #include "Light_Manager.h"
-
+#include "Management.h"
+#include "Scene_Field.h"
 #include "Camera_Debug.h"
 #include "Camera_Cinematic.h"
 // GameObject
@@ -99,7 +100,7 @@ HRESULT CLoading::Loading_Stage_APT()
 	//MCIWndClose(m_hVideo);
 	m_isFinish = true;
 
-	//SetWindowText(g_hWnd, L"Complete");
+	SetWindowText(g_hWnd, L"Complete");
 
 	return NOERROR;
 }
@@ -125,6 +126,9 @@ HRESULT CLoading::Loading_Stage_FIELD()
 	SetUp_CameraMove();
 	if (FAILED(Ready_Layer_BackGround_FIELD(L"Layer_BackGround")))
 		return E_FAIL;
+
+
+
 
 	return NOERROR;
 }
