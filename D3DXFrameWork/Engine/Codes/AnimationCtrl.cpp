@@ -116,12 +116,6 @@ void CAnimationCtrl::Play_AnimationSet(const _float & fTimeDelta)
 	_int iComputeBA = (_int)fTmpAfter - (_int)fTmpBefore;
 	if (iComputeBA >= 1)
 	{
-
-
-		if (m_Func)
-			m_Func();
-
-
 		m_isChangeMatrix = true;
 	}
 	else

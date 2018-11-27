@@ -21,8 +21,6 @@ public:
 	_bool Get_ChangeMatrix() {
 		return m_isChangeMatrix;
 	}
-	void Set_CallBack(CallBack Func) {
-		m_Func = Func;	}
 private:
 	LPD3DXANIMATIONCONTROLLER		m_pAniCtrl = nullptr;
 	_uint							m_iOldAniIdx = 0;
