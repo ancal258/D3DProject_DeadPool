@@ -34,11 +34,18 @@ void CAnimator::Ready_Pair()
 	//	NOGUN_IDLE00, NOGUN_IDLE01, NOGUN_IDLE02, NOGUN_IDLE03, NOGUN_IDLE04, NOGUN_IDLE05, NOGUN_IDLE06,
 	//	NOGUN_WALK_F, NOGUN_WALK_FL, NOGUN_WALK_FR, NOGUN_WALK_L, NOGUN_WALK_R, NOGUN_WALK_B, INTERACT_DOG,
 	//	ANIM_END
-	pair<_uint, _uint> p1 = make_pair(NOGUN_IDLE00, NOGUN_WALK_F);
-	pair<_uint, _uint> p2 = make_pair(NOGUN_WALK_F,NOGUN_IDLE00);
+	// APT - Blending 될 애니메이션들
+	m_vecBlendPair.push_back(make_pair(NOGUN_IDLE00, NOGUN_WALK_F));
+	m_vecBlendPair.push_back(make_pair(NOGUN_WALK_F, NOGUN_IDLE00));
+	if (true == m_isChange)
+	{
+		//pair<_uint, _uint> p2 = make_pair(NOGUN_WALK_F, NOGUN_IDLE00);
 
-	m_vecBlendPair.push_back(p1);
-	m_vecBlendPair.push_back(p2);
+	}
+	else // FIELD - Blending 될 애니메이션들
+	{
+
+	}
 }
 
 void CAnimator::Update_Animation(const _float & fTimeDelta)

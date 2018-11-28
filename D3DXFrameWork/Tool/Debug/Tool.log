@@ -1,16 +1,2 @@
-﻿  CamPoint.cpp
-c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\campoint.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
-c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\campoint.cpp(105): warning C4805: '==': 연산에 'bool' 형식과 'BOOL' 형식을 함께 사용하는 것은 안전하지 않습니다.
-  코드를 생성하고 있습니다...
-  건너뛰고 있습니다... (관련된 변경 내용 없음)
-  ToolView.cpp
-  ToolTerrain.cpp
-  Static_Object.cpp
-  Player.cpp
-  Page_Terrain.cpp
-  Page_Object.cpp
-  Page_Animation.cpp
-  Form.cpp
-  EventCube.cpp
-  Tool.vcxproj -> C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Tool\.\Bin\Tool.exe
+﻿  Tool.vcxproj -> C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Tool\.\Bin\Tool.exe
   Tool.vcxproj -> .\Bin\Tool.pdb (Partial PDB)

@@ -35,7 +35,10 @@ HRESULT CAnimationCtrl::Ready_AnimationCtrl()
 HRESULT CAnimationCtrl::Set_AnimationSet(const _uint & iIndex)
 {
 	if (m_pCurrentAnimSet == m_vecAnimSet[iIndex])
+	{
+		m_iCurrentAniIdx = iIndex;
 		return NOERROR;
+	}
 	// 애니메이션 컨트롤러에 저장된 애니메이션 셋을 얻어온다.
 	m_pCurrentAnimSet = m_vecAnimSet[iIndex];
 
@@ -44,6 +47,8 @@ HRESULT CAnimationCtrl::Set_AnimationSet(const _uint & iIndex)
 
 	m_iNewTrack = m_iCurrentTrack == 0 ? 1 : 0;
 
+	m_iOldAniIdx = m_iCurrentAniIdx;
+	m_iCurrentAniIdx = iIndex;
 
 	// 새로운 트랙에 새 애니메이션 셋을 올려놓는다.
 	m_pAniCtrl->SetTrackAnimationSet(m_iNewTrack, m_pCurrentAnimSet);
@@ -65,7 +70,7 @@ HRESULT CAnimationCtrl::Set_AnimationSet(const _uint & iIndex)
 
 	if (m_callbackCheckPair)
 	{
-		if (true == m_callbackCheckPair(m_iCurrentTrack, m_iNewTrack))
+		if (true == m_callbackCheckPair(m_iOldAniIdx, m_iCurrentAniIdx))
 		{
 			m_pAniCtrl->KeyTrackEnable(m_iCurrentTrack, FALSE, m_fTimeAcc + 0.25f);
 			m_pAniCtrl->KeyTrackSpeed(m_iCurrentTrack, 1.f, m_fTimeAcc, 0.25f, D3DXTRANSITION_LINEAR); // 키 프레임 속도. 기본은 1, 0이면 멈춤. duration => 보간을 하는 시간 간격
@@ -102,8 +107,9 @@ HRESULT CAnimationCtrl::Set_AnimationSet(const _uint & iIndex)
 	//새 트랙의 포지션을 초기값으로 되돌린다. 되돌리지 않으면 원본 시간에 누적되서 시간이 계산되므로 초기화 해주어야 한다. (애니메이션이 바꼈기 때문에)
 	m_pAniCtrl->SetTrackPosition(m_iNewTrack, 0.0);
 
-	m_iCurrentTrack = m_iNewTrack;
 
+	m_iCurrentTrack = m_iNewTrack;
+	
 	return NOERROR;
 }
 

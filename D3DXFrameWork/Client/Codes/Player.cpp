@@ -434,7 +434,8 @@ HRESULT CPlayer::SetUp_ConstantTable(LPD3DXEFFECT pEffect)
 HRESULT CPlayer::Update_HandMatrix()
 {
 	if (nullptr == m_pHandMatrix[0] ||
-		nullptr == m_pHandMatrix[1])
+		nullptr == m_pHandMatrix[1] ||
+		nullptr == m_pRootMatrix)
 		return E_FAIL;
 
 	m_CombinedHandMatrix[0] = *m_pHandMatrix[0] * *m_pTransformCom->Get_WorldMatrix();

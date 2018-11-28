@@ -27,7 +27,6 @@ public:
 	}
 private:
 	LPD3DXANIMATIONCONTROLLER		m_pAniCtrl = nullptr;
-	_uint							m_iOldAniIdx = 0;
 	_uint							m_iCurrentTrack = 0;
 	_uint							m_iNewTrack = 1;
 	_float							m_fTimeAcc = 0.f; // Acc : ´©Àû
@@ -40,6 +39,8 @@ private:
 	function<void(void)>			m_callbackFunc = nullptr;
 	function<_bool(_uint,_uint)>	m_callbackCheckPair = nullptr;
 
+	_uint							m_iOldAniIdx = 0;
+	_uint							m_iCurrentAniIdx = 0;
 public:
 	static CAnimationCtrl* Create(LPD3DXANIMATIONCONTROLLER pAniCtrl);
 	static CAnimationCtrl* Create(const CAnimationCtrl &rhs);
