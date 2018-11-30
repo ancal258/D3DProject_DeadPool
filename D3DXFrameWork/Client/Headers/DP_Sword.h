@@ -33,6 +33,7 @@ private:
 	CMesh_Static*		m_pMeshCom = nullptr;
 	CShader*			m_pShaderCom = nullptr;
 	CCollider*			m_pColliderCom = nullptr;
+	CCollider*			m_pColliderCom_Sphere[5] = { nullptr , nullptr, nullptr, nullptr };
 private:
 	CPlayer*			m_pPlayer = nullptr;
 	_uint				m_iSide = 0; // 0 == ÁÂÃø , 1 == ¿ìÃø

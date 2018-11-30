@@ -29,6 +29,11 @@ const _matrix * CPlayer::Get_WorldMatrix() const
 	return m_pTransformCom->Get_WorldMatrix();
 }
 
+const _matrix * CPlayer::Get_RealMatrix() const
+{
+	return &m_RealMatrix;
+}
+
 HRESULT CPlayer::Ready_GameObject_Prototype()
 {
 	return NOERROR;
@@ -383,7 +388,7 @@ HRESULT CPlayer::Ready_Component()
 		return E_FAIL;
 	m_pColliderCom->SetUp_Collider(&m_CombinedRootMatrix, &_vec3(50, 140, 50), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f, 70.f, 0.f));
 
-	m_pAnimator = CAnimator::Create(Get_Graphic_Device(), m_pMeshCom, m_pTransformCom, m_pNavigationCom);
+	m_pAnimator = CAnimator::Create(Get_Graphic_Device(), m_pMeshCom, m_pTransformCom, m_pNavigationCom,m_iStageNum);
 
 	Safe_Release(pComponent_Manager);
 

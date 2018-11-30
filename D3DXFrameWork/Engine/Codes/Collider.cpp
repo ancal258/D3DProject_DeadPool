@@ -333,7 +333,7 @@ HRESULT CCollider::Create_BoundingBox()
 
 HRESULT CCollider::Create_Sphere()
 {
-	if (FAILED(D3DXCreateSphere(Get_Graphic_Device(), 0.5f, 20.0f, 20.0f, &m_pMesh, &m_pAdjacency)))
+	if (FAILED(D3DXCreateSphere(Get_Graphic_Device(), 0.5f, 10.0f, 10.0f, &m_pMesh, &m_pAdjacency)))
 		return E_FAIL;
 
 	return NOERROR;

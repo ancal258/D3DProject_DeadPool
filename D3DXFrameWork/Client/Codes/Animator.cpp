@@ -14,7 +14,7 @@ CAnimator::CAnimator(LPDIRECT3DDEVICE9 pGraphic_Device)
 	m_pGraphic_Device->AddRef();
 }
 
-HRESULT CAnimator::Ready_Animator(CMesh_Dynamic* pMeshCom, CTransform* pTransformCom, CNavigation* pNavigationCom)
+HRESULT CAnimator::Ready_Animator(CMesh_Dynamic* pMeshCom, CTransform* pTransformCom, CNavigation* pNavigationCom, _uint iSceneNum)
 {
 	m_pMeshCom = pMeshCom;
 	m_pMeshCom->AddRef();
@@ -24,33 +24,34 @@ HRESULT CAnimator::Ready_Animator(CMesh_Dynamic* pMeshCom, CTransform* pTransfor
 	m_pNavigationCom->AddRef();
 	m_pMeshCom->RegistCallbackFunc(bind(&CAnimator::AnimFinish, this));
 	m_pMeshCom->RegistCallbackCheckPair(bind(&CAnimator::CheckPair, this, placeholders::_1, placeholders::_2));
+	m_iSceneNum = iSceneNum;
 	Ready_Pair();
 	return NOERROR;
 }
 
 void CAnimator::Ready_Pair()
 {
+	m_vecBlendPair.reserve(3);
 	//SIT_IDLE_BREATH, SIT_IDLE_HANDMOVE, SIT_GETUP, SIT_SITDOWN,
 	//	NOGUN_IDLE00, NOGUN_IDLE01, NOGUN_IDLE02, NOGUN_IDLE03, NOGUN_IDLE04, NOGUN_IDLE05, NOGUN_IDLE06,
 	//	NOGUN_WALK_F, NOGUN_WALK_FL, NOGUN_WALK_FR, NOGUN_WALK_L, NOGUN_WALK_R, NOGUN_WALK_B, INTERACT_DOG,
 	//	ANIM_END
+	//pair<_uint, _uint> p2 = make_pair(NOGUN_WALK_F, NOGUN_IDLE00);
 	// APT - Blending 될 애니메이션들
-	m_vecBlendPair.push_back(make_pair(NOGUN_IDLE00, NOGUN_WALK_F));
-	m_vecBlendPair.push_back(make_pair(NOGUN_WALK_F, NOGUN_IDLE00));
-	if (true == m_isChange)
+	if (0 == m_iSceneNum)
 	{
-		//pair<_uint, _uint> p2 = make_pair(NOGUN_WALK_F, NOGUN_IDLE00);
-
+		m_vecBlendPair.push_back(make_pair(NOGUN_IDLE00, NOGUN_WALK_F));
+		m_vecBlendPair.push_back(make_pair(NOGUN_WALK_F, NOGUN_IDLE00));
 	}
 	else // FIELD - Blending 될 애니메이션들
 	{
+		m_vecBlendPair.push_back(make_pair(SWORLD_LIGHT_01, SWORLD_LIGHT_02));
 
 	}
 }
 
 void CAnimator::Update_Animation(const _float & fTimeDelta)
 {
-	m_isChange = true;
 	if (m_ArrayAnimState[SIT_GETUP] == true)
 	{
 		m_pMeshCom->Set_AnimationSet(SIT_GETUP);
@@ -147,7 +148,7 @@ void CAnimator::Input_Push_Back(_uint iIndex)
 
 void CAnimator::AnimFinish()
 {
-	if (true != m_isChange)
+	if (0 == m_iSceneNum)
 	{
 		if (m_ReservationList.size() != 0)
 		{
@@ -173,11 +174,11 @@ _bool CAnimator::CheckPair(_uint iFirst, _uint iSecond)
 	return false;
 }
 
-CAnimator * CAnimator::Create(LPDIRECT3DDEVICE9 pGraphic_Device, CMesh_Dynamic* pMeshCom, CTransform* pTransformCom, CNavigation* pNavigationCom)
+CAnimator * CAnimator::Create(LPDIRECT3DDEVICE9 pGraphic_Device, CMesh_Dynamic* pMeshCom, CTransform* pTransformCom, CNavigation* pNavigationCom, _uint iSceneNum)
 {
 	CAnimator*      pInstance = new CAnimator(pGraphic_Device);
 
-	if (FAILED(pInstance->Ready_Animator(pMeshCom, pTransformCom, pNavigationCom)))
+	if (FAILED(pInstance->Ready_Animator(pMeshCom, pTransformCom, pNavigationCom, iSceneNum)))
 	{
 		_MSG_BOX("CAnimator Created Failed");
 		Safe_Release(pInstance);

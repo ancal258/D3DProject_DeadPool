@@ -196,6 +196,65 @@ HRESULT CToolView::Ready_Componet_Prototype_SceneAPT()
 
 HRESULT CToolView::Ready_Componet_Prototype_SceneMap()
 {
+	// For.Component_Mesh_Celling_Center
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Celling_Center", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/FIELD_Base/", L"Celling_Center.x"))))
+		return E_FAIL;
+	// For.Component_Mesh_Celling_Hatch
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Celling_Hatch", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/FIELD_Base/", L"Celling_Hatch.x"))))
+		return E_FAIL;
+	// For.Component_Mesh_Celling_Outer
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Celling_Outer", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/FIELD_Base/", L"Celling_Outer.x"))))
+		return E_FAIL;
+	// For.Component_Mesh_Floor
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Floor", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/FIELD_Base/", L"Floor.x"))))
+		return E_FAIL;
+	// For.Component_Mesh_Floor_Center
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Floor_Center", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/FIELD_Base/", L"Floor_Center.x"))))
+		return E_FAIL;
+	// For.Component_Mesh_Floor_Outer
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Floor_Outer", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/FIELD_Base/", L"Floor_Outer.x"))))
+		return E_FAIL;
+	// For.Component_Mesh_Floor_Straight
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Floor_Straight", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/FIELD_Base/", L"Floor_Straight.x"))))
+		return E_FAIL;
+	// For.Component_Metal_Pipes_Bend
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Metal_Pipes_Bend", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/FIELD_Base/", L"Metal_Pipes_Bend.x"))))
+		return E_FAIL;
+	// For.Component_Mesh_Metal_Pipes_Long
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Metal_Pipes_Long", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/FIELD_Base/", L"Metal_Pipes_Long.x"))))
+		return E_FAIL;
+	// For.Component_Mesh_Tunnel_MetalTrim
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Tunnel_MetalTrim", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/FIELD_Base/", L"Tunnel_MetalTrim.x"))))
+		return E_FAIL;
+	// For.Component_Mesh_Tunnel_Straight
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Tunnel_Straight", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/FIELD_Base/", L"Tunnel_Straight.x"))))
+		return E_FAIL;
+	// For.Component_Mesh_Tunnel_Straight_Top
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Tunnel_Straight_Top", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/FIELD_Base/", L"Tunnel_Straight_Top.x"))))
+		return E_FAIL;
+	// For.Component_Mesh_Tunnel_Trim
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Tunnel_Trim", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/FIELD_Base/", L"Tunnel_Trim.x"))))
+		return E_FAIL;
+	// For.Component_Mesh_Tunnel_Trim_Top
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Tunnel_Trim_Top", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/FIELD_Base/", L"Tunnel_Trim_Top.x"))))
+		return E_FAIL;
+	// For.Component_Mesh_Wall_Base_01
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Wall_Base_01", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/FIELD_Base/", L"Wall_Base_01.x"))))
+		return E_FAIL;
+	// For.Component_Mesh_Wall_Base_02
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Wall_Base_02", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/FIELD_Base/", L"Wall_Base_02.x"))))
+		return E_FAIL;
+	// For.Component_Mesh_Wall_Base_03
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Wall_Base_03", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/FIELD_Base/", L"Wall_Base_03.x"))))
+		return E_FAIL;
+	// For.Component_Mesh_Wall_Base_hole
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Wall_Base_hole", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/FIELD_Base/", L"Wall_Base_hole.x"))))
+		return E_FAIL;
+	// For.Component_Mesh_Wall_Base_Trim
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Wall_Base_Trim", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/FIELD_Base/", L"Wall_Base_Trim.x"))))
+		return E_FAIL;
+
+
 	return NOERROR;
 }
 
@@ -338,6 +397,64 @@ HRESULT CToolView::Ready_GameObject_Prototype_SceneAPT()
 
 HRESULT CToolView::Ready_GameObject_Prototype_SceneMap()
 {
+	// For.Prototype_Celling_Center
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Celling_Center", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_Celling_Center"))))
+		return E_FAIL;
+	// For.Prototype_Celling_Hatch
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Celling_Hatch", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_Celling_Hatch"))))
+		return E_FAIL;
+	// For.Prototype_Celling_Outer
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Celling_Outer", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_Celling_Outer"))))
+		return E_FAIL;
+	// For.Prototype_Floor
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Floor", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_Floor"))))
+		return E_FAIL;
+	// For.Prototype_Floor_Center
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Floor_Center", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_Floor_Center"))))
+		return E_FAIL;
+	// For.Prototype_Floor_Outer
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Floor_Outer", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_Floor_Outer"))))
+		return E_FAIL;
+	// For.Prototype_Floor_Straight
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Floor_Straight", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_Floor_Straight"))))
+		return E_FAIL;
+	// For.Prototype_Metal_Pipes_Bend
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Metal_Pipes_Bend", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_Metal_Pipes_Bend"))))
+		return E_FAIL;
+	// For.Prototype_Metal_Pipes_Long
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Metal_Pipes_Long", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_Metal_Pipes_Long"))))
+		return E_FAIL;
+	// For.Prototype_Tunnel_MetalTrim
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Tunnel_MetalTrim", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_Tunnel_MetalTrim"))))
+		return E_FAIL;
+	// For.Prototype_Tunnel_Straight
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Tunnel_Straight", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_Tunnel_Straight"))))
+		return E_FAIL;
+	// For.Prototype_Tunnel_Straight_Top
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Tunnel_Straight_Top", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_Tunnel_Straight_Top"))))
+		return E_FAIL;
+	// For.Prototype_Tunnel_Trim
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Tunnel_Trim", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_Tunnel_Trim"))))
+		return E_FAIL;
+	// For.Prototype_Tunnel_Trim_Top
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Tunnel_Trim_Top", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_Tunnel_Trim_Top"))))
+		return E_FAIL;
+	// For.Prototype_Wall_Base_01
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Wall_Base_01", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_Wall_Base_01"))))
+		return E_FAIL;
+	// For.Prototype_Wall_Base_02
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Wall_Base_02", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_Wall_Base_02"))))
+		return E_FAIL;
+	// For.Prototype_Wall_Base_03
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Wall_Base_03", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_Wall_Base_03"))))
+		return E_FAIL;
+	// For.Prototype_Wall_Base_hole
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Wall_Base_hole", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_Wall_Base_hole"))))
+		return E_FAIL;
+	// For.Prototype_Wall_Base_Trim
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Wall_Base_Trim", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_Wall_Base_Trim"))))
+		return E_FAIL;
+
 	return NOERROR;
 }
 

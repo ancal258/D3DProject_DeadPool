@@ -135,13 +135,12 @@ void CAnimationCtrl::Play_AnimationSet(const _float & fTimeDelta)
 	m_pAniCtrl->GetTrackDesc(m_iCurrentTrack, &m_TrackDesc);
 	double fCurrentAnimFactor = m_TrackDesc.Position / period;
 	double fNextAnimFactor = (m_TrackDesc.Position + fTimeDelta) / period;
-
+	double fPercent = (fCurrentAnimFactor / period) * 100;
 	if (_int(fNextAnimFactor) > _int(fCurrentAnimFactor))
 	{
 		if (m_callbackFunc)
 			m_callbackFunc();
 	}
-
 
 	m_fTimeAcc += fTimeDelta;	
 	m_pAniCtrl->AdvanceTime(fTimeDelta, nullptr);

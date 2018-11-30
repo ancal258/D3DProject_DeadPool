@@ -31,7 +31,7 @@ private:
 	explicit CAnimator(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual ~CAnimator() = default;
 public:
-	HRESULT Ready_Animator(CMesh_Dynamic* pMeshCom, CTransform* pTransformCom, CNavigation* pNavigationCom);
+	HRESULT Ready_Animator(CMesh_Dynamic* pMeshCom, CTransform* pTransformCom, CNavigation* pNavigationCom, _uint iSceneNum);
 	void Ready_Pair();
 public:
 	void SetUp_RootMatrix(_matrix* pRootMatrix) {
@@ -55,9 +55,8 @@ private:
 	CTransform*         m_pTransformCom = nullptr;
 	CNavigation*		m_pNavigationCom = nullptr;
 	_bool				m_ArrayAnimState[ANIM_END] = { 0 };
-	_bool				m_ArrayFieldState[FIELD_END] = { 0 };
 	_matrix*            m_CombinedRootMatrix = nullptr;
-	_bool				m_isChange = false;
+	_uint				m_iSceneNum = false;
 
 	vector<pair<_uint,_uint>>		m_vecBlendPair;
 	
@@ -65,7 +64,7 @@ private:
 	list<_uint>			m_ReservationList;
 
 public:
-	static CAnimator* Create(LPDIRECT3DDEVICE9 pGraphic_Device,CMesh_Dynamic* pMeshCom, CTransform* pTransformCom, CNavigation* pNavigationCom);
+	static CAnimator* Create(LPDIRECT3DDEVICE9 pGraphic_Device,CMesh_Dynamic* pMeshCom, CTransform* pTransformCom, CNavigation* pNavigationCom,_uint iSceneNum);
 protected:
 	virtual void Free();
 };

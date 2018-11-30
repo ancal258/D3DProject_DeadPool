@@ -88,7 +88,10 @@ void CDP_Sword::Render_GameObject()
 	Safe_Release(pEffect);
 
 	m_pColliderCom->Render_Collider();
-
+	for (size_t i = 0; i < 5; i++)
+	{
+		m_pColliderCom_Sphere[i]->Render_Collider();
+	}
 }
 
 HRESULT CDP_Sword::Ready_Component()
@@ -121,7 +124,31 @@ HRESULT CDP_Sword::Ready_Component()
 	m_pColliderCom = (CCollider*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Collider_Box");
 	if (FAILED(Add_Component(L"Com_Collider", m_pColliderCom)))
 		return E_FAIL;
-	m_pColliderCom->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(130, 10,10), &_vec3(0.0f, 0.f, 0.f), &_vec3(50.f, 0, 0.f));
+	m_pColliderCom->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(100, 2,1), &_vec3(0.0f, 0.f, 0.f), &_vec3(70.f, 0, 0.f));
+
+	m_pColliderCom_Sphere[0] = (CCollider*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Collider_Sphere");
+	if (FAILED(Add_Component(L"Com_Collider0", m_pColliderCom_Sphere[0])))
+		return E_FAIL;
+	m_pColliderCom_Sphere[0]->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(20,20,20), &_vec3(0.0f, 0.f, 0.f), &_vec3(30.f, 0, 0.f));
+	m_pColliderCom_Sphere[1] = (CCollider*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Collider_Sphere");
+	if (FAILED(Add_Component(L"Com_Collider1", m_pColliderCom_Sphere[1])))
+		return E_FAIL;
+	m_pColliderCom_Sphere[1]->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(20,20,20), &_vec3(0.0f, 0.f, 0.f), &_vec3(50.f, 0, 0.f));
+	m_pColliderCom_Sphere[2] = (CCollider*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Collider_Sphere");
+	if (FAILED(Add_Component(L"Com_Collider2", m_pColliderCom_Sphere[2])))
+		return E_FAIL;
+	m_pColliderCom_Sphere[2]->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(20,20,20), &_vec3(0.0f, 0.f, 0.f), &_vec3(70.f, 0, 0.f));
+	m_pColliderCom_Sphere[3] = (CCollider*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Collider_Sphere");
+	if (FAILED(Add_Component(L"Com_Collider3", m_pColliderCom_Sphere[3])))
+		return E_FAIL;
+	m_pColliderCom_Sphere[3]->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(20,20,20), &_vec3(0.0f, 0.f, 0.f), &_vec3(90.f, 0, 0.f));
+	m_pColliderCom_Sphere[4] = (CCollider*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Collider_Sphere");
+	if (FAILED(Add_Component(L"Com_Collider4", m_pColliderCom_Sphere[4])))
+		return E_FAIL;
+	m_pColliderCom_Sphere[4]->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(20,20,20), &_vec3(0.0f, 0.f, 0.f), &_vec3(110.f, 0, 0.f));
+
+
+
 	Safe_Release(pComponent_Manager);
 
 	return NOERROR;
@@ -216,6 +243,9 @@ void CDP_Sword::Free()
 	Safe_Release(m_pRendererCom);
 	Safe_Release(m_pShaderCom);
 	Safe_Release(m_pColliderCom);
-
+	for (size_t i = 0; i < 5; i++)
+	{
+		Safe_Release(m_pColliderCom_Sphere[i]);
+	}
 	CGameObject::Free();
 }

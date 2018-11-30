@@ -135,9 +135,6 @@
     <ClInclude Include="..\Headers\DP_Sword.h">
       <Filter>02.GameObject\02.For.Stage\02.DP_Sowrd</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\Static_Object.h">
-      <Filter>02.GameObject\00.For.Static\01.Static_Object</Filter>
-    </ClInclude>
     <ClInclude Include="..\Headers\Camera_Target.h">
       <Filter>02.GameObject\03.For.Public\Camera\Target</Filter>
     </ClInclude>
@@ -171,6 +168,9 @@
     <ClInclude Include="..\Headers\Player.h">
       <Filter>02.GameObject\02.For.Stage\01.Player</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\Static_Object.h">
+      <Filter>02.GameObject\00.For.Static\01.Static_Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -199,9 +199,6 @@
     </ClCompile>
     <ClCompile Include="..\Codes\DP_Sword.cpp">
       <Filter>02.GameObject\02.For.Stage\02.DP_Sowrd</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\Static_Object.cpp">
-      <Filter>02.GameObject\00.For.Static\01.Static_Object</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Camera_Target.cpp">
       <Filter>02.GameObject\03.For.Public\Camera\Target</Filter>
@@ -235,6 +232,9 @@
     </ClCompile>
     <ClCompile Include="..\Codes\Player.cpp">
       <Filter>02.GameObject\02.For.Stage\01.Player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Static_Object.cpp">
+      <Filter>02.GameObject\00.For.Static\01.Static_Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

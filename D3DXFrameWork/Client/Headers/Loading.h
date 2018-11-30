@@ -67,12 +67,12 @@ private:
 private:
 	LPDIRECT3DDEVICE9			m_pGraphic_Device = nullptr;
 	CObject_Manager*			m_pObject_Manager = nullptr;
-	SCENEID						m_eSceneID;
-	HANDLE						m_hThread;
+	SCENEID						m_eSceneID = SCENE_END;
+	HANDLE						m_hThread = 0;
 	CRITICAL_SECTION			m_Critical_Section;
 
 private:
-	_tchar						m_szString[128];
+	_tchar						m_szString[128] = L"";
 	_bool						m_isFinish = false;
 public:
 	static CLoading* Create(LPDIRECT3DDEVICE9 pGraphicDev, SCENEID eSceneID);

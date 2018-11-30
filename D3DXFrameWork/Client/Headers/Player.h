@@ -37,6 +37,7 @@ public:
 		return m_CombinedHandMatrix[iSide];
 	}
 	const _matrix* Get_WorldMatrix() const;
+	const _matrix* Get_RealMatrix() const;
 	const _long* Get_MouseMove() const {
 		return m_dwMouseMove;
 	}

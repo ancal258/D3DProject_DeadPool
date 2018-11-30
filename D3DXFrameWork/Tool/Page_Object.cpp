@@ -552,6 +552,302 @@ void CPage_Object::Create_Object_APT(_uint iIndex)
 
 void CPage_Object::Create_Object_MAP(_uint iIndex)
 {
+	CMainFrame*		pMainFrame = (CMainFrame*)AfxGetMainWnd();
+	CGameObject*	pMesh = nullptr;
+	_tchar szMeshName[128] = L"";
+
+	switch (iIndex)
+	{
+	case MESH_CELLING_CENTER:
+		if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_Celling_Center", L"Layer_Static_FIELD", &pMesh)))
+			return;
+		if (nullptr != pMesh)
+		{
+			wsprintf(szMeshName, L"Celling_Center_%d", iMeshCntArray[MESH_CELLING_CENTER]);
+
+			vGameObject.push_back(pMesh); // 오브젝트 메쉬들 추가될때마다 컨테이너에 저장, 파일 저장 할 때 순회하면서 데이터 저장.
+			m_MeshListBox.AddString(szMeshName);
+			++iMeshCntArray[MESH_CELLING_CENTER];
+			((CStatic_Object*)pMesh)->Set_PrototypeTag(L"Prototype_Celling_Center");
+			((CStatic_Object*)pMesh)->Set_Position(&_vec3(0, 0, 0));
+			((CStatic_Object*)pMesh)->Set_Scale(&_vec3(m_fMeshSize, m_fMeshSize, m_fMeshSize));
+		}
+		break;
+	case MESH_CELLING_HATCH:
+		if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_Celling_Hatch", L"Layer_Static_FIELD", &pMesh)))
+			return;
+		if (nullptr != pMesh)
+		{
+			wsprintf(szMeshName, L"Celling_Hatch_%d", iMeshCntArray[MESH_CELLING_HATCH]);
+
+			vGameObject.push_back(pMesh); // 오브젝트 메쉬들 추가될때마다 컨테이너에 저장, 파일 저장 할 때 순회하면서 데이터 저장.
+			m_MeshListBox.AddString(szMeshName);
+			++iMeshCntArray[MESH_CELLING_HATCH];
+			((CStatic_Object*)pMesh)->Set_PrototypeTag(L"Prototype_Celling_Hatch");
+			((CStatic_Object*)pMesh)->Set_Position(&_vec3(0, 0, 0));
+			((CStatic_Object*)pMesh)->Set_Scale(&_vec3(m_fMeshSize, m_fMeshSize, m_fMeshSize));
+		}
+		break;
+
+	case MESH_CELLING_OUTER:
+		if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_Celling_Outer", L"Layer_Static_FIELD", &pMesh)))
+			return;
+		if (nullptr != pMesh)
+		{
+			wsprintf(szMeshName, L"Celling_Outer_%d", iMeshCntArray[MESH_CELLING_OUTER]);
+
+			vGameObject.push_back(pMesh); // 오브젝트 메쉬들 추가될때마다 컨테이너에 저장, 파일 저장 할 때 순회하면서 데이터 저장.
+			m_MeshListBox.AddString(szMeshName);
+			++iMeshCntArray[MESH_CELLING_OUTER];
+			((CStatic_Object*)pMesh)->Set_PrototypeTag(L"Prototype_Celling_Outer");
+			((CStatic_Object*)pMesh)->Set_Position(&_vec3(0, 0, 0));
+			((CStatic_Object*)pMesh)->Set_Scale(&_vec3(m_fMeshSize, m_fMeshSize, m_fMeshSize));
+		}
+		break;
+	case MESH_FLOOR:
+		if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_Floor", L"Layer_Static_FIELD", &pMesh)))
+			return;
+		if (nullptr != pMesh)
+		{
+			wsprintf(szMeshName, L"Floor_%d", iMeshCntArray[MESH_FLOOR]);
+
+			vGameObject.push_back(pMesh); // 오브젝트 메쉬들 추가될때마다 컨테이너에 저장, 파일 저장 할 때 순회하면서 데이터 저장.
+			m_MeshListBox.AddString(szMeshName);
+			++iMeshCntArray[MESH_FLOOR];
+			((CStatic_Object*)pMesh)->Set_PrototypeTag(L"Prototype_Floor");
+			((CStatic_Object*)pMesh)->Set_Position(&_vec3(0, 0, 0));
+			((CStatic_Object*)pMesh)->Set_Scale(&_vec3(m_fMeshSize, m_fMeshSize, m_fMeshSize));
+		}
+		break;
+	case MESH_FLOOR_CENTER:
+		if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_Floor_Center", L"Layer_Static_FIELD", &pMesh)))
+			return;
+		if (nullptr != pMesh)
+		{
+			wsprintf(szMeshName, L"Floor_Center_%d", iMeshCntArray[MESH_FLOOR_CENTER]);
+
+			vGameObject.push_back(pMesh); // 오브젝트 메쉬들 추가될때마다 컨테이너에 저장, 파일 저장 할 때 순회하면서 데이터 저장.
+			m_MeshListBox.AddString(szMeshName);
+			++iMeshCntArray[MESH_FLOOR_CENTER];
+			((CStatic_Object*)pMesh)->Set_PrototypeTag(L"Prototype_Floor_Center");
+			((CStatic_Object*)pMesh)->Set_Position(&_vec3(0, 0, 0));
+			((CStatic_Object*)pMesh)->Set_Scale(&_vec3(m_fMeshSize, m_fMeshSize, m_fMeshSize));
+		}
+		break;
+	case MESH_FLOOR_OUTER:
+		if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_Floor_Outer", L"Layer_Static_FIELD", &pMesh)))
+			return;
+		if (nullptr != pMesh)
+		{
+			wsprintf(szMeshName, L"Floor_Outer_%d", iMeshCntArray[MESH_FLOOR_OUTER]);
+
+			vGameObject.push_back(pMesh); // 오브젝트 메쉬들 추가될때마다 컨테이너에 저장, 파일 저장 할 때 순회하면서 데이터 저장.
+			m_MeshListBox.AddString(szMeshName);
+			++iMeshCntArray[MESH_FLOOR_OUTER];
+			((CStatic_Object*)pMesh)->Set_PrototypeTag(L"Prototype_Floor_Outer");
+			((CStatic_Object*)pMesh)->Set_Position(&_vec3(0, 0, 0));
+			((CStatic_Object*)pMesh)->Set_Scale(&_vec3(m_fMeshSize, m_fMeshSize, m_fMeshSize));
+		}
+		break;
+	case MESH_FLOOR_STRAIGHT:
+		if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_Floor_Straight", L"Layer_Static_FIELD", &pMesh)))
+			return;
+		if (nullptr != pMesh)
+		{
+			wsprintf(szMeshName, L"Floor_Straight_%d", iMeshCntArray[MESH_FLOOR_STRAIGHT]);
+
+			vGameObject.push_back(pMesh); // 오브젝트 메쉬들 추가될때마다 컨테이너에 저장, 파일 저장 할 때 순회하면서 데이터 저장.
+			m_MeshListBox.AddString(szMeshName);
+			++iMeshCntArray[MESH_FLOOR_STRAIGHT];
+			((CStatic_Object*)pMesh)->Set_PrototypeTag(L"Prototype_Floor_Straight");
+			((CStatic_Object*)pMesh)->Set_Position(&_vec3(0, 0, 0));
+			((CStatic_Object*)pMesh)->Set_Scale(&_vec3(m_fMeshSize, m_fMeshSize, m_fMeshSize));
+		}
+		break;
+	case MESH_METAL_PIPES_BENT:
+		if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_Metal_Pipes_Bend", L"Layer_Static_FIELD", &pMesh)))
+			return;
+		if (nullptr != pMesh)
+		{
+			wsprintf(szMeshName, L"Metal_Pipes_Bend_%d", iMeshCntArray[MESH_METAL_PIPES_BENT]);
+
+			vGameObject.push_back(pMesh); // 오브젝트 메쉬들 추가될때마다 컨테이너에 저장, 파일 저장 할 때 순회하면서 데이터 저장.
+			m_MeshListBox.AddString(szMeshName);
+			++iMeshCntArray[MESH_METAL_PIPES_BENT];
+			((CStatic_Object*)pMesh)->Set_PrototypeTag(L"Prototype_Metal_Pipes_Bend");
+			((CStatic_Object*)pMesh)->Set_Position(&_vec3(0, 0, 0));
+			((CStatic_Object*)pMesh)->Set_Scale(&_vec3(m_fMeshSize, m_fMeshSize, m_fMeshSize));
+		}
+		break;
+	case MESH_METAL_PIPES_LONG:
+		if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_Metal_Pipes_Long", L"Layer_Static_FIELD", &pMesh)))
+			return;
+		if (nullptr != pMesh)
+		{
+			wsprintf(szMeshName, L"Pipes_Long_%d", iMeshCntArray[MESH_METAL_PIPES_LONG]);
+
+			vGameObject.push_back(pMesh); // 오브젝트 메쉬들 추가될때마다 컨테이너에 저장, 파일 저장 할 때 순회하면서 데이터 저장.
+			m_MeshListBox.AddString(szMeshName);
+			++iMeshCntArray[MESH_METAL_PIPES_LONG];
+			((CStatic_Object*)pMesh)->Set_PrototypeTag(L"Prototype_Metal_Pipes_Long");
+			((CStatic_Object*)pMesh)->Set_Position(&_vec3(0, 0, 0));
+			((CStatic_Object*)pMesh)->Set_Scale(&_vec3(m_fMeshSize, m_fMeshSize, m_fMeshSize));
+		}
+		break;
+	case MESH_TUNNEL_METALTRIM:
+		if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_Tunnel_MetalTrim", L"Layer_Static_FIELD", &pMesh)))
+			return;
+		if (nullptr != pMesh)
+		{
+			wsprintf(szMeshName, L"Tunnel_MetalTrim_%d", iMeshCntArray[MESH_TUNNEL_METALTRIM]);
+
+			vGameObject.push_back(pMesh); // 오브젝트 메쉬들 추가될때마다 컨테이너에 저장, 파일 저장 할 때 순회하면서 데이터 저장.
+			m_MeshListBox.AddString(szMeshName);
+			++iMeshCntArray[MESH_TUNNEL_METALTRIM];
+			((CStatic_Object*)pMesh)->Set_PrototypeTag(L"Prototype_Tunnel_MetalTrim");
+			((CStatic_Object*)pMesh)->Set_Position(&_vec3(0, 0, 0));
+			((CStatic_Object*)pMesh)->Set_Scale(&_vec3(m_fMeshSize, m_fMeshSize, m_fMeshSize));
+		}
+		break;
+	case MESH_TUNNEL_STRAIGHT:
+		if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_Tunnel_Straight", L"Layer_Static_FIELD", &pMesh)))
+			return;
+		if (nullptr != pMesh)
+		{
+			wsprintf(szMeshName, L"Tunnel_Straight_%d", iMeshCntArray[MESH_TUNNEL_STRAIGHT]);
+
+			vGameObject.push_back(pMesh); // 오브젝트 메쉬들 추가될때마다 컨테이너에 저장, 파일 저장 할 때 순회하면서 데이터 저장.
+			m_MeshListBox.AddString(szMeshName);
+			++iMeshCntArray[MESH_TUNNEL_STRAIGHT];
+			((CStatic_Object*)pMesh)->Set_PrototypeTag(L"Prototype_Tunnel_Straight");
+			((CStatic_Object*)pMesh)->Set_Position(&_vec3(0, 0, 0));
+			((CStatic_Object*)pMesh)->Set_Scale(&_vec3(m_fMeshSize, m_fMeshSize, m_fMeshSize));
+		}
+		break;
+	case MESH_TUNNEL_STRAIGHT_TOP:
+		if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_Tunnel_Straight_Top", L"Layer_Static_FIELD", &pMesh)))
+			return;
+		if (nullptr != pMesh)
+		{
+			wsprintf(szMeshName, L"Tunnel_Straight_Top_%d", iMeshCntArray[MESH_TUNNEL_STRAIGHT_TOP]);
+
+			vGameObject.push_back(pMesh); // 오브젝트 메쉬들 추가될때마다 컨테이너에 저장, 파일 저장 할 때 순회하면서 데이터 저장.
+			m_MeshListBox.AddString(szMeshName);
+			++iMeshCntArray[MESH_TUNNEL_STRAIGHT_TOP];
+			((CStatic_Object*)pMesh)->Set_PrototypeTag(L"Prototype_Tunnel_Straight_Top");
+			((CStatic_Object*)pMesh)->Set_Position(&_vec3(0, 0, 0));
+			((CStatic_Object*)pMesh)->Set_Scale(&_vec3(m_fMeshSize, m_fMeshSize, m_fMeshSize));
+		}
+		break;
+	case MESH_TUNNEL_TRIM:
+		if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_Tunnel_Trim", L"Layer_Static_FIELD", &pMesh)))
+			return;
+		if (nullptr != pMesh)
+		{
+			wsprintf(szMeshName, L"Tunnel_Trim_%d", iMeshCntArray[MESH_TUNNEL_TRIM]);
+
+			vGameObject.push_back(pMesh); // 오브젝트 메쉬들 추가될때마다 컨테이너에 저장, 파일 저장 할 때 순회하면서 데이터 저장.
+			m_MeshListBox.AddString(szMeshName);
+			++iMeshCntArray[MESH_TUNNEL_TRIM];
+			((CStatic_Object*)pMesh)->Set_PrototypeTag(L"Prototype_Tunnel_Trim");
+			((CStatic_Object*)pMesh)->Set_Position(&_vec3(0, 0, 0));
+			((CStatic_Object*)pMesh)->Set_Scale(&_vec3(m_fMeshSize, m_fMeshSize, m_fMeshSize));
+		}
+		break;
+	case MESH_TUNNEL_TRIM_TOP:
+		if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_Tunnel_Trim_Top", L"Layer_Static_FIELD", &pMesh)))
+			return;
+		if (nullptr != pMesh)
+		{
+			wsprintf(szMeshName, L"Tunnel_Trim_Top_%d", iMeshCntArray[MESH_TUNNEL_TRIM_TOP]);
+
+			vGameObject.push_back(pMesh); // 오브젝트 메쉬들 추가될때마다 컨테이너에 저장, 파일 저장 할 때 순회하면서 데이터 저장.
+			m_MeshListBox.AddString(szMeshName);
+			++iMeshCntArray[MESH_TUNNEL_TRIM_TOP];
+			((CStatic_Object*)pMesh)->Set_PrototypeTag(L"Prototype_Tunnel_Trim_Top");
+			((CStatic_Object*)pMesh)->Set_Position(&_vec3(0, 0, 0));
+			((CStatic_Object*)pMesh)->Set_Scale(&_vec3(m_fMeshSize, m_fMeshSize, m_fMeshSize));
+		}
+		break;
+	case MESH_WALL_BASE1:
+		if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_Wall_Base_01", L"Layer_Static_FIELD", &pMesh)))
+			return;
+		if (nullptr != pMesh)
+		{
+			wsprintf(szMeshName, L"Wall_Base_01_%d", iMeshCntArray[MESH_WALL_BASE1]);
+
+			vGameObject.push_back(pMesh); // 오브젝트 메쉬들 추가될때마다 컨테이너에 저장, 파일 저장 할 때 순회하면서 데이터 저장.
+			m_MeshListBox.AddString(szMeshName);
+			++iMeshCntArray[MESH_WALL_BASE1];
+			((CStatic_Object*)pMesh)->Set_PrototypeTag(L"Prototype_Wall_Base_01");
+			((CStatic_Object*)pMesh)->Set_Position(&_vec3(0, 0, 0));
+			((CStatic_Object*)pMesh)->Set_Scale(&_vec3(m_fMeshSize, m_fMeshSize, m_fMeshSize));
+		}
+		break;
+	case MESH_WALL_BASE2:
+		if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_Wall_Base_02", L"Layer_Static_FIELD", &pMesh)))
+			return;
+		if (nullptr != pMesh)
+		{
+			wsprintf(szMeshName, L"Wall_Base_02_%d", iMeshCntArray[MESH_WALL_BASE2]);
+
+			vGameObject.push_back(pMesh); // 오브젝트 메쉬들 추가될때마다 컨테이너에 저장, 파일 저장 할 때 순회하면서 데이터 저장.
+			m_MeshListBox.AddString(szMeshName);
+			++iMeshCntArray[MESH_WALL_BASE2];
+			((CStatic_Object*)pMesh)->Set_PrototypeTag(L"Prototype_Wall_Base_02");
+			((CStatic_Object*)pMesh)->Set_Position(&_vec3(0, 0, 0));
+			((CStatic_Object*)pMesh)->Set_Scale(&_vec3(m_fMeshSize, m_fMeshSize, m_fMeshSize));
+		}
+		break;
+	case MESH_WALL_BASE3:
+		if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_Wall_Base_03", L"Layer_Static_FIELD", &pMesh)))
+			return;
+		if (nullptr != pMesh)
+		{
+			wsprintf(szMeshName, L"Wall_Base_03_%d", iMeshCntArray[MESH_WALL_BASE3]);
+
+			vGameObject.push_back(pMesh); // 오브젝트 메쉬들 추가될때마다 컨테이너에 저장, 파일 저장 할 때 순회하면서 데이터 저장.
+			m_MeshListBox.AddString(szMeshName);
+			++iMeshCntArray[MESH_WALL_BASE3];
+			((CStatic_Object*)pMesh)->Set_PrototypeTag(L"Prototype_Wall_Base_03");
+			((CStatic_Object*)pMesh)->Set_Position(&_vec3(0, 0, 0));
+			((CStatic_Object*)pMesh)->Set_Scale(&_vec3(m_fMeshSize, m_fMeshSize, m_fMeshSize));
+		}
+		break;
+	case MESH_WALL_BASE_HOLE:
+		if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_Wall_Base_hole", L"Layer_Static_FIELD", &pMesh)))
+			return;
+		if (nullptr != pMesh)
+		{
+			wsprintf(szMeshName, L"Wall_Base_hole_%d", iMeshCntArray[MESH_WALL_BASE_HOLE]);
+
+			vGameObject.push_back(pMesh); // 오브젝트 메쉬들 추가될때마다 컨테이너에 저장, 파일 저장 할 때 순회하면서 데이터 저장.
+			m_MeshListBox.AddString(szMeshName);
+			++iMeshCntArray[MESH_WALL_BASE_HOLE];
+			((CStatic_Object*)pMesh)->Set_PrototypeTag(L"Prototype_Wall_Base_hole");
+			((CStatic_Object*)pMesh)->Set_Position(&_vec3(0, 0, 0));
+			((CStatic_Object*)pMesh)->Set_Scale(&_vec3(m_fMeshSize, m_fMeshSize, m_fMeshSize));
+		}
+		break;
+	case MESH_WALL_BASE_TRIM:
+		if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_Wall_Base_Trim", L"Layer_Static_FIELD", &pMesh)))
+			return;
+		if (nullptr != pMesh)
+		{
+			wsprintf(szMeshName, L"Wall_Base_Trim_%d", iMeshCntArray[MESH_WALL_BASE_TRIM]);
+
+			vGameObject.push_back(pMesh); // 오브젝트 메쉬들 추가될때마다 컨테이너에 저장, 파일 저장 할 때 순회하면서 데이터 저장.
+			m_MeshListBox.AddString(szMeshName);
+			++iMeshCntArray[MESH_WALL_BASE_TRIM];
+			((CStatic_Object*)pMesh)->Set_PrototypeTag(L"Prototype_Wall_Base_Trim");
+			((CStatic_Object*)pMesh)->Set_Position(&_vec3(0, 0, 0));
+			((CStatic_Object*)pMesh)->Set_Scale(&_vec3(m_fMeshSize, m_fMeshSize, m_fMeshSize));
+		}
+		break;
+
+	default:
+		break;
+	}
 }
 
 void CPage_Object::Create_Object_STATIC(_uint iIndex)
@@ -657,6 +953,25 @@ BOOL CPage_Object::OnInitDialog()
 	m_APTCombo.AddString(L"27. Door_Frame");
 	m_APTCombo.AddString(L"28. Celling");
 
+	m_MAPCombo.AddString(L"00. Celling_Center");
+	m_MAPCombo.AddString(L"01. Celling_Hatch");
+	m_MAPCombo.AddString(L"02. Celling_Outer");
+	m_MAPCombo.AddString(L"03. Floor");
+	m_MAPCombo.AddString(L"04. Floor_Center");
+	m_MAPCombo.AddString(L"05. Floor_Outer");
+	m_MAPCombo.AddString(L"06. Floor_Straight");
+	m_MAPCombo.AddString(L"07. Metal_Pipes_Bend");
+	m_MAPCombo.AddString(L"08. Metal_Pipes_Long");
+	m_MAPCombo.AddString(L"09. Tunnel_MetalTrim");
+	m_MAPCombo.AddString(L"10. Tunnel_Straight");
+	m_MAPCombo.AddString(L"11. Tunnel_Straight_Top");
+	m_MAPCombo.AddString(L"12. Tunnel_Trim");
+	m_MAPCombo.AddString(L"13. Tunnel_Trim_Top");
+	m_MAPCombo.AddString(L"14. Wall_Base_01");
+	m_MAPCombo.AddString(L"15. Wall_Base_02");
+	m_MAPCombo.AddString(L"16. Wall_Base_03");
+	m_MAPCombo.AddString(L"17. Wall_Base_hole");
+	m_MAPCombo.AddString(L"18. Wall_Base_Trim");
 
 	m_STATICCombo.AddString(L"00.MESH_TEST");
 	m_STATICCombo.AddString(L"01.MESH_ROCK_BRIDGE");

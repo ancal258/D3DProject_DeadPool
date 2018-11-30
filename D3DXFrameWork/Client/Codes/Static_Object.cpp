@@ -46,6 +46,7 @@ HRESULT CStatic_Object::Ready_GameObject()
 
 _int CStatic_Object::Update_GameObject(const _float & fTimeDelta)
 {
+	m_isCol = false;
 	return _int();
 }
 
@@ -77,15 +78,17 @@ _int CStatic_Object::LastUpdate_GameObject(const _float & fTimeDelta)
 
 	//// OBB충돌 Player & 
 
-	for (size_t i = 0; i < 1; i++)
+	for (size_t i = 0; i < 3; i++)
 	{
 		const CGameObject* pPlayer = pObject_Manager->Get_ObjectPointer(SCENE_STAGE, L"Layer_Player", i);
 		if (nullptr == pPlayer)
-			return -1;
+			break;
 
 		// 디버깅용. 실제론 return true일 때 마다 특정 행동을 취해주자.
-		if (true == m_pColliderCom->Collision_OBB((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider"))) 
-			break;
+		if (true == m_pColliderCom->Collision_OBB((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider")))
+		{
+			//m_isCol = true;
+		}
 	}
 
 
@@ -194,6 +197,7 @@ HRESULT CStatic_Object::SetUp_ConstantTable(LPD3DXEFFECT pEffect)
 	D3DXMatrixInverse(&matView, nullptr, &matView);
 	pEffect->SetVector("g_vCamPosition", (_vec4*)&matView.m[3][0]);
 
+	pEffect->SetBool("g_isCol", m_isCol);
 
 	Safe_Release(pEffect);
 

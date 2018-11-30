@@ -127,6 +127,8 @@ HRESULT CLoading::Loading_Stage_FIELD()
 	if (FAILED(Ready_Layer_BackGround_FIELD(L"Layer_BackGround")))
 		return E_FAIL;
 
+	if (FAILED(Load_Static_Object(L"../Bin/DataFiles/Field_TestObject.dat")))
+		return E_FAIL;
 
 
 
@@ -442,6 +444,17 @@ HRESULT CLoading::Ready_Stage_Prototype_GameObject_SceneFIELD()
 	// For.GameObject_Sword_Right
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Sword_Right", CDP_Sword::Create(Get_Graphic_Device(), 1))))
 		return E_FAIL;
+	//////////////////////////////////////////////
+	// For.GameObject_KitchenTable
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_KitchenTable", CStatic_Object::Create(Get_Graphic_Device(), L"Component_Mesh_KitchenTable"))))
+		return E_FAIL;
+	// For.GameObject_BookCase
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_BookCase", CStatic_Object::Create(Get_Graphic_Device(), L"Component_Mesh_BookCase"))))
+		return E_FAIL;
+	// For.GameObject_RubberDuckie
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_RubberDuckie", CStatic_Object::Create(Get_Graphic_Device(), L"Component_Mesh_RubberDuckie"))))
+		return E_FAIL;
+
 	return NOERROR;
 }
 
@@ -460,6 +473,17 @@ HRESULT CLoading::Ready_Component_Prototype_SceneFIELD()
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Sword", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/Sword/", L"DeadPool_Sword.x"))))
 		return E_FAIL;
 
+	////////////////////////////////////////////
+	
+	// For.Component_Mesh_BookCase
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_BookCase", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"BookCase.x"))))
+		return E_FAIL;
+	// For.Component_Mesh_KitchenTable
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_KitchenTable", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"KitchenTable.x"))))
+		return E_FAIL;
+	// For.Component_Mesh_RubberDuckie
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_RubberDuckie", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"RubberDuckie.x"))))
+		return E_FAIL;
 	Safe_Release(pComponent_Manager);
 
 	return NOERROR;

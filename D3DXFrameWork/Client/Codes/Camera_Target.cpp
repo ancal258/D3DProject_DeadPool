@@ -96,7 +96,7 @@ HRESULT CCamera_Target::SetUp_Target(const CGameObject * pGameObject)
 
 	m_pTarget = pGameObject;
 
-	m_pTargetWorldMatrix = ((CPlayer*)m_pTarget)->Get_WorldMatrix();
+	m_pTargetWorldMatrix = ((CPlayer*)m_pTarget)->Get_RealMatrix();
 	m_pTargetMouseMove = ((CPlayer*)m_pTarget)->Get_MouseMove();
 
 	return NOERROR;
