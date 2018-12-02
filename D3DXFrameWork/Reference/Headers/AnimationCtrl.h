@@ -20,11 +20,13 @@ public:
 		return m_dlPeriod;	}
 
 	void RegistCallbackFunc(function<void(void)> callbackFunc) {
-		m_callbackFunc = callbackFunc;
-	}
+		m_callbackFunc = callbackFunc;	}
 	void RegistCallbackCheckPair(function<_bool(_uint, _uint)> callbackCheckPair) {
-		m_callbackCheckPair = callbackCheckPair;
-	}
+		m_callbackCheckPair = callbackCheckPair;	}
+	void RegistCallbackCheckComboPair(function<_bool(_uint)> callbackCheckComboPair) {
+		m_callbackCheckComboPair = callbackCheckComboPair;	}
+	void RegistCallbackCheckComboTime(function<_uint(_uint)> callbackCheckComboTime) {
+		m_callbackCheckComboTime = callbackCheckComboTime;	}
 private:
 	LPD3DXANIMATIONCONTROLLER		m_pAniCtrl = nullptr;
 	_uint							m_iCurrentTrack = 0;
@@ -37,7 +39,9 @@ private:
 	DOUBLE							m_dlPeriod = 0;
 	DOUBLE							m_dlCurrentPeriod = 0;
 	function<void(void)>			m_callbackFunc = nullptr;
-	function<_bool(_uint,_uint)>	m_callbackCheckPair = nullptr;
+	function<_bool(_uint, _uint)>	m_callbackCheckPair = nullptr;
+	function<_bool(_uint)>			m_callbackCheckComboPair = nullptr;
+	function<_uint(_uint)>			m_callbackCheckComboTime = nullptr;
 
 	_uint							m_iOldAniIdx = 0;
 	_uint							m_iCurrentAniIdx = 0;

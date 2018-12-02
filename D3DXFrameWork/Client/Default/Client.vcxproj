@@ -180,6 +180,7 @@
     <ClInclude Include="..\Headers\Constant.h" />
     <ClInclude Include="..\Headers\Defines.h" />
     <ClInclude Include="..\Headers\Dog.h" />
+    <ClInclude Include="..\Headers\DP_Gun.h" />
     <ClInclude Include="..\Headers\DP_Sword.h" />
     <ClInclude Include="..\Headers\Effect.h" />
     <ClInclude Include="..\Headers\Event_Cube.h" />
@@ -190,6 +191,7 @@
     <ClInclude Include="..\Headers\Scene_Intro.h" />
     <ClInclude Include="..\Headers\Scene_Logo.h" />
     <ClInclude Include="..\Headers\Scene_Stage.h" />
+    <ClInclude Include="..\Headers\SkyDom.h" />
     <ClInclude Include="..\Headers\Static_Object.h" />
     <ClInclude Include="..\Headers\Terrain.h" />
     <ClInclude Include="..\Headers\Test.h" />
@@ -211,6 +213,7 @@
     <ClCompile Include="..\Codes\Camera_Debug.cpp" />
     <ClCompile Include="..\Codes\Camera_Target.cpp" />
     <ClCompile Include="..\Codes\Dog.cpp" />
+    <ClCompile Include="..\Codes\DP_Gun.cpp" />
     <ClCompile Include="..\Codes\DP_Sword.cpp" />
     <ClCompile Include="..\Codes\Effect.cpp" />
     <ClCompile Include="..\Codes\Event_Cube.cpp" />
@@ -221,6 +224,7 @@
     <ClCompile Include="..\Codes\Scene_Intro.cpp" />
     <ClCompile Include="..\Codes\Scene_Logo.cpp" />
     <ClCompile Include="..\Codes\Scene_Stage.cpp" />
+    <ClCompile Include="..\Codes\SkyDom.cpp" />
     <ClCompile Include="..\Codes\Static_Object.cpp" />
     <ClCompile Include="..\Codes\Terrain.cpp" />
     <ClCompile Include="..\Codes\Test.cpp" />

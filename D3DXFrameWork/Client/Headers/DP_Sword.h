@@ -37,6 +37,7 @@ private:
 private:
 	CPlayer*			m_pPlayer = nullptr;
 	_uint				m_iSide = 0; // 0 == ÁÂÃø , 1 == ¿ìÃø
+
 private:
 	HRESULT Ready_Component();
 	HRESULT	SetUp_ConstantTable(LPD3DXEFFECT pEffect);

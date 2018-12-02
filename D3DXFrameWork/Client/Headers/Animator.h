@@ -24,8 +24,17 @@ private:
 	};
 	enum ANIM_FIELD {
 		SWORD_IDLE, SWORLD_LIGHT_01, SWORLD_LIGHT_02, SWORLD_LIGHT_03, SWORLD_HEAVY_01, SWORLD_HEAVY_02, SWORLD_HEAVY_03,
-		//SWORLD_LIGHT_05, SWORLD_LIGHT_04,SWORLD_LIGHT_03, SWORLD_LIGHT_02, SWORLD_LIGHT_01,SWORD_IDLE,
+		SWORD_AIR_01,SWORD_AIL_02,SWORD_AIR_03, AIM_F, AIM_FL, AIM_FR, AIM_L, AIM_R, AIM_B, AIM_BL, AIM_BR, AIM_IDLE,
+		SWORD_RUN_FORWARD, SWORD_JUMP, SWORD_DOUBLEJUMP, SWORD_JUMPLAND, RUN_JUMP, RUN_DOUBLEJUMP, RUN_JUMPLAND,
 		FIELD_END
+	};
+
+	enum STATE {
+		STATE_SWORD, STATE_AIM, STATE_RUN, STATE_NORMAL, STATE_END
+	};
+
+	enum KEY_STATE {
+		Q,W,E,R,A,S,D,KEY_END
 	};
 private:
 	explicit CAnimator(LPDIRECT3DDEVICE9 pGraphic_Device);
@@ -46,7 +55,11 @@ public:
 private: // CallBack
 	void AnimFinish();
 	_bool CheckPair(_uint iFirst, _uint iSecond);
-
+	_bool CheckCombo(_uint iCurrentIdx);
+	_uint CheckComboTime(_uint iCurrentIdx);
+private:
+	_uint CheckSwordLight();
+	_uint CheckSwordHeavy();
 private:
 	LPDIRECT3DDEVICE9 m_pGraphic_Device = nullptr;
 	CInput_Device* m_pInput_Device = nullptr;
@@ -57,12 +70,20 @@ private:
 	_bool				m_ArrayAnimState[ANIM_END] = { 0 };
 	_matrix*            m_CombinedRootMatrix = nullptr;
 	_uint				m_iSceneNum = false;
-
-	vector<pair<_uint,_uint>>		m_vecBlendPair;
+	_uint				m_iState = STATE_SWORD;
+	_uint				m_iLastState = STATE_SWORD;
+	vector<pair<_uint, _uint>>		m_vecBlendPair;
+	vector<pair<_uint, _uint>>		m_vecComboPair;
+	vector<pair<_uint, _uint>>		m_vecComboTime;
 	
+
+	_bool				m_isKeyDown[KEY_END] = { false };
 private:
 	list<_uint>			m_ReservationList;
 
+	//사용 변수
+private:
+	_uint				m_iSit = SIT_IDLE_BREATH;
 public:
 	static CAnimator* Create(LPDIRECT3DDEVICE9 pGraphic_Device,CMesh_Dynamic* pMeshCom, CTransform* pTransformCom, CNavigation* pNavigationCom,_uint iSceneNum);
 protected:

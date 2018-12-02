@@ -165,7 +165,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\Headers\Animation.h" />
     <ClInclude Include="..\Headers\AnimationCtrl.h" />
     <ClInclude Include="..\Headers\Base.h" />
     <ClInclude Include="..\Headers\Buffer_Collider.h" />
@@ -211,7 +210,6 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Codes\Animation.cpp" />
     <ClCompile Include="..\Codes\AnimationCtrl.cpp" />
     <ClCompile Include="..\Codes\Base.cpp" />
     <ClCompile Include="..\Codes\Buffer_Collider.cpp" />

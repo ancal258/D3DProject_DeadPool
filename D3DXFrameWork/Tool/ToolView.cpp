@@ -253,7 +253,31 @@ HRESULT CToolView::Ready_Componet_Prototype_SceneMap()
 	// For.Component_Mesh_Wall_Base_Trim
 	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Wall_Base_Trim", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/FIELD_Base/", L"Wall_Base_Trim.x"))))
 		return E_FAIL;
-
+	////////////////////////////////////////////////////
+	// For.Component_Mesh_
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_AccessRoof", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/GWN/", L"AccessRoof.x"))))
+		return E_FAIL;																																									
+	// For.Component_Mesh_																																								
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_ACVent_01", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/GWN/", L"ACVent_01.x"))))
+		return E_FAIL;																																									
+	// For.Component_Mesh_																																								
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_ACVent_02", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/GWN/", L"ACVent_02.x"))))
+		return E_FAIL;																																									
+	// For.Component_Mesh_																																								
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_IndustrialGenerator", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/GWN/", L"IndustrialGenerator.x"))))
+		return E_FAIL;																																									
+	// For.Component_Mesh_																																								
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_RadioTower01", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/GWN/", L"RadioTower01.x"))))
+		return E_FAIL;																																									
+	// For.Component_Mesh_																																								
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_RoofTopAC", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/GWN/", L"RoofTopAC.x"))))
+		return E_FAIL;																																									
+	// For.Component_Mesh_																																								
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Structure_01", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/GWN/", L"Structure_01.x"))))
+		return E_FAIL;																																									
+	// For.Component_Mesh_																																								
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_WaterHeater01", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/GWN/", L"WaterHeater01.x"))))
+		return E_FAIL;
 
 	return NOERROR;
 }
@@ -261,7 +285,7 @@ HRESULT CToolView::Ready_Componet_Prototype_SceneMap()
 HRESULT CToolView::Ready_Componet_Prototype_SceneStatic()
 {
 	// For.Component_Mesh_Player
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Player", CMesh_Dynamic::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/DynamicMesh/PlayerXFile/", L"DP_APT_00.x"))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Player", CMesh_Dynamic::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/DynamicMesh/PlayerXFile/", L"DP_Field.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_Rock_Wall
 	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Rock_Wall", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/Rock/", L"Rock_Wall_01.x"))))
@@ -453,6 +477,32 @@ HRESULT CToolView::Ready_GameObject_Prototype_SceneMap()
 		return E_FAIL;
 	// For.Prototype_Wall_Base_Trim
 	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Wall_Base_Trim", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_Wall_Base_Trim"))))
+		return E_FAIL;
+	///////////////////////////////////////////////////
+
+	// For.Prototype_
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_AccessRoof", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_AccessRoof"))))
+		return E_FAIL;
+	// For.Prototype_
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_ACVent_01", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_ACVent_01"))))
+		return E_FAIL;
+	// For.Prototype_
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_ACVent_02", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_ACVent_02"))))
+		return E_FAIL;
+	// For.Prototype_
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_IndustrialGenerator", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_IndustrialGenerator"))))
+		return E_FAIL;
+	// For.Prototype_
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_RadioTower01", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_RadioTower01"))))
+		return E_FAIL;
+	// For.Prototype_
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_RoofTopAC", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_RoofTopAC"))))
+		return E_FAIL;
+	// For.Prototype_
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Structure_01", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_Structure_01"))))
+		return E_FAIL;
+	// For.Prototype_
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_WaterHeater01", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_WaterHeater01"))))
 		return E_FAIL;
 
 	return NOERROR;

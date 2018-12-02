@@ -74,13 +74,13 @@ HRESULT CAnimationCtrl::Set_AnimationSet(const _uint & iIndex)
 		{
 			m_pAniCtrl->KeyTrackEnable(m_iCurrentTrack, FALSE, m_fTimeAcc + 0.25f);
 			m_pAniCtrl->KeyTrackSpeed(m_iCurrentTrack, 1.f, m_fTimeAcc, 0.25f, D3DXTRANSITION_LINEAR); // 키 프레임 속도. 기본은 1, 0이면 멈춤. duration => 보간을 하는 시간 간격
-			m_pAniCtrl->KeyTrackWeight(m_iCurrentTrack, 0.1f, m_fTimeAcc, 0.25f, D3DXTRANSITION_LINEAR); // 트랙 가중치
+			m_pAniCtrl->KeyTrackWeight(m_iCurrentTrack, 0.05f, m_fTimeAcc, 0.25f, D3DXTRANSITION_EASEINEASEOUT); // 트랙 가중치
 
 																										 // 새로운 트랙을 활성화 시킨다.
 			m_pAniCtrl->SetTrackEnable(m_iNewTrack, TRUE);
 			m_pAniCtrl->KeyTrackSpeed(m_iNewTrack, 1.f, m_fTimeAcc, 0.25f, D3DXTRANSITION_LINEAR);
 			//현재 트랙의 가중치 // 2번쨰 인자는 1을 기준으로한 가중치를 의미한다. --> 뉴트랙과 합쳐서 1이 나와야됨
-			m_pAniCtrl->KeyTrackWeight(m_iNewTrack, 0.9f, m_fTimeAcc, 0.25f, D3DXTRANSITION_LINEAR);
+			m_pAniCtrl->KeyTrackWeight(m_iNewTrack, 0.95f, m_fTimeAcc, 0.25f, D3DXTRANSITION_EASEINEASEOUT);
 		}
 		else
 		{
@@ -135,7 +135,25 @@ void CAnimationCtrl::Play_AnimationSet(const _float & fTimeDelta)
 	m_pAniCtrl->GetTrackDesc(m_iCurrentTrack, &m_TrackDesc);
 	double fCurrentAnimFactor = m_TrackDesc.Position / period;
 	double fNextAnimFactor = (m_TrackDesc.Position + fTimeDelta) / period;
+	
 	double fPercent = (fCurrentAnimFactor / period) * 100;
+	double fTimeCombo = 0;
+	if (m_callbackCheckComboTime) // 콤보 시간 체크 (0인 애들은 어차피 콤보가 없어서 m_callbackCheckComboPair() 에서 걸러짐)
+		fTimeCombo = m_callbackCheckComboTime(m_iCurrentAniIdx);
+
+	if (fTimeCombo != 0 && fPercent >= fTimeCombo) // 계속 콜백 호출 방지.
+	{
+		if (m_callbackCheckComboPair)
+		{
+			if (true == m_callbackCheckComboPair(m_iCurrentAniIdx))
+			{
+				m_fTimeAcc += fTimeDelta;
+				m_pAniCtrl->AdvanceTime(fTimeDelta, nullptr);
+				return;
+			}
+		}
+	}
+
 	if (_int(fNextAnimFactor) > _int(fCurrentAnimFactor))
 	{
 		if (m_callbackFunc)

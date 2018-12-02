@@ -28,6 +28,8 @@ public:
 		return m_isLived; }
 	void Set_Lived(_bool isLived) {
 		m_isLived = isLived;}
+	void Set_Active(_bool isActive) {
+		m_isActive = isActive;	}
 public:	
 	HRESULT Set_Transform(D3DTRANSFORMSTATETYPE eType, const _matrix* pMatrix) {
 		return m_pGraphic_Device->SetTransform(eType, pMatrix); }
@@ -49,7 +51,9 @@ private:
 	map<const _tchar*, CComponent*>			m_mapComponent;
 	typedef map<const _tchar*, CComponent*>	MAPCOMPONENT;
 protected:
-	_bool						m_isLived = true;
+	_bool						m_isLived = true; // 살았니? 죽었니?
+	_bool						m_isActive = true; // 활성화 되어있니? 안되어있니?
+
 private:
 	CComponent* Find_Component(const _tchar* pComponentTag) const;
 

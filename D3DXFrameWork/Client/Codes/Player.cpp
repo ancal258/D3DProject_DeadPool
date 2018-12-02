@@ -61,7 +61,7 @@ HRESULT CPlayer::Ready_GameObject()
 		return E_FAIL;
 	Update_HandMatrix();
 
-	m_pMeshCom->Set_AnimationSet(SIT_IDLE_BREATH);
+	//m_pMeshCom->Set_AnimationSet(SIT_GETUP);
 	D3DXMatrixIdentity(&m_RealMatrix);
 
 	return NOERROR;
@@ -390,7 +390,7 @@ HRESULT CPlayer::Ready_Component()
 	m_pColliderCom = (CCollider*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Collider_Box");
 	if (FAILED(Add_Component(L"Com_Collider", m_pColliderCom)))
 		return E_FAIL;
-	m_pColliderCom->SetUp_Collider(&m_CombinedRootMatrix, &_vec3(50, 140, 50), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f, 70.f, 0.f));
+	m_pColliderCom->SetUp_Collider(&m_RealMatrix, &_vec3(50, 140, 50), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f, 70.f, 0.f));
 
 
 	Safe_Release(pComponent_Manager);

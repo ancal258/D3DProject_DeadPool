@@ -106,9 +106,6 @@
     <Filter Include="02.GameObject\02.For.Stage\02.Weapon\00.DP_Weapon">
       <UniqueIdentifier>{abca4089-2475-4422-8c33-3fc14dfbbd4a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\02.For.Stage\02.Weapon\00.DP_Weapon\00.DP_Sword">
-      <UniqueIdentifier>{c8151ed4-8fae-4fc7-9b1c-e707a83c4e69}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.GameObject\02.For.Stage\02.Weapon\01.Brawler_Weapon\Brawler_Knife">
       <UniqueIdentifier>{1a5ebc2d-d327-4b62-848e-aa30e4b6172d}</UniqueIdentifier>
     </Filter>
@@ -117,6 +114,15 @@
     </Filter>
     <Filter Include="02.GameObject\02.For.Stage\00.Brawler\02.Brawler_02">
       <UniqueIdentifier>{b35053ae-f216-474c-9baa-ecc371ad79c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\02.Weapon\00.DP_Weapon\DP_Sword">
+      <UniqueIdentifier>{c8151ed4-8fae-4fc7-9b1c-e707a83c4e69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\02.Weapon\00.DP_Weapon\DP_Gun">
+      <UniqueIdentifier>{7946c561-e566-43cd-8442-44fbb2e3071d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\99.SkyDom">
+      <UniqueIdentifier>{a996f9b7-28d4-4401-940e-33fdb2a8d2b6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -211,10 +217,16 @@
       <Filter>02.GameObject\02.For.Stage\02.Weapon\01.Brawler_Weapon\Brawler_Knife</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\DP_Sword.h">
-      <Filter>02.GameObject\02.For.Stage\02.Weapon\00.DP_Weapon\00.DP_Sword</Filter>
+      <Filter>02.GameObject\02.For.Stage\02.Weapon\00.DP_Weapon\DP_Sword</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Brawler02.h">
       <Filter>02.GameObject\02.For.Stage\00.Brawler\02.Brawler_02</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\DP_Gun.h">
+      <Filter>02.GameObject\02.For.Stage\02.Weapon\00.DP_Weapon\DP_Gun</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\SkyDom.h">
+      <Filter>02.GameObject\02.For.Stage\99.SkyDom</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -294,10 +306,16 @@
       <Filter>02.GameObject\02.For.Stage\02.Weapon\01.Brawler_Weapon\Brawler_Knife</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\DP_Sword.cpp">
-      <Filter>02.GameObject\02.For.Stage\02.Weapon\00.DP_Weapon\00.DP_Sword</Filter>
+      <Filter>02.GameObject\02.For.Stage\02.Weapon\00.DP_Weapon\DP_Sword</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Brawler02.cpp">
       <Filter>02.GameObject\02.For.Stage\00.Brawler\02.Brawler_02</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\DP_Gun.cpp">
+      <Filter>02.GameObject\02.For.Stage\02.Weapon\00.DP_Weapon\DP_Gun</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\SkyDom.cpp">
+      <Filter>02.GameObject\02.For.Stage\99.SkyDom</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

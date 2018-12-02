@@ -154,6 +154,16 @@ void CMesh_Dynamic::RegistCallbackCheckPair(function<_bool(_uint, _uint)> callba
 	m_pAniCtrl->RegistCallbackCheckPair(callbackCheckPair);
 }
 
+void CMesh_Dynamic::RegistCallbackCheckComboPair(function<_bool(_uint)> callbackCheckComboPair)
+{
+	m_pAniCtrl->RegistCallbackCheckComboPair(callbackCheckComboPair);
+}
+
+void CMesh_Dynamic::RegistCallbackCheckComboTime(function<_uint(_uint)> callbackCheckComboTime)
+{
+	m_pAniCtrl->RegistCallbackCheckComboTime(callbackCheckComboTime);
+}
+
 
 HRESULT CMesh_Dynamic::Update_CombinedTransformationMatrix(D3DXFRAME_DERIVED * pFrame, D3DXMATRIX matParent)
 {

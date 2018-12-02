@@ -14,7 +14,6 @@ private:
 	virtual ~CMesh_Dynamic() = default;
 public:
 	const _matrix* Get_FrameMatrixByName(const char* pFrameName);
-
 public:
 	HRESULT Ready_Mesh(const _tchar* pFilePath, const _tchar* pFileName);
 	void Render_Mesh(LPD3DXEFFECT pEffect);
@@ -26,6 +25,8 @@ public:
 	_bool Get_ChangeMatrix();
 	void RegistCallbackFunc(function<void(void)> callbackFunc);
 	void RegistCallbackCheckPair(function<_bool(_uint, _uint)> callbackCheckPair);
+	void RegistCallbackCheckComboPair(function<_bool(_uint)> callbackCheckComboPair);
+	void RegistCallbackCheckComboTime(function<_uint(_uint)> callbackCheckComboTime);
 private:
 	CHierarchyLoader*						m_pLoader = nullptr;
 	D3DXFRAME*								m_pRootFrame = nullptr;

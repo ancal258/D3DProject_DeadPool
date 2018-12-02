@@ -26,6 +26,8 @@ public:
 	_bool Get_ChangeMatrix();
 	void RegistCallbackFunc(function<void(void)> callbackFunc);
 	void RegistCallbackCheckPair(function<_bool(_uint, _uint)> callbackCheckPair);
+	void RegistCallbackCheckComboPair(function<_bool(_uint)> callbackCheckComboPair);
+	void RegistCallbackCheckComboTime(function<_uint(_uint)> callbackCheckComboTime);
 private:
 	CHierarchyLoader*						m_pLoader = nullptr;
 	D3DXFRAME*								m_pRootFrame = nullptr;

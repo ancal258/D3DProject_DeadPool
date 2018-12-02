@@ -10,6 +10,7 @@
 #include "Terrain.h"
 #include "Player.h"
 #include "DP_Sword.h"
+#include "DP_Gun.h"
 #include "Static_Object.h"
 #include "Event_Cube.h"
 #include "Effect.h"
@@ -18,6 +19,7 @@
 #include "Brawler02.h"
 #include "Brawler_Knife.h"
 #include "Brawler_ElectricBaton.h"
+#include "SkyDom.h"
 
 CLoading::CLoading(LPDIRECT3DDEVICE9 pGraphicDev)
 	:m_pGraphic_Device(pGraphicDev)
@@ -447,11 +449,24 @@ HRESULT CLoading::Ready_Component_Prototype_SceneFIELD()
 		return E_FAIL;
 	pComponent_Manager->AddRef();
 
+	// For.Component_Mesh_SkyDom_Night
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_SkyDom_Night", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/Sky/", L"SkyDom_Night.x"))))
+		return E_FAIL;
+	// For.Component_Mesh_SkyDom_Dusk
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_SkyDom_Dusk", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/Sky/", L"SkyDom_Dusk.x"))))
+		return E_FAIL;
+	// For.Component_Mesh_SkyDom_Sunset
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_SkyDom_Sunset", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/Sky/", L"SkyDom_Sunset.x"))))
+		return E_FAIL;
+
 	// For.Component_Mesh_Player
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Player", CMesh_Dynamic::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/DynamicMesh/PlayerXFile/", L"DP_Field.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_Sword
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Sword", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/Sword/", L"DeadPool_Sword.x"))))
+		return E_FAIL;
+	// For.Component_Mesh_Gun
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Gun", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/Gun/", L"DeadPool_Gun.x"))))
 		return E_FAIL;
 
 
@@ -482,6 +497,9 @@ HRESULT CLoading::Ready_Component_Prototype_SceneFIELD()
 	// For.Component_Mesh_RubberDuckie
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_RubberDuckie", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"RubberDuckie.x"))))
 		return E_FAIL;
+
+
+	////////////////////////////////////////////
 	Safe_Release(pComponent_Manager);
 
 	return NOERROR;
@@ -501,12 +519,21 @@ HRESULT CLoading::Ready_Stage_Prototype_GameObject_SceneFIELD()
 	// For.GameObject_Brawler01
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Brawler02", CBrawler02::Create(Get_Graphic_Device()))))
 		return E_FAIL;
+	// For.GameObject_SkyDom_Night
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_SkyDom_Night", CSkyDom::Create(Get_Graphic_Device()))))
+		return E_FAIL;
 
 	// For.GameObject_Sword_Left
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Sword_Left", CDP_Sword::Create(Get_Graphic_Device(), 0))))
 		return E_FAIL;
 	// For.GameObject_Sword_Right
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Sword_Right", CDP_Sword::Create(Get_Graphic_Device(), 1))))
+		return E_FAIL;
+	// For.GameObject_Gun_Left
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Gun_Left", CDP_Gun::Create(Get_Graphic_Device(), 0))))
+		return E_FAIL;										 
+	// For.GameObject_Gun_Right								 
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Gun_Right", CDP_Gun::Create(Get_Graphic_Device(), 1))))
 		return E_FAIL;
 	// For.GameObject_Brawler_Knife
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Brawler_Knife", CBrawler_Knife::Create(Get_Graphic_Device()))))
@@ -597,16 +624,19 @@ HRESULT CLoading::Ready_Layer_BackGround(const _tchar * pLayerTag)
 
 HRESULT CLoading::Ready_Layer_Object()
 {
-	for (size_t i = 0; i < 4; i++)
+	for (size_t i = 0; i < 2; i++)
 	{
 		if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01", SCENE_STAGE, L"Layer_Brawler01")))
 			return E_FAIL;
 	}
-	for (size_t i = 0; i < 3; i++)
+	for (size_t i = 0; i < 1; i++)
 	{
 		if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler02", SCENE_STAGE, L"Layer_Brawler02")))
 			return E_FAIL;
 	}
+
+
+
 	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler_TPose", SCENE_STAGE, L"Layer_Brawler_TPose")))
 	//	return E_FAIL;
 	return NOERROR;
@@ -624,6 +654,12 @@ HRESULT CLoading::Ready_Layer_Player_FIELD(const _tchar * pLayerTag)
 	// For.Sword
 	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Sword_Right", SCENE_STAGE, pLayerTag)))
 		return E_FAIL;
+	//// For.Gun
+	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Gun_Left", SCENE_STAGE, pLayerTag)))
+	//	return E_FAIL;
+	//// For.Gun
+	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Gun_Right", SCENE_STAGE, pLayerTag)))
+	//	return E_FAIL;
 	return NOERROR;
 }
 
@@ -633,6 +669,8 @@ HRESULT CLoading::Ready_Layer_BackGround_FIELD(const _tchar * pLayerTag)
 
 	// For.Terrain
 	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Terrain", SCENE_STAGE, pLayerTag)))
+		return E_FAIL;
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_SkyDom_Night", SCENE_STAGE, pLayerTag)))
 		return E_FAIL;
 
 
