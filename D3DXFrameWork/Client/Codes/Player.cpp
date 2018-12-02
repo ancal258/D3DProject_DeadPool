@@ -63,7 +63,6 @@ HRESULT CPlayer::Ready_GameObject()
 
 	m_pMeshCom->Set_AnimationSet(SIT_IDLE_BREATH);
 	D3DXMatrixIdentity(&m_RealMatrix);
-	m_pAnimator->SetUp_RootMatrix(&m_RealMatrix);
 
 	return NOERROR;
 }
@@ -267,6 +266,11 @@ HRESULT CPlayer::SetUp_StageInfo(_uint iStage)
 		m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(15.f, 0.f, 15.f));
 	}
 
+	m_pAnimator = CAnimator::Create(Get_Graphic_Device(), m_pMeshCom, m_pTransformCom, m_pNavigationCom, m_iStageNum);
+	if(nullptr != m_pAnimator)
+		m_pAnimator->SetUp_RootMatrix(&m_RealMatrix);
+
+
 	return NOERROR;
 }
 
@@ -388,7 +392,6 @@ HRESULT CPlayer::Ready_Component()
 		return E_FAIL;
 	m_pColliderCom->SetUp_Collider(&m_CombinedRootMatrix, &_vec3(50, 140, 50), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f, 70.f, 0.f));
 
-	m_pAnimator = CAnimator::Create(Get_Graphic_Device(), m_pMeshCom, m_pTransformCom, m_pNavigationCom,m_iStageNum);
 
 	Safe_Release(pComponent_Manager);
 

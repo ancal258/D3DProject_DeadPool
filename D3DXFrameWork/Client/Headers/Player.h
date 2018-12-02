@@ -91,7 +91,7 @@ private:
 
 private:
 	HRESULT Ready_Component();
-	HRESULT   SetUp_ConstantTable(LPD3DXEFFECT pEffect);
+	HRESULT SetUp_ConstantTable(LPD3DXEFFECT pEffect);
 	HRESULT Update_HandMatrix();
 	HRESULT Load_CamData(const _tchar * pFileName);
 

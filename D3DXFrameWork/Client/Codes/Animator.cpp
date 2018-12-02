@@ -148,7 +148,7 @@ void CAnimator::Input_Push_Back(_uint iIndex)
 
 void CAnimator::AnimFinish()
 {
-	if (0 == m_iSceneNum)
+	if (1 == m_iSceneNum)
 	{
 		if (m_ReservationList.size() != 0)
 		{
@@ -192,6 +192,7 @@ void CAnimator::Free()
 	Safe_Release(m_pMeshCom);
 	Safe_Release(m_pTransformCom);
 	Safe_Release(m_pNavigationCom);
+
 
 	Safe_Release(m_pInput_Device);
 	Safe_Release(m_pGraphic_Device);

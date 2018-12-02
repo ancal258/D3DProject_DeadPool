@@ -237,6 +237,5 @@ void CStatic_Object::Free()
 	Safe_Release(m_pRendererCom);
 	Safe_Release(m_pShaderCom);
 	Safe_Release(m_pColliderCom);
-
 	CGameObject::Free();
 }

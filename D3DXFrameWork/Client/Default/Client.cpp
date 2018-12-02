@@ -77,8 +77,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	if (FAILED(pFrame_Manager->Add_Frame(L"Frame_60", 60)))
 		return FALSE;
 
-	srand(unsigned(time(NULL)));
-	
+	srand((unsigned)time(NULL));
+
     // 기본 메시지 루프입니다.
 	while (true)
 

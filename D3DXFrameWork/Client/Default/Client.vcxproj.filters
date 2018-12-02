@@ -52,9 +52,6 @@
     <Filter Include="02.GameObject\02.For.Stage\01.Player">
       <UniqueIdentifier>{ef9ed4d7-7af1-43cf-aae1-5c7e7d697d6d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\02.For.Stage\02.DP_Sowrd">
-      <UniqueIdentifier>{23f5fd35-54a5-4348-834d-3f3c62d0f4dc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.GameObject\00.For.Static\01.Static_Object">
       <UniqueIdentifier>{695cdc37-7343-4240-9f45-118625ac1bfb}</UniqueIdentifier>
     </Filter>
@@ -90,6 +87,36 @@
     </Filter>
     <Filter Include="01.Scene\02.Scene_Stage\01.Scene_Field">
       <UniqueIdentifier>{c1ec52a9-c4ef-43b3-8316-34851aed0eda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\00.Brawler">
+      <UniqueIdentifier>{efaf370b-72cc-453a-9f01-5af9ea5062b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\00.Brawler\00.Brawler_00">
+      <UniqueIdentifier>{226cbcc8-3d49-4357-b849-d4ef667b4853}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\00.Brawler\01.Brawler_01">
+      <UniqueIdentifier>{4dedbf57-754d-4e07-bf89-2400e4d1bd7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\02.Weapon">
+      <UniqueIdentifier>{23f5fd35-54a5-4348-834d-3f3c62d0f4dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\02.Weapon\01.Brawler_Weapon">
+      <UniqueIdentifier>{31b68f46-6842-48a3-8f2a-662e4e93cdb3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\02.Weapon\00.DP_Weapon">
+      <UniqueIdentifier>{abca4089-2475-4422-8c33-3fc14dfbbd4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\02.Weapon\00.DP_Weapon\00.DP_Sword">
+      <UniqueIdentifier>{c8151ed4-8fae-4fc7-9b1c-e707a83c4e69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\02.Weapon\01.Brawler_Weapon\Brawler_Knife">
+      <UniqueIdentifier>{1a5ebc2d-d327-4b62-848e-aa30e4b6172d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\02.Weapon\01.Brawler_Weapon\Brawler_ElectricBaton">
+      <UniqueIdentifier>{d968a566-9c2c-41b1-ad1c-c2d0d14fb292}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\00.Brawler\02.Brawler_02">
+      <UniqueIdentifier>{b35053ae-f216-474c-9baa-ecc371ad79c3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -132,9 +159,6 @@
     <ClInclude Include="..\Headers\Test.h">
       <Filter>02.GameObject\00.For.Static\00.Test</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\DP_Sword.h">
-      <Filter>02.GameObject\02.For.Stage\02.DP_Sowrd</Filter>
-    </ClInclude>
     <ClInclude Include="..\Headers\Camera_Target.h">
       <Filter>02.GameObject\03.For.Public\Camera\Target</Filter>
     </ClInclude>
@@ -171,6 +195,27 @@
     <ClInclude Include="..\Headers\Static_Object.h">
       <Filter>02.GameObject\00.For.Static\01.Static_Object</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\Brawler.h">
+      <Filter>02.GameObject\02.For.Stage\00.Brawler</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Brawler01.h">
+      <Filter>02.GameObject\02.For.Stage\00.Brawler\01.Brawler_01</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Brawler_TPose.h">
+      <Filter>02.GameObject\02.For.Stage\00.Brawler\00.Brawler_00</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Brawler_ElectricBaton.h">
+      <Filter>02.GameObject\02.For.Stage\02.Weapon\01.Brawler_Weapon\Brawler_ElectricBaton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Brawler_Knife.h">
+      <Filter>02.GameObject\02.For.Stage\02.Weapon\01.Brawler_Weapon\Brawler_Knife</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\DP_Sword.h">
+      <Filter>02.GameObject\02.For.Stage\02.Weapon\00.DP_Weapon\00.DP_Sword</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Brawler02.h">
+      <Filter>02.GameObject\02.For.Stage\00.Brawler\02.Brawler_02</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -196,9 +241,6 @@
     </ClCompile>
     <ClCompile Include="..\Codes\Test.cpp">
       <Filter>02.GameObject\00.For.Static\00.Test</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\DP_Sword.cpp">
-      <Filter>02.GameObject\02.For.Stage\02.DP_Sowrd</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Camera_Target.cpp">
       <Filter>02.GameObject\03.For.Public\Camera\Target</Filter>
@@ -235,6 +277,27 @@
     </ClCompile>
     <ClCompile Include="..\Codes\Static_Object.cpp">
       <Filter>02.GameObject\00.For.Static\01.Static_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Brawler.cpp">
+      <Filter>02.GameObject\02.For.Stage\00.Brawler</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Brawler01.cpp">
+      <Filter>02.GameObject\02.For.Stage\00.Brawler\01.Brawler_01</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Brawler_TPose.cpp">
+      <Filter>02.GameObject\02.For.Stage\00.Brawler\00.Brawler_00</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Brawler_ElectricBaton.cpp">
+      <Filter>02.GameObject\02.For.Stage\02.Weapon\01.Brawler_Weapon\Brawler_ElectricBaton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Brawler_Knife.cpp">
+      <Filter>02.GameObject\02.For.Stage\02.Weapon\01.Brawler_Weapon\Brawler_Knife</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\DP_Sword.cpp">
+      <Filter>02.GameObject\02.For.Stage\02.Weapon\00.DP_Weapon\00.DP_Sword</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Brawler02.cpp">
+      <Filter>02.GameObject\02.For.Stage\00.Brawler\02.Brawler_02</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

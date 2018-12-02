@@ -37,6 +37,12 @@ _int CCamera_Target::Update_GameObject(const _float & fTimeDelta)
 {
 	if (false == m_isCameraOn)
 		return 0;
+	if (nullptr == m_pTarget &&
+		nullptr == m_pTargetWorldMatrix &&
+		nullptr == m_pTargetMouseMove)
+		return 0;
+
+
 
 	_vec3 vTargetPos = m_pTargetWorldMatrix->m[3];
 	m_Camera_Desc.vEye = vTargetPos;

@@ -59,5 +59,11 @@ CScene_Field * CScene_Field::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 }
 void CScene_Field::Free()
 {
+	if (FAILED(CObject_Manager::GetInstance()->Clear_Object(SCENE_STAGE)))
+		return;
+
+	if (FAILED(CComponent_Manager::GetInstance()->Clear_Component(SCENE_STAGE)))
+		return;
+
 	CScene::Free();
 }
