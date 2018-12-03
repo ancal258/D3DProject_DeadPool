@@ -21,7 +21,7 @@ private:
 	explicit CTerrain(const CTerrain& rhs);
 	virtual ~CTerrain() = default;
 public:
-	virtual HRESULT Ready_GameObject_Prototype();
+	virtual HRESULT Ready_GameObject_Prototype(const _uint & iStageNum);
 	virtual HRESULT Ready_GameObject();
 	virtual _int Update_GameObject(const _float& fTimeDelta);
 	virtual _int LastUpdate_GameObject(const _float& fTimeDelta);
@@ -37,12 +37,13 @@ private:
 private:
 	LPDIRECT3DTEXTURE9	m_pFilterTexture = nullptr;
 	D3DMATERIAL9		m_MtrlInfo;
+	_uint				m_iStageNum = 0;
 private:
 	HRESULT Ready_Component();
 	HRESULT	SetUp_ConstantTable(LPD3DXEFFECT pEffect);
 
 public:
-	static CTerrain* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CTerrain* Create(LPDIRECT3DDEVICE9 pGraphic_Device, const _uint & iStageNum);
 	virtual CGameObject* Clone_GameObject();
 protected:
 	virtual void Free();

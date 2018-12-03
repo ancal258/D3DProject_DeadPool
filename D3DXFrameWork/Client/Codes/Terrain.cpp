@@ -18,14 +18,16 @@ CTerrain::CTerrain(LPDIRECT3DDEVICE9 pGraphic_Device)
 CTerrain::CTerrain(const CTerrain & rhs)
 	: CGameObject(rhs)
 	, m_MtrlInfo(rhs.m_MtrlInfo)
+	, m_iStageNum(rhs.m_iStageNum)
 {
 
 }
 
-HRESULT CTerrain::Ready_GameObject_Prototype()
+HRESULT CTerrain::Ready_GameObject_Prototype(const _uint & iStageNum)
 {
 	ZeroMemory(&m_MtrlInfo, sizeof(D3DMATERIAL9));
 
+	m_iStageNum = iStageNum;
 	return NOERROR;
 }
 
@@ -34,7 +36,10 @@ HRESULT CTerrain::Ready_GameObject()
 	if (FAILED(Ready_Component()))
 		return E_FAIL;	
 
-	D3DXCreateTextureFromFileEx(Get_Graphic_Device(), L"../Bin/Splatting.bmp", 0, 0, 1, 0, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, D3DX_DEFAULT, D3DX_DEFAULT, 0, nullptr, nullptr, &m_pFilterTexture);
+	if (0 == m_iStageNum)
+		D3DXCreateTextureFromFileEx(Get_Graphic_Device(), L"../Bin/Splatting.bmp", 0, 0, 1, 0, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, D3DX_DEFAULT, D3DX_DEFAULT, 0, nullptr, nullptr, &m_pFilterTexture);
+	if (1 == m_iStageNum)
+		D3DXCreateTextureFromFileEx(Get_Graphic_Device(), L"../Bin/Splatting1.bmp", 0, 0, 1, 0, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, D3DX_DEFAULT, D3DX_DEFAULT, 0, nullptr, nullptr, &m_pFilterTexture);
 
 
 
@@ -137,10 +142,18 @@ HRESULT CTerrain::Ready_Component()
 		return E_FAIL;
 
 	// For.Com_Buffer
-	m_pBufferCom = (CBuffer_Terrain*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Buffer_Terrain");
-	if (FAILED(Add_Component(L"Com_Buffer", m_pBufferCom)))
-		return E_FAIL;
-
+	if (0 == m_iStageNum)
+	{
+		m_pBufferCom = (CBuffer_Terrain*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Buffer_Terrain");
+		if (FAILED(Add_Component(L"Com_Buffer", m_pBufferCom)))
+			return E_FAIL;
+	}
+	if (1 == m_iStageNum)
+	{
+		m_pBufferCom = (CBuffer_Terrain*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Buffer_Terrain2");
+		if (FAILED(Add_Component(L"Com_Buffer", m_pBufferCom)))
+			return E_FAIL;
+	}
 	// For.Com_Shader
 	m_pShaderCom = (CShader*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Shader_Terrain");
 	if (FAILED(Add_Component(L"Com_Shader", m_pShaderCom)))
@@ -222,11 +235,11 @@ HRESULT CTerrain::SetUp_ConstantTable(LPD3DXEFFECT pEffect)
 	return NOERROR;
 }
 
-CTerrain * CTerrain::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+CTerrain * CTerrain::Create(LPDIRECT3DDEVICE9 pGraphic_Device, const _uint & iStageNum)
 {
 	CTerrain*		pInstance = new CTerrain(pGraphic_Device);
 
-	if (FAILED(pInstance->Ready_GameObject_Prototype()))
+	if (FAILED(pInstance->Ready_GameObject_Prototype(iStageNum)))
 	{
 		_MSG_BOX("Prototype_CTerrain Created Failed");
 		Safe_Release(pInstance);

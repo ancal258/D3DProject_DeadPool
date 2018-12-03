@@ -73,7 +73,7 @@ HRESULT CToolTerrain::Save_HeightMap()
 
 	m_pFilterTexture->UnlockRect(0);
 
-	D3DXSaveTextureToFile(L"../Client/Bin/Height.bmp", D3DXIFF_BMP, m_pFilterTexture, nullptr);
+	D3DXSaveTextureToFile(L"../Client/Bin/Resources/Textures/Terrain/Height2.bmp", D3DXIFF_BMP, m_pFilterTexture, nullptr);
 	return NOERROR;
 }
 

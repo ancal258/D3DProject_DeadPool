@@ -14,7 +14,6 @@ private:
 	virtual ~CMesh_Dynamic() = default;
 public:
 	const _matrix* Get_FrameMatrixByName(const char* pFrameName);
-
 public:
 	HRESULT Ready_Mesh(const _tchar* pFilePath, const _tchar* pFileName);
 	void Render_Mesh(LPD3DXEFFECT pEffect);

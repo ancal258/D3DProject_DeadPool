@@ -32,7 +32,6 @@ HRESULT CCamera_Target::Ready_GameObject()
 	m_fAngle[0] = D3DXToRadian(48.f);
 	return NOERROR;
 }
-
 _int CCamera_Target::Update_GameObject(const _float & fTimeDelta)
 {
 	if (false == m_isCameraOn)
@@ -49,12 +48,13 @@ _int CCamera_Target::Update_GameObject(const _float & fTimeDelta)
 	//m_Camera_Desc.vEye.x += 3.f;
 	m_Camera_Desc.vEye.y = vTargetPos.y - m_fCameraY;
 	m_Camera_Desc.vEye.z = vTargetPos.z - m_fCameraZ;
+
 	if (true == ((CPlayer*)m_pTarget)->Get_IsButtonDown(8))
 	{
-		if (m_fCameraZ > 5.f)
+		if (m_fCameraZ > 9.f)
 		{
 			m_fCameraZ -= 0.3f;
-			m_fCameraY -= 0.1f;
+			m_fCameraY += 0.1f;
 		}
 	}
 	else
@@ -62,12 +62,12 @@ _int CCamera_Target::Update_GameObject(const _float & fTimeDelta)
 		if (m_fCameraZ < 15.3f)
 		{
 			m_fCameraZ += 0.3f;
-			m_fCameraY += 0.1f;
+			m_fCameraY -= 0.1f;
 		}
 	}
 	_vec3 vLook = vTargetPos - m_Camera_Desc.vEye;
 	m_Camera_Desc.vAt = m_Camera_Desc.vEye + vLook;
-	m_Camera_Desc.vAt.y = 8.f;
+	m_Camera_Desc.vAt.y = m_Camera_Desc.vEye.y + 5.f;
 	m_Camera_Desc.vAt.x += m_fCameraX;
 	
 
@@ -123,8 +123,8 @@ HRESULT CCamera_Target::SetUp_Target(const CGameObject * pGameObject)
 	m_pTargetMouseMove = ((CPlayer*)m_pTarget)->Get_MouseMove();
 
 	m_fCameraX = 0.f;
-	m_fCameraY = 10.f;
-	m_fCameraZ = 15.f;
+	m_fCameraY = -3.f;
+	m_fCameraZ = 15.3f;
 
 	return NOERROR;
 }

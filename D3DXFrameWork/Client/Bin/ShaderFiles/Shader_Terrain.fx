@@ -204,7 +204,7 @@ PS_OUT PS_MAIN_PHONG(PS_IN_PHONG In)
 	PS_OUT			Out = (PS_OUT)0;
 
 	vector	vDiffuse_Sour = tex2D(SourSampler, In.vTexUV * 2.f);
-	vector	vDiffuse_Dest1 = tex2D(DestSampler1, In.vTexUV * 2.f);
+	vector	vDiffuse_Dest1 = tex2D(DestSampler1, In.vTexUV * 30.f);
 	vector	vDiffuse_Dest2 = tex2D(DestSampler2, In.vTexUV * 2.f);
 	vector	vDiffuse_Dest3 = tex2D(DestSampler3, In.vTexUV * 2.f);
 	vector	vFilter = tex2D(FilterSampler, In.vTexUV);

@@ -201,6 +201,9 @@ HRESULT CLoading::Ready_Static_Prototype_Component()
 	// For.Component_Buffer_Terrain	
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Buffer_Terrain", CBuffer_Terrain::Create(Get_Graphic_Device(), L"../Bin/Resources/Textures/Terrain/Height.bmp", 1.f))))
 		return E_FAIL;
+	// For.Component_Buffer_Terrain	
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Buffer_Terrain2", CBuffer_Terrain::Create(Get_Graphic_Device(), L"../Bin/Resources/Textures/Terrain/Height2.bmp", 1.f))))
+		return E_FAIL;
 	// For.Component_Buffer_Collider
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Buffer_Collider", CBuffer_Collider::Create(Get_Graphic_Device()))))
 		return E_FAIL;
@@ -228,7 +231,7 @@ HRESULT CLoading::Ready_Static_Prototype_Component()
 HRESULT CLoading::Ready_Stage_Prototype_GameObject_SceneAPT()
 {
 	// For.GameObject_Terrain
-	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Terrain", CTerrain::Create(Get_Graphic_Device()))))
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Terrain", CTerrain::Create(Get_Graphic_Device(),0))))
 		return E_FAIL;
 	// For.GameObject_Player
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Player", CPlayer::Create(Get_Graphic_Device()))))
@@ -508,7 +511,7 @@ HRESULT CLoading::Ready_Component_Prototype_SceneFIELD()
 HRESULT CLoading::Ready_Stage_Prototype_GameObject_SceneFIELD()
 {
 	// For.GameObject_Terrain
-	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Terrain", CTerrain::Create(Get_Graphic_Device()))))
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Terrain", CTerrain::Create(Get_Graphic_Device(),1))))
 		return E_FAIL;
 	// For.GameObject_Player
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Player", CPlayer::Create(Get_Graphic_Device()))))

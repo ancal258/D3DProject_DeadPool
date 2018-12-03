@@ -238,7 +238,8 @@ void CAnimator::AnimFinish()
 		{
 			m_ReservationList.erase(m_ReservationList.begin());
 		}
-		m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &(_vec3)m_CombinedRootMatrix->m[3]);
+		if(STATE_RUN != m_iState)
+			m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &(_vec3)m_CombinedRootMatrix->m[3]);
 		m_pTransformCom->Update_Matrix();
 		if (m_ReservationList.size() != 0)
 			m_pMeshCom->Set_AnimationSet(*m_ReservationList.begin());

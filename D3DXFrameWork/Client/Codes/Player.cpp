@@ -49,7 +49,6 @@ HRESULT CPlayer::Ready_GameObject()
 	if (FAILED(Ready_Component()))
 		return E_FAIL;
 	m_fMouseSence = 3.f;
-	m_pTransformCom->Scaling(0.05f, 0.05f, 0.05f); 
 	//m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(54, 0.f, 12.65f));
 	//m_pTransformCom->Go_Straight(0.8,1);
 	m_pInput_Device = CInput_Device::GetInstance();
@@ -261,12 +260,14 @@ HRESULT CPlayer::SetUp_StageInfo(_uint iStage)
 
 	if (0 == m_iStageNum)
 	{
+		m_pTransformCom->Scaling(0.05f, 0.05f, 0.05f);
 		m_pTransformCom->Set_AngleY(D3DXToRadian(48));
 		m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(16.0f, 0.f, 13.73f));
 	}
 
 	if (1 == m_iStageNum)
 	{
+		m_pTransformCom->Scaling(0.05f, 0.05f, 0.05f);
 		m_pTransformCom->Set_AngleY(D3DXToRadian(48));
 		m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(15.f, 0.f, 15.f));
 	}
