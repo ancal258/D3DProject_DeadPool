@@ -51,6 +51,8 @@ void CAnimator::Ready_Pair()
 		// Blend
 		m_vecBlendPair.push_back(make_pair(SWORD_IDLE, SWORD_RUN_FORWARD));
 		m_vecBlendPair.push_back(make_pair(SWORD_RUN_FORWARD, SWORD_IDLE));
+		m_vecBlendPair.push_back(make_pair(SWORD_IDLE, AIM_IDLE));
+		m_vecBlendPair.push_back(make_pair(AIM_IDLE, SWORD_IDLE));
 		//m_vecBlendPair.push_back(make_pair(SWORLD_LIGHT_02, SWORLD_LIGHT_03));
 		//m_vecBlendPair.push_back(make_pair(SWORLD_HEAVY_01, SWORLD_HEAVY_02));
 		//m_vecBlendPair.push_back(make_pair(SWORLD_HEAVY_02, SWORLD_HEAVY_03));
@@ -152,10 +154,43 @@ void CAnimator::Update_Animation_FIELD(const _float & fTimeDelta)
 	}
 	else
 		m_isKeyDown[E] = false;
+
 	if (m_pInput_Device->Get_DIKeyState(DIK_W) & 0x8000)
 	{
-		//m_pTransformCom->Go_Straight(15.3, fTimeDelta);
+		m_pMeshCom->Set_AnimationSet(SWORD_RUN_FORWARD);
+		m_pTransformCom->Go_Straight(15.3, fTimeDelta);
+		m_iState = STATE_RUN;
 	}
+
+
+	//LBUTTON --> ÃÑ±â·Î ¹Ù²ñ
+	if (m_pInput_Device->Get_DIMouseState(CInput_Device::DIM_LBUTTON)& 0x8000)
+	{
+		m_iLastState = STATE_AIM;
+		if (m_isKeyDown[LBUTTON] == false)
+		{
+			m_isKeyDown[LBUTTON] = true;
+		}
+	}
+	else
+	{
+		m_isKeyDown[LBUTTON] = false;
+		m_iLastState = SWORD_IDLE;
+	}
+
+	//RBUTTON --> Ä«¸Þ¶ó ÁÜ
+	if (m_pInput_Device->Get_DIMouseState(CInput_Device::DIM_RBUTTON) & 0x8000)
+	{
+		if (m_isKeyDown[RBUTTON] == false)
+		{
+			m_isKeyDown[RBUTTON] = true;
+		}
+	}
+	else
+	{
+		m_isKeyDown[RBUTTON] = false;
+	}
+
 
 	if (m_ReservationList.size() == 0)
 	{
@@ -163,7 +198,8 @@ void CAnimator::Update_Animation_FIELD(const _float & fTimeDelta)
 			m_pMeshCom->Set_AnimationSet(SWORD_IDLE);
 		else if (m_iState == STATE_AIM)
 			m_pMeshCom->Set_AnimationSet(AIM_IDLE);
-
+		else if (m_iState == STATE_RUN)
+			m_pMeshCom->Set_AnimationSet(SWORD_RUN_FORWARD);
 	}
 	else
 	{
@@ -207,8 +243,14 @@ void CAnimator::AnimFinish()
 		if (m_ReservationList.size() != 0)
 			m_pMeshCom->Set_AnimationSet(*m_ReservationList.begin());
 		else
-			m_pMeshCom->Set_AnimationSet(SWORD_IDLE);
-
+		{
+			if (STATE_SWORD == m_iState)
+				m_pMeshCom->Set_AnimationSet(SWORD_IDLE);
+			else if (STATE_AIM == m_iState)
+				m_pMeshCom->Set_AnimationSet(AIM_IDLE);
+			else if (STATE_RUN == m_iState)
+				m_pMeshCom->Set_AnimationSet(SWORD_RUN_FORWARD);
+		}
 
 
 	}

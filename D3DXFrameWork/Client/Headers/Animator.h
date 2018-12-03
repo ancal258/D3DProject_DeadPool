@@ -34,7 +34,7 @@ private:
 	};
 
 	enum KEY_STATE {
-		Q,W,E,R,A,S,D,KEY_END
+		Q,W,E,R,A,S,D,LBUTTON,RBUTTON, KEY_END
 	};
 private:
 	explicit CAnimator(LPDIRECT3DDEVICE9 pGraphic_Device);
@@ -46,6 +46,8 @@ public:
 	void SetUp_RootMatrix(_matrix* pRootMatrix) {
 		m_CombinedRootMatrix = pRootMatrix;
 	}
+	_bool Get_IsButtonDown(_uint iIndex) {
+		return m_isKeyDown[iIndex];}
 public:
 	void Update_Animation(const _float & fTimeDelta);
 	void Update_Animation_FIELD(const _float & fTimeDelta);

@@ -34,6 +34,11 @@ const _matrix * CPlayer::Get_RealMatrix() const
 	return &m_RealMatrix;
 }
 
+_bool CPlayer::Get_IsButtonDown(_uint iIndex)
+{
+	return m_pAnimator->Get_IsButtonDown(iIndex);
+}
+
 HRESULT CPlayer::Ready_GameObject_Prototype()
 {
 	return NOERROR;

@@ -47,18 +47,35 @@ _int CCamera_Target::Update_GameObject(const _float & fTimeDelta)
 	_vec3 vTargetPos = m_pTargetWorldMatrix->m[3];
 	m_Camera_Desc.vEye = vTargetPos;
 	//m_Camera_Desc.vEye.x += 3.f;
-	m_Camera_Desc.vEye.y = 10.f;
-	m_Camera_Desc.vEye.z -= 15.f;
-
+	m_Camera_Desc.vEye.y = vTargetPos.y - m_fCameraY;
+	m_Camera_Desc.vEye.z = vTargetPos.z - m_fCameraZ;
+	if (true == ((CPlayer*)m_pTarget)->Get_IsButtonDown(8))
+	{
+		if (m_fCameraZ > 5.f)
+		{
+			m_fCameraZ -= 0.3f;
+			m_fCameraY -= 0.1f;
+		}
+	}
+	else
+	{
+		if (m_fCameraZ < 15.3f)
+		{
+			m_fCameraZ += 0.3f;
+			m_fCameraY += 0.1f;
+		}
+	}
 	_vec3 vLook = vTargetPos - m_Camera_Desc.vEye;
 	m_Camera_Desc.vAt = m_Camera_Desc.vEye + vLook;
 	m_Camera_Desc.vAt.y = 8.f;
+	m_Camera_Desc.vAt.x += m_fCameraX;
+	
+
 
 	_matrix		matRotY;
 	_vec3		vDist;
 	if (0 != m_pTargetMouseMove)
 	{
-		_float tmp;
 		m_fAngle[1] += D3DXToRadian(m_pTargetMouseMove[1] * 3.f) * fTimeDelta;
 		D3DXMatrixRotationX(&matRotY, m_fAngle[1]);
 		memcpy(&matRotY.m[3], &m_Camera_Desc.vAt, sizeof(_vec3));
@@ -104,6 +121,10 @@ HRESULT CCamera_Target::SetUp_Target(const CGameObject * pGameObject)
 
 	m_pTargetWorldMatrix = ((CPlayer*)m_pTarget)->Get_RealMatrix();
 	m_pTargetMouseMove = ((CPlayer*)m_pTarget)->Get_MouseMove();
+
+	m_fCameraX = 0.f;
+	m_fCameraY = 10.f;
+	m_fCameraZ = 15.f;
 
 	return NOERROR;
 }

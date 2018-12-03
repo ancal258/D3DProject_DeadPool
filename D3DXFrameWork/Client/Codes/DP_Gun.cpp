@@ -42,6 +42,8 @@ HRESULT CDP_Gun::Ready_GameObject()
 
 _int CDP_Gun::Update_GameObject(const _float & fTimeDelta)
 {
+	// iIndex == 7 == LBUTTON ( 8 == RBUTTON)
+	m_isActive = m_pPlayer->Get_IsButtonDown(7);
 
 
 	return _int();
@@ -51,7 +53,8 @@ _int CDP_Gun::LastUpdate_GameObject(const _float & fTimeDelta)
 {
 	if (nullptr == m_pRendererCom)
 		return -1;
-
+	if (m_isActive == false)
+		return 0;
 	m_pTransformCom->Set_ParentMatrix(m_pPlayer->Get_HandMatrix(m_iSide));
 
 	m_pTransformCom->Update_Matrix();
@@ -87,6 +90,60 @@ void CDP_Gun::Render_GameObject()
 
 	Safe_Release(pEffect);
 
+	Render_Axis();
+}
+
+void CDP_Gun::Render_Axis()
+{
+	_vec3      vPointX[2], vPointY[2], vPointZ[2];
+	_vec3	   vRight = m_pTransformCom->Get_WorldMatrix()->m[0];
+	_vec3	   vUp = m_pTransformCom->Get_WorldMatrix()->m[1];
+	_vec3	   vLook = m_pTransformCom->Get_WorldMatrix()->m[2];
+	vPointX[0] = m_pTransformCom->Get_WorldMatrix()->m[3]; // Get_StateInfo(CTransform::STATE_POSITION);
+	vPointX[1] = vPointX[0] + vRight * 50;
+
+	vPointY[0] = m_pTransformCom->Get_WorldMatrix()->m[3];
+	vPointY[1] = vPointY[0] + vUp * 50;
+
+	vPointZ[0] = m_pTransformCom->Get_WorldMatrix()->m[3];
+	vPointZ[1] = vPointZ[0] + vLook * 50;
+
+	LPD3DXLINE            pLine = nullptr;
+	if (FAILED(D3DXCreateLine(Get_Graphic_Device(), &pLine)))
+		return;
+
+	_matrix      matView, matProj;
+
+	Get_Graphic_Device()->GetTransform(D3DTS_VIEW, &matView);
+	Get_Graphic_Device()->GetTransform(D3DTS_PROJECTION, &matProj);
+
+	_matrix      matTransform;
+	D3DXMatrixIdentity(&matTransform);
+
+	for (size_t i = 0; i < 2; ++i)
+	{
+		D3DXVec3TransformCoord(&vPointX[i], &vPointX[i], &matView);
+		D3DXVec3TransformCoord(&vPointX[i], &vPointX[i], &matProj);
+
+		D3DXVec3TransformCoord(&vPointY[i], &vPointY[i], &matView);
+		D3DXVec3TransformCoord(&vPointY[i], &vPointY[i], &matProj);
+
+		D3DXVec3TransformCoord(&vPointZ[i], &vPointZ[i], &matView);
+		D3DXVec3TransformCoord(&vPointZ[i], &vPointZ[i], &matProj);
+
+	}
+
+	pLine->SetWidth(2.0f);
+
+	pLine->Begin();
+
+	pLine->DrawTransform(vPointX, 2, &matTransform, D3DXCOLOR(1.f, 0.f, 0.f, 1.f)); // Right - Red
+	pLine->DrawTransform(vPointY, 2, &matTransform, D3DXCOLOR(0.f, 1.f, 0.f, 1.f)); // Up  - Green
+	pLine->DrawTransform(vPointZ, 2, &matTransform, D3DXCOLOR(0.f, 0.f, 1.f, 1.f)); // Look - Blue
+
+	pLine->End();
+
+	Safe_Release(pLine);
 }
 
 HRESULT CDP_Gun::Ready_Component()

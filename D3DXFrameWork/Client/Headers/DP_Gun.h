@@ -27,6 +27,8 @@ public:
 	virtual _int LastUpdate_GameObject(const _float& fTimeDelta);
 	virtual void Render_GameObject();
 private:
+	void Render_Axis();
+private:
 	CTransform*			m_pTransformCom = nullptr;
 	CRenderer*			m_pRendererCom = nullptr;
 	CMesh_Static*		m_pMeshCom = nullptr;

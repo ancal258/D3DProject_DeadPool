@@ -44,6 +44,7 @@ public:
 	void Set_EventTag(const _tchar* pEventTag) {
 		m_pEventTag = pEventTag;
 	}
+	_bool Get_IsButtonDown(_uint iIndex);
 public:
 	virtual HRESULT Ready_GameObject_Prototype();
 	virtual HRESULT Ready_GameObject();

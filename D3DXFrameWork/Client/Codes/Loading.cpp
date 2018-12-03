@@ -654,12 +654,12 @@ HRESULT CLoading::Ready_Layer_Player_FIELD(const _tchar * pLayerTag)
 	// For.Sword
 	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Sword_Right", SCENE_STAGE, pLayerTag)))
 		return E_FAIL;
-	//// For.Gun
-	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Gun_Left", SCENE_STAGE, pLayerTag)))
-	//	return E_FAIL;
-	//// For.Gun
-	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Gun_Right", SCENE_STAGE, pLayerTag)))
-	//	return E_FAIL;
+	// For.Gun
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Gun_Left", SCENE_STAGE, pLayerTag)))
+		return E_FAIL;
+	// For.Gun
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Gun_Right", SCENE_STAGE, pLayerTag)))
+		return E_FAIL;
 	return NOERROR;
 }
 

@@ -26,6 +26,10 @@ private:
 	const _matrix*		m_pTargetWorldMatrix = nullptr;
 	const _long*		m_pTargetMouseMove = nullptr;
 	_float				m_fAngle[2] = { 0 };
+
+	_float				m_fCameraX = 0.f;
+	_float				m_fCameraY = 0.f;
+	_float				m_fCameraZ = 0.f;
 public:
 	static CCamera_Target* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone_GameObject();

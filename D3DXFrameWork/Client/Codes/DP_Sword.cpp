@@ -42,7 +42,9 @@ HRESULT CDP_Sword::Ready_GameObject()
 
 _int CDP_Sword::Update_GameObject(const _float & fTimeDelta)
 {
-
+	// iIndex == 7 == LBUTTON ( 8 == RBUTTON)
+	m_isActive = m_pPlayer->Get_IsButtonDown(7);
+	m_isActive ^= 1;
 
 	return _int();
 }
@@ -51,7 +53,8 @@ _int CDP_Sword::LastUpdate_GameObject(const _float & fTimeDelta)
 {
 	if (nullptr == m_pRendererCom)
 		return -1;
-
+	if (m_isActive == false)
+		return 0;
 	m_pTransformCom->Set_ParentMatrix(m_pPlayer->Get_HandMatrix(m_iSide));
 
 	m_pTransformCom->Update_Matrix();
