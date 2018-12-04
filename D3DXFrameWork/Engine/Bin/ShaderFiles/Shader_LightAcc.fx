@@ -14,7 +14,7 @@ vector			g_vLightDir;
 
 struct PS_IN // 픽셀의 정보를 담기위한 구조체.
 {
-	float4	vPosition : POSITION;
+	float4	vPosition : POSITION;	
 	float2	vTexUV : TEXCOORD0;
 };
 
@@ -32,7 +32,7 @@ PS_OUT PS_MAIN(PS_IN In)
 	// 0 ~ 1    ->    -1 ~ 1
 	vector		vNormal = vector(vNormalInfo.xyz * 2.f - 1.f, 0.f);
 
-	Out.vShade = max(dot(normalize(g_vLightDir) * -1.f, normalize(vNormal)), 0.f);
+	Out.vShade = max(dot(normalize(g_vLightDir) * -1.f, normalize(vNormal)), 0.f);		
 	Out.vShade.a = 1.f;
 
 	return Out;
@@ -42,9 +42,9 @@ PS_OUT PS_MAIN(PS_IN In)
 technique Default_Device
 {
 	pass Default_Rendering
-	{
+	{		
 		ZWriteEnable = false;
 		VertexShader = NULL;
 		PixelShader = compile ps_3_0 PS_MAIN();
-	}
+	}	
 }

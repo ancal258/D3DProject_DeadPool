@@ -413,6 +413,9 @@
     <FxCompile Include="..\Bin\ShaderFiles\Shader_Collider.fx">
       <Filter>01.Utility\03.For.Component\Component\Shader\ShaderFiles</Filter>
     </FxCompile>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_Blend.fx">
+      <Filter>01.Utility\03.For.Component\Component\Shader\ShaderFiles</Filter>
+    </FxCompile>
     <FxCompile Include="..\Bin\ShaderFiles\Shader_LightAcc.fx">
       <Filter>01.Utility\03.For.Component\Component\Shader\ShaderFiles</Filter>
     </FxCompile>

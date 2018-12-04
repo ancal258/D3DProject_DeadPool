@@ -36,6 +36,7 @@ protected:
 	CNavigation*		m_pNavigationCom = nullptr;
 	CMesh_Dynamic*      m_pMeshCom = nullptr;
 	CCollider*			m_pColliderCom = nullptr;
+	CCollider*			m_pColliderCom_Body = nullptr;
 protected:
 	_matrix             m_CombinedHandMatrix[2];
 	const _matrix*      m_pHandMatrix[2] = { nullptr };

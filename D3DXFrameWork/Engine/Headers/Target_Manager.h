@@ -16,7 +16,7 @@ public:
 	HRESULT Add_Target(LPDIRECT3DDEVICE9 pGraphic_Device, const _tchar* pTargetTag, const _uint& iWidth, const _uint& iHeight, D3DFORMAT eFormat, D3DXCOLOR ClearColor);
 	HRESULT Add_MRT(const _tchar* pMRTTag, const _tchar* pTargetTag);
 	HRESULT Begin_MRT(const _tchar* pMRTTag);
-	HRESULT EndMRT(const _tchar* pMRTTag);
+	HRESULT End_MRT(const _tchar* pMRTTag);
 	HRESULT SetUp_OnShader(LPD3DXEFFECT pEffect, const char* pConstantName, const _tchar* pTargetTag);
 #ifdef _DEBUG
 	HRESULT Ready_DebugBuffer(const _tchar* pTargetTag, const _float& fStartX, const _float& fStartY, const _float& fSizeX, const _float& fSizeY);

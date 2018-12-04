@@ -2,7 +2,7 @@
 #include "..\Headers\Brawler.h"
 #include "Component_Manager.h"
 #include "Light_Manager.h"
-
+#include "Object_Manager.h"
 
 _USING(Client)
 
@@ -57,7 +57,39 @@ _int CBrawler::Update_GameObject(const _float & fTimeDelta)
 
 _int CBrawler::LastUpdate_GameObject(const _float & fTimeDelta)
 {
+	for (size_t i = 1; i < 3; i++)
+	{
+		const CGameObject* pPlayer = CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Player", i);
+		if (nullptr == pPlayer)
+			break;
 
+		// 디버깅용. 실제론 return true일 때 마다 특정 행동을 취해주자.
+		if (true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider0")))
+		{
+			//m_isCol = true;
+			int a = 0;
+		}
+		if (true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider1")))
+		{
+			//m_isCol = true;
+			int a = 0;
+		}
+		if (true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider2")))
+		{
+			//m_isCol = true;
+			int a = 0;
+		}
+		if (true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider3")))
+		{
+			//m_isCol = true;
+			int a = 0;
+		}
+		if (true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider4")))
+		{
+			//m_isCol = true;
+			int a = 0;
+		}
+	}
 
 	m_pTransformCom->Update_Matrix();
 
@@ -91,7 +123,7 @@ void CBrawler::Render_GameObject()
 	Safe_Release(pEffect);
 	
 	m_pColliderCom->Render_Collider();
-
+	m_pColliderCom_Body->Render_Collider();
 
 }
 
@@ -129,6 +161,10 @@ HRESULT CBrawler::Ready_Component()
 		return E_FAIL;
 	m_pColliderCom->SetUp_Collider(&m_CombinedRootMatrix, &_vec3(50, 140, 50), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f, 70.f, 0.f));
 
+	m_pColliderCom_Body = (CCollider*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Collider_Sphere");
+	if (FAILED(Add_Component(L"Com_Collider_Body", m_pColliderCom_Body)))
+		return E_FAIL;
+	m_pColliderCom_Body->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(60, 60, 60), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f, 100.f, 0.f));
 
 	Safe_Release(pComponent_Manager);
 
@@ -197,6 +233,7 @@ void CBrawler::Free()
 	Safe_Release(m_pShaderCom);
 	Safe_Release(m_pNavigationCom);
 	Safe_Release(m_pColliderCom);
+	Safe_Release(m_pColliderCom_Body);
 
 	CGameObject::Free();
 }

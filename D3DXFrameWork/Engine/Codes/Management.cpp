@@ -6,7 +6,7 @@
 #include "Component_Manager.h"
 #include "Object_Manager.h"
 #include "Light_Manager.h"
-
+#include "Target_Manager.h"
 _IMPLEMENT_SINGLETON(CManagement)
 
 CManagement::CManagement()
@@ -82,6 +82,9 @@ void CManagement::Release_Engine()
 
 	if (dwRefCnt = CLight_Manager::GetInstance()->DestroyInstance())
 		_MSG_BOX("CLight_Manager Release Failed");
+
+	if (dwRefCnt = CTarget_Manager::GetInstance()->DestroyInstance())
+		_MSG_BOX("CTarget_Manager Release Failed");
 
 	if (dwRefCnt = CGraphic_Device::GetInstance()->DestroyInstance())
 		_MSG_BOX("CGraphic_Device Release Failed");

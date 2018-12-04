@@ -30,6 +30,9 @@ private:
 	_float				m_fCameraX = 0.f;
 	_float				m_fCameraY = 0.f;
 	_float				m_fCameraZ = 0.f;
+	_uint				m_iStage = 0;
+private:
+	void MouseEvent();
 public:
 	static CCamera_Target* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone_GameObject();

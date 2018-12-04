@@ -39,11 +39,11 @@ public:
 	const _matrix* Get_WorldMatrix() const;
 	const _matrix* Get_RealMatrix() const;
 	const _long* Get_MouseMove() const {
-		return m_dwMouseMove;
-	}
+		return m_dwMouseMove;	}
 	void Set_EventTag(const _tchar* pEventTag) {
-		m_pEventTag = pEventTag;
-	}
+		m_pEventTag = pEventTag;	}
+	const _uint Get_StageNum() {
+		return m_iStageNum;	}
 	_bool Get_IsButtonDown(_uint iIndex);
 public:
 	virtual HRESULT Ready_GameObject_Prototype();
@@ -71,8 +71,9 @@ private:
 	CAnimator*			m_pAnimator = nullptr;
 	//Mouse
 private:
-	_float            m_fMouseSence = 0;
-	_long            m_dwMouseMove[2] = { 0 };
+	_float          m_fMouseSence = 0;
+	_float			m_fRotate = 0.f;
+	_long           m_dwMouseMove[2] = { 0 };
 	//Camera
 private:
 	CCamera_Cinematic* m_pCamera_Cinematic = nullptr;

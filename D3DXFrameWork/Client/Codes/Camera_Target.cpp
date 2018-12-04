@@ -41,34 +41,20 @@ _int CCamera_Target::Update_GameObject(const _float & fTimeDelta)
 		nullptr == m_pTargetMouseMove)
 		return 0;
 
-
+	MouseEvent();
 
 	_vec3 vTargetPos = m_pTargetWorldMatrix->m[3];
 	m_Camera_Desc.vEye = vTargetPos;
 	//m_Camera_Desc.vEye.x += 3.f;
-	m_Camera_Desc.vEye.y = vTargetPos.y - m_fCameraY;
+	m_Camera_Desc.vEye.y = vTargetPos.y + m_fCameraY;
 	m_Camera_Desc.vEye.z = vTargetPos.z - m_fCameraZ;
 
-	if (true == ((CPlayer*)m_pTarget)->Get_IsButtonDown(8))
-	{
-		if (m_fCameraZ > 9.f)
-		{
-			m_fCameraZ -= 0.3f;
-			m_fCameraY += 0.1f;
-		}
-	}
-	else
-	{
-		if (m_fCameraZ < 15.3f)
-		{
-			m_fCameraZ += 0.3f;
-			m_fCameraY -= 0.1f;
-		}
-	}
+	
+	
 	_vec3 vLook = vTargetPos - m_Camera_Desc.vEye;
 	m_Camera_Desc.vAt = m_Camera_Desc.vEye + vLook;
 	m_Camera_Desc.vAt.y = m_Camera_Desc.vEye.y + 5.f;
-	m_Camera_Desc.vAt.x += m_fCameraX;
+	//m_Camera_Desc.vAt.x += m_fCameraX;
 	
 
 
@@ -121,12 +107,76 @@ HRESULT CCamera_Target::SetUp_Target(const CGameObject * pGameObject)
 
 	m_pTargetWorldMatrix = ((CPlayer*)m_pTarget)->Get_RealMatrix();
 	m_pTargetMouseMove = ((CPlayer*)m_pTarget)->Get_MouseMove();
+	m_iStage = ((CPlayer*)m_pTarget)->Get_StageNum();
 
-	m_fCameraX = 0.f;
-	m_fCameraY = -3.f;
-	m_fCameraZ = 15.3f;
-
+	if (0 == m_iStage)
+	{
+		m_fCameraX = 0.f;
+		m_fCameraY = 3.f;
+		m_fCameraZ = 8.3f;
+	}
+	if (1 == m_iStage)
+	{
+		m_fCameraX = 0.f;
+		m_fCameraY = 3.f;
+		m_fCameraZ = 8.3f;
+	}
 	return NOERROR;
+}
+
+void CCamera_Target::MouseEvent()
+{
+	if (true == ((CPlayer*)m_pTarget)->Get_IsButtonDown(8))
+	{
+		//if (1 == m_iStage)
+		//{
+		//	if (m_fCameraZ > 0.5f)
+		//	{
+		//		m_fCameraZ -= 0.05f;
+		//		m_fCameraY += 0.02f;
+		//	}
+		//}
+	}
+	else
+	{
+		//m_fCameraZ += 0.03;
+		//if (m_fCameraZ < 1.3f)
+		//{
+		//	m_fCameraZ += 0.05f;
+		//	m_fCameraY -= 0.02f;
+		//}
+	}
+
+	if (GetKeyState(VK_NUMPAD1) & 0x8000)
+	{
+		m_fCameraY -= 0.02f;
+	}
+	if (GetKeyState(VK_NUMPAD2) & 0x8000)
+	{
+		m_fCameraY += 0.02f;
+	}
+	if (GetKeyState(VK_NUMPAD3) & 0x8000)
+	{
+		_vec3 vTmp = m_Camera_Desc.vAt - m_Camera_Desc.vEye;
+		D3DXVec3Normalize(&vTmp, &vTmp);
+		//m_fCameraZ -= 0.02f;
+		m_Camera_Desc.vEye += vTmp * 2.f;
+	}
+	if (GetKeyState(VK_NUMPAD4) & 0x8000)
+	{
+		_vec3 vTmp = m_Camera_Desc.vAt - m_Camera_Desc.vEye;
+		D3DXVec3Normalize(&vTmp, &vTmp);
+		//m_fCameraZ -= 0.02f;
+		m_Camera_Desc.vEye -= vTmp * 2.f;
+	}
+	if (GetKeyState(VK_NUMPAD5) & 0x8000)
+	{
+		m_fCameraX -= 0.02f;
+	}
+	if (GetKeyState(VK_NUMPAD6) & 0x8000)
+	{
+		m_fCameraX += 0.02f;
+	}
 }
 
 CCamera_Target * CCamera_Target::Create(LPDIRECT3DDEVICE9 pGraphic_Device)

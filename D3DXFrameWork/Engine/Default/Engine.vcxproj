@@ -255,6 +255,7 @@
     <ResourceCompile Include="Engine.rc" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_Blend.fx" />
     <FxCompile Include="..\Bin\ShaderFiles\Shader_Collider.fx" />
     <FxCompile Include="..\Bin\ShaderFiles\Shader_LightAcc.fx" />
   </ItemGroup>

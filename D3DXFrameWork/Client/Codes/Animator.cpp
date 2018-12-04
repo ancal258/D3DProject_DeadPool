@@ -72,6 +72,14 @@ void CAnimator::Ready_Pair()
 	}
 }
 
+_bool CAnimator::Get_IsReservation()
+{
+	if (0 == m_ReservationList.size())
+		return false;
+	else
+		return true;
+}
+
 void CAnimator::Update_Animation(const _float & fTimeDelta)
 {
 	if (m_ArrayAnimState[SIT_GETUP] == false)
@@ -253,7 +261,14 @@ void CAnimator::AnimFinish()
 				m_pMeshCom->Set_AnimationSet(SWORD_RUN_FORWARD);
 		}
 
-
+		if (m_ReservationList.size() == 0)
+		{
+			if (m_fRotate != nullptr)
+			{
+				m_pTransformCom->RotationY(D3DXToRadian(*m_fRotate), 1.f);
+				*m_fRotate = 0.f;
+			}
+		}
 	}
 }
 

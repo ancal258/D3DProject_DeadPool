@@ -1,11 +1,15 @@
 #include "..\Headers\Renderer.h"
 
 #include "GameObject.h"
+#include "Target_Manager.h"
+#include "Light_Manager.h"
+#include "Shader.h"
 
 CRenderer::CRenderer(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CComponent(pGraphic_Device)
+	, m_pTarget_Manager(CTarget_Manager::GetInstance())
 {
-
+	m_pTarget_Manager->AddRef();
 }
 
 
@@ -26,15 +30,116 @@ HRESULT CRenderer::Add_Render_Group(RENDERGROUP eGroup, CGameObject * pGameObjec
 
 HRESULT CRenderer::Ready_Renderer()
 {
+	LPDIRECT3DDEVICE9	pGraphic_Device = Get_Graphic_Device();
+	if (nullptr == pGraphic_Device)
+		return E_FAIL;
+	if (nullptr == m_pTarget_Manager)
+		return E_FAIL;
+
+	D3DVIEWPORT9		ViewPort;
+	pGraphic_Device->GetViewport(&ViewPort);
+
+	// 디퍼드 렌더링을 위한 렌더타겟 정보를 생성한다.
+
+
+	// For. Target_Diffuse : 디퍼드로 그리는 객체들의 픽셀 색상을 저장.
+	if (FAILED(m_pTarget_Manager->Add_Target(pGraphic_Device, L"Target_Diffuse", ViewPort.Width, ViewPort.Height, D3DFMT_A8R8G8B8, D3DXCOLOR(0.f, 0.f, 0.f, 0.f))))
+		return E_FAIL;
+
+	// For. Target_Normal : 디퍼드로 그리는 객체들의 픽셀 노말을 저장.
+	if (FAILED(m_pTarget_Manager->Add_Target(pGraphic_Device, L"Target_Normal", ViewPort.Width, ViewPort.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0.f, 0.f, 0.f, 1.f))))
+		return E_FAIL;
+
+	// For. Target_Shade : 디퍼드로 그리는 객체들의 픽셀 명암을 저장.
+	if (FAILED(m_pTarget_Manager->Add_Target(pGraphic_Device, L"Target_Shade", ViewPort.Width, ViewPort.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0.f, 0.f, 0.f, 1.f))))
+		return E_FAIL;
+
+
+#ifdef _DEBUG
+	if (FAILED(m_pTarget_Manager->Ready_DebugBuffer(L"Target_Diffuse", 0.f, 0.f, 200.f, 200.f)))
+		return E_FAIL;
+	if (FAILED(m_pTarget_Manager->Ready_DebugBuffer(L"Target_Normal", 0.f, 200.f, 200.f, 200.f)))
+		return E_FAIL;
+	if (FAILED(m_pTarget_Manager->Ready_DebugBuffer(L"Target_Shade", 200.f, 0.f, 200.f, 200.f)))
+		return E_FAIL;
+#endif
+
+
+	// For. MRT_Deferred
+	if (FAILED(m_pTarget_Manager->Add_MRT(L"MRT_Deferred", L"Target_Diffuse")))
+		return E_FAIL;
+	if (FAILED(m_pTarget_Manager->Add_MRT(L"MRT_Deferred", L"Target_Normal")))
+		return E_FAIL;
+
+	// For. MRT_LightAcc
+	if (FAILED(m_pTarget_Manager->Add_MRT(L"MRT_LightAcc", L"Target_Shade")))
+		return E_FAIL;
+
+	// For.Shader_LightAcc
+	m_pShader_LightAcc = CShader::Create(pGraphic_Device, L"../Bin/ShaderFiles/Shader_LightAcc.fx");
+	if (nullptr == m_pShader_LightAcc)
+		return E_FAIL;
+
+	// For.Shader_Blend
+	m_pShader_Blend = CShader::Create(pGraphic_Device, L"../Bin/ShaderFiles/Shader_Blend.fx");
+	if (nullptr == m_pShader_Blend)
+		return E_FAIL;
+
+	// For.Buffer
+	if (FAILED(pGraphic_Device->CreateVertexBuffer(sizeof(VTXVIEWPORT) * 4, 0, D3DFVF_XYZRHW | D3DFVF_TEX1, D3DPOOL_MANAGED, &m_pVB, nullptr)))
+		return E_FAIL;
+
+	VTXVIEWPORT*			pVertices = nullptr;
+
+	m_pVB->Lock(0, 0, (void**)&pVertices, 0);
+
+	pVertices[0].vPosition = _vec4(0.0f, 0.0f, 0.f, 1.f);
+	pVertices[0].vTexUV = _vec2(0.f, 0.f);
+
+	pVertices[1].vPosition = _vec4(ViewPort.Width, 0.f, 0.f, 1.f);
+	pVertices[1].vTexUV = _vec2(1.f, 0.f);
+
+	pVertices[2].vPosition = _vec4(ViewPort.Width, ViewPort.Height, 0.f, 1.f);
+	pVertices[2].vTexUV = _vec2(1.f, 1.f);
+
+	pVertices[3].vPosition = _vec4(0.0f, ViewPort.Height, 0.f, 1.f);
+	pVertices[3].vTexUV = _vec2(0.f, 1.f);
+
+	m_pVB->Unlock();
+
+	if (FAILED(pGraphic_Device->CreateIndexBuffer(sizeof(POLYGON16) * 2, 0, D3DFMT_INDEX16, D3DPOOL_MANAGED, &m_pIB, nullptr)))
+		return E_FAIL;
+
+	POLYGON16*		pIndices = nullptr;
+
+	m_pIB->Lock(0, 0, (void**)&pIndices, 0);
+
+	pIndices[0]._1 = 0;
+	pIndices[0]._2 = 1;
+	pIndices[0]._3 = 2;
+
+	pIndices[1]._1 = 0;
+	pIndices[1]._2 = 2;
+	pIndices[1]._3 = 3;
+
+	m_pIB->Unlock();
+
+
+
 	return NOERROR;
 }
 
 void CRenderer::Render_Renderer()
 {
 	Render_Priority();
-	Render_NoneAlpha();
+	Render_Deferred();
 	Render_Alpha();
 	Render_UI();
+
+#ifdef _DEBUG
+	m_pTarget_Manager->Render_DebugBuffer(L"MRT_Deferred");
+	m_pTarget_Manager->Render_DebugBuffer(L"MRT_LightAcc");
+#endif
 }
 
 void CRenderer::Render_Priority()
@@ -84,6 +189,81 @@ void CRenderer::Render_UI()
 	m_RenderList[RENDER_UI].clear();
 }
 
+void CRenderer::Render_Deferred()
+{
+	if (nullptr == m_pTarget_Manager)
+		return;
+
+	m_pTarget_Manager->Begin_MRT(L"MRT_Deferred");
+
+	Render_NoneAlpha();
+
+	m_pTarget_Manager->End_MRT(L"MRT_Deferred");
+
+	Render_LightAcc();
+
+	Render_Blend();
+}
+
+void CRenderer::Render_LightAcc()
+{
+	if (nullptr == m_pTarget_Manager)
+		return;
+
+	LPD3DXEFFECT pEffect = m_pShader_LightAcc->Get_EffectHandle();
+	if (nullptr == pEffect)
+		return;
+
+	// 장치에 Shade타겟을 셋팅한다.
+	m_pTarget_Manager->Begin_MRT(L"MRT_LightAcc");
+
+	m_pTarget_Manager->SetUp_OnShader(pEffect, "g_NormalTexture", L"Target_Normal");
+
+	pEffect->Begin(nullptr, 0);
+	pEffect->BeginPass(0);
+
+	CLight_Manager::GetInstance()->Render_Light(pEffect);
+
+	pEffect->EndPass();
+	pEffect->End();
+
+	m_pTarget_Manager->End_MRT(L"MRT_LightAcc");
+}
+
+void CRenderer::Render_Blend()
+{
+	LPDIRECT3DDEVICE9	pGraphic_Device = Get_Graphic_Device();
+	if (nullptr == pGraphic_Device)
+		return;
+
+	pGraphic_Device->AddRef();
+
+	LPD3DXEFFECT pEffect = m_pShader_Blend->Get_EffectHandle();
+	if (nullptr == pEffect)
+		return;
+	pEffect->AddRef();
+
+	m_pTarget_Manager->SetUp_OnShader(pEffect, "g_DiffuseTexture", L"Target_Diffuse");
+	m_pTarget_Manager->SetUp_OnShader(pEffect, "g_ShadeTexture", L"Target_Shade");
+
+	pEffect->Begin(nullptr, 0);
+	pEffect->BeginPass(0);
+
+	pGraphic_Device->SetStreamSource(0, m_pVB, 0, sizeof(VTXVIEWPORT));
+	pGraphic_Device->SetFVF(D3DFVF_XYZRHW | D3DFVF_TEX1);
+	pGraphic_Device->SetIndices(m_pIB);
+	pGraphic_Device->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 4, 0, 2);
+
+	pEffect->EndPass();
+	pEffect->End();
+
+	Safe_Release(pGraphic_Device);
+	Safe_Release(pEffect);
+
+
+
+}
+
 CRenderer * CRenderer::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
 	CRenderer*		pInstance = new CRenderer(pGraphic_Device);
@@ -114,7 +294,11 @@ void CRenderer::Free()
 		}
 		m_RenderList[i].clear();
 	}
-	
+	Safe_Release(m_pVB);
+	Safe_Release(m_pIB);
+	Safe_Release(m_pShader_Blend);
+	Safe_Release(m_pShader_LightAcc);
+	Safe_Release(m_pTarget_Manager);
 
 	CComponent::Free();
 }

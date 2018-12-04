@@ -36,6 +36,12 @@ HRESULT CLight_Manager::Add_Light(LPDIRECT3DDEVICE9 pGraphic_Device, const D3DLI
 	return NOERROR;
 }
 
+void CLight_Manager::Render_Light(LPD3DXEFFECT pEffect)
+{
+	for (auto& pLight : m_LightList)
+		pLight->Render_Light(pEffect);
+}
+
 void CLight_Manager::Free()
 {
 	for (auto& pLight : m_LightList)

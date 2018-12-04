@@ -48,6 +48,11 @@ public:
 	}
 	_bool Get_IsButtonDown(_uint iIndex) {
 		return m_isKeyDown[iIndex];}
+	_bool Get_IsReservation();
+	void Set_MouseRotate(_float *fRotate) {
+		m_fRotate = fRotate;
+	}
+	
 public:
 	void Update_Animation(const _float & fTimeDelta);
 	void Update_Animation_FIELD(const _float & fTimeDelta);
@@ -86,6 +91,7 @@ private:
 	//사용 변수
 private:
 	_uint				m_iSit = SIT_IDLE_BREATH;
+	_float				*m_fRotate = nullptr;
 public:
 	static CAnimator* Create(LPDIRECT3DDEVICE9 pGraphic_Device,CMesh_Dynamic* pMeshCom, CTransform* pTransformCom, CNavigation* pNavigationCom,_uint iSceneNum);
 protected:

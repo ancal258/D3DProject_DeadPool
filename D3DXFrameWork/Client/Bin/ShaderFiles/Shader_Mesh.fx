@@ -5,16 +5,6 @@ texture		g_NormalTexture;
 texture		g_SpecularTexture;
 bool		g_isCol;
 
-vector		g_vLightDir;
-vector		g_vLightDiffuse;
-vector		g_vLightAmbient;
-vector		g_vLightSpecular;
-
-vector		g_vMtrlDiffuse = vector(1.f, 1.f, 1.f, 1.f);
-vector		g_vMtrlAmbient = vector(0.3f, 0.3f, 0.3f, 1.f);
-vector		g_vMtrlSpecular = vector(1.f, 1.f, 1.f, 1.f);
-float		g_fPower = 20.f;
-
 vector		g_vCamPosition = vector(1.f,1.f,1.f,1.f);
 
 
@@ -34,14 +24,21 @@ struct VS_IN // 변환을 거치기전(정점버퍼에 선언된) 정점의 정보를 담기위한 구조체
 	float2	vTexUV : TEXCOORD0;
 };
 
-
 struct VS_OUT // 변환(월드, 뷰, 투영행렬)을 거친 정점의 정보
+{
+	float4	vPosition : POSITION;
+	float4	vNormal : NORMAL;
+	float2	vTexUV : TEXCOORD0;
+};
+
+struct VS_OUT_SKY // 변환(월드, 뷰, 투영행렬)을 거친 정점의 정보
 {
 	float4	vPosition : POSITION;
 	float4	vNormal : NORMAL;
 	float2	vTexUV : TEXCOORD0;
 	float4	vWorldPos : TEXCOORD1;
 };
+
 
 VS_OUT VS_MAIN(VS_IN In)
 {
@@ -61,14 +58,12 @@ VS_OUT VS_MAIN(VS_IN In)
 
 	Out.vTexUV = In.vTexUV;
 
-	Out.vWorldPos = mul(vector(In.vPosition, 1.f), g_matWorld);
-
 	return Out;
 }
 
-VS_OUT VS_MAIN_SKY(VS_IN In)
+VS_OUT_SKY VS_MAIN_SKY(VS_IN In)
 {
-	VS_OUT			Out = (VS_OUT)0;
+	VS_OUT_SKY			Out = (VS_OUT_SKY)0;
 
 	matrix			matWV, matWVP;
 
@@ -94,10 +89,23 @@ struct PS_IN // 픽셀의 정보를 담기위한 구조체.
 	float4	vPosition : POSITION;
 	float4	vNormal : NORMAL;
 	float2	vTexUV : TEXCOORD0;
+};
+
+struct PS_IN_SKY // 픽셀의 정보를 담기위한 구조체.
+{
+	float4	vPosition : POSITION;
+	float4	vNormal : NORMAL;
+	float2	vTexUV : TEXCOORD0;
 	float4	vWorldPos : TEXCOORD1;
 };
 
 struct PS_OUT
+{
+	vector	vDiffuse : COLOR0;
+	vector	vNormal : COLOR1;
+};
+
+struct PS_OUT_SKY
 {
 	vector	vColor : COLOR0;
 };
@@ -106,36 +114,22 @@ PS_OUT PS_MAIN(PS_IN In)
 {
 	PS_OUT			Out = (PS_OUT)0;
 
-	vector		vShade = max(dot(normalize(g_vLightDir) * -1.f, In.vNormal), 0.f);
-
-	vector		vLook = normalize(In.vWorldPos - g_vCamPosition);
-	vector		vReflect = normalize(reflect(g_vLightDir, In.vNormal));
-
-	vector		vSpecular = pow(max(dot(vLook * -1.f, vReflect), 0.f), g_fPower);
-
 	vector		vDiffuse = tex2D(DiffuseSampler, In.vTexUV);
 
-	Out.vColor = (g_vLightDiffuse * (vDiffuse * g_vMtrlDiffuse)) * saturate(vShade + (g_vLightAmbient * g_vMtrlAmbient))
-		+ (g_vLightSpecular * g_vMtrlSpecular) * vSpecular;
+	Out.vDiffuse = vDiffuse;
+	Out.vNormal = vector(In.vNormal.xyz * 0.5f + 0.5f, 0.f);
 
-	Out.vColor.gb = Out.vColor.gb * (1.3 - g_isCol);
+	Out.vDiffuse.gb = Out.vDiffuse.gb * (1.3 - g_isCol);
 	return Out;
 }
 
-PS_OUT PS_MAIN_SKY(PS_IN In)
+PS_OUT_SKY PS_MAIN_SKY(PS_IN_SKY In)
 {
-	PS_OUT			Out = (PS_OUT)0;
-
-	vector		vShade = max(dot(normalize(g_vLightDir) * -1.f, In.vNormal), 0.f);
-
-	vector		vLook = normalize(In.vWorldPos - g_vCamPosition);
-	vector		vReflect = normalize(reflect(g_vLightDir, In.vNormal));
-
-	vector		vSpecular = pow(max(dot(vLook * -1.f, vReflect), 0.f), g_fPower);
+	PS_OUT_SKY			Out = (PS_OUT_SKY)0;
 
 	vector		vDiffuse = tex2D(DiffuseSampler, In.vTexUV);
 
-	Out.vColor = (g_vLightDiffuse * (vDiffuse * g_vMtrlDiffuse));
+	Out.vColor = vDiffuse;
 
 	return Out;
 }

@@ -290,14 +290,14 @@ void CPlayer::Camera_Update(const _float& fTimeDelta)
 		nullptr != m_pCamera_Target&&
 		nullptr != m_pCamera_Cinematic)
 	{
-		if (m_pInput_Device->Get_DIKeyState(DIK_NUMPAD1) & 0x8000)
+		if (m_pInput_Device->Get_DIKeyState(DIK_NUMPAD8) & 0x8000)
 		{
 			m_Camera_State = CAMERA_DEBUG;
 			m_pCamera_Debug->Set_IsCameraOn(true);
 			m_pCamera_Target->Set_IsCameraOn(false);
 			m_pCamera_Cinematic->Set_IsCameraOn(false);
 		}
-		if (m_pInput_Device->Get_DIKeyState(DIK_NUMPAD2) & 0x8000)
+		if (m_pInput_Device->Get_DIKeyState(DIK_NUMPAD9) & 0x8000)
 		{
 			m_Camera_State = CAMERA_TARGET;
 			m_pCamera_Debug->Set_IsCameraOn(false);
@@ -333,7 +333,15 @@ void CPlayer::Camera_Update(const _float& fTimeDelta)
 	{
 		if (m_dwMouseMove[0] = CInput_Device::GetInstance()->Get_DIMouseMove(CInput_Device::DIMM_X))
 		{
-			m_pTransformCom->RotationY(D3DXToRadian(m_dwMouseMove[0] * m_fMouseSence), fTimeDelta);
+			if (false == m_pAnimator->Get_IsReservation())
+			{
+				m_pTransformCom->RotationY(D3DXToRadian(m_dwMouseMove[0] * m_fMouseSence), fTimeDelta);
+			}
+			else
+			{
+				m_fRotate += D3DXToRadian(m_dwMouseMove[0] * m_fMouseSence);
+				m_pAnimator->Set_MouseRotate(&m_fRotate);
+			}
 		}
 
 		if (m_dwMouseMove[1] = CInput_Device::GetInstance()->Get_DIMouseMove(CInput_Device::DIMM_Y))

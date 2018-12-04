@@ -17,6 +17,12 @@ private:
 		_vec3		vAlignAxis[3]; // 박스와 평행한 축.
 		_vec3		vProjDir[3]; // 박스의 중심에서 면의 중심을 바라보는 벡터.
 	}OBB;
+	typedef struct tagSphere
+	{
+		_vec3 vMin;
+		_vec3 vMax;
+		_vec3 vCenter;
+	}SPHERE;
 public:
 	enum TYPE { TYPE_BOUNDINGBOX, TYPE_SPHERE };
 	enum BOXTYPE { BOXTYPE_AABB, BOXTYPE_OBB, BOXTYPE_NONE };
@@ -48,7 +54,7 @@ public:
 	HRESULT SetUp_Collider(const _matrix* pWorldMatrixPointer, const _vec3* pScale, const _vec3* pAngle, const _vec3* pPosition);
 	_bool Collision_AABB(const CCollider* pTargetCollider);
 	_bool Collision_OBB(const CCollider* pTargetCollider);
-
+	_bool Collision_Sphere(const CCollider* pTargetCollider);
 	// 월드변환을 위한 추가 상태변환 행렬을 얻어온다.
 	void Render_Collider();
 private:
@@ -61,6 +67,7 @@ private:
 	const _matrix*			m_pWorldMatrix = nullptr;
 private:
 	OBB						m_tOBB;
+	SPHERE					m_tSphere;
 private:
 	HRESULT Create_BoundingBox();
 	HRESULT Create_Sphere();
@@ -70,6 +77,7 @@ private:
 	// 이 메시의 민과 맥스를 구하자.
 	HRESULT Compute_MinMax();
 	HRESULT SetUp_OBB(); // 
+	HRESULT SetUp_SPEHRE(); // 
 public:
 	static CCollider* Create(LPDIRECT3DDEVICE9 pGraphic_Device, TYPE eType);
 	virtual CComponent* Clone_Component();

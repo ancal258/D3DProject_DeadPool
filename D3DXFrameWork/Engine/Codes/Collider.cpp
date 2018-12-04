@@ -155,7 +155,6 @@ HRESULT CCollider::SetUp_Collider(const _vec3* pMin, const _vec3* pMax, const _m
 HRESULT CCollider::SetUp_Collider(const _matrix* pWorldMatrixPointer, const _vec3 * pScale, const _vec3 * pAngle, const _vec3 * pPosition)
 {
 	_matrix			matScale, matRotX, matRotY, matRotZ, matTrans;
-
 	D3DXMatrixScaling(&matScale, pScale->x, pScale->y, pScale->z);
 	D3DXMatrixRotationX(&matRotX, pAngle->x);
 	D3DXMatrixRotationY(&matRotY, pAngle->y);
@@ -200,6 +199,9 @@ HRESULT CCollider::SetUp_Collider(const _matrix* pWorldMatrixPointer, const _vec
 		return E_FAIL;
 
 	if (FAILED(SetUp_OBB()))
+		return E_FAIL;
+
+	if (FAILED(SetUp_SPEHRE()))
 		return E_FAIL;
 
 	m_pWorldMatrix = pWorldMatrixPointer;
@@ -284,6 +286,32 @@ _bool CCollider::Collision_OBB(const CCollider * pTargetCollider)
 	return m_isColl = true;
 }
 
+_bool CCollider::Collision_Sphere(const CCollider * pTargetCollider)
+{
+	_vec3 vSour;
+	_vec3 vDest;
+	D3DXVec3TransformCoord(&vSour, &m_tSphere.vCenter, m_pWorldMatrix);
+	D3DXVec3TransformCoord(&vDest, &pTargetCollider->m_tSphere.vCenter, pTargetCollider->m_pWorldMatrix);
+	_float fDistance = D3DXVec3Length(&(vDest - vSour));
+
+	_vec3 vSour_Min, vSour_Max;
+	_vec3 vDest_Min, vDest_Max;
+	D3DXVec3TransformCoord(&vSour_Min, &m_tSphere.vMin, m_pWorldMatrix);
+	D3DXVec3TransformCoord(&vSour_Max, &m_tSphere.vMax, m_pWorldMatrix);
+	
+	D3DXVec3TransformCoord(&vDest_Min, &pTargetCollider->m_tSphere.vMin, pTargetCollider->m_pWorldMatrix);
+	D3DXVec3TransformCoord(&vDest_Max, &pTargetCollider->m_tSphere.vMax, pTargetCollider->m_pWorldMatrix);
+
+	_float vSourRadius = D3DXVec3Length(&(vSour_Min - vSour_Max)) * 0.5f;
+	_float vDestRadius = D3DXVec3Length(&(vDest_Min - vDest_Max)) * 0.5f;
+
+	if ((vSourRadius + vDestRadius) > fDistance)
+	{
+		return true;
+	}
+	return false;
+}
+
 void CCollider::Render_Collider()
 {
 	if (nullptr == m_pMesh)
@@ -335,7 +363,6 @@ HRESULT CCollider::Create_Sphere()
 {
 	if (FAILED(D3DXCreateSphere(Get_Graphic_Device(), 0.5f, 10.0f, 10.0f, &m_pMesh, &m_pAdjacency)))
 		return E_FAIL;
-
 	return NOERROR;
 }
 
@@ -377,6 +404,16 @@ HRESULT CCollider::SetUp_OBB()
 	m_tOBB.vProjDir[1] = (m_tOBB.vPoint[5] + m_tOBB.vPoint[0]) * 0.5f - m_tOBB.vCenter;
 	m_tOBB.vProjDir[2] = (m_tOBB.vPoint[5] + m_tOBB.vPoint[7]) * 0.5f - m_tOBB.vCenter;
 
+	return NOERROR;
+}
+
+HRESULT CCollider::SetUp_SPEHRE()
+{
+	ZeroMemory(&m_tSphere, sizeof(SPHERE));
+
+	m_tSphere.vCenter = m_tOBB.vCenter;
+	m_tSphere.vMin = _vec3(m_vMax.x*0.5f, m_vMax.y*0.5f, m_vMin.z);
+	m_tSphere.vMax = _vec3(m_vMax.x*0.5f, m_vMax.y*0.5f, m_vMax.z);
 	return NOERROR;
 }
 

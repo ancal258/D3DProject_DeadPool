@@ -113,7 +113,7 @@ void CTerrain::Render_GameObject()
 	else if (GetKeyState(VK_NUMPAD1) & 0x8000)
 		iPass = 1;
 
-	pEffect->BeginPass(iPass);
+	pEffect->BeginPass(0);
 
 	m_pBufferCom->Render_VIBuffer();
 
