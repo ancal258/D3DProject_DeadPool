@@ -145,6 +145,15 @@
     <Filter Include="01.Utility\03.For.Component\Component\VIBuffer\Terrain\QuadTree">
       <UniqueIdentifier>{cd05abd8-1855-4b0e-b4f7-5f7dd0ab121e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Utility\07.Target">
+      <UniqueIdentifier>{b2c92f64-342d-499f-b099-58a7d0827e1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\07.Target\Manager">
+      <UniqueIdentifier>{bf5cbe62-6961-4bd3-84bf-118d4ab9f678}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\07.Target\Target">
+      <UniqueIdentifier>{0abe8f6f-3d52-49ab-8965-ff36b720c4d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Headers\Base.h">
@@ -274,6 +283,12 @@
     <ClInclude Include="..\Headers\QuadTree.h">
       <Filter>01.Utility\03.For.Component\Component\VIBuffer\Terrain\QuadTree</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\Target.h">
+      <Filter>01.Utility\07.Target\Target</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Target_Manager.h">
+      <Filter>01.Utility\07.Target\Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Codes\Base.cpp">
@@ -384,12 +399,21 @@
     <ClCompile Include="..\Codes\QuadTree.cpp">
       <Filter>01.Utility\03.For.Component\Component\VIBuffer\Terrain\QuadTree</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\Target.cpp">
+      <Filter>01.Utility\07.Target\Target</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Target_Manager.cpp">
+      <Filter>01.Utility\07.Target\Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Engine.rc" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="..\Bin\ShaderFiles\Shader_Collider.fx">
+      <Filter>01.Utility\03.For.Component\Component\Shader\ShaderFiles</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_LightAcc.fx">
       <Filter>01.Utility\03.For.Component\Component\Shader\ShaderFiles</Filter>
     </FxCompile>
   </ItemGroup>

@@ -65,6 +65,12 @@ typedef struct tagVertex_Color
 	DWORD				dwColor;
 }VTXCOL;
 
+typedef struct tagVertex_ViewPort
+{
+	D3DXVECTOR4			vPosition;
+	D3DXVECTOR2			vTexUV;
+}VTXVIEWPORT;
+
 typedef struct tagPolygon_16
 {
 	unsigned short		_1, _2, _3;
