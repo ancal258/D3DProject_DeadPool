@@ -21,6 +21,9 @@
 #include "Brawler_ElectricBaton.h"
 #include "SkyDom.h"
 
+// UI
+
+
 CLoading::CLoading(LPDIRECT3DDEVICE9 pGraphicDev)
 	:m_pGraphic_Device(pGraphicDev)
 	,m_pObject_Manager(CObject_Manager::GetInstance())
@@ -156,7 +159,7 @@ HRESULT CLoading::Ready_LightInfo()
 	LightInfo.Type = D3DLIGHT_DIRECTIONAL;
 	LightInfo.Diffuse = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
 	LightInfo.Specular = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
-	LightInfo.Ambient = LightInfo.Diffuse;
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.f);
 	LightInfo.Direction = _vec3(1.f, -1.f, 1.f);
 
 	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
@@ -186,6 +189,7 @@ HRESULT CLoading::Ready_Static_Prototype_Component()
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Shader_Effect", CShader::Create(Get_Graphic_Device(), L"../Bin/ShaderFiles/Shader_Effect.fx"))))
 		return E_FAIL;
 
+
 	// For.Component_Texture_Terrain
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_Terrain", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/Terrain/Grass_%d.tga", 4))))
 		return E_FAIL;
@@ -193,6 +197,7 @@ HRESULT CLoading::Ready_Static_Prototype_Component()
 	// For.Component_Texture_Filter
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_Filter", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/Terrain/Filter.bmp"))))
 		return E_FAIL;
+
 
 	// For.Component_Texture_Effect
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_Effect", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/Explosion/Explosion%d.png", 90))))

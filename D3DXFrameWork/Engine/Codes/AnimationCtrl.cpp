@@ -96,6 +96,18 @@ HRESULT CAnimationCtrl::Set_AnimationSet(const _uint & iIndex)
 			m_pAniCtrl->KeyTrackWeight(m_iNewTrack, 0.9f, m_fTimeAcc, 0.25f, D3DXTRANSITION_LINEAR);
 		}
 	}
+	else
+	{
+		m_pAniCtrl->KeyTrackEnable(m_iCurrentTrack, FALSE, m_fTimeAcc + 0.25f);
+		m_pAniCtrl->KeyTrackSpeed(m_iCurrentTrack, 1.f, m_fTimeAcc, 0.25f, D3DXTRANSITION_LINEAR); // 키 프레임 속도. 기본은 1, 0이면 멈춤. duration => 보간을 하는 시간 간격
+		m_pAniCtrl->KeyTrackWeight(m_iCurrentTrack, 0.05f, m_fTimeAcc, 0.25f, D3DXTRANSITION_EASEINEASEOUT); // 트랙 가중치
+
+																											 // 새로운 트랙을 활성화 시킨다.
+		m_pAniCtrl->SetTrackEnable(m_iNewTrack, TRUE);
+		m_pAniCtrl->KeyTrackSpeed(m_iNewTrack, 1.f, m_fTimeAcc, 0.25f, D3DXTRANSITION_LINEAR);
+		//현재 트랙의 가중치 // 2번쨰 인자는 1을 기준으로한 가중치를 의미한다. --> 뉴트랙과 합쳐서 1이 나와야됨
+		m_pAniCtrl->KeyTrackWeight(m_iNewTrack, 0.95f, m_fTimeAcc, 0.25f, D3DXTRANSITION_EASEINEASEOUT);
+	}
 
 
 

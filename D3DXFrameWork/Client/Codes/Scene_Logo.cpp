@@ -6,6 +6,8 @@
 #include "Management.h"
 #include "Loading.h"
 
+// UI
+#include "UI_Test.h"
 _USING(Client)
 
 CScene_Logo::CScene_Logo(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -85,7 +87,9 @@ HRESULT CScene_Logo::Ready_Logo_Prototype_Component()
 	// For.Component_Texture_Logo
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_LOGO, L"Component_Texture_Logo", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/Logo/Logo.png"))))
 		return E_FAIL;
-
+	// For.Component_Texture_Filter
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_UI_Test", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/UI/Test.tga"))))
+		return E_FAIL;
 	Safe_Release(pComponent_Manager);
 	
 	return NOERROR;
@@ -95,7 +99,10 @@ HRESULT CScene_Logo::Ready_Logo_Prototype_GameObject()
 {
 	// For.GameObject_BackLogo
 	if (FAILED(Add_Object_Prototype(SCENE_LOGO, L"GameObject_BackLogo", CBack_Logo::Create(Get_Graphic_Device()))))
-		return E_FAIL;	
+		return E_FAIL;
+	// For.GameObject_BackLogo
+	if (FAILED(Add_Object_Prototype(SCENE_LOGO, L"GameObject_UI_Test", CUI_Test::Create(Get_Graphic_Device()))))
+		return E_FAIL;
 
 	return NOERROR;
 }
@@ -104,6 +111,9 @@ HRESULT CScene_Logo::Ready_Layer_BackGround(const _tchar* pLayerTag)
 {
 	// For.BackGround
 	if (FAILED(Add_Object(SCENE_LOGO, L"GameObject_BackLogo", SCENE_LOGO, pLayerTag)))
+		return E_FAIL;
+	// For.BackGround
+	if (FAILED(Add_Object(SCENE_LOGO, L"GameObject_UI_Test", SCENE_LOGO, L"Layer_UI")))
 		return E_FAIL;
 
 	return NOERROR;

@@ -1,11 +1,2 @@
-﻿FXC : warning X4717: Effects deprecated for D3DCompiler_47
-  
-  compilation object save succeeded; see C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Tool\Bin\Shader_StaticMesh.cso
-C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Tool\Bin\ShaderFiles\Shader_Terrain.fx(4,28-30): warning X3081: comma expression used where a vector constructor may have been intended
-C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Tool\Bin\ShaderFiles\Shader_Terrain.fx(4,28-32): warning X3081: comma expression used where a vector constructor may have been intended
-C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Tool\Bin\ShaderFiles\Shader_Terrain.fx(4,28-34): warning X3081: comma expression used where a vector constructor may have been intended
-FXC : warning X4717: Effects deprecated for D3DCompiler_47
-  
-  compilation object save succeeded; see C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Tool\Bin\Shader_Terrain.cso
-  Tool.vcxproj -> C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Tool\.\Bin\Tool.exe
+﻿  Tool.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Tool\.\Bin\Tool.exe
   Tool.vcxproj -> .\Bin\Tool.pdb (Partial PDB)

@@ -73,9 +73,6 @@
     <Filter Include="01.Scene\02.Scene_Stage">
       <UniqueIdentifier>{8980710a-8fb1-4e81-957b-e72d910f2557}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Scene\02.Scene_Stage\00.Scene_APT">
-      <UniqueIdentifier>{2eb7b2d3-58c9-4475-a53f-2e89075f7d6d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.GameObject\02.For.Stage\03.Effect">
       <UniqueIdentifier>{95eaa733-37fe-47b9-97b5-7d1a528837ee}</UniqueIdentifier>
     </Filter>
@@ -84,9 +81,6 @@
     </Filter>
     <Filter Include="02.GameObject\02.For.Stage\01.Player\Animator">
       <UniqueIdentifier>{7158ddbb-568d-48f0-bccd-21097a1b4f4a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01.Scene\02.Scene_Stage\01.Scene_Field">
-      <UniqueIdentifier>{c1ec52a9-c4ef-43b3-8316-34851aed0eda}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.GameObject\02.For.Stage\02.Weapon">
       <UniqueIdentifier>{23f5fd35-54a5-4348-834d-3f3c62d0f4dc}</UniqueIdentifier>
@@ -126,6 +120,24 @@
     </Filter>
     <Filter Include="02.GameObject\02.For.Stage\05.Brawler\02.Brawler_02">
       <UniqueIdentifier>{b35053ae-f216-474c-9baa-ecc371ad79c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\02.Scene_Stage\00.Scene_APT">
+      <UniqueIdentifier>{2eb7b2d3-58c9-4475-a53f-2e89075f7d6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Scene\02.Scene_Stage\01.Scene_Field">
+      <UniqueIdentifier>{c1ec52a9-c4ef-43b3-8316-34851aed0eda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\01.For.Logo\01.UI">
+      <UniqueIdentifier>{130d126b-2840-4bc0-a8b7-7b562981d705}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\01.For.Logo\01.UI\Button">
+      <UniqueIdentifier>{b83d13c2-d94f-4471-b69c-e321aad88b5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\01.For.Logo\01.UI\Button\GameStart">
+      <UniqueIdentifier>{91adf23e-6eb0-432f-ac0d-2ebe0bc99308}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\01.For.Logo\01.UI\Test">
+      <UniqueIdentifier>{f1ccfb04-b190-412f-9e68-d9cbfc1f06b8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -231,6 +243,9 @@
     <ClInclude Include="..\Headers\Terrain.h">
       <Filter>02.GameObject\02.For.Stage\00.Terrain\APT_Terrain</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\UI_Test.h">
+      <Filter>02.GameObject\01.For.Logo\01.UI\Test</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -320,6 +335,9 @@
     <ClCompile Include="..\Codes\Terrain.cpp">
       <Filter>02.GameObject\02.For.Stage\00.Terrain\APT_Terrain</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\UI_Test.cpp">
+      <Filter>02.GameObject\01.For.Logo\01.UI\Test</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -348,6 +366,9 @@
       <Filter>97.ShaderFiles</Filter>
     </FxCompile>
     <FxCompile Include="..\Bin\ShaderFiles\Shader_Effect.fx">
+      <Filter>97.ShaderFiles</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_UI.fx">
       <Filter>97.ShaderFiles</Filter>
     </FxCompile>
   </ItemGroup>

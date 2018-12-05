@@ -41,7 +41,6 @@ private:
 	HRESULT Ready_LightInfo();
 private:
 	HRESULT Ready_Static_Prototype_Component(); // Static으로 쓰기위한 원형 컴포넌트생성
-
 	HRESULT Ready_Stage_Prototype_GameObject_SceneAPT(); // APT에서 쓰기위한 원형 객체 생성.
 	HRESULT Ready_Componet_Prototype_SceneAPT(); // APT에서 쓰기 위한 Mesh 원형 생성
 

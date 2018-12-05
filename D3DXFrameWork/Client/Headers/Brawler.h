@@ -31,7 +31,7 @@ public:
 	virtual void Render_GameObject();
 
 public:
-	void CallBackFinish(_uint iIndex);
+	void CallBackFinish();
 protected:
 	CTransform*         m_pTransformCom = nullptr;
 	CRenderer*			m_pRendererCom = nullptr;
@@ -42,6 +42,8 @@ protected:
 	CCollider*			m_pColliderCom_Body = nullptr;
 protected:
 	_bool				m_isDamaged = false;
+	_uint				m_iIdleIndex = 0;
+	_uint				m_iCurrentIndex = 0;
 protected:
 	_matrix             m_CombinedHandMatrix[2];
 	const _matrix*      m_pHandMatrix[2] = { nullptr };

@@ -1,6 +1,5 @@
-﻿  Brawler01.cpp
-c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\codes\brawler01.cpp(39): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Brawler.cpp
-  코드를 생성하고 있습니다...
-  Client.vcxproj -> C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Default\..\Bin\Client.exe
+﻿FXC : warning X4717: Effects deprecated for D3DCompiler_47
+  
+  compilation object save succeeded; see D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\Shader_UI.cso
+  Client.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Default\..\Bin\Client.exe
   Client.vcxproj -> ..\Bin\Client.pdb (Full PDB)

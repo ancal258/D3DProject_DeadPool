@@ -56,27 +56,13 @@ _int CBrawler::Update_GameObject(const _float & fTimeDelta)
 			break;
 
 		// 디버깅용. 실제론 return true일 때 마다 특정 행동을 취해주자.
-		if (true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider0")))
+		if (true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider0")) ||
+			true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider1")) ||
+			true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider2")) ||
+			true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider3")) ||
+			true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider4")))
 		{
 			m_isDamaged = true;
-		}
-		if (true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider1")))
-		{
-			m_isDamaged = true;
-		}
-		if (true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider2")))
-		{
-			m_isDamaged = true;
-		}
-		if (true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider3")))
-		{
-			m_isDamaged = true;
-
-		}
-		if (true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider4")))
-		{
-			m_isDamaged = true;
-
 		}
 	}
 
@@ -123,6 +109,16 @@ void CBrawler::Render_GameObject()
 	m_pColliderCom->Render_Collider();
 	m_pColliderCom_Body->Render_Collider();
 
+}
+
+void CBrawler::CallBackFinish()
+{
+	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &(_vec3)m_CombinedRootMatrix.m[3]);
+	m_pTransformCom->Update_Matrix();
+	m_isDamaged = false;
+	m_iCurrentIndex = m_iIdleIndex;
+	m_pMeshCom->Set_AnimationSet(m_iIdleIndex);
+	
 }
 
 HRESULT CBrawler::Ready_Component()

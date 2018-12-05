@@ -14,3 +14,6 @@ using namespace Client;
 
 #include <process.h>
 
+#ifdef _DEBUG
+#pragma comment(linker, "/entry:wWinMainCRTStartup /subsystem:console")
+#endif

@@ -41,7 +41,9 @@ HRESULT CBrawler02::Ready_GameObject()
 
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &vPosition);
 
-	m_pMeshCom->Set_AnimationSet(0);
+	m_iIdleIndex = 0;
+
+	m_pMeshCom->Set_AnimationSet(m_iIdleIndex);
 
 	return NOERROR;
 }

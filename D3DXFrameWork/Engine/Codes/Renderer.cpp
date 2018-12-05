@@ -69,9 +69,9 @@ HRESULT CRenderer::Ready_Renderer()
 		return E_FAIL;
 	if (FAILED(m_pTarget_Manager->Ready_DebugBuffer(L"Target_Depth", 0.f, 400.f, 200.f, 200.f)))
 		return E_FAIL;
-	if (FAILED(m_pTarget_Manager->Ready_DebugBuffer(L"Target_Shade", 200.f, 0.f, 200.f, 200.f)))
+	if (FAILED(m_pTarget_Manager->Ready_DebugBuffer(L"Target_Shade", ViewPort.Width - 200.f, 0.f, 200.f, 200.f)))
 		return E_FAIL;
-	if (FAILED(m_pTarget_Manager->Ready_DebugBuffer(L"Target_Specular", 200.f, 200.f, 200.f, 200.f)))
+	if (FAILED(m_pTarget_Manager->Ready_DebugBuffer(L"Target_Specular", ViewPort.Width - 200.f, 200.f, 200.f, 200.f)))
 		return E_FAIL;
 #endif
 

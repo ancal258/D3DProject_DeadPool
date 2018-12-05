@@ -41,17 +41,15 @@ HRESULT CBrawler01::Ready_GameObject()
 
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &vPosition);
 
-	m_pMeshCom->Set_AnimationSet(0);
+	m_iIdleIndex = 0;
+	m_pMeshCom->RegistCallbackFunc(bind(&CBrawler::CallBackFinish, this));
+	m_pMeshCom->Set_AnimationSet(m_iIdleIndex);
 
 	return NOERROR;
 }
 
 _int CBrawler01::Update_GameObject(const _float & fTimeDelta)
 {
-	if (true == m_isDamaged)
-	{
-		m_pMeshCom->Set_AnimationSet(7);
-	}
 
 
 
@@ -60,7 +58,12 @@ _int CBrawler01::Update_GameObject(const _float & fTimeDelta)
 
 _int CBrawler01::LastUpdate_GameObject(const _float & fTimeDelta)
 {
+	if (true == m_isDamaged)
+	{
+		m_iCurrentIndex = 4;
+	}
 
+	m_pMeshCom->Set_AnimationSet(m_iCurrentIndex);
 
 	m_pMeshCom->Play_AnimationSet(fTimeDelta);
 	return CBrawler::LastUpdate_GameObject(fTimeDelta);
