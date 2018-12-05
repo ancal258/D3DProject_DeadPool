@@ -47,16 +47,8 @@ _int CBrawler::Update_GameObject(const _float & fTimeDelta)
 	if (nullptr == m_pRendererCom)
 		return -1;
 
-
 	Update_HandMatrix();
 
-	if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
-		return -1;
-	return _int();
-}
-
-_int CBrawler::LastUpdate_GameObject(const _float & fTimeDelta)
-{
 	for (size_t i = 1; i < 3; i++)
 	{
 		const CGameObject* pPlayer = CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Player", i);
@@ -66,30 +58,36 @@ _int CBrawler::LastUpdate_GameObject(const _float & fTimeDelta)
 		// 디버깅용. 실제론 return true일 때 마다 특정 행동을 취해주자.
 		if (true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider0")))
 		{
-			//m_isCol = true;
-			int a = 0;
+			m_isDamaged = true;
 		}
 		if (true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider1")))
 		{
-			//m_isCol = true;
-			int a = 0;
+			m_isDamaged = true;
 		}
 		if (true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider2")))
 		{
-			//m_isCol = true;
-			int a = 0;
+			m_isDamaged = true;
 		}
 		if (true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider3")))
 		{
-			//m_isCol = true;
-			int a = 0;
+			m_isDamaged = true;
+
 		}
 		if (true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider4")))
 		{
-			//m_isCol = true;
-			int a = 0;
+			m_isDamaged = true;
+
 		}
 	}
+
+	if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
+		return -1;
+	return _int();
+}
+
+_int CBrawler::LastUpdate_GameObject(const _float & fTimeDelta)
+{
+
 
 	m_pTransformCom->Update_Matrix();
 

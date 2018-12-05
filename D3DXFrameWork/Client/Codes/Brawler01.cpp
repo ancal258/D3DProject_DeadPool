@@ -48,13 +48,21 @@ HRESULT CBrawler01::Ready_GameObject()
 
 _int CBrawler01::Update_GameObject(const _float & fTimeDelta)
 {
-	m_pMeshCom->Play_AnimationSet(fTimeDelta);
+	if (true == m_isDamaged)
+	{
+		m_pMeshCom->Set_AnimationSet(7);
+	}
+
+
 
 	return CBrawler::Update_GameObject(fTimeDelta);
 }
 
 _int CBrawler01::LastUpdate_GameObject(const _float & fTimeDelta)
 {
+
+
+	m_pMeshCom->Play_AnimationSet(fTimeDelta);
 	return CBrawler::LastUpdate_GameObject(fTimeDelta);
 }
 

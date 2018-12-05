@@ -29,6 +29,9 @@ public:
 	virtual _int Update_GameObject(const _float& fTimeDelta);
 	virtual _int LastUpdate_GameObject(const _float& fTimeDelta);
 	virtual void Render_GameObject();
+
+public:
+	void CallBackFinish(_uint iIndex);
 protected:
 	CTransform*         m_pTransformCom = nullptr;
 	CRenderer*			m_pRendererCom = nullptr;
@@ -37,6 +40,8 @@ protected:
 	CMesh_Dynamic*      m_pMeshCom = nullptr;
 	CCollider*			m_pColliderCom = nullptr;
 	CCollider*			m_pColliderCom_Body = nullptr;
+protected:
+	_bool				m_isDamaged = false;
 protected:
 	_matrix             m_CombinedHandMatrix[2];
 	const _matrix*      m_pHandMatrix[2] = { nullptr };

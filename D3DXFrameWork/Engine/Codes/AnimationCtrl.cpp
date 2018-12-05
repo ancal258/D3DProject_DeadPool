@@ -165,6 +165,23 @@ void CAnimationCtrl::Play_AnimationSet(const _float & fTimeDelta)
 
 }
 
+void CAnimationCtrl::Play_AnimationSet_AI(const _float & fTimeDelta)
+{
+	double period = m_pCurrentAnimSet->GetPeriod();
+	m_pAniCtrl->GetTrackDesc(m_iCurrentTrack, &m_TrackDesc);
+	double fCurrentAnimFactor = m_TrackDesc.Position / period;
+	double fNextAnimFactor = (m_TrackDesc.Position + fTimeDelta) / period;
+
+	if (_int(fNextAnimFactor) > _int(fCurrentAnimFactor))
+	{
+		if (m_callbackFunc)
+			m_callbackFunc();
+	}
+
+	m_fTimeAcc += fTimeDelta;
+	m_pAniCtrl->AdvanceTime(fTimeDelta, nullptr);
+}
+
 void CAnimationCtrl::Set_TrackPosition(DOUBLE dlPosition)
 {
 	m_pAniCtrl->SetTrackPosition(m_iCurrentTrack,dlPosition);

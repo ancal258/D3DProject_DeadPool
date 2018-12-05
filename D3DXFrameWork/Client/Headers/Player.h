@@ -73,6 +73,7 @@ private:
 private:
 	_float          m_fMouseSence = 0;
 	_float			m_fRotate = 0.f;
+	_float			m_fTimeAcc = 0.f;
 	_long           m_dwMouseMove[2] = { 0 };
 	//Camera
 private:

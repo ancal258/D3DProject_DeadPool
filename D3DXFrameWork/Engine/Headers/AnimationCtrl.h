@@ -15,6 +15,7 @@ public:
 	HRESULT Set_AnimationSet(const _uint& iIndex);
 	_bool Is_Finish();
 	void Play_AnimationSet(const _float& fTimeDelta);
+	void Play_AnimationSet_AI(const _float& fTimeDelta);
 	void Set_TrackPosition(DOUBLE dlPosition);
 	DOUBLE Get_TrackPeriod() {
 		return m_dlPeriod;	}

@@ -23,16 +23,16 @@ HRESULT CLight::Ready_Light(const D3DLIGHT9 * pLightInfo)
 
 	m_pVB->Lock(0, 0, (void**)&pVertices, 0);
 
-	pVertices[0].vPosition = _vec4(0.0f, 0.0f, 0.f, 1.f);
+	pVertices[0].vPosition = _vec4(0.0f - 0.5f, 0.0f - 0.5f, 0.f, 1.f);
 	pVertices[0].vTexUV = _vec2(0.f, 0.f);
 
-	pVertices[1].vPosition = _vec4(ViewPort.Width, 0.f, 0.f, 1.f);
+	pVertices[1].vPosition = _vec4(ViewPort.Width - 0.5f, 0.f - 0.5f, 0.f, 1.f);
 	pVertices[1].vTexUV = _vec2(1.f, 0.f);
 
-	pVertices[2].vPosition = _vec4(ViewPort.Width, ViewPort.Height, 0.f, 1.f);
+	pVertices[2].vPosition = _vec4(ViewPort.Width - 0.5f, ViewPort.Height - 0.5f, 0.f, 1.f);
 	pVertices[2].vTexUV = _vec2(1.f, 1.f);
 
-	pVertices[3].vPosition = _vec4(0.0f, ViewPort.Height, 0.f, 1.f);
+	pVertices[3].vPosition = _vec4(0.0f - 0.5f, ViewPort.Height - 0.5f, 0.f, 1.f);
 	pVertices[3].vTexUV = _vec2(0.f, 1.f);
 
 	m_pVB->Unlock();
@@ -59,7 +59,22 @@ HRESULT CLight::Ready_Light(const D3DLIGHT9 * pLightInfo)
 
 void CLight::Render_Light(LPD3DXEFFECT pEffect)
 {
+	// 빛 세팅
 	pEffect->SetVector("g_vLightDir", &_vec4(m_LightInfo.Direction, 0.f));
+	pEffect->SetVector("g_vLightDiffuse", (_vec4*)&m_LightInfo.Diffuse);
+	pEffect->SetVector("g_vLightAmbient", (_vec4*)&m_LightInfo.Ambient);
+	pEffect->SetVector("g_vLightSpecular", (_vec4*)&m_LightInfo.Specular);
+	// View Proj행렬 받아서 역행렬을 인자로 던져줌 ( z나누기 위해 )
+	_matrix		matView, matProj;
+	m_pGraphic_Device->GetTransform(D3DTS_VIEW, &matView);
+	m_pGraphic_Device->GetTransform(D3DTS_PROJECTION, &matProj);
+
+	D3DXMatrixInverse(&matView, nullptr, &matView);
+	D3DXMatrixInverse(&matProj, nullptr, &matProj);
+
+	pEffect->SetVector("g_vCamPosition", (_vec4*)&matView.m[3][0]);
+	pEffect->SetMatrix("g_matViewInv", &matView);
+	pEffect->SetMatrix("g_matProjInv", &matProj);
 
 	pEffect->CommitChanges(); // Begin 이후에 값이 변경 되었기 때문에 반드시 해줘야 한다.
 

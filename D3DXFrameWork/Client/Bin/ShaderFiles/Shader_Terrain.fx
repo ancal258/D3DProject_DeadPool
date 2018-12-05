@@ -87,6 +87,8 @@ struct VS_OUT_PHONG
 	vector	vNormal : NORMAL;
 	float2	vTexUV : TEXCOORD0;
 	vector	vWorldPos : TEXCOORD1;
+	vector	vProjPos : TEXCOORD2;
+
 };
 
 VS_OUT_PHONG VS_MAIN_PHONG(VS_IN In)
@@ -104,6 +106,7 @@ VS_OUT_PHONG VS_MAIN_PHONG(VS_IN In)
 	Out.vTexUV = In.vTexUV;
 
 	Out.vWorldPos = mul(vector(In.vPosition, 1.f), g_matWorld);
+	Out.vProjPos = Out.vPosition;
 
 	return Out;
 }
@@ -114,6 +117,7 @@ struct PS_IN_PHONG
 	vector	vNormal : NORMAL;
 	float2	vTexUV : TEXCOORD0;
 	vector	vWorldPos : TEXCOORD1;
+	vector	vProjPos : TEXCOORD2;
 };
 
 
@@ -121,6 +125,7 @@ struct PS_OUT
 {
 	vector	vDiffuse : COLOR0;
 	vector	vNormal : COLOR1;
+	vector	vDepth : COLOR2;
 };
 
 PS_OUT PS_MAIN_PHONG(PS_IN_PHONG In)
@@ -152,6 +157,7 @@ PS_OUT PS_MAIN_PHONG(PS_IN_PHONG In)
 	Out.vDiffuse = vResultColor;
 
 	Out.vNormal = vector(In.vNormal.xyz * 0.5f + 0.5f, 0.f);
+	Out.vDepth = vector(In.vProjPos.z / In.vProjPos.w, In.vProjPos.w / 500.f, 0.f, 0.f);
 
 	return Out;
 }

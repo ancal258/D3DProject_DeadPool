@@ -22,6 +22,16 @@ sampler	ShadeSampler = sampler_state
 	mipfilter = linear;
 };
 
+texture			g_SpecularTexture;
+
+sampler SpecularSampler = sampler_state
+{
+	texture = g_SpecularTexture;
+	minfilter = linear;
+	magfilter = linear;
+	mipfilter = linear;
+};
+
 vector			g_vLightDir;
 
 
@@ -42,8 +52,9 @@ PS_OUT PS_MAIN(PS_IN In)
 
 	vector		vDiffuse = tex2D(DiffuseSampler, In.vTexUV);
 	vector		vShade = tex2D(ShadeSampler, In.vTexUV);
+	vector		vSpecular = tex2D(SpecularSampler, In.vTexUV);
 
-	Out.vColor = vDiffuse * vShade;
+	Out.vColor = vDiffuse * saturate(vShade) + vSpecular;
 
 	return Out;
 }

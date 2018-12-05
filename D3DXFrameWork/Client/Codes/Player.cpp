@@ -273,9 +273,12 @@ HRESULT CPlayer::SetUp_StageInfo(_uint iStage)
 	}
 
 	m_pAnimator = CAnimator::Create(Get_Graphic_Device(), m_pMeshCom, m_pTransformCom, m_pNavigationCom, m_iStageNum);
-	if(nullptr != m_pAnimator)
+	if (nullptr != m_pAnimator)
+	{
 		m_pAnimator->SetUp_RootMatrix(&m_RealMatrix);
+		m_pAnimator->SetUp_MouseRotate(&m_fRotate,&m_fTimeAcc);
 
+	}
 
 	return NOERROR;
 }
@@ -339,8 +342,8 @@ void CPlayer::Camera_Update(const _float& fTimeDelta)
 			}
 			else
 			{
-				m_fRotate += D3DXToRadian(m_dwMouseMove[0] * m_fMouseSence);
-				m_pAnimator->Set_MouseRotate(&m_fRotate);
+				m_fRotate = D3DXToRadian(m_dwMouseMove[0] * m_fMouseSence);
+				m_fTimeAcc += m_fRotate * fTimeDelta;
 			}
 		}
 

@@ -265,8 +265,9 @@ void CAnimator::AnimFinish()
 		{
 			if (m_fRotate != nullptr)
 			{
-				m_pTransformCom->RotationY(D3DXToRadian(*m_fRotate), 1.f);
+				m_pTransformCom->RotationY(*m_fTimeAcc , 1.f);
 				*m_fRotate = 0.f;
+				*m_fTimeAcc = 0.f;
 			}
 		}
 	}

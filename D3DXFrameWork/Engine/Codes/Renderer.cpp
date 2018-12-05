@@ -50,17 +50,28 @@ HRESULT CRenderer::Ready_Renderer()
 	if (FAILED(m_pTarget_Manager->Add_Target(pGraphic_Device, L"Target_Normal", ViewPort.Width, ViewPort.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0.f, 0.f, 0.f, 1.f))))
 		return E_FAIL;
 
+	// For.Target_Depth : 디퍼드로 그리는 객체들의 깊이를 저장.
+	if (FAILED(m_pTarget_Manager->Add_Target(pGraphic_Device, L"Target_Depth", ViewPort.Width, ViewPort.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0.f, 0.f, 0.f, 1.f))))
+		return E_FAIL;
+
 	// For. Target_Shade : 디퍼드로 그리는 객체들의 픽셀 명암을 저장.
 	if (FAILED(m_pTarget_Manager->Add_Target(pGraphic_Device, L"Target_Shade", ViewPort.Width, ViewPort.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0.f, 0.f, 0.f, 1.f))))
 		return E_FAIL;
 
+	// For.Target_Specular : 디퍼드로 그리는 객체들의 픽셀 정반사광을 저장.
+	if (FAILED(m_pTarget_Manager->Add_Target(pGraphic_Device, L"Target_Specular", ViewPort.Width, ViewPort.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0.f, 0.f, 0.f, 0.f))))
+		return E_FAIL;
 
 #ifdef _DEBUG
 	if (FAILED(m_pTarget_Manager->Ready_DebugBuffer(L"Target_Diffuse", 0.f, 0.f, 200.f, 200.f)))
 		return E_FAIL;
 	if (FAILED(m_pTarget_Manager->Ready_DebugBuffer(L"Target_Normal", 0.f, 200.f, 200.f, 200.f)))
 		return E_FAIL;
+	if (FAILED(m_pTarget_Manager->Ready_DebugBuffer(L"Target_Depth", 0.f, 400.f, 200.f, 200.f)))
+		return E_FAIL;
 	if (FAILED(m_pTarget_Manager->Ready_DebugBuffer(L"Target_Shade", 200.f, 0.f, 200.f, 200.f)))
+		return E_FAIL;
+	if (FAILED(m_pTarget_Manager->Ready_DebugBuffer(L"Target_Specular", 200.f, 200.f, 200.f, 200.f)))
 		return E_FAIL;
 #endif
 
@@ -70,11 +81,13 @@ HRESULT CRenderer::Ready_Renderer()
 		return E_FAIL;
 	if (FAILED(m_pTarget_Manager->Add_MRT(L"MRT_Deferred", L"Target_Normal")))
 		return E_FAIL;
-
+	if (FAILED(m_pTarget_Manager->Add_MRT(L"MRT_Deferred", L"Target_Depth")))
+		return E_FAIL;
 	// For. MRT_LightAcc
 	if (FAILED(m_pTarget_Manager->Add_MRT(L"MRT_LightAcc", L"Target_Shade")))
 		return E_FAIL;
-
+	if (FAILED(m_pTarget_Manager->Add_MRT(L"MRT_LightAcc", L"Target_Specular")))
+		return E_FAIL;
 	// For.Shader_LightAcc
 	m_pShader_LightAcc = CShader::Create(pGraphic_Device, L"../Bin/ShaderFiles/Shader_LightAcc.fx");
 	if (nullptr == m_pShader_LightAcc)
@@ -93,16 +106,16 @@ HRESULT CRenderer::Ready_Renderer()
 
 	m_pVB->Lock(0, 0, (void**)&pVertices, 0);
 
-	pVertices[0].vPosition = _vec4(0.0f, 0.0f, 0.f, 1.f);
+	pVertices[0].vPosition = _vec4(0.0f - 0.5f, 0.0f - 0.5f, 0.f, 1.f);
 	pVertices[0].vTexUV = _vec2(0.f, 0.f);
 
-	pVertices[1].vPosition = _vec4(ViewPort.Width, 0.f, 0.f, 1.f);
+	pVertices[1].vPosition = _vec4(ViewPort.Width - 0.5f, 0.f - 0.5f, 0.f, 1.f);
 	pVertices[1].vTexUV = _vec2(1.f, 0.f);
 
-	pVertices[2].vPosition = _vec4(ViewPort.Width, ViewPort.Height, 0.f, 1.f);
+	pVertices[2].vPosition = _vec4(ViewPort.Width - 0.5f, ViewPort.Height - 0.5f, 0.f, 1.f);
 	pVertices[2].vTexUV = _vec2(1.f, 1.f);
 
-	pVertices[3].vPosition = _vec4(0.0f, ViewPort.Height, 0.f, 1.f);
+	pVertices[3].vPosition = _vec4(0.0f - 0.5f, ViewPort.Height - 0.5f, 0.f, 1.f);
 	pVertices[3].vTexUV = _vec2(0.f, 1.f);
 
 	m_pVB->Unlock();
@@ -218,6 +231,7 @@ void CRenderer::Render_LightAcc()
 	m_pTarget_Manager->Begin_MRT(L"MRT_LightAcc");
 
 	m_pTarget_Manager->SetUp_OnShader(pEffect, "g_NormalTexture", L"Target_Normal");
+	m_pTarget_Manager->SetUp_OnShader(pEffect, "g_DepthTexture", L"Target_Depth");
 
 	pEffect->Begin(nullptr, 0);
 	pEffect->BeginPass(0);
@@ -241,11 +255,13 @@ void CRenderer::Render_Blend()
 	LPD3DXEFFECT pEffect = m_pShader_Blend->Get_EffectHandle();
 	if (nullptr == pEffect)
 		return;
+
 	pEffect->AddRef();
 
 	m_pTarget_Manager->SetUp_OnShader(pEffect, "g_DiffuseTexture", L"Target_Diffuse");
 	m_pTarget_Manager->SetUp_OnShader(pEffect, "g_ShadeTexture", L"Target_Shade");
-
+	m_pTarget_Manager->SetUp_OnShader(pEffect, "g_SpecularTexture", L"Target_Specular");
+	
 	pEffect->Begin(nullptr, 0);
 	pEffect->BeginPass(0);
 
