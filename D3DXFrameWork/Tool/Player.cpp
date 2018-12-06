@@ -36,7 +36,7 @@ HRESULT CPlayer::Ready_GameObject()
 {
 	if (FAILED(Ready_Component()))
 		return E_FAIL;
-	m_pTransformCom->Scaling(0.05f, 0.05f, 0.05f);
+	m_pTransformCom->Scaling(0.01f, 0.01f, 0.01f);
 	//m_pTransformCom->Set_AngleY(D3DXToRadian(0));
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(0, 0.f, 0));
 

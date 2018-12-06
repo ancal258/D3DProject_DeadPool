@@ -85,6 +85,8 @@ HRESULT CStatic_Object::Ready_GameObject()
 
 _int CStatic_Object::Update_GameObject(const _float & fTimeDelta)
 {
+	if (true == m_isLock)
+		return 0;
 	BOOL pHit = FALSE;
 	if (CInput_Device::GetInstance()->Get_DIMouseState(CInput_Device::DIM_LBUTTON) & 0x80)
 	{
@@ -111,6 +113,9 @@ _int CStatic_Object::LastUpdate_GameObject(const _float & fTimeDelta)
 {
 	if (nullptr == m_pRendererCom)
 		return -1;
+
+	if (true == m_isLock)
+		m_isCol = false;
 
 	if (true == m_isCol)
 	{

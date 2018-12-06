@@ -166,7 +166,7 @@ void CAnimator::Update_Animation_FIELD(const _float & fTimeDelta)
 	if (m_pInput_Device->Get_DIKeyState(DIK_W) & 0x8000)
 	{
 		m_pMeshCom->Set_AnimationSet(SWORD_RUN_FORWARD);
-		m_pTransformCom->Go_Straight(15.3, fTimeDelta);
+		m_pTransformCom->Go_Straight(7.8f, fTimeDelta);
 		m_iState = STATE_RUN;
 	}
 

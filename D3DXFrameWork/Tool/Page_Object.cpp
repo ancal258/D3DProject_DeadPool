@@ -22,7 +22,7 @@ IMPLEMENT_DYNAMIC(CPage_Object, CPropertyPage)
 
 CPage_Object::CPage_Object()
 	: CPropertyPage(IDD_PAGE_OBJECT)
-	, m_fMeshSize(0.05f)
+	, m_fMeshSize(0.01f)
 	, m_fMeshPosX(0)
 	, m_fMeshPosY(0)
 	, m_fTransPow(0)
@@ -33,6 +33,7 @@ CPage_Object::CPage_Object()
 	, m_isBlocked(FALSE)
 	, m_fMeshPosZ(0)
 	, m_isTransformMode(FALSE)
+	, m_isLock(FALSE)
 {
 
 }
@@ -59,6 +60,7 @@ void CPage_Object::DoDataExchange(CDataExchange* pDX)
 	DDX_Check(pDX, IDC_CHECK1, m_isBlocked);
 	DDX_Text(pDX, IDC_EDIT19, m_fMeshPosZ);
 	DDX_Check(pDX, IDC_CHECK2, m_isTransformMode);
+	DDX_Check(pDX, IDC_CHECK3, m_isLock);
 }
 
 
@@ -83,6 +85,8 @@ BEGIN_MESSAGE_MAP(CPage_Object, CPropertyPage)
 	ON_WM_LBUTTONDOWN()
 	ON_BN_CLICKED(IDC_CHECK1, &CPage_Object::OnBnClickedCheck1)
 	ON_BN_CLICKED(IDC_CHECK2, &CPage_Object::OnBnClickedCheck2)
+	ON_BN_CLICKED(IDC_CHECK3, &CPage_Object::OnBnClickedCheck3)
+	ON_BN_CLICKED(IDC_BUTTON2, &CPage_Object::OnBnClickedButton2)
 END_MESSAGE_MAP()
 
 
@@ -1418,7 +1422,6 @@ void CPage_Object::OnBnClickedButton16() // Load
 void CPage_Object::OnLButtonDown(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
-
 	CPropertyPage::OnLButtonDown(nFlags, point);
 }
 
@@ -1442,5 +1445,31 @@ void CPage_Object::OnBnClickedCheck2()
 	for (auto& pGameObject : vGameObject)
 	{
 		((CStatic_Object*)pGameObject)->Set_TransformMode(m_isTransformMode);
+	}
+}
+
+
+void CPage_Object::OnBnClickedCheck3()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+
+	UpdateData(1);
+	for (auto& pGameObject : vGameObject)
+	{
+		if (true == ((CStatic_Object*)pGameObject)->Get_ClickedObject())
+		{
+			((CStatic_Object*)(pGameObject))->m_isLock = m_isLock;
+		}
+	}
+}
+
+
+void CPage_Object::OnBnClickedButton2()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+
+	for (auto& pGameObject : vGameObject)
+	{
+		((CStatic_Object*)(pGameObject))->m_isLock = false;
 	}
 }

@@ -99,7 +99,7 @@ void CPage_Terrain::OnBnClickedButton1()
 
 	CMainFrame*		pMainFrame = (CMainFrame*)AfxGetMainWnd();
 	
-	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Buffer_Terrain", CBuffer_Terrain::Create(CGraphic_Device::GetInstance()->Get_GraphicDev(), m_iTerrainX, m_iTerrainZ, 1.f))))
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Buffer_Terrain", CBuffer_Terrain::Create(CGraphic_Device::GetInstance()->Get_GraphicDev(), m_iTerrainX, m_iTerrainZ, 4.f))))
 		return;
 
 	//if (FAILED(CObject_Manager::GetInstance()->Add_Object(0, L"Prototype_Terrain", 0, L"Layer_Terrain", nullptr)))

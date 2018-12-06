@@ -148,8 +148,8 @@ HRESULT CLoading::Loading_Stage_FIELD()
 	if (FAILED(Ready_Layer_Object()))
 		return E_FAIL;
 
-	//if (FAILED(Load_Static_Object(L"../Bin/DataFiles/Field_TestObject.dat")))
-	//	return E_FAIL;
+	if (FAILED(Load_Static_Object(L"../Bin/DataFiles/StaticObject_Field.dat")))
+		return E_FAIL;
 
 	m_isFinish = true;
 
@@ -251,7 +251,7 @@ HRESULT CLoading::Ready_Static_Prototype_Component()
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Buffer_Terrain", CBuffer_Terrain::Create(Get_Graphic_Device(), L"../Bin/Resources/Textures/Terrain/Height.bmp", 1.f))))
 		return E_FAIL;
 	// For.Component_Buffer_Terrain	
-	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Buffer_Terrain2", CBuffer_Terrain::Create(Get_Graphic_Device(), L"../Bin/Resources/Textures/Terrain/Height2.bmp", 1.f))))
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Buffer_Terrain2", CBuffer_Terrain::Create(Get_Graphic_Device(), L"../Bin/Resources/Textures/Terrain/Height2.bmp", 4.f))))
 		return E_FAIL;
 	// For.Component_Buffer_Collider
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Buffer_Collider", CBuffer_Collider::Create(Get_Graphic_Device()))))

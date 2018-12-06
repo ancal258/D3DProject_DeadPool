@@ -27,9 +27,10 @@ private:
 	const _long*		m_pTargetMouseMove = nullptr;
 	_float				m_fAngle[2] = { 0 };
 
-	_float				m_fCameraX = 0.f;
-	_float				m_fCameraY = 0.f;
-	_float				m_fCameraZ = 0.f;
+	_float				m_fCameraEyeX = 0.f;
+	_float				m_fCameraEyeY = 0.f;
+	_float				m_fCameraEyeZ = 0.f;
+	_float				m_fCameraAtY = 0.f;
 	_uint				m_iStage = 0;
 private:
 	void MouseEvent();

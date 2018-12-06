@@ -92,4 +92,7 @@ public:
 	float m_fMeshPosZ;
 	BOOL m_isTransformMode;
 	afx_msg void OnBnClickedCheck2();
+	BOOL m_isLock;
+	afx_msg void OnBnClickedCheck3();
+	afx_msg void OnBnClickedButton2();
 };

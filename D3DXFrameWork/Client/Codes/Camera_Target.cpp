@@ -46,14 +46,14 @@ _int CCamera_Target::Update_GameObject(const _float & fTimeDelta)
 	_vec3 vTargetPos = m_pTargetWorldMatrix->m[3];
 	m_Camera_Desc.vEye = vTargetPos;
 	//m_Camera_Desc.vEye.x += 3.f;
-	m_Camera_Desc.vEye.y = vTargetPos.y + m_fCameraY;
-	m_Camera_Desc.vEye.z = vTargetPos.z - m_fCameraZ;
+	m_Camera_Desc.vEye.y = vTargetPos.y + m_fCameraEyeY;
+	m_Camera_Desc.vEye.z = vTargetPos.z - m_fCameraEyeZ;
 
 	
 	
 	_vec3 vLook = vTargetPos - m_Camera_Desc.vEye;
 	m_Camera_Desc.vAt = m_Camera_Desc.vEye + vLook;
-	m_Camera_Desc.vAt.y = m_Camera_Desc.vEye.y + 5.f;
+	m_Camera_Desc.vAt.y = m_Camera_Desc.vEye.y + m_fCameraAtY;
 	//m_Camera_Desc.vAt.x += m_fCameraX;
 	
 
@@ -111,15 +111,17 @@ HRESULT CCamera_Target::SetUp_Target(const CGameObject * pGameObject)
 
 	if (0 == m_iStage)
 	{
-		m_fCameraX = 0.f;
-		m_fCameraY = 3.f;
-		m_fCameraZ = 8.3f;
+		m_fCameraEyeX = 0.f;
+		m_fCameraEyeY = 3.f;
+		m_fCameraEyeZ = 8.3f;
+		m_fCameraAtY = 5.f;
 	}
 	if (1 == m_iStage)
 	{
-		m_fCameraX = 0.f;
-		m_fCameraY = 3.f;
-		m_fCameraZ = 2.f;
+		m_fCameraEyeX = 0.f;
+		m_fCameraEyeY = -0.74f;
+		m_fCameraEyeZ = 0.62f;
+		m_fCameraAtY = 2.54f;
 	}
 	return NOERROR;
 }
@@ -149,34 +151,85 @@ void CCamera_Target::MouseEvent()
 
 	if (GetKeyState(VK_NUMPAD1) & 0x8000)
 	{
-		m_fCameraY -= 0.02f;
+		system("cls");
+		m_fCameraEyeY -= 0.03f;
+
+		cout << "m_fCameraEyeX : " << m_fCameraEyeX << endl;
+		cout << "m_fCameraEyeY : " << m_fCameraEyeY << endl;
+		cout << "m_fCameraEyeZ : " << m_fCameraEyeZ << endl;
+		cout << "m_fCameraAtY : " << m_fCameraAtY << endl;
 	}
 	if (GetKeyState(VK_NUMPAD2) & 0x8000)
 	{
-		m_fCameraY += 0.02f;
+		system("cls");
+		m_fCameraEyeY += 0.03f;
+
+		cout << "m_fCameraEyeX : " << m_fCameraEyeX << endl;
+		cout << "m_fCameraEyeY : " << m_fCameraEyeY << endl;
+		cout << "m_fCameraEyeZ : " << m_fCameraEyeZ << endl;
+		cout << "m_fCameraAtY : " << m_fCameraAtY << endl;
 	}
 	if (GetKeyState(VK_NUMPAD3) & 0x8000)
 	{
-		_vec3 vTmp = m_Camera_Desc.vAt - m_Camera_Desc.vEye;
-		D3DXVec3Normalize(&vTmp, &vTmp);
-		//m_fCameraZ -= 0.02f;
-		m_Camera_Desc.vEye += vTmp * 2.f;
+		system("cls");
+		m_fCameraEyeZ -= 0.03f;
+
+		cout << "m_fCameraEyeX : " << m_fCameraEyeX << endl;
+		cout << "m_fCameraEyeY : " << m_fCameraEyeY << endl;
+		cout << "m_fCameraEyeZ : " << m_fCameraEyeZ << endl;
+		cout << "m_fCameraAtY : " << m_fCameraAtY << endl;
 	}
 	if (GetKeyState(VK_NUMPAD4) & 0x8000)
 	{
-		_vec3 vTmp = m_Camera_Desc.vAt - m_Camera_Desc.vEye;
-		D3DXVec3Normalize(&vTmp, &vTmp);
-		//m_fCameraZ -= 0.02f;
-		m_Camera_Desc.vEye -= vTmp * 2.f;
+		system("cls");
+		m_fCameraEyeZ += 0.03f;
+
+		cout << "m_fCameraEyeX : " << m_fCameraEyeX << endl;
+		cout << "m_fCameraEyeY : " << m_fCameraEyeY << endl;
+		cout << "m_fCameraEyeZ : " << m_fCameraEyeZ << endl;
+		cout << "m_fCameraAtY : " << m_fCameraAtY << endl;
 	}
 	if (GetKeyState(VK_NUMPAD5) & 0x8000)
 	{
-		m_fCameraX -= 0.02f;
+		system("cls");
+		m_fCameraEyeX -= 0.03f;
+
+		cout << "m_fCameraEyeX : " << m_fCameraEyeX << endl;
+		cout << "m_fCameraEyeY : " << m_fCameraEyeY << endl;
+		cout << "m_fCameraEyeZ : " << m_fCameraEyeZ << endl;
+		cout << "m_fCameraAtY : " << m_fCameraAtY << endl;
 	}
 	if (GetKeyState(VK_NUMPAD6) & 0x8000)
 	{
-		m_fCameraX += 0.02f;
+		system("cls");
+		m_fCameraEyeX += 0.03f;
+
+		cout << "m_fCameraEyeX : " << m_fCameraEyeX << endl;
+		cout << "m_fCameraEyeY : " << m_fCameraEyeY << endl;
+		cout << "m_fCameraEyeZ : " << m_fCameraEyeZ << endl;
+		cout << "m_fCameraAtY : " << m_fCameraAtY << endl;
 	}
+	if (GetKeyState('U') & 0x8000)
+	{
+		system("cls");
+		m_fCameraAtY += 0.03f;
+
+		cout << "m_fCameraEyeX : " << m_fCameraEyeX << endl;
+		cout << "m_fCameraEyeY : " << m_fCameraEyeY << endl;
+		cout << "m_fCameraEyeZ : " << m_fCameraEyeZ << endl;
+		cout << "m_fCameraAtY : " << m_fCameraAtY << endl;
+	}
+	if (GetKeyState('I') & 0x8000)
+	{
+		system("cls");
+		m_fCameraAtY -= 0.03f;
+
+		cout << "m_fCameraEyeX : " << m_fCameraEyeX << endl;
+		cout << "m_fCameraEyeY : " << m_fCameraEyeY << endl;
+		cout << "m_fCameraEyeZ : " << m_fCameraEyeZ << endl;
+		cout << "m_fCameraAtY : " << m_fCameraAtY << endl;
+	}
+
 }
 
 CCamera_Target * CCamera_Target::Create(LPDIRECT3DDEVICE9 pGraphic_Device)

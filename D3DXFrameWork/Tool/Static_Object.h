@@ -58,6 +58,8 @@ private:
 	_bool				m_isCol = false;
 	_bool				m_isLButtonDown = false;
 	_bool				m_isTransformMode = false;
+public:
+	_bool				m_isLock = false;
 private:
 	HRESULT Ready_Component();
 	HRESULT SetUp_ConstantTable(LPD3DXEFFECT pEffect);
