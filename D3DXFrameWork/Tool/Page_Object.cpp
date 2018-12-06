@@ -1410,6 +1410,7 @@ void CPage_Object::OnBnClickedButton16() // Load
 				++iMeshCntArray[MESH_END];
 				((CStatic_Object*)pMesh)->Set_PrototypeTag(pPrototype_Tag);
 				((CStatic_Object*)pMesh)->Set_StateInfo(&ObjectInfo.vRight, &ObjectInfo.vUp, &ObjectInfo.vLook, &ObjectInfo.vPos);
+				((CStatic_Object*)pMesh)->m_isLock = true;
 			}
 		}
 

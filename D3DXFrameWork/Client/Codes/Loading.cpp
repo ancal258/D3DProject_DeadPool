@@ -190,25 +190,56 @@ HRESULT CLoading::Ready_LightInfo_FIELD()
 	ZeroMemory(&LightInfo, sizeof(D3DLIGHT9));
 
 	LightInfo.Type = D3DLIGHT_DIRECTIONAL;
-	LightInfo.Diffuse = D3DXCOLOR(0.6f, 0.6f, 0.6f, 1.f);
+	LightInfo.Diffuse = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.f);
 	LightInfo.Specular = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
-	LightInfo.Ambient = D3DXCOLOR(0.3f, 0.3f, 0.3f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.2f, 0.2f, 0.2f, 1.f);
 	LightInfo.Direction = _vec3(1.f, -1.f, 1.f);
 
 	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
 		return E_FAIL;
 
-
+	// For. Wall_01
 	LightInfo.Type = D3DLIGHT_POINT;
-	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.0f, 0.f, 1.f);
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 1.0f, 0.f, 1.f);
 	LightInfo.Specular = D3DXCOLOR(1.f, 0.f, 0.f, 1.f);
-	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.0f, 0.0f, 1.f);
-	LightInfo.Position = _vec3(15.f, 3.f, 5.f);
-	LightInfo.Range = 8.0f;
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.5f, 0.0f, 1.f);
+	LightInfo.Position = _vec3(22.1f, 2.f, 10.21f);
+	LightInfo.Range = 1.0f;
 
 	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
 		return E_FAIL;
 
+	// For. Wall_02
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 1.0f, 0.f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 0.f, 0.f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.5f, 0.0f, 1.f);
+	LightInfo.Position = _vec3(22.1f, 2.f, 7.67f);
+	LightInfo.Range = 1.0f;
+
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
+	// For. LightBase_01
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.0f, 0.f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 0.f, 0.f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.0f, 0.0f, 1.f);
+	LightInfo.Position = _vec3(15.22f, 2.f, 1.85f);
+	LightInfo.Range = 1.0f;
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
+	// For. LightBase_02
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.0f, 0.f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 0.f, 0.f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.0f, 0.0f, 1.f);
+	LightInfo.Position = _vec3(18.76, 2.f, 1.85f);
+	LightInfo.Range = 1.0f;
+
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
 	return NOERROR;
 }
 

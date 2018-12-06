@@ -30,7 +30,9 @@ private:
 	_float				m_fCameraEyeX = 0.f;
 	_float				m_fCameraEyeY = 0.f;
 	_float				m_fCameraEyeZ = 0.f;
+	_float				m_fCameraAtX = 0.f;
 	_float				m_fCameraAtY = 0.f;
+	_float				m_fCameraAtZ = 0.f;
 	_uint				m_iStage = 0;
 private:
 	void MouseEvent();

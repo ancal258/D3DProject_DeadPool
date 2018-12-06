@@ -36,7 +36,7 @@ HRESULT CBrawler01::Ready_GameObject()
 
 	m_pTransformCom->Scaling(0.01f, 0.01f, 0.01f);
 	m_pTransformCom->Set_AngleY(D3DXToRadian(rand() % 180));
-	_vec3 vPosition = _vec3(rand() % 60 + 10, 0.f, rand() % 60 + 10);
+	_vec3 vPosition = _vec3(rand() % 16 + 2.8f, 0.f, rand() % 16 + 16.f);
 
 
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &vPosition);

@@ -53,7 +53,9 @@ _int CCamera_Target::Update_GameObject(const _float & fTimeDelta)
 	
 	_vec3 vLook = vTargetPos - m_Camera_Desc.vEye;
 	m_Camera_Desc.vAt = m_Camera_Desc.vEye + vLook;
+	m_Camera_Desc.vAt.x += m_fCameraAtX;
 	m_Camera_Desc.vAt.y = m_Camera_Desc.vEye.y + m_fCameraAtY;
+	m_Camera_Desc.vAt.z += m_fCameraAtZ;
 	//m_Camera_Desc.vAt.x += m_fCameraX;
 	
 
@@ -114,14 +116,18 @@ HRESULT CCamera_Target::SetUp_Target(const CGameObject * pGameObject)
 		m_fCameraEyeX = 0.f;
 		m_fCameraEyeY = 3.f;
 		m_fCameraEyeZ = 8.3f;
+		m_fCameraAtX = 0.f;
 		m_fCameraAtY = 5.f;
+		m_fCameraAtZ = 0.f;
 	}
 	if (1 == m_iStage)
 	{
 		m_fCameraEyeX = 0.f;
 		m_fCameraEyeY = -0.74f;
 		m_fCameraEyeZ = 0.62f;
+		m_fCameraAtX = 0.f;
 		m_fCameraAtY = 2.54f;
+		m_fCameraAtZ = 0.f;
 	}
 	return NOERROR;
 }
@@ -130,23 +136,21 @@ void CCamera_Target::MouseEvent()
 {
 	if (true == ((CPlayer*)m_pTarget)->Get_IsButtonDown(8))
 	{
-		//if (1 == m_iStage)
-		//{
-		//	if (m_fCameraZ > 0.5f)
-		//	{
-		//		m_fCameraZ -= 0.05f;
-		//		m_fCameraY += 0.02f;
-		//	}
-		//}
+		if (m_fCameraEyeZ > 0.02f) // EYEY = -0.74 -> 0.22 0.96이동. 0.6이동 // AtY -> 2.54 -> 1.52 --> 1정도 이동. 비슷. // 30틱
+		{
+			m_fCameraEyeZ -= 0.03f;
+			m_fCameraEyeY += 0.032f;
+			m_fCameraAtY -= 0.034f;
+		}
 	}
 	else
 	{
-		//m_fCameraZ += 0.03;
-		//if (m_fCameraZ < 1.3f)
-		//{
-		//	m_fCameraZ += 0.05f;
-		//	m_fCameraY -= 0.02f;
-		//}
+		if (m_fCameraEyeZ < 0.62f)
+		{
+			m_fCameraEyeZ += 0.03f;
+			m_fCameraEyeY -= 0.032f;
+			m_fCameraAtY += 0.034f;
+		}
 	}
 
 	if (GetKeyState(VK_NUMPAD1) & 0x8000)
@@ -212,7 +216,7 @@ void CCamera_Target::MouseEvent()
 	if (GetKeyState('U') & 0x8000)
 	{
 		system("cls");
-		m_fCameraAtY += 0.03f;
+		m_fCameraAtX += 0.03f;
 
 		cout << "m_fCameraEyeX : " << m_fCameraEyeX << endl;
 		cout << "m_fCameraEyeY : " << m_fCameraEyeY << endl;
@@ -222,7 +226,47 @@ void CCamera_Target::MouseEvent()
 	if (GetKeyState('I') & 0x8000)
 	{
 		system("cls");
+		m_fCameraAtX -= 0.03f;
+
+		cout << "m_fCameraEyeX : " << m_fCameraEyeX << endl;
+		cout << "m_fCameraEyeY : " << m_fCameraEyeY << endl;
+		cout << "m_fCameraEyeZ : " << m_fCameraEyeZ << endl;
+		cout << "m_fCameraAtY : " << m_fCameraAtY << endl;
+	}
+	if (GetKeyState('J') & 0x8000)
+	{
+		system("cls");
+		m_fCameraAtY += 0.03f;
+
+		cout << "m_fCameraEyeX : " << m_fCameraEyeX << endl;
+		cout << "m_fCameraEyeY : " << m_fCameraEyeY << endl;
+		cout << "m_fCameraEyeZ : " << m_fCameraEyeZ << endl;
+		cout << "m_fCameraAtY : " << m_fCameraAtY << endl;
+	}
+	if (GetKeyState('K') & 0x8000)
+	{
+		system("cls");
 		m_fCameraAtY -= 0.03f;
+
+		cout << "m_fCameraEyeX : " << m_fCameraEyeX << endl;
+		cout << "m_fCameraEyeY : " << m_fCameraEyeY << endl;
+		cout << "m_fCameraEyeZ : " << m_fCameraEyeZ << endl;
+		cout << "m_fCameraAtY : " << m_fCameraAtY << endl;
+	}
+	if (GetKeyState('N') & 0x8000)
+	{
+		system("cls");
+		m_fCameraAtZ += 0.03f;
+
+		cout << "m_fCameraEyeX : " << m_fCameraEyeX << endl;
+		cout << "m_fCameraEyeY : " << m_fCameraEyeY << endl;
+		cout << "m_fCameraEyeZ : " << m_fCameraEyeZ << endl;
+		cout << "m_fCameraAtY : " << m_fCameraAtY << endl;
+	}
+	if (GetKeyState('M') & 0x8000)
+	{
+		system("cls");
+		m_fCameraAtZ -= 0.03f;
 
 		cout << "m_fCameraEyeX : " << m_fCameraEyeX << endl;
 		cout << "m_fCameraEyeY : " << m_fCameraEyeY << endl;

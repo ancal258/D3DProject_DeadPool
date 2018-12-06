@@ -63,16 +63,16 @@ HRESULT CRenderer::Ready_Renderer()
 		return E_FAIL;
 
 #ifdef _DEBUG
-	if (FAILED(m_pTarget_Manager->Ready_DebugBuffer(L"Target_Diffuse", 0.f, 0.f, 100.f, 100.f)))
+	if (FAILED(m_pTarget_Manager->Ready_DebugBuffer(L"Target_Diffuse", 0.f, 0.f, 200.f, 200.f)))
 		return E_FAIL;
-	//if (FAILED(m_pTarget_Manager->Ready_DebugBuffer(L"Target_Normal", 0.f, 200.f, 200.f, 200.f)))
-	//	return E_FAIL;
-	//if (FAILED(m_pTarget_Manager->Ready_DebugBuffer(L"Target_Depth", 0.f, 400.f, 200.f, 200.f)))
-	//	return E_FAIL;
-	//if (FAILED(m_pTarget_Manager->Ready_DebugBuffer(L"Target_Shade", ViewPort.Width - 200.f, 0.f, 200.f, 200.f)))
-	//	return E_FAIL;
-	//if (FAILED(m_pTarget_Manager->Ready_DebugBuffer(L"Target_Specular", ViewPort.Width - 200.f, 200.f, 200.f, 200.f)))
-	//	return E_FAIL;
+	if (FAILED(m_pTarget_Manager->Ready_DebugBuffer(L"Target_Normal", 0.f, 200.f, 200.f, 200.f)))
+		return E_FAIL;
+	if (FAILED(m_pTarget_Manager->Ready_DebugBuffer(L"Target_Depth", 0.f, 400.f, 200.f, 200.f)))
+		return E_FAIL;
+	if (FAILED(m_pTarget_Manager->Ready_DebugBuffer(L"Target_Shade", ViewPort.Width - 200.f, 0.f, 200.f, 200.f)))
+		return E_FAIL;
+	if (FAILED(m_pTarget_Manager->Ready_DebugBuffer(L"Target_Specular", ViewPort.Width - 200.f, 200.f, 200.f, 200.f)))
+		return E_FAIL;
 #endif
 
 
