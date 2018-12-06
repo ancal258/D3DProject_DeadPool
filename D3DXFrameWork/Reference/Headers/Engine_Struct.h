@@ -21,7 +21,6 @@ typedef struct tagD3DXMeshContainer_Derived : public D3DXMESHCONTAINER
 	D3DXMATRIX**	ppCombinedMatrices;
 	D3DXMATRIX*		pOffsetMatrices;
 	D3DXMATRIX*		pRenderingMatrices;
-
 }D3DXMESHCONTAINER_DERIVED;
 
 typedef struct tagD3DXFrame_Derived : public D3DXFRAME

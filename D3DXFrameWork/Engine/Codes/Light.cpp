@@ -59,8 +59,20 @@ HRESULT CLight::Ready_Light(const D3DLIGHT9 * pLightInfo)
 
 void CLight::Render_Light(LPD3DXEFFECT pEffect)
 {
+	_uint			iPassIdx = 0;
+
+	if (D3DLIGHT_DIRECTIONAL == m_LightInfo.Type)
+	{
+		iPassIdx = 0;
+		pEffect->SetVector("g_vLightDir", &_vec4(m_LightInfo.Direction, 0.f));
+	}
+	else if (D3DLIGHT_POINT == m_LightInfo.Type)
+	{
+		iPassIdx = 1;
+		pEffect->SetVector("g_vLightPos", &_vec4(m_LightInfo.Position, 1.f));
+		pEffect->SetFloat("g_fRange", m_LightInfo.Range);
+	}
 	// 빛 세팅
-	pEffect->SetVector("g_vLightDir", &_vec4(m_LightInfo.Direction, 0.f));
 	pEffect->SetVector("g_vLightDiffuse", (_vec4*)&m_LightInfo.Diffuse);
 	pEffect->SetVector("g_vLightAmbient", (_vec4*)&m_LightInfo.Ambient);
 	pEffect->SetVector("g_vLightSpecular", (_vec4*)&m_LightInfo.Specular);
@@ -78,10 +90,14 @@ void CLight::Render_Light(LPD3DXEFFECT pEffect)
 
 	pEffect->CommitChanges(); // Begin 이후에 값이 변경 되었기 때문에 반드시 해줘야 한다.
 
+	pEffect->BeginPass(iPassIdx);
+
 	m_pGraphic_Device->SetStreamSource(0, m_pVB, 0, sizeof(VTXVIEWPORT));
 	m_pGraphic_Device->SetFVF(D3DFVF_XYZRHW | D3DFVF_TEX1);
 	m_pGraphic_Device->SetIndices(m_pIB);
 	m_pGraphic_Device->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 4, 0, 2);
+
+	pEffect->EndPass();
 }
 
 CLight * CLight::Create(LPDIRECT3DDEVICE9 pGraphic_Device, const D3DLIGHT9 * pLightInfo)

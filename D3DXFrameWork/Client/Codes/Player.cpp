@@ -267,7 +267,7 @@ HRESULT CPlayer::SetUp_StageInfo(_uint iStage)
 
 	if (1 == m_iStageNum)
 	{
-		m_pTransformCom->Scaling(0.05f, 0.05f, 0.05f);
+		m_pTransformCom->Scaling(0.01f, 0.01f, 0.01f);
 		m_pTransformCom->Set_AngleY(D3DXToRadian(48));
 		m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(15.f, 0.f, 15.f));
 	}

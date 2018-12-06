@@ -97,7 +97,7 @@ HRESULT CSkyDom::Ready_Component()
 		return E_FAIL;
 
 	// For.Com_Buffer
-	m_pMeshCom = (CMesh_Static*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Mesh_SkyDom_Dusk");
+	m_pMeshCom = (CMesh_Static*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Mesh_SkyDom_Night");
 	if (FAILED(Add_Component(L"Com_Mesh", m_pMeshCom)))
 		return E_FAIL;
 

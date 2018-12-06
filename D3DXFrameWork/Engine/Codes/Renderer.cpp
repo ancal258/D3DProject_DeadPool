@@ -51,7 +51,7 @@ HRESULT CRenderer::Ready_Renderer()
 		return E_FAIL;
 
 	// For.Target_Depth : 디퍼드로 그리는 객체들의 깊이를 저장.
-	if (FAILED(m_pTarget_Manager->Add_Target(pGraphic_Device, L"Target_Depth", ViewPort.Width, ViewPort.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0.f, 0.f, 0.f, 1.f))))
+	if (FAILED(m_pTarget_Manager->Add_Target(pGraphic_Device, L"Target_Depth", ViewPort.Width, ViewPort.Height, D3DFMT_A32B32G32R32F, D3DXCOLOR(0.f, 0.f, 0.f, 1.f))))
 		return E_FAIL;
 
 	// For. Target_Shade : 디퍼드로 그리는 객체들의 픽셀 명암을 저장.
@@ -234,11 +234,9 @@ void CRenderer::Render_LightAcc()
 	m_pTarget_Manager->SetUp_OnShader(pEffect, "g_DepthTexture", L"Target_Depth");
 
 	pEffect->Begin(nullptr, 0);
-	pEffect->BeginPass(0);
 
 	CLight_Manager::GetInstance()->Render_Light(pEffect);
 
-	pEffect->EndPass();
 	pEffect->End();
 
 	m_pTarget_Manager->End_MRT(L"MRT_LightAcc");

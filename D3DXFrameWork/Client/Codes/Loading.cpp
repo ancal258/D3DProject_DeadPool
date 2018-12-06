@@ -118,6 +118,12 @@ HRESULT CLoading::Loading_Stage_APT()
 
 HRESULT CLoading::Loading_Stage_FIELD()
 {
+	if (FAILED(CLight_Manager::GetInstance()->Clear_Light()))
+		return E_FAIL;
+
+	if (FAILED(Ready_LightInfo_FIELD()))
+		return E_FAIL;
+
 	if (FAILED(Ready_Static_Prototype_Component()))
 		return E_FAIL;
 	if (FAILED(Ready_Component_Prototype_SceneFIELD()))
@@ -157,10 +163,48 @@ HRESULT CLoading::Ready_LightInfo()
 	ZeroMemory(&LightInfo, sizeof(D3DLIGHT9));
 
 	LightInfo.Type = D3DLIGHT_DIRECTIONAL;
-	LightInfo.Diffuse = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
+	LightInfo.Diffuse = D3DXCOLOR(0.8f, 0.8f, 0.8f, 1.f);
 	LightInfo.Specular = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
 	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.f);
 	LightInfo.Direction = _vec3(1.f, -1.f, 1.f);
+
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.0f, 0.f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 0.f, 0.f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.0f, 0.0f, 1.f);
+	LightInfo.Position = _vec3(15.f, 3.f, 5.f);
+	LightInfo.Range = 8.0f;
+
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
+	return NOERROR;
+}
+
+HRESULT CLoading::Ready_LightInfo_FIELD()
+{
+	D3DLIGHT9			LightInfo;
+	ZeroMemory(&LightInfo, sizeof(D3DLIGHT9));
+
+	LightInfo.Type = D3DLIGHT_DIRECTIONAL;
+	LightInfo.Diffuse = D3DXCOLOR(0.6f, 0.6f, 0.6f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.3f, 0.3f, 0.3f, 1.f);
+	LightInfo.Direction = _vec3(1.f, -1.f, 1.f);
+
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
+
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.0f, 0.f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 0.f, 0.f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.0f, 0.0f, 1.f);
+	LightInfo.Position = _vec3(15.f, 3.f, 5.f);
+	LightInfo.Range = 8.0f;
 
 	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
 		return E_FAIL;

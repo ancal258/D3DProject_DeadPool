@@ -34,7 +34,7 @@ HRESULT CBrawler01::Ready_GameObject()
 	if(nullptr != pKnife)
 		dynamic_cast<CBrawler_Knife*>(pKnife)->SetUp_ParentPointer(this);
 
-	m_pTransformCom->Scaling(0.05f, 0.05f, 0.05f);
+	m_pTransformCom->Scaling(0.01f, 0.01f, 0.01f);
 	m_pTransformCom->Set_AngleY(D3DXToRadian(rand() % 180));
 	_vec3 vPosition = _vec3(rand() % 60 + 10, 0.f, rand() % 60 + 10);
 

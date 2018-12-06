@@ -16,7 +16,6 @@ public:
 	const _matrix* Get_FrameMatrixByName(const char* pFrameName);
 public:
 	HRESULT Ready_Mesh(const _tchar* pFilePath, const _tchar* pFileName);
-	HRESULT Ready_CloneMesh();
 	void Render_Mesh(LPD3DXEFFECT pEffect);
 	HRESULT Set_AnimationSet(const _uint& iIndex);
 	_bool Is_Finish();

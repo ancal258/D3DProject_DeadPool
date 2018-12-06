@@ -1,0 +1,29 @@
+(Normal에 *0.5f + 0.5f 하는 이유 : -1~1 인 범위를 0~1로 만들어주기 위해-- 텍스쳐가 0~1까지밖에 저장하지 못하기 때문에.)
+
+Target에 타겟을 그려주는 함수 만들자
+
+
+디퍼드 코드 순서
+
+ViePort구조체 하나 만들기
+Target, TargetManager(만들고), Renderer, Shader(Terrain, Mesh)
+Renderer에서 DEBUG 모드일 때 하는 놈들 처리
+
+Renderer LightAcc()
+
+Light클래스에서 버퍼를 만들어 그려주는 작업을 할 것이다. (두 개 그리는 상황 방지하기 위해)
+
+Target 클래스에 Buffer 구현 과정 추가
+Light 클래스에 Buffer 구현 과정 추가 --> Render 추가
+
+
+Shader 파일을 하나 만들어서 --> 조명을 저장한다. ( 엔진에서만 사용함 )
+
+
+Renderer 객체 안에 Shader 객체 하나 만들어서 사용하자.
+
+Target에서 SetUp할 때 Shader에 텍스쳐를 넘겨주자.
+
+백버퍼에 값을 채워주기 위한 버퍼를 셰이더를 하나 더 만들어야 한다 .
+
+이펙트 깊이버퍼 

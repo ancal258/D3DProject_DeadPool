@@ -119,7 +119,7 @@ HRESULT CCamera_Target::SetUp_Target(const CGameObject * pGameObject)
 	{
 		m_fCameraX = 0.f;
 		m_fCameraY = 3.f;
-		m_fCameraZ = 8.3f;
+		m_fCameraZ = 2.f;
 	}
 	return NOERROR;
 }
