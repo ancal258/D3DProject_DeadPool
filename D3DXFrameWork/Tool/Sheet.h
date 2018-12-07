@@ -15,7 +15,7 @@ public:
 	void Set_PickingPoint(_vec3 vPickingPoint) {
 		m_Page_Object.Set_PickingPoint(vPickingPoint);
 	}
-	void Set_VecPointNav(vector<_vec3>* pVecPoint) {
+	void Set_VecPointNav(_vec3* pVecPoint) {
 		m_Page_Navigation.Set_VecPointNav(pVecPoint);
 	}
 	void Add_CamPoint(_vec3 vPoint) {

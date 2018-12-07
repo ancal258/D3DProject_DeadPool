@@ -4,6 +4,7 @@
 #include "Component_Manager.h"
 #include "Input_Device.h"
 #include "Light_Manager.h"
+#include "NavPoint.h"
 
 _USING(Tool)
 
@@ -51,6 +52,7 @@ vector<_vec3>* CToolTerrain::Get_vecPoint()
 	return m_pNavigationCom->Get_vecPoint();
 }
 
+
 HRESULT CToolTerrain::Save_HeightMap()
 {
 	if (FAILED(D3DXCreateTexture(Get_Graphic_Device(), m_iWidth, m_iHeight, 1, 0, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, &m_pFilterTexture)))
@@ -88,6 +90,8 @@ HRESULT CToolTerrain::Add_Cell(_vec3* vPosArray)
 	if (FAILED(m_pNavigationCom->Add_Cell(vPosArray)))
 		return E_FAIL;
 
+
+
 	return NOERROR;
 }
 
@@ -106,6 +110,9 @@ HRESULT CToolTerrain::Ready_GameObject()
 	m_MtrlInfo.Ambient = D3DXCOLOR(0.2f, 0.2f, 0.2f, 1.f);
 	m_MtrlInfo.Emissive = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
 	m_MtrlInfo.Power = 40.0f;
+
+	if (FAILED(D3DXCreateLine(Get_Graphic_Device(), &m_pLine)))
+		return E_FAIL;
 	return NOERROR;
 }
 
@@ -113,18 +120,18 @@ _int CToolTerrain::Update_GameObject(const _float & fTimeDelta)
 {
 	if (CInput_Device::GetInstance()->Get_DIMouseState(CInput_Device::DIM_LBUTTON) & 0x80)
 	{
-		if (STATE_ADD_NAV != m_eMouseState)
-		{
+		//if (STATE_ADD_NAV != m_eMouseState)
+		//{
 			if (true == CInput_Device::GetInstance()->Picking_ToBuffer(m_pBufferCom, m_pTransformCom, &m_vOut))
 				m_vPickingPoint = m_vOut;
 			if (STATE_TILE1 <= m_eMouseState && m_eMouseState <= STATE_TILE4)
 				Load_SplattingMap();
-		}
-		else
-		{
-			if (true == CInput_Device::GetInstance()->Picking_ToBuffer(m_pBufferCom, m_pTransformCom, m_pNavigationCom, &m_vOut))
-				m_vPickingPoint = m_vOut;
-		}
+		//}
+		//else
+		//{
+		//	if (true == CInput_Device::GetInstance()->Picking_ToBuffer(m_pBufferCom, m_pTransformCom, m_pNavigationCom, &m_vOut))
+		//		m_vPickingPoint = m_vOut;
+		//}
 	}
 	else
 	{
@@ -165,7 +172,8 @@ void CToolTerrain::Render_GameObject()
 	pEffect->EndPass();
 	pEffect->End();
 
-	m_pNavigationCom->Render_Navigation();
+	Render_NavPoint();
+	//m_pNavigationCom->Render_Navigation();
 	//Safe_Release(pEffect);
 }
 
@@ -268,6 +276,60 @@ HRESULT CToolTerrain::SetUp_ConstantTable(LPD3DXEFFECT pEffect)
 
 
 	return NOERROR;
+}
+
+void CToolTerrain::Render_NavPoint()
+{
+	if (m_vecNavPoint.size() < 2)
+		return;
+
+	_matrix		matView, matProj;
+
+	Get_Graphic_Device()->GetTransform(D3DTS_VIEW, &matView);
+	Get_Graphic_Device()->GetTransform(D3DTS_PROJECTION, &matProj);
+
+	_matrix		matTransform;
+	D3DXMatrixIdentity(&matTransform);
+
+	// 3으로 나누어 떨어질 때 마다 포인트를 + 1 해야된다.
+	// 즉 몫 만큼 Size +가 되어야 함.
+
+	//if (m_vecNavPoint.size() % 3 == 0)
+	//{
+	_uint		iSizeUp = m_vecNavPoint.size() / 3;
+
+	_vec3*		pPointArray = new _vec3[m_vecNavPoint.size() + iSizeUp];
+
+	_uint		iIndex = 0;
+	for (size_t i = 0; i < m_vecNavPoint.size() + iSizeUp; ++i)
+	{
+		if ((i + 1) % 4 == 0 && i != 0)
+		{
+			pPointArray[i] = pPointArray[i - 3];
+			continue;
+		}
+		pPointArray[i] = m_vecNavPoint[iIndex++]->m_vWorldPosition;
+	}
+
+	for (int j = 0; j < iSizeUp; ++j)
+	{
+		for (size_t i = j * 4; i < j * 4 + 4; ++i)
+		{
+			D3DXVec3TransformCoord(&pPointArray[i], &pPointArray[i], &matView);
+			if (pPointArray[i].z < 0.0f)
+				pPointArray[i].z = 0.f;
+
+			D3DXVec3TransformCoord(&pPointArray[i], &pPointArray[i], &matProj);
+		}
+		m_pLine->SetWidth(2.0f);
+
+		m_pLine->Begin();
+
+		m_pLine->DrawTransform(&pPointArray[j*4], 4, &matTransform, D3DXCOLOR(1.f, 0.f, 0.f, 1.f));
+
+		m_pLine->End();
+	}
+
 }
 
 CToolTerrain * CToolTerrain::Create(LPDIRECT3DDEVICE9 pGraphic_Device)

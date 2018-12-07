@@ -77,6 +77,9 @@
     <Filter Include="02.GameObject\05.EventCube">
       <UniqueIdentifier>{5ce87419-2eef-45af-a1a9-8543edb5f278}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\06.NavPoint">
+      <UniqueIdentifier>{abd1f07b-536a-483d-9d40-5be244f975fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -148,6 +151,9 @@
     <ClInclude Include="EventCube.h">
       <Filter>02.GameObject\05.EventCube</Filter>
     </ClInclude>
+    <ClInclude Include="NavPoint.h">
+      <Filter>02.GameObject\06.NavPoint</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -206,6 +212,9 @@
     </ClCompile>
     <ClCompile Include="EventCube.cpp">
       <Filter>02.GameObject\05.EventCube</Filter>
+    </ClCompile>
+    <ClCompile Include="NavPoint.cpp">
+      <Filter>02.GameObject\06.NavPoint</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

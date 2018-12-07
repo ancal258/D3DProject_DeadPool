@@ -99,7 +99,7 @@ void CMainFrame::Set_PickingPoint(_vec3 vPickingPoint)
 {
 	m_pFormView->Set_PickingPoint(vPickingPoint);
 }
-void CMainFrame::Set_VecPointNav(vector<_vec3>* pVecPoint)
+void CMainFrame::Set_VecPointNav(_vec3* pVecPoint)
 {
 	m_pFormView->Set_VecPointNav(pVecPoint);
 }

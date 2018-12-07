@@ -23,7 +23,7 @@ protected:
 
 	DECLARE_MESSAGE_MAP()
 public:
-void Set_VecPointNav(vector<_vec3>* pVecPoint);
+void Set_VecPointNav(_vec3* pVecPoint);
 
 public:
 	float m_fNavPosX;
@@ -32,9 +32,14 @@ public:
 	CListBox m_PointList;
 	CListBox m_NavList;
 	_vec3 m_vArray[3];
-	vector<_vec3> m_vecPoint;
+	vector<_vec3*> m_vecPoint;
 	_uint m_iPointNum = 0;
+	////////////////////////////
+	LPDIRECT3DDEVICE9		 m_pGraphic_Device = nullptr;
+	LPD3DXLINE				m_pLine = nullptr;
+
 	afx_msg void OnBnClickedButton1();
 	afx_msg void OnBnClickedButton10();
 	virtual BOOL OnSetActive();
+	virtual BOOL OnInitDialog();
 };

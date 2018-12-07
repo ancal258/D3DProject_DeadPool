@@ -84,7 +84,7 @@ void CForm::Set_PickingPoint(_vec3 vPickingPoint)
 	m_pSheet->Set_PickingPoint(vPickingPoint);
 }
 
-void CForm::Set_VecPointNav(vector<_vec3>* pVecPoint)
+void CForm::Set_VecPointNav(_vec3* pVecPoint)
 {
 	m_pSheet->Set_VecPointNav(pVecPoint);
 }

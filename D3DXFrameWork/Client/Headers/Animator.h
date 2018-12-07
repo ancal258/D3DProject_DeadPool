@@ -92,6 +92,7 @@ private:
 	//사용 변수
 private:
 	_uint				m_iSit = SIT_IDLE_BREATH;
+	_bool				m_isAttackState = false;
 	_float				*m_fRotate = nullptr;
 	_float				*m_fTimeAcc = nullptr;
 public:

@@ -32,7 +32,7 @@ public:
 #endif
 public:
 	void Set_PickingPoint(_vec3 vPickingPoint);
-	void Set_VecPointNav(vector<_vec3>* pVecPoint);
+	void Set_VecPointNav(_vec3* pVecPoint);
 	void Add_CamPoint(_vec3 vPoint);
 protected:  // 컨트롤 모음이 포함된 멤버입니다.
 	CToolBar          m_wndToolBar;

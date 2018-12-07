@@ -1,0 +1,121 @@
+
+	if (GetKeyState(VK_NUMPAD1) & 0x8000)
+	{
+		system("cls");
+		m_fCameraEyeY -= 0.03f;
+
+		cout << "m_fCameraEyeX : " << m_fCameraEyeX << endl;
+		cout << "m_fCameraEyeY : " << m_fCameraEyeY << endl;
+		cout << "m_fCameraEyeZ : " << m_fCameraEyeZ << endl;
+		cout << "m_fCameraAtY : " << m_fCameraAtY << endl;
+	}
+	if (GetKeyState(VK_NUMPAD2) & 0x8000)
+	{
+		system("cls");
+		m_fCameraEyeY += 0.03f;
+
+		cout << "m_fCameraEyeX : " << m_fCameraEyeX << endl;
+		cout << "m_fCameraEyeY : " << m_fCameraEyeY << endl;
+		cout << "m_fCameraEyeZ : " << m_fCameraEyeZ << endl;
+		cout << "m_fCameraAtY : " << m_fCameraAtY << endl;
+	}
+	if (GetKeyState(VK_NUMPAD3) & 0x8000)
+	{
+		system("cls");
+		m_fCameraEyeZ -= 0.03f;
+
+		cout << "m_fCameraEyeX : " << m_fCameraEyeX << endl;
+		cout << "m_fCameraEyeY : " << m_fCameraEyeY << endl;
+		cout << "m_fCameraEyeZ : " << m_fCameraEyeZ << endl;
+		cout << "m_fCameraAtY : " << m_fCameraAtY << endl;
+	}
+	if (GetKeyState(VK_NUMPAD4) & 0x8000)
+	{
+		system("cls");
+		m_fCameraEyeZ += 0.03f;
+
+		cout << "m_fCameraEyeX : " << m_fCameraEyeX << endl;
+		cout << "m_fCameraEyeY : " << m_fCameraEyeY << endl;
+		cout << "m_fCameraEyeZ : " << m_fCameraEyeZ << endl;
+		cout << "m_fCameraAtY : " << m_fCameraAtY << endl;
+	}
+	if (GetKeyState(VK_NUMPAD5) & 0x8000)
+	{
+		system("cls");
+		m_fCameraEyeX -= 0.03f;
+
+		cout << "m_fCameraEyeX : " << m_fCameraEyeX << endl;
+		cout << "m_fCameraEyeY : " << m_fCameraEyeY << endl;
+		cout << "m_fCameraEyeZ : " << m_fCameraEyeZ << endl;
+		cout << "m_fCameraAtY : " << m_fCameraAtY << endl;
+	}
+	if (GetKeyState(VK_NUMPAD6) & 0x8000)
+	{
+		system("cls");
+		m_fCameraEyeX += 0.03f;
+
+		cout << "m_fCameraEyeX : " << m_fCameraEyeX << endl;
+		cout << "m_fCameraEyeY : " << m_fCameraEyeY << endl;
+		cout << "m_fCameraEyeZ : " << m_fCameraEyeZ << endl;
+		cout << "m_fCameraAtY : " << m_fCameraAtY << endl;
+	}
+	if (GetKeyState('U') & 0x8000)
+	{
+		system("cls");
+		m_fCameraAtX += 0.03f;
+
+		cout << "m_fCameraEyeX : " << m_fCameraEyeX << endl;
+		cout << "m_fCameraEyeY : " << m_fCameraEyeY << endl;
+		cout << "m_fCameraEyeZ : " << m_fCameraEyeZ << endl;
+		cout << "m_fCameraAtY : " << m_fCameraAtY << endl;
+	}
+	if (GetKeyState('I') & 0x8000)
+	{
+		system("cls");
+		m_fCameraAtX -= 0.03f;
+
+		cout << "m_fCameraEyeX : " << m_fCameraEyeX << endl;
+		cout << "m_fCameraEyeY : " << m_fCameraEyeY << endl;
+		cout << "m_fCameraEyeZ : " << m_fCameraEyeZ << endl;
+		cout << "m_fCameraAtY : " << m_fCameraAtY << endl;
+	}
+	if (GetKeyState('J') & 0x8000)
+	{
+		system("cls");
+		m_fCameraAtY += 0.03f;
+
+		cout << "m_fCameraEyeX : " << m_fCameraEyeX << endl;
+		cout << "m_fCameraEyeY : " << m_fCameraEyeY << endl;
+		cout << "m_fCameraEyeZ : " << m_fCameraEyeZ << endl;
+		cout << "m_fCameraAtY : " << m_fCameraAtY << endl;
+	}
+	if (GetKeyState('K') & 0x8000)
+	{
+		system("cls");
+		m_fCameraAtY -= 0.03f;
+
+		cout << "m_fCameraEyeX : " << m_fCameraEyeX << endl;
+		cout << "m_fCameraEyeY : " << m_fCameraEyeY << endl;
+		cout << "m_fCameraEyeZ : " << m_fCameraEyeZ << endl;
+		cout << "m_fCameraAtY : " << m_fCameraAtY << endl;
+	}
+	if (GetKeyState('N') & 0x8000)
+	{
+		system("cls");
+		m_fCameraAtZ += 0.03f;
+
+		cout << "m_fCameraEyeX : " << m_fCameraEyeX << endl;
+		cout << "m_fCameraEyeY : " << m_fCameraEyeY << endl;
+		cout << "m_fCameraEyeZ : " << m_fCameraEyeZ << endl;
+		cout << "m_fCameraAtY : " << m_fCameraAtY << endl;
+	}
+	if (GetKeyState('M') & 0x8000)
+	{
+		system("cls");
+		m_fCameraAtZ -= 0.03f;
+
+		cout << "m_fCameraEyeX : " << m_fCameraEyeX << endl;
+		cout << "m_fCameraEyeY : " << m_fCameraEyeY << endl;
+		cout << "m_fCameraEyeZ : " << m_fCameraEyeZ << endl;
+		cout << "m_fCameraAtY : " << m_fCameraAtY << endl;
+	}

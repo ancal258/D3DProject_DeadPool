@@ -202,6 +202,8 @@ void CAnimator::Update_Animation_FIELD(const _float & fTimeDelta)
 
 	if (m_ReservationList.size() == 0)
 	{
+		m_isAttackState = false;
+
 		if (m_iState == STATE_SWORD)
 			m_pMeshCom->Set_AnimationSet(SWORD_IDLE);
 		else if (m_iState == STATE_AIM)
@@ -211,6 +213,8 @@ void CAnimator::Update_Animation_FIELD(const _float & fTimeDelta)
 	}
 	else
 	{
+		m_isAttackState = true;
+
 		m_pMeshCom->Set_AnimationSet(*m_ReservationList.begin());
 	}
 

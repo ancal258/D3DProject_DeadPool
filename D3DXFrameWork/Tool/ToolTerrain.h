@@ -13,8 +13,8 @@ class CNavigation;
 class CCell;
 _END
 
+class CNavPoint;
 _BEGIN(Tool)
-
 class CToolTerrain : public CGameObject
 {
 private:
@@ -42,6 +42,8 @@ public:
 	HRESULT Save_HeightMap();
 	HRESULT Load_SplattingMap();
 	HRESULT Add_Cell(_vec3* vPosArray);
+	void Add_NavPoint(CNavPoint* pNavPoint) {
+		m_vecNavPoint.push_back(pNavPoint);	}
 public:
 	virtual HRESULT Ready_GameObject_Prototype();
 	virtual HRESULT Ready_GameObject();
@@ -55,8 +57,10 @@ private:
 	CBuffer_Terrain*	m_pBufferCom = nullptr;
 	CTexture*			m_pTextureCom = nullptr;
 	CShader*			m_pShaderCom = nullptr;
+public:
 	CNavigation*		m_pNavigationCom = nullptr;
-
+	vector<CNavPoint*>  m_vecNavPoint;
+private:
 	_float				m_fRadius = 0;
 
 	LPDIRECT3DTEXTURE9	m_pFilterTexture = nullptr;
@@ -70,9 +74,13 @@ private:
 	_vec3				m_vOut;
 	_vec3				m_vPickingPoint;
 
-public:
+	// NavPoint
+	LPD3DXLINE				m_pLine = nullptr;
+
+private:
 	HRESULT Ready_Component();
 	HRESULT SetUp_ConstantTable(LPD3DXEFFECT pEffect);
+	void Render_NavPoint();
 public:
 	static CToolTerrain* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone_GameObject();

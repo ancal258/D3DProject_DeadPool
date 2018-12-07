@@ -1,6 +1,35 @@
-﻿  Page_Object.cpp
-d:\github\d3dproject_deadpool\d3dxframework\tool\page_object.cpp(1435): warning C4805: '==': 연산에 'bool' 형식과 'BOOL' 형식을 함께 사용하는 것은 안전하지 않습니다.
-d:\github\d3dproject_deadpool\d3dxframework\tool\page_object.cpp(1448): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
-d:\github\d3dproject_deadpool\d3dxframework\tool\page_object.cpp(1462): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
-  Tool.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Tool\.\Bin\Tool.exe
+﻿  ToolTerrain.cpp
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\navpoint.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\toolterrain.cpp(314): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\toolterrain.cpp(316): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  Page_Navigation.cpp
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\navpoint.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  ToolView.cpp
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\campoint.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\eventcube.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\navpoint.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+  Static_Object.cpp
+  Page_Terrain.cpp
+  Page_Object.cpp
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\page_object.cpp(1435): warning C4805: '==': 연산에 'bool' 형식과 'BOOL' 형식을 함께 사용하는 것은 안전하지 않습니다.
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\page_object.cpp(1448): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\page_object.cpp(1462): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+  Page_CinemaCam.cpp
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\campoint.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\eventcube.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\page_cinemacam.cpp(199): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  NavPoint.cpp
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\navpoint.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\navpoint.cpp(107): warning C4805: '==': 연산에 'bool' 형식과 'BOOL' 형식을 함께 사용하는 것은 안전하지 않습니다.
+  Form.cpp
+  EventCube.cpp
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\eventcube.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\eventcube.cpp(105): warning C4805: '==': 연산에 'bool' 형식과 'BOOL' 형식을 함께 사용하는 것은 안전하지 않습니다.
+  CamPoint.cpp
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\campoint.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\campoint.cpp(105): warning C4805: '==': 연산에 'bool' 형식과 'BOOL' 형식을 함께 사용하는 것은 안전하지 않습니다.
+  코드를 생성하고 있습니다...
+  Tool.vcxproj -> C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Tool\.\Bin\Tool.exe
   Tool.vcxproj -> .\Bin\Tool.pdb (Partial PDB)

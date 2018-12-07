@@ -8,6 +8,9 @@
 #include "ToolTerrain.h"
 #include "Object_Manager.h"
 #include "MainFrm.h"
+#include "ToolView.h"
+#include "NavPoint.h"
+#include "Graphic_Device.h"
 // CPage_Navigation 대화 상자입니다.
 
 IMPLEMENT_DYNAMIC(CPage_Navigation, CPropertyPage)
@@ -35,10 +38,21 @@ void CPage_Navigation::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_LIST1, m_NavList);
 }
 
-void CPage_Navigation::Set_VecPointNav(vector<_vec3>* pVecPoint)
+void CPage_Navigation::Set_VecPointNav(_vec3* pVecPoint)
 {
-	m_vecPoint = *pVecPoint;
-	int a = m_vecPoint.size();
+	//m_vecPoint.push_back(pVecPoint);
+
+	//if (m_vecPoint.size() == 3)
+	//{
+	//	CGameObject* pTerrain = const_cast<CGameObject*>(CObject_Manager::GetInstance()->Get_ObjectPointer(0, L"Layer_Terrain", 0));
+	//	_vec3 vArray[3];
+	//	vArray[0] = *m_vecPoint[0];
+	//	vArray[1] = *m_vecPoint[1];
+	//	vArray[2] = *m_vecPoint[2];
+	//	static_cast<CToolTerrain*>(pTerrain)->Add_Cell(vArray);
+	//	m_vecPoint.clear();
+	//}
+
 }
 //
 //void CPage_Navigation::Set_PickingPoint(_vec3 vPickingPoint)
@@ -94,6 +108,8 @@ END_MESSAGE_MAP()
 
 void CPage_Navigation::OnBnClickedButton1() // Save
 {
+	CGameObject* pTerrain = const_cast<CGameObject*>(CObject_Manager::GetInstance()->Get_ObjectPointer(0, L"Layer_Terrain", 0));
+
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	CFileDialog		FileDlg(FALSE, L"dat", L"*.dat", OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, _T("StaticObjectInfo Files (*.dat)|*.dat|"), this);
 
@@ -105,14 +121,15 @@ void CPage_Navigation::OnBnClickedButton1() // Save
 		hFile = CreateFile(FileDlg.GetPathName(), GENERIC_WRITE, 0, nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, 0);
 		if (0 == hFile)
 			return;
+		auto vecNavPoint = static_cast<CToolTerrain*>(pTerrain)->m_vecNavPoint;
 
-		_ulong		dwNumCell = m_vecPoint.size();
+		_ulong		dwNumCell = vecNavPoint.size() / 3;	// m_vecPoint.size();
 
 		WriteFile(hFile, &dwNumCell, sizeof(_ulong), &dwByte, nullptr);
 
-		for (auto& vPoint : m_vecPoint)
+		for (auto& vNavPoint : vecNavPoint)
 		{
-			WriteFile(hFile, vPoint , sizeof(_vec3), &dwByte, nullptr);
+			WriteFile(hFile, vNavPoint->m_vWorldPosition, sizeof(_vec3), &dwByte, nullptr);
 		}
 
 		CloseHandle(hFile);
@@ -124,9 +141,7 @@ void CPage_Navigation::OnBnClickedButton1() // Save
 
 void CPage_Navigation::OnBnClickedButton10() // Load
 {
-	m_vecPoint.clear();
-	m_NavList.ResetContent();
-	m_PointList.ResetContent();
+	CMainFrame*		pMainFrame = (CMainFrame*)AfxGetMainWnd();
 
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	CFileDialog		FileDlg(TRUE, L"dat", L"*.dat", OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT, _T("TileInfo Files (*.dat)|*.dat|"), this);
@@ -154,17 +169,19 @@ void CPage_Navigation::OnBnClickedButton10() // Load
 				break;
 
 			const CGameObject* pTerrain = CObject_Manager::GetInstance()->Get_ObjectPointer(0, L"Layer_Terrain", 0);
-			if (nullptr != pTerrain)
-				((CToolTerrain*)pTerrain)->Add_Cell(vPoint);
-
-
+			//if (nullptr != pTerrain)
+			//	((CToolTerrain*)pTerrain)->Add_Cell(vPoint);
+			CGameObject*	pGameObject = nullptr;
+			if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_NavPoint", L"Layer_NavPoint", &pGameObject)))
+				return;
 			for (size_t i = 0; i < 3; i++)
 			{
-				m_vecPoint.push_back(vPoint[i]);
+				static_cast<CNavPoint*>(pGameObject)->Set_Position(&vPoint[i]);
+				((CToolTerrain*)pTerrain)->Add_NavPoint(static_cast<CNavPoint*>(pGameObject));
 			}
-			_tchar szPoint[MAX_PATH] = L"";
-			wsprintf(szPoint, L"Cell_%d", m_NavList.GetCount());
-			m_NavList.AddString(szPoint);
+			//_tchar szPoint[MAX_PATH] = L"";
+			//wsprintf(szPoint, L"Cell_%d", m_NavList.GetCount());
+			//m_NavList.AddString(szPoint);
 		}
 
 		CloseHandle(hFile);
@@ -186,4 +203,19 @@ BOOL CPage_Navigation::OnSetActive()
 		((CToolTerrain*)pTerrain)->Set_MouseState(STATE_ADD_NAV);
 	}
 	return CPropertyPage::OnSetActive();
+}
+
+
+BOOL CPage_Navigation::OnInitDialog()
+{
+	CPropertyPage::OnInitDialog();
+
+	// TODO:  여기에 추가 초기화 작업을 추가합니다.
+	m_pGraphic_Device = CGraphic_Device::GetInstance()->Get_GraphicDev();
+
+	if (FAILED(D3DXCreateLine(m_pGraphic_Device, &m_pLine)))
+		return E_FAIL;
+
+	return TRUE;  // return TRUE unless you set the focus to a control
+				  // 예외: OCX 속성 페이지는 FALSE를 반환해야 합니다.
 }

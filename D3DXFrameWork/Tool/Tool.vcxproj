@@ -206,6 +206,7 @@
     <ClInclude Include="EventCube.h" />
     <ClInclude Include="Form.h" />
     <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="NavPoint.h" />
     <ClInclude Include="Page_Animation.h" />
     <ClInclude Include="Page_CinemaCam.h" />
     <ClInclude Include="Page_Navigation.h" />
@@ -229,6 +230,7 @@
     <ClCompile Include="EventCube.cpp" />
     <ClCompile Include="Form.cpp" />
     <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="NavPoint.cpp" />
     <ClCompile Include="Page_Animation.cpp" />
     <ClCompile Include="Page_CinemaCam.cpp" />
     <ClCompile Include="Page_Navigation.cpp" />

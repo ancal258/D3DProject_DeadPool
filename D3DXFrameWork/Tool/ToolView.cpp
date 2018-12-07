@@ -24,6 +24,7 @@
 #include "Player.h"
 #include "CamPoint.h"
 #include "EventCube.h"
+#include "NavPoint.h"
 
 #include "Static_Object.h"
 
@@ -391,6 +392,8 @@ HRESULT CToolView::Ready_GameObject_Prototype_Static()
 	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_CamPoint", CCamPoint::Create(m_pGraphic_Device))))
 		return E_FAIL;
 	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_EventCube", CEventCube::Create(m_pGraphic_Device))))
+		return E_FAIL;
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_NavPoint", CNavPoint::Create(m_pGraphic_Device))))
 		return E_FAIL;
 	return NOERROR;
 }
@@ -814,6 +817,7 @@ void CToolView::OnInitialUpdate()
 		return;
 
 
+
 	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
 }
 
@@ -865,9 +869,14 @@ void CToolView::OnLButtonUp(UINT nFlags, CPoint point)
 		}
 		if (STATE_ADD_NAV == ((CToolTerrain*)pTerrain)->Get_MouseState())
 		{
-			vector<_vec3>* pVecPoint = ((CToolTerrain*)pTerrain)->Get_vecPoint();
+			_vec3 PickingPoint = ((CToolTerrain*)pTerrain)->Get_PickingPoint();
 			CMainFrame*		pMainFrame = (CMainFrame*)AfxGetMainWnd();
-			pMainFrame->Set_VecPointNav(pVecPoint);
+			CGameObject*	pGameObject = nullptr;
+			if (FAILED(Ready_Layer_Object(L"Prototype_NavPoint", L"Layer_NavPoint", &pGameObject)))
+				return;
+			static_cast<CNavPoint*>(pGameObject)->Set_Position(&PickingPoint);
+			((CToolTerrain*)pTerrain)->Add_NavPoint(static_cast<CNavPoint*>(pGameObject));
+			//pMainFrame->Set_VecPointNav(&PickingPoint);
 		}
 		if (STATE_ADD_CAM == ((CToolTerrain*)pTerrain)->Get_MouseState())
 		{
