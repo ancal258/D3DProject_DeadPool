@@ -178,7 +178,7 @@ void CPlayer::Render_GameObject()
 
 	Safe_Release(pEffect);
 
-	//m_pNavigationCom->Render_Navigation();
+	m_pNavigationCom->Render_Navigation();
 
 	m_pColliderCom->Render_Collider();
 
@@ -269,7 +269,7 @@ HRESULT CPlayer::SetUp_StageInfo(_uint iStage)
 	{
 		m_pTransformCom->Scaling(0.01f, 0.01f, 0.01f);
 		m_pTransformCom->Set_AngleY(D3DXToRadian(48));
-		m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(15.f, 0.f, 15.f));
+		m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(5.f, 0.f, 5.f));
 	}
 
 	m_pAnimator = CAnimator::Create(Get_Graphic_Device(), m_pMeshCom, m_pTransformCom, m_pNavigationCom, m_iStageNum);

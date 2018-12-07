@@ -126,7 +126,31 @@ void CPage_Navigation::OnBnClickedButton1() // Save
 		_ulong		dwNumCell = vecNavPoint.size() / 3;	// m_vecPoint.size();
 
 		WriteFile(hFile, &dwNumCell, sizeof(_ulong), &dwByte, nullptr);
+		/*
+			여기서 점 3개로 선 2개를 만들어 외적, 양이면 그대로, 음이면 반대로 저장해야한다.
+		*/
+		for (int i = 0; i < vecNavPoint.size(); i += 3)
+		{
+			_vec3 vPoint[3];
 
+			vPoint[0] = vecNavPoint[i]->m_vWorldPosition;
+			vPoint[1] = vecNavPoint[i+1]->m_vWorldPosition;
+			vPoint[2] = vecNavPoint[i+2]->m_vWorldPosition;
+
+			_vec3 vDir[2];
+			vDir[0] = vPoint[1] - vPoint[0];
+			vDir[1] = vPoint[2] - vPoint[1];
+
+			_vec3 vCross;
+			D3DXVec3Cross(&vCross, &vDir[0], &vDir[1]);
+
+			if (vCross.y < 0)
+			{
+				_vec3 vTmp = vecNavPoint[i]->m_vWorldPosition;
+				vecNavPoint[i]->m_vWorldPosition = vecNavPoint[i + 2]->m_vWorldPosition;
+				vecNavPoint[i + 2]->m_vWorldPosition = vTmp;
+			}
+		}
 		for (auto& vNavPoint : vecNavPoint)
 		{
 			WriteFile(hFile, vNavPoint->m_vWorldPosition, sizeof(_vec3), &dwByte, nullptr);
@@ -172,10 +196,10 @@ void CPage_Navigation::OnBnClickedButton10() // Load
 			//if (nullptr != pTerrain)
 			//	((CToolTerrain*)pTerrain)->Add_Cell(vPoint);
 			CGameObject*	pGameObject = nullptr;
-			if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_NavPoint", L"Layer_NavPoint", &pGameObject)))
-				return;
 			for (size_t i = 0; i < 3; i++)
 			{
+			if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_NavPoint", L"Layer_NavPoint", &pGameObject)))
+				return;
 				static_cast<CNavPoint*>(pGameObject)->Set_Position(&vPoint[i]);
 				((CToolTerrain*)pTerrain)->Add_NavPoint(static_cast<CNavPoint*>(pGameObject));
 			}

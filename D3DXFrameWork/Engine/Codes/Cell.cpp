@@ -121,7 +121,7 @@ _vec2 CCell::Sliding_Move(const _vec3 * pLook, _ulong dwSlideIndex)
 	_vec2 vLook = _vec2((*pLook).x,(*pLook).z);
 	_vec2 vReplectLook = _vec2((vLook * -1).x, (vLook * -1).y);
 	_vec2 vProj = m_vNormal[dwSlideIndex];
-	vProj *= (D3DXVec2Dot(&m_vNormal[dwSlideIndex], &vReplectLook) - 0.6f); // ≈ıøµ ∫§≈Õ
+	vProj *= (D3DXVec2Dot(&m_vNormal[dwSlideIndex], &vReplectLook)); // ≈ıøµ ∫§≈Õ
 	
 	return vLook + vProj;
 }

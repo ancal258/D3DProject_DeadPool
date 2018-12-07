@@ -71,6 +71,7 @@ _bool CNavigation::Move_OnNavigation(CTransform * pTransformCom, const _float & 
 	vPosition += vLook * fSpeedPerSec * fTimeDelta;
 
 	_ulong		dwMoveIndex = 0;
+	_ulong		dwSlideIndex = 0;
 
 	if (true == m_vecCell[m_dwCurrentIdx]->Is_Move(&vPosition, &dwMoveIndex))
 	{
@@ -79,7 +80,17 @@ _bool CNavigation::Move_OnNavigation(CTransform * pTransformCom, const _float & 
 	}
 	else
 	{
-		int a = 0;
+		////	int a = 0;
+		//vPosition -= vLook * fSpeedPerSec * fTimeDelta;
+		//_vec2	vSlide = m_vecCell[m_dwCurrentIdx]->Sliding_Move(&vLook, m_dwCurrentIdx);
+		//_vec3   vSlide_v3 = _vec3(vSlide.x, vPosition.y, vSlide.y); // slide y == z
+		//vPosition += vSlide_v3 * fSpeedPerSec * fTimeDelta;
+		////vPosition += -vLook * 0.1f;
+		//if (true == m_vecCell[m_dwCurrentIdx]->Is_Sliding(&vPosition, &dwMoveIndex))
+		//{
+		//	pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &vPosition);
+		//	m_dwCurrentIdx = dwMoveIndex; // 현재 인덱스.
+		//}
 	}
 
 
