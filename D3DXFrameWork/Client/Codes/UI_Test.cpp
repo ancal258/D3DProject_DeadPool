@@ -107,12 +107,12 @@ HRESULT CUI_Test::Ready_Component()
 		return E_FAIL;
 
 	// For.Com_Shader
-	m_pShaderCom = (CShader*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Shader_UI");
+	m_pShaderCom = (CShader*)pComponent_Manager->Clone_Component(SCENE_STATIC, L"Component_Shader_UI");
 	if (FAILED(Add_Component(L"Com_Shader", m_pShaderCom)))
 		return E_FAIL;
 
 	// For.Com_Texture
-	m_pTextureCom = (CTexture*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Texture_UI_Test");
+	m_pTextureCom = (CTexture*)pComponent_Manager->Clone_Component(SCENE_LOGO, L"Component_Texture_UI_Test");
 	if (FAILED(Add_Component(L"Com_Texture", m_pTextureCom)))
 		return E_FAIL;
 

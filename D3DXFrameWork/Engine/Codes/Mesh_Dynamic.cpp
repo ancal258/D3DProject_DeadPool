@@ -8,13 +8,10 @@ CMesh_Dynamic::CMesh_Dynamic(LPDIRECT3DDEVICE9 pGraphic_Device)
 
 CMesh_Dynamic::CMesh_Dynamic(const CMesh_Dynamic & rhs)
 	: CComponent(rhs)
-	, m_pLoader(rhs.m_pLoader)
-	, m_pRootFrame(rhs.m_pRootFrame)
-	, m_matPivot(rhs.m_matPivot)
-	, m_vecMeshContainerList(rhs.m_vecMeshContainerList)
-	, m_pAniCtrl(CAnimationCtrl::Create(*rhs.m_pAniCtrl))
+	,m_pLoader(rhs.m_pLoader)
 {
 	m_pLoader->AddRef();
+	lstrcpy(m_pFilePath, rhs.m_pFilePath);
 }
 
 const _matrix * CMesh_Dynamic::Get_FrameMatrixByName(const char * pFrameName)
@@ -29,17 +26,22 @@ const _matrix * CMesh_Dynamic::Get_FrameMatrixByName(const char * pFrameName)
 
 HRESULT CMesh_Dynamic::Ready_Mesh(const _tchar * pFilePath, const _tchar * pFileName)
 {
-	_tchar			szFullPath[MAX_PATH] = L"";
-	lstrcpy(szFullPath, pFilePath);
-	lstrcat(szFullPath, pFileName);
+	lstrcpy(m_pFilePath, pFilePath);
+	lstrcat(m_pFilePath, pFileName);
 
 	m_pLoader = CHierarchyLoader::Create(Get_Graphic_Device(), pFilePath);
 	if (nullptr == m_pLoader)
 		return E_FAIL;
 
+	return NOERROR;
+}
+
+HRESULT CMesh_Dynamic::Ready_CloneMesh()
+{
+
 	LPD3DXANIMATIONCONTROLLER pAniCtrl = nullptr;
 
-	if (FAILED(D3DXLoadMeshHierarchyFromX(szFullPath, D3DXMESH_MANAGED, Get_Graphic_Device(), m_pLoader, nullptr, &m_pRootFrame,  &pAniCtrl)))
+	if (FAILED(D3DXLoadMeshHierarchyFromX(m_pFilePath, D3DXMESH_MANAGED, Get_Graphic_Device(), m_pLoader, nullptr, &m_pRootFrame, &pAniCtrl)))
 		return E_FAIL;
 
 	m_pAniCtrl = CAnimationCtrl::Create(pAniCtrl);
@@ -47,6 +49,8 @@ HRESULT CMesh_Dynamic::Ready_Mesh(const _tchar * pFilePath, const _tchar * pFile
 		return E_FAIL;
 
 	Safe_Release(pAniCtrl);
+
+	//m_pAniCtrl = CAnimationCtrl::Create(*m_pAniCtrl);
 
 	D3DXMatrixIdentity(&m_matPivot);
 	D3DXMatrixRotationY(&m_matPivot, D3DXToRadian(270));
@@ -230,12 +234,21 @@ CMesh_Dynamic * CMesh_Dynamic::Create(LPDIRECT3DDEVICE9 pGraphic_Device, const _
 
 CComponent * CMesh_Dynamic::Clone_Component()
 {
-	return new CMesh_Dynamic(*this);
+	CMesh_Dynamic*		pInstance = new CMesh_Dynamic(*this);
+
+	if (FAILED(pInstance->Ready_CloneMesh()))
+	{
+		_MSG_BOX("CMesh_Dynamic Clone Failed");
+		Safe_Release(pInstance);
+	}
+
+	return pInstance;
 }
+
 void CMesh_Dynamic::Free()
 {
 	//m_pLoader->DestroyFrame();
-	if (false == is_Clone())
+	if (true == is_Clone())
 	{
 		m_vecMeshContainerList.clear();
 		m_pLoader->DestroyFrame(m_pRootFrame);

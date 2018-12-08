@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "..\Headers\Scene_Stage.h"
 #include "Component_Manager.h"
-#include "Scene_Field.h"
+#include "Scene_Loading.h"
 #include "Management.h"
 #include "Loading.h"
 
@@ -28,11 +28,7 @@ _int CScene_Stage::Update_Scene(const _float & fTimeDelta)
 
 	if (pInput_Device->Get_DIKeyState(DIK_L) & 0x80)
 	{
-		m_pLoading = CLoading::Create(Get_Graphic_Device(), SCENE_FIELD);
-		if (nullptr == m_pLoading)
-			return E_FAIL;
-
-		CScene*		pNewScene = CScene_Field::Create(Get_Graphic_Device());
+		CScene*		pNewScene = CScene_Loading::Create(Get_Graphic_Device(),SCENE_FIELD);
 		if (nullptr == pNewScene)
 			return -1;
 
@@ -79,11 +75,5 @@ CScene_Stage * CScene_Stage::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 }
 void CScene_Stage::Free()
 {
-	if (FAILED(CObject_Manager::GetInstance()->Clear_Object(SCENE_STAGE)))
-		return;
-
-	if (FAILED(CComponent_Manager::GetInstance()->Clear_Component(SCENE_STAGE)))
-		return;
-
 	CScene::Free();
 }

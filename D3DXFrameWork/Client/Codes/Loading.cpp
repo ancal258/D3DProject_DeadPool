@@ -714,6 +714,14 @@ HRESULT CLoading::Ready_Component_Prototype_SceneFIELD()
 
 
 	////////////////////////////////////////////
+
+	// For.Component_Mesh_Bicycle
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Bicycle", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Bicycle.x"))))
+		return E_FAIL;
+	// For.Component_Mesh_Weight_Barbel
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Weight_Barbel", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Weight_Barbel.x"))))
+		return E_FAIL;
+
 	Safe_Release(pComponent_Manager);
 
 	return NOERROR;
@@ -890,6 +898,14 @@ HRESULT CLoading::Ready_Stage_Prototype_GameObject_SceneFIELD()
 		return E_FAIL;
 	// For.Prototype_
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_WoodenBox", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_WoodenBox"))))
+		return E_FAIL;
+	////////////////////////////////////////////////////
+
+	// For.GameObject_Bicycle
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Bicycle", CStatic_Object::Create(Get_Graphic_Device(), L"Component_Mesh_Bicycle"))))
+		return E_FAIL;
+	// For.GameObject_Weight_Barbel
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Weight_Barbel", CStatic_Object::Create(Get_Graphic_Device(), L"Component_Mesh_Weight_Barbel"))))
 		return E_FAIL;
 
 	return NOERROR;

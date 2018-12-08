@@ -124,7 +124,7 @@ HRESULT CMainApp::Ready_Static_Component()
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STATIC, L"Component_Frustum", CFrustum::Create(m_pGraphic_Device))))
 		return E_FAIL;
 	// For.Component_Shader_UI
-	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Shader_UI", CShader::Create(m_pGraphic_Device, L"../Bin/ShaderFiles/Shader_UI.fx"))))
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STATIC, L"Component_Shader_UI", CShader::Create(m_pGraphic_Device, L"../Bin/ShaderFiles/Shader_UI.fx"))))
 		return E_FAIL;
 
 	Safe_Release(pComponent_Manager);	

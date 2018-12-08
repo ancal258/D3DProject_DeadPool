@@ -27,6 +27,16 @@ CAnimationCtrl::CAnimationCtrl(const CAnimationCtrl & rhs)
 
 HRESULT CAnimationCtrl::Ready_AnimationCtrl()
 {
+	//( 출력될 갯수?, X파일 내에 정의되어 있는 애니메이션 갯수 , 
+
+	m_vecAnimSet.reserve(m_pAniCtrl->GetMaxNumAnimationSets());
+	for (size_t i = 0; i < m_pAniCtrl->GetMaxNumAnimationSets(); i++)
+	{
+		LPD3DXANIMATIONSET pAS = nullptr;
+		m_pAniCtrl->GetAnimationSet(i, &pAS);
+		m_vecAnimSet.push_back(pAS);
+	}
+
 	return NOERROR;
 }
 

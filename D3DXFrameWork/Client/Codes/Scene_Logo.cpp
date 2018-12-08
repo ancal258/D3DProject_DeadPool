@@ -2,7 +2,7 @@
 #include "..\Headers\Scene_Logo.h"
 #include "Component_Manager.h"
 #include "Back_Logo.h"
-#include "Scene_Stage.h"
+#include "Scene_Loading.h"
 #include "Management.h"
 #include "Loading.h"
 
@@ -28,10 +28,6 @@ HRESULT CScene_Logo::Ready_Scene()
 	if (FAILED(Ready_Layer_BackGround(L"Layer_BackGround")))
 		return E_FAIL;
 
-	m_pLoading = CLoading::Create(Get_Graphic_Device(), SCENE_STAGE);
-	if (nullptr == m_pLoading)
-		return E_FAIL;
-
 
 	return NOERROR;
 }
@@ -45,11 +41,7 @@ _int CScene_Logo::Update_Scene(const _float & fTimeDelta)
 
 	if (pInput_Device->Get_DIKeyState(DIK_RETURN) & 0x80)
 	{
-		if (false == m_pLoading->Get_Finish())
-			return 0;
-
-
-		CScene*		pNewScene = CScene_Stage::Create(Get_Graphic_Device());
+		CScene*		pNewScene = CScene_Loading::Create(Get_Graphic_Device(),SCENE_STAGE);
 		if (nullptr == pNewScene)
 			return -1;
 
@@ -88,7 +80,7 @@ HRESULT CScene_Logo::Ready_Logo_Prototype_Component()
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_LOGO, L"Component_Texture_Logo", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/Logo/Logo.png"))))
 		return E_FAIL;
 	// For.Component_Texture_Filter
-	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_UI_Test", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/UI/Test.tga"))))
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_LOGO, L"Component_Texture_UI_Test", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/UI/Test.tga"))))
 		return E_FAIL;
 	Safe_Release(pComponent_Manager);
 	
@@ -133,13 +125,6 @@ CScene_Logo * CScene_Logo::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 }
 void CScene_Logo::Free()
 {
-	Safe_Release(m_pLoading);
-
-	if (FAILED(CObject_Manager::GetInstance()->Clear_Object(SCENE_LOGO)))
-		return;
-
-	if (FAILED(CComponent_Manager::GetInstance()->Clear_Component(SCENE_LOGO)))
-		return;
 
 	CScene::Free();
 }

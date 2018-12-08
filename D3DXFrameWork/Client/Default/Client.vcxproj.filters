@@ -139,6 +139,9 @@
     <Filter Include="02.GameObject\01.For.Logo\01.UI\Test">
       <UniqueIdentifier>{f1ccfb04-b190-412f-9e68-d9cbfc1f06b8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Scene\98.Scene_Loading">
+      <UniqueIdentifier>{294a83a7-7136-4735-b3a9-47b9e63b8af3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -246,6 +249,9 @@
     <ClInclude Include="..\Headers\UI_Test.h">
       <Filter>02.GameObject\01.For.Logo\01.UI\Test</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\Scene_Loading.h">
+      <Filter>01.Scene\98.Scene_Loading</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -337,6 +343,9 @@
     </ClCompile>
     <ClCompile Include="..\Codes\UI_Test.cpp">
       <Filter>02.GameObject\01.For.Logo\01.UI\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Scene_Loading.cpp">
+      <Filter>01.Scene\98.Scene_Loading</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

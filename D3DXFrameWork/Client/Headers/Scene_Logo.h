@@ -21,8 +21,6 @@ private:
 	HRESULT Ready_Logo_Prototype_GameObject(); // 로고에서 쓰기위한 원형 객체 생성.
 	HRESULT Ready_Layer_BackGround(const _tchar* pLayerTag); // 로고에서 실제 사용하기위한 객체 생성.
 
-private:
-	CLoading*		m_pLoading = nullptr;
 public:
 	static CScene_Logo* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 protected:
