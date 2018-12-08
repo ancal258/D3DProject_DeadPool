@@ -2,7 +2,11 @@
 
 #include "Defines.h"
 #include "Camera.h"
+_BEGIN(Engine)
 
+class CFrustum;
+
+_END
 _BEGIN(Client)
 
 class CCamera_Target final : public CCamera
@@ -20,13 +24,20 @@ public:
 public:
 	virtual HRESULT SetUp_CameraInfo(CAMERADESC CamDesc, PROJDESC ProjDesc);
 	virtual HRESULT SetUp_Target(const CGameObject* pGameObject);
+public:
+	HRESULT Ready_Component();
+	_bool Culling_ToFrustum(CTransform* pTransform, CVIBuffer* pBuffer = nullptr, const _float& fRadius = 0.f);
+	_bool Culling_ToQuadTree(CTransform* pTransform, CVIBuffer* pBuffer = nullptr, const _float& fRadius = 0.f);
+private:
+	CFrustum*		m_pFrustumCom = nullptr;
+
 private:
 	_float				m_fCamSpeed = 0.f;
 	const CGameObject*	m_pTarget = nullptr;
 	const _matrix*		m_pTargetWorldMatrix = nullptr;
 	const _long*		m_pTargetMouseMove = nullptr;
 	_float				m_fAngle[2] = { 0 };
-
+private:
 	_float				m_fCameraEyeX = 0.f;
 	_float				m_fCameraEyeY = 0.f;
 	_float				m_fCameraEyeZ = 0.f;

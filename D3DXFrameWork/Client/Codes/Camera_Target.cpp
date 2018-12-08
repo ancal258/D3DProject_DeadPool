@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "..\Headers\Camera_Target.h"
+#include "Component_Manager.h"
 #include "Player.h"
 
 _USING(Client)
@@ -28,6 +29,10 @@ HRESULT CCamera_Target::Ready_GameObject_Prototype()
 
 HRESULT CCamera_Target::Ready_GameObject()
 {
+	//if (FAILED(Ready_Component()))
+	//	return E_FAIL;
+
+
 	m_fCamSpeed = 10.f;
 	m_fAngle[0] = D3DXToRadian(48.f);
 	return NOERROR;
@@ -130,6 +135,42 @@ HRESULT CCamera_Target::SetUp_Target(const CGameObject * pGameObject)
 		m_fCameraAtZ = 0.f;
 	}
 	return NOERROR;
+}
+
+HRESULT CCamera_Target::Ready_Component()
+{
+	CComponent_Manager*		pComponent_Manager = CComponent_Manager::GetInstance();
+	if (nullptr == pComponent_Manager)
+		return E_FAIL;
+
+	pComponent_Manager->AddRef();
+
+	// For.Com_Frustum
+	m_pFrustumCom = (CFrustum*)pComponent_Manager->Clone_Component(SCENE_STATIC, L"Component_Frustum");
+	if (nullptr == m_pFrustumCom)
+		return E_FAIL;
+	if (FAILED(Add_Component(L"Com_Frustum", m_pFrustumCom)))
+		return E_FAIL;
+
+	Safe_Release(pComponent_Manager);
+
+	return NOERROR;
+}
+
+_bool CCamera_Target::Culling_ToFrustum(CTransform * pTransform, CVIBuffer * pBuffer, const _float & fRadius)
+{
+	if (nullptr == m_pFrustumCom)
+		return false;
+
+	return m_pFrustumCom->Culling_ToFrustum(pTransform, pBuffer, fRadius);
+}
+
+_bool CCamera_Target::Culling_ToQuadTree(CTransform * pTransform, CVIBuffer * pBuffer, const _float & fRadius)
+{
+	if (nullptr == m_pFrustumCom)
+		return false;
+
+	return m_pFrustumCom->Culling_ToQuadTree(pTransform, pBuffer, fRadius);
 }
 
 void CCamera_Target::MouseEvent()

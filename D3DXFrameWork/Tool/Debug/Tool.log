@@ -1,6 +1,5 @@
-﻿  Page_Object.cpp
-d:\github\d3dproject_deadpool\d3dxframework\tool\page_object.cpp(1659): warning C4805: '==': 연산에 'bool' 형식과 'BOOL' 형식을 함께 사용하는 것은 안전하지 않습니다.
-d:\github\d3dproject_deadpool\d3dxframework\tool\page_object.cpp(1672): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
-d:\github\d3dproject_deadpool\d3dxframework\tool\page_object.cpp(1686): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+﻿  Page_Navigation.cpp
+d:\github\d3dproject_deadpool\d3dxframework\tool\navpoint.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+d:\github\d3dproject_deadpool\d3dxframework\tool\page_navigation.cpp(132): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   Tool.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Tool\.\Bin\Tool.exe
   Tool.vcxproj -> .\Bin\Tool.pdb (Partial PDB)

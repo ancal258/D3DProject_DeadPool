@@ -74,7 +74,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	pFrame_Manager->AddRef();
 
 	// For.Frame_60
-	if (FAILED(pFrame_Manager->Add_Frame(L"Frame_60", 60)))
+	if (FAILED(pFrame_Manager->Add_Frame(L"Frame_60", 200)))
 		return FALSE;
 
 	srand((unsigned)time(NULL));
