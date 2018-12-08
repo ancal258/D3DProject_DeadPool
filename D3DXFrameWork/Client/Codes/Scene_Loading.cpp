@@ -1,11 +1,12 @@
 #include "stdafx.h"
 #include "..\Headers\Scene_Loading.h"
 #include "Component_Manager.h"
-#include "Back_Logo.h"
+#include "Back_Loading.h"
 #include "Scene_Stage.h"
 #include "Scene_Field.h"
 #include "Management.h"
 #include "Loading.h"
+#include "Font_Manager.h"
 
 // UI
 #include "UI_Test.h"
@@ -68,8 +69,11 @@ _int CScene_Loading::Update_Scene(const _float & fTimeDelta)
 	if (nullptr == pInput_Device)
 		return -1;
 
+
 	if (pInput_Device->Get_DIKeyState(DIK_RETURN) & 0x80)
 	{
+
+
 		if (false == m_pLoading->Get_Finish())
 			return 0;
 
@@ -108,7 +112,16 @@ _int CScene_Loading::LastUpdate_Scene(const _float & fTimeDelta)
 
 void CScene_Loading::Render_Scene()
 {
-
+	_tchar		szLoading[128] = L"";
+	lstrcpy(szLoading, m_pLoading->Get_String());
+	if (lstrlen(szLoading) > 1)
+	{
+		_matrix	   matTransform, matScale, matTranslate;
+		D3DXMatrixScaling(&matScale, 1.f, 1.f, 2.f);
+		D3DXMatrixTranslation(&matTranslate, 100, (g_iBackCY)-50, 0.f);
+		matTransform = matScale * matTranslate;
+		CFont_Manager::GetInstance()->Render_Font(L"Font_Magic", szLoading, D3DXCOLOR(1.f, 1.f, 1.f, 1.f), &matTransform);
+	}
 }
 
 HRESULT CScene_Loading::Ready_Logo_Prototype_Component()
@@ -123,7 +136,7 @@ HRESULT CScene_Loading::Ready_Logo_Prototype_Component()
 		return E_FAIL;
 
 	// For.Component_Texture_Logo
-	if (FAILED(pComponent_Manager->Add_Component(SCENE_LOGO, L"Component_Texture_Logo", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/Logo/Logo.png"))))
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_LOGO, L"Component_Texture_BackGround", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/BackGround/BackGround.tga"))))
 		return E_FAIL;
 
 	// For.Component_Texture_Filter
@@ -137,7 +150,7 @@ HRESULT CScene_Loading::Ready_Logo_Prototype_Component()
 HRESULT CScene_Loading::Ready_Logo_Prototype_GameObject()
 {
 	// For.GameObject_BackLogo
-	if (FAILED(Add_Object_Prototype(SCENE_LOGO, L"GameObject_BackLogo", CBack_Logo::Create(Get_Graphic_Device()))))
+	if (FAILED(Add_Object_Prototype(SCENE_LOGO, L"GameObject_BackLogo", CBack_Loading::Create(Get_Graphic_Device()))))
 		return E_FAIL;
 	// For.GameObject_BackLogo
 	if (FAILED(Add_Object_Prototype(SCENE_LOGO, L"GameObject_UI_Test", CUI_Test::Create(Get_Graphic_Device()))))
@@ -151,9 +164,9 @@ HRESULT CScene_Loading::Ready_Layer_BackGround(const _tchar* pLayerTag)
 	// For.BackGround
 	if (FAILED(Add_Object(SCENE_LOGO, L"GameObject_BackLogo", SCENE_LOGO, pLayerTag)))
 		return E_FAIL;
-	// For.TestUI
-	if (FAILED(Add_Object(SCENE_LOGO, L"GameObject_UI_Test", SCENE_LOGO, L"Layer_UI")))
-		return E_FAIL;
+	//// For.TestUI
+	//if (FAILED(Add_Object(SCENE_LOGO, L"GameObject_UI_Test", SCENE_LOGO, L"Layer_UI")))
+	//	return E_FAIL;
 
 	return NOERROR;
 }

@@ -70,15 +70,20 @@ HRESULT CLoading::Loading_Stage_APT()
 
 	if (FAILED(Ready_Static_Prototype_Component()))
 		return E_FAIL;
+	lstrcpy(m_szString, L"APT_Mesh_Load...");
 	if (FAILED(Ready_Componet_Prototype_SceneAPT()))
 		return E_FAIL;
 
+	lstrcpy(m_szString, L"APT_Prototype...");
 	if (FAILED(Ready_Stage_Prototype_GameObject_SceneAPT()))
 		return E_FAIL;
+	lstrcpy(m_szString, L"Layer_BackGround...");
 	if (FAILED(Ready_Layer_BackGround(L"Layer_BackGround")))
 		return E_FAIL;
+	lstrcpy(m_szString, L"Layer_Player...");
 	if (FAILED(Ready_Layer_Player(L"Layer_Player")))
 		return E_FAIL;
+	lstrcpy(m_szString, L"Layer_Camera...");
 	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Debug", L"Layer_Camera")))
 		return E_FAIL;
 
@@ -110,6 +115,7 @@ HRESULT CLoading::Loading_Stage_APT()
 
 	//MCIWndClose(m_hVideo);
 	m_isFinish = true;
+	lstrcpy(m_szString, L"Loading Complete");
 
 	//SetWindowText(g_hWnd, L"Complete");
 
@@ -123,17 +129,21 @@ HRESULT CLoading::Loading_Stage_FIELD()
 
 	if (FAILED(Ready_LightInfo_FIELD()))
 		return E_FAIL;
-
 	if (FAILED(Ready_Static_Prototype_Component()))
 		return E_FAIL;
+	lstrcpy(m_szString, L"Field_Mesh_Load...");
 	if (FAILED(Ready_Component_Prototype_SceneFIELD()))
 		return E_FAIL;
+	lstrcpy(m_szString, L"Field_Prototype...");
 	if (FAILED(Ready_Stage_Prototype_GameObject_SceneFIELD()))
 		return E_FAIL;
+	lstrcpy(m_szString, L"Layer_BackGround...");
 	if (FAILED(Ready_Layer_BackGround_FIELD(L"Layer_BackGround")))
 		return E_FAIL;
+	lstrcpy(m_szString, L"Layer_Player...");
 	if (FAILED(Ready_Layer_Player_FIELD(L"Layer_Player")))
 		return E_FAIL;
+	lstrcpy(m_szString, L"Layer_Camera...");
 	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Debug", L"Layer_Camera")))
 		return E_FAIL;
 
@@ -143,8 +153,7 @@ HRESULT CLoading::Loading_Stage_FIELD()
 	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Cinematic", L"Layer_Camera")))
 		return E_FAIL;
 	SetUp_CameraMove();
-
-
+	lstrcpy(m_szString, L"Layer_Object...");
 	if (FAILED(Ready_Layer_Object()))
 		return E_FAIL;
 
@@ -152,7 +161,7 @@ HRESULT CLoading::Loading_Stage_FIELD()
 		return E_FAIL;
 
 	m_isFinish = true;
-
+	lstrcpy(m_szString, L"Loading Complete");
 
 	return NOERROR;
 }
@@ -251,38 +260,47 @@ HRESULT CLoading::Ready_Static_Prototype_Component()
 	pComponent_Manager->AddRef();
 
 	// For.Component_Shader_Terrain
-	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Shader_Terrain", CShader::Create(Get_Graphic_Device(), L"../Bin/ShaderFiles/Shader_Terrain.fx"))))
+	lstrcpy(m_szString, L"../Bin/ShaderFiles/Shader_Terrain.fx");
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Shader_Terrain", CShader::Create(Get_Graphic_Device(), m_szString))))
 		return E_FAIL;
 
 	// For.Component_Shader_Mesh
-	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Shader_Mesh", CShader::Create(Get_Graphic_Device(), L"../Bin/ShaderFiles/Shader_Mesh.fx"))))
+	lstrcpy(m_szString, L"../Bin/ShaderFiles/Shader_Mesh.fx");
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Shader_Mesh", CShader::Create(Get_Graphic_Device(), m_szString))))
 		return E_FAIL;
 	// For.Component_Shader_Collider
-	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Shader_Collider", CShader::Create(Get_Graphic_Device(), L"../Bin/ShaderFiles/Shader_Collider.fx"))))
+	lstrcpy(m_szString, L"../Bin/ShaderFiles/Shader_Collider.fx");
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Shader_Collider", CShader::Create(Get_Graphic_Device(), m_szString))))
 		return E_FAIL;
 	// For.Component_Shader_Effect
-	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Shader_Effect", CShader::Create(Get_Graphic_Device(), L"../Bin/ShaderFiles/Shader_Effect.fx"))))
+	lstrcpy(m_szString, L"../Bin/ShaderFiles/Shader_Effect.fx");
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Shader_Effect", CShader::Create(Get_Graphic_Device(), m_szString))))
 		return E_FAIL;
 
 
 	// For.Component_Texture_Terrain
-	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_Terrain", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/Terrain/Grass_%d.tga", 4))))
+	lstrcpy(m_szString, L"../Bin/Resources/Textures/Terrain/Grass_%d.tga");
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_Terrain", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, m_szString, 4))))
 		return E_FAIL;
 
 	// For.Component_Texture_Filter
-	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_Filter", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/Terrain/Filter.bmp"))))
+	lstrcpy(m_szString, L"../Bin/Resources/Textures/Terrain/Filter.bmp");
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_Filter", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, m_szString))))
 		return E_FAIL;
 
 
 	// For.Component_Texture_Effect
-	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_Effect", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/Explosion/Explosion%d.png", 90))))
+	lstrcpy(m_szString, L"../Bin/Resources/Textures/Explosion/Explosion%d.png");
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_Effect", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, m_szString, 90))))
 		return E_FAIL;
 
 	// For.Component_Buffer_Terrain	
-	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Buffer_Terrain", CBuffer_Terrain::Create(Get_Graphic_Device(), L"../Bin/Resources/Textures/Terrain/Height.bmp", 1.f))))
+	lstrcpy(m_szString, L"../Bin/Resources/Textures/Terrain/Height.bmp");
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Buffer_Terrain", CBuffer_Terrain::Create(Get_Graphic_Device(), m_szString, 1.f))))
 		return E_FAIL;
 	// For.Component_Buffer_Terrain	
-	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Buffer_Terrain2", CBuffer_Terrain::Create(Get_Graphic_Device(), L"../Bin/Resources/Textures/Terrain/Height2.bmp", 4.f))))
+	lstrcpy(m_szString, L"../Bin/Resources/Textures/Terrain/Height2.bmp");
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Buffer_Terrain2", CBuffer_Terrain::Create(Get_Graphic_Device(), m_szString, 4.f))))
 		return E_FAIL;
 	// For.Component_Buffer_Collider
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Buffer_Collider", CBuffer_Collider::Create(Get_Graphic_Device()))))
@@ -1053,7 +1071,7 @@ HRESULT CLoading::Load_Static_Object(const _tchar * pFilePath)
 		{
 			break;
 		}
-
+		lstrcpy(m_szString, ObjectInfo.szPrototype_Tag);
 		if (FAILED(Add_Object(SCENE_STAGE, ObjectInfo.szPrototype_Tag, SCENE_STAGE, L"Layer_Load", &pStatic_Object)))
 			return E_FAIL;
 		((CStatic_Object*)pStatic_Object)->Set_StateInfo(&ObjectInfo.vRight, &ObjectInfo.vUp, &ObjectInfo.vLook, &ObjectInfo.vPos);

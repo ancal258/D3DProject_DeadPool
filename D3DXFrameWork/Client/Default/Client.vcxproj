@@ -167,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Headers\Animator.h" />
+    <ClInclude Include="..\Headers\Back_Loading.h" />
     <ClInclude Include="..\Headers\Back_Logo.h" />
     <ClInclude Include="..\Headers\Brawler.h" />
     <ClInclude Include="..\Headers\Brawler01.h" />
@@ -204,6 +205,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Codes\Animator.cpp" />
+    <ClCompile Include="..\Codes\Back_Loading.cpp" />
     <ClCompile Include="..\Codes\Back_Logo.cpp" />
     <ClCompile Include="..\Codes\Brawler.cpp" />
     <ClCompile Include="..\Codes\Brawler01.cpp" />

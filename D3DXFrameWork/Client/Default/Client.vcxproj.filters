@@ -142,6 +142,12 @@
     <Filter Include="01.Scene\98.Scene_Loading">
       <UniqueIdentifier>{294a83a7-7136-4735-b3a9-47b9e63b8af3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\99.For.Loading">
+      <UniqueIdentifier>{64142fea-ecb0-40a9-ba06-4a03acec19d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\99.For.Loading\Back_Loading">
+      <UniqueIdentifier>{7605e346-7ee2-46a0-805a-b6df5b480f13}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -252,6 +258,9 @@
     <ClInclude Include="..\Headers\Scene_Loading.h">
       <Filter>01.Scene\98.Scene_Loading</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\Back_Loading.h">
+      <Filter>02.GameObject\99.For.Loading\Back_Loading</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -346,6 +355,9 @@
     </ClCompile>
     <ClCompile Include="..\Codes\Scene_Loading.cpp">
       <Filter>01.Scene\98.Scene_Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Back_Loading.cpp">
+      <Filter>02.GameObject\99.For.Loading\Back_Loading</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

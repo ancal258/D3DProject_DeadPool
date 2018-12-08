@@ -1627,7 +1627,7 @@ void CPage_Object::OnBnClickedButton16() // Load
 				return;
 			if (nullptr != pMesh)
 			{
-				wsprintf(szMeshName, L"Load_%d", iMeshCntArray[MESH_END]);
+				wsprintf(szMeshName, pPrototype_Tag, iMeshCntArray[MESH_END]);
 
 				vGameObject.push_back(pMesh); // 오브젝트 메쉬들 추가될때마다 컨테이너에 저장, 파일 저장 할 때 순회하면서 데이터 저장.
 				m_MeshListBox.AddString(szMeshName);

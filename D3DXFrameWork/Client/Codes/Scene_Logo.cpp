@@ -125,6 +125,5 @@ CScene_Logo * CScene_Logo::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 }
 void CScene_Logo::Free()
 {
-
 	CScene::Free();
 }

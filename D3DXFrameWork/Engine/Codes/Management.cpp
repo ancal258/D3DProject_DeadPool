@@ -7,6 +7,7 @@
 #include "Object_Manager.h"
 #include "Light_Manager.h"
 #include "Target_Manager.h"
+#include "Font_Manager.h"
 _IMPLEMENT_SINGLETON(CManagement)
 
 CManagement::CManagement()
@@ -69,8 +70,6 @@ void CManagement::Release_Engine()
 	if (dwRefCnt = CTimer_Manager::GetInstance()->DestroyInstance())
 		_MSG_BOX("CTimer_Manager Release Failed");
 
-	
-
 	if (dwRefCnt = CManagement::GetInstance()->DestroyInstance())
 		_MSG_BOX("CManagement Release Failed");
 
@@ -82,6 +81,9 @@ void CManagement::Release_Engine()
 
 	if (dwRefCnt = CLight_Manager::GetInstance()->DestroyInstance())
 		_MSG_BOX("CLight_Manager Release Failed");
+
+	if (dwRefCnt = CFont_Manager::GetInstance()->DestroyInstance())
+		_MSG_BOX("CTimer_Manager Release Failed");
 
 	if (dwRefCnt = CTarget_Manager::GetInstance()->DestroyInstance())
 		_MSG_BOX("CTarget_Manager Release Failed");

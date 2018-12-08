@@ -176,12 +176,14 @@
     <ClInclude Include="..\Headers\Collider.h" />
     <ClInclude Include="..\Headers\Component.h" />
     <ClInclude Include="..\Headers\Component_Manager.h" />
+    <ClInclude Include="..\Headers\DXFont.h" />
     <ClInclude Include="..\Headers\Engine_Defines.h" />
     <ClInclude Include="..\Headers\Engine_Functor.h" />
     <ClInclude Include="..\Headers\Engine_Funtion.h" />
     <ClInclude Include="..\Headers\Engine_Macro.h" />
     <ClInclude Include="..\Headers\Engine_Struct.h" />
     <ClInclude Include="..\Headers\Engine_Typedef.h" />
+    <ClInclude Include="..\Headers\Font_Manager.h" />
     <ClInclude Include="..\Headers\Frame.h" />
     <ClInclude Include="..\Headers\Frame_Manager.h" />
     <ClInclude Include="..\Headers\Frustum.h" />
@@ -223,6 +225,8 @@
     <ClCompile Include="..\Codes\Collider.cpp" />
     <ClCompile Include="..\Codes\Component.cpp" />
     <ClCompile Include="..\Codes\Component_Manager.cpp" />
+    <ClCompile Include="..\Codes\DXFont.cpp" />
+    <ClCompile Include="..\Codes\Font_Manager.cpp" />
     <ClCompile Include="..\Codes\Frame.cpp" />
     <ClCompile Include="..\Codes\Frame_Manager.cpp" />
     <ClCompile Include="..\Codes\Frustum.cpp" />

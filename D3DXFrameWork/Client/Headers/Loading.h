@@ -75,6 +75,7 @@ private:
 private:
 	_tchar						m_szString[128] = L"";
 	_bool						m_isFinish = false;
+	_float						m_fPercent = 0;
 public:
 	static CLoading* Create(LPDIRECT3DDEVICE9 pGraphicDev, SCENEID eSceneID);
 protected:

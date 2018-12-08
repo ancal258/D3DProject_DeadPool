@@ -3,6 +3,7 @@
 #include "Management.h"
 #include "Input_Device.h"
 #include "Component_Manager.h"
+#include "Font_Manager.h"
 #include "Scene_Logo.h"
 #include "Scene_Intro.h"
 #include "Camera_Debug.h"
@@ -83,6 +84,9 @@ HRESULT CMainApp::Ready_Default_Setting(CGraphic_Device::WINMODE eMode, const _u
 	// For.Input_Device
 	if (FAILED(CInput_Device::GetInstance()->Ready_Input_Device(g_hInst, g_hWnd)))
 		return E_FAIL;
+
+	// For.Font
+	if(FAILED(CFont_Manager::GetInstance()->Add_Font(m_pGraphic_Device, L"Font_Magic", FW_HEAVY,L" 휴먼매직체")))
 	
 	// For.Management
 	if (nullptr == m_pManagement)

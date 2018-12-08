@@ -145,14 +145,23 @@
     <Filter Include="01.Utility\03.For.Component\Component\VIBuffer\Terrain\QuadTree">
       <UniqueIdentifier>{cd05abd8-1855-4b0e-b4f7-5f7dd0ab121e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Utility\07.Target">
+    <Filter Include="01.Utility\07.For.Target">
       <UniqueIdentifier>{b2c92f64-342d-499f-b099-58a7d0827e1d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Utility\07.Target\Manager">
+    <Filter Include="01.Utility\07.For.Target\Manager">
       <UniqueIdentifier>{bf5cbe62-6961-4bd3-84bf-118d4ab9f678}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Utility\07.Target\Target">
+    <Filter Include="01.Utility\07.For.Target\Target">
       <UniqueIdentifier>{0abe8f6f-3d52-49ab-8965-ff36b720c4d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\08.For.Font">
+      <UniqueIdentifier>{2762d155-8ec3-4438-adf4-00d23a6e8938}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\08.For.Font\DXFont">
+      <UniqueIdentifier>{e70ea97a-1905-47a7-98f8-b0bb65077aa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Utility\08.For.Font\Manager">
+      <UniqueIdentifier>{ef497d00-caf2-474c-b38f-a0b85b0f3553}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -284,10 +293,16 @@
       <Filter>01.Utility\03.For.Component\Component\VIBuffer\Terrain\QuadTree</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Target.h">
-      <Filter>01.Utility\07.Target\Target</Filter>
+      <Filter>01.Utility\07.For.Target\Target</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Target_Manager.h">
-      <Filter>01.Utility\07.Target\Manager</Filter>
+      <Filter>01.Utility\07.For.Target\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\DXFont.h">
+      <Filter>01.Utility\08.For.Font\DXFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Font_Manager.h">
+      <Filter>01.Utility\08.For.Font\Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -400,10 +415,16 @@
       <Filter>01.Utility\03.For.Component\Component\VIBuffer\Terrain\QuadTree</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Target.cpp">
-      <Filter>01.Utility\07.Target\Target</Filter>
+      <Filter>01.Utility\07.For.Target\Target</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Target_Manager.cpp">
-      <Filter>01.Utility\07.Target\Manager</Filter>
+      <Filter>01.Utility\07.For.Target\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\DXFont.cpp">
+      <Filter>01.Utility\08.For.Font\DXFont</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Font_Manager.cpp">
+      <Filter>01.Utility\08.For.Font\Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
