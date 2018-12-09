@@ -106,6 +106,11 @@ _int CNavPoint::LastUpdate_GameObject(const _float & fTimeDelta)
 
 	if (true == m_isCol)
 	{
+		if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_DELETE) & 0x80)
+		{
+			m_isLived = false;
+		}
+
 		CObject_Manager* pObject_Manager = CObject_Manager::GetInstance();
 		if (nullptr == pObject_Manager)
 			return -1;

@@ -154,6 +154,9 @@
     <Filter Include="02.GameObject\02.For.Stage\98.UI\CrossHair">
       <UniqueIdentifier>{60a14e03-a254-4623-804e-74abb1b5bb48}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\98.UI\HPBar">
+      <UniqueIdentifier>{d5e22f3e-5e70-4cfc-9425-b1f181e31488}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -270,6 +273,9 @@
     <ClInclude Include="..\Headers\UI_CrossHair.h">
       <Filter>02.GameObject\02.For.Stage\98.UI\CrossHair</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\UI_HPBar.h">
+      <Filter>02.GameObject\02.For.Stage\98.UI\HPBar</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -370,6 +376,9 @@
     </ClCompile>
     <ClCompile Include="..\Codes\UI_CrossHair.cpp">
       <Filter>02.GameObject\02.For.Stage\98.UI\CrossHair</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\UI_HPBar.cpp">
+      <Filter>02.GameObject\02.For.Stage\98.UI\HPBar</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

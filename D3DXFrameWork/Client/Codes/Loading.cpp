@@ -23,6 +23,7 @@
 
 // UI
 #include "UI_CrossHair.h"
+#include "UI_HPBar.h"
 
 CLoading::CLoading(LPDIRECT3DDEVICE9 pGraphicDev)
 	:m_pGraphic_Device(pGraphicDev)
@@ -109,11 +110,11 @@ HRESULT CLoading::Loading_Stage_APT()
 	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Dog", SCENE_STAGE, L"Layer_Dog")))
 		return E_FAIL;
 
-	//for (size_t i = 0; i < 40; i++)
-	//{
-	//	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Effect", SCENE_STAGE, L"Layer_Effect")))
-	//		return E_FAIL;
-	//}
+	for (size_t i = 0; i < 10; i++)
+	{
+		if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Effect", SCENE_STAGE, L"Layer_Effect")))
+			return E_FAIL;
+	}
 
 	//MCIWndClose(m_hVideo);
 	m_isFinish = true;
@@ -280,6 +281,17 @@ HRESULT CLoading::Ready_LightInfo_FIELD()
 	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
 		return E_FAIL;
 
+	// For. Wall_03
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 1.0f, 0.f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 1.f, 0.f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.5f, 0.0f, 1.f);
+	LightInfo.Position = _vec3(34.79f, 2.f, 44.09f);
+	LightInfo.Range = 1.0f;
+
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
 	// For. LightBase_01
 	LightInfo.Type = D3DLIGHT_POINT;
 	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.0f, 0.f, 1.f);
@@ -315,10 +327,63 @@ HRESULT CLoading::Ready_LightInfo_FIELD()
 	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
 	LightInfo.Specular = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
 	LightInfo.Ambient = D3DXCOLOR(0.3f, 0.25f, 0.27f, 1.f);
-	LightInfo.Position = _vec3(3.422, 2.5f, 1.577f);
+	LightInfo.Position = _vec3(3.422f, 2.5f, 1.577f);
 	LightInfo.Range = 3.0f;
 	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
 		return E_FAIL;
+
+	// For. Lamp02
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.3f, 0.25f, 0.27f, 1.f);
+	LightInfo.Position = _vec3(30.62f, 2.5f, 34.86f);
+	LightInfo.Range = 3.0f;
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
+
+	// For. Lamp03
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.3f, 0.25f, 0.27f, 1.f);
+	LightInfo.Position = _vec3(40.11f, 2.5f, 30.05f);
+	LightInfo.Range = 3.0f;
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
+
+	// For. Lamp04
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.3f, 0.25f, 0.27f, 1.f);
+	LightInfo.Position = _vec3(26.3f, 2.5f, 11.05f);
+	LightInfo.Range = 3.0f;
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
+	// For. Emergency
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(0.9f, 0.2f, 0.2f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(0.8f, 0.2f, 0.2f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.3f, 0.07f, 0.07f, 1.f);
+	LightInfo.Position = _vec3(42.9f, 3.f, 30.4);
+	LightInfo.Range = 1.0f;
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
+	// For. Emergency02
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(0.9f, 0.2f, 0.2f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(0.8f, 0.2f, 0.2f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.3f, 0.07f, 0.07f, 1.f);
+	LightInfo.Position = _vec3(46.97, 3.f, 30.4);
+	LightInfo.Range = 1.0f;
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
 
 
 	return NOERROR;
@@ -507,7 +572,7 @@ HRESULT CLoading::Ready_Stage_Prototype_GameObject_SceneAPT()
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Event_Cube", CEvent_Cube::Create(Get_Graphic_Device()))))
 		return E_FAIL;
 	// For.GameObject_Effect
-	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototye_Effect", CEffect::Create(Get_Graphic_Device()))))
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Effect", CEffect::Create(Get_Graphic_Device()))))
 		return E_FAIL;
 
 	return NOERROR;
@@ -832,6 +897,13 @@ HRESULT CLoading::Ready_Component_Prototype_SceneFIELD()
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Weight_Barbel", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Weight_Barbel.x"))))
 		return E_FAIL;
 
+	/////////////////////////////////////////////
+
+	// For.Component_Texture_HPBar
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_HPBar", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/UI/HPBar/HPBar%d.png", 2))))
+		return E_FAIL;
+
+
 	Safe_Release(pComponent_Manager);
 
 	return NOERROR;
@@ -843,11 +915,21 @@ HRESULT CLoading::Ready_UI_SceneFIELD()
 	// For.Prototype_UI_CrossHair
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_CrossHair", CUI_CrossHair::Create(Get_Graphic_Device()))))
 		return E_FAIL;
+	// For.Prototype_UI_HPBar
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_HPBar", CUI_HPBar::Create(Get_Graphic_Device()))))
+		return E_FAIL;
 
 
 	//GameObject
 	if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_UI_CrossHair", SCENE_STAGE, L"Layer_UI", nullptr)))
 		return E_FAIL;
+
+	////GameObject
+	//for (int i = 0; i < 10; ++i)
+	//{
+	//	if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_UI_HPBar", SCENE_STAGE, L"Layer_UI", nullptr)))
+	//		return E_FAIL;
+	//}
 	return NOERROR;
 }
 

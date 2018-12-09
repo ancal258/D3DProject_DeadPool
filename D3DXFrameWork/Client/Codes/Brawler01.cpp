@@ -3,6 +3,7 @@
 #include "Component_Manager.h"
 #include "Object_Manager.h"
 #include "Brawler_Knife.h"
+#include "UI_HPBar.h"
 CBrawler01::CBrawler01(LPDIRECT3DDEVICE9 pGraphic_Device)
 	:CBrawler(pGraphic_Device)
 {
@@ -40,6 +41,12 @@ HRESULT CBrawler01::Ready_GameObject()
 
 
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &vPosition);
+
+	CGameObject* pHP_Bar = nullptr;
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_UI_HPBar", SCENE_STAGE, L"Layer_UI", &pHP_Bar)))
+		return E_FAIL;
+	if (nullptr != pHP_Bar)
+		dynamic_cast<CUI_HPBar*>(pHP_Bar)->Set_Position(this);
 
 	m_iIdleIndex = 0;
 	m_pMeshCom->RegistCallbackFunc(bind(&CBrawler::CallBackFinish, this));

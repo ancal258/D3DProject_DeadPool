@@ -198,6 +198,7 @@
     <ClInclude Include="..\Headers\Terrain.h" />
     <ClInclude Include="..\Headers\Test.h" />
     <ClInclude Include="..\Headers\UI_CrossHair.h" />
+    <ClInclude Include="..\Headers\UI_HPBar.h" />
     <ClInclude Include="..\Headers\UI_Test.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="Resource.h" />
@@ -235,6 +236,7 @@
     <ClCompile Include="..\Codes\Terrain.cpp" />
     <ClCompile Include="..\Codes\Test.cpp" />
     <ClCompile Include="..\Codes\UI_CrossHair.cpp" />
+    <ClCompile Include="..\Codes\UI_HPBar.cpp" />
     <ClCompile Include="..\Codes\UI_Test.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="stdafx.cpp">
