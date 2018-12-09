@@ -29,8 +29,8 @@ HRESULT CCamera_Target::Ready_GameObject_Prototype()
 
 HRESULT CCamera_Target::Ready_GameObject()
 {
-	//if (FAILED(Ready_Component()))
-	//	return E_FAIL;
+	if (FAILED(Ready_Component()))
+		return E_FAIL;
 
 
 	m_fCamSpeed = 10.f;
@@ -41,10 +41,20 @@ _int CCamera_Target::Update_GameObject(const _float & fTimeDelta)
 {
 	if (false == m_isCameraOn)
 		return 0;
+	return CCamera::Update_GameObject(fTimeDelta);
+}
+
+_int CCamera_Target::LastUpdate_GameObject(const _float & fTimeDelta)
+{
+	if (false == m_isCameraOn)
+		return 0;
 	if (nullptr == m_pTarget &&
 		nullptr == m_pTargetWorldMatrix &&
 		nullptr == m_pTargetMouseMove)
 		return 0;
+
+	if (nullptr != m_pFrustumCom)
+		m_pFrustumCom->Update_Frustum(&m_matView, &m_matProj);
 
 	MouseEvent();
 
@@ -54,15 +64,15 @@ _int CCamera_Target::Update_GameObject(const _float & fTimeDelta)
 	m_Camera_Desc.vEye.y = vTargetPos.y + m_fCameraEyeY;
 	m_Camera_Desc.vEye.z = vTargetPos.z - m_fCameraEyeZ;
 
-	
-	
+
+
 	_vec3 vLook = vTargetPos - m_Camera_Desc.vEye;
 	m_Camera_Desc.vAt = m_Camera_Desc.vEye + vLook;
 	m_Camera_Desc.vAt.x += m_fCameraAtX;
 	m_Camera_Desc.vAt.y = m_Camera_Desc.vEye.y + m_fCameraAtY;
 	m_Camera_Desc.vAt.z += m_fCameraAtZ;
 	//m_Camera_Desc.vAt.x += m_fCameraX;
-	
+
 
 
 	_matrix		matRotY;
@@ -82,11 +92,6 @@ _int CCamera_Target::Update_GameObject(const _float & fTimeDelta)
 		D3DXVec3TransformCoord(&m_Camera_Desc.vEye, &vDist, &matRotY);
 
 	}
-	return CCamera::Update_GameObject(fTimeDelta);
-}
-
-_int CCamera_Target::LastUpdate_GameObject(const _float & fTimeDelta)
-{
 	return _int();
 }
 
@@ -180,7 +185,7 @@ void CCamera_Target::MouseEvent()
 		if (m_fCameraEyeZ > 0.02f) // EYEY = -0.74 -> 0.22 0.96이동. 0.6이동 // AtY -> 2.54 -> 1.52 --> 1정도 이동. 비슷. // 30틱
 		{
 			m_fCameraEyeZ -= 0.03f;
-			m_fCameraEyeY += 0.032f;
+			m_fCameraEyeY += 0.045f;
 			m_fCameraAtY -= 0.034f;
 		}
 	}
@@ -189,7 +194,7 @@ void CCamera_Target::MouseEvent()
 		if (m_fCameraEyeZ < 0.62f)
 		{
 			m_fCameraEyeZ += 0.03f;
-			m_fCameraEyeY -= 0.032f;
+			m_fCameraEyeY -= 0.045f;
 			m_fCameraAtY += 0.034f;
 		}
 	}
@@ -225,6 +230,7 @@ CGameObject * CCamera_Target::Clone_GameObject()
 
 void CCamera_Target::Free()
 {
+	Safe_Release(m_pFrustumCom);
 	CCamera::Free();
 }
 

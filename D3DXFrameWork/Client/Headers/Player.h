@@ -45,6 +45,7 @@ public:
 	const _uint Get_StageNum() {
 		return m_iStageNum;	}
 	_bool Get_IsButtonDown(_uint iIndex);
+	_uint Get_AnimState();
 public:
 	virtual HRESULT Ready_GameObject_Prototype();
 	virtual HRESULT Ready_GameObject();

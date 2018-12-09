@@ -43,8 +43,15 @@ HRESULT CDP_Sword::Ready_GameObject()
 _int CDP_Sword::Update_GameObject(const _float & fTimeDelta)
 {
 	// iIndex == 7 == LBUTTON ( 8 == RBUTTON)
-	m_isActive = m_pPlayer->Get_IsButtonDown(7);
-	m_isActive ^= 1;
+	//m_isActive = m_pPlayer->Get_IsButtonDown(7);
+	//m_isActive ^= 1;
+
+	//		STATE_SWORD, STATE_AIM, STATE_RUN, STATE_NORMAL, STATE_END
+	if (1 != m_pPlayer->Get_AnimState())
+		m_isActive = true;
+	else
+		m_isActive = false;
+
 
 	return _int();
 }

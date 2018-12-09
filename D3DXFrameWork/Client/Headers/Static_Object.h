@@ -21,6 +21,7 @@ private:
 	virtual ~CStatic_Object() = default;
 public:
 	void Set_StateInfo(_vec3* pRight, _vec3* pUp, _vec3* vLook, _vec3* vPos);
+	HRESULT SetUp_Radius();
 public:
 	virtual HRESULT Ready_GameObject_Prototype(const _tchar* pComponent_Tag);
 	virtual HRESULT Ready_GameObject();
@@ -37,6 +38,7 @@ private:
 	const _tchar*		m_pComponent_Tag = nullptr;
 	// col
 	_bool				m_isCol = false;
+	_float				m_fRadius = 0;
 private:
 	HRESULT Ready_Component();
 	HRESULT	SetUp_ConstantTable(LPD3DXEFFECT pEffect);

@@ -27,6 +27,7 @@ HRESULT CAnimator::Ready_Animator(CMesh_Dynamic* pMeshCom, CTransform* pTransfor
 	m_pMeshCom->RegistCallbackCheckComboPair(bind(&CAnimator::CheckCombo, this, placeholders::_1));
 	m_pMeshCom->RegistCallbackCheckComboTime(bind(&CAnimator::CheckComboTime, this, placeholders::_1));
 	m_iSceneNum = iSceneNum;
+	m_iState = STATE_SWORD;
 	Ready_Pair();
 	return NOERROR;
 }
@@ -53,6 +54,10 @@ void CAnimator::Ready_Pair()
 		m_vecBlendPair.push_back(make_pair(SWORD_RUN_FORWARD, SWORD_IDLE));
 		m_vecBlendPair.push_back(make_pair(SWORD_IDLE, AIM_IDLE));
 		m_vecBlendPair.push_back(make_pair(AIM_IDLE, SWORD_IDLE));
+		m_vecBlendPair.push_back(make_pair(AIM_IDLE, AIM_F));
+		m_vecBlendPair.push_back(make_pair(AIM_F, AIM_IDLE));
+		m_vecBlendPair.push_back(make_pair(AIM_IDLE, AIM_B));
+		m_vecBlendPair.push_back(make_pair(AIM_B, AIM_IDLE));
 		//m_vecBlendPair.push_back(make_pair(SWORLD_LIGHT_02, SWORLD_LIGHT_03));
 		//m_vecBlendPair.push_back(make_pair(SWORLD_HEAVY_01, SWORLD_HEAVY_02));
 		//m_vecBlendPair.push_back(make_pair(SWORLD_HEAVY_02, SWORLD_HEAVY_03));
@@ -78,6 +83,19 @@ _bool CAnimator::Get_IsReservation()
 		return false;
 	else
 		return true;
+}
+
+_uint CAnimator::Get_AnimState()
+{
+	if (m_iState < KEY_END)
+		return m_iState;
+	else
+	{
+		if (AIM_F <= m_iState && m_iState <= AIM_IDLE)
+			return 1;
+		else
+			return 0;
+	}
 }
 
 void CAnimator::Update_Animation(const _float & fTimeDelta)
@@ -163,20 +181,40 @@ void CAnimator::Update_Animation_FIELD(const _float & fTimeDelta)
 	else
 		m_isKeyDown[E] = false;
 
-	if (m_pInput_Device->Get_DIKeyState(DIK_W) & 0x8000)
+	if (m_ReservationList.size() == 0)
 	{
-		m_pMeshCom->Set_AnimationSet(SWORD_RUN_FORWARD);
-		//m_pTransformCom->Go_Straight(7.8f, fTimeDelta);
-		m_pNavigationCom->Move_OnNavigation(m_pTransformCom, 8.7f, fTimeDelta);
-		m_iState = STATE_RUN;
+		if (m_pInput_Device->Get_DIKeyState(DIK_W) & 0x8000)
+		{
+			if (m_iState != STATE_AIM)
+			{
+				m_pMeshCom->Set_AnimationSet(SWORD_RUN_FORWARD);
+				//m_pTransformCom->Go_Straight(7.8f, fTimeDelta);
+				m_pNavigationCom->Move_OnNavigation(m_pTransformCom, 8.7f, fTimeDelta);
+				m_iState = STATE_RUN;
+			}
+			else
+			{
+				m_pMeshCom->Set_AnimationSet(AIM_F);
+				m_pNavigationCom->Move_OnNavigation(m_pTransformCom, 4.7f, fTimeDelta);
+				m_iState = AIM_F;
+			}
+		}
+		if (m_pInput_Device->Get_DIKeyState(DIK_S) & 0x8000)
+		{
+			if (m_iState != STATE_AIM)
+			{
+				m_pMeshCom->Set_AnimationSet(SWORD_RUN_FORWARD);
+				m_pTransformCom->Go_Straight(-8.7f, fTimeDelta);
+				m_iState = STATE_RUN;
+			}
+			else
+			{
+				m_pMeshCom->Set_AnimationSet(AIM_B);
+				m_pNavigationCom->Move_OnNavigation(m_pTransformCom, -4.7f, fTimeDelta);
+				m_iState = AIM_B;
+			}
+		}
 	}
-	if (m_pInput_Device->Get_DIKeyState(DIK_S) & 0x8000)
-	{
-		m_pMeshCom->Set_AnimationSet(SWORD_RUN_FORWARD);
-		m_pTransformCom->Go_Straight(-8.7f, fTimeDelta);
-		m_iState = STATE_RUN;
-	}
-
 	//LBUTTON --> ÃÑ±â·Î ¹Ù²ñ
 	if (m_pInput_Device->Get_DIMouseState(CInput_Device::DIM_LBUTTON)& 0x8000)
 	{
@@ -189,7 +227,7 @@ void CAnimator::Update_Animation_FIELD(const _float & fTimeDelta)
 	else
 	{
 		m_isKeyDown[LBUTTON] = false;
-		m_iLastState = SWORD_IDLE;
+		//m_iLastState = SWORD_IDLE;
 	}
 
 	//RBUTTON --> Ä«¸Þ¶ó ÁÜ
@@ -216,6 +254,8 @@ void CAnimator::Update_Animation_FIELD(const _float & fTimeDelta)
 			m_pMeshCom->Set_AnimationSet(AIM_IDLE);
 		else if (m_iState == STATE_RUN)
 			m_pMeshCom->Set_AnimationSet(SWORD_RUN_FORWARD);
+		else
+			m_pMeshCom->Set_AnimationSet(m_iState);
 	}
 	else
 	{

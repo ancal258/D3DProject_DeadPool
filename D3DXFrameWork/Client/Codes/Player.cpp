@@ -39,6 +39,11 @@ _bool CPlayer::Get_IsButtonDown(_uint iIndex)
 	return m_pAnimator->Get_IsButtonDown(iIndex);
 }
 
+_uint CPlayer::Get_AnimState()
+{
+	return m_pAnimator->Get_AnimState();
+}
+
 HRESULT CPlayer::Ready_GameObject_Prototype()
 {
 	return NOERROR;
@@ -67,6 +72,8 @@ HRESULT CPlayer::Ready_GameObject()
 
 	//m_pMeshCom->Set_AnimationSet(SIT_GETUP);
 	D3DXMatrixIdentity(&m_RealMatrix);
+
+
 
 	return NOERROR;
 }

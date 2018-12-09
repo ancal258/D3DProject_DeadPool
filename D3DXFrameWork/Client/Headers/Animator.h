@@ -51,8 +51,8 @@ public:
 	_bool Get_IsReservation();
 	void SetUp_MouseRotate(_float *fRotate,_float *fTimeAcc) {
 		m_fRotate = fRotate;
-		m_fTimeAcc = fTimeAcc;
-	}
+		m_fTimeAcc = fTimeAcc;	}
+	_uint Get_AnimState();
 	
 public:
 	void Update_Animation(const _float & fTimeDelta);
@@ -79,6 +79,7 @@ private:
 	_matrix*            m_CombinedRootMatrix = nullptr;
 	_uint				m_iSceneNum = false;
 	_uint				m_iState = STATE_SWORD;
+	_uint				m_iNextState = 0;
 	_uint				m_iLastState = STATE_SWORD;
 	vector<pair<_uint, _uint>>		m_vecBlendPair;
 	vector<pair<_uint, _uint>>		m_vecComboPair;

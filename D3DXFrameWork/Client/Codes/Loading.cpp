@@ -22,7 +22,7 @@
 #include "SkyDom.h"
 
 // UI
-
+#include "UI_CrossHair.h"
 
 CLoading::CLoading(LPDIRECT3DDEVICE9 pGraphicDev)
 	:m_pGraphic_Device(pGraphicDev)
@@ -94,7 +94,9 @@ HRESULT CLoading::Loading_Stage_APT()
 		return E_FAIL;
 	SetUp_CameraMove();
 
-
+	lstrcpy(m_szString, L"Layer_UI...");
+	if (FAILED(Ready_UI_SceneAPT()))
+		return E_FAIL;
 
 	if (FAILED(Load_Static_Object(L"../Bin/DataFiles/StaticO11bject1.dat")))
 		return E_FAIL;
@@ -153,6 +155,11 @@ HRESULT CLoading::Loading_Stage_FIELD()
 	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Cinematic", L"Layer_Camera")))
 		return E_FAIL;
 	SetUp_CameraMove();
+
+	lstrcpy(m_szString, L"Layer_UI...");
+	if (FAILED(Ready_UI_SceneFIELD()))
+		return E_FAIL;
+
 	lstrcpy(m_szString, L"Layer_Object...");
 	if (FAILED(Ready_Layer_Object()))
 		return E_FAIL;
@@ -172,23 +179,67 @@ HRESULT CLoading::Ready_LightInfo()
 	ZeroMemory(&LightInfo, sizeof(D3DLIGHT9));
 
 	LightInfo.Type = D3DLIGHT_DIRECTIONAL;
-	LightInfo.Diffuse = D3DXCOLOR(0.8f, 0.8f, 0.8f, 1.f);
-	LightInfo.Specular = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
-	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.f);
+	LightInfo.Diffuse = D3DXCOLOR(0.4f, 0.4f, 0.4f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.3f, 0.3f, 0.3f, 1.f);
 	LightInfo.Direction = _vec3(1.f, -1.f, 1.f);
+
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+	// For. Chair Lamp
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.5f, 0.f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 0.5f, 0.f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.25f, 0.0f, 1.f);
+	LightInfo.Position = _vec3(8.f, 4.f, 13.2f);
+	LightInfo.Range = 5.0f;
+
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
+	// For. Table Lamp
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.5f, 0.f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 0.5f, 0.f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.25f, 0.0f, 1.f);
+	LightInfo.Position = _vec3(34.18f, 4.f, 15.5f);
+	LightInfo.Range = 8.0f;
+
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
+
+	// For. Neon
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(0.f, 0.f, 0.8f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(0.f, 0.0f, 0.8f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.0f, 0.f, 0.4f, 1.f);
+	LightInfo.Position = _vec3(25.73f, 13.f, 1.235f);
+	LightInfo.Range = 5.0f;
 
 	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
 		return E_FAIL;
 
 	LightInfo.Type = D3DLIGHT_POINT;
-	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.0f, 0.f, 1.f);
-	LightInfo.Specular = D3DXCOLOR(1.f, 0.f, 0.f, 1.f);
-	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.0f, 0.0f, 1.f);
-	LightInfo.Position = _vec3(15.f, 3.f, 5.f);
-	LightInfo.Range = 8.0f;
+	LightInfo.Diffuse = D3DXCOLOR(0.58f, 0.f, 1.f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(0.58f, 0.0f, 1.f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.29f, 0.f, 0.5f, 1.f);
+	LightInfo.Position = _vec3(8.143f, 13.f, 34.57f);
+	LightInfo.Range = 6.0f;
 
 	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
 		return E_FAIL;
+
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.f, 0.f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 0.0f, 0.f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.f, 0.0f, 1.f);
+	LightInfo.Position = _vec3(24.75f, 13.f, 34.57f);
+	LightInfo.Range = 5.0f;
+
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
 
 	return NOERROR;
 }
@@ -199,9 +250,9 @@ HRESULT CLoading::Ready_LightInfo_FIELD()
 	ZeroMemory(&LightInfo, sizeof(D3DLIGHT9));
 
 	LightInfo.Type = D3DLIGHT_DIRECTIONAL;
-	LightInfo.Diffuse = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.f);
-	LightInfo.Specular = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
-	LightInfo.Ambient = D3DXCOLOR(0.2f, 0.2f, 0.2f, 1.f);
+	LightInfo.Diffuse = D3DXCOLOR(0.3f, 0.3f, 0.3f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(0.5f, 0.5f, 0.5f, 0.5f);
+	LightInfo.Ambient = D3DXCOLOR(0.15f, 0.15f, 0.15f, 1.f);
 	LightInfo.Direction = _vec3(1.f, -1.f, 1.f);
 
 	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
@@ -210,7 +261,7 @@ HRESULT CLoading::Ready_LightInfo_FIELD()
 	// For. Wall_01
 	LightInfo.Type = D3DLIGHT_POINT;
 	LightInfo.Diffuse = D3DXCOLOR(1.f, 1.0f, 0.f, 1.f);
-	LightInfo.Specular = D3DXCOLOR(1.f, 0.f, 0.f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 1.f, 0.f, 1.f);
 	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.5f, 0.0f, 1.f);
 	LightInfo.Position = _vec3(22.1f, 2.f, 10.21f);
 	LightInfo.Range = 1.0f;
@@ -221,7 +272,7 @@ HRESULT CLoading::Ready_LightInfo_FIELD()
 	// For. Wall_02
 	LightInfo.Type = D3DLIGHT_POINT;
 	LightInfo.Diffuse = D3DXCOLOR(1.f, 1.0f, 0.f, 1.f);
-	LightInfo.Specular = D3DXCOLOR(1.f, 0.f, 0.f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 1.f, 0.f, 1.f);
 	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.5f, 0.0f, 1.f);
 	LightInfo.Position = _vec3(22.1f, 2.f, 7.67f);
 	LightInfo.Range = 1.0f;
@@ -246,9 +297,30 @@ HRESULT CLoading::Ready_LightInfo_FIELD()
 	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.0f, 0.0f, 1.f);
 	LightInfo.Position = _vec3(18.76, 2.f, 1.85f);
 	LightInfo.Range = 1.0f;
-
 	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
 		return E_FAIL;
+
+	// For. Lamp_BIG
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.45f, 0.40f, 1.f);
+	LightInfo.Position = _vec3(13.20, 5.f, 25.82f);
+	LightInfo.Range = 11.0f;
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
+	// For. Lamp01
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.3f, 0.25f, 0.27f, 1.f);
+	LightInfo.Position = _vec3(3.422, 2.5f, 1.577f);
+	LightInfo.Range = 3.0f;
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
+
 	return NOERROR;
 }
 
@@ -292,6 +364,11 @@ HRESULT CLoading::Ready_Static_Prototype_Component()
 	// For.Component_Texture_Effect
 	lstrcpy(m_szString, L"../Bin/Resources/Textures/Explosion/Explosion%d.png");
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_Effect", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, m_szString, 90))))
+		return E_FAIL;
+
+
+	// For.Component_Texture_UI_CrossHair
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_UI_CrossHair", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/UI/CrossHair.png"))))
 		return E_FAIL;
 
 	// For.Component_Buffer_Terrain	
@@ -357,6 +434,9 @@ HRESULT CLoading::Ready_Stage_Prototype_GameObject_SceneAPT()
 		return E_FAIL;
 	// For.GameObject_KitchenTable
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_KitchenTable", CStatic_Object::Create(Get_Graphic_Device(), L"Component_Mesh_KitchenTable"))))
+		return E_FAIL;
+	// For.GameObject_LampHouse
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_LampHouse", CStatic_Object::Create(Get_Graphic_Device(), L"Component_Mesh_LampHouse"))))
 		return E_FAIL;
 	// For.GameObject_NeonSign_01
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_NeonSign_01", CStatic_Object::Create(Get_Graphic_Device(), L"Component_Mesh_NeonSign_01"))))
@@ -472,6 +552,9 @@ HRESULT CLoading::Ready_Componet_Prototype_SceneAPT()
 	// For.Component_Mesh_KitchenTable
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_KitchenTable", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"KitchenTable.x"))))
 		return E_FAIL;
+	// For.Component_Mesh_LampHouse
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_LampHouse", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"LampHouse.x"))))
+		return E_FAIL;
 	// For.Component_Mesh_NeonSign_01
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_NeonSign_01", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"NeonSign_01.x"))))
 		return E_FAIL;
@@ -541,6 +624,12 @@ HRESULT CLoading::Ready_Componet_Prototype_SceneAPT()
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Player", CMesh_Dynamic::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/DynamicMesh/PlayerXFile/", L"DP_APT_00.x"))))
 		return E_FAIL;
 	Safe_Release(pComponent_Manager);
+
+	return NOERROR;
+}
+
+HRESULT CLoading::Ready_UI_SceneAPT()
+{
 
 	return NOERROR;
 }
@@ -670,6 +759,9 @@ HRESULT CLoading::Ready_Component_Prototype_SceneFIELD()
 	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(SCENE_STAGE, L"Component_Mesh_Ladder", CMesh_Static::Create(m_pGraphic_Device, L"../Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/GWN/", L"Ladder.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_																																								
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(SCENE_STAGE, L"Component_Mesh_LampStand", CMesh_Static::Create(m_pGraphic_Device, L"../Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/GWN/", L"LampStand.x"))))
+		return E_FAIL;
+	// For.Component_Mesh_																																								
 	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(SCENE_STAGE, L"Component_Mesh_Light_Base_01", CMesh_Static::Create(m_pGraphic_Device, L"../Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/GWN/", L"Light_Base_01.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_																																								
@@ -742,6 +834,20 @@ HRESULT CLoading::Ready_Component_Prototype_SceneFIELD()
 
 	Safe_Release(pComponent_Manager);
 
+	return NOERROR;
+}
+
+HRESULT CLoading::Ready_UI_SceneFIELD()
+{
+	//Prototype
+	// For.Prototype_UI_CrossHair
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_CrossHair", CUI_CrossHair::Create(Get_Graphic_Device()))))
+		return E_FAIL;
+
+
+	//GameObject
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_UI_CrossHair", SCENE_STAGE, L"Layer_UI", nullptr)))
+		return E_FAIL;
 	return NOERROR;
 }
 
@@ -856,6 +962,9 @@ HRESULT CLoading::Ready_Stage_Prototype_GameObject_SceneFIELD()
 		return E_FAIL;
 	// For.Prototype_
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Ladder", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_Ladder"))))
+		return E_FAIL;
+	// For.Prototype_
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_LampStand", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_LampStand"))))
 		return E_FAIL;
 	// For.Prototype_
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Light_Base_01", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_Light_Base_01"))))

@@ -1,5 +1,4 @@
-﻿  Static_Object.cpp
-  Camera_Target.cpp
-  코드를 생성하고 있습니다...
+﻿  Animator.cpp
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\animator.cpp(118): warning C4305: '인수': 'double'에서 'const Engine::_float'(으)로 잘립니다.
   Client.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Default\..\Bin\Client.exe
   Client.vcxproj -> ..\Bin\Client.pdb (Full PDB)

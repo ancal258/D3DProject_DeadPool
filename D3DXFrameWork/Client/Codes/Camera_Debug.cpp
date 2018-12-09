@@ -29,8 +29,8 @@ HRESULT CCamera_Debug::Ready_GameObject()
 {
 	m_fCamSpeed = 10.f;
 	m_isCameraOn = true;
-	if (FAILED(Ready_Component()))
-		return E_FAIL;
+	//if (FAILED(Ready_Component()))
+	//	return E_FAIL;
 	return NOERROR;
 }
 

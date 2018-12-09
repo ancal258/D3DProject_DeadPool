@@ -247,6 +247,21 @@ void CPage_Object::Create_Object_APT(_uint iIndex)
 			((CStatic_Object*)pMesh)->Set_Scale(&_vec3(m_fMeshSize, m_fMeshSize, m_fMeshSize));
 		}
 		break;
+	case MESH_LAMPHOUSE:
+		if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_LampHouse", L"Layer_Static_APT", &pMesh)))
+			return;
+		if (nullptr != pMesh)
+		{
+			wsprintf(szMeshName, L"LampHouse_%d", iMeshCntArray[MESH_LAMPHOUSE]);
+
+			vGameObject.push_back(pMesh); // 오브젝트 메쉬들 추가될때마다 컨테이너에 저장, 파일 저장 할 때 순회하면서 데이터 저장.
+			m_MeshListBox.AddString(szMeshName);
+			++iMeshCntArray[MESH_LAMPHOUSE];
+			((CStatic_Object*)pMesh)->Set_PrototypeTag(L"Prototype_LampHouse");
+			((CStatic_Object*)pMesh)->Set_Position(&_vec3(0, 0, 0));
+			((CStatic_Object*)pMesh)->Set_Scale(&_vec3(m_fMeshSize, m_fMeshSize, m_fMeshSize));
+		}
+		break;
 	case MESH_NEONSIGN_01:
 		if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_NeonSign_01", L"Layer_Static_APT", &pMesh)))
 			return;
@@ -942,6 +957,21 @@ void CPage_Object::Create_Object_MAP(_uint iIndex)
 			((CStatic_Object*)pMesh)->Set_Scale(&_vec3(m_fMeshSize, m_fMeshSize, m_fMeshSize));
 		}
 		break;
+	case MESH_LAMPSTAND:
+		if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_LampStand", L"Layer_Static_FIELD", &pMesh)))
+			return;
+		if (nullptr != pMesh)
+		{
+			wsprintf(szMeshName, L"LampStand_%d", iMeshCntArray[MESH_LAMPSTAND]);
+
+			vGameObject.push_back(pMesh); // 오브젝트 메쉬들 추가될때마다 컨테이너에 저장, 파일 저장 할 때 순회하면서 데이터 저장.
+			m_MeshListBox.AddString(szMeshName);
+			++iMeshCntArray[MESH_LAMPSTAND];
+			((CStatic_Object*)pMesh)->Set_PrototypeTag(L"Prototype_LampStand");
+			((CStatic_Object*)pMesh)->Set_Position(&_vec3(0, 0, 0));
+			((CStatic_Object*)pMesh)->Set_Scale(&_vec3(m_fMeshSize, m_fMeshSize, m_fMeshSize));
+		}
+		break;
 	case MESH_LIGHT_BASE_01:
 		if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_Light_Base_01", L"Layer_Static_FIELD", &pMesh)))
 			return;
@@ -1332,26 +1362,27 @@ BOOL CPage_Object::OnInitDialog()
 	m_APTCombo.AddString(L"06. DP_Bed02");
 	m_APTCombo.AddString(L"07. DP_Sofa");
 	m_APTCombo.AddString(L"08. KitchenTable");
-	m_APTCombo.AddString(L"09. NeonSign01");
-	m_APTCombo.AddString(L"10. NeonSign02");
-	m_APTCombo.AddString(L"11. NeonSign03");
-	m_APTCombo.AddString(L"12. NeonSign04");
-	m_APTCombo.AddString(L"13. Poster01");
-	m_APTCombo.AddString(L"14. Poster02");
-	m_APTCombo.AddString(L"15. RubberDuckie");
-	m_APTCombo.AddString(L"16. Rug");
-	m_APTCombo.AddString(L"17. TV");
-	m_APTCombo.AddString(L"18. TV_Remote");
-	m_APTCombo.AddString(L"19. Wall_01");
-	m_APTCombo.AddString(L"20. Wall_01b");
-	m_APTCombo.AddString(L"21. Wall_Corner");
-	m_APTCombo.AddString(L"22. Wall_SideBtm");
-	m_APTCombo.AddString(L"23. Wall_SideTop");
-	m_APTCombo.AddString(L"24. Weight_Barbel");
-	m_APTCombo.AddString(L"25. Weight_Bench");
-	m_APTCombo.AddString(L"26. Door");
-	m_APTCombo.AddString(L"27. Door_Frame");
-	m_APTCombo.AddString(L"28. Celling");
+	m_APTCombo.AddString(L"09. LampHouse");
+	m_APTCombo.AddString(L"10. NeonSign01");
+	m_APTCombo.AddString(L"11. NeonSign02");
+	m_APTCombo.AddString(L"12. NeonSign03");
+	m_APTCombo.AddString(L"13. NeonSign04");
+	m_APTCombo.AddString(L"14. Poster01");
+	m_APTCombo.AddString(L"15. Poster02");
+	m_APTCombo.AddString(L"16. RubberDuckie");
+	m_APTCombo.AddString(L"17. Rug");
+	m_APTCombo.AddString(L"18. TV");
+	m_APTCombo.AddString(L"19. TV_Remote");
+	m_APTCombo.AddString(L"20. Wall_01");
+	m_APTCombo.AddString(L"21. Wall_01b");
+	m_APTCombo.AddString(L"22. Wall_Corner");
+	m_APTCombo.AddString(L"23. Wall_SideBtm");
+	m_APTCombo.AddString(L"24. Wall_SideTop");
+	m_APTCombo.AddString(L"25. Weight_Barbel");
+	m_APTCombo.AddString(L"26. Weight_Bench");
+	m_APTCombo.AddString(L"27. Door");
+	m_APTCombo.AddString(L"28. Door_Frame");
+	m_APTCombo.AddString(L"29. Celling");
 
 	m_MAPCombo.AddString(L"00. AccessRoof");
 	m_MAPCombo.AddString(L"01. AccessRoof_Door");
@@ -1378,26 +1409,27 @@ BOOL CPage_Object::OnInitDialog()
 	m_MAPCombo.AddString(L"22. IndustrialCart");
 	m_MAPCombo.AddString(L"23. IndustrialGenerator");
 	m_MAPCombo.AddString(L"24. Ladder");
-	m_MAPCombo.AddString(L"25. Light_Base_01");
-	m_MAPCombo.AddString(L"26. Light_Base_02");
-	m_MAPCombo.AddString(L"27. MainBuilding_01");
-	m_MAPCombo.AddString(L"28. MainBuilding_02");
-	m_MAPCombo.AddString(L"29. OutDoorPipe");
-	m_MAPCombo.AddString(L"30. Pannel_Wood");
-	m_MAPCombo.AddString(L"31. RadioTower01");
-	m_MAPCombo.AddString(L"32. RoofTopAC");
-	m_MAPCombo.AddString(L"33. Structure_01");
-	m_MAPCombo.AddString(L"34. ToolBox");
-	m_MAPCombo.AddString(L"35. Transformer01");
-	m_MAPCombo.AddString(L"36. Transformer02");
-	m_MAPCombo.AddString(L"37. TrashBagSpilled");
-	m_MAPCombo.AddString(L"38. TriSentinel");
-	m_MAPCombo.AddString(L"39. VentDeco");
-	m_MAPCombo.AddString(L"40. Wall_Rail01");
-	m_MAPCombo.AddString(L"41. Wall_Rail02");
-	m_MAPCombo.AddString(L"42. WallLight");
-	m_MAPCombo.AddString(L"43. WaterHeater01");
-	m_MAPCombo.AddString(L"44. WoodenBox");
+	m_MAPCombo.AddString(L"25. LampStand");
+	m_MAPCombo.AddString(L"26. Light_Base_01");
+	m_MAPCombo.AddString(L"27. Light_Base_02");
+	m_MAPCombo.AddString(L"28. MainBuilding_01");
+	m_MAPCombo.AddString(L"29. MainBuilding_02");
+	m_MAPCombo.AddString(L"30. OutDoorPipe");
+	m_MAPCombo.AddString(L"31. Pannel_Wood");
+	m_MAPCombo.AddString(L"32. RadioTower01");
+	m_MAPCombo.AddString(L"33. RoofTopAC");
+	m_MAPCombo.AddString(L"34. Structure_01");
+	m_MAPCombo.AddString(L"35. ToolBox");
+	m_MAPCombo.AddString(L"36. Transformer01");
+	m_MAPCombo.AddString(L"37. Transformer02");
+	m_MAPCombo.AddString(L"38. TrashBagSpilled");
+	m_MAPCombo.AddString(L"39. TriSentinel");
+	m_MAPCombo.AddString(L"40. VentDeco");
+	m_MAPCombo.AddString(L"41. Wall_Rail01");
+	m_MAPCombo.AddString(L"42. Wall_Rail02");
+	m_MAPCombo.AddString(L"43. WallLight");
+	m_MAPCombo.AddString(L"44. WaterHeater01");
+	m_MAPCombo.AddString(L"45. WoodenBox");
 
 
 	m_STATICCombo.AddString(L"00.MESH_TEST");

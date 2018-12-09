@@ -131,6 +131,9 @@ HRESULT CToolView::Ready_Componet_Prototype_SceneAPT()
 	// For.Component_Mesh_KitchenTable
 	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_KitchenTable", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"KitchenTable.x"))))
 		return E_FAIL;
+	// For.Component_Mesh_LampHouse
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_LampHouse", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"LampHouse.x"))))
+		return E_FAIL;
 	// For.Component_Mesh_NeonSign_01
 	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_NeonSign_01", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"NeonSign_01.x"))))
 		return E_FAIL;
@@ -331,6 +334,9 @@ HRESULT CToolView::Ready_Componet_Prototype_SceneMap()
 	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Ladder", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/GWN/", L"Ladder.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_																																								
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_LampStand", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/GWN/", L"LampStand.x"))))
+		return E_FAIL;
+	// For.Component_Mesh_																																								
 	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(0, L"Component_Mesh_Light_Base_01", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/GWN/", L"Light_Base_01.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_																																								
@@ -465,9 +471,12 @@ HRESULT CToolView::Ready_GameObject_Prototype_SceneAPT()
 		return E_FAIL;
 	// For.GameObject_DP_Sofa
 	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_DP_Sofa", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_DP_Sofa"))))
-		return E_FAIL;
+		return E_FAIL; 
 	// For.GameObject_KitchenTable
 	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_KitchenTable", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_KitchenTable"))))
+		return E_FAIL;
+	// For.GameObject_LampHouse
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_LampHouse", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_LampHouse"))))
 		return E_FAIL;
 	// For.GameObject_NeonSign_01
 	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_NeonSign_01", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_NeonSign_01"))))
@@ -664,9 +673,12 @@ HRESULT CToolView::Ready_GameObject_Prototype_SceneMap()
 		return E_FAIL;
 	// For.Prototype_
 	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_IndustrialGenerator", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_IndustrialGenerator"))))
-		return E_FAIL;
+		return E_FAIL; 
 	// For.Prototype_
 	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Ladder", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_Ladder"))))
+		return E_FAIL;
+	// For.Prototype_
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_LampStand", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_LampStand"))))
 		return E_FAIL;
 	// For.Prototype_
 	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Light_Base_01", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_Light_Base_01"))))

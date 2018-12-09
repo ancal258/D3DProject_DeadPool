@@ -5,7 +5,7 @@
 #include "Light_Manager.h"
 #include "Player.h"
 
-#include "Camera_Debug.h"
+#include "Camera_Target.h"
 _USING(Client)
 
 CStatic_Object::CStatic_Object(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -28,6 +28,20 @@ void CStatic_Object::Set_StateInfo(_vec3* pRight, _vec3* pUp, _vec3* vLook, _vec
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_LOOK, vLook);
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, vPos);
 }
+HRESULT CStatic_Object::SetUp_Radius()
+{
+	if (nullptr == m_pMeshCom ||
+		nullptr == m_pTransformCom)
+		return E_FAIL;
+
+	_vec3 vMaxPoint = *m_pMeshCom->Get_MaxPoint();
+	D3DXVec3TransformCoord(&vMaxPoint, &vMaxPoint, m_pTransformCom->Get_WorldMatrix());
+
+	m_fRadius = max(vMaxPoint.x, vMaxPoint.y);
+	m_fRadius = max(m_fRadius, vMaxPoint.z);
+	m_fRadius *= 2;
+	return NOERROR;
+}
 HRESULT CStatic_Object::Ready_GameObject_Prototype(const _tchar* pComponent_Tag)
 {
 	m_pComponent_Tag = pComponent_Tag;
@@ -38,14 +52,15 @@ HRESULT CStatic_Object::Ready_GameObject()
 {
 	if (FAILED(Ready_Component()))
 		return E_FAIL;
-
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(20, 10, 20));
 	m_pTransformCom->Scaling(_vec3(5, 5, 5));
+	m_fRadius = 550.f;
 	return NOERROR;
 }
 
 _int CStatic_Object::Update_GameObject(const _float & fTimeDelta)
 {
+
 	m_isCol = false;
 	return _int();
 }
@@ -54,42 +69,39 @@ _int CStatic_Object::LastUpdate_GameObject(const _float & fTimeDelta)
 {
 	if (nullptr == m_pRendererCom)
 		return -1;
-	
+
 	m_pTransformCom->Update_Matrix();
 
-	//CCamera_Debug*	pCamera = (CCamera_Debug*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Camera", 0);
-	//if (nullptr == pCamera)
+	CCamera_Target*	pCamera = (CCamera_Target*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Camera", 1);
+	if (nullptr == pCamera)
+		return -1;
+
+
+
+	if (false == pCamera->Culling_ToFrustum(m_pTransformCom, nullptr, m_fRadius))
+	{
+		if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
+			return -1;
+	}
+
+	//CObject_Manager* pObject_Manager = CObject_Manager::GetInstance();
+	//if (nullptr == pObject_Manager)
 	//	return -1;
 
-	//_float fRadius = 0.f;
+	////// OBB충돌 Player & 
 
-	//fRadius = max(m_pMeshCom->Get_MaxPoint()->x, m_pMeshCom->Get_MaxPoint()->y);
-	//fRadius = max(fRadius, m_pMeshCom->Get_MaxPoint()->z);
-
-	//if (false == pCamera->Culling_ToFrustum(m_pTransformCom, nullptr, fRadius))
+	//for (size_t i = 0; i < 3; i++)
 	//{
-	if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
-		return -1;
+	//	const CGameObject* pPlayer = pObject_Manager->Get_ObjectPointer(SCENE_STAGE, L"Layer_Player", i);
+	//	if (nullptr == pPlayer)
+	//		break;
+
+	//	// 디버깅용. 실제론 return true일 때 마다 특정 행동을 취해주자.
+	//	if (true == m_pColliderCom->Collision_OBB((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider")))
+	//	{
+	//		//m_isCol = true;
+	//	}
 	//}
-
-	CObject_Manager* pObject_Manager = CObject_Manager::GetInstance();
-	if (nullptr == pObject_Manager)
-		return -1;
-
-	//// OBB충돌 Player & 
-
-	for (size_t i = 0; i < 3; i++)
-	{
-		const CGameObject* pPlayer = pObject_Manager->Get_ObjectPointer(SCENE_STAGE, L"Layer_Player", i);
-		if (nullptr == pPlayer)
-			break;
-
-		// 디버깅용. 실제론 return true일 때 마다 특정 행동을 취해주자.
-		if (true == m_pColliderCom->Collision_OBB((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider")))
-		{
-			//m_isCol = true;
-		}
-	}
 
 
 	return _int();

@@ -3,6 +3,7 @@
 #include "Component_Manager.h"
 #include "Light_Manager.h"
 #include "Object_Manager.h"
+#include "Camera_Target.h"
 
 _USING(Client)
 
@@ -47,6 +48,15 @@ _int CBrawler::Update_GameObject(const _float & fTimeDelta)
 	if (nullptr == m_pRendererCom)
 		return -1;
 
+	CCamera_Target*	pCamera = (CCamera_Target*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Camera", 1);
+	if (nullptr == pCamera)
+		return -1;
+
+	_float fRadius = 15.f;
+
+
+
+
 	Update_HandMatrix();
 
 	for (size_t i = 1; i < 3; i++)
@@ -66,8 +76,11 @@ _int CBrawler::Update_GameObject(const _float & fTimeDelta)
 		}
 	}
 
-	if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
-		return -1;
+	if (false == pCamera->Culling_ToFrustum(m_pTransformCom, nullptr, fRadius))
+	{
+		if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
+			return -1;
+	}
 	return _int();
 }
 
@@ -158,7 +171,7 @@ HRESULT CBrawler::Ready_Component()
 	m_pColliderCom_Body = (CCollider*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Collider_Sphere");
 	if (FAILED(Add_Component(L"Com_Collider_Body", m_pColliderCom_Body)))
 		return E_FAIL;
-	m_pColliderCom_Body->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(60, 60, 60), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f, 100.f, 0.f));
+	m_pColliderCom_Body->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(60, 60, 60), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f, 120.f, 0.f));
 
 	Safe_Release(pComponent_Manager);
 
