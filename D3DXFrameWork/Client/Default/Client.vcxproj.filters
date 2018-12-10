@@ -219,9 +219,6 @@
     <ClInclude Include="..\Headers\Dog.h">
       <Filter>02.GameObject\02.For.Stage\04.Dog</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\Animator.h">
-      <Filter>02.GameObject\02.For.Stage\01.Player\Animator</Filter>
-    </ClInclude>
     <ClInclude Include="..\Headers\Scene_Field.h">
       <Filter>01.Scene\02.Scene_Stage\01.Scene_Field</Filter>
     </ClInclude>
@@ -275,6 +272,9 @@
     </ClInclude>
     <ClInclude Include="..\Headers\UI_HPBar.h">
       <Filter>02.GameObject\02.For.Stage\98.UI\HPBar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Animator.h">
+      <Filter>02.GameObject\02.For.Stage\01.Player\Animator</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

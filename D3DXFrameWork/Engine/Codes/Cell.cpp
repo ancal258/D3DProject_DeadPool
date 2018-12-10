@@ -65,7 +65,7 @@ _bool CCell::Compare_Point(const _vec3 * pSourPoint, const _vec3 * pDestPoint)
 	return false;
 }
 
-_bool CCell::Is_Move(const _vec3 * pPosition, _ulong * pIndex)
+_bool CCell::Is_Move(const _vec3 * pPosition, _ulong * pIndex, _ulong* pSlideIndex)
 {
 	// pIndex = 옮긴 인덱스 위치
 
@@ -78,6 +78,7 @@ _bool CCell::Is_Move(const _vec3 * pPosition, _ulong * pIndex)
 		{
 			if (nullptr == m_pNeighbor[i])
 			{
+				*pSlideIndex = i;
 				return false;
 			}
 			else
@@ -119,7 +120,7 @@ _bool CCell::Is_Sliding(const _vec3 * pPosition, _ulong * pIndex)
 _vec2 CCell::Sliding_Move(const _vec3 * pLook, _ulong dwSlideIndex)
 {
 	_vec2 vLook = _vec2((*pLook).x,(*pLook).z);
-	_vec2 vReplectLook = _vec2((vLook * -1).x, (vLook * -1).y);
+	_vec2 vReplectLook = -vLook;
 	_vec2 vProj = m_vNormal[dwSlideIndex];
 	vProj *= (D3DXVec2Dot(&m_vNormal[dwSlideIndex], &vReplectLook)); // 투영 벡터
 	

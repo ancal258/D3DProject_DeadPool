@@ -179,10 +179,22 @@ HRESULT CLoading::Ready_LightInfo()
 	D3DLIGHT9			LightInfo;
 	ZeroMemory(&LightInfo, sizeof(D3DLIGHT9));
 
-	LightInfo.Type = D3DLIGHT_DIRECTIONAL;
-	LightInfo.Diffuse = D3DXCOLOR(0.4f, 0.4f, 0.4f, 1.f);
+	// For. Player
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(0.7, 0.7f, 0.7f, 1.f);
 	LightInfo.Specular = D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.f);
-	LightInfo.Ambient = D3DXCOLOR(0.3f, 0.3f, 0.3f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.4f, 0.4f, 0.4f, 1.f);
+	LightInfo.Position = _vec3(8.f, 4.f, 13.2f);
+	LightInfo.Range = 6.0f;
+
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
+	// For. Directional
+	LightInfo.Type = D3DLIGHT_DIRECTIONAL;
+	LightInfo.Diffuse = D3DXCOLOR(0.3f, 0.3f, 0.3f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.15f, 0.15f, 0.15f, 1.f);
 	LightInfo.Direction = _vec3(1.f, -1.f, 1.f);
 
 	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))

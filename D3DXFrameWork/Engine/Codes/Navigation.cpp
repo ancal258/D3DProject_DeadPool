@@ -61,6 +61,36 @@ HRESULT CNavigation::SetUp_Navigation(const _uint & iNaviIndex)
 	return NOERROR;
 }
 
+void CNavigation::Compute_Animation(_matrix * pRealMatrix, CTransform * pTransformCom, const _float & fSpeedPerSec, const _float & fTimeDelta)
+{
+	_vec3		vPosition = (_vec3)pRealMatrix->m[3]; // 현재 포지션
+	_vec3		vLook =  (_vec3)pRealMatrix->m[3] - (_vec3)m_LastMatrix.m[3]; // 이동하려는 방향 벡터.
+	_float		fLength = D3DXVec3Length(&vLook);
+	D3DXVec3Normalize(&vLook, &vLook);
+	_ulong		dwMoveIndex = 0;
+	_ulong		dwSlideIndex = 0;
+
+	if (true == m_vecCell[m_dwCurrentIdx]->Is_Move(&vPosition, &dwMoveIndex, &dwSlideIndex))
+	{
+		m_dwCurrentIdx = dwMoveIndex;
+	}
+	else
+	{
+		// Root뼈의 위치를 받아온다.
+		vPosition = *pTransformCom->Get_StateInfo(CTransform::STATE_POSITION);
+		// Look벡터와 반대 방향으로 밀어준다.
+		vPosition += (vLook * -1) * fLength * 2;
+		_vec2	vSlide = m_vecCell[m_dwCurrentIdx]->Sliding_Move(&vLook, dwSlideIndex);
+		_vec3   vSlide_v3 = _vec3(vSlide.x, vPosition.y, vSlide.y); // slide y == z
+		vPosition += vSlide_v3 * fSpeedPerSec * fTimeDelta;
+		if (true == m_vecCell[m_dwCurrentIdx]->Is_Sliding(&vPosition, &dwMoveIndex))
+		{
+			pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &vPosition);
+			m_dwCurrentIdx = dwMoveIndex; // 현재 인덱스.
+		}
+	}
+}
+
 _bool CNavigation::Move_OnNavigation(CTransform * pTransformCom, const _float & fSpeedPerSec, const _float & fTimeDelta)
 {
 	_vec3		vPosition = *pTransformCom->Get_StateInfo(CTransform::STATE_POSITION);
@@ -73,24 +103,24 @@ _bool CNavigation::Move_OnNavigation(CTransform * pTransformCom, const _float & 
 	_ulong		dwMoveIndex = 0;
 	_ulong		dwSlideIndex = 0;
 
-	if (true == m_vecCell[m_dwCurrentIdx]->Is_Move(&vPosition, &dwMoveIndex))
+	if (true == m_vecCell[m_dwCurrentIdx]->Is_Move(&vPosition, &dwMoveIndex, &dwSlideIndex))
 	{
 		pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &vPosition);
 		m_dwCurrentIdx = dwMoveIndex;
 	}
 	else
 	{
-		////	int a = 0;
-		//vPosition -= vLook * fSpeedPerSec * fTimeDelta;
-		//_vec2	vSlide = m_vecCell[m_dwCurrentIdx]->Sliding_Move(&vLook, m_dwCurrentIdx);
-		//_vec3   vSlide_v3 = _vec3(vSlide.x, vPosition.y, vSlide.y); // slide y == z
-		//vPosition += vSlide_v3 * fSpeedPerSec * fTimeDelta;
-		////vPosition += -vLook * 0.1f;
-		//if (true == m_vecCell[m_dwCurrentIdx]->Is_Sliding(&vPosition, &dwMoveIndex))
-		//{
-		//	pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &vPosition);
-		//	m_dwCurrentIdx = dwMoveIndex; // 현재 인덱스.
-		//}
+		// 원래 위치로 돌린 위치로 계산하기 위해.
+		vPosition -= vLook * fSpeedPerSec * fTimeDelta; 
+		_vec2	vSlide = m_vecCell[m_dwCurrentIdx]->Sliding_Move(&vLook, dwSlideIndex);
+		_vec3   vSlide_v3 = _vec3(vSlide.x, vPosition.y, vSlide.y); // slide y == z
+		// 구한 슬라이딩 벡터 방향으로 움직여라.
+		vPosition += vSlide_v3 * fSpeedPerSec * fTimeDelta;
+		if (true == m_vecCell[m_dwCurrentIdx]->Is_Sliding(&vPosition, &dwMoveIndex))
+		{
+			pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &vPosition);
+			m_dwCurrentIdx = dwMoveIndex; // 현재 인덱스.
+		}
 	}
 
 

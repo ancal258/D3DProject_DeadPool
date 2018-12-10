@@ -22,6 +22,21 @@ const D3DLIGHT9 * CLight_Manager::Get_LightInfo(const _uint& iIndex) const
 	return (*iter)->Get_LightInfo();
 }
 
+void CLight_Manager::Set_PointInfo(VALUE eValue, const _vec3 * vPosition, const _uint& iIndex)
+{
+	if (m_LightList.size() <= iIndex)
+		return;
+
+	auto	iter = m_LightList.begin();
+
+	for (size_t i = 0; i < iIndex; ++i)
+		++iter;
+
+
+	(*iter)->Set_PointInfo(eValue, vPosition);
+	return;
+}
+
 HRESULT CLight_Manager::Add_Light(LPDIRECT3DDEVICE9 pGraphic_Device, const D3DLIGHT9 * pLightInfo)
 {
 	if (nullptr == pLightInfo)

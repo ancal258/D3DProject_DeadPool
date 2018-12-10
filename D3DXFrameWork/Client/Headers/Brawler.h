@@ -54,6 +54,13 @@ protected:
 	virtual HRESULT Ready_Component();
 	HRESULT Update_HandMatrix();
 	HRESULT SetUp_ConstantTable(LPD3DXEFFECT pEffect);
+private:
+	LPD3DXMESH				m_pColliderMesh = nullptr;
+	BOOL					m_Hit = FALSE;
+	_float					m_fDist = 0;
+
+private:
+	HRESULT isHitScan();
 public:
 	virtual CGameObject* Clone_GameObject() PURE;
 protected:

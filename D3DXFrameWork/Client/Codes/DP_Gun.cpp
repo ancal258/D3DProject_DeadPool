@@ -93,7 +93,7 @@ void CDP_Gun::Render_GameObject()
 
 	Safe_Release(pEffect);
 
-	Render_Axis();
+	//Render_Axis();
 }
 
 void CDP_Gun::Render_Axis()

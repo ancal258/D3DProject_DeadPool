@@ -6,6 +6,7 @@ _BEGIN(Engine)
 
 class CVIBuffer;
 class CMesh_Static;
+class CCollider;
 class CTransform;
 class CNavigation;
 class _ENGINE_DLL CInput_Device final : public CBase
@@ -31,15 +32,20 @@ public:
 public:
 	HRESULT Ready_Input_Device(HINSTANCE hInst, HWND hWnd);
 	HRESULT Inquire_Input_State();
+	HRESULT Update_MinDist();
 	_bool Picking_ToBuffer(CVIBuffer* pBufferCom, CTransform* pTransformCom, _vec3* pCollPos);
 	_bool Picking_ToBuffer(CVIBuffer* pBufferCom, CTransform* pTransformCom, CNavigation* pNavigation, _vec3* pCollPos);
 	HRESULT Picking_ToMesh(CMesh_Static * pStaticMeshCom, CTransform * pTransformCom, BOOL* pHit);
 	HRESULT Picking_ToCollider(LPD3DXMESH pMesh, CTransform * pTransformCom, BOOL* pHit);
+	HRESULT Picking_ToCollider(LPD3DXMESH pMesh, CTransform * pTransformCom, BOOL* pHit, _float* fDist);
+	_bool Is_MinDist(_float fDist);
 	HRESULT SetUp_Picking();
 private:
 	HWND							m_hWnd = 0;
 	_vec3							m_vRayDir;
 	_vec3							m_vRayPos;
+	list<_float>					DistList;
+	_float							m_fMinDist = 0;
 private:
 	LPDIRECTINPUT8					m_pSDK = nullptr;
 	LPDIRECTINPUTDEVICE8			m_pKeyBoard = nullptr;

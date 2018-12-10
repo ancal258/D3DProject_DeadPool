@@ -72,6 +72,7 @@ HRESULT CPlayer::Ready_GameObject()
 
 	//m_pMeshCom->Set_AnimationSet(SIT_GETUP);
 	D3DXMatrixIdentity(&m_RealMatrix);
+	m_pNavigationCom->Update_LastMatrix(&m_RealMatrix);
 
 
 
@@ -86,12 +87,16 @@ _int CPlayer::Update_GameObject(const _float & fTimeDelta)
 	if (nullptr != m_pAnimator)
 	{
 		if (0 == m_iStageNum)
+		{
+			CLight_Manager::GetInstance()->Set_PointInfo(CLight_Manager::STATE_POSITION, m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION) ,0);
 			m_pAnimator->Update_Animation(fTimeDelta);
+		}
 		if (1 == m_iStageNum)
 		{
 			m_pAnimator->Update_Animation_FIELD(fTimeDelta);
 		}
 	}
+	m_pTransformCom->Update_Matrix();
 	Update_HandMatrix();
 
 
@@ -150,6 +155,11 @@ _int CPlayer::LastUpdate_GameObject(const _float & fTimeDelta)
 
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &vPosition);
 	m_pTransformCom->Update_Matrix();
+
+	// 현재 RealMatrix 값과 과거의 Matrix값을 비교 처리
+	m_pNavigationCom->Compute_Animation(&m_RealMatrix, m_pTransformCom, 5.f, fTimeDelta);
+	// LastMatrix Update
+	m_pNavigationCom->Update_LastMatrix(&m_RealMatrix);
 
 	if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
 		return -1;

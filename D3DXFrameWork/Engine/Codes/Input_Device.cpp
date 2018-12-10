@@ -4,7 +4,7 @@
 #include "Transform.h"
 #include "VIBuffer.h"
 #include "Mesh_Static.h"
-
+#include "Collider.h"
 _IMPLEMENT_SINGLETON(CInput_Device)
 
 CInput_Device::CInput_Device()
@@ -28,6 +28,7 @@ HRESULT CInput_Device::Ready_Input_Device(HINSTANCE hInst, HWND hWnd)
 	return NOERROR;
 }
 
+// 매 프레임 호출된다.
 HRESULT CInput_Device::Inquire_Input_State()
 {
 	if (nullptr == m_pKeyBoard ||
@@ -39,11 +40,26 @@ HRESULT CInput_Device::Inquire_Input_State()
 	m_pKeyBoard->GetDeviceState(256, m_byKeyState);
 
 	m_pMouse->GetDeviceState(sizeof(DIMOUSESTATE), &m_MouseState);
-
+	DistList.clear();
 	if (FAILED(SetUp_Picking()))
 		return E_FAIL;
 
 
+	return NOERROR;
+}
+
+HRESULT CInput_Device::Update_MinDist()
+{
+	if (0 != DistList.size())
+	{
+		m_fMinDist = *DistList.begin();
+
+		for (auto& fDist : DistList)
+		{
+			if (m_fMinDist > fDist)
+				m_fMinDist = fDist;
+		}
+	}
 	return NOERROR;
 }
 
@@ -68,6 +84,7 @@ HRESULT CInput_Device::Picking_ToMesh(CMesh_Static * pStaticMeshCom, CTransform 
 
 HRESULT CInput_Device::Picking_ToCollider(LPD3DXMESH pMesh, CTransform * pTransformCom, BOOL * pHit)
 {
+
 	_float		fU, fV, fDist;
 	_vec3		vRayPos, vRayDir;
 	_matrix     matWorld = *pTransformCom->Get_WorldMatrix();
@@ -76,9 +93,39 @@ HRESULT CInput_Device::Picking_ToCollider(LPD3DXMESH pMesh, CTransform * pTransf
 	D3DXVec3TransformCoord(&vRayPos, &m_vRayPos, &matWorld);
 	D3DXVec3TransformNormal(&vRayDir, &m_vRayDir, &matWorld);
 
-	if (FAILED(D3DXIntersect(pMesh, &vRayPos, &vRayDir, (BOOL*)pHit, nullptr, &fU, &fV, &fDist, nullptr, nullptr)))
+	if (FAILED(D3DXIntersect(pMesh, &vRayPos, &vRayDir, pHit, nullptr, &fU, &fV, &fDist, nullptr, nullptr)))
 		return E_FAIL;
+
+
 	return NOERROR;
+}
+
+HRESULT CInput_Device::Picking_ToCollider(LPD3DXMESH pMesh, CTransform * pTransformCom, BOOL * pHit, _float* fDist)
+{
+
+	_float		fU, fV;
+	_vec3		vRayPos, vRayDir;
+	_matrix     matWorld = *pTransformCom->Get_WorldMatrix();
+	D3DXVec3Normalize(&m_vRayDir, &m_vRayDir);
+	D3DXMatrixInverse(&matWorld, nullptr, &matWorld);
+	D3DXVec3TransformCoord(&vRayPos, &m_vRayPos, &matWorld);
+	D3DXVec3TransformNormal(&vRayDir, &m_vRayDir, &matWorld);
+
+	if (FAILED(D3DXIntersect(pMesh, &vRayPos, &vRayDir, pHit, nullptr, &fU, &fV, fDist, nullptr, nullptr)))
+		return E_FAIL;
+
+	if (TRUE == *pHit)
+		DistList.push_back(*fDist);
+
+	return NOERROR;
+}
+
+_bool CInput_Device::Is_MinDist(_float fDist)
+{
+	if (fDist == m_fMinDist)
+		return true;
+	else
+		return false;
 }
 
 HRESULT CInput_Device::SetUp_Picking()
@@ -102,8 +149,10 @@ HRESULT CInput_Device::SetUp_Picking()
 
 	// x : 0 -> -1, 800 -> 1, 400 -> 0
 	// y : 0 -> 1, 600 -> -1, 300 -> 0
-	vMousePos.x = (ptMouse.x / ((ViewPort.Width + 300) * 0.5f)) - 1.f; // mfc 300정도 보정
-	vMousePos.y = (ptMouse.y / ((ViewPort.Height + 30) * -0.5f)) + 1.f; // mfc 30정도 보정
+	//vMousePos.x = (ptMouse.x / ((ViewPort.Width + 300) * 0.5f)) - 1.f; // mfc 300정도 보정
+	//vMousePos.y = (ptMouse.y / ((ViewPort.Height + 30) * -0.5f)) + 1.f; // mfc 30정도 보정
+	vMousePos.x = (ptMouse.x / ((ViewPort.Width) * 0.5f)) - 1.f; // mfc 300정도 보정
+	vMousePos.y = (ptMouse.y / ((ViewPort.Height) * -0.5f)) + 1.f; // mfc 30정도 보정
 	vMousePos.z = 0.f;
 
 	// In.View Space

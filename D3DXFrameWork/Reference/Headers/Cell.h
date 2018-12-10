@@ -24,7 +24,7 @@ public:
 public:
 	HRESULT Ready_Cell(const _vec3 * pPoints, const _ulong& dwIndex);
 	_bool Compare_Point(const _vec3* pSourPoint, const _vec3* pDestPoint);
-	_bool Is_Move(const _vec3* pPosition, _ulong* pIndex);
+	_bool Is_Move(const _vec3* pPosition, _ulong* pIndex, _ulong* pSlideIndex);
 	_bool Is_Sliding(const _vec3* pPosition, _ulong* pIndex);
 	_vec2 Sliding_Move(const _vec3* pLook, _ulong dwSlideIndex);
 	void Render_Cell(LPD3DXLINE pLine);

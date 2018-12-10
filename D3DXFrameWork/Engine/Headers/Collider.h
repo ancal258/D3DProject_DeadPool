@@ -5,7 +5,6 @@
 #include "Component.h"
 
 _BEGIN(Engine)
-
 class CShader;
 class _ENGINE_DLL CCollider final : public CComponent
 {

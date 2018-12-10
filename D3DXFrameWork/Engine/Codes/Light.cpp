@@ -6,6 +6,15 @@ CLight::CLight(LPDIRECT3DDEVICE9 pGraphic_Device)
 	m_pGraphic_Device->AddRef();
 }
 
+void CLight::Set_PointInfo(_uint eValue, const _vec3* vPosition)
+{
+	if (eValue == STATE_POSITION)
+	{
+		_vec3 vTmp = _vec3(vPosition->x, vPosition->y + 7, vPosition->z);
+		m_LightInfo.Position = vTmp;
+	}
+}
+
 HRESULT CLight::Ready_Light(const D3DLIGHT9 * pLightInfo)
 {
 	m_LightInfo = *pLightInfo;

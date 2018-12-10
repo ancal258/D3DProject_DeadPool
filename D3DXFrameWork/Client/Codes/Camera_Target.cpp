@@ -41,6 +41,20 @@ _int CCamera_Target::Update_GameObject(const _float & fTimeDelta)
 {
 	if (false == m_isCameraOn)
 		return 0;
+
+
+	D3DVIEWPORT9		ViewPort;
+	Get_Graphic_Device()->GetViewport(&ViewPort);
+
+	POINT			pt;
+	pt.x = ViewPort.Width * 0.5f;
+	pt.y = ViewPort.Height * 0.5f;
+
+	ClientToScreen(g_hWnd, &pt);
+
+
+	SetCursorPos(pt.x, pt.y);
+
 	return CCamera::Update_GameObject(fTimeDelta);
 }
 

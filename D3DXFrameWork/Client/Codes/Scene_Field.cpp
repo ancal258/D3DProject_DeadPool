@@ -28,6 +28,9 @@ _int CScene_Field::Update_Scene(const _float & fTimeDelta)
 
 _int CScene_Field::LastUpdate_Scene(const _float & fTimeDelta)
 {
+	if (FAILED(CInput_Device::GetInstance()->Update_MinDist()))
+		return E_FAIL;
+
 	return CScene::LastUpdate_Scene(fTimeDelta);
 }
 

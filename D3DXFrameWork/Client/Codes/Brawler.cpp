@@ -4,6 +4,7 @@
 #include "Light_Manager.h"
 #include "Object_Manager.h"
 #include "Camera_Target.h"
+#include "Player.h"
 
 _USING(Client)
 
@@ -54,9 +55,6 @@ _int CBrawler::Update_GameObject(const _float & fTimeDelta)
 
 	_float fRadius = 15.f;
 
-
-
-
 	Update_HandMatrix();
 
 	for (size_t i = 1; i < 3; i++)
@@ -81,12 +79,16 @@ _int CBrawler::Update_GameObject(const _float & fTimeDelta)
 		if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
 			return -1;
 	}
+
+	if (FAILED(isHitScan()))
+		return E_FAIL;
 	return _int();
 }
 
 _int CBrawler::LastUpdate_GameObject(const _float & fTimeDelta)
 {
-
+	if (TRUE == m_Hit)
+		m_isDamaged = CInput_Device::GetInstance()->Is_MinDist(m_fDist);
 
 	m_pTransformCom->Update_Matrix();
 
@@ -172,6 +174,7 @@ HRESULT CBrawler::Ready_Component()
 	if (FAILED(Add_Component(L"Com_Collider_Body", m_pColliderCom_Body)))
 		return E_FAIL;
 	m_pColliderCom_Body->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(70, 70, 70), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f, 120.f, 0.f));
+	m_pColliderMesh = m_pColliderCom_Body->Get_Mesh();
 
 	Safe_Release(pComponent_Manager);
 
@@ -216,6 +219,21 @@ HRESULT CBrawler::SetUp_ConstantTable(LPD3DXEFFECT pEffect)
 
 	Safe_Release(pEffect);
 
+	return NOERROR;
+}
+
+HRESULT CBrawler::isHitScan()
+{
+	const CGameObject* pPlayer = CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Player", 0);
+	if (nullptr == pPlayer)
+		return NOERROR;
+	m_Hit = FALSE;
+
+	if (true == ((CPlayer*)pPlayer)->Get_IsButtonDown(7))
+	{
+		if (FAILED(CInput_Device::GetInstance()->Picking_ToCollider(m_pColliderMesh, m_pTransformCom, &m_Hit,&m_fDist)))
+			return E_FAIL;
+	}
 	return NOERROR;
 }
 
