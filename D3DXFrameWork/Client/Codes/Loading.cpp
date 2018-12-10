@@ -251,8 +251,10 @@ HRESULT CLoading::Ready_LightInfo_FIELD()
 	ZeroMemory(&LightInfo, sizeof(D3DLIGHT9));
 
 	LightInfo.Type = D3DLIGHT_DIRECTIONAL;
+	//LightInfo.Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.f);
 	LightInfo.Diffuse = D3DXCOLOR(0.3f, 0.3f, 0.3f, 1.f);
 	LightInfo.Specular = D3DXCOLOR(0.5f, 0.5f, 0.5f, 0.5f);
+	//LightInfo.Ambient = D3DXCOLOR(0.4f, 0.4f, 0.4f, 1.f);
 	LightInfo.Ambient = D3DXCOLOR(0.15f, 0.15f, 0.15f, 1.f);
 	LightInfo.Direction = _vec3(1.f, -1.f, 1.f);
 

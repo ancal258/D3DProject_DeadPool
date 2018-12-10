@@ -39,7 +39,7 @@ struct VS_OUT // 변환(월드, 뷰, 투영행렬)을 거친 정점의 정보
 	float4	vPosition : POSITION;
 	float4	vNormal : NORMAL;
 	float2	vTexUV : TEXCOORD0;
-	float4	vWorldPos : TEXCOORD1;
+	float4	vProjPos : TEXCOORD1;
 };
 
 
@@ -62,7 +62,7 @@ VS_OUT VS_MAIN(VS_IN In)
 
 	Out.vTexUV = In.vTexUV;
 
-	Out.vWorldPos = mul(vector(In.vPosition, 1.f), g_matWorld);
+	Out.vProjPos = Out.vPosition;
 
 	return Out;
 }
@@ -72,31 +72,28 @@ struct PS_IN // 픽셀의 정보를 담기위한 구조체.
 	float4	vPosition : POSITION;
 	float4	vNormal : NORMAL;
 	float2	vTexUV : TEXCOORD0;
-	float4	vWorldPos : TEXCOORD1;
+	float4	vProjPos : TEXCOORD1;
 };
 
 struct PS_OUT
 {
-	vector	vColor : COLOR0;
+	vector	vDiffuse : COLOR0;
+	vector	vNormal : COLOR1;
+	vector	vDepth : COLOR2;
 };
 
 PS_OUT PS_MAIN(PS_IN In)
 {
 	PS_OUT			Out = (PS_OUT)0;
 
-	vector		vShade = max(dot(normalize(g_vLightDir) * -1.f, In.vNormal), 0.f);
-
-	vector		vLook = normalize(In.vWorldPos - g_vCamPosition);
-	vector		vReflect = normalize(reflect(g_vLightDir, In.vNormal));
-
-	vector		vSpecular = pow(max(dot(vLook * -1.f, vReflect), 0.f), g_fPower);
-
 	vector		vDiffuse = tex2D(DiffuseSampler, In.vTexUV);
 
-	Out.vColor = (g_vLightDiffuse * (vDiffuse * g_vMtrlDiffuse)) * saturate(vShade + (g_vLightAmbient * g_vMtrlAmbient))
-		+ (g_vLightSpecular * g_vMtrlSpecular) * vSpecular;
+	Out.vDiffuse = vDiffuse;
+	Out.vNormal = 0;// vector(In.vNormal.xyz * 0.5f + 0.5f, 0.f);
 
-	Out.vColor.gb *= 1 - g_isCol;
+	Out.vDepth = vector(In.vProjPos.z / In.vProjPos.w, In.vProjPos.w / 500.0f, 0.f, 0.f);
+
+	Out.vDiffuse.gb *= 1 - g_isCol;
 	return Out;
 }
 

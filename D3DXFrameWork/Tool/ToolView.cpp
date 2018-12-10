@@ -788,12 +788,22 @@ HRESULT CToolView::Ready_LightInfo()
 
 	LightInfo.Type = D3DLIGHT_DIRECTIONAL;
 	LightInfo.Diffuse = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
-	LightInfo.Specular = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.f);
 	LightInfo.Ambient = LightInfo.Diffuse;
-	LightInfo.Direction = _vec3(1.f, -1.f, 1.f);
+	LightInfo.Direction = _vec3(1.f, 1.f, 1.f);
 
 	if (FAILED(CLight_Manager::GetInstance()->Add_Light(m_pGraphic_Device, &LightInfo)))
 		return E_FAIL;
+
+	//ZeroMemory(&LightInfo, sizeof(D3DLIGHT9));
+	//LightInfo.Type = D3DLIGHT_DIRECTIONAL;
+	//LightInfo.Diffuse = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
+	//LightInfo.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.f);
+	//LightInfo.Ambient = LightInfo.Diffuse;
+	//LightInfo.Direction = _vec3(1.f, -1.f, 1.f);
+
+	//if (FAILED(CLight_Manager::GetInstance()->Add_Light(m_pGraphic_Device, &LightInfo)))
+	//	return E_FAIL;
 
 
 	return NOERROR;

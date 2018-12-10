@@ -171,7 +171,7 @@ HRESULT CBrawler::Ready_Component()
 	m_pColliderCom_Body = (CCollider*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Collider_Sphere");
 	if (FAILED(Add_Component(L"Com_Collider_Body", m_pColliderCom_Body)))
 		return E_FAIL;
-	m_pColliderCom_Body->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(60, 60, 60), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f, 120.f, 0.f));
+	m_pColliderCom_Body->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(70, 70, 70), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f, 120.f, 0.f));
 
 	Safe_Release(pComponent_Manager);
 
