@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "..\Headers\Scene_Field.h"
 #include "Component_Manager.h"
-
+#include "Scene_Loading.h"
+#include "Management.h"
 
 
 _USING(Client)
@@ -21,6 +22,22 @@ HRESULT CScene_Field::Ready_Scene()
 
 _int CScene_Field::Update_Scene(const _float & fTimeDelta)
 {
+	CInput_Device*	pInput_Device = Get_Input_Device();
+	if (nullptr == pInput_Device)
+		return -1;
+
+	if (pInput_Device->Get_DIKeyState(DIK_L) & 0x80)
+	{
+		CScene*		pNewScene = CScene_Loading::Create(Get_Graphic_Device(), SCENE_AIRPLANE);
+		if (nullptr == pNewScene)
+			return -1;
+
+		if (FAILED(CManagement::GetInstance()->SetUp_CurrentScene(pNewScene)))
+			return -1;
+		return 0;
+	}
+
+
 	m_fTimeAcc += fTimeDelta;
 
 	return CScene::Update_Scene(fTimeDelta);
@@ -62,11 +79,6 @@ CScene_Field * CScene_Field::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 }
 void CScene_Field::Free()
 {
-	if (FAILED(CObject_Manager::GetInstance()->Clear_Object(SCENE_STAGE)))
-		return;
-
-	if (FAILED(CComponent_Manager::GetInstance()->Clear_Component(SCENE_STAGE)))
-		return;
 
 	CScene::Free();
 }

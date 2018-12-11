@@ -58,6 +58,13 @@ void CAnimator::Ready_Pair()
 		m_vecBlendPair.push_back(make_pair(AIM_F, AIM_IDLE));
 		m_vecBlendPair.push_back(make_pair(AIM_IDLE, AIM_B));
 		m_vecBlendPair.push_back(make_pair(AIM_B, AIM_IDLE));
+		m_vecBlendPair.push_back(make_pair(AIM_IDLE, SWORD_JUMP));
+		m_vecBlendPair.push_back(make_pair(SWORD_IDLE, SWORD_JUMP));
+		m_vecBlendPair.push_back(make_pair(SWORD_JUMP, SWORD_DOUBLEJUMP));
+		m_vecBlendPair.push_back(make_pair(SWORD_JUMP, SWORD_JUMPLAND));
+		m_vecBlendPair.push_back(make_pair(SWORD_JUMP, SWORD_RUN_FORWARD));
+		m_vecBlendPair.push_back(make_pair(SWORD_DOUBLEJUMP, SWORD_JUMPLAND));
+		m_vecBlendPair.push_back(make_pair(SWORD_DOUBLEJUMP, SWORD_RUN_FORWARD));
 		//m_vecBlendPair.push_back(make_pair(SWORLD_LIGHT_02, SWORLD_LIGHT_03));
 		//m_vecBlendPair.push_back(make_pair(SWORLD_HEAVY_01, SWORLD_HEAVY_02));
 		//m_vecBlendPair.push_back(make_pair(SWORLD_HEAVY_02, SWORLD_HEAVY_03));
@@ -68,12 +75,14 @@ void CAnimator::Ready_Pair()
 		m_vecComboPair.push_back(make_pair(SWORLD_LIGHT_02, SWORLD_LIGHT_03));
 		m_vecComboPair.push_back(make_pair(SWORLD_HEAVY_01, SWORLD_HEAVY_02));
 		m_vecComboPair.push_back(make_pair(SWORLD_HEAVY_02, SWORLD_HEAVY_03));
+		m_vecComboPair.push_back(make_pair(SWORD_JUMP, SWORD_DOUBLEJUMP));
 
 		// ComboTime
 		m_vecComboTime.push_back(make_pair(SWORLD_LIGHT_01, 70));
 		m_vecComboTime.push_back(make_pair(SWORLD_LIGHT_02, 60));
 		m_vecComboTime.push_back(make_pair(SWORLD_HEAVY_01, 52));
 		m_vecComboTime.push_back(make_pair(SWORLD_HEAVY_02, 100));
+		m_vecComboTime.push_back(make_pair(SWORD_JUMP, 80));
 	}
 }
 
@@ -181,23 +190,42 @@ void CAnimator::Update_Animation_FIELD(const _float & fTimeDelta)
 	else
 		m_isKeyDown[E] = false;
 
+	if (m_pInput_Device->Get_DIKeyState(DIK_SPACE) & 0x8000)
+	{
+		m_iLastState = STATE_AIR;
+		if (m_isKeyDown[SPACE] == false)
+		{
+			m_isKeyDown[SPACE] = true;
+			_uint iAdd = CheckJump();
+			Input_Push_Back(SWORD_JUMP + iAdd);
+		}
+
+	}
+	else
+		m_isKeyDown[SPACE] = false;
 	if (m_ReservationList.size() == 0)
 	{
 		if (m_pInput_Device->Get_DIKeyState(DIK_W) & 0x8000)
 		{
-			if (m_iState != STATE_AIM)
+			if (false == m_isJumpLand)
 			{
-				m_pMeshCom->Set_AnimationSet(SWORD_RUN_FORWARD);
-				//m_pTransformCom->Go_Straight(7.8f, fTimeDelta);
-				m_pNavigationCom->Move_OnNavigation(m_pTransformCom, 8.7f, fTimeDelta);
-				m_iState = STATE_RUN;
+				if (m_iState == STATE_AIM)
+				{
+					m_pMeshCom->Set_AnimationSet(AIM_F);
+					m_pNavigationCom->Move_OnNavigation(m_pTransformCom, 4.7f, fTimeDelta);
+					m_iState = AIM_F;
+				}
+				else
+				{
+					m_pMeshCom->Set_AnimationSet(SWORD_RUN_FORWARD);
+					//m_pTransformCom->Go_Straight(7.8f, fTimeDelta);
+					m_pNavigationCom->Move_OnNavigation(m_pTransformCom, 8.7f, fTimeDelta);
+					m_iState = STATE_RUN;
+				}
 			}
 			else
-			{
-				m_pMeshCom->Set_AnimationSet(AIM_F);
-				m_pNavigationCom->Move_OnNavigation(m_pTransformCom, 4.7f, fTimeDelta);
-				m_iState = AIM_F;
-			}
+				m_pNavigationCom->Move_OnNavigation(m_pTransformCom, 0.6f, fTimeDelta);
+
 		}
 		if (m_pInput_Device->Get_DIKeyState(DIK_S) & 0x8000)
 		{
@@ -212,6 +240,16 @@ void CAnimator::Update_Animation_FIELD(const _float & fTimeDelta)
 				m_pMeshCom->Set_AnimationSet(AIM_B);
 				m_pNavigationCom->Move_OnNavigation(m_pTransformCom, -4.7f, fTimeDelta);
 				m_iState = AIM_B;
+			}
+		}
+	}
+	else
+	{
+		if (m_pInput_Device->Get_DIKeyState(DIK_W) & 0x8000)
+		{
+			if (m_iState == STATE_AIR)
+			{
+				m_pNavigationCom->Move_OnNavigation(m_pTransformCom, 8.7f, fTimeDelta);
 			}
 		}
 	}
@@ -254,6 +292,8 @@ void CAnimator::Update_Animation_FIELD(const _float & fTimeDelta)
 			m_pMeshCom->Set_AnimationSet(AIM_IDLE);
 		else if (m_iState == STATE_RUN)
 			m_pMeshCom->Set_AnimationSet(SWORD_RUN_FORWARD);
+		else if (m_iState == STATE_AIR)
+			m_pMeshCom->Set_AnimationSet(SWORD_JUMPLAND);
 		else
 			m_pMeshCom->Set_AnimationSet(m_iState);
 	}
@@ -292,6 +332,11 @@ void CAnimator::AnimFinish()
 {
 	if (1 == m_iSceneNum)
 	{
+		if (true == m_isJumpLand)
+		{
+			m_iLastState = m_iState = STATE_SWORD;
+			m_isJumpLand = false;
+		}
 		if (m_ReservationList.size() != 0)
 		{
 			m_ReservationList.erase(m_ReservationList.begin());
@@ -309,6 +354,11 @@ void CAnimator::AnimFinish()
 				m_pMeshCom->Set_AnimationSet(AIM_IDLE);
 			else if (STATE_RUN == m_iState)
 				m_pMeshCom->Set_AnimationSet(SWORD_RUN_FORWARD);
+			else if (STATE_AIR == m_iState)
+			{
+				m_isJumpLand = true;
+				m_pMeshCom->Set_AnimationSet(SWORD_JUMPLAND);
+			}
 		}
 
 		if (m_ReservationList.size() == 0)
@@ -394,6 +444,18 @@ _uint CAnimator::CheckSwordHeavy()
 		return 1;
 	else if (*iter == SWORLD_HEAVY_02)
 		return 2;
+	else
+		return 0;
+}
+
+_uint CAnimator::CheckJump()
+{
+	if (m_ReservationList.size() == 0)
+		return 0;
+
+	auto iter = m_ReservationList.end();
+	if (*(--iter) == SWORD_JUMP)
+		return 1;
 	else
 		return 0;
 }

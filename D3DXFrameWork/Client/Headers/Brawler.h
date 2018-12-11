@@ -32,32 +32,44 @@ public:
 
 public:
 	void CallBackFinish();
-protected:
+protected: // For. Component
 	CTransform*         m_pTransformCom = nullptr;
 	CRenderer*			m_pRendererCom = nullptr;
 	CShader*			m_pShaderCom = nullptr;
 	CNavigation*		m_pNavigationCom = nullptr;
 	CMesh_Dynamic*      m_pMeshCom = nullptr;
+protected: // For. Collider
 	CCollider*			m_pColliderCom = nullptr;
+	CCollider*			m_pColliderCom_Head = nullptr;
 	CCollider*			m_pColliderCom_Body = nullptr;
-protected:
-	_bool				m_isDamaged = false;
-	_uint				m_iIdleIndex = 0;
-	_uint				m_iCurrentIndex = 0;
-protected:
+protected: // For. Player
+	const CGameObject*	m_pPlayer[3] = { nullptr , nullptr, nullptr };
+
 	_matrix             m_CombinedHandMatrix[2];
 	const _matrix*      m_pHandMatrix[2] = { nullptr };
 	_matrix            m_CombinedRootMatrix;
 	const _matrix*      m_pRootMatrix = nullptr;
 	_matrix				m_RealMatrix;
+protected: // For. Animation
+	_uint				m_iDeathIndex = 0;
+	_uint				m_iIdleIndex = 0;
+	_uint				m_iCurrentIndex = 0;
+protected: // For. AttackCheck
+	_bool			m_isDamaged = false;
+	_vec3			m_vPlayerDir;
+	_vec3			m_vBrawlerLook;
+	_bool			m_isCallDeathIdx = false;
+	_float			m_fLength = 0;
+	_float			m_fRadian = 0;
 protected:
 	virtual HRESULT Ready_Component();
 	HRESULT Update_HandMatrix();
 	HRESULT SetUp_ConstantTable(LPD3DXEFFECT pEffect);
+	void Compute_PlayerDir();
 private:
-	LPD3DXMESH				m_pColliderMesh = nullptr;
-	BOOL					m_Hit = FALSE;
-	_float					m_fDist = 0;
+	LPD3DXMESH				m_pColliderMesh[2] = { nullptr, nullptr };
+	BOOL					m_Hit[2] = { FALSE };
+	_float					m_fDist[2] = { 0 };
 
 private:
 	HRESULT isHitScan();

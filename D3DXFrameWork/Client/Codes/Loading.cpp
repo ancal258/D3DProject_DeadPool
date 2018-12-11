@@ -20,7 +20,8 @@
 #include "Brawler_Knife.h"
 #include "Brawler_ElectricBaton.h"
 #include "SkyDom.h"
-
+#include "Airplane.h"
+#include "Minigun.h"
 // UI
 #include "UI_CrossHair.h"
 #include "UI_HPBar.h"
@@ -110,11 +111,11 @@ HRESULT CLoading::Loading_Stage_APT()
 	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Dog", SCENE_STAGE, L"Layer_Dog")))
 		return E_FAIL;
 
-	for (size_t i = 0; i < 10; i++)
-	{
-		if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Effect", SCENE_STAGE, L"Layer_Effect")))
-			return E_FAIL;
-	}
+	//for (size_t i = 0; i < 10; i++)
+	//{
+	//	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Effect", SCENE_STAGE, L"Layer_Effect")))
+	//		return E_FAIL;
+	//}
 
 	//MCIWndClose(m_hVideo);
 	m_isFinish = true;
@@ -167,6 +168,58 @@ HRESULT CLoading::Loading_Stage_FIELD()
 
 	if (FAILED(Load_Static_Object(L"../Bin/DataFiles/StaticObject_Field.dat")))
 		return E_FAIL;
+
+	m_isFinish = true;
+	lstrcpy(m_szString, L"Loading Complete");
+
+	return NOERROR;
+}
+
+HRESULT CLoading::Loading_Stage_AIRPLANE()
+{
+	if (FAILED(CLight_Manager::GetInstance()->Clear_Light()))
+		return E_FAIL;
+
+	if (FAILED(Ready_LightInfo_AIRPLANE()))
+		return E_FAIL;
+	if (FAILED(Ready_Static_Prototype_Component()))
+		return E_FAIL;
+	lstrcpy(m_szString, L"Field_Mesh_Load...");
+	if (FAILED(Ready_Component_Prototype_SceneFIELD()))
+		return E_FAIL;
+	lstrcpy(m_szString, L"Field_Prototype...");
+	if (FAILED(Ready_Stage_Prototype_GameObject_SceneFIELD()))
+		return E_FAIL;
+	lstrcpy(m_szString, L"Layer_BackGround...");
+	if (FAILED(Ready_Layer_BackGround_AIRPLANE(L"Layer_BackGround")))
+		return E_FAIL;
+	lstrcpy(m_szString, L"Layer_Player...");
+	if (FAILED(Ready_Layer_Player_FIELD(L"Layer_Player")))
+		return E_FAIL;
+
+	lstrcpy(m_szString, L"Layer_Airplane...");
+	if (FAILED(Ready_AIRPLANE()))
+		return E_FAIL;
+
+	lstrcpy(m_szString, L"Layer_Camera...");
+	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Debug", L"Layer_Camera")))
+		return E_FAIL;
+
+	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Target", L"Layer_Camera")))
+		return E_FAIL;
+
+	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Cinematic", L"Layer_Camera")))
+		return E_FAIL;
+	SetUp_CameraMove();
+
+	lstrcpy(m_szString, L"Layer_UI...");
+	if (FAILED(Ready_UI_SceneFIELD()))
+		return E_FAIL;
+	/////////////////////
+
+
+	/////////////////////
+
 
 	m_isFinish = true;
 	lstrcpy(m_szString, L"Loading Complete");
@@ -399,6 +452,25 @@ HRESULT CLoading::Ready_LightInfo_FIELD()
 		return E_FAIL;
 
 
+
+	return NOERROR;
+}
+
+HRESULT CLoading::Ready_LightInfo_AIRPLANE()
+{
+	D3DLIGHT9			LightInfo;
+	ZeroMemory(&LightInfo, sizeof(D3DLIGHT9));
+
+	LightInfo.Type = D3DLIGHT_DIRECTIONAL;
+	//LightInfo.Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.f);
+	LightInfo.Diffuse = D3DXCOLOR(0.9f, 0.9f, 0.9f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(0.6f, 0.6f, 0.6f, 0.5f);
+	//LightInfo.Ambient = D3DXCOLOR(0.4f, 0.4f, 0.4f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.f);
+	LightInfo.Direction = _vec3(1.f, -1.f, 1.f);
+
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
 
 	return NOERROR;
 }
@@ -910,6 +982,9 @@ HRESULT CLoading::Ready_Component_Prototype_SceneFIELD()
 	// For.Component_Mesh_Weight_Barbel
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Weight_Barbel", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"Weight_Barbel.x"))))
 		return E_FAIL;
+	// For.Component_Mesh_Helicopter
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Helicopter", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/Helicopter/", L"Helicopter.x"))))
+		return E_FAIL;
 
 	/////////////////////////////////////////////
 
@@ -947,6 +1022,30 @@ HRESULT CLoading::Ready_UI_SceneFIELD()
 	return NOERROR;
 }
 
+HRESULT CLoading::Ready_AIRPLANE()
+{
+	// For. AirPlane
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_AirPlane", CAirplane::Create(Get_Graphic_Device()))))
+		return E_FAIL;
+	// For.Add_AirPlane
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_AirPlane", SCENE_STAGE, L"Layer_Airplane", nullptr)))
+		return E_FAIL;
+
+
+	// For.Minigun
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(SCENE_STAGE, L"Component_Mesh_Minigun", CMesh_Dynamic::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/Helicopter/", L"MinigunFire.x"))))
+		return E_FAIL;
+	// For.Prototype_Minigun
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Minigun", CMinigun::Create(Get_Graphic_Device()))))
+		return E_FAIL;
+	// For.Add_Minigun
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Minigun", SCENE_STAGE, L"Layer_Minigun", nullptr)))
+		return E_FAIL;
+
+
+	return NOERROR;
+}
+
 HRESULT CLoading::Ready_Stage_Prototype_GameObject_SceneFIELD()
 {
 	// For.GameObject_Terrain
@@ -962,7 +1061,13 @@ HRESULT CLoading::Ready_Stage_Prototype_GameObject_SceneFIELD()
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Brawler02", CBrawler02::Create(Get_Graphic_Device()))))
 		return E_FAIL;
 	// For.GameObject_SkyDom_Night
-	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_SkyDom_Night", CSkyDom::Create(Get_Graphic_Device()))))
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_SkyDom_Night", CSkyDom::Create(Get_Graphic_Device(), 0))))
+		return E_FAIL;
+	// For.GameObject_SkyDom_Dusk
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_SkyDom_Dusk", CSkyDom::Create(Get_Graphic_Device(), 1))))
+		return E_FAIL;
+	// For.GameObject_SkyDom_Sunset
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_SkyDom_Sunset", CSkyDom::Create(Get_Graphic_Device(),2))))
 		return E_FAIL;
 
 	// For.GameObject_Sword_Left
@@ -1130,7 +1235,11 @@ HRESULT CLoading::Ready_Stage_Prototype_GameObject_SceneFIELD()
 	// For.GameObject_Weight_Barbel
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Weight_Barbel", CStatic_Object::Create(Get_Graphic_Device(), L"Component_Mesh_Weight_Barbel"))))
 		return E_FAIL;
-
+	
+	// For.GameObject_Helicopter
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Helicopter", CStatic_Object::Create(Get_Graphic_Device(), L"Component_Mesh_Helicopter"))))
+		return E_FAIL;
+	//////////////////////////////////////////////////
 	return NOERROR;
 }
 
@@ -1214,6 +1323,17 @@ HRESULT CLoading::Ready_Layer_Object()
 			return E_FAIL;
 	}
 
+	CGameObject* pGameObject;
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Helicopter", SCENE_STAGE, L"Layer_Helicopter", &pGameObject)))
+		return E_FAIL;
+	_matrix matInfo;
+	D3DXMatrixIdentity(&matInfo);
+	matInfo.m[3][0] = 81.25;
+	matInfo.m[3][1] = 0.f;
+	matInfo.m[3][2] = 55.18f;
+	CTransform* pTransform = (CTransform*)pGameObject->Get_ComponentPointer(L"Com_Transform");
+	((CStatic_Object*)pGameObject)->Set_StateInfo(&(_vec3)matInfo.m[0], &(_vec3)matInfo.m[1], &(_vec3)matInfo.m[2], &(_vec3)matInfo.m[3]);
+	pTransform->Scaling(_vec3(0.01f, 0.01f, 0.01f));
 
 
 	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler_TPose", SCENE_STAGE, L"Layer_Brawler_TPose")))
@@ -1253,6 +1373,17 @@ HRESULT CLoading::Ready_Layer_BackGround_FIELD(const _tchar * pLayerTag)
 		return E_FAIL;
 
 
+
+	return NOERROR;
+}
+
+HRESULT CLoading::Ready_Layer_BackGround_AIRPLANE(const _tchar * pLayerTag)
+{
+	// For.Terrain
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Terrain", SCENE_STAGE, pLayerTag)))
+		return E_FAIL;
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_SkyDom_Dusk", SCENE_STAGE, pLayerTag)))
+		return E_FAIL;
 
 	return NOERROR;
 }
@@ -1360,6 +1491,9 @@ _uint CLoading::Thread_Main(void * pArg)
 		break;
 	case SCENE_FIELD:
 		hr = pLoading->Loading_Stage_FIELD();
+		break;
+	case SCENE_AIRPLANE:
+		hr = pLoading->Loading_Stage_AIRPLANE();
 		break;
 	}
 

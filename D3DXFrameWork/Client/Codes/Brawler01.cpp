@@ -4,6 +4,7 @@
 #include "Object_Manager.h"
 #include "Brawler_Knife.h"
 #include "UI_HPBar.h"
+#include "Player.h"
 CBrawler01::CBrawler01(LPDIRECT3DDEVICE9 pGraphic_Device)
 	:CBrawler(pGraphic_Device)
 {
@@ -57,6 +58,7 @@ HRESULT CBrawler01::Ready_GameObject()
 
 _int CBrawler01::Update_GameObject(const _float & fTimeDelta)
 {
+	Compute_PlayerDir();
 
 
 
@@ -67,7 +69,8 @@ _int CBrawler01::LastUpdate_GameObject(const _float & fTimeDelta)
 {
 	if (true == m_isDamaged)
 	{
-		m_iCurrentIndex = 4;
+		Set_DeathIndex();
+		m_iCurrentIndex = m_iDeathIndex;
 	}
 
 	m_pMeshCom->Set_AnimationSet(m_iCurrentIndex);
@@ -78,7 +81,53 @@ _int CBrawler01::LastUpdate_GameObject(const _float & fTimeDelta)
 
 void CBrawler01::Render_GameObject()
 {
+	//_vec3      vPointX[2], vPointY[2], vPointZ[2];
 
+	//vPointX[0] = *m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION);
+	//vPointX[1] = vPointX[0] + *m_pTransformCom->Get_StateInfo(CTransform::STATE_RIGHT) * 10;
+
+	//vPointY[0] = *m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION);
+	//vPointY[1] = vPointY[0] + *m_pTransformCom->Get_StateInfo(CTransform::STATE_UP) * 10;
+
+	//vPointZ[0] = *m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION);
+	//vPointZ[1] = vPointZ[0] + *m_pTransformCom->Get_StateInfo(CTransform::STATE_LOOK) * 10;
+
+	//LPD3DXLINE            pLine = nullptr;
+	//if (FAILED(D3DXCreateLine(Get_Graphic_Device(), &pLine)))
+	//	return;
+
+	//_matrix      matView, matProj;
+
+	//Get_Graphic_Device()->GetTransform(D3DTS_VIEW, &matView);
+	//Get_Graphic_Device()->GetTransform(D3DTS_PROJECTION, &matProj);
+
+	//_matrix      matTransform;
+	//D3DXMatrixIdentity(&matTransform);
+
+	//for (size_t i = 0; i < 2; ++i)
+	//{
+	//	D3DXVec3TransformCoord(&vPointX[i], &vPointX[i], &matView);
+	//	D3DXVec3TransformCoord(&vPointX[i], &vPointX[i], &matProj);
+
+	//	D3DXVec3TransformCoord(&vPointY[i], &vPointY[i], &matView);
+	//	D3DXVec3TransformCoord(&vPointY[i], &vPointY[i], &matProj);
+
+	//	D3DXVec3TransformCoord(&vPointZ[i], &vPointZ[i], &matView);
+	//	D3DXVec3TransformCoord(&vPointZ[i], &vPointZ[i], &matProj);
+
+	//}
+
+	//pLine->SetWidth(2.0f);
+
+	//pLine->Begin();
+
+	//pLine->DrawTransform(vPointX, 2, &matTransform, D3DXCOLOR(1.f, 0.f, 0.f, 1.f));
+	//pLine->DrawTransform(vPointY, 2, &matTransform, D3DXCOLOR(0.f, 1.f, 0.f, 1.f));
+	//pLine->DrawTransform(vPointZ, 2, &matTransform, D3DXCOLOR(0.f, 0.f, 1.f, 1.f));
+
+	//pLine->End();
+
+	//Safe_Release(pLine);
 
 	CBrawler::Render_GameObject();
 }
@@ -98,6 +147,36 @@ HRESULT CBrawler01::Ready_Component()
 	Safe_Release(pComponent_Manager);
 
 	return NOERROR;
+}
+void CBrawler01::Set_DeathIndex()
+{
+	if (true == m_isCallDeathIdx)
+		return;
+	if (m_fRadian > 0.819f)
+		m_iDeathIndex = STATE_DEATH_F;
+	else
+	{
+		_vec3 vCross;
+
+		// 몬스터의 Look과 Player와 몬스터의 방향벡터를 외적해서 좌측/우측 판단.
+		D3DXVec3Cross(&vCross, &m_vBrawlerLook, &m_vPlayerDir);
+		if (vCross.y >= 0)
+		{
+			if (10 > m_fLength)
+				m_iDeathIndex = STATE_DEATH_L;
+			else
+				m_iDeathIndex = STATE_DEATH_LL;
+		}
+		else
+		{
+			if (10 > m_fLength)
+				m_iDeathIndex = STATE_DEATH_R;
+			else
+				m_iDeathIndex = STATE_DEATH_RL;
+		}
+
+	}
+	m_isCallDeathIdx = true;
 }
 
 CBrawler01 * CBrawler01::Create(LPDIRECT3DDEVICE9 pGraphic_Device)

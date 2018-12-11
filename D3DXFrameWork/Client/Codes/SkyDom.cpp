@@ -10,11 +10,13 @@ CSkyDom::CSkyDom(LPDIRECT3DDEVICE9 pGraphic_Device)
 
 CSkyDom::CSkyDom(const CSkyDom & rhs)
 	:CGameObject(rhs)
+	,m_iType(rhs.m_iType)
 {
 }
 
-HRESULT CSkyDom::Ready_GameObject_Prototype()
+HRESULT CSkyDom::Ready_GameObject_Prototype(const _uint& iType)
 {
+	m_iType = iType;
 	return NOERROR;
 }
 
@@ -96,11 +98,27 @@ HRESULT CSkyDom::Ready_Component()
 	if (FAILED(Add_Component(L"Com_Renderer", m_pRendererCom)))
 		return E_FAIL;
 
-	// For.Com_Buffer
-	m_pMeshCom = (CMesh_Static*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Mesh_SkyDom_Night");
-	if (FAILED(Add_Component(L"Com_Mesh", m_pMeshCom)))
-		return E_FAIL;
-
+	if (TYPE_NIGHT == m_iType)
+	{
+		// For.Com_Buffer
+		m_pMeshCom = (CMesh_Static*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Mesh_SkyDom_Night");
+		if (FAILED(Add_Component(L"Com_Mesh", m_pMeshCom)))
+			return E_FAIL;
+	}
+	if (TYPE_DUSK == m_iType)
+	{
+		// For.Com_Buffer
+		m_pMeshCom = (CMesh_Static*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Mesh_SkyDom_Dusk");
+		if (FAILED(Add_Component(L"Com_Mesh", m_pMeshCom)))
+			return E_FAIL;
+	}
+	if (TYPE_SUNSET == m_iType)
+	{
+		// For.Com_Buffer
+		m_pMeshCom = (CMesh_Static*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Mesh_SkyDom_Sunset");
+		if (FAILED(Add_Component(L"Com_Mesh", m_pMeshCom)))
+			return E_FAIL;
+	}
 	// For.Com_Shader
 	m_pShaderCom = (CShader*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Shader_Mesh");
 	if (FAILED(Add_Component(L"Com_Shader", m_pShaderCom)))
@@ -148,11 +166,11 @@ HRESULT CSkyDom::SetUp_ConstantTable(LPD3DXEFFECT pEffect)
 	return NOERROR;
 }
 
-CSkyDom * CSkyDom::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+CSkyDom * CSkyDom::Create(LPDIRECT3DDEVICE9 pGraphic_Device, const _uint& iType)
 {
 	CSkyDom*		pInstance = new CSkyDom(pGraphic_Device);
 
-	if (FAILED(pInstance->Ready_GameObject_Prototype()))
+	if (FAILED(pInstance->Ready_GameObject_Prototype(iType)))
 	{
 		_MSG_BOX("Prototype_CSkyDom Created Failed");
 		Safe_Release(pInstance);

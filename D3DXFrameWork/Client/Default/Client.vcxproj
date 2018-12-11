@@ -168,6 +168,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Headers\Airplane.h" />
     <ClInclude Include="..\Headers\Animator.h" />
     <ClInclude Include="..\Headers\Back_Loading.h" />
     <ClInclude Include="..\Headers\Back_Logo.h" />
@@ -189,7 +190,9 @@
     <ClInclude Include="..\Headers\Event_Cube.h" />
     <ClInclude Include="..\Headers\Loading.h" />
     <ClInclude Include="..\Headers\MainApp.h" />
+    <ClInclude Include="..\Headers\Minigun.h" />
     <ClInclude Include="..\Headers\Player.h" />
+    <ClInclude Include="..\Headers\Scene_AirPlane.h" />
     <ClInclude Include="..\Headers\Scene_Field.h" />
     <ClInclude Include="..\Headers\Scene_Intro.h" />
     <ClInclude Include="..\Headers\Scene_Loading.h" />
@@ -208,6 +211,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Codes\Airplane.cpp" />
     <ClCompile Include="..\Codes\Animator.cpp" />
     <ClCompile Include="..\Codes\Back_Loading.cpp" />
     <ClCompile Include="..\Codes\Back_Logo.cpp" />
@@ -227,7 +231,9 @@
     <ClCompile Include="..\Codes\Event_Cube.cpp" />
     <ClCompile Include="..\Codes\Loading.cpp" />
     <ClCompile Include="..\Codes\MainApp.cpp" />
+    <ClCompile Include="..\Codes\Minigun.cpp" />
     <ClCompile Include="..\Codes\Player.cpp" />
+    <ClCompile Include="..\Codes\Scene_AirPlane.cpp" />
     <ClCompile Include="..\Codes\Scene_Field.cpp" />
     <ClCompile Include="..\Codes\Scene_Intro.cpp" />
     <ClCompile Include="..\Codes\Scene_Loading.cpp" />

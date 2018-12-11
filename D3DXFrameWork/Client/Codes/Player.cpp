@@ -146,8 +146,10 @@ _int CPlayer::LastUpdate_GameObject(const _float & fTimeDelta)
 
 	m_RealMatrix = *m_pTransformCom->Get_WorldMatrix();
 	m_RealMatrix.m[3][0] = m_CombinedRootMatrix.m[3][0];
+	m_RealMatrix.m[3][1] = m_CombinedRootMatrix.m[3][1];
 	m_RealMatrix.m[3][2] = m_CombinedRootMatrix.m[3][2];
 
+	//_vec3      vPosition = *(_vec3*)m_RealMatrix.m[3];
 	_vec3      vPosition = *m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION);
 	*(_vec3*)m_RealMatrix.m[3] = pBufferCom->SetHeight_OnTerrain((_vec3*)m_RealMatrix.m[3], pTransformCom);
 	vPosition.y = (*(_vec3*)m_RealMatrix.m[3]).y;

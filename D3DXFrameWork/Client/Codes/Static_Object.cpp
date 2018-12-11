@@ -52,8 +52,8 @@ HRESULT CStatic_Object::Ready_GameObject()
 {
 	if (FAILED(Ready_Component()))
 		return E_FAIL;
-	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(20, 10, 20));
-	m_pTransformCom->Scaling(_vec3(5, 5, 5));
+	//m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(20, 10, 20));
+	//m_pTransformCom->Scaling(_vec3(5, 5, 5));
 	m_fRadius = 550.f;
 	return NOERROR;
 }

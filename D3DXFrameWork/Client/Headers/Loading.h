@@ -36,10 +36,12 @@ public:
 	HRESULT Ready_Loading(SCENEID eSceneID);
 	HRESULT Loading_Stage_APT();
 	HRESULT Loading_Stage_FIELD();
+	HRESULT Loading_Stage_AIRPLANE();
 	//HRESULT Loading_();
 private:
 	HRESULT Ready_LightInfo();
 	HRESULT Ready_LightInfo_FIELD();
+	HRESULT Ready_LightInfo_AIRPLANE();
 private:
 	HRESULT Ready_Static_Prototype_Component(); // Static으로 쓰기위한 원형 컴포넌트생성
 
@@ -51,6 +53,8 @@ private:
 	HRESULT Ready_Component_Prototype_SceneFIELD(); // FIELD에서 쓰기 위한 Mesh 원형 생성
 	HRESULT Ready_UI_SceneFIELD();
 
+	HRESULT Ready_AIRPLANE(); // AIRPLANE에서만 쓰이는 프로토타입과 컴포넌트 객체들
+
 private:
 	HRESULT Ready_Layer_Camera(const _tchar * pProtoName, const _tchar* pLayerTag);
 	HRESULT Ready_Layer_Test(const _tchar* pLayerTag);
@@ -61,7 +65,8 @@ private:
 	HRESULT Ready_Layer_Object();
 
 	HRESULT Ready_Layer_Player_FIELD(const _tchar* pLayerTag); // FIELD 플레이어 / 칼
-	HRESULT Ready_Layer_BackGround_FIELD(const _tchar* pLayerTag); // FIELD 터레인
+	HRESULT Ready_Layer_BackGround_FIELD(const _tchar* pLayerTag); // FIELD 터레인 / 스카이
+	HRESULT Ready_Layer_BackGround_AIRPLANE(const _tchar* pLayerTag); // AIRPLANE 터레인 / 스카이
 private:
 	HRESULT Load_Static_Object(const _tchar* pFilePath);
 	HRESULT Load_Event_Cube(const _tchar* pFilePath);

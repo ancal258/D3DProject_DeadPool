@@ -22,7 +22,7 @@ private:
 	virtual ~CSkyDom() = default;
 
 public:
-	virtual HRESULT Ready_GameObject_Prototype();
+	virtual HRESULT Ready_GameObject_Prototype(const _uint& iType);
 	virtual HRESULT Ready_GameObject();
 	virtual _int Update_GameObject(const _float& fTimeDelta);
 	virtual _int LastUpdate_GameObject(const _float& fTimeDelta);
@@ -40,7 +40,7 @@ private:
 	HRESULT	SetUp_ConstantTable(LPD3DXEFFECT pEffect);
 
 public:
-	static CSkyDom* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CSkyDom* Create(LPDIRECT3DDEVICE9 pGraphic_Device, const _uint& iType);
 	virtual CGameObject* Clone_GameObject();
 protected:
 	virtual void Free();

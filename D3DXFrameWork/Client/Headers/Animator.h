@@ -30,11 +30,11 @@ private:
 	};
 
 	enum STATE {
-		STATE_SWORD, STATE_AIM, STATE_RUN, STATE_NORMAL, STATE_END
+		STATE_SWORD, STATE_AIM, STATE_RUN, STATE_NORMAL, STATE_AIR, STATE_END
 	};
 
 	enum KEY_STATE {
-		Q,W,E,R,A,S,D,LBUTTON,RBUTTON, KEY_END
+		Q,W,E,R,A,S,D,LBUTTON,RBUTTON,SPACE, KEY_END
 	};
 private:
 	explicit CAnimator(LPDIRECT3DDEVICE9 pGraphic_Device);
@@ -68,6 +68,7 @@ private: // CallBack
 private:
 	_uint CheckSwordLight();
 	_uint CheckSwordHeavy();
+	_uint CheckJump();
 private:
 	LPDIRECT3DDEVICE9 m_pGraphic_Device = nullptr;
 	CInput_Device* m_pInput_Device = nullptr;
@@ -94,8 +95,10 @@ private:
 private:
 	_uint				m_iSit = SIT_IDLE_BREATH;
 	_bool				m_isAttackState = false;
+	_bool				m_isJumpLand = false;
 	_float				*m_fRotate = nullptr;
 	_float				*m_fTimeAcc = nullptr;
+
 public:
 	static CAnimator* Create(LPDIRECT3DDEVICE9 pGraphic_Device,CMesh_Dynamic* pMeshCom, CTransform* pTransformCom, CNavigation* pNavigationCom,_uint iSceneNum);
 protected:

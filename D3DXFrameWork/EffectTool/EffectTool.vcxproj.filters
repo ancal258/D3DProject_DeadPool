@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Default">
+      <UniqueIdentifier>{409d9771-2e96-40af-92ed-a0b7f2838d27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Default\Main">
+      <UniqueIdentifier>{2aba8612-2b14-4a9a-b778-5e835bff2036}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Default\Else">
+      <UniqueIdentifier>{b234c301-f063-4f9d-91dc-85c680305eff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="99.Headers">
+      <UniqueIdentifier>{793e1ddc-23b9-4d0c-9862-2086590053e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.View">
+      <UniqueIdentifier>{28bfb29b-9f5e-4e2e-bc67-551bf33fc69d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.View\MainView">
+      <UniqueIdentifier>{bbd1ad5d-3da5-4809-b12b-a66774e9fe88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.MainFrm">
+      <UniqueIdentifier>{7114c2b3-0f65-4ee5-a7f3-3f31acb734cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.View\FormView">
+      <UniqueIdentifier>{75eac32c-410d-4676-9271-28f784879910}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.View\FormView\Sheet">
+      <UniqueIdentifier>{3ededef2-15ef-4c82-8ead-16b4c618746d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.View\FormView\Sheet\Page_Effect">
+      <UniqueIdentifier>{82b7a104-519b-41c9-82bd-e4254cdd9489}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="00.View\FormView\Sheet\Page_MeshEffect">
+      <UniqueIdentifier>{45b7c880-67e3-47ed-bec3-a2507ef1ebb7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="EffectTool.h">
+      <Filter>Default\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectToolDoc.h">
+      <Filter>Default\Else</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Default\Else</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Default\Else</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Default\Else</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectToolView.h">
+      <Filter>00.View\MainView</Filter>
+    </ClInclude>
+    <ClInclude Include="Defines.h">
+      <Filter>99.Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>01.MainFrm</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectForm.h">
+      <Filter>00.View\FormView</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectSheet.h">
+      <Filter>00.View\FormView\Sheet</Filter>
+    </ClInclude>
+    <ClInclude Include="Page_Effect.h">
+      <Filter>00.View\FormView\Sheet\Page_Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="Page_MeshEffect.h">
+      <Filter>00.View\FormView\Sheet\Page_MeshEffect</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="EffectTool.cpp">
+      <Filter>Default\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectToolDoc.cpp">
+      <Filter>Default\Else</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Default\Else</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectToolView.cpp">
+      <Filter>00.View\MainView</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>01.MainFrm</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectForm.cpp">
+      <Filter>00.View\FormView</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectSheet.cpp">
+      <Filter>00.View\FormView\Sheet</Filter>
+    </ClCompile>
+    <ClCompile Include="Page_Effect.cpp">
+      <Filter>00.View\FormView\Sheet\Page_Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Page_MeshEffect.cpp">
+      <Filter>00.View\FormView\Sheet\Page_MeshEffect</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\EffectTool.ico">
+      <Filter>Default\Else</Filter>
+    </Image>
+    <Image Include="res\EffectToolDoc.ico">
+      <Filter>Default\Else</Filter>
+    </Image>
+    <Image Include="res\Toolbar.bmp">
+      <Filter>Default\Else</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="EffectTool.rc">
+      <Filter>Default\Else</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\EffectTool.rc2">
+      <Filter>Default\Else</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt">
+      <Filter>Default\Else</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

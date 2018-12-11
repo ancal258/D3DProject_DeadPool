@@ -4,6 +4,7 @@
 #include "Back_Loading.h"
 #include "Scene_Stage.h"
 #include "Scene_Field.h"
+#include "Scene_AirPlane.h"
 #include "Management.h"
 #include "Loading.h"
 #include "Font_Manager.h"
@@ -42,6 +43,19 @@ HRESULT CScene_Loading::Ready_Scene(_uint iSceneNum)
 			return E_FAIL;
 
 		m_pLoading = CLoading::Create(Get_Graphic_Device(), SCENE_FIELD);
+		if (nullptr == m_pLoading)
+			return E_FAIL;
+	}
+
+	if (iSceneNum == SCENE_AIRPLANE)
+	{
+		if (FAILED(CObject_Manager::GetInstance()->Clear_Object(SCENE_STAGE)))
+			return E_FAIL;
+
+		if (FAILED(CComponent_Manager::GetInstance()->Clear_Component(SCENE_STAGE)))
+			return E_FAIL;
+
+		m_pLoading = CLoading::Create(Get_Graphic_Device(), SCENE_AIRPLANE);
 		if (nullptr == m_pLoading)
 			return E_FAIL;
 	}
@@ -91,6 +105,15 @@ _int CScene_Loading::Update_Scene(const _float & fTimeDelta)
 		if (SCENE_FIELD == m_iSceneNum)
 		{
 			CScene*		pNewScene = CScene_Field::Create(Get_Graphic_Device());
+			if (nullptr == pNewScene)
+				return -1;
+			if (FAILED(CManagement::GetInstance()->SetUp_CurrentScene(pNewScene)))
+				return -1;
+		}
+
+		if (SCENE_AIRPLANE == m_iSceneNum)
+		{
+			CScene*		pNewScene = CScene_AirPlane::Create(Get_Graphic_Device());
 			if (nullptr == pNewScene)
 				return -1;
 			if (FAILED(CManagement::GetInstance()->SetUp_CurrentScene(pNewScene)))

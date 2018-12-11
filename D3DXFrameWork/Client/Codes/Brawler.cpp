@@ -41,6 +41,13 @@ HRESULT CBrawler::Ready_GameObject()
 
 	D3DXMatrixIdentity(&m_RealMatrix);
 
+	for (size_t i = 0; i < 3; i++)
+	{
+		m_pPlayer[i] = CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Player", i);
+		if (nullptr == m_pPlayer[i])
+			return E_FAIL;
+	}
+
 	return NOERROR;
 }
 
@@ -59,16 +66,11 @@ _int CBrawler::Update_GameObject(const _float & fTimeDelta)
 
 	for (size_t i = 1; i < 3; i++)
 	{
-		const CGameObject* pPlayer = CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Player", i);
-		if (nullptr == pPlayer)
-			break;
-
-		// 디버깅용. 실제론 return true일 때 마다 특정 행동을 취해주자.
-		if (true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider0")) ||
-			true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider1")) ||
-			true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider2")) ||
-			true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider3")) ||
-			true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider4")))
+		if (true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider0")) ||
+			true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider1")) ||
+			true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider2")) ||
+			true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider3")) ||
+			true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider4")))
 		{
 			m_isDamaged = true;
 		}
@@ -87,9 +89,15 @@ _int CBrawler::Update_GameObject(const _float & fTimeDelta)
 
 _int CBrawler::LastUpdate_GameObject(const _float & fTimeDelta)
 {
-	if (TRUE == m_Hit)
-		m_isDamaged = CInput_Device::GetInstance()->Is_MinDist(m_fDist);
-
+	// 첫번째 구체 체크
+	if (TRUE == m_Hit[0])
+		m_isDamaged = CInput_Device::GetInstance()->Is_MinDist(m_fDist[0]);
+	if (TRUE == m_Hit[1])
+	{
+		// 두번재 구체 체크 ( 첫번째 구체가 가장 짧은 거리가 아니라면. )
+		if(false == m_isDamaged)
+			m_isDamaged = CInput_Device::GetInstance()->Is_MinDist(m_fDist[1]);
+	}
 	m_pTransformCom->Update_Matrix();
 
 	return _int();
@@ -123,6 +131,7 @@ void CBrawler::Render_GameObject()
 	
 	m_pColliderCom->Render_Collider();
 	m_pColliderCom_Body->Render_Collider();
+	m_pColliderCom_Head->Render_Collider();
 
 }
 
@@ -170,11 +179,18 @@ HRESULT CBrawler::Ready_Component()
 		return E_FAIL;
 	m_pColliderCom->SetUp_Collider(&m_CombinedRootMatrix, &_vec3(50, 140, 50), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f, 70.f, 0.f));
 
+	
+	m_pColliderCom_Head = (CCollider*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Collider_Sphere");
+	if (FAILED(Add_Component(L"Com_Collider_Head", m_pColliderCom_Head)))
+		return E_FAIL;
+	m_pColliderCom_Head->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(40, 40, 40), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f, 120.f, 0.f));
+	m_pColliderMesh[0] = m_pColliderCom_Head->Get_Mesh();
+
 	m_pColliderCom_Body = (CCollider*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Collider_Sphere");
 	if (FAILED(Add_Component(L"Com_Collider_Body", m_pColliderCom_Body)))
 		return E_FAIL;
-	m_pColliderCom_Body->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(70, 70, 70), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f, 120.f, 0.f));
-	m_pColliderMesh = m_pColliderCom_Body->Get_Mesh();
+	m_pColliderCom_Body->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(70, 70, 70), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f,70.f, 0.f));
+	m_pColliderMesh[1] = m_pColliderCom_Body->Get_Mesh();
 
 	Safe_Release(pComponent_Manager);
 
@@ -222,16 +238,33 @@ HRESULT CBrawler::SetUp_ConstantTable(LPD3DXEFFECT pEffect)
 	return NOERROR;
 }
 
+void CBrawler::Compute_PlayerDir()
+{
+	_vec3 vPlayerPos = static_cast<_vec3>((dynamic_cast<const CPlayer*>(m_pPlayer[0])->Get_RealMatrix()->m[3]));
+	_vec3 vBrawlerPos = static_cast<_vec3>(m_pTransformCom->Get_WorldMatrix()->m[3]);
+
+	m_vPlayerDir = vPlayerPos - vBrawlerPos;
+	m_fLength = D3DXVec3Length(&m_vPlayerDir);
+
+	D3DXVec3Normalize(&m_vPlayerDir, &m_vPlayerDir);
+	m_vBrawlerLook = static_cast<_vec3>(m_pTransformCom->Get_WorldMatrix()->m[2]);
+	D3DXVec3Normalize(&m_vBrawlerLook, &m_vBrawlerLook);
+	m_fRadian = D3DXVec3Dot(&m_vBrawlerLook, &m_vPlayerDir);
+}
+
 HRESULT CBrawler::isHitScan()
 {
 	const CGameObject* pPlayer = CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Player", 0);
 	if (nullptr == pPlayer)
 		return NOERROR;
-	m_Hit = FALSE;
-
+	m_Hit[0] = FALSE;
+	m_Hit[1] = FALSE;
 	if (true == ((CPlayer*)pPlayer)->Get_IsButtonDown(7))
 	{
-		if (FAILED(CInput_Device::GetInstance()->Picking_ToCollider(m_pColliderMesh, m_pTransformCom, &m_Hit,&m_fDist)))
+		if (FAILED(CInput_Device::GetInstance()->Picking_ToCollider(m_pColliderMesh[0], m_pTransformCom, &m_Hit[0], &m_fDist[0])))
+			return E_FAIL;
+
+		if (FAILED(CInput_Device::GetInstance()->Picking_ToCollider(m_pColliderMesh[1], m_pTransformCom, &m_Hit[1], &m_fDist[1])))
 			return E_FAIL;
 	}
 	return NOERROR;
@@ -259,6 +292,7 @@ void CBrawler::Free()
 	Safe_Release(m_pNavigationCom);
 	Safe_Release(m_pColliderCom);
 	Safe_Release(m_pColliderCom_Body);
+	Safe_Release(m_pColliderCom_Head);
 
 	CGameObject::Free();
 }

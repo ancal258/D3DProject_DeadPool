@@ -79,9 +79,6 @@
     <Filter Include="02.GameObject\02.For.Stage\04.Dog">
       <UniqueIdentifier>{86f842d2-fbab-4209-9e7c-005ee523d4ae}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\02.For.Stage\01.Player\Animator">
-      <UniqueIdentifier>{7158ddbb-568d-48f0-bccd-21097a1b4f4a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.GameObject\02.For.Stage\02.Weapon">
       <UniqueIdentifier>{23f5fd35-54a5-4348-834d-3f3c62d0f4dc}</UniqueIdentifier>
     </Filter>
@@ -157,6 +154,27 @@
     <Filter Include="02.GameObject\02.For.Stage\98.UI\HPBar">
       <UniqueIdentifier>{d5e22f3e-5e70-4cfc-9425-b1f181e31488}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Scene\02.Scene_Stage\02.Scene_AirPlane">
+      <UniqueIdentifier>{7fdb7cc5-01ec-4817-9927-5d70711f32c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\01.Player\02.Airlane">
+      <UniqueIdentifier>{03fa352f-077b-4cfb-98d2-c830e64d72d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\01.Player\02.Airlane\Airplane">
+      <UniqueIdentifier>{1d1cb279-7d62-43e2-9317-a9779e042e76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\01.Player\02.Airlane\Airplane\Prop">
+      <UniqueIdentifier>{b1f00a92-d463-4b8f-a8b9-e9ba6b98d652}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\01.Player\02.Airlane\Minigun">
+      <UniqueIdentifier>{3921d24b-c687-475e-9d5a-7547d1841ff8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\01.Player\00.Animator">
+      <UniqueIdentifier>{7158ddbb-568d-48f0-bccd-21097a1b4f4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\01.Player\01.Player">
+      <UniqueIdentifier>{08135124-b773-47ab-b85f-c769688d9b1f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -222,9 +240,6 @@
     <ClInclude Include="..\Headers\Scene_Field.h">
       <Filter>01.Scene\02.Scene_Stage\01.Scene_Field</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\Player.h">
-      <Filter>02.GameObject\02.For.Stage\01.Player</Filter>
-    </ClInclude>
     <ClInclude Include="..\Headers\Static_Object.h">
       <Filter>02.GameObject\00.For.Static\01.Static_Object</Filter>
     </ClInclude>
@@ -274,7 +289,19 @@
       <Filter>02.GameObject\02.For.Stage\98.UI\HPBar</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Animator.h">
-      <Filter>02.GameObject\02.For.Stage\01.Player\Animator</Filter>
+      <Filter>02.GameObject\02.For.Stage\01.Player\00.Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Scene_AirPlane.h">
+      <Filter>01.Scene\02.Scene_Stage\02.Scene_AirPlane</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Airplane.h">
+      <Filter>02.GameObject\02.For.Stage\01.Player\02.Airlane\Airplane</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Minigun.h">
+      <Filter>02.GameObject\02.For.Stage\01.Player\02.Airlane\Minigun</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Player.h">
+      <Filter>02.GameObject\02.For.Stage\01.Player\01.Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -324,13 +351,10 @@
       <Filter>02.GameObject\02.For.Stage\04.Dog</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Animator.cpp">
-      <Filter>02.GameObject\02.For.Stage\01.Player\Animator</Filter>
+      <Filter>02.GameObject\02.For.Stage\01.Player\00.Animator</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Scene_Field.cpp">
       <Filter>01.Scene\02.Scene_Stage\01.Scene_Field</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\Player.cpp">
-      <Filter>02.GameObject\02.For.Stage\01.Player</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Static_Object.cpp">
       <Filter>02.GameObject\00.For.Static\01.Static_Object</Filter>
@@ -379,6 +403,18 @@
     </ClCompile>
     <ClCompile Include="..\Codes\UI_HPBar.cpp">
       <Filter>02.GameObject\02.For.Stage\98.UI\HPBar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Scene_AirPlane.cpp">
+      <Filter>01.Scene\02.Scene_Stage\02.Scene_AirPlane</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Airplane.cpp">
+      <Filter>02.GameObject\02.For.Stage\01.Player\02.Airlane\Airplane</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Minigun.cpp">
+      <Filter>02.GameObject\02.For.Stage\01.Player\02.Airlane\Minigun</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Player.cpp">
+      <Filter>02.GameObject\02.For.Stage\01.Player\01.Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
