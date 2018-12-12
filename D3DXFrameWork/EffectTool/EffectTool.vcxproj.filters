@@ -37,6 +37,18 @@
     <Filter Include="00.View\FormView\Sheet\Page_ParticleEffect">
       <UniqueIdentifier>{e2457399-e497-43b9-8211-53fdeba2c49d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject">
+      <UniqueIdentifier>{e855c8a0-0dab-4808-b4b7-1aa0eae05103}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\00. BaseTexture">
+      <UniqueIdentifier>{bf858bcf-610f-436b-a2e9-d1d58ad39709}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\01. Effect">
+      <UniqueIdentifier>{04674934-c034-46ff-b3ed-7f72777f43d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\99.Camera">
+      <UniqueIdentifier>{8d1b32f1-fdb4-43a1-ad8b-0b0b3d0b6503}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EffectTool.h">
@@ -78,6 +90,15 @@
     <ClInclude Include="Page_ParticleEffect.h">
       <Filter>00.View\FormView\Sheet\Page_ParticleEffect</Filter>
     </ClInclude>
+    <ClInclude Include="ToolEffect.h">
+      <Filter>02.GameObject\01. Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolCamera_Effect.h">
+      <Filter>02.GameObject\99.Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolBase.h">
+      <Filter>02.GameObject\00. BaseTexture</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EffectTool.cpp">
@@ -109,6 +130,15 @@
     </ClCompile>
     <ClCompile Include="Page_ParticleEffect.cpp">
       <Filter>00.View\FormView\Sheet\Page_ParticleEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolEffect.cpp">
+      <Filter>02.GameObject\01. Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolCamera_Effect.cpp">
+      <Filter>02.GameObject\99.Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolBase.cpp">
+      <Filter>02.GameObject\00. BaseTexture</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

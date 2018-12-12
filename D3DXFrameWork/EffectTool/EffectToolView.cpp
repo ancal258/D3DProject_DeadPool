@@ -14,9 +14,14 @@
 
 // My Include
 #include "Component_Manager.h"
+#include "Light_Manager.h"
 #include "Object_Manager.h"
 #include "Graphic_Device.h"
 #include "Input_Device.h"
+// GameObject
+#include "ToolEffect.h"
+#include "ToolCamera_Effect.h"
+#include "ToolBase.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -91,6 +96,7 @@ void CEffectToolView::OnEndPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
 // CEffectToolView 진단
 
 #ifdef _DEBUG
+
 void CEffectToolView::AssertValid() const
 {
 	CView::AssertValid();
@@ -149,6 +155,151 @@ void CEffectToolView::OnInitialUpdate()
 		return;
 
 	CComponent_Manager::GetInstance()->Reserve_Component_Manager(1);
-	CObject_Manager::GetInstance()->Reserve_Object_Manager(1);
+	CObject_Manager::GetInstance()->Reserve_Object_Manager(1);	
 	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
+	// 함수 호출 부
+
+	// Light
+	D3DLIGHT9			LightInfo;
+	ZeroMemory(&LightInfo, sizeof(D3DLIGHT9));
+
+	LightInfo.Type = D3DLIGHT_DIRECTIONAL;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.f);
+	LightInfo.Ambient = LightInfo.Diffuse;
+	LightInfo.Direction = _vec3(1.f, 1.f, 1.f);
+
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(m_pGraphic_Device, &LightInfo)))
+		return;
+	//
+
+	
+	if (FAILED(Ready_Component()))
+		return;
+
+	if (FAILED(Ready_Prototype()))
+		return;
+
+	if (FAILED(Ready_Layer_Camera()))
+		return;
+
+	if (FAILED(Layer_Object()))
+		return;
+
+
+}
+
+HRESULT CEffectToolView::Ready_Layer_Object(const _tchar * pPrototypeTag, const _tchar * pLayerTag, CGameObject** ppGameObject)
+{
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object(0, pPrototypeTag, 0, pLayerTag, ppGameObject)))
+		return E_FAIL;
+
+	return NOERROR;
+}
+
+HRESULT CEffectToolView::Ready_Component()
+{
+	CComponent_Manager*		pComponent_Manager = CComponent_Manager::GetInstance();
+	if (nullptr == pComponent_Manager)
+		return E_FAIL;
+	pComponent_Manager->AddRef();
+
+	// For.Component_Shader_Effect
+	if (FAILED(pComponent_Manager->Add_Component(0, L"Component_Shader_Effect", CShader::Create(m_pGraphic_Device, L"../Client/Bin/ShaderFiles/Shader_Effect.fx"))))
+		return E_FAIL;
+
+	// For.Component_Buffer_RcTex
+	if (FAILED(pComponent_Manager->Add_Component(0, L"Component_Buffer_RcTex", CBuffer_RcTex::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	// For.Component_Buffer_RcCol
+	if (FAILED(pComponent_Manager->Add_Component(0, L"Component_Buffer_RcCol", CBuffer_RcCol::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	// For.Component_Renderer	
+	if (FAILED(pComponent_Manager->Add_Component(0, L"Component_Renderer", m_pRenderer = CRenderer::Create(m_pGraphic_Device))))
+		return E_FAIL;
+	m_pRenderer->AddRef();
+	// For.Component_Transform
+	if (FAILED(pComponent_Manager->Add_Component(0, L"Component_Transform", CTransform::Create(m_pGraphic_Device))))
+		return E_FAIL;
+	
+	
+	/////////////////////////////////////////////////////////////////////
+	if (FAILED(pComponent_Manager->Add_Component(0, L"Component_Texture_Effect", CTexture::Create(m_pGraphic_Device, CTexture::TYPE_GENERAL, L"../Client/Bin/Resources/Textures/Explosion/Explosion%d.png", 90))))
+		return E_FAIL;
+	if (FAILED(pComponent_Manager->Add_Component(0, L"Component_Texture_Base", CTexture::Create(m_pGraphic_Device, CTexture::TYPE_GENERAL, L"Bin/Textures/BaseTexture.png"))))
+		return E_FAIL;
+
+
+
+	Safe_Release(pComponent_Manager);
+
+
+	return NOERROR;
+}
+
+HRESULT CEffectToolView::Ready_Prototype()
+{
+
+	CObject_Manager*		pObject_Manager = CObject_Manager::GetInstance();
+	if (nullptr == pObject_Manager)
+		return E_FAIL;
+	pObject_Manager->AddRef();
+
+	// For. Camera
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_Camera", CToolCamera_Effect::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	// For. Prototype_ToolBase
+	if (FAILED(pObject_Manager->Add_Object_Prototype(0, L"Prototype_ToolBase", CToolBase::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	// For. Effect_Explosion
+	if (FAILED(pObject_Manager->Add_Object_Prototype(0, L"Prototype_Explosion", CToolEffect::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+
+	Safe_Release(pObject_Manager);
+	return NOERROR;
+}
+
+HRESULT CEffectToolView::Ready_Layer_Camera()
+{
+	CToolCamera_Effect*		pCameraTool = nullptr;
+	if (FAILED(Ready_Layer_Object(L"Prototype_Camera", L"Layer_Camera", (CGameObject**)&pCameraTool)))
+		return E_FAIL;
+
+	CAMERADESC			CamDesc;
+	ZeroMemory(&CamDesc, sizeof(CAMERADESC));
+	CamDesc.vEye = _vec3(0.f, 7.f, -5.f);
+	CamDesc.vAt = _vec3(0.f, 0.f, 0.f);
+	CamDesc.vAxisY = _vec3(0.f, 1.f, 0.f);
+
+	PROJDESC			ProjDesc;
+	ZeroMemory(&ProjDesc, sizeof(PROJDESC));
+	ProjDesc.fFovy = D3DXToRadian(60.0f);
+	ProjDesc.fAspect = _float(g_iBackCX) / g_iBackCY;
+	ProjDesc.fNear = 0.3f;
+	ProjDesc.fFar = 500.f;
+
+	if (FAILED(pCameraTool->SetUp_CameraInfo(CamDesc, ProjDesc)))
+		return E_FAIL;
+
+	return NOERROR;
+}
+
+HRESULT CEffectToolView::Layer_Object()
+{
+	if (FAILED(Ready_Layer_Object(L"Prototype_ToolBase", L"Layer_Background", nullptr)))
+		return E_FAIL;
+
+	for (size_t i = 0; i < 10; i++)
+	{
+		if (FAILED(Ready_Layer_Object(L"Prototype_Explosion", L"Layer_Effect", nullptr)))
+			return E_FAIL;
+
+	}
+
+	return NOERROR;
 }

@@ -56,6 +56,12 @@ protected:
 public:
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	virtual void OnInitialUpdate();
+private:
+	HRESULT			Ready_Layer_Object(const _tchar * pPrototypeTag, const _tchar * pLayerTag, CGameObject** ppGameObject);
+	HRESULT			Ready_Component();
+	HRESULT			Ready_Prototype();
+	HRESULT			Ready_Layer_Camera();
+	HRESULT			Layer_Object();
 };
 
 #ifndef _DEBUG  // EffectToolView.cpp의 디버그 버전
