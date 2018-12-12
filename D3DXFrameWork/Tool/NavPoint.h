@@ -26,7 +26,7 @@ public:
 	}
 public:
 	void Set_StateInfo(_vec3* pRight, _vec3* pUp, _vec3* vLook, _vec3* vPos);
-	void Set_Position(_vec3* pPosition) const;
+	void Set_Position(_vec3* pPosition);
 	void Set_Scale(_vec3* pScale) const;
 	void Set_PlusPosition(_uint iType, _float & fValue) const;
 	void RotationY(const _float & fRadian) const;

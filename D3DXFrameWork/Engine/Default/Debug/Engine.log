@@ -1,3 +1,63 @@
-﻿  Input_Device.cpp
-  Engine.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Engine\Default\..\Bin\Engine.dll
+﻿FXC : warning X4717: Effects deprecated for D3DCompiler_47
+  
+  compilation object save succeeded; see C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Engine\Bin\Shader_Blend.cso
+FXC : warning X4717: Effects deprecated for D3DCompiler_47
+  
+  compilation object save succeeded; see C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Engine\Bin\Shader_Collider.cso
+FXC : warning X4717: Effects deprecated for D3DCompiler_47
+  
+  compilation object save succeeded; see C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Engine\Bin\Shader_LightAcc.cso
+  VIBuffer.cpp
+  Transform.cpp
+  Timer_Manager.cpp
+  Timer.cpp
+  Texture.cpp
+  Target_Manager.cpp
+  Target.cpp
+  Shader.cpp
+  Scene.cpp
+  Renderer.cpp
+  QuadTree.cpp
+  Picking.cpp
+  Object_Manager.cpp
+  Navigation.cpp
+  Mesh_Static.cpp
+  Mesh_Dynamic.cpp
+  Management.cpp
+  Light_Manager.cpp
+  Light.cpp
+  Layer.cpp
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  Input_Device.cpp
+  HierarchyLoader.cpp
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\codes\hierarchyloader.cpp(223): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.10240.0\ucrt\string.h(119): note: 'strcpy' 선언을 참조하십시오.
+  Graphic_Device.cpp
+  GameObject.cpp
+  Frustum.cpp
+  Frame_Manager.cpp
+  Frame.cpp
+  Font_Manager.cpp
+  DXFont.cpp
+  Component_Manager.cpp
+  Component.cpp
+  Collider.cpp
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\codes\collider.cpp(364): warning C4244: '인수': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Cell.cpp
+  Camera.cpp
+  Buffer_Terrain.cpp
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\codes\buffer_terrain.cpp(175): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\codes\buffer_terrain.cpp(177): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\codes\buffer_terrain.cpp(200): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\engine\codes\buffer_terrain.cpp(202): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  Buffer_RcTex.cpp
+  Buffer_RcCol.cpp
+  Buffer_Collider.cpp
+  Base.cpp
+  AnimationCtrl.cpp
+  코드를 생성하고 있습니다...
+  LINK : ..\Bin\Engine.dll을(를) 찾을 수 없거나 마지막 증분 링크에 의해 빌드되지 않았습니다. 전체 링크를 수행하고 있습니다.
+     ..\Bin\Engine.lib 라이브러리 및 ..\Bin\Engine.exp 개체를 생성하고 있습니다.
+  Engine.vcxproj -> C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Engine\Default\..\Bin\Engine.dll
   Engine.vcxproj -> ..\Bin\Engine.pdb (Full PDB)

@@ -975,13 +975,16 @@ void CToolView::OnLButtonUp(UINT nFlags, CPoint point)
 		}
 		if (STATE_ADD_NAV == ((CToolTerrain*)pTerrain)->Get_MouseState())
 		{
-			_vec3 PickingPoint = ((CToolTerrain*)pTerrain)->Get_PickingPoint();
-			CMainFrame*		pMainFrame = (CMainFrame*)AfxGetMainWnd();
-			CGameObject*	pGameObject = nullptr;
-			if (FAILED(Ready_Layer_Object(L"Prototype_NavPoint", L"Layer_NavPoint", &pGameObject)))
-				return;
-			static_cast<CNavPoint*>(pGameObject)->Set_Position(&PickingPoint);
-			((CToolTerrain*)pTerrain)->Add_NavPoint(static_cast<CNavPoint*>(pGameObject));
+			_vec3 PickingPoint = ((CToolTerrain*)pTerrain)->Get_MousePoint();
+			if (PickingPoint.x >= 0)
+			{
+				CMainFrame*		pMainFrame = (CMainFrame*)AfxGetMainWnd();
+				CGameObject*	pGameObject = nullptr;
+				if (FAILED(Ready_Layer_Object(L"Prototype_NavPoint", L"Layer_NavPoint", &pGameObject)))
+					return;
+				static_cast<CNavPoint*>(pGameObject)->Set_Position(&PickingPoint);
+				((CToolTerrain*)pTerrain)->Add_NavPoint(static_cast<CNavPoint*>(pGameObject));
+			}
 			//pMainFrame->Set_VecPointNav(&PickingPoint);
 		}
 		if (STATE_ADD_CAM == ((CToolTerrain*)pTerrain)->Get_MouseState())

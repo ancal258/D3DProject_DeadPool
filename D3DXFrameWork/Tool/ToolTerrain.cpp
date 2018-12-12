@@ -44,7 +44,7 @@ _vec3 CToolTerrain::Get_MousePoint()
 	if (true == CInput_Device::GetInstance()->Picking_ToBuffer(m_pBufferCom, m_pTransformCom, &vOut))
 		return vOut;
 
-	return vOut;
+	return _vec3(-1,-1,-1);
 }
 
 vector<_vec3>* CToolTerrain::Get_vecPoint()

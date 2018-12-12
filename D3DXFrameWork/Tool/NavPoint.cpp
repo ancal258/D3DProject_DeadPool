@@ -30,8 +30,11 @@ void CNavPoint::Set_StateInfo(_vec3 * pRight, _vec3 * pUp, _vec3 * vLook, _vec3 
 
 }
 
-void CNavPoint::Set_Position(_vec3 * pPosition) const
+void CNavPoint::Set_Position(_vec3 * pPosition)
 {
+	if (pPosition->x <= 0 || pPosition->z <= 0)
+		m_isLived = false;
+
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, pPosition);
 }
 
@@ -143,6 +146,9 @@ _int CNavPoint::LastUpdate_GameObject(const _float & fTimeDelta)
 			//_vec3		vPosition = pBufferCom->SetHeight_OnTerrain(m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION), pTransformCom);
 			_vec3		vMousePos = ((CToolTerrain*)pTerrain)->Get_MousePoint();
 			//vMousePos.y = vPosition.y;
+			if(vMousePos.x <= 0 ||  vMousePos.z <= 0)
+				m_isLived = false;
+
 			m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &vMousePos);
 		}
 	}
@@ -189,7 +195,7 @@ HRESULT CNavPoint::Ready_Component()
 	m_pColliderCom = (CCollider*)pComponent_Manager->Clone_Component(0, L"Component_Collider_Sphere");
 	if (FAILED(Add_Component(L"Com_Collider", m_pColliderCom)))
 		return E_FAIL;
-	m_pColliderCom->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(2, 2, 2), &_vec3(0, 0, 0), &_vec3(0, 0, 0));
+	m_pColliderCom->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(1, 1, 1), &_vec3(0, 0, 0), &_vec3(0, 0, 0));
 	m_pMesh = m_pColliderCom->Get_Mesh();
 	Safe_Release(pComponent_Manager);
 

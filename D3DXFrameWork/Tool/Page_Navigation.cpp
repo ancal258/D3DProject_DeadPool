@@ -198,8 +198,8 @@ void CPage_Navigation::OnBnClickedButton10() // Load
 			CGameObject*	pGameObject = nullptr;
 			for (size_t i = 0; i < 3; i++)
 			{
-			if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_NavPoint", L"Layer_NavPoint", &pGameObject)))
-				return;
+				if (FAILED(pMainFrame->m_pToolView->Ready_Layer_Object(L"Prototype_NavPoint", L"Layer_NavPoint", &pGameObject)))
+					return;
 				static_cast<CNavPoint*>(pGameObject)->Set_Position(&vPoint[i]);
 				((CToolTerrain*)pTerrain)->Add_NavPoint(static_cast<CNavPoint*>(pGameObject));
 			}

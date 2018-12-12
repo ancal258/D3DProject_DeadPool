@@ -34,6 +34,9 @@
     <Filter Include="00.View\FormView\Sheet\Page_MeshEffect">
       <UniqueIdentifier>{45b7c880-67e3-47ed-bec3-a2507ef1ebb7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00.View\FormView\Sheet\Page_ParticleEffect">
+      <UniqueIdentifier>{e2457399-e497-43b9-8211-53fdeba2c49d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EffectTool.h">
@@ -72,6 +75,9 @@
     <ClInclude Include="Page_MeshEffect.h">
       <Filter>00.View\FormView\Sheet\Page_MeshEffect</Filter>
     </ClInclude>
+    <ClInclude Include="Page_ParticleEffect.h">
+      <Filter>00.View\FormView\Sheet\Page_ParticleEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EffectTool.cpp">
@@ -100,6 +106,9 @@
     </ClCompile>
     <ClCompile Include="Page_MeshEffect.cpp">
       <Filter>00.View\FormView\Sheet\Page_MeshEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Page_ParticleEffect.cpp">
+      <Filter>00.View\FormView\Sheet\Page_ParticleEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -9,6 +9,7 @@
 #define IDD_EFFECTFORM                  310
 #define IDD_PAGE_EFFECT                 311
 #define IDD_PAGE_MESHEFFECT             312
+#define IDD_PAGE_PARTICLEEFFECT         313
 #define IDC_BUTTON1                     1000
 #define IDC_COMBO1                      1001
 
@@ -16,9 +17,9 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        313
+#define _APS_NEXT_RESOURCE_VALUE        314
 #define _APS_NEXT_COMMAND_VALUE         32771
 #define _APS_NEXT_CONTROL_VALUE         1002
-#define _APS_NEXT_SYMED_VALUE           313
+#define _APS_NEXT_SYMED_VALUE           314
 #endif
 #endif

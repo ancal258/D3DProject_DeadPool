@@ -1,0 +1,32 @@
+이펙트 클래스 복사해서 파티클래스 만듦
+--> 버퍼만 바꿈
+
+정점 1개만 갖고 있는 버퍼를 만들자.
+Buffer_PointTex
+
+구조체 추가 ( 위치 , fPSize , UV )  --> fPSize : 뷰포트상의 크기. 
+VTXPOINTTEX
+포인트 스프라이트로 그리는 정점의 UV좌표는 0,0 이다.
+
+특정 Render State를 주면 PSize 값의 크기로 크리게 된다.
+
+[*FVF는 정해진 순서대로 선언해야 한다.]
+
+정점버퍼에 정점을 1개만 만들어두고, 정점을 n개 갖는 파티클 객체를 만들것이다.
+
+DrawPrimitive(인덱스 버퍼를 안쓸것이다.)
+
+렌더 그룹 ALPHA하지말자 ( 계속 정렬하기 떄문에 비효율적.)
+
+
+Particle 클래스 하나 추가.
+Buffer_PointTex 추가
+구조체 추가.
+Shader_Effect : Pass 하나 추가했다.
+다른 패스 선언부에서 PointSprite 옵션 false로 해줘야 한다.
+
+Timedelta Reset : 클라에서 시간 초기화 하는거 재호출 (씬 전환 시 )
+
+포인트 스프라이트는 항상 빌보드를 한다 .
+
+쉐이더에서 fPSize를 비율에 따라 수정해야 더 자연스러워질것이다.
