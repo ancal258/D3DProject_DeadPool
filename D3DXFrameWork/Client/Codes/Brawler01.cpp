@@ -15,11 +15,11 @@ CBrawler01::CBrawler01(const CBrawler01 & rhs)
 {
 }
 
-HRESULT CBrawler01::Ready_GameObject_Prototype()
+HRESULT CBrawler01::Ready_GameObject_Prototype(_uint iStageNum)
 {
 	if (FAILED(CBrawler::Ready_GameObject_Prototype()))
 		return E_FAIL;
-
+	m_iStageNum = iStageNum;
 	return NOERROR;
 }
 
@@ -58,76 +58,39 @@ HRESULT CBrawler01::Ready_GameObject()
 
 _int CBrawler01::Update_GameObject(const _float & fTimeDelta)
 {
-	Compute_PlayerDir();
+	if (1 == m_iStageNum)
+	{
+		if (-1 == Update_Stage_Field(fTimeDelta))
+			return -1;
+	}
 
-
+	else if (2 == m_iStageNum)
+	{
+		if (-1 == Update_Stage_Airplane(fTimeDelta))
+			return -1;
+	}
 
 	return CBrawler::Update_GameObject(fTimeDelta);
 }
 
 _int CBrawler01::LastUpdate_GameObject(const _float & fTimeDelta)
 {
-	if (true == m_isDamaged)
+	if (1 == m_iStageNum)
 	{
-		Set_DeathIndex();
-		m_iCurrentIndex = m_iDeathIndex;
+		if (-1 == LastUpdate_Stage_Field(fTimeDelta))
+			return -1;
+	}
+	else if (2 == m_iStageNum)
+	{
+		if (-1 == LastUpdate_Stage_Airplane(fTimeDelta))
+			return -1;
 	}
 
-	m_pMeshCom->Set_AnimationSet(m_iCurrentIndex);
-
-	m_pMeshCom->Play_AnimationSet(fTimeDelta);
 	return CBrawler::LastUpdate_GameObject(fTimeDelta);
 }
 
 void CBrawler01::Render_GameObject()
 {
-	//_vec3      vPointX[2], vPointY[2], vPointZ[2];
-
-	//vPointX[0] = *m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION);
-	//vPointX[1] = vPointX[0] + *m_pTransformCom->Get_StateInfo(CTransform::STATE_RIGHT) * 10;
-
-	//vPointY[0] = *m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION);
-	//vPointY[1] = vPointY[0] + *m_pTransformCom->Get_StateInfo(CTransform::STATE_UP) * 10;
-
-	//vPointZ[0] = *m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION);
-	//vPointZ[1] = vPointZ[0] + *m_pTransformCom->Get_StateInfo(CTransform::STATE_LOOK) * 10;
-
-	//LPD3DXLINE            pLine = nullptr;
-	//if (FAILED(D3DXCreateLine(Get_Graphic_Device(), &pLine)))
-	//	return;
-
-	//_matrix      matView, matProj;
-
-	//Get_Graphic_Device()->GetTransform(D3DTS_VIEW, &matView);
-	//Get_Graphic_Device()->GetTransform(D3DTS_PROJECTION, &matProj);
-
-	//_matrix      matTransform;
-	//D3DXMatrixIdentity(&matTransform);
-
-	//for (size_t i = 0; i < 2; ++i)
-	//{
-	//	D3DXVec3TransformCoord(&vPointX[i], &vPointX[i], &matView);
-	//	D3DXVec3TransformCoord(&vPointX[i], &vPointX[i], &matProj);
-
-	//	D3DXVec3TransformCoord(&vPointY[i], &vPointY[i], &matView);
-	//	D3DXVec3TransformCoord(&vPointY[i], &vPointY[i], &matProj);
-
-	//	D3DXVec3TransformCoord(&vPointZ[i], &vPointZ[i], &matView);
-	//	D3DXVec3TransformCoord(&vPointZ[i], &vPointZ[i], &matProj);
-
-	//}
-
-	//pLine->SetWidth(2.0f);
-
-	//pLine->Begin();
-
-	//pLine->DrawTransform(vPointX, 2, &matTransform, D3DXCOLOR(1.f, 0.f, 0.f, 1.f));
-	//pLine->DrawTransform(vPointY, 2, &matTransform, D3DXCOLOR(0.f, 1.f, 0.f, 1.f));
-	//pLine->DrawTransform(vPointZ, 2, &matTransform, D3DXCOLOR(0.f, 0.f, 1.f, 1.f));
-
-	//pLine->End();
-
-	//Safe_Release(pLine);
 
 	CBrawler::Render_GameObject();
 }
@@ -147,6 +110,55 @@ HRESULT CBrawler01::Ready_Component()
 	Safe_Release(pComponent_Manager);
 
 	return NOERROR;
+}
+_int CBrawler01::Update_Stage_Field(const _float & fTimeDelta)
+{
+	Compute_PlayerDir();
+	//cout << m_fLength << endl;
+	if (true == m_isSearch && false == m_isDamaged)
+	{
+		if (D3DXVec3Dot(&m_vBrawlerLook, &m_vPlayerDir) < 0.998f)
+		{
+			_vec3 vCross;
+
+			// 몬스터의 Look과 Player와 몬스터의 방향벡터를 외적해서 좌측/우측 판단.
+			D3DXVec3Cross(&vCross, &m_vBrawlerLook, &m_vPlayerDir);
+			if (vCross.y >= 0)
+				m_pTransformCom->RotationY(D3DXToRadian(180.f), fTimeDelta);
+			else
+				m_pTransformCom->RotationY(D3DXToRadian(-180.f), fTimeDelta);
+		}
+		if (m_fLength > 2.f)
+		{
+			m_pTransformCom->Go_Straight(2, fTimeDelta);
+			m_iCurrentIndex = STATE_WALK_F;
+		}
+	}
+
+	return _int();
+}
+_int CBrawler01::LastUpdate_Stage_Field(const _float & fTimeDelta)
+{
+
+	if (true == m_isDamaged)
+	{
+		Set_DeathIndex();
+		m_iCurrentIndex = m_iDeathIndex;
+	}
+
+	m_pMeshCom->Set_AnimationSet(m_iCurrentIndex);
+
+	m_pMeshCom->Play_AnimationSet(fTimeDelta);
+
+	return _int();
+}
+_int CBrawler01::Update_Stage_Airplane(const _float & fTimeDelta)
+{
+	return _int();
+}
+_int CBrawler01::LastUpdate_Stage_Airplane(const _float & fTimeDelta)
+{
+	return _int();
 }
 void CBrawler01::Set_DeathIndex()
 {
@@ -179,11 +191,11 @@ void CBrawler01::Set_DeathIndex()
 	m_isCallDeathIdx = true;
 }
 
-CBrawler01 * CBrawler01::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+CBrawler01 * CBrawler01::Create(LPDIRECT3DDEVICE9 pGraphic_Device, _uint iStageNum)
 {
 	CBrawler01*      pInstance = new CBrawler01(pGraphic_Device);
 
-	if (FAILED(pInstance->Ready_GameObject_Prototype()))
+	if (FAILED(pInstance->Ready_GameObject_Prototype(iStageNum)))
 	{
 		_MSG_BOX("Prototype_CBrawler01 Created Failed");
 		Safe_Release(pInstance);

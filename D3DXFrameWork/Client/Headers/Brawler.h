@@ -42,6 +42,7 @@ protected: // For. Collider
 	CCollider*			m_pColliderCom = nullptr;
 	CCollider*			m_pColliderCom_Head = nullptr;
 	CCollider*			m_pColliderCom_Body = nullptr;
+	CCollider*			m_pColliderCom_Search = nullptr;
 protected: // For. Player
 	const CGameObject*	m_pPlayer[3] = { nullptr , nullptr, nullptr };
 
@@ -56,16 +57,27 @@ protected: // For. Animation
 	_uint				m_iCurrentIndex = 0;
 protected: // For. AttackCheck
 	_bool			m_isDamaged = false;
+	_bool			m_isSearch = false;
 	_vec3			m_vPlayerDir;
 	_vec3			m_vBrawlerLook;
 	_bool			m_isCallDeathIdx = false;
 	_float			m_fLength = 0;
 	_float			m_fRadian = 0;
+
+
+protected: // For. StageNum
+	_uint		m_iStageNum = 0;
 protected:
 	virtual HRESULT Ready_Component();
 	HRESULT Update_HandMatrix();
 	HRESULT SetUp_ConstantTable(LPD3DXEFFECT pEffect);
 	void Compute_PlayerDir();
+protected:
+	virtual _int Update_Stage_Field(const _float& fTimeDelta) PURE;
+	virtual _int LastUpdate_Stage_Field(const _float& fTimeDelta) PURE;
+
+	virtual _int Update_Stage_Airplane(const _float& fTimeDelta) PURE;
+	virtual _int LastUpdate_Stage_Airplane(const _float& fTimeDelta) PURE;
 private:
 	LPD3DXMESH				m_pColliderMesh[2] = { nullptr, nullptr };
 	BOOL					m_Hit[2] = { FALSE };

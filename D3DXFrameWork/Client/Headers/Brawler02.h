@@ -19,6 +19,12 @@ public:
 
 private:
 	virtual HRESULT Ready_Component();
+private:
+	virtual _int Update_Stage_Field(const _float& fTimeDelta) { return 1; };
+	virtual _int LastUpdate_Stage_Field(const _float& fTimeDelta) { return 1; };
+
+	virtual _int Update_Stage_Airplane(const _float& fTimeDelta) { return 1; };
+	virtual _int LastUpdate_Stage_Airplane(const _float& fTimeDelta) { return 1; };
 public:
 	static CBrawler02* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone_GameObject();

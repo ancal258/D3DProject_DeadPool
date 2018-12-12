@@ -15,6 +15,7 @@ CBrawler::CBrawler(LPDIRECT3DDEVICE9 pGraphic_Device)
 
 CBrawler::CBrawler(const CBrawler & rhs)
 	: CGameObject(rhs)
+	, m_iStageNum(rhs.m_iStageNum)
 {
 }
 
@@ -64,15 +65,25 @@ _int CBrawler::Update_GameObject(const _float & fTimeDelta)
 
 	Update_HandMatrix();
 
-	for (size_t i = 1; i < 3; i++)
+	if (false == m_isDamaged)
 	{
-		if (true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider0")) ||
-			true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider1")) ||
-			true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider2")) ||
-			true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider3")) ||
-			true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider4")))
+		// 플레이어 - Search 컬라이더 충돌.
+		if (true == m_pColliderCom_Search->Collision_Sphere((const CCollider*)m_pPlayer[0]->Get_ComponentPointer(L"Com_Collider")))
+			m_isSearch = true;
+		else
+			m_isSearch = false;
+
+		// 칼 - 몬스터 Body 충돌.
+		for (size_t i = 1; i < 3; i++)
 		{
-			m_isDamaged = true;
+			if (true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider0")) ||
+				true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider1")) ||
+				true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider2")) ||
+				true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider3")) ||
+				true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider4")))
+			{
+				m_isDamaged = true;
+			}
 		}
 	}
 
@@ -132,7 +143,7 @@ void CBrawler::Render_GameObject()
 	m_pColliderCom->Render_Collider();
 	m_pColliderCom_Body->Render_Collider();
 	m_pColliderCom_Head->Render_Collider();
-
+	m_pColliderCom_Search->Render_Collider();
 }
 
 void CBrawler::CallBackFinish()
@@ -179,6 +190,10 @@ HRESULT CBrawler::Ready_Component()
 		return E_FAIL;
 	m_pColliderCom->SetUp_Collider(&m_CombinedRootMatrix, &_vec3(50, 140, 50), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f, 70.f, 0.f));
 
+	m_pColliderCom_Search = (CCollider*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Collider_Sphere");
+	if (FAILED(Add_Component(L"Com_Collider_Search", m_pColliderCom_Search)))
+		return E_FAIL;
+	m_pColliderCom_Search->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(700, 700, 700), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f, 70.f, 0.f));
 	
 	m_pColliderCom_Head = (CCollider*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Collider_Sphere");
 	if (FAILED(Add_Component(L"Com_Collider_Head", m_pColliderCom_Head)))
@@ -293,6 +308,6 @@ void CBrawler::Free()
 	Safe_Release(m_pColliderCom);
 	Safe_Release(m_pColliderCom_Body);
 	Safe_Release(m_pColliderCom_Head);
-
+	Safe_Release(m_pColliderCom_Search);
 	CGameObject::Free();
 }

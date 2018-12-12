@@ -1055,7 +1055,10 @@ HRESULT CLoading::Ready_Stage_Prototype_GameObject_SceneFIELD()
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Player", CPlayer::Create(Get_Graphic_Device()))))
 		return E_FAIL;
 	// For.GameObject_Brawler01
-	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Brawler01", CBrawler01::Create(Get_Graphic_Device()))))
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Brawler01_1", CBrawler01::Create(Get_Graphic_Device(), 1))))
+		return E_FAIL;
+	// For.GameObject_Brawler01
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Brawler01_2", CBrawler01::Create(Get_Graphic_Device(), 2))))
 		return E_FAIL;
 	// For.GameObject_Brawler01
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Brawler02", CBrawler02::Create(Get_Graphic_Device()))))
@@ -1312,9 +1315,9 @@ HRESULT CLoading::Ready_Layer_BackGround(const _tchar * pLayerTag)
 
 HRESULT CLoading::Ready_Layer_Object()
 {
-	for (size_t i = 0; i < 2; i++)
+	for (size_t i = 0; i < 3; i++)
 	{
-		if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01", SCENE_STAGE, L"Layer_Brawler01")))
+		if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01")))
 			return E_FAIL;
 	}
 	for (size_t i = 0; i < 1; i++)
