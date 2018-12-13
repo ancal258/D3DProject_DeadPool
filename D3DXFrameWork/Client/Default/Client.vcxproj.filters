@@ -175,6 +175,9 @@
     <Filter Include="02.GameObject\02.For.Stage\01.Player\01.Player">
       <UniqueIdentifier>{08135124-b773-47ab-b85f-c769688d9b1f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\00.For.Static\01.Static_Object\Static_Airplane">
+      <UniqueIdentifier>{18c07c7b-5dc0-4386-9046-f7476fd310b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -303,6 +306,12 @@
     <ClInclude Include="..\Headers\Player.h">
       <Filter>02.GameObject\02.For.Stage\01.Player\01.Player</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\Static_Airplane.h">
+      <Filter>02.GameObject\00.For.Static\01.Static_Object\Static_Airplane</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Prop.h">
+      <Filter>02.GameObject\02.For.Stage\01.Player\02.Airlane\Airplane\Prop</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -416,6 +425,12 @@
     <ClCompile Include="..\Codes\Player.cpp">
       <Filter>02.GameObject\02.For.Stage\01.Player\01.Player</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\Static_Airplane.cpp">
+      <Filter>02.GameObject\00.For.Static\01.Static_Object\Static_Airplane</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Prop.cpp">
+      <Filter>02.GameObject\02.For.Stage\01.Player\02.Airlane\Airplane\Prop</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -447,6 +462,9 @@
       <Filter>97.ShaderFiles</Filter>
     </FxCompile>
     <FxCompile Include="..\Bin\ShaderFiles\Shader_UI.fx">
+      <Filter>97.ShaderFiles</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_Prop.fx">
       <Filter>97.ShaderFiles</Filter>
     </FxCompile>
   </ItemGroup>

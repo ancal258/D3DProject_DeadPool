@@ -101,4 +101,13 @@ typedef struct tagStaticObjectInfo {
 	D3DXVECTOR3 vLook;
 	D3DXVECTOR3 vPos;
 	wchar_t szPrototype_Tag[128];			// Component_Tag
+	bool isOffCulling;
 }STATIC_OBJECT_INFO;					// Collider -> MinMax Setup Setting
+
+typedef struct tagStaticObjectInfo2 {
+	D3DXVECTOR3 vRight;
+	D3DXVECTOR3 vUp;
+	D3DXVECTOR3 vLook;
+	D3DXVECTOR3 vPos;
+	wchar_t szPrototype_Tag[128];			// Component_Tag
+}STATIC_OBJECT_INFO2;					// Collider -> MinMax Setup Setting

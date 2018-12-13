@@ -97,4 +97,6 @@ public:
 	BOOL m_isLock;
 	afx_msg void OnBnClickedCheck3();
 	afx_msg void OnBnClickedButton2();
+	BOOL m_isOffCulling;
+	afx_msg void OnBnClickedCheck4();
 };

@@ -29,17 +29,19 @@ STATIC_OBJECT_INFO CStatic_Object::Get_ObjectInfo()
 	tObjectInfo.vUp = matWorld.m[1];
 	tObjectInfo.vLook = matWorld.m[2];
 	tObjectInfo.vPos = matWorld.m[3];
+	tObjectInfo.isOffCulling = m_isOffCulling;
 
 	return tObjectInfo;
 }
 
-void CStatic_Object::Set_StateInfo(_vec3 * pRight, _vec3 * pUp, _vec3 * vLook, _vec3 * vPos)
+void CStatic_Object::Set_StateInfo(_vec3 * pRight, _vec3 * pUp, _vec3 * vLook, _vec3 * vPos, _bool isOffCulling)
 {
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_RIGHT, pRight);
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_UP, pUp);
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_LOOK, vLook);
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, vPos);
-
+	m_isOffCulling = isOffCulling;
+	m_isLock = true;
 }
 
 void CStatic_Object::Set_Position(_vec3 * pPosition) const

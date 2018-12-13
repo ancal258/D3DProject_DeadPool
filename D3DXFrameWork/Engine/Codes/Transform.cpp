@@ -146,6 +146,15 @@ void CTransform::Set_AngleZ(const _float & fRadian)
 	D3DXVec3TransformNormal((_vec3*)&m_matWorld.m[STATE_LOOK][0], &vLook, &matRotZ);
 }
 
+void CTransform::RotationX(const _float & fAnglePerSec, const _float & fTimeDelta)
+{
+	_matrix		matRotX;
+	D3DXMatrixRotationX(&matRotX, fAnglePerSec * fTimeDelta);
+
+	D3DXVec3TransformNormal((_vec3*)&m_matWorld.m[STATE_RIGHT][0], (_vec3*)&m_matWorld.m[STATE_RIGHT][0], &matRotX);
+	D3DXVec3TransformNormal((_vec3*)&m_matWorld.m[STATE_UP][0], (_vec3*)&m_matWorld.m[STATE_UP][0], &matRotX);
+	D3DXVec3TransformNormal((_vec3*)&m_matWorld.m[STATE_LOOK][0], (_vec3*)&m_matWorld.m[STATE_LOOK][0], &matRotX);
+}
 void CTransform::RotationY(const _float & fAnglePerSec, const _float & fTimeDelta)
 {
 	_matrix		matRotY;
@@ -155,14 +164,14 @@ void CTransform::RotationY(const _float & fAnglePerSec, const _float & fTimeDelt
 	D3DXVec3TransformNormal((_vec3*)&m_matWorld.m[STATE_UP][0], (_vec3*)&m_matWorld.m[STATE_UP][0], &matRotY);
 	D3DXVec3TransformNormal((_vec3*)&m_matWorld.m[STATE_LOOK][0], (_vec3*)&m_matWorld.m[STATE_LOOK][0], &matRotY);
 }
-void CTransform::RotationX(const _float & fAnglePerSec, const _float & fTimeDelta)
+void CTransform::RotationZ(const _float & fAnglePerSec, const _float & fTimeDelta)
 {
-	_matrix		matRotX;
-	D3DXMatrixRotationX(&matRotX, fAnglePerSec * fTimeDelta);
+	_matrix		matRotZ;
+	D3DXMatrixRotationZ(&matRotZ, fAnglePerSec * fTimeDelta);
 
-	D3DXVec3TransformNormal((_vec3*)&m_matWorld.m[STATE_RIGHT][0], (_vec3*)&m_matWorld.m[STATE_RIGHT][0], &matRotX);
-	D3DXVec3TransformNormal((_vec3*)&m_matWorld.m[STATE_UP][0], (_vec3*)&m_matWorld.m[STATE_UP][0], &matRotX);
-	D3DXVec3TransformNormal((_vec3*)&m_matWorld.m[STATE_LOOK][0], (_vec3*)&m_matWorld.m[STATE_LOOK][0], &matRotX);
+	D3DXVec3TransformNormal((_vec3*)&m_matWorld.m[STATE_RIGHT][0], (_vec3*)&m_matWorld.m[STATE_RIGHT][0], &matRotZ);
+	D3DXVec3TransformNormal((_vec3*)&m_matWorld.m[STATE_UP][0], (_vec3*)&m_matWorld.m[STATE_UP][0], &matRotZ);
+	D3DXVec3TransformNormal((_vec3*)&m_matWorld.m[STATE_LOOK][0], (_vec3*)&m_matWorld.m[STATE_LOOK][0], &matRotZ);
 }
 
 // 0 : Look  || 1 : Up || 2 : Right

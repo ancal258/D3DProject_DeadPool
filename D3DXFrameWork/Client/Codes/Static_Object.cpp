@@ -21,12 +21,13 @@ CStatic_Object::CStatic_Object(const CStatic_Object & rhs)
 
 }
 
-void CStatic_Object::Set_StateInfo(_vec3* pRight, _vec3* pUp, _vec3* vLook, _vec3* vPos)
+void CStatic_Object::Set_StateInfo(_vec3* pRight, _vec3* pUp, _vec3* vLook, _vec3* vPos, _bool isOffCulling)
 {
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_RIGHT, pRight);
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_UP, pUp);
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_LOOK, vLook);
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, vPos);
+	m_isOffCulling = isOffCulling;
 }
 HRESULT CStatic_Object::SetUp_Radius()
 {
@@ -77,13 +78,19 @@ _int CStatic_Object::LastUpdate_GameObject(const _float & fTimeDelta)
 		return -1;
 
 
-
-	if (false == pCamera->Culling_ToFrustum(m_pTransformCom, nullptr, m_fRadius))
+	if (false == m_isOffCulling)
+	{
+		if (false == pCamera->Culling_ToFrustum(m_pTransformCom, nullptr, m_fRadius))
+		{
+			if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
+				return -1;
+		}
+	}
+	else
 	{
 		if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
 			return -1;
 	}
-
 	//CObject_Manager* pObject_Manager = CObject_Manager::GetInstance();
 	//if (nullptr == pObject_Manager)
 	//	return -1;

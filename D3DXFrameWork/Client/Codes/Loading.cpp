@@ -22,6 +22,8 @@
 #include "SkyDom.h"
 #include "Airplane.h"
 #include "Minigun.h"
+#include "Prop.h"
+#include "Static_Airplane.h"
 // UI
 #include "UI_CrossHair.h"
 #include "UI_HPBar.h"
@@ -498,6 +500,10 @@ HRESULT CLoading::Ready_Static_Prototype_Component()
 	// For.Component_Shader_Effect
 	lstrcpy(m_szString, L"../Bin/ShaderFiles/Shader_Effect.fx");
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Shader_Effect", CShader::Create(Get_Graphic_Device(), m_szString))))
+		return E_FAIL;
+	// For.Component_Shader_Prop
+	lstrcpy(m_szString, L"../Bin/ShaderFiles/Shader_Prop.fx");
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Shader_Prop", CShader::Create(Get_Graphic_Device(), m_szString))))
 		return E_FAIL;
 
 
@@ -985,6 +991,9 @@ HRESULT CLoading::Ready_Component_Prototype_SceneFIELD()
 	// For.Component_Mesh_Helicopter
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Helicopter", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/Helicopter/", L"Helicopter.x"))))
 		return E_FAIL;
+	// For.Component_Mesh_Prop
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Prop", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/Helicopter/", L"Prop.x"))))
+		return E_FAIL;
 
 	/////////////////////////////////////////////
 
@@ -1238,9 +1247,12 @@ HRESULT CLoading::Ready_Stage_Prototype_GameObject_SceneFIELD()
 	// For.GameObject_Weight_Barbel
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Weight_Barbel", CStatic_Object::Create(Get_Graphic_Device(), L"Component_Mesh_Weight_Barbel"))))
 		return E_FAIL;
-	
+
 	// For.GameObject_Helicopter
-	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Helicopter", CStatic_Object::Create(Get_Graphic_Device(), L"Component_Mesh_Helicopter"))))
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Static_Airplane", CStatic_Airplane::Create(Get_Graphic_Device()))))
+		return E_FAIL;
+	// For.GameObject_Helicopter
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Prop", CProp::Create(Get_Graphic_Device()))))
 		return E_FAIL;
 	//////////////////////////////////////////////////
 	return NOERROR;
@@ -1325,18 +1337,11 @@ HRESULT CLoading::Ready_Layer_Object()
 		if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler02", SCENE_STAGE, L"Layer_Brawler02")))
 			return E_FAIL;
 	}
-
-	CGameObject* pGameObject;
-	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Helicopter", SCENE_STAGE, L"Layer_Helicopter", &pGameObject)))
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Static_Airplane", SCENE_STAGE, L"Layer_Airplane_Field")))
 		return E_FAIL;
-	_matrix matInfo;
-	D3DXMatrixIdentity(&matInfo);
-	matInfo.m[3][0] = 81.25;
-	matInfo.m[3][1] = 0.f;
-	matInfo.m[3][2] = 55.18f;
-	CTransform* pTransform = (CTransform*)pGameObject->Get_ComponentPointer(L"Com_Transform");
-	((CStatic_Object*)pGameObject)->Set_StateInfo(&(_vec3)matInfo.m[0], &(_vec3)matInfo.m[1], &(_vec3)matInfo.m[2], &(_vec3)matInfo.m[3]);
-	pTransform->Scaling(_vec3(0.01f, 0.01f, 0.01f));
+	// For.Add_AirPlane
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Prop", SCENE_STAGE, L"Layer_Airplane_Field")))
+		return E_FAIL;
 
 
 	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler_TPose", SCENE_STAGE, L"Layer_Brawler_TPose")))
@@ -1400,7 +1405,6 @@ HRESULT CLoading::Load_Static_Object(const _tchar * pFilePath)
 	HANDLE			hFile = CreateFile(pFilePath, GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 	if (0 == hFile)
 		return E_FAIL;
-
 	for (;;)
 	{
 		STATIC_OBJECT_INFO		ObjectInfo;
@@ -1413,7 +1417,7 @@ HRESULT CLoading::Load_Static_Object(const _tchar * pFilePath)
 		lstrcpy(m_szString, ObjectInfo.szPrototype_Tag);
 		if (FAILED(Add_Object(SCENE_STAGE, ObjectInfo.szPrototype_Tag, SCENE_STAGE, L"Layer_Load", &pStatic_Object)))
 			return E_FAIL;
-		((CStatic_Object*)pStatic_Object)->Set_StateInfo(&ObjectInfo.vRight, &ObjectInfo.vUp, &ObjectInfo.vLook, &ObjectInfo.vPos);
+		((CStatic_Object*)pStatic_Object)->Set_StateInfo(&ObjectInfo.vRight, &ObjectInfo.vUp, &ObjectInfo.vLook, &ObjectInfo.vPos,ObjectInfo.isOffCulling);
 	}
 
 	CloseHandle(hFile);

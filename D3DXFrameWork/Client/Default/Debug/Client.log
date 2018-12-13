@@ -1,9 +1,3 @@
-﻿  Loading.cpp
-d:\github\d3dproject_deadpool\d3dxframework\client\headers\event_cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
-d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(237): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(377): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(387): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(439): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(449): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+﻿  Static_Airplane.cpp
   Client.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Default\..\Bin\Client.exe
   Client.vcxproj -> ..\Bin\Client.pdb (Full PDB)

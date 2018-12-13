@@ -34,6 +34,7 @@ CPage_Object::CPage_Object()
 	, m_fMeshPosZ(0)
 	, m_isTransformMode(FALSE)
 	, m_isLock(FALSE)
+	, m_isOffCulling(FALSE)
 {
 
 }
@@ -61,6 +62,7 @@ void CPage_Object::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_EDIT19, m_fMeshPosZ);
 	DDX_Check(pDX, IDC_CHECK2, m_isTransformMode);
 	DDX_Check(pDX, IDC_CHECK3, m_isLock);
+	DDX_Check(pDX, IDC_CHECK4, m_isOffCulling);
 }
 
 
@@ -87,6 +89,7 @@ BEGIN_MESSAGE_MAP(CPage_Object, CPropertyPage)
 	ON_BN_CLICKED(IDC_CHECK2, &CPage_Object::OnBnClickedCheck2)
 	ON_BN_CLICKED(IDC_CHECK3, &CPage_Object::OnBnClickedCheck3)
 	ON_BN_CLICKED(IDC_BUTTON2, &CPage_Object::OnBnClickedButton2)
+	ON_BN_CLICKED(IDC_CHECK4, &CPage_Object::OnBnClickedCheck4)
 END_MESSAGE_MAP()
 
 
@@ -99,7 +102,13 @@ void CPage_Object::Set_PickingPoint(_vec3 vPickingPoint)
 	m_fMeshPosY = vPickingPoint.y;
 	m_fMeshPosZ = vPickingPoint.z;
 
-
+	for (auto& pGameObject : vGameObject)
+	{
+		if (true == ((CStatic_Object*)pGameObject)->Get_ClickedObject())
+		{
+			m_isOffCulling = ((CStatic_Object*)(pGameObject))->m_isOffCulling;
+		}
+	}
 
 	UpdateData(0);
 }
@@ -1618,6 +1627,7 @@ void CPage_Object::OnBnClickedButton8() // Save
 		for (auto& pGameObject : vGameObject)
 		{
 			WriteFile(hFile, &((CStatic_Object*)pGameObject)->Get_ObjectInfo(), sizeof(STATIC_OBJECT_INFO), &dwByte, nullptr);
+			//WriteFile(hFile, false, sizeof(_bool), &dwByte, nullptr);
 		}
 
 		CloseHandle(hFile);
@@ -1644,6 +1654,7 @@ void CPage_Object::OnBnClickedButton16() // Load
 		hFile = CreateFile(FileDlg.GetPathName(), GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
 		if (0 == hFile)
 			return;
+
 		while (true)
 		{
 			STATIC_OBJECT_INFO		ObjectInfo;
@@ -1665,8 +1676,7 @@ void CPage_Object::OnBnClickedButton16() // Load
 				m_MeshListBox.AddString(szMeshName);
 				++iMeshCntArray[MESH_END];
 				((CStatic_Object*)pMesh)->Set_PrototypeTag(pPrototype_Tag);
-				((CStatic_Object*)pMesh)->Set_StateInfo(&ObjectInfo.vRight, &ObjectInfo.vUp, &ObjectInfo.vLook, &ObjectInfo.vPos);
-				((CStatic_Object*)pMesh)->m_isLock = true;
+				((CStatic_Object*)pMesh)->Set_StateInfo(&ObjectInfo.vRight, &ObjectInfo.vUp, &ObjectInfo.vLook, &ObjectInfo.vPos, ObjectInfo.isOffCulling);
 			}
 		}
 
@@ -1728,5 +1738,19 @@ void CPage_Object::OnBnClickedButton2()
 	for (auto& pGameObject : vGameObject)
 	{
 		((CStatic_Object*)(pGameObject))->m_isLock = false;
+	}
+}
+
+
+void CPage_Object::OnBnClickedCheck4() // OffCulling
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	UpdateData(1);
+	for (auto& pGameObject : vGameObject)
+	{
+		if (true == ((CStatic_Object*)pGameObject)->Get_ClickedObject())
+		{
+			((CStatic_Object*)(pGameObject))->m_isOffCulling = m_isOffCulling;
+		}
 	}
 }

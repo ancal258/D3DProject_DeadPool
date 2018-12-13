@@ -149,10 +149,10 @@ HRESULT CInput_Device::SetUp_Picking()
 
 	// x : 0 -> -1, 800 -> 1, 400 -> 0
 	// y : 0 -> 1, 600 -> -1, 300 -> 0
-	//vMousePos.x = (ptMouse.x / ((ViewPort.Width + 300) * 0.5f)) - 1.f; // mfc 300정도 보정
-	//vMousePos.y = (ptMouse.y / ((ViewPort.Height + 30) * -0.5f)) + 1.f; // mfc 30정도 보정
-	vMousePos.x = (ptMouse.x / ((ViewPort.Width) * 0.5f)) - 1.f; // mfc 300정도 보정
-	vMousePos.y = (ptMouse.y / ((ViewPort.Height) * -0.5f)) + 1.f; // mfc 30정도 보정
+	vMousePos.x = (ptMouse.x / ((ViewPort.Width + 300) * 0.5f)) - 1.f; // mfc 300정도 보정
+	vMousePos.y = (ptMouse.y / ((ViewPort.Height + 30) * -0.5f)) + 1.f; // mfc 30정도 보정
+	//vMousePos.x = (ptMouse.x / ((ViewPort.Width) * 0.5f)) - 1.f; // mfc 300정도 보정
+	//vMousePos.y = (ptMouse.y / ((ViewPort.Height) * -0.5f)) + 1.f; // mfc 30정도 보정
 	vMousePos.z = 0.f;
 
 	// In.View Space

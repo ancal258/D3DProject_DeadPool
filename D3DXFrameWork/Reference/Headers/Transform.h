@@ -40,8 +40,9 @@ public:
 	void Set_AngleX(const _float& fRadian); // 특정각도로 고정시킨다.
 	void Set_AngleY(const _float& fRadian); // 특정각도로 고정시킨다.
 	void Set_AngleZ(const _float& fRadian); // 특정각도로 고정시킨다.
-	void RotationY(const _float& fRadianPerSec, const _float& fTimeDelta); // 특정 각도만큼 추가적으로 회전한다.
 	void RotationX(const _float& fRadianPerSec, const _float& fTimeDelta); // 특정 각도만큼 추가적으로 회전한다.
+	void RotationY(const _float& fRadianPerSec, const _float& fTimeDelta); // 특정 각도만큼 추가적으로 회전한다.
+	void RotationZ(const _float& fRadianPerSec, const _float& fTimeDelta); // 특정 각도만큼 추가적으로 회전한다.
 	void Set_PlusPosition(_uint iType, _float& fValue); 
 
 private:

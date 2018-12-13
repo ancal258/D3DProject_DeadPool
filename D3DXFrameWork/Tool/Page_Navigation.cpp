@@ -138,13 +138,13 @@ void CPage_Navigation::OnBnClickedButton1() // Save
 			vPoint[2] = vecNavPoint[i+2]->m_vWorldPosition;
 
 			_vec3 vDir[2];
-			vDir[0] = vPoint[1] - vPoint[0];
+			vDir[0] = vPoint[0] - vPoint[1];
 			vDir[1] = vPoint[2] - vPoint[1];
 
 			_vec3 vCross;
 			D3DXVec3Cross(&vCross, &vDir[0], &vDir[1]);
 
-			if (vCross.y < 0)
+			if (vCross.y > 0)
 			{
 				_vec3 vTmp = vecNavPoint[i]->m_vWorldPosition;
 				vecNavPoint[i]->m_vWorldPosition = vecNavPoint[i + 2]->m_vWorldPosition;
