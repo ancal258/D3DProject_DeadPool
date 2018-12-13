@@ -1,14 +1,8 @@
-﻿  Transform.cpp
+﻿  Mesh_Dynamic.cpp
   코드를 생성하고 있습니다...
   건너뛰고 있습니다... (관련된 변경 내용 없음)
-  VIBuffer.cpp
-  Navigation.cpp
-  Mesh_Static.cpp
   Management.cpp
-  Input_Device.cpp
-  Frustum.cpp
   Component_Manager.cpp
-  Buffer_Terrain.cpp
      ..\Bin\Engine.lib 라이브러리 및 ..\Bin\Engine.exp 개체를 생성하고 있습니다.
   Engine.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Engine\Default\..\Bin\Engine.dll
   Engine.vcxproj -> ..\Bin\Engine.pdb (Full PDB)

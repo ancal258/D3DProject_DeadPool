@@ -54,9 +54,10 @@ private:
 	HRESULT Ready_UI_SceneFIELD();
 
 	HRESULT Ready_AIRPLANE(); // AIRPLANE에서만 쓰이는 프로토타입과 컴포넌트 객체들
+	HRESULT Ready_UI_SceneAIRPLANE();
 
 private:
-	HRESULT Ready_Layer_Camera(const _tchar * pProtoName, const _tchar* pLayerTag);
+	HRESULT Ready_Layer_Camera(const _tchar * pProtoName, const _tchar* pLayerTag, const _float fNear);
 	HRESULT Ready_Layer_Test(const _tchar* pLayerTag);
 
 	HRESULT Ready_Layer_Player(const _tchar* pLayerTag);

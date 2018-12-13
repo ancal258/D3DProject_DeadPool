@@ -59,16 +59,9 @@ HRESULT CBrawler01::Ready_GameObject()
 _int CBrawler01::Update_GameObject(const _float & fTimeDelta)
 {
 	if (1 == m_iStageNum)
-	{
-		if (-1 == Update_Stage_Field(fTimeDelta))
-			return -1;
-	}
-
+		Update_Stage_Field(fTimeDelta);
 	else if (2 == m_iStageNum)
-	{
-		if (-1 == Update_Stage_Airplane(fTimeDelta))
-			return -1;
-	}
+		Update_Stage_Airplane(fTimeDelta);
 
 	return CBrawler::Update_GameObject(fTimeDelta);
 }
@@ -76,15 +69,10 @@ _int CBrawler01::Update_GameObject(const _float & fTimeDelta)
 _int CBrawler01::LastUpdate_GameObject(const _float & fTimeDelta)
 {
 	if (1 == m_iStageNum)
-	{
-		if (-1 == LastUpdate_Stage_Field(fTimeDelta))
-			return -1;
-	}
+		LastUpdate_Stage_Field(fTimeDelta);
 	else if (2 == m_iStageNum)
-	{
-		if (-1 == LastUpdate_Stage_Airplane(fTimeDelta))
-			return -1;
-	}
+		LastUpdate_Stage_Airplane(fTimeDelta);
+
 
 	return CBrawler::LastUpdate_GameObject(fTimeDelta);
 }

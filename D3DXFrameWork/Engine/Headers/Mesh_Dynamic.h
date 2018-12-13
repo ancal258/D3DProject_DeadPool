@@ -14,6 +14,7 @@ private:
 	virtual ~CMesh_Dynamic() = default;
 public:
 	const _matrix* Get_FrameMatrixByName(const char* pFrameName);
+	_matrix* Get_FrameMatrix(const char* pFrameName);
 public:
 	HRESULT Ready_Mesh(const _tchar* pFilePath, const _tchar* pFileName);
 	HRESULT Ready_CloneMesh();

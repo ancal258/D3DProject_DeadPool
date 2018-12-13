@@ -9,6 +9,7 @@
 #include "Camera_Debug.h"
 #include "Camera_Target.h"
 #include "Camera_Cinematic.h"
+#include "Camera_Minigun.h"
 #include "Test.h"
 
 
@@ -150,6 +151,9 @@ HRESULT CMainApp::Ready_Static_GameObject()
 		return E_FAIL;
 	// For.GameObject_Camera_Cinematic
 	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(SCENE_STATIC, L"GameObject_Camera_Cinematic", CCamera_Cinematic::Create(m_pGraphic_Device))))
+		return E_FAIL;
+	// For.GameObject_Camera_Minigun
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(SCENE_STATIC, L"GameObject_Camera_Minigun", CCamera_Minigun::Create(m_pGraphic_Device))))
 		return E_FAIL;
 	//// For.GameObject_Test
 	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(SCENE_STATIC, L"GameObject_Test", CTest::Create(m_pGraphic_Device))))

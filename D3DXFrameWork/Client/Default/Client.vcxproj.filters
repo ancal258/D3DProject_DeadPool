@@ -178,6 +178,9 @@
     <Filter Include="02.GameObject\00.For.Static\01.Static_Object\Static_Airplane">
       <UniqueIdentifier>{18c07c7b-5dc0-4386-9046-f7476fd310b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\03.For.Public\Camera\Minigun">
+      <UniqueIdentifier>{0aaa213f-a279-41e8-85ba-3f3062829a14}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -312,6 +315,9 @@
     <ClInclude Include="..\Headers\Prop.h">
       <Filter>02.GameObject\02.For.Stage\01.Player\02.Airlane\Airplane\Prop</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\Camera_Minigun.h">
+      <Filter>02.GameObject\03.For.Public\Camera\Minigun</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -430,6 +436,9 @@
     </ClCompile>
     <ClCompile Include="..\Codes\Prop.cpp">
       <Filter>02.GameObject\02.For.Stage\01.Player\02.Airlane\Airplane\Prop</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Camera_Minigun.cpp">
+      <Filter>02.GameObject\03.For.Public\Camera\Minigun</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

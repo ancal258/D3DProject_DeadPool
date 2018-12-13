@@ -13,6 +13,8 @@ class CCollider;
 _END
 
 _BEGIN(Client)
+class CCamera_Debug;
+class CCamera_Minigun;
 class CAirplane final : public CGameObject
 {
 private:
@@ -34,11 +36,14 @@ private:
 	CMesh_Static*		m_pMeshCom = nullptr;
 	CShader*			m_pShaderCom = nullptr;
 	CCollider*			m_pColliderCom = nullptr;
+private:
+	CCamera_Debug*		m_pCamera_Debug = nullptr;
+	CCamera_Minigun*	m_pCamera_Minigun = nullptr;
 
 private:
 	HRESULT Ready_Component();
 	HRESULT	SetUp_ConstantTable(LPD3DXEFFECT pEffect);
-
+	HRESULT SetUp_Camera();
 public:
 	static CAirplane* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone_GameObject();

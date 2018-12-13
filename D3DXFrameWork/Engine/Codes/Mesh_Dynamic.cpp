@@ -24,6 +24,16 @@ const _matrix * CMesh_Dynamic::Get_FrameMatrixByName(const char * pFrameName)
 	return &pFrame->CombinedTransformationMatrix;
 }
 
+_matrix * CMesh_Dynamic::Get_FrameMatrix(const char * pFrameName)
+{
+	D3DXFRAME_DERIVED*	pFrame = (D3DXFRAME_DERIVED*)D3DXFrameFind(m_pRootFrame, pFrameName);
+
+	if (nullptr == pFrame)
+		return nullptr;
+
+	return &pFrame->TransformationMatrix;
+}
+
 HRESULT CMesh_Dynamic::Ready_Mesh(const _tchar * pFilePath, const _tchar * pFileName)
 {
 	lstrcpy(m_pFilePath, pFilePath);

@@ -5,7 +5,9 @@
 #include "Light_Manager.h"
 #include "Player.h"
 
-#include "Camera_Target.h"
+
+#include "Camera_Debug.h"
+#include "Camera_Minigun.h"
 _USING(Client)
 
 CAirplane::CAirplane(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -49,6 +51,8 @@ HRESULT CAirplane::Ready_GameObject()
 
 _int CAirplane::Update_GameObject(const _float & fTimeDelta)
 {
+	if (FAILED(SetUp_Camera()))
+		return -1;
 
 	return _int();
 }
@@ -60,6 +64,8 @@ _int CAirplane::LastUpdate_GameObject(const _float & fTimeDelta)
 		return -1;
 
 	m_pTransformCom->Update_Matrix();
+
+	_matrix matTmp = *m_pTransformCom->Get_WorldMatrix();
 
 	if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
 		return -1;
@@ -147,6 +153,7 @@ HRESULT CAirplane::SetUp_ConstantTable(LPD3DXEFFECT pEffect)
 
 	_matrix			matView, matProj;
 
+	
 	Get_Transform(D3DTS_VIEW, &matView);
 	Get_Transform(D3DTS_PROJECTION, &matProj);
 
@@ -173,6 +180,33 @@ HRESULT CAirplane::SetUp_ConstantTable(LPD3DXEFFECT pEffect)
 	return NOERROR;
 }
 
+HRESULT CAirplane::SetUp_Camera()
+{
+	if (nullptr == m_pCamera_Debug)
+		m_pCamera_Debug = (CCamera_Debug*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Camera", 0);
+
+	if (nullptr == m_pCamera_Minigun)
+		m_pCamera_Minigun = (CCamera_Minigun*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Camera", 1);
+
+
+	if (nullptr != m_pCamera_Debug&&
+		nullptr != m_pCamera_Minigun)
+	{
+		if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_NUMPAD8) & 0x8000)
+		{
+			m_pCamera_Debug->Set_IsCameraOn(true);
+			m_pCamera_Minigun->Set_IsCameraOn(false);
+		}
+		if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_NUMPAD9) & 0x8000)
+		{
+			m_pCamera_Debug->Set_IsCameraOn(false);
+			m_pCamera_Minigun->Set_IsCameraOn(true);
+		}
+	}
+
+	return NOERROR;
+}
+ 
 CAirplane * CAirplane::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
 	CAirplane*		pInstance = new CAirplane(pGraphic_Device);

@@ -42,11 +42,18 @@ HRESULT CBrawler::Ready_GameObject()
 
 	D3DXMatrixIdentity(&m_RealMatrix);
 
-	for (size_t i = 0; i < 3; i++)
+	if (1 == m_iStageNum)
 	{
-		m_pPlayer[i] = CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Player", i);
-		if (nullptr == m_pPlayer[i])
-			return E_FAIL;
+		for (size_t i = 0; i < 3; i++)
+		{
+			m_pPlayer[i] = CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Player", i);
+			if (nullptr == m_pPlayer[i])
+				return E_FAIL;
+		}
+	}
+	if (2 == m_iStageNum)
+	{
+
 	}
 
 	return NOERROR;
@@ -57,41 +64,11 @@ _int CBrawler::Update_GameObject(const _float & fTimeDelta)
 	if (nullptr == m_pRendererCom)
 		return -1;
 
-	CCamera_Target*	pCamera = (CCamera_Target*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Camera", 1);
-	if (nullptr == pCamera)
-		return -1;
+	if (1 == m_iStageNum)
+		CBrawler::Update_Stage_Field(fTimeDelta);
+	else if (2 == m_iStageNum)
+		CBrawler::Update_Stage_Airplane(fTimeDelta);
 
-	_float fRadius = 15.f;
-
-	Update_HandMatrix();
-
-	if (false == m_isDamaged)
-	{
-		// 플레이어 - Search 컬라이더 충돌.
-		if (true == m_pColliderCom_Search->Collision_Sphere((const CCollider*)m_pPlayer[0]->Get_ComponentPointer(L"Com_Collider")))
-			m_isSearch = true;
-		else
-			m_isSearch = false;
-
-		// 칼 - 몬스터 Body 충돌.
-		for (size_t i = 1; i < 3; i++)
-		{
-			if (true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider0")) ||
-				true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider1")) ||
-				true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider2")) ||
-				true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider3")) ||
-				true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider4")))
-			{
-				m_isDamaged = true;
-			}
-		}
-	}
-
-	if (false == pCamera->Culling_ToFrustum(m_pTransformCom, nullptr, fRadius))
-	{
-		if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
-			return -1;
-	}
 
 	if (FAILED(isHitScan()))
 		return E_FAIL;
@@ -100,16 +77,11 @@ _int CBrawler::Update_GameObject(const _float & fTimeDelta)
 
 _int CBrawler::LastUpdate_GameObject(const _float & fTimeDelta)
 {
-	// 첫번째 구체 체크
-	if (TRUE == m_Hit[0])
-		m_isDamaged = CInput_Device::GetInstance()->Is_MinDist(m_fDist[0]);
-	if (TRUE == m_Hit[1])
-	{
-		// 두번재 구체 체크 ( 첫번째 구체가 가장 짧은 거리가 아니라면. )
-		if(false == m_isDamaged)
-			m_isDamaged = CInput_Device::GetInstance()->Is_MinDist(m_fDist[1]);
-	}
-	m_pTransformCom->Update_Matrix();
+	if (1 == m_iStageNum)
+		CBrawler::LastUpdate_Stage_Field(fTimeDelta);
+	else if (2 == m_iStageNum)
+		CBrawler::LastUpdate_Stage_Airplane(fTimeDelta);
+
 
 	return _int();
 }
@@ -265,6 +237,73 @@ void CBrawler::Compute_PlayerDir()
 	m_vBrawlerLook = static_cast<_vec3>(m_pTransformCom->Get_WorldMatrix()->m[2]);
 	D3DXVec3Normalize(&m_vBrawlerLook, &m_vBrawlerLook);
 	m_fRadian = D3DXVec3Dot(&m_vBrawlerLook, &m_vPlayerDir);
+}
+
+_int CBrawler::Update_Stage_Field(const _float & fTimeDelta)
+{
+	CCamera_Target*	pCamera = (CCamera_Target*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Camera", 1);
+	if (nullptr == pCamera)
+		return -1;
+
+	_float fRadius = 15.f;
+
+	Update_HandMatrix();
+
+	if (false == m_isDamaged)
+	{
+		// 플레이어 - Search 컬라이더 충돌.
+		if (true == m_pColliderCom_Search->Collision_Sphere((const CCollider*)m_pPlayer[0]->Get_ComponentPointer(L"Com_Collider")))
+			m_isSearch = true;
+		else
+			m_isSearch = false;
+
+		// 칼 - 몬스터 Body 충돌.
+		for (size_t i = 1; i < 3; i++)
+		{
+			if (true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider0")) ||
+				true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider1")) ||
+				true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider2")) ||
+				true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider3")) ||
+				true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider4")))
+			{
+				m_isDamaged = true;
+			}
+		}
+	}
+
+	if (false == pCamera->Culling_ToFrustum(m_pTransformCom, nullptr, fRadius))
+	{
+		if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
+			return -1;
+	}
+
+	return _int();
+}
+
+_int CBrawler::LastUpdate_Stage_Field(const _float & fTimeDelta)
+{
+	// 첫번째 구체 체크
+	if (TRUE == m_Hit[0])
+		m_isDamaged = CInput_Device::GetInstance()->Is_MinDist(m_fDist[0]);
+	if (TRUE == m_Hit[1])
+	{
+		// 두번재 구체 체크 ( 첫번째 구체가 가장 짧은 거리가 아니라면. )
+		if (false == m_isDamaged)
+			m_isDamaged = CInput_Device::GetInstance()->Is_MinDist(m_fDist[1]);
+	}
+	m_pTransformCom->Update_Matrix();
+
+	return _int();
+}
+
+_int CBrawler::Update_Stage_Airplane(const _float & fTimeDelta)
+{
+	return _int();
+}
+
+_int CBrawler::LastUpdate_Stage_Airplane(const _float & fTimeDelta)
+{
+	return _int();
 }
 
 HRESULT CBrawler::isHitScan()

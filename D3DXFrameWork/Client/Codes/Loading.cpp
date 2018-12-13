@@ -6,6 +6,7 @@
 #include "Scene_Field.h"
 #include "Camera_Debug.h"
 #include "Camera_Cinematic.h"
+#include "Camera_Minigun.h"
 // GameObject
 #include "Terrain.h"
 #include "Player.h"
@@ -88,13 +89,13 @@ HRESULT CLoading::Loading_Stage_APT()
 	if (FAILED(Ready_Layer_Player(L"Layer_Player")))
 		return E_FAIL;
 	lstrcpy(m_szString, L"Layer_Camera...");
-	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Debug", L"Layer_Camera")))
+	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Debug", L"Layer_Camera",0.25f)))
 		return E_FAIL;
 
-	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Target", L"Layer_Camera")))
+	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Target", L"Layer_Camera", 0.25f)))
 		return E_FAIL;
 
-	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Cinematic", L"Layer_Camera")))
+	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Cinematic", L"Layer_Camera",0.25f)))
 		return E_FAIL;
 	SetUp_CameraMove();
 
@@ -150,13 +151,13 @@ HRESULT CLoading::Loading_Stage_FIELD()
 	if (FAILED(Ready_Layer_Player_FIELD(L"Layer_Player")))
 		return E_FAIL;
 	lstrcpy(m_szString, L"Layer_Camera...");
-	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Debug", L"Layer_Camera")))
+	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Debug", L"Layer_Camera", 0.25f)))
 		return E_FAIL;
 
-	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Target", L"Layer_Camera")))
+	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Target", L"Layer_Camera", 0.25f)))
 		return E_FAIL;
 
-	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Cinematic", L"Layer_Camera")))
+	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Cinematic", L"Layer_Camera", 0.25f)))
 		return E_FAIL;
 	SetUp_CameraMove();
 
@@ -195,27 +196,31 @@ HRESULT CLoading::Loading_Stage_AIRPLANE()
 	lstrcpy(m_szString, L"Layer_BackGround...");
 	if (FAILED(Ready_Layer_BackGround_AIRPLANE(L"Layer_BackGround")))
 		return E_FAIL;
-	lstrcpy(m_szString, L"Layer_Player...");
-	if (FAILED(Ready_Layer_Player_FIELD(L"Layer_Player")))
-		return E_FAIL;
+	//lstrcpy(m_szString, L"Layer_Player...");
+	//if (FAILED(Ready_Layer_Player_FIELD(L"Layer_Player")))
+	//	return E_FAIL;
 
 	lstrcpy(m_szString, L"Layer_Airplane...");
 	if (FAILED(Ready_AIRPLANE()))
 		return E_FAIL;
 
 	lstrcpy(m_szString, L"Layer_Camera...");
-	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Debug", L"Layer_Camera")))
+	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Debug", L"Layer_Camera", 0.25f)))
 		return E_FAIL;
 
-	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Target", L"Layer_Camera")))
+	lstrcpy(m_szString, L"Layer_Camera...");
+	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Minigun", L"Layer_Camera", 0.1f)))
 		return E_FAIL;
 
-	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Cinematic", L"Layer_Camera")))
-		return E_FAIL;
-	SetUp_CameraMove();
+	//if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Target", L"Layer_Camera")))
+	//	return E_FAIL;
+
+	//if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Cinematic", L"Layer_Camera")))
+	//	return E_FAIL;
+	//SetUp_CameraMove();
 
 	lstrcpy(m_szString, L"Layer_UI...");
-	if (FAILED(Ready_UI_SceneFIELD()))
+	if (FAILED(Ready_UI_SceneAIRPLANE()))
 		return E_FAIL;
 	/////////////////////
 
@@ -1041,6 +1046,10 @@ HRESULT CLoading::Ready_AIRPLANE()
 		return E_FAIL;
 
 
+	// For.Add_AirPlane
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Prop", SCENE_STAGE, L"Layer_Airplane_Field")))
+		return E_FAIL;
+
 	// For.Minigun
 	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(SCENE_STAGE, L"Component_Mesh_Minigun", CMesh_Dynamic::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/Helicopter/", L"MinigunFire.x"))))
 		return E_FAIL;
@@ -1049,6 +1058,20 @@ HRESULT CLoading::Ready_AIRPLANE()
 		return E_FAIL;
 	// For.Add_Minigun
 	if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Minigun", SCENE_STAGE, L"Layer_Minigun", nullptr)))
+		return E_FAIL;
+
+
+	return NOERROR;
+}
+
+HRESULT CLoading::Ready_UI_SceneAIRPLANE()
+{
+	//Prototype
+	// For.Prototype_UI_CrossHair
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_CrossHair", CUI_CrossHair::Create(Get_Graphic_Device()))))
+		return E_FAIL;
+	// For.Prototype_UI_HPBar
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_HPBar", CUI_HPBar::Create(Get_Graphic_Device()))))
 		return E_FAIL;
 
 
@@ -1258,7 +1281,7 @@ HRESULT CLoading::Ready_Stage_Prototype_GameObject_SceneFIELD()
 	return NOERROR;
 }
 
-HRESULT CLoading::Ready_Layer_Camera(const _tchar * pProtoName, const _tchar * pLayerTag)
+HRESULT CLoading::Ready_Layer_Camera(const _tchar * pProtoName, const _tchar * pLayerTag, const _float fNear)
 {
 	// For.Camera_Debug
 	CCamera*	pCamera = nullptr;
@@ -1274,7 +1297,7 @@ HRESULT CLoading::Ready_Layer_Camera(const _tchar * pProtoName, const _tchar * p
 	ZeroMemory(&ProjDesc, sizeof(PROJDESC));
 	ProjDesc.fFovy = D3DXToRadian(60.0f);
 	ProjDesc.fAspect = _float(g_iBackCX) / g_iBackCY;
-	ProjDesc.fNear = 0.3f;
+	ProjDesc.fNear = fNear;
 	ProjDesc.fFar = 500.f;
 
 	if (FAILED(pCamera->SetUp_CameraInfo(CamDesc, ProjDesc)))

@@ -73,11 +73,11 @@ protected:
 	HRESULT SetUp_ConstantTable(LPD3DXEFFECT pEffect);
 	void Compute_PlayerDir();
 protected:
-	virtual _int Update_Stage_Field(const _float& fTimeDelta) PURE;
-	virtual _int LastUpdate_Stage_Field(const _float& fTimeDelta) PURE;
+	virtual _int Update_Stage_Field(const _float& fTimeDelta);
+	virtual _int LastUpdate_Stage_Field(const _float& fTimeDelta);
 
-	virtual _int Update_Stage_Airplane(const _float& fTimeDelta) PURE;
-	virtual _int LastUpdate_Stage_Airplane(const _float& fTimeDelta) PURE;
+	virtual _int Update_Stage_Airplane(const _float& fTimeDelta);
+	virtual _int LastUpdate_Stage_Airplane(const _float& fTimeDelta);
 private:
 	LPD3DXMESH				m_pColliderMesh[2] = { nullptr, nullptr };
 	BOOL					m_Hit[2] = { FALSE };

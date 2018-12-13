@@ -180,6 +180,7 @@
     <ClInclude Include="..\Headers\Brawler_TPose.h" />
     <ClInclude Include="..\Headers\Camera_Cinematic.h" />
     <ClInclude Include="..\Headers\Camera_Debug.h" />
+    <ClInclude Include="..\Headers\Camera_Minigun.h" />
     <ClInclude Include="..\Headers\Camera_Target.h" />
     <ClInclude Include="..\Headers\Constant.h" />
     <ClInclude Include="..\Headers\Defines.h" />
@@ -225,6 +226,7 @@
     <ClCompile Include="..\Codes\Brawler_TPose.cpp" />
     <ClCompile Include="..\Codes\Camera_Cinematic.cpp" />
     <ClCompile Include="..\Codes\Camera_Debug.cpp" />
+    <ClCompile Include="..\Codes\Camera_Minigun.cpp" />
     <ClCompile Include="..\Codes\Camera_Target.cpp" />
     <ClCompile Include="..\Codes\Dog.cpp" />
     <ClCompile Include="..\Codes\DP_Gun.cpp" />

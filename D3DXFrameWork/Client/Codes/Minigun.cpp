@@ -32,9 +32,9 @@ HRESULT CMinigun::Ready_GameObject()
 	if (nullptr == m_pAirplane)
 		return E_FAIL;
 
-	//m_pHandMatrix[0] = m_pMeshCom->Get_FrameMatrixByName("L_Weapon01_Wpn_XW");
-	//if (nullptr == m_pHandMatrix[0])
-	//	return E_FAIL;
+	m_matRotationY = m_pMeshCom->Get_FrameMatrix("L_Misc02_XM");
+	if (nullptr == m_matRotationY)
+		return E_FAIL;
 	//m_pHandMatrix[1] = m_pMeshCom->Get_FrameMatrixByName("R_Weapon01_Wpn_XW");
 	//if (nullptr == m_pHandMatrix[1])
 	//	return E_FAIL;
@@ -52,8 +52,14 @@ HRESULT CMinigun::Ready_GameObject()
 
 _int CMinigun::Update_GameObject(const _float & fTimeDelta)
 {
+	//_matrix	matRotZ;
+	//D3DXMatrixRotationZ(&matRotZ, 180 * fTimeDelta);
 
+	//D3DXVec3TransformNormal((_vec3*)&m_matRotationY->m[0][0], (_vec3*)&m_matRotationY->m[0][0], &matRotZ);
+	//D3DXVec3TransformNormal((_vec3*)&m_matRotationY->m[1][0], (_vec3*)&m_matRotationY->m[1][0], &matRotZ);
+	//D3DXVec3TransformNormal((_vec3*)&m_matRotationY->m[2][0], (_vec3*)&m_matRotationY->m[2][0], &matRotZ);
 
+	//m_matRotationY = m_pMeshCom->Get_FrameMatrix("L_Misc02_XM");
 
 	//Update_HandMatrix();
 
@@ -221,14 +227,6 @@ CGameObject * CMinigun::Clone_GameObject()
 
 HRESULT CMinigun::Update_HandMatrix()
 {
-	if (nullptr == m_pHandMatrix[0] ||
-		nullptr == m_pHandMatrix[1] ||
-		nullptr == m_pRootMatrix)
-		return E_FAIL;
-
-	m_CombinedHandMatrix[0] = *m_pHandMatrix[0] * *m_pTransformCom->Get_WorldMatrix();
-	m_CombinedHandMatrix[1] = *m_pHandMatrix[1] * *m_pTransformCom->Get_WorldMatrix();
-	m_CombinedRootMatrix = *m_pRootMatrix * *m_pTransformCom->Get_WorldMatrix();
 
 	return NOERROR;
 }
