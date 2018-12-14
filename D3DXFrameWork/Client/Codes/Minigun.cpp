@@ -4,7 +4,7 @@
 #include "Light_Manager.h"
 #include "Object_Manager.h"
 #include "Airplane.h"
-
+#include "Input_Device.h"
 _USING(Client)
 
 CMinigun::CMinigun(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -32,15 +32,18 @@ HRESULT CMinigun::Ready_GameObject()
 	if (nullptr == m_pAirplane)
 		return E_FAIL;
 
-	m_matRotationY = m_pMeshCom->Get_FrameMatrix("L_Misc02_XM");
-	if (nullptr == m_matRotationY)
-		return E_FAIL;
-	//m_pHandMatrix[1] = m_pMeshCom->Get_FrameMatrixByName("R_Weapon01_Wpn_XW");
-	//if (nullptr == m_pHandMatrix[1])
+	m_fMouseSence = 8.1f;
+
+	//m_pBoneA = m_pMeshCom->Get_FrameMatrix("L_Misc02_XM");
+	//if (nullptr == m_pBoneA)
 	//	return E_FAIL;
-	//m_pRootMatrix = m_pMeshCom->Get_FrameMatrixByName("C_Root_Reference_XR");
-	//if (nullptr == m_pRootMatrix)
+	//m_pBoneB = m_pMeshCom->Get_FrameMatrix("L_Misc03_XM");
+	//if (nullptr == m_pBoneA)
 	//	return E_FAIL;
+	//m_pBoneC = m_pMeshCom->Get_FrameMatrix("L_Misc04_XM");
+	//if (nullptr == m_pBoneC)
+	//	return E_FAIL;
+
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(160, 100, 60));
 
 
@@ -52,18 +55,52 @@ HRESULT CMinigun::Ready_GameObject()
 
 _int CMinigun::Update_GameObject(const _float & fTimeDelta)
 {
-	_matrix	matRotZ;
-	D3DXMatrixRotationZ(&matRotZ, 180 * fTimeDelta);
+	//_matrix	matRotY;
+	//D3DXMatrixRotationY(&matRotY, 1 * fTimeDelta);
 
-	D3DXVec3TransformNormal((_vec3*)&m_matRotationY->m[0][0], (_vec3*)&m_matRotationY->m[0][0], &matRotZ);
-	D3DXVec3TransformNormal((_vec3*)&m_matRotationY->m[1][0], (_vec3*)&m_matRotationY->m[1][0], &matRotZ);
-	D3DXVec3TransformNormal((_vec3*)&m_matRotationY->m[2][0], (_vec3*)&m_matRotationY->m[2][0], &matRotZ);
+	//D3DXVec3TransformNormal((_vec3*)&m_pBoneA->m[0][0], (_vec3*)&m_pBoneA->m[0][0], &matRotY);
+	//D3DXVec3TransformNormal((_vec3*)&m_pBoneA->m[1][0], (_vec3*)&m_pBoneA->m[1][0], &matRotY);
+	//D3DXVec3TransformNormal((_vec3*)&m_pBoneA->m[2][0], (_vec3*)&m_pBoneA->m[2][0], &matRotY);
 
-	m_matRotationY = m_pMeshCom->Get_FrameMatrix("L_Misc02_XM");
+	if (m_dwMouseMove = CInput_Device::GetInstance()->Get_DIMouseMove(CInput_Device::DIMM_X))
+	{
+		if (m_dwMouseMove < 0)
+		{
+			if (m_dwMouseAcc[0] > -730)
+			{
+				m_dwMouseAcc[0] += m_dwMouseMove;
+				m_pTransformCom->RotationAxis(_vec3(0,1,0) ,D3DXToRadian(m_dwMouseMove * m_fMouseSence), fTimeDelta);
+			}
+		}
+		else
+		{
+			if (m_dwMouseAcc[0] < 553)
+			{
+				m_dwMouseAcc[0] += m_dwMouseMove;
+				m_pTransformCom->RotationAxis(_vec3(0, 1, 0), D3DXToRadian(m_dwMouseMove * m_fMouseSence), fTimeDelta);
+			}
+		}
+	}
 
-	//Update_HandMatrix();
-
-
+	if (m_dwMouseMove = CInput_Device::GetInstance()->Get_DIMouseMove(CInput_Device::DIMM_Y))
+	{
+		if (m_dwMouseMove < 0)
+		{
+			if (m_dwMouseAcc[1] > -400)
+			{
+				m_dwMouseAcc[1] += m_dwMouseMove;
+				m_pTransformCom->RotationAxis(*m_pTransformCom->Get_StateInfo(CTransform::STATE_RIGHT), D3DXToRadian(m_dwMouseMove * m_fMouseSence), fTimeDelta);
+			}
+		}
+		else
+		{
+			if (m_dwMouseAcc[1] < 580)
+			{
+				m_dwMouseAcc[1] += m_dwMouseMove;
+				m_pTransformCom->RotationAxis(*m_pTransformCom->Get_StateInfo(CTransform::STATE_RIGHT), D3DXToRadian(m_dwMouseMove * m_fMouseSence), fTimeDelta);
+			}
+		}
+	}
 
 
 
@@ -97,7 +134,7 @@ void CMinigun::Render_GameObject()
 		nullptr == m_pShaderCom)
 		return;
 
-	m_matRotationY = m_pMeshCom->Get_FrameMatrix("L_Misc02_XM");
+	//m_matRotationY = m_pMeshCom->Get_FrameMatrix("L_Misc02_XM");
 
 	LPD3DXEFFECT pEffect = m_pShaderCom->Get_EffectHandle();
 	if (nullptr == pEffect)

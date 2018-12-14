@@ -54,10 +54,10 @@ HRESULT CProp::Ready_GameObject()
 _int CProp::Update_GameObject(const _float & fTimeDelta)
 {
 	//cout << m_fAngle << endl;
-	if (GetKeyState('N') & 0x80)
-		m_fAngle += 10;
-	if (GetKeyState('M') & 0x80)
-		m_fAngle -= 10;
+	//if (GetKeyState('N') & 0x80)
+	//	m_fAngle += 10;
+	//if (GetKeyState('M') & 0x80)
+	//	m_fAngle -= 10;
 	m_pTransformCom->RotationY(D3DXToRadian(m_fAngle), fTimeDelta);
 
 
@@ -79,7 +79,7 @@ _int CProp::LastUpdate_GameObject(const _float & fTimeDelta)
 		m_pTransformCom->Set_ParentMatrix(*dynamic_cast<const CStatic_Airplane*>(m_pAirplane)->Get_WorldMatrix());
 	if(2 == m_iStage)
 		m_pTransformCom->Set_ParentMatrix(*dynamic_cast<const CAirplane*>(m_pAirplane)->Get_WorldMatrix());
-	_vec3 vTest = *m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION);
+
 	m_pTransformCom->Update_Matrix();
 
 

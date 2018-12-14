@@ -32,8 +32,10 @@ private: // For. Component
 	CNavigation*		m_pNavigationCom = nullptr;
 	CMesh_Dynamic*      m_pMeshCom = nullptr;
 
-	_matrix*            m_matRotationZ = nullptr;
-	_matrix*            m_matRotationY = nullptr;
+	_float				m_fMouseSence = 0.f;
+	_long				m_dwMouseMove = 0;
+	_long				m_dwMouseAcc[2] = { 0 };
+	_float				m_fTimeDelta = 0.f;
 private:
 	const CGameObject*	m_pAirplane = nullptr;
 private:

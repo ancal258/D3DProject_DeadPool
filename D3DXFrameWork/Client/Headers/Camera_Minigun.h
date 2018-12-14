@@ -30,9 +30,11 @@ public:
 public:
 	HRESULT SetUp_CameraInfo(CAMERADESC CamDesc, PROJDESC ProjDesc);
 private:
-	_float			m_fCamSpeed = 0.f;
 	CFrustum*		m_pFrustumCom = nullptr;
+private:
+	_float			m_fCamSpeed = 0.f;
 
+	_long			m_dwRotAcc[2] = { 0 };
 	_float			m_fOffsetX = 0.f;
 	_float			m_fOffsetY = 0.f;
 	_float			m_fOffsetZ = 0.f;

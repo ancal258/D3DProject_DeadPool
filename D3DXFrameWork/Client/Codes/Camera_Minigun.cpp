@@ -31,16 +31,21 @@ HRESULT CCamera_Minigun::Ready_GameObject()
 {
 	m_fCamSpeed = 10.f;
 	m_isCameraOn = true;
-	//if (FAILED(Ready_Component())) Layer_Minigun
-	//	return E_FAIL;
+
+	// For.Com_Frustum
+	m_pFrustumCom = (CFrustum*)CComponent_Manager::GetInstance()->Clone_Component(SCENE_STATIC, L"Component_Frustum");
+	if (nullptr == m_pFrustumCom)
+		return E_FAIL;
+	if (FAILED(Add_Component(L"Com_Frustum", m_pFrustumCom)))
+		return E_FAIL;
 
 	m_pPlayer = CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Minigun", 0);
 	if (nullptr == m_pPlayer)
 		return E_FAIL;
 
-	m_fOffsetX = 0.185f;
-	m_fOffsetY = 1.366f;
-	m_fOffsetZ = 0.091f;
+	m_fOffsetX = 0.143f;
+	m_fOffsetY = 1.4f;
+	m_fOffsetZ = 0.272f;
 
 	return NOERROR;
 }
@@ -63,60 +68,105 @@ _int CCamera_Minigun::Update_GameObject(const _float & fTimeDelta)
 	pt.y = ViewPort.Height * 0.5f;
 
 	ClientToScreen(g_hWnd, &pt);
+	SetCursorPos(pt.x, pt.y);
 
 
-	//SetCursorPos(pt.x, pt.y);
 
-	if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_W) & 0x8000)
-	{
-		m_fOffsetZ -= 0.001f;
-	}
-	if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_S) & 0x8000)
-	{
-		m_fOffsetZ += 0.001f;
-	}
-	if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_A) & 0x8000)
-	{
-		m_fOffsetX -= 0.001f;
-	}
-	if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_D) & 0x8000)
-	{
-		m_fOffsetX += 0.001f;
-	}
-	if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_Q) & 0x8000)
-	{
-		m_fOffsetY += 0.001f;
-	}
-	if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_E) & 0x8000)
-	{
-		m_fOffsetY -= 0.001f;
-	}
-
+	//if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_W) & 0x8000)
+	//{
+	//	m_fOffsetZ -= 0.001f;
+	//}
+	//if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_S) & 0x8000)
+	//{
+	//	m_fOffsetZ += 0.001f;
+	//}
+	//if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_A) & 0x8000)
+	//{
+	//	m_fOffsetX -= 0.001f;
+	//}
+	//if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_D) & 0x8000)
+	//{
+	//	m_fOffsetX += 0.001f;
+	//}
+	//if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_Q) & 0x8000)
+	//{
+	//	m_fOffsetY += 0.001f;
+	//}
+	//if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_E) & 0x8000)
+	//{
+	//	m_fOffsetY -= 0.001f;
+	//}
 
 	_long		MouseMove = 0;
 	_vec3		vLook = m_Camera_Desc.vAt - m_Camera_Desc.vEye;
 
 	if (MouseMove = Get_DIMouseMove(CInput_Device::DIMM_X))
 	{
-		_matrix		matRot;
-		D3DXMatrixRotationY(&matRot, D3DXToRadian(MouseMove * m_fCamSpeed) * fTimeDelta);
+		if (MouseMove < 0)
+		{
+			if (m_dwRotAcc[0] > -730)
+			{
+				m_dwRotAcc[0] += MouseMove;
 
-		D3DXVec3TransformNormal(&vLook, &vLook, &matRot);
+				_matrix		matRot;
+				D3DXMatrixRotationY(&matRot, D3DXToRadian(MouseMove * m_fCamSpeed) * fTimeDelta);
+				D3DXVec3TransformNormal(&vLook, &vLook, &matRot);
+				m_Camera_Desc.vAt = m_Camera_Desc.vEye + vLook;
+			}
+		}
+		else
+		{
+			if (m_dwRotAcc[0] < 553)
+			{
+				m_dwRotAcc[0] += MouseMove;
 
-		m_Camera_Desc.vAt = m_Camera_Desc.vEye + vLook;
+				_matrix		matRot;
+				D3DXMatrixRotationY(&matRot, D3DXToRadian(MouseMove * m_fCamSpeed) * fTimeDelta);
+				D3DXVec3TransformNormal(&vLook, &vLook, &matRot);
+				m_Camera_Desc.vAt = m_Camera_Desc.vEye + vLook;
+			}
+		}
+
 	}
-
+	// -400 + 580
 	if (MouseMove = Get_DIMouseMove(CInput_Device::DIMM_Y))
 	{
-		_vec3		vRight;
-		D3DXVec3Cross(&vRight, &m_Camera_Desc.vAxisY, &vLook);
+		if (MouseMove < 0)
+		{
+			if (m_dwRotAcc[1] > -400)
+			{
+				m_dwRotAcc[1] += MouseMove;
 
-		_matrix		matRot;
-		D3DXMatrixRotationAxis(&matRot, &vRight, D3DXToRadian(MouseMove * m_fCamSpeed) * fTimeDelta);
+				_vec3		vRight;
+				D3DXVec3Cross(&vRight, &m_Camera_Desc.vAxisY, &vLook);
 
-		D3DXVec3TransformNormal(&vLook, &vLook, &matRot);
+				_matrix		matRot;
+				D3DXMatrixRotationAxis(&matRot, &vRight, D3DXToRadian(MouseMove * m_fCamSpeed) * fTimeDelta);
 
-		m_Camera_Desc.vAt = m_Camera_Desc.vEye + vLook;
+				D3DXVec3TransformNormal(&vLook, &vLook, &matRot);
+
+				m_Camera_Desc.vAt = m_Camera_Desc.vEye + vLook;
+			}
+		}
+		else
+		{
+			if (m_dwRotAcc[1] < 580)
+			{
+				m_dwRotAcc[1] += MouseMove;
+
+				_vec3		vRight;
+				D3DXVec3Cross(&vRight, &m_Camera_Desc.vAxisY, &vLook);
+
+				_matrix		matRot;
+				D3DXMatrixRotationAxis(&matRot, &vRight, D3DXToRadian(MouseMove * m_fCamSpeed) * fTimeDelta);
+
+				D3DXVec3TransformNormal(&vLook, &vLook, &matRot);
+
+				m_Camera_Desc.vAt = m_Camera_Desc.vEye + vLook;
+			}
+		}
+
+
 	}
 	if (nullptr != m_pFrustumCom)
 		m_pFrustumCom->Update_Frustum(&m_matView, &m_matProj);
@@ -139,7 +189,11 @@ _int CCamera_Minigun::LastUpdate_GameObject(const _float & fTimeDelta)
 	m_Camera_Desc.vEye.y = vParentPos.y + m_fOffsetY;
 	m_Camera_Desc.vEye.z = vParentPos.z - m_fOffsetZ;
 	
-	cout << "X : " << m_fOffsetX << "Y : " << m_fOffsetY << "Z : " << m_fOffsetZ << endl;
+
+	if (nullptr != m_pFrustumCom)
+		m_pFrustumCom->Update_Frustum(&m_matView, &m_matProj);
+	//cout << "X : " << m_fOffsetX << "Y : " << m_fOffsetY << "Z : " << m_fOffsetZ << endl;
+	//cout << "At : (" << m_Camera_Desc.vAt.x << "," << m_Camera_Desc.vAt.y << "," << m_Camera_Desc.vAt.z << ")" << endl;
 
 	return _int();
 }
@@ -186,9 +240,13 @@ HRESULT CCamera_Minigun::Ready_Component()
 }
 
 HRESULT CCamera_Minigun::SetUp_CameraInfo(CAMERADESC CamDesc, PROJDESC ProjDesc)
-{
+{ 
+	CamDesc.vAt = _vec3(41.567f, 5.092f, 62.342f);
+
 	Set_CameraDesc(CamDesc);
 	Set_ProjectionDesc(ProjDesc);
+
+
 
 	SetUp_Matrix();
 

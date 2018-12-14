@@ -188,6 +188,7 @@
     <ClInclude Include="..\Headers\DP_Gun.h" />
     <ClInclude Include="..\Headers\DP_Sword.h" />
     <ClInclude Include="..\Headers\Effect.h" />
+    <ClInclude Include="..\Headers\Effect_Mesh.h" />
     <ClInclude Include="..\Headers\Event_Cube.h" />
     <ClInclude Include="..\Headers\Loading.h" />
     <ClInclude Include="..\Headers\MainApp.h" />
@@ -232,6 +233,7 @@
     <ClCompile Include="..\Codes\DP_Gun.cpp" />
     <ClCompile Include="..\Codes\DP_Sword.cpp" />
     <ClCompile Include="..\Codes\Effect.cpp" />
+    <ClCompile Include="..\Codes\Effect_Mesh.cpp" />
     <ClCompile Include="..\Codes\Event_Cube.cpp" />
     <ClCompile Include="..\Codes\Loading.cpp" />
     <ClCompile Include="..\Codes\MainApp.cpp" />

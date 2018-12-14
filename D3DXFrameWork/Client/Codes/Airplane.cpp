@@ -45,7 +45,7 @@ HRESULT CAirplane::Ready_GameObject()
 	if (FAILED(Ready_Component()))
 		return E_FAIL;
 	m_pTransformCom->Scaling(_vec3(0.01f, 0.01f, 0.01f));
-	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(10, 0, 10));
+	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(41.64, 5.5f, 46.22));
 	return NOERROR;
 }
 

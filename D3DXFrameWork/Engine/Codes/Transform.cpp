@@ -174,6 +174,16 @@ void CTransform::RotationZ(const _float & fAnglePerSec, const _float & fTimeDelt
 	D3DXVec3TransformNormal((_vec3*)&m_matWorld.m[STATE_LOOK][0], (_vec3*)&m_matWorld.m[STATE_LOOK][0], &matRotZ);
 }
 
+void CTransform::RotationAxis(const _vec3 vAxis, const _float & fRadianPerSec, const _float & fTimeDelta)
+{
+	_matrix		matRotAxis;
+	D3DXMatrixRotationAxis(&matRotAxis, &vAxis, fRadianPerSec* fTimeDelta);
+
+	D3DXVec3TransformNormal((_vec3*)&m_matWorld.m[STATE_RIGHT][0], (_vec3*)&m_matWorld.m[STATE_RIGHT][0], &matRotAxis);
+	D3DXVec3TransformNormal((_vec3*)&m_matWorld.m[STATE_UP][0], (_vec3*)&m_matWorld.m[STATE_UP][0], &matRotAxis);
+	D3DXVec3TransformNormal((_vec3*)&m_matWorld.m[STATE_LOOK][0], (_vec3*)&m_matWorld.m[STATE_LOOK][0], &matRotAxis);
+}
+
 // 0 : Look  || 1 : Up || 2 : Right
 void CTransform::Set_PlusPosition(_uint iType, _float & fValue)
 {

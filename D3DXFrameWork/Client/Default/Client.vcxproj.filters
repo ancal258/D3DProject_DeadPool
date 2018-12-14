@@ -181,6 +181,12 @@
     <Filter Include="02.GameObject\03.For.Public\Camera\Minigun">
       <UniqueIdentifier>{0aaa213f-a279-41e8-85ba-3f3062829a14}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh">
+      <UniqueIdentifier>{1bdee184-6a92-4b19-a1a8-712ecbc0ce06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\03.Effect\00.Effect_Texture">
+      <UniqueIdentifier>{070009b5-7b03-4210-ba0b-ebc5720b26b8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -236,9 +242,6 @@
     </ClInclude>
     <ClInclude Include="..\Headers\Scene_Stage.h">
       <Filter>01.Scene\02.Scene_Stage\00.Scene_APT</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Headers\Effect.h">
-      <Filter>02.GameObject\02.For.Stage\03.Effect</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Dog.h">
       <Filter>02.GameObject\02.For.Stage\04.Dog</Filter>
@@ -318,6 +321,12 @@
     <ClInclude Include="..\Headers\Camera_Minigun.h">
       <Filter>02.GameObject\03.For.Public\Camera\Minigun</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\Effect.h">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\00.Effect_Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Effect_Mesh.h">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -358,9 +367,6 @@
     </ClCompile>
     <ClCompile Include="..\Codes\Scene_Stage.cpp">
       <Filter>01.Scene\02.Scene_Stage\00.Scene_APT</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\Effect.cpp">
-      <Filter>02.GameObject\02.For.Stage\03.Effect</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Dog.cpp">
       <Filter>02.GameObject\02.For.Stage\04.Dog</Filter>
@@ -439,6 +445,12 @@
     </ClCompile>
     <ClCompile Include="..\Codes\Camera_Minigun.cpp">
       <Filter>02.GameObject\03.For.Public\Camera\Minigun</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Effect.cpp">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\00.Effect_Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Effect_Mesh.cpp">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

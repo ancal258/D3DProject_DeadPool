@@ -25,6 +25,9 @@
 #include "Minigun.h"
 #include "Prop.h"
 #include "Static_Airplane.h"
+
+//Effect
+#include "Effect_Mesh.h"
 // UI
 #include "UI_CrossHair.h"
 #include "UI_HPBar.h"
@@ -65,6 +68,8 @@ HRESULT CLoading::Ready_Loading(SCENEID eSceneID)
 
 	return NOERROR;
 }
+
+
 
 HRESULT CLoading::Loading_Stage_APT()
 {
@@ -112,6 +117,10 @@ HRESULT CLoading::Loading_Stage_APT()
 
 	//Dog
 	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Dog", SCENE_STAGE, L"Layer_Dog")))
+		return E_FAIL;
+
+	////TEST////
+	if (FAILED(Ready_Effect()))
 		return E_FAIL;
 
 	//for (size_t i = 0; i < 10; i++)
@@ -224,6 +233,8 @@ HRESULT CLoading::Loading_Stage_AIRPLANE()
 		return E_FAIL;
 	/////////////////////
 
+	if (FAILED(Load_Static_Object(L"../Bin/DataFiles/StaticObject_Airplane.dat")))
+		return E_FAIL;
 
 	/////////////////////
 
@@ -479,6 +490,30 @@ HRESULT CLoading::Ready_LightInfo_AIRPLANE()
 	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
 		return E_FAIL;
 
+	return NOERROR;
+}
+
+HRESULT CLoading::Ready_Effect()
+{
+	CComponent_Manager*		pComponent_Manager = CComponent_Manager::GetInstance();
+	if (nullptr == pComponent_Manager)
+		return E_FAIL;
+	pComponent_Manager->AddRef();
+	// For. Effect_Mesh
+
+	// For.Component_Mesh_Prop
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_EffectSwordHeavy03R", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/Effect/Sword/", L"Sword_Heavy_03R.x"))))
+		return E_FAIL;
+	// For.Prototype_EffectSwordHeavy03R
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_EffectSwordHeavy03R", CEffect_Mesh::Create(Get_Graphic_Device()))))
+		return E_FAIL;
+
+	// For.Add_EffectSwordHeavy03R
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_EffectSwordHeavy03R", SCENE_STAGE, L"Layer_MeshEffect")))
+		return E_FAIL;
+
+
+	Safe_Release(pComponent_Manager);
 	return NOERROR;
 }
 

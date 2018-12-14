@@ -31,12 +31,13 @@ public:
 
 	HRESULT Add_Object_Prototype(const _uint& iSceneID, const _tchar* pProtoTag, CGameObject* pPrototype);
 	HRESULT Add_Object(const _uint& iPSceneID, const _tchar* pProtoTag, const _uint& iSceneID, const _tchar* pLayerTag, CGameObject** ppGameObject = nullptr);
-
 public:
 	HRESULT Ready_Loading(SCENEID eSceneID);
+private: 
 	HRESULT Loading_Stage_APT();
 	HRESULT Loading_Stage_FIELD();
 	HRESULT Loading_Stage_AIRPLANE();
+	HRESULT Ready_Effect();
 	//HRESULT Loading_();
 private:
 	HRESULT Ready_LightInfo();

@@ -3,6 +3,9 @@ matrix		g_matWorld, g_matView, g_matProj;
 
 texture		g_DiffuseTexture;
 
+float		g_fU;
+float		g_fV;
+
 sampler DiffuseSampler = sampler_state
 {
 	texture = g_DiffuseTexture;
@@ -40,7 +43,7 @@ VS_OUT VS_MAIN(VS_IN In)
 	Out.vPosition = mul(vector(In.vPosition, 1.f), matWVP);
 	Out.vTexUV = In.vTexUV;
 
-	return Out;	 
+	return Out;
 }
 
 struct PS_IN // 픽셀의 정보를 담기위한 구조체.
@@ -56,11 +59,24 @@ struct PS_OUT
 
 PS_OUT PS_MAIN(PS_IN In)
 {
-	PS_OUT			Out = (PS_OUT)0;	
+	PS_OUT			Out = (PS_OUT)0;
 
 	vector		vDiffuse = tex2D(DiffuseSampler, In.vTexUV);
 
 	Out.vColor = vDiffuse;
+
+	return Out;
+}
+
+PS_OUT PS_MAIN_MESH(PS_IN In)
+{
+	PS_OUT			Out = (PS_OUT)0;
+
+	float2 fUV = float2(In.vTexUV.x + g_fU, In.vTexUV.y + g_fV);
+	vector		vDiffuse = tex2D(DiffuseSampler, fUV);
+
+	Out.vColor = vDiffuse;
+	Out.vColor.a = saturate(vDiffuse.r + vDiffuse.g + vDiffuse.b);
 
 	return Out;
 }
@@ -86,5 +102,24 @@ technique Default_Device
 
 		VertexShader = compile vs_3_0 VS_MAIN();
 		PixelShader = compile ps_3_0 PS_MAIN();
-	}		
+	}
+
+	pass MeshEffect_Rendering
+	{
+		cullmode = none;
+
+		//AlphaBlendEnable = true;
+		//SrcBlend = SrcAlpha;
+		//DestBlend = InvSrcAlpha;
+
+		AlphaTestEnable = true;
+		AlphaFunc = Greater;
+		AlphaRef = 10;
+
+
+		//ZWriteEnable = true;
+
+		VertexShader = compile vs_3_0 VS_MAIN();
+		PixelShader = compile ps_3_0 PS_MAIN_MESH();
+	}
 }

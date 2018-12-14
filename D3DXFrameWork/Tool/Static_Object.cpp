@@ -80,8 +80,8 @@ HRESULT CStatic_Object::Ready_GameObject()
 {
 	if (FAILED(Ready_Component()))
 		return E_FAIL;
-
-
+	//Set_Position(&_vec3(50, 0, 50));
+	m_isCol = true;
 	return NOERROR;
 }
 

@@ -28,7 +28,18 @@ _int CScene_Stage::Update_Scene(const _float & fTimeDelta)
 
 	if (pInput_Device->Get_DIKeyState(DIK_L) & 0x80)
 	{
-		CScene*		pNewScene = CScene_Loading::Create(Get_Graphic_Device(),SCENE_FIELD);
+		CScene*		pNewScene = CScene_Loading::Create(Get_Graphic_Device(), SCENE_FIELD);
+		if (nullptr == pNewScene)
+			return -1;
+
+		if (FAILED(CManagement::GetInstance()->SetUp_CurrentScene(pNewScene)))
+			return -1;
+		return 0;
+	}
+
+	if (pInput_Device->Get_DIKeyState(DIK_K) & 0x80)
+	{
+		CScene*		pNewScene = CScene_Loading::Create(Get_Graphic_Device(), SCENE_AIRPLANE);
 		if (nullptr == pNewScene)
 			return -1;
 

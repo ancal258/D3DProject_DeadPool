@@ -21,6 +21,7 @@ const _matrix * CMesh_Dynamic::Get_FrameMatrixByName(const char * pFrameName)
 	if (nullptr == pFrame)
 		return nullptr;
 
+	//Update_CombinedTransformationMatrix((D3DXFRAME_DERIVED*)pFrame, m_matPivot);
 	return &pFrame->CombinedTransformationMatrix;
 }
 
@@ -31,7 +32,7 @@ _matrix * CMesh_Dynamic::Get_FrameMatrix(const char * pFrameName)
 	if (nullptr == pFrame)
 		return nullptr;
 
-	return &pFrame->TransformationMatrix;
+	return &pFrame->CombinedTransformationMatrix;
 }
 
 HRESULT CMesh_Dynamic::Ready_Mesh(const _tchar * pFilePath, const _tchar * pFileName)

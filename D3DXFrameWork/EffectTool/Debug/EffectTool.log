@@ -1,7 +1,12 @@
-﻿  EffectToolView.cpp
-  코드를 생성하고 있습니다...
-  건너뛰고 있습니다... (관련된 변경 내용 없음)
-  ToolEffect.cpp
-  ToolBase.cpp
+﻿  건너뛰고 있습니다... (관련된 변경 내용 없음)
+  Page_ParticleEffect.cpp
+  Page_MeshEffect.cpp
+  Page_Effect.cpp
+  MainFrm.cpp
+  EffectToolView.cpp
+  EffectToolDoc.cpp
+  EffectTool.cpp
+  EffectSheet.cpp
+  EffectForm.cpp
   EffectTool.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\EffectTool\.\Bin\EffectTool.exe
   EffectTool.vcxproj -> .\Bin\EffectTool.pdb (Partial PDB)
