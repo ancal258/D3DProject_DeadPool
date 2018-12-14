@@ -52,14 +52,14 @@ HRESULT CMinigun::Ready_GameObject()
 
 _int CMinigun::Update_GameObject(const _float & fTimeDelta)
 {
-	//_matrix	matRotZ;
-	//D3DXMatrixRotationZ(&matRotZ, 180 * fTimeDelta);
+	_matrix	matRotZ;
+	D3DXMatrixRotationZ(&matRotZ, 180 * fTimeDelta);
 
-	//D3DXVec3TransformNormal((_vec3*)&m_matRotationY->m[0][0], (_vec3*)&m_matRotationY->m[0][0], &matRotZ);
-	//D3DXVec3TransformNormal((_vec3*)&m_matRotationY->m[1][0], (_vec3*)&m_matRotationY->m[1][0], &matRotZ);
-	//D3DXVec3TransformNormal((_vec3*)&m_matRotationY->m[2][0], (_vec3*)&m_matRotationY->m[2][0], &matRotZ);
+	D3DXVec3TransformNormal((_vec3*)&m_matRotationY->m[0][0], (_vec3*)&m_matRotationY->m[0][0], &matRotZ);
+	D3DXVec3TransformNormal((_vec3*)&m_matRotationY->m[1][0], (_vec3*)&m_matRotationY->m[1][0], &matRotZ);
+	D3DXVec3TransformNormal((_vec3*)&m_matRotationY->m[2][0], (_vec3*)&m_matRotationY->m[2][0], &matRotZ);
 
-	//m_matRotationY = m_pMeshCom->Get_FrameMatrix("L_Misc02_XM");
+	m_matRotationY = m_pMeshCom->Get_FrameMatrix("L_Misc02_XM");
 
 	//Update_HandMatrix();
 
@@ -97,7 +97,7 @@ void CMinigun::Render_GameObject()
 		nullptr == m_pShaderCom)
 		return;
 
-
+	m_matRotationY = m_pMeshCom->Get_FrameMatrix("L_Misc02_XM");
 
 	LPD3DXEFFECT pEffect = m_pShaderCom->Get_EffectHandle();
 	if (nullptr == pEffect)

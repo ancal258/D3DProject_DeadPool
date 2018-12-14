@@ -197,7 +197,7 @@ void CPlayer::Render_GameObject()
 
 	Safe_Release(pEffect);
 
-	//m_pNavigationCom->Render_Navigation();
+	m_pNavigationCom->Render_Navigation();
 
 	//m_pColliderCom->Render_Collider();
 

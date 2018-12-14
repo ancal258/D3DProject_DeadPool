@@ -132,10 +132,17 @@ void CPage_Navigation::OnBnClickedButton1() // Save
 		for (int i = 0; i < vecNavPoint.size(); i += 3)
 		{
 			_vec3 vPoint[3];
-
+			
 			vPoint[0] = vecNavPoint[i]->m_vWorldPosition;
 			vPoint[1] = vecNavPoint[i+1]->m_vWorldPosition;
 			vPoint[2] = vecNavPoint[i+2]->m_vWorldPosition;
+
+			for (size_t i = 0; i < 3; i++)
+			{
+				vPoint[i].x = (ceilf(vPoint[i].x * 1000)) / 1000;
+				vPoint[i].y = 0; // 1000;
+				vPoint[i].z = (ceilf(vPoint[i].z * 1000)) / 1000;
+			}
 
 			_vec3 vDir[2];
 			vDir[0] = vPoint[0] - vPoint[1];
@@ -144,7 +151,7 @@ void CPage_Navigation::OnBnClickedButton1() // Save
 			_vec3 vCross;
 			D3DXVec3Cross(&vCross, &vDir[0], &vDir[1]);
 
-			if (vCross.y > 0)
+			if (vCross.y >= 0)
 			{
 				_vec3 vTmp = vecNavPoint[i]->m_vWorldPosition;
 				vecNavPoint[i]->m_vWorldPosition = vecNavPoint[i + 2]->m_vWorldPosition;
@@ -153,6 +160,10 @@ void CPage_Navigation::OnBnClickedButton1() // Save
 		}
 		for (auto& vNavPoint : vecNavPoint)
 		{
+			vNavPoint->m_vWorldPosition.x = (ceilf(vNavPoint->m_vWorldPosition.x * 1000)) / 1000;
+			vNavPoint->m_vWorldPosition.y = 0;
+			vNavPoint->m_vWorldPosition.z = (ceilf(vNavPoint->m_vWorldPosition.z * 1000)) / 1000;
+
 			WriteFile(hFile, vNavPoint->m_vWorldPosition, sizeof(_vec3), &dwByte, nullptr);
 		}
 
