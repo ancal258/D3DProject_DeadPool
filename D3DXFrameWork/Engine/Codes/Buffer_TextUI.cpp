@@ -1,17 +1,17 @@
 #include "../Headers/Buffer_TextUI.h"
 
-CBuffer_TexUI::CBuffer_TexUI(LPDIRECT3DDEVICE9 pGraphic_Device)
+CBuffer_TextUI::CBuffer_TextUI(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CVIBuffer(pGraphic_Device)
 {
 }
 
-CBuffer_TexUI::CBuffer_TexUI(const CBuffer_TexUI & rhs)
+CBuffer_TextUI::CBuffer_TextUI(const CBuffer_TextUI & rhs)
 	: CVIBuffer(rhs)
 {
 
 }
 
-HRESULT CBuffer_TexUI::Ready_VIBuffer()
+HRESULT CBuffer_TextUI::Ready_VIBuffer()
 {
 	// For.Vertex Buffer
 	m_iStride = sizeof(VTXTEX);
@@ -62,7 +62,7 @@ HRESULT CBuffer_TexUI::Ready_VIBuffer()
 	return NOERROR;
 }
 
-void CBuffer_TexUI::Render_VIBuffer()
+void CBuffer_TextUI::Render_VIBuffer()
 {
 	LPDIRECT3DDEVICE9 pGraphic_Device = Get_Graphic_Device();
 	if (nullptr == pGraphic_Device)
@@ -78,25 +78,25 @@ void CBuffer_TexUI::Render_VIBuffer()
 	Safe_Release(pGraphic_Device);
 }
 
-CBuffer_TexUI * CBuffer_TexUI::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+CBuffer_TextUI * CBuffer_TextUI::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
-	CBuffer_TexUI*		pInstance = new CBuffer_TexUI(pGraphic_Device);
+	CBuffer_TextUI*		pInstance = new CBuffer_TextUI(pGraphic_Device);
 
 	if (FAILED(pInstance->Ready_VIBuffer()))
 	{
-		_MSG_BOX("CBuffer_TexUI Created Failed");
+		_MSG_BOX("CBuffer_TextUI Created Failed");
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
 
-CComponent * CBuffer_TexUI::Clone_Component()
+CComponent * CBuffer_TextUI::Clone_Component()
 {
-	return new CBuffer_TexUI(*this);
+	return new CBuffer_TextUI(*this);
 }
 
-void CBuffer_TexUI::Free()
+void CBuffer_TextUI::Free()
 {
 
 	CVIBuffer::Free();

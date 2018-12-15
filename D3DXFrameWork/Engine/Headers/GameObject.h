@@ -53,7 +53,7 @@ private:
 protected:
 	_bool						m_isLived = true; // 살았니? 죽었니?
 	_bool						m_isActive = true; // 활성화 되어있니? 안되어있니?
-
+	_int						m_iHP = 1;
 private:
 	CComponent* Find_Component(const _tchar* pComponentTag) const;
 

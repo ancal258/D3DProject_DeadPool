@@ -67,6 +67,19 @@ PS_OUT PS_MAIN(PS_IN In)
 	return Out;
 }
 
+PS_OUT PS_MAIN_BLACK(PS_IN In)
+{
+	PS_OUT			Out = (PS_OUT)0;
+
+	float2 vTexUV = In.vTexUV;
+
+	vTexUV.x = 1 - vTexUV.x;
+	vector		vDiffuse = tex2D(DiffuseSampler, vTexUV);
+	Out.vColor.rgba = vDiffuse.a;
+
+	return Out;
+}
+
 
 
 technique Default_Device
@@ -85,6 +98,21 @@ technique Default_Device
 
 		VertexShader = compile vs_3_0 VS_MAIN();
 		PixelShader = compile ps_3_0 PS_MAIN();
+	}
+	pass Black_Rendering
+	{
+		cullmode = cw;
+
+
+
+		AlphaTestEnable = true;
+		AlphaFunc = Greater;
+		AlphaRef = 100;
+
+		ZEnable = false;
+
+		VertexShader = compile vs_3_0 VS_MAIN();
+		PixelShader = compile ps_3_0 PS_MAIN_BLACK();
 	}
 
 }

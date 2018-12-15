@@ -1,0 +1,10 @@
+StaticUI_0 - inkStroke1
+StaticUI_1 - inkStroke2
+StaticUI_2 - inkStroke3
+StaticUI_3 - HalfoneCircle
+StaticUI_4 - WeaponSword
+StaticUI_5 - WeaponGun
+StaticUI_6 - WeaponMinigun
+StaticUI_7 - Heart
+StaticUI_8 - DeadPoolIcon
+StaticUI_9 - inkDrip

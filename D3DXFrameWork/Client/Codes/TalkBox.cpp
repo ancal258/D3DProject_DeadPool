@@ -24,7 +24,7 @@ void CTalkBox::Set_Info(_vec2 vPos, _tchar* pTalkString)
 	lstrcpy(m_szTalk, pTalkString);
 	m_iStrlen = lstrlen(m_szTalk);
 
-	m_fSizeX = 18 * m_iStrlen;
+	m_fSizeX = 17 * m_iStrlen;
 	m_fSizeY = 100;
 
 }
@@ -51,6 +51,7 @@ HRESULT CTalkBox::Ready_GameObject()
 
 _int CTalkBox::Update_GameObject(const _float & fTimeDelta)
 {
+
 	m_pTransformCom->Scaling(m_fSizeX, m_fSizeY, 1.f);
 
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(m_fX - (g_iBackCX >> 1)
@@ -65,6 +66,8 @@ _int CTalkBox::LastUpdate_GameObject(const _float & fTimeDelta)
 		return -1;
 
 	m_pTransformCom->Update_Matrix();
+
+
 
 	if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_UI, this)))
 		return -1;
@@ -98,7 +101,7 @@ void CTalkBox::Render_GameObject()
 
 	_matrix	   matTransform, matScale, matTranslate;
 	D3DXMatrixScaling(&matScale, 1.2f, 1.2f, 1.f);
-	D3DXMatrixTranslation(&matTranslate, m_fX/* - (m_fSizeX * 0.8f)*/ , m_fY - 15, 0.f);
+	D3DXMatrixTranslation(&matTranslate, m_fX  - 80 /*(m_fSizeX * 0.8f)*/ , m_fY - 70, 0.f);
 	matTransform = matScale * matTranslate;
 	CFont_Manager::GetInstance()->Render_Font(L"Font_Badaboom", m_szTalk, D3DXCOLOR(0.f, 0.f, 0.f, 1.f), &matTransform);
 	
@@ -125,7 +128,7 @@ HRESULT CTalkBox::Ready_Component()
 		return E_FAIL;
 
 	// For.Com_Buffer
-	m_pBufferCom = (CBuffer_RcTex*)pComponent_Manager->Clone_Component(SCENE_STATIC, L"Component_Buffer_RcTex");
+	m_pBufferCom = (CBuffer_TextUI*)pComponent_Manager->Clone_Component(SCENE_STATIC, L"Component_Buffer_TextUI");
 	if (FAILED(Add_Component(L"Com_Buffer", m_pBufferCom)))
 		return E_FAIL;
 
@@ -136,8 +139,12 @@ HRESULT CTalkBox::Ready_Component()
 
 	// For.Com_Texture
 	m_pTextureCom = (CTexture*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Texture_UI_TalkBox");
+	if(nullptr == m_pTextureCom)
+		m_pTextureCom = (CTexture*)pComponent_Manager->Clone_Component(SCENE_LOGO, L"Component_Texture_UI_TalkBox");
+
 	if (FAILED(Add_Component(L"Com_Texture", m_pTextureCom)))
 		return E_FAIL;
+	
 
 	Safe_Release(pComponent_Manager);
 

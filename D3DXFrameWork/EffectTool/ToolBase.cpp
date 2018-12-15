@@ -68,7 +68,7 @@ void CToolBase::Render_GameObject()
 
 
 	pEffect->Begin(nullptr, 0);
-	pEffect->BeginPass(1);
+	pEffect->BeginPass(2);
 
 	m_pBufferCom->Render_VIBuffer();
 
@@ -132,8 +132,11 @@ HRESULT CToolBase::SetUp_ConstantTable(LPD3DXEFFECT pEffect)
 
 	pEffect->SetMatrix("g_matView", &matView);
 	pEffect->SetMatrix("g_matProj", &matProj);
+	pEffect->SetFloat("g_fU", 1);
+	pEffect->SetFloat("g_fV", 1);
 
 	m_pTextureCom->SetUp_OnShader(pEffect, "g_DiffuseTexture", _uint(m_fFrame));
+
 
 
 	CTarget_Manager::GetInstance()->SetUp_OnShader(pEffect, "g_DepthTexture", L"Target_Depth");

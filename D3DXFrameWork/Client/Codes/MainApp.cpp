@@ -91,7 +91,7 @@ HRESULT CMainApp::Ready_Default_Setting(CGraphic_Device::WINMODE eMode, const _u
 		return E_FAIL;
 
 	// For.Font Badaboom BB
-	if (FAILED(CFont_Manager::GetInstance()->Add_Font(m_pGraphic_Device, L"Font_Badaboom", FW_LIGHT, L"Badaboom BB")))
+	if (FAILED(CFont_Manager::GetInstance()->Add_Font(m_pGraphic_Device, L"Font_Badaboom", FW_THIN, L"Badaboom BB")))
 		return E_FAIL;
 
 	// For.Font Comix Loud
@@ -100,6 +100,10 @@ HRESULT CMainApp::Ready_Default_Setting(CGraphic_Device::WINMODE eMode, const _u
 
 	// For.Font Comix Loud
 	if (FAILED(CFont_Manager::GetInstance()->Add_Font(m_pGraphic_Device, L"Font_HYGothic", FW_DONTCARE, L"HYGothic")))
+		return E_FAIL;
+
+	// For.Font Rix ´Ù¶÷Áã
+	if (FAILED(CFont_Manager::GetInstance()->Add_Font(m_pGraphic_Device, L"Font_Number", FW_DONTCARE, L"Rix´Ù¶÷Áã M")))
 		return E_FAIL;
 
 	//// For.Font Comix Loud
@@ -136,8 +140,8 @@ HRESULT CMainApp::Ready_Static_Component()
 		return E_FAIL;
 
 	// For.Component_Buffer_TextUI
-	//if (FAILED(pComponent_Manager->Add_Component(SCENE_STATIC, L"Component_Buffer_TextUI", CBuffer_TextUI::Create(m_pGraphic_Device))))
-	//	return E_FAIL;
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STATIC, L"Component_Buffer_TextUI", CBuffer_TextUI::Create(m_pGraphic_Device))))
+		return E_FAIL;
 
 	// For.Component_Buffer_RcCol
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STATIC, L"Component_Buffer_RcCol", CBuffer_RcCol::Create(m_pGraphic_Device))))

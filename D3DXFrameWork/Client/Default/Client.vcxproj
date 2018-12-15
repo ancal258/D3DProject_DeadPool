@@ -203,6 +203,7 @@
     <ClInclude Include="..\Headers\Scene_Logo.h" />
     <ClInclude Include="..\Headers\Scene_Stage.h" />
     <ClInclude Include="..\Headers\SkyDom.h" />
+    <ClInclude Include="..\Headers\StaticUI.h" />
     <ClInclude Include="..\Headers\Static_Airplane.h" />
     <ClInclude Include="..\Headers\Static_Object.h" />
     <ClInclude Include="..\Headers\TalkBox.h" />
@@ -250,6 +251,7 @@
     <ClCompile Include="..\Codes\Scene_Logo.cpp" />
     <ClCompile Include="..\Codes\Scene_Stage.cpp" />
     <ClCompile Include="..\Codes\SkyDom.cpp" />
+    <ClCompile Include="..\Codes\StaticUI.cpp" />
     <ClCompile Include="..\Codes\Static_Airplane.cpp" />
     <ClCompile Include="..\Codes\Static_Object.cpp" />
     <ClCompile Include="..\Codes\TalkBox.cpp" />

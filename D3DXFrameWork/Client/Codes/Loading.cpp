@@ -33,6 +33,7 @@
 #include "UI_CrossHair.h"
 #include "UI_HPBar.h"
 #include "TalkBox.h"
+#include "StaticUI.h"
 
 CLoading::CLoading(LPDIRECT3DDEVICE9 pGraphicDev)
 	:m_pGraphic_Device(pGraphicDev)
@@ -106,10 +107,6 @@ HRESULT CLoading::Loading_Stage_APT()
 		return E_FAIL;
 	SetUp_CameraMove();
 
-	lstrcpy(m_szString, L"Layer_StaticUI...");
-	if (FAILED(Ready_Static_Prototype_UI()))
-		return E_FAIL;
-
 	lstrcpy(m_szString, L"Layer_UI...");
 	if (FAILED(Ready_UI_SceneAPT()))
 		return E_FAIL;
@@ -126,26 +123,16 @@ HRESULT CLoading::Loading_Stage_APT()
 		return E_FAIL;
 
 	////TEST////
-	if (FAILED(Ready_Effect()))
-		return E_FAIL;
-
-
-	// For.Add_EffectSwordHeavy03R
-	CGameObject* pUI;
-	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_UI_TalkBox_White", SCENE_STAGE, L"Layer_UI", &pUI)))
-		return E_FAIL;
-	((CTalkBox*)pUI)->Set_Info(_vec2((g_iBackCX >> 1) - 200, 200), L"Hi my friend~");
-	 
-
-	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_UI_TalkBox_Orange", SCENE_STAGE, L"Layer_UI", &pUI)))
-		return E_FAIL;
-	((CTalkBox*)pUI)->Set_Info(_vec2((g_iBackCX >> 1) + 200, 400), L"fxxk your self");
-
-	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_UI_TalkBox_Orange", SCENE_STAGE, L"Layer_UI", &pUI)))
-		return E_FAIL;
-	((CTalkBox*)pUI)->Set_Info(_vec2((g_iBackCX >> 1) + 200, 600), L"This TalkBox has auto length function");
-
+	//if (FAILED(Ready_Effect()))
+	//	return E_FAIL;
 	////////////////
+
+	lstrcpy(m_szString, L"Layer_StaticUI...");
+	if (FAILED(Ready_Static_Prototype_UI()))
+		return E_FAIL;
+	if (FAILED(Ready_Static_Layer_UI()))
+		return E_FAIL;
+
 
 	//for (size_t i = 0; i < 10; i++)
 	//{
@@ -194,10 +181,6 @@ HRESULT CLoading::Loading_Stage_FIELD()
 		return E_FAIL;
 	SetUp_CameraMove();
 
-	lstrcpy(m_szString, L"Layer_StaticUI...");
-	if (FAILED(Ready_Static_Prototype_UI()))
-		return E_FAIL;
-
 	lstrcpy(m_szString, L"Layer_UI...");
 	if (FAILED(Ready_UI_SceneFIELD()))
 		return E_FAIL;
@@ -207,6 +190,12 @@ HRESULT CLoading::Loading_Stage_FIELD()
 		return E_FAIL;
 
 	if (FAILED(Load_Static_Object(L"../Bin/DataFiles/StaticObject_Field.dat")))
+		return E_FAIL;
+
+	lstrcpy(m_szString, L"Layer_StaticUI...");
+	if (FAILED(Ready_Static_Prototype_UI()))
+		return E_FAIL;
+	if (FAILED(Ready_Static_Layer_UI()))
 		return E_FAIL;
 
 	m_isFinish = true;
@@ -256,10 +245,6 @@ HRESULT CLoading::Loading_Stage_AIRPLANE()
 	//	return E_FAIL;
 	//SetUp_CameraMove();
 
-	lstrcpy(m_szString, L"Layer_StaticUI...");
-	if (FAILED(Ready_Static_Prototype_UI()))
-		return E_FAIL;
-
 	lstrcpy(m_szString, L"Layer_UI...");
 	if (FAILED(Ready_UI_SceneAIRPLANE()))
 		return E_FAIL;
@@ -268,7 +253,11 @@ HRESULT CLoading::Loading_Stage_AIRPLANE()
 	if (FAILED(Load_Static_Object(L"../Bin/DataFiles/StaticObject_Airplane.dat")))
 		return E_FAIL;
 
-	/////////////////////
+	lstrcpy(m_szString, L"Layer_StaticUI...");
+	if (FAILED(Ready_Static_Prototype_UI()))
+		return E_FAIL;
+	if (FAILED(Ready_Static_Layer_UI()))
+		return E_FAIL;
 
 
 	m_isFinish = true;
@@ -620,7 +609,11 @@ HRESULT CLoading::Ready_Static_Prototype_Component()
 		return E_FAIL;
 
 	// For.Component_Texture_UI_TalkBox
-	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_UI_TalkBox", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/UI/WhiteTalkBox_%d.tga",2))))
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_UI_TalkBox", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/UI/WhiteTalkBox_%d.tga", 2))))
+		return E_FAIL;
+
+	// For.Component_Texture_UI_StaticUI
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_UI_StaticUI", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/UI/BackUI/StaticUI_%d.tga", 10))))
 		return E_FAIL;
 
 	// For.Component_Buffer_Terrain	
@@ -660,6 +653,46 @@ HRESULT CLoading::Ready_Static_Prototype_UI()
 	// For.Prototype_UI_TalkBox_Orange
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_TalkBox_Orange", CTalkBox::Create(Get_Graphic_Device(), 1))))
 		return E_FAIL;
+	// For.Prototype_UI_StaticUI_inkStroke1
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_StaticUI_inkStroke1", CStaticUI::Create(Get_Graphic_Device(), 0))))
+		return E_FAIL;
+	// For.Prototype_UI_StaticUI_inkStroke2
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_StaticUI_inkStroke2", CStaticUI::Create(Get_Graphic_Device(), 1))))
+		return E_FAIL;
+	// For.Prototype_UI_StaticUI_inkStroke3
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_StaticUI_inkStroke3", CStaticUI::Create(Get_Graphic_Device(), 2))))
+		return E_FAIL;
+	// For.Prototype_UI_StaticUI_HalfoneCircle
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_StaticUI_HalfoneCircle", CStaticUI::Create(Get_Graphic_Device(), 3))))
+		return E_FAIL;
+	// For.Prototype_UI_StaticUI_WeaponSword
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_StaticUI_WeaponSword", CStaticUI::Create(Get_Graphic_Device(), 4))))
+		return E_FAIL;
+	// For.Prototype_UI_StaticUI_WeaponGun
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_StaticUI_WeaponGun", CStaticUI::Create(Get_Graphic_Device(), 5))))
+		return E_FAIL;
+	// For.Prototype_UI_StaticUI_WeaponMinigun
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_StaticUI_WeaponMinigun", CStaticUI::Create(Get_Graphic_Device(), 6))))
+		return E_FAIL;
+	// For.Prototype_UI_StaticUI_Heart
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_StaticUI_Heart", CStaticUI::Create(Get_Graphic_Device(), 7))))
+		return E_FAIL;
+	// For.Prototype_UI_StaticUI_DeadPoolIcon
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_StaticUI_DeadPoolIcon", CStaticUI::Create(Get_Graphic_Device(), 8))))
+		return E_FAIL;
+	// For.Prototype_UI_StaticUI_inkDrip
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_StaticUI_inkDrip", CStaticUI::Create(Get_Graphic_Device(), 9))))
+		return E_FAIL;
+
+	return NOERROR;
+}
+
+HRESULT CLoading::Ready_Static_Layer_UI()
+{
+	//CGameObject* pUI;
+	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_UI_StaticUI_inkStroke1", SCENE_STAGE, L"Layer_UI", &pUI)))
+	//	return E_FAIL;
+	//((CStaticUI*)pUI)->Set_Info(_vec2(100,100), _vec2(256,64));
 
 	return NOERROR;
 }

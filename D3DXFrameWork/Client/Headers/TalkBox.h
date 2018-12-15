@@ -6,7 +6,7 @@
 _BEGIN(Engine)
 class CTransform;
 class CRenderer;
-class CBuffer_RcTex;
+class CBuffer_TextUI;
 class CTexture;
 class CShader;
 _END
@@ -30,7 +30,7 @@ public:
 private:
 	CTransform*			m_pTransformCom = nullptr;
 	CRenderer*			m_pRendererCom = nullptr;
-	CBuffer_RcTex*		m_pBufferCom = nullptr;
+	CBuffer_TextUI*		m_pBufferCom = nullptr;
 	CTexture*			m_pTextureCom = nullptr;
 	CShader*			m_pShaderCom = nullptr;
 private:
@@ -39,6 +39,9 @@ private:
 	_tchar				m_szTalk[MAX_PATH] = { 0 };
 	_uint				m_iStrlen = 0;
 	_ulong				m_dwTextureIdx = 0;
+
+private:
+	_float				m_fTimeAcc = 0.f;
 private:
 	HRESULT Ready_Component();
 	HRESULT	SetUp_ConstantTable(LPD3DXEFFECT pEffect);

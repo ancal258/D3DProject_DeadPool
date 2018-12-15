@@ -49,7 +49,7 @@ HRESULT CBrawler01::Ready_GameObject()
 	if (nullptr != pHP_Bar)
 		dynamic_cast<CUI_HPBar*>(pHP_Bar)->Set_Position(this);
 
-	m_iIdleIndex = 0;
+	m_iIdleIndex = STATE_IDLE;
 	m_pMeshCom->RegistCallbackFunc(bind(&CBrawler::CallBackFinish, this));
 	m_pMeshCom->Set_AnimationSet(m_iIdleIndex);
 
@@ -112,16 +112,20 @@ _int CBrawler01::Update_Stage_Field(const _float & fTimeDelta)
 			// 몬스터의 Look과 Player와 몬스터의 방향벡터를 외적해서 좌측/우측 판단.
 			D3DXVec3Cross(&vCross, &m_vBrawlerLook, &m_vPlayerDir);
 			if (vCross.y >= 0)
-				m_pTransformCom->RotationY(D3DXToRadian(180.f), fTimeDelta);
+				m_pTransformCom->RotationY(D3DXToRadian(360.f), fTimeDelta);
 			else
-				m_pTransformCom->RotationY(D3DXToRadian(-180.f), fTimeDelta);
+				m_pTransformCom->RotationY(D3DXToRadian(-360.f), fTimeDelta);
 		}
 		if (m_fLength > 2.f)
 		{
-			m_pTransformCom->Go_Straight(2, fTimeDelta);
-			m_iCurrentIndex = STATE_WALK_F;
+			m_pTransformCom->Go_Straight(4.2f, fTimeDelta);
+			m_iCurrentIndex = STATE_RUN_F;
 		}
+		else
+			m_iCurrentIndex = STATE_IDLE;
 	}
+	else
+		m_iCurrentIndex = STATE_IDLE;
 
 	return _int();
 }

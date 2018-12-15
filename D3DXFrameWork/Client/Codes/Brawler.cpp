@@ -64,6 +64,7 @@ _int CBrawler::Update_GameObject(const _float & fTimeDelta)
 	if (nullptr == m_pRendererCom)
 		return -1;
 
+
 	if (1 == m_iStageNum)
 		CBrawler::Update_Stage_Field(fTimeDelta);
 	else if (2 == m_iStageNum)
@@ -122,7 +123,10 @@ void CBrawler::CallBackFinish()
 {
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &(_vec3)m_CombinedRootMatrix.m[3]);
 	m_pTransformCom->Update_Matrix();
-	m_isDamaged = false;
+	//STATE_DEATH_F, STATE_DEATH_L, STATE_DEATH_LL, STATE_DEATH_R,STATE_DEATH_RL
+	if(4 <= m_iCurrentIndex && m_iCurrentIndex <= 8)
+		m_isDamaged = false;
+
 	m_iCurrentIndex = m_iIdleIndex;
 	m_pMeshCom->Set_AnimationSet(m_iIdleIndex);
 	
@@ -165,7 +169,7 @@ HRESULT CBrawler::Ready_Component()
 	m_pColliderCom_Search = (CCollider*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Collider_Sphere");
 	if (FAILED(Add_Component(L"Com_Collider_Search", m_pColliderCom_Search)))
 		return E_FAIL;
-	m_pColliderCom_Search->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(700, 700, 700), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f, 70.f, 0.f));
+	m_pColliderCom_Search->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(1200, 1200, 1200), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f, 70.f, 0.f));
 	
 	m_pColliderCom_Head = (CCollider*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Collider_Sphere");
 	if (FAILED(Add_Component(L"Com_Collider_Head", m_pColliderCom_Head)))

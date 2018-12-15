@@ -196,6 +196,12 @@
     <Filter Include="02.GameObject\00.For.Static\03.UI\TalkBox">
       <UniqueIdentifier>{c71bb4a8-020f-4623-89f8-3198055f5a86}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\00.For.Static\03.UI\StaticUI">
+      <UniqueIdentifier>{6fd592b9-c131-4f36-a4e5-3c7020874966}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\00.For.Static\03.UI\DynamicUI">
+      <UniqueIdentifier>{54d84d41-f200-4356-8d88-4d94d1c827a3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -342,6 +348,9 @@
     <ClInclude Include="..\Headers\TalkBox.h">
       <Filter>02.GameObject\00.For.Static\03.UI\TalkBox</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\StaticUI.h">
+      <Filter>02.GameObject\00.For.Static\03.UI\StaticUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -472,6 +481,9 @@
     </ClCompile>
     <ClCompile Include="..\Codes\TalkBox.cpp">
       <Filter>02.GameObject\00.For.Static\03.UI\TalkBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\StaticUI.cpp">
+      <Filter>02.GameObject\00.For.Static\03.UI\StaticUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

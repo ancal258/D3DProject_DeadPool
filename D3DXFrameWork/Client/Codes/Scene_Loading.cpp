@@ -8,6 +8,7 @@
 #include "Management.h"
 #include "Loading.h"
 #include "Font_Manager.h"
+#include "TalkBox.h"
 
 // UI
 #include "UI_Test.h"
@@ -69,6 +70,21 @@ HRESULT CScene_Loading::Ready_Scene(_uint iSceneNum)
 
 	if (FAILED(Ready_Layer_BackGround(L"Layer_BackGround")))
 		return E_FAIL;
+
+	CGameObject* pUI;
+	if (FAILED(Add_Object(SCENE_LOGO, L"Prototype_UI_TalkBox_White", SCENE_LOGO, L"Layer_UI", &pUI)))
+		return E_FAIL;
+	((CTalkBox*)pUI)->Set_Info(_vec2((g_iBackCX >> 1) - 200, 200), L"Hi my friend~  ");
+
+
+	if (FAILED(Add_Object(SCENE_LOGO, L"Prototype_UI_TalkBox_Orange", SCENE_LOGO, L"Layer_UI", &pUI)))
+		return E_FAIL;
+	((CTalkBox*)pUI)->Set_Info(_vec2((g_iBackCX >> 1), 400), L"1234 5678 90aa.  ");
+
+	if (FAILED(Add_Object(SCENE_LOGO, L"Prototype_UI_TalkBox_Orange", SCENE_LOGO, L"Layer_UI", &pUI)))
+		return E_FAIL;
+	((CTalkBox*)pUI)->Set_Info(_vec2((g_iBackCX >> 1) - 200, 600), L"This TalkBox has auto length function. ");
+
 
 
 	m_iSceneNum = iSceneNum;
@@ -143,15 +159,10 @@ void CScene_Loading::Render_Scene()
 		D3DXMatrixScaling(&matScale, 1.f, 1.f, 2.f);
 		D3DXMatrixTranslation(&matTranslate, 100, (g_iBackCY)-50, 0.f);
 		matTransform = matScale * matTranslate;
-		CFont_Manager::GetInstance()->Render_Font(L"Font_Badaboom", szLoading, D3DXCOLOR(1.f, 1.f, 1.f, 1.f), &matTransform);
+		CFont_Manager::GetInstance()->Render_Font(L"Font_Number", szLoading, D3DXCOLOR(1.f, 1.f, 1.f, 1.f), &matTransform);
 	}
-	//{
-	//	_matrix	   matTransform, matScale, matTranslate;
-	//	D3DXMatrixScaling(&matScale, 1.f, 1.f, 2.f);
-	//	D3DXMatrixTranslation(&matTranslate, 100, (g_iBackCY) - 100, 0.f);
-	//	matTransform = matScale * matTranslate;
-	//	CFont_Manager::GetInstance()->Render_Font(L"Font_Badaboom", L"I want to Fight with my sword and gun Fucking Duck!", D3DXCOLOR(1.f, 1.f, 1.f, 1.f), &matTransform);
-	//}
+
+
 
 }
 
@@ -173,6 +184,9 @@ HRESULT CScene_Loading::Ready_Logo_Prototype_Component()
 	// For.Component_Texture_Filter
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_LOGO, L"Component_Texture_UI_Test", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/UI/Test.tga"))))
 		return E_FAIL;
+	// For.Component_Texture_UI_TalkBox
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_LOGO, L"Component_Texture_UI_TalkBox", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/UI/WhiteTalkBox_%d.tga", 2))))
+		return E_FAIL;
 	Safe_Release(pComponent_Manager);
 
 	return NOERROR;
@@ -185,6 +199,13 @@ HRESULT CScene_Loading::Ready_Logo_Prototype_GameObject()
 		return E_FAIL;
 	// For.GameObject_BackLogo
 	if (FAILED(Add_Object_Prototype(SCENE_LOGO, L"GameObject_UI_Test", CUI_Test::Create(Get_Graphic_Device()))))
+		return E_FAIL;
+
+	// For.Prototype_UI_TalkBox_White
+	if (FAILED(Add_Object_Prototype(SCENE_LOGO, L"Prototype_UI_TalkBox_White", CTalkBox::Create(Get_Graphic_Device(), 0))))
+		return E_FAIL;
+	// For.Prototype_UI_TalkBox_Orange
+	if (FAILED(Add_Object_Prototype(SCENE_LOGO, L"Prototype_UI_TalkBox_Orange", CTalkBox::Create(Get_Graphic_Device(), 1))))
 		return E_FAIL;
 
 	return NOERROR;

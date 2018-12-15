@@ -57,6 +57,7 @@ protected: // For. Animation
 	_uint				m_iCurrentIndex = 0;
 protected: // For. AttackCheck
 	_bool			m_isDamaged = false;
+	_bool			m_isLastDamaged = false;
 	_bool			m_isSearch = false;
 	_vec3			m_vPlayerDir;
 	_vec3			m_vBrawlerLook;
