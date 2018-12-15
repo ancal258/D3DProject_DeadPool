@@ -28,9 +28,11 @@
 
 //Effect
 #include "Effect_Mesh.h"
+#include "Effect_RectParticle.h"
 // UI
 #include "UI_CrossHair.h"
 #include "UI_HPBar.h"
+#include "TalkBox.h"
 
 CLoading::CLoading(LPDIRECT3DDEVICE9 pGraphicDev)
 	:m_pGraphic_Device(pGraphicDev)
@@ -104,6 +106,10 @@ HRESULT CLoading::Loading_Stage_APT()
 		return E_FAIL;
 	SetUp_CameraMove();
 
+	lstrcpy(m_szString, L"Layer_StaticUI...");
+	if (FAILED(Ready_Static_Prototype_UI()))
+		return E_FAIL;
+
 	lstrcpy(m_szString, L"Layer_UI...");
 	if (FAILED(Ready_UI_SceneAPT()))
 		return E_FAIL;
@@ -122,6 +128,24 @@ HRESULT CLoading::Loading_Stage_APT()
 	////TEST////
 	if (FAILED(Ready_Effect()))
 		return E_FAIL;
+
+
+	// For.Add_EffectSwordHeavy03R
+	CGameObject* pUI;
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_UI_TalkBox_White", SCENE_STAGE, L"Layer_UI", &pUI)))
+		return E_FAIL;
+	((CTalkBox*)pUI)->Set_Info(_vec2((g_iBackCX >> 1) - 200, 200), L"Hi my friend~");
+	 
+
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_UI_TalkBox_Orange", SCENE_STAGE, L"Layer_UI", &pUI)))
+		return E_FAIL;
+	((CTalkBox*)pUI)->Set_Info(_vec2((g_iBackCX >> 1) + 200, 400), L"fxxk your self");
+
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_UI_TalkBox_Orange", SCENE_STAGE, L"Layer_UI", &pUI)))
+		return E_FAIL;
+	((CTalkBox*)pUI)->Set_Info(_vec2((g_iBackCX >> 1) + 200, 600), L"This TalkBox has auto length function");
+
+	////////////////
 
 	//for (size_t i = 0; i < 10; i++)
 	//{
@@ -169,6 +193,10 @@ HRESULT CLoading::Loading_Stage_FIELD()
 	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Cinematic", L"Layer_Camera", 0.25f)))
 		return E_FAIL;
 	SetUp_CameraMove();
+
+	lstrcpy(m_szString, L"Layer_StaticUI...");
+	if (FAILED(Ready_Static_Prototype_UI()))
+		return E_FAIL;
 
 	lstrcpy(m_szString, L"Layer_UI...");
 	if (FAILED(Ready_UI_SceneFIELD()))
@@ -227,6 +255,10 @@ HRESULT CLoading::Loading_Stage_AIRPLANE()
 	//if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Cinematic", L"Layer_Camera")))
 	//	return E_FAIL;
 	//SetUp_CameraMove();
+
+	lstrcpy(m_szString, L"Layer_StaticUI...");
+	if (FAILED(Ready_Static_Prototype_UI()))
+		return E_FAIL;
 
 	lstrcpy(m_szString, L"Layer_UI...");
 	if (FAILED(Ready_UI_SceneAIRPLANE()))
@@ -501,7 +533,7 @@ HRESULT CLoading::Ready_Effect()
 	pComponent_Manager->AddRef();
 	// For. Effect_Mesh
 
-	// For.Component_Mesh_Prop
+	// For.Component_Mesh_EffectSwordHeavy03R
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_EffectSwordHeavy03R", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/Effect/Sword/", L"Sword_Heavy_03R.x"))))
 		return E_FAIL;
 	// For.Prototype_EffectSwordHeavy03R
@@ -512,6 +544,25 @@ HRESULT CLoading::Ready_Effect()
 	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_EffectSwordHeavy03R", SCENE_STAGE, L"Layer_MeshEffect")))
 		return E_FAIL;
 
+
+
+	// For. Particle
+
+	// For.Component_Texture_Blood
+	lstrcpy(m_szString, L"../Bin/Resources/Textures/Effect/Blood/blood_4x4_1_subUV_%d.png");
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_Blood", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, m_szString, 16))))
+		return E_FAIL;
+	// For.Prototype_EffectRectParticle
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_EffectRectParticle", CEffect_RectParticle::Create(Get_Graphic_Device()))))
+		return E_FAIL;
+
+	for (size_t i = 0; i < 10; i++)
+	{
+		if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_EffectRectParticle", SCENE_STAGE, L"Layer_ParticleEffect")))
+			return E_FAIL;
+	}
+	// For.Add_EffectRectParticle
+	
 
 	Safe_Release(pComponent_Manager);
 	return NOERROR;
@@ -568,6 +619,10 @@ HRESULT CLoading::Ready_Static_Prototype_Component()
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_UI_CrossHair", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/UI/CrossHair.png"))))
 		return E_FAIL;
 
+	// For.Component_Texture_UI_TalkBox
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_UI_TalkBox", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/UI/WhiteTalkBox_%d.tga",2))))
+		return E_FAIL;
+
 	// For.Component_Buffer_Terrain	
 	lstrcpy(m_szString, L"../Bin/Resources/Textures/Terrain/Height.bmp");
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Buffer_Terrain", CBuffer_Terrain::Create(Get_Graphic_Device(), m_szString, 1.f))))
@@ -593,6 +648,18 @@ HRESULT CLoading::Ready_Static_Prototype_Component()
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Picking", CPicking::Create(Get_Graphic_Device()))))
 		return E_FAIL;
 	Safe_Release(pComponent_Manager);
+
+	return NOERROR;
+}
+
+HRESULT CLoading::Ready_Static_Prototype_UI()
+{
+	// For.Prototype_UI_TalkBox_White
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_TalkBox_White", CTalkBox::Create(Get_Graphic_Device(), 0))))
+		return E_FAIL;
+	// For.Prototype_UI_TalkBox_Orange
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_TalkBox_Orange", CTalkBox::Create(Get_Graphic_Device(), 1))))
+		return E_FAIL;
 
 	return NOERROR;
 }

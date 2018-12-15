@@ -110,6 +110,12 @@
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
+    <FxCompile>
+      <ShaderType>Effect</ShaderType>
+    </FxCompile>
+    <FxCompile>
+      <ShaderModel>2.0</ShaderModel>
+    </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -195,6 +201,8 @@
     <ClInclude Include="EffectTool.h" />
     <ClInclude Include="EffectToolDoc.h" />
     <ClInclude Include="EffectToolView.h" />
+    <ClInclude Include="Effect_Mesh.h" />
+    <ClInclude Include="Effect_RectParticle.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Page_Effect.h" />
     <ClInclude Include="Page_MeshEffect.h" />
@@ -212,6 +220,8 @@
     <ClCompile Include="EffectTool.cpp" />
     <ClCompile Include="EffectToolDoc.cpp" />
     <ClCompile Include="EffectToolView.cpp" />
+    <ClCompile Include="Effect_Mesh.cpp" />
+    <ClCompile Include="Effect_RectParticle.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="Page_Effect.cpp" />
     <ClCompile Include="Page_MeshEffect.cpp" />
@@ -236,6 +246,12 @@
     <Image Include="res\EffectTool.ico" />
     <Image Include="res\EffectToolDoc.ico" />
     <Image Include="res\Toolbar.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Bin\ShaderFiles\Shader_Collider.fx" />
+    <FxCompile Include="Bin\ShaderFiles\Shader_Effect.fx" />
+    <FxCompile Include="Bin\ShaderFiles\Shader_Mesh.fx" />
+    <FxCompile Include="Bin\ShaderFiles\Shader_Prop.fx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

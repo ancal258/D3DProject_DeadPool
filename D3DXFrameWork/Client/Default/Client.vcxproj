@@ -90,7 +90,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>Create</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -125,7 +125,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>Create</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -189,6 +189,7 @@
     <ClInclude Include="..\Headers\DP_Sword.h" />
     <ClInclude Include="..\Headers\Effect.h" />
     <ClInclude Include="..\Headers\Effect_Mesh.h" />
+    <ClInclude Include="..\Headers\Effect_RectParticle.h" />
     <ClInclude Include="..\Headers\Event_Cube.h" />
     <ClInclude Include="..\Headers\Loading.h" />
     <ClInclude Include="..\Headers\MainApp.h" />
@@ -204,6 +205,7 @@
     <ClInclude Include="..\Headers\SkyDom.h" />
     <ClInclude Include="..\Headers\Static_Airplane.h" />
     <ClInclude Include="..\Headers\Static_Object.h" />
+    <ClInclude Include="..\Headers\TalkBox.h" />
     <ClInclude Include="..\Headers\Terrain.h" />
     <ClInclude Include="..\Headers\Test.h" />
     <ClInclude Include="..\Headers\UI_CrossHair.h" />
@@ -234,6 +236,7 @@
     <ClCompile Include="..\Codes\DP_Sword.cpp" />
     <ClCompile Include="..\Codes\Effect.cpp" />
     <ClCompile Include="..\Codes\Effect_Mesh.cpp" />
+    <ClCompile Include="..\Codes\Effect_RectParticle.cpp" />
     <ClCompile Include="..\Codes\Event_Cube.cpp" />
     <ClCompile Include="..\Codes\Loading.cpp" />
     <ClCompile Include="..\Codes\MainApp.cpp" />
@@ -249,6 +252,7 @@
     <ClCompile Include="..\Codes\SkyDom.cpp" />
     <ClCompile Include="..\Codes\Static_Airplane.cpp" />
     <ClCompile Include="..\Codes\Static_Object.cpp" />
+    <ClCompile Include="..\Codes\TalkBox.cpp" />
     <ClCompile Include="..\Codes\Terrain.cpp" />
     <ClCompile Include="..\Codes\Test.cpp" />
     <ClCompile Include="..\Codes\UI_CrossHair.cpp" />

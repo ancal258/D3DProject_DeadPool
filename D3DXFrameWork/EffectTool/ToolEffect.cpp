@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "ToolEffect.h"
 #include "Component_Manager.h"
-
+#include "Target_Manager.h"
 
 
 CToolEffect::CToolEffect(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -157,6 +157,7 @@ HRESULT CToolEffect::SetUp_ConstantTable(LPD3DXEFFECT pEffect)
 	m_pTextureCom->SetUp_OnShader(pEffect, "g_DiffuseTexture", _uint(m_fFrame));
 
 
+	CTarget_Manager::GetInstance()->SetUp_OnShader(pEffect, "g_DepthTexture", L"Target_Depth");
 
 	Safe_Release(pEffect);
 

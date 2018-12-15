@@ -74,7 +74,7 @@ void CEffect_Mesh::Render_GameObject()
 		return;
 
 	pEffect->Begin(nullptr, 0);
-	pEffect->BeginPass(1);
+	pEffect->BeginPass(2);
 
 	m_pMeshCom->Render_Mesh(pEffect);
 

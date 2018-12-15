@@ -86,8 +86,29 @@ HRESULT CMainApp::Ready_Default_Setting(CGraphic_Device::WINMODE eMode, const _u
 	if (FAILED(CInput_Device::GetInstance()->Ready_Input_Device(g_hInst, g_hWnd)))
 		return E_FAIL;
 
-	// For.Font
-	if(FAILED(CFont_Manager::GetInstance()->Add_Font(m_pGraphic_Device, L"Font_Magic", FW_HEAVY,L" ÈÞ¸Õ¸ÅÁ÷Ã¼")))
+	// For.Font Magic
+	if (FAILED(CFont_Manager::GetInstance()->Add_Font(m_pGraphic_Device, L"Font_Magic", FW_HEAVY, L"ÈÞ¸Õ¸ÅÁ÷Ã¼")))
+		return E_FAIL;
+
+	// For.Font Badaboom BB
+	if (FAILED(CFont_Manager::GetInstance()->Add_Font(m_pGraphic_Device, L"Font_Badaboom", FW_LIGHT, L"Badaboom BB")))
+		return E_FAIL;
+
+	// For.Font Comix Loud
+	if (FAILED(CFont_Manager::GetInstance()->Add_Font(m_pGraphic_Device, L"Font_Comix", FW_LIGHT, L"Comix Loud")))
+		return E_FAIL;
+
+	// For.Font Comix Loud
+	if (FAILED(CFont_Manager::GetInstance()->Add_Font(m_pGraphic_Device, L"Font_HYGothic", FW_DONTCARE, L"HYGothic")))
+		return E_FAIL;
+
+	//// For.Font Comix Loud
+	//if (FAILED(CFont_Manager::GetInstance()->Add_Font(m_pGraphic_Device, L"Font_NotoBB", FW_THIN, L"Noto Sans CJK KR")))
+	//	return E_FAIL;
+
+	//// For.Font Comix Loud
+	//if (FAILED(CFont_Manager::GetInstance()->Add_Font(m_pGraphic_Device, L"Font_NotoBB", FW_THIN, L"Noto Sans CJK KR")))
+	//	return E_FAIL;
 	
 	// For.Management
 	if (nullptr == m_pManagement)
@@ -113,6 +134,10 @@ HRESULT CMainApp::Ready_Static_Component()
 	// For.Component_Buffer_RcTex
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STATIC, L"Component_Buffer_RcTex", CBuffer_RcTex::Create(m_pGraphic_Device))))
 		return E_FAIL;
+
+	// For.Component_Buffer_TextUI
+	//if (FAILED(pComponent_Manager->Add_Component(SCENE_STATIC, L"Component_Buffer_TextUI", CBuffer_TextUI::Create(m_pGraphic_Device))))
+	//	return E_FAIL;
 
 	// For.Component_Buffer_RcCol
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STATIC, L"Component_Buffer_RcCol", CBuffer_RcCol::Create(m_pGraphic_Device))))

@@ -90,8 +90,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;ENGINE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -125,8 +124,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -171,6 +169,7 @@
     <ClInclude Include="..\Headers\Buffer_RcCol.h" />
     <ClInclude Include="..\Headers\Buffer_RcTex.h" />
     <ClInclude Include="..\Headers\Buffer_Terrain.h" />
+    <ClInclude Include="..\Headers\Buffer_TextUI.h" />
     <ClInclude Include="..\Headers\Camera.h" />
     <ClInclude Include="..\Headers\Cell.h" />
     <ClInclude Include="..\Headers\Collider.h" />
@@ -220,6 +219,7 @@
     <ClCompile Include="..\Codes\Buffer_RcCol.cpp" />
     <ClCompile Include="..\Codes\Buffer_RcTex.cpp" />
     <ClCompile Include="..\Codes\Buffer_Terrain.cpp" />
+    <ClCompile Include="..\Codes\Buffer_TextUI.cpp" />
     <ClCompile Include="..\Codes\Camera.cpp" />
     <ClCompile Include="..\Codes\Cell.cpp" />
     <ClCompile Include="..\Codes\Collider.cpp" />

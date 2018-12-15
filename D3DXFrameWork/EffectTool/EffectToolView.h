@@ -56,8 +56,10 @@ protected:
 public:
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	virtual void OnInitialUpdate();
-private:
+
+public:
 	HRESULT			Ready_Layer_Object(const _tchar * pPrototypeTag, const _tchar * pLayerTag, CGameObject** ppGameObject);
+private:
 	HRESULT			Ready_Component();
 	HRESULT			Ready_Prototype();
 	HRESULT			Ready_Layer_Camera();

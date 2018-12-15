@@ -5,6 +5,7 @@
 // 원형 컴포넌트들을 모아서 관리한다.
 #include "Buffer_RcTex.h"
 #include "Buffer_RcCol.h"
+#include "Buffer_TextUI.h"
 #include "Buffer_Collider.h"
 #include "Renderer.h"
 #include "Transform.h"

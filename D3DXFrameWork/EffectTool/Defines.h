@@ -8,6 +8,8 @@ const unsigned int	g_iBackCY = 600;
 
 const unsigned int g_iFormCX = 300;
 const unsigned int g_iFormCY = 600;
+
+const float g_fTimeDelta = 0.02f;
 enum MOUSE_STATE { STATE_DRAWUP, STATE_DRAWDOWN, STATE_TILE1, STATE_TILE2, STATE_TILE3, STATE_TILE4, STATE_ADD_OBJECT, STATE_ADD_NAV, STATE_ADD_CAM, STATE_EFFECT, STATE_END };
 
 

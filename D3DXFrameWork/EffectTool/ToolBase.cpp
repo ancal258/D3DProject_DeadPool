@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "ToolBase.h"
 #include "Component_Manager.h"
-
+#include "Target_Manager.h"
 
 
 CToolBase::CToolBase(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -68,7 +68,7 @@ void CToolBase::Render_GameObject()
 
 
 	pEffect->Begin(nullptr, 0);
-	pEffect->BeginPass(0);
+	pEffect->BeginPass(1);
 
 	m_pBufferCom->Render_VIBuffer();
 
@@ -136,6 +136,7 @@ HRESULT CToolBase::SetUp_ConstantTable(LPD3DXEFFECT pEffect)
 	m_pTextureCom->SetUp_OnShader(pEffect, "g_DiffuseTexture", _uint(m_fFrame));
 
 
+	CTarget_Manager::GetInstance()->SetUp_OnShader(pEffect, "g_DepthTexture", L"Target_Depth");
 
 	Safe_Release(pEffect);
 

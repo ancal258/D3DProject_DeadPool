@@ -124,18 +124,6 @@
     <Filter Include="01.Scene\02.Scene_Stage\01.Scene_Field">
       <UniqueIdentifier>{c1ec52a9-c4ef-43b3-8316-34851aed0eda}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\01.For.Logo\01.UI">
-      <UniqueIdentifier>{130d126b-2840-4bc0-a8b7-7b562981d705}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\01.For.Logo\01.UI\Button">
-      <UniqueIdentifier>{b83d13c2-d94f-4471-b69c-e321aad88b5d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\01.For.Logo\01.UI\Button\GameStart">
-      <UniqueIdentifier>{91adf23e-6eb0-432f-ac0d-2ebe0bc99308}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\01.For.Logo\01.UI\Test">
-      <UniqueIdentifier>{f1ccfb04-b190-412f-9e68-d9cbfc1f06b8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01.Scene\98.Scene_Loading">
       <UniqueIdentifier>{294a83a7-7136-4735-b3a9-47b9e63b8af3}</UniqueIdentifier>
     </Filter>
@@ -186,6 +174,27 @@
     </Filter>
     <Filter Include="02.GameObject\02.For.Stage\03.Effect\00.Effect_Texture">
       <UniqueIdentifier>{070009b5-7b03-4210-ba0b-ebc5720b26b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle">
+      <UniqueIdentifier>{c9122e5d-1b98-466c-9a4b-d58f59c56d15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\Particle_Parent">
+      <UniqueIdentifier>{5396b795-ec4e-4042-87a8-8a186245c3f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\00.For.Static\03.UI">
+      <UniqueIdentifier>{130d126b-2840-4bc0-a8b7-7b562981d705}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\00.For.Static\03.UI\Button">
+      <UniqueIdentifier>{b83d13c2-d94f-4471-b69c-e321aad88b5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\00.For.Static\03.UI\Button\GameStart">
+      <UniqueIdentifier>{91adf23e-6eb0-432f-ac0d-2ebe0bc99308}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\00.For.Static\03.UI\Test">
+      <UniqueIdentifier>{f1ccfb04-b190-412f-9e68-d9cbfc1f06b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\00.For.Static\03.UI\TalkBox">
+      <UniqueIdentifier>{c71bb4a8-020f-4623-89f8-3198055f5a86}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -283,7 +292,7 @@
       <Filter>02.GameObject\02.For.Stage\00.Terrain\APT_Terrain</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\UI_Test.h">
-      <Filter>02.GameObject\01.For.Logo\01.UI\Test</Filter>
+      <Filter>02.GameObject\00.For.Static\03.UI\Test</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Scene_Loading.h">
       <Filter>01.Scene\98.Scene_Loading</Filter>
@@ -326,6 +335,12 @@
     </ClInclude>
     <ClInclude Include="..\Headers\Effect_Mesh.h">
       <Filter>02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Effect_RectParticle.h">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\TalkBox.h">
+      <Filter>02.GameObject\00.For.Static\03.UI\TalkBox</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -411,7 +426,7 @@
       <Filter>02.GameObject\02.For.Stage\00.Terrain\APT_Terrain</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\UI_Test.cpp">
-      <Filter>02.GameObject\01.For.Logo\01.UI\Test</Filter>
+      <Filter>02.GameObject\00.For.Static\03.UI\Test</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Scene_Loading.cpp">
       <Filter>01.Scene\98.Scene_Loading</Filter>
@@ -451,6 +466,12 @@
     </ClCompile>
     <ClCompile Include="..\Codes\Effect_Mesh.cpp">
       <Filter>02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Effect_RectParticle.cpp">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\TalkBox.cpp">
+      <Filter>02.GameObject\00.For.Static\03.UI\TalkBox</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

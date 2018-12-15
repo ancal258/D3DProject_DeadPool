@@ -49,6 +49,18 @@
     <Filter Include="02.GameObject\99.Camera">
       <UniqueIdentifier>{8d1b32f1-fdb4-43a1-ad8b-0b0b3d0b6503}</UniqueIdentifier>
     </Filter>
+    <Filter Include="98.ShaderFiles">
+      <UniqueIdentifier>{5812f244-1040-406e-ac84-0f5dcf51be7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\01. Effect\ToolEffect">
+      <UniqueIdentifier>{bfbc5bc1-dc3b-43ae-bc17-31edfe3e21c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\01. Effect\Effect_Mesh">
+      <UniqueIdentifier>{f515d9e5-542c-41b2-8091-57b0bea23807}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\01. Effect\Effect_RectParticle">
+      <UniqueIdentifier>{13c3a1af-ef9a-4817-95b8-7e8735eaf505}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EffectTool.h">
@@ -90,14 +102,20 @@
     <ClInclude Include="Page_ParticleEffect.h">
       <Filter>00.View\FormView\Sheet\Page_ParticleEffect</Filter>
     </ClInclude>
-    <ClInclude Include="ToolEffect.h">
-      <Filter>02.GameObject\01. Effect</Filter>
-    </ClInclude>
     <ClInclude Include="ToolCamera_Effect.h">
       <Filter>02.GameObject\99.Camera</Filter>
     </ClInclude>
     <ClInclude Include="ToolBase.h">
       <Filter>02.GameObject\00. BaseTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolEffect.h">
+      <Filter>02.GameObject\01. Effect\ToolEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect_Mesh.h">
+      <Filter>02.GameObject\01. Effect\Effect_Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect_RectParticle.h">
+      <Filter>02.GameObject\01. Effect\Effect_RectParticle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -131,14 +149,20 @@
     <ClCompile Include="Page_ParticleEffect.cpp">
       <Filter>00.View\FormView\Sheet\Page_ParticleEffect</Filter>
     </ClCompile>
-    <ClCompile Include="ToolEffect.cpp">
-      <Filter>02.GameObject\01. Effect</Filter>
-    </ClCompile>
     <ClCompile Include="ToolCamera_Effect.cpp">
       <Filter>02.GameObject\99.Camera</Filter>
     </ClCompile>
     <ClCompile Include="ToolBase.cpp">
       <Filter>02.GameObject\00. BaseTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolEffect.cpp">
+      <Filter>02.GameObject\01. Effect\ToolEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect_Mesh.cpp">
+      <Filter>02.GameObject\01. Effect\Effect_Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect_RectParticle.cpp">
+      <Filter>02.GameObject\01. Effect\Effect_RectParticle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -166,5 +190,19 @@
     <Text Include="ReadMe.txt">
       <Filter>Default\Else</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Bin\ShaderFiles\Shader_Effect.fx">
+      <Filter>98.ShaderFiles</Filter>
+    </FxCompile>
+    <FxCompile Include="Bin\ShaderFiles\Shader_Mesh.fx">
+      <Filter>98.ShaderFiles</Filter>
+    </FxCompile>
+    <FxCompile Include="Bin\ShaderFiles\Shader_Prop.fx">
+      <Filter>98.ShaderFiles</Filter>
+    </FxCompile>
+    <FxCompile Include="Bin\ShaderFiles\Shader_Collider.fx">
+      <Filter>98.ShaderFiles</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

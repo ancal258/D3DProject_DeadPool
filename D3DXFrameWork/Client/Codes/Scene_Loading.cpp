@@ -143,8 +143,16 @@ void CScene_Loading::Render_Scene()
 		D3DXMatrixScaling(&matScale, 1.f, 1.f, 2.f);
 		D3DXMatrixTranslation(&matTranslate, 100, (g_iBackCY)-50, 0.f);
 		matTransform = matScale * matTranslate;
-		CFont_Manager::GetInstance()->Render_Font(L"Font_Magic", szLoading, D3DXCOLOR(1.f, 1.f, 1.f, 1.f), &matTransform);
+		CFont_Manager::GetInstance()->Render_Font(L"Font_Badaboom", szLoading, D3DXCOLOR(1.f, 1.f, 1.f, 1.f), &matTransform);
 	}
+	//{
+	//	_matrix	   matTransform, matScale, matTranslate;
+	//	D3DXMatrixScaling(&matScale, 1.f, 1.f, 2.f);
+	//	D3DXMatrixTranslation(&matTranslate, 100, (g_iBackCY) - 100, 0.f);
+	//	matTransform = matScale * matTranslate;
+	//	CFont_Manager::GetInstance()->Render_Font(L"Font_Badaboom", L"I want to Fight with my sword and gun Fucking Duck!", D3DXCOLOR(1.f, 1.f, 1.f, 1.f), &matTransform);
+	//}
+
 }
 
 HRESULT CScene_Loading::Ready_Logo_Prototype_Component()
