@@ -2,6 +2,9 @@
 #include "..\Headers\StaticUI.h"
 #include "Component_Manager.h"
 #include "Font_Manager.h"
+#include "Input_Device.h"
+#include "Player.h"
+#include "Object_Manager.h"
 _USING(Client)
 
 CStaticUI::CStaticUI(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -27,6 +30,17 @@ void CStaticUI::Set_Info(_vec2 vPos, _vec2 vScale)
 
 }
 
+void CStaticUI::Set_Info(_vec2 vPos, _vec2 vScale, _float fDegree)
+{
+	m_fX = vPos.x;
+	m_fY = vPos.y;
+
+	m_fSizeX = vScale.x;
+	m_fSizeY = vScale.y;
+
+	m_pTransformCom->Set_AngleZ(D3DXToRadian(fDegree));
+}
+
 HRESULT CStaticUI::Ready_GameObject_Prototype(_uint iKind)
 {
 	m_dwTextureIdx = iKind;
@@ -38,7 +52,12 @@ HRESULT CStaticUI::Ready_GameObject()
 {
 	if (FAILED(Ready_Component()))
 		return E_FAIL;
-
+	if (0 == m_dwTextureIdx || 1 == m_dwTextureIdx || 12 == m_dwTextureIdx)
+	{
+		m_pPlayer = (CPlayer*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Player", 0);
+		if (nullptr == m_pPlayer)
+			return E_FAIL;
+	}
 
 	return NOERROR;
 }
@@ -61,11 +80,14 @@ _int CStaticUI::LastUpdate_GameObject(const _float & fTimeDelta)
 
 	m_pTransformCom->Update_Matrix();
 
+	if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_RETURN) & 0x8000)
+	{
+		m_isLoad = true;
+	}
 
-
-	if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_UI, this)))
-		return -1;
-
+	if (true == m_isLoad)
+		if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_UI, this)))
+			return -1;
 	return _int();
 }
 
@@ -91,7 +113,50 @@ void CStaticUI::Render_GameObject()
 
 	pEffect->EndPass();
 	pEffect->End();
+
+	Render_StaticText();
+
 	Safe_Release(pEffect);
+}
+
+void CStaticUI::Render_StaticText()
+{
+
+
+	// DP Point inkStroke Text
+	if (1 == m_dwTextureIdx)
+	{
+		_matrix	   matTransform, matScale, matTranslate;
+		D3DXMatrixScaling(&matScale, 0.8f, 0.8f, 1.f);
+		D3DXMatrixTranslation(&matTranslate, m_fX - 123 /*(m_fSizeX * 0.8f)*/, m_fY - 10, 0.f);
+		matTransform = matScale * matTranslate;
+		_tchar m_szDP_Point[MAX_PATH] = L"";
+		wsprintf(m_szDP_Point, L"DP Point : %d", m_pPlayer->Get_DP_Point());
+		CFont_Manager::GetInstance()->Render_Font(L"Font_Number", m_szDP_Point , D3DXCOLOR(1.f, 0.54f, 0.f, 1.f), &matTransform);
+	}
+	// HeadShotPoint inkStroke Text
+	else if (0 == m_dwTextureIdx)
+	{
+		_matrix	   matTransform, matScale, matTranslate;
+		D3DXMatrixScaling(&matScale, 0.8f, 0.8f, 1.f);
+		D3DXMatrixTranslation(&matTranslate, m_fX - 155 /*(m_fSizeX * 0.8f)*/, m_fY - 10, 0.f);
+		matTransform = matScale * matTranslate;
+		_tchar m_szDP_HeadShotPoint[MAX_PATH] = L"";
+		wsprintf(m_szDP_HeadShotPoint, L"HeadShot Point : %d", m_pPlayer->Get_HeadSHot_Point());
+		CFont_Manager::GetInstance()->Render_Font(L"Font_Number", m_szDP_HeadShotPoint, D3DXCOLOR(1.f, 0.54f, 0.f, 1.f), &matTransform);
+	}
+	else if (12 == m_dwTextureIdx)
+	{
+		_matrix	   matTransform, matScale, matTranslate;
+		D3DXMatrixScaling(&matScale, 0.8f, 0.8f, 1.f);
+		D3DXMatrixTranslation(&matTranslate, m_fX - 110 /*(m_fSizeX * 0.8f)*/, m_fY - 30, 0.f);
+		matTransform = matScale * matTranslate;
+		_tchar m_szDP_BulletCnt[MAX_PATH] = L"";
+		wsprintf(m_szDP_BulletCnt, L"%d", m_pPlayer->Get_BulletCnt());
+		CFont_Manager::GetInstance()->Render_Font(L"Font_Number", m_szDP_BulletCnt, D3DXCOLOR(1.f, 0.54f, 0.f, 1.f), &matTransform);
+	}
+
+
 }
 
 HRESULT CStaticUI::Ready_Component()
@@ -113,7 +178,7 @@ HRESULT CStaticUI::Ready_Component()
 		return E_FAIL;
 
 	// For.Com_Buffer
-	m_pBufferCom = (CBuffer_TextUI*)pComponent_Manager->Clone_Component(SCENE_STATIC, L"Component_Buffer_TextUI");
+	m_pBufferCom = (CBuffer_TextUI*)pComponent_Manager->Clone_Component(SCENE_STATIC, L"Component_Buffer_RcTex");
 	if (FAILED(Add_Component(L"Com_Buffer", m_pBufferCom)))
 		return E_FAIL;
 

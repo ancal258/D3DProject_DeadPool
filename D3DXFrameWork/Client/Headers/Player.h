@@ -45,7 +45,16 @@ public:
 	const _uint Get_StageNum() {
 		return m_iStageNum;	}
 	_bool Get_IsButtonDown(_uint iIndex);
+	_bool Get_IsReservation();
 	_uint Get_AnimState();
+	_uint Get_DP_Point() {
+		return m_iDP_Point;	}
+	_uint Get_HeadSHot_Point() {
+		return m_iHeadShot_Point;	}
+	_uint Get_BulletCnt() {
+		return m_iBulletCnt;	}
+	void Use_Bullet() {
+		--m_iBulletCnt;	}
 public:
 	virtual HRESULT Ready_GameObject_Prototype();
 	virtual HRESULT Ready_GameObject();
@@ -83,8 +92,6 @@ private:
 	CCamera_Target* m_pCamera_Target = nullptr;
 	STATE_CAMERA	m_Camera_State = CAMERA_DEBUG;
 	const _tchar*	m_pEventTag = nullptr;
-
-
 	//Matrix
 private:
 	_matrix            m_CombinedHandMatrix[2];
@@ -92,7 +99,11 @@ private:
 	_matrix            m_CombinedRootMatrix;
 	const _matrix*      m_pRootMatrix = nullptr;
 	_matrix				m_RealMatrix;
-
+	// Point
+private:
+	_uint				m_iDP_Point = 0;
+	_uint				m_iHeadShot_Point = 0;
+	_uint				m_iBulletCnt = 36;
 private:
 	HRESULT Ready_Component();
 	HRESULT SetUp_ConstantTable(LPD3DXEFFECT pEffect);

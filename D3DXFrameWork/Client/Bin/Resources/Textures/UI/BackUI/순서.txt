@@ -8,3 +8,6 @@ StaticUI_6 - WeaponMinigun
 StaticUI_7 - Heart
 StaticUI_8 - DeadPoolIcon
 StaticUI_9 - inkDrip
+StaticUI_10 - HealthFill
+StaticUI_11 - HealthBack
+StaticUI_12 - BulletBack

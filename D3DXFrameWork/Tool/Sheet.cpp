@@ -4,11 +4,30 @@
 #include "stdafx.h"
 #include "Tool.h"
 #include "Sheet.h"
-
+#include "Object_Manager.h"
+#include "ToolTerrain.h"
 
 // CSheet
 
 IMPLEMENT_DYNAMIC(CSheet, CPropertySheet)
+
+void CSheet::Add_CamPoint(_vec3 vPoint)
+{
+	CGameObject* pTerrain = const_cast<CGameObject*>(CObject_Manager::GetInstance()->Get_ObjectPointer(0, L"Layer_Terrain", 0));
+	if (nullptr != pTerrain)
+	{
+		if (STATE_ADD_CAM == ((CToolTerrain*)pTerrain)->Get_MouseState())
+		{
+			m_Page_CinemaCam.Add_CamPoint(vPoint);
+		}
+		if (STATE_ADD_AIRPLANEPATH == ((CToolTerrain*)pTerrain)->Get_MouseState())
+		{
+			m_Page_AirplanePath.Add_CamPoint(vPoint);
+		}
+	}
+
+
+}
 
 CSheet::CSheet()
 {
@@ -17,6 +36,7 @@ CSheet::CSheet()
 	AddPage(&m_Page_Animation);
 	AddPage(&m_Page_Navigation);
 	AddPage(&m_Page_CinemaCam);
+	AddPage(&m_Page_AirplanePath);
 }
 
 CSheet::CSheet(UINT nIDCaption, CWnd* pParentWnd, UINT iSelectPage)
@@ -38,6 +58,7 @@ CSheet::~CSheet()
 	m_Page_Animation.DestroyWindow();
 	m_Page_Navigation.DestroyWindow();
 	m_Page_CinemaCam.DestroyWindow();
+	m_Page_AirplanePath.DestroyWindow();
 }
 
 

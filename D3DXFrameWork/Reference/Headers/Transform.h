@@ -44,7 +44,8 @@ public:
 	void RotationY(const _float& fRadianPerSec, const _float& fTimeDelta); // 특정 각도만큼 추가적으로 회전한다.
 	void RotationZ(const _float& fRadianPerSec, const _float& fTimeDelta); // 특정 각도만큼 추가적으로 회전한다.
 	void RotationAxis(const _vec3 vAxis, const _float& fRadianPerSec, const _float& fTimeDelta); // 특정 각도만큼 추가적으로 회전한다.
-	void Set_PlusPosition(_uint iType, _float& fValue); 
+	void Set_PlusPosition(_uint iType, _float& fValue);
+	void Set_PlusPosition(_vec3 vDir, _float& fValue);
 
 private:
 	_matrix					m_matWorld; // 자기만의 행렬.

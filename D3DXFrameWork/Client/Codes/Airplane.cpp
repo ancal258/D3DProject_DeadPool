@@ -46,6 +46,8 @@ HRESULT CAirplane::Ready_GameObject()
 		return E_FAIL;
 	m_pTransformCom->Scaling(_vec3(0.01f, 0.01f, 0.01f));
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(41.64, 5.5f, 46.22));
+	m_fSpeed = 10.f;
+	Load_Path(nullptr);
 	return NOERROR;
 }
 
@@ -53,6 +55,24 @@ _int CAirplane::Update_GameObject(const _float & fTimeDelta)
 {
 	if (FAILED(SetUp_Camera()))
 		return -1;
+
+	if (4 * m_iCurrentIndex >= m_vecPath.size())
+	{
+		// 카메라 끝 시점
+		m_dlCurrentOffset = 1;
+		m_isFinish = true;
+	}
+	else
+	{
+		m_dlCurrentOffset += (fTimeDelta / m_fSpeed);
+		m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &Bezier4(m_vecPath[0 + 4 * m_iCurrentIndex], m_vecPath[1 + 4 * m_iCurrentIndex], m_vecPath[2 + 4 * m_iCurrentIndex], m_vecPath[3 + 4 * m_iCurrentIndex], m_dlCurrentOffset));
+	}
+
+	if (m_dlCurrentOffset >= 1)
+	{
+		m_dlCurrentOffset = 0;
+		++m_iCurrentIndex;
+	}
 
 	return _int();
 }
@@ -205,6 +225,33 @@ HRESULT CAirplane::SetUp_Camera()
 	}
 
 	return NOERROR;
+}
+
+HRESULT CAirplane::Load_Path(_tchar * pFilePath)
+{
+	m_vecPath.push_back(_vec3(41.64, 5.5f, 46.22));
+	m_vecPath.push_back(_vec3(45.64, 8.5f, 40.22));
+	m_vecPath.push_back(_vec3(52.64, 12.5f, 56.22));
+	m_vecPath.push_back(_vec3(61.64, 8.5f, 66.22));
+
+	return NOERROR;
+}
+
+_vec3 CAirplane::Bezier4(_vec3 vPoint_1, _vec3 vPoint_2, _vec3 vPoint_3, _vec3 vPoint_4, double Offset)
+{
+	double OffsetA, OffsetB, OffsetC;
+
+	_vec3 vResult;
+
+	OffsetA = 1 - Offset;
+	OffsetB = OffsetA * OffsetA * OffsetA;
+	OffsetC = Offset * Offset * Offset;
+
+	vResult.x = OffsetB*vPoint_1.x + 3 * Offset*OffsetA*OffsetA*vPoint_2.x + 3 * Offset*Offset*OffsetA*vPoint_3.x + OffsetC*vPoint_4.x;
+	vResult.y = OffsetB*vPoint_1.y + 3 * Offset*OffsetA*OffsetA*vPoint_2.y + 3 * Offset*Offset*OffsetA*vPoint_3.y + OffsetC*vPoint_4.y;
+	vResult.z = OffsetB*vPoint_1.z + 3 * Offset*OffsetA*OffsetA*vPoint_2.z + 3 * Offset*Offset*OffsetA*vPoint_3.z + OffsetC*vPoint_4.z;
+
+	return(vResult);
 }
  
 CAirplane * CAirplane::Create(LPDIRECT3DDEVICE9 pGraphic_Device)

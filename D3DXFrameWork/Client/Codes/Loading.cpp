@@ -32,6 +32,7 @@
 // UI
 #include "UI_CrossHair.h"
 #include "UI_HPBar.h"
+#include "UI_HpFill.h"
 #include "TalkBox.h"
 #include "StaticUI.h"
 
@@ -253,11 +254,11 @@ HRESULT CLoading::Loading_Stage_AIRPLANE()
 	if (FAILED(Load_Static_Object(L"../Bin/DataFiles/StaticObject_Airplane.dat")))
 		return E_FAIL;
 
-	lstrcpy(m_szString, L"Layer_StaticUI...");
-	if (FAILED(Ready_Static_Prototype_UI()))
-		return E_FAIL;
-	if (FAILED(Ready_Static_Layer_UI()))
-		return E_FAIL;
+	//lstrcpy(m_szString, L"Layer_StaticUI...");
+	//if (FAILED(Ready_Static_Prototype_UI()))
+	//	return E_FAIL;
+	//if (FAILED(Ready_Static_Layer_UI()))
+	//	return E_FAIL;
 
 
 	m_isFinish = true;
@@ -284,9 +285,9 @@ HRESULT CLoading::Ready_LightInfo()
 
 	// For. Directional
 	LightInfo.Type = D3DLIGHT_DIRECTIONAL;
-	LightInfo.Diffuse = D3DXCOLOR(0.3f, 0.3f, 0.3f, 1.f);
+	LightInfo.Diffuse = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.f);
 	LightInfo.Specular = D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.f);
-	LightInfo.Ambient = D3DXCOLOR(0.15f, 0.15f, 0.15f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.3f, 0.3f, 0.3f, 1.f);
 	LightInfo.Direction = _vec3(1.f, -1.f, 1.f);
 
 	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
@@ -356,10 +357,10 @@ HRESULT CLoading::Ready_LightInfo_FIELD()
 
 	LightInfo.Type = D3DLIGHT_DIRECTIONAL;
 	//LightInfo.Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.f);
-	LightInfo.Diffuse = D3DXCOLOR(0.3f, 0.3f, 0.3f, 1.f);
+	LightInfo.Diffuse = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.f);
 	LightInfo.Specular = D3DXCOLOR(0.5f, 0.5f, 0.5f, 0.5f);
 	//LightInfo.Ambient = D3DXCOLOR(0.4f, 0.4f, 0.4f, 1.f);
-	LightInfo.Ambient = D3DXCOLOR(0.15f, 0.15f, 0.15f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.3f, 0.3f, 0.3f, 1.f);
 	LightInfo.Direction = _vec3(1.f, -1.f, 1.f);
 
 	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
@@ -613,7 +614,7 @@ HRESULT CLoading::Ready_Static_Prototype_Component()
 		return E_FAIL;
 
 	// For.Component_Texture_UI_StaticUI
-	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_UI_StaticUI", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/UI/BackUI/StaticUI_%d.tga", 10))))
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_UI_StaticUI", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/UI/BackUI/StaticUI_%d.tga", 13))))
 		return E_FAIL;
 
 	// For.Component_Buffer_Terrain	
@@ -683,16 +684,91 @@ HRESULT CLoading::Ready_Static_Prototype_UI()
 	// For.Prototype_UI_StaticUI_inkDrip
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_StaticUI_inkDrip", CStaticUI::Create(Get_Graphic_Device(), 9))))
 		return E_FAIL;
+	// For.Prototype_UI_StaticUI_HealthBarFill
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_StaticUI_HealthBarFill", CUI_HpFill::Create(Get_Graphic_Device()))))
+		return E_FAIL;
+	// For.Prototype_UI_StaticUI_HealthBarBack
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_StaticUI_HealthBarBack", CStaticUI::Create(Get_Graphic_Device(), 11))))
+		return E_FAIL;
+	// For.Prototype_UI_StaticUI_BulletBack
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_StaticUI_BulletBack", CStaticUI::Create(Get_Graphic_Device(), 12))))
+		return E_FAIL;
 
 	return NOERROR;
 }
 
 HRESULT CLoading::Ready_Static_Layer_UI()
 {
-	//CGameObject* pUI;
-	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_UI_StaticUI_inkStroke1", SCENE_STAGE, L"Layer_UI", &pUI)))
-	//	return E_FAIL;
-	//((CStaticUI*)pUI)->Set_Info(_vec2(100,100), _vec2(256,64));
+	CGameObject* pUI;
+
+	// HeadShot Points
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_UI_StaticUI_inkStroke1", SCENE_STAGE, L"Layer_UI", &pUI)))
+		return E_FAIL;
+	((CStaticUI*)pUI)->Set_Info(_vec2(g_iBackCX - 220, 350), _vec2(290, 64), 180);
+
+	// DP Points
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_UI_StaticUI_inkStroke2", SCENE_STAGE, L"Layer_UI", &pUI)))
+		return E_FAIL;
+	((CStaticUI*)pUI)->Set_Info(_vec2(g_iBackCX - 170, 100), _vec2(256, 32));
+
+	// Mission b
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_UI_StaticUI_inkStroke3", SCENE_STAGE, L"Layer_UI", &pUI)))
+		return E_FAIL;
+	((CStaticUI*)pUI)->Set_Info(_vec2((g_iBackCX >> 1), 100), _vec2(256, 42));
+
+	// Heart Back
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_UI_StaticUI_HalfoneCircle", SCENE_STAGE, L"Layer_UI", &pUI)))
+		return E_FAIL;
+	((CStaticUI*)pUI)->Set_Info(_vec2(100, 90), _vec2(74, 74));
+
+	// Heart
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_UI_StaticUI_Heart", SCENE_STAGE, L"Layer_UI", &pUI)))
+		return E_FAIL;
+	((CStaticUI*)pUI)->Set_Info(_vec2(100, 100), _vec2(64, 64));
+
+
+	// HealthBarFill
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_UI_StaticUI_HealthBarFill", SCENE_STAGE, L"Layer_UI", &pUI)))
+		return E_FAIL;
+	((CStaticUI*)pUI)->Set_Info(_vec2(111, 105), _vec2(160, 8));
+
+	// HealthBarBack
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_UI_StaticUI_HealthBarBack", SCENE_STAGE, L"Layer_UI", &pUI)))
+		return E_FAIL;
+	((CStaticUI*)pUI)->Set_Info(_vec2(190, 100), _vec2(175, 32));
+
+
+	// Sword
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_UI_StaticUI_WeaponSword", SCENE_STAGE, L"Layer_UI", &pUI)))
+		return E_FAIL;
+	((CStaticUI*)pUI)->Set_Info(_vec2(140, 150), _vec2(128, 64));
+
+
+	// Gun Back
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_UI_StaticUI_HalfoneCircle", SCENE_STAGE, L"Layer_UI", &pUI)))
+		return E_FAIL;
+	((CStaticUI*)pUI)->Set_Info(_vec2(110, 190), _vec2(74, 74));
+
+	// Gun
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_UI_StaticUI_WeaponGun", SCENE_STAGE, L"Layer_UI", &pUI)))
+		return E_FAIL;
+	((CStaticUI*)pUI)->Set_Info(_vec2(120, 190), _vec2(128, 64));
+
+	// DP Icon
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_UI_StaticUI_DeadPoolIcon", SCENE_STAGE, L"Layer_UI", &pUI)))
+		return E_FAIL;
+	((CStaticUI*)pUI)->Set_Info(_vec2(g_iBackCX - 100, 350), _vec2(32, 32), -30);
+
+	// DP Icon
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_UI_StaticUI_DeadPoolIcon", SCENE_STAGE, L"Layer_UI", &pUI)))
+		return E_FAIL;
+	((CStaticUI*)pUI)->Set_Info(_vec2(g_iBackCX - 230, 90), _vec2(32, 32), 30);
+
+	// Bullet Back
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_UI_StaticUI_BulletBack", SCENE_STAGE, L"Layer_UI", &pUI)))
+		return E_FAIL;
+	((CStaticUI*)pUI)->Set_Info(_vec2(210, 200), _vec2(150, 36));
+
 
 	return NOERROR;
 }

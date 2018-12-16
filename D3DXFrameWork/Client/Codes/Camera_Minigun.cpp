@@ -98,6 +98,7 @@ _int CCamera_Minigun::Update_GameObject(const _float & fTimeDelta)
 	//}
 
 	_long		MouseMove = 0;
+	//m_Camera_Desc.vAt = _vec3(m_Camera_Desc.vEye.x - 0.073, m_Camera_Desc.vEye.y - 0.408, m_Camera_Desc.vEye.z + 16.122);
 	_vec3		vLook = m_Camera_Desc.vAt - m_Camera_Desc.vEye;
 
 	if (MouseMove = Get_DIMouseMove(CInput_Device::DIMM_X))
@@ -241,6 +242,7 @@ HRESULT CCamera_Minigun::Ready_Component()
 
 HRESULT CCamera_Minigun::SetUp_CameraInfo(CAMERADESC CamDesc, PROJDESC ProjDesc)
 { 
+
 	CamDesc.vAt = _vec3(41.567f, 5.092f, 62.342f);
 
 	Set_CameraDesc(CamDesc);

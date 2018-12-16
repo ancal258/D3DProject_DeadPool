@@ -26,6 +26,8 @@ public:
 public:
 	_bool Get_Lived() {
 		return m_isLived; }
+	_int Get_HP() {
+		return m_iHP;}
 	void Set_Lived(_bool isLived) {
 		m_isLived = isLived;}
 	void Set_Active(_bool isActive) {

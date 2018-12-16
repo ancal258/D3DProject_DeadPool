@@ -213,6 +213,15 @@ void CTransform::Set_PlusPosition(_uint iType, _float & fValue)
 	Set_StateInfo(STATE_POSITION, &vPosition);
 }
 
+void CTransform::Set_PlusPosition(_vec3 vDir, _float & fValue)
+{
+	_vec3	vPosition = *Get_StateInfo(STATE_POSITION);
+	vPosition += vDir * fValue;
+
+
+	Set_StateInfo(STATE_POSITION, &vPosition);
+}
+
 CTransform * CTransform::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
 	CTransform*		pInstance = new CTransform(pGraphic_Device);

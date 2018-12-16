@@ -64,6 +64,7 @@ protected: // For. AttackCheck
 	_bool			m_isCallDeathIdx = false;
 	_float			m_fLength = 0;
 	_float			m_fRadian = 0;
+	_float			m_fDamegedTime = 0;
 
 
 protected: // For. StageNum

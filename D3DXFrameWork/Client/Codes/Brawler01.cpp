@@ -40,6 +40,7 @@ HRESULT CBrawler01::Ready_GameObject()
 	m_pTransformCom->Set_AngleY(D3DXToRadian(rand() % 180));
 	_vec3 vPosition = _vec3(rand() % 16 + 2.8f, 0.f, rand() % 16 + 16.f);
 
+	m_iHP = 4;
 
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &vPosition);
 
@@ -133,6 +134,21 @@ _int CBrawler01::LastUpdate_Stage_Field(const _float & fTimeDelta)
 {
 
 	if (true == m_isDamaged)
+	{
+		m_fDamegedTime += fTimeDelta;
+
+		if (m_fDamegedTime < 0.3f)
+		{
+			_float fDist = fTimeDelta * -3.6f;
+			m_pTransformCom->Set_PlusPosition(m_vPlayerDir, fDist);
+		}
+		
+		if (m_fDamegedTime > 1)
+			m_isDamaged = false;
+		//Set_DeathIndex();
+		//m_iCurrentIndex = m_iDeathIndex;
+	}
+	if (m_iHP <= 0)
 	{
 		Set_DeathIndex();
 		m_iCurrentIndex = m_iDeathIndex;

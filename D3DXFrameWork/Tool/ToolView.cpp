@@ -993,6 +993,12 @@ void CToolView::OnLButtonUp(UINT nFlags, CPoint point)
 			CMainFrame*		pMainFrame = (CMainFrame*)AfxGetMainWnd();
 			pMainFrame->Add_CamPoint(PickingPoint);
 		}
+		if (STATE_ADD_AIRPLANEPATH == ((CToolTerrain*)pTerrain)->Get_MouseState())
+		{
+			_vec3 PickingPoint = ((CToolTerrain*)pTerrain)->Get_PickingPoint();
+			CMainFrame*		pMainFrame = (CMainFrame*)AfxGetMainWnd();
+			pMainFrame->Add_CamPoint(PickingPoint);
+		}
 	}
 	CView::OnLButtonUp(nFlags, point);
 }

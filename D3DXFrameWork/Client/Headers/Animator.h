@@ -12,7 +12,7 @@ _END
 
 
 _BEGIN(Client)
-
+class CPlayer;
 class CAnimator final : public CBase
 {
 private:
@@ -85,7 +85,7 @@ private:
 	vector<pair<_uint, _uint>>		m_vecBlendPair;
 	vector<pair<_uint, _uint>>		m_vecComboPair;
 	vector<pair<_uint, _uint>>		m_vecComboTime;
-	
+	CPlayer*			m_pPlayer;
 
 	_bool				m_isKeyDown[KEY_END] = { false };
 private:

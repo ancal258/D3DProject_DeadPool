@@ -80,6 +80,9 @@
     <Filter Include="02.GameObject\06.NavPoint">
       <UniqueIdentifier>{abd1f07b-536a-483d-9d40-5be244f975fa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="00.View\FormView\Sheet\Page_AirplanePath">
+      <UniqueIdentifier>{49cac73b-c6a9-4d95-a041-a43a8a71fd4f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -154,6 +157,9 @@
     <ClInclude Include="NavPoint.h">
       <Filter>02.GameObject\06.NavPoint</Filter>
     </ClInclude>
+    <ClInclude Include="Page_AirplanePath.h">
+      <Filter>00.View\FormView\Sheet\Page_AirplanePath</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -215,6 +221,9 @@
     </ClCompile>
     <ClCompile Include="NavPoint.cpp">
       <Filter>02.GameObject\06.NavPoint</Filter>
+    </ClCompile>
+    <ClCompile Include="Page_AirplanePath.cpp">
+      <Filter>00.View\FormView\Sheet\Page_AirplanePath</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

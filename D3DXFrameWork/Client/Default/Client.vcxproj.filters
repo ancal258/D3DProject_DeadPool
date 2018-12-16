@@ -202,6 +202,27 @@
     <Filter Include="02.GameObject\00.For.Static\03.UI\DynamicUI">
       <UniqueIdentifier>{54d84d41-f200-4356-8d88-4d94d1c827a3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\00.For.Static\03.UI\DynamicUI\HPFill">
+      <UniqueIdentifier>{4c41e188-9ca9-472a-8baf-e681d52dbf5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Mission">
+      <UniqueIdentifier>{4e8ff068-16f3-4070-8f89-ac037319bd46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Mission\Manager">
+      <UniqueIdentifier>{ecc2e733-f98b-4b1e-9681-e70293e850c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.Mission\Mission">
+      <UniqueIdentifier>{ea12f857-3c15-47d4-a917-2ceafc7d7ac1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\00.For.Static\03.UI\DynamicUI\Bullet">
+      <UniqueIdentifier>{b212f72c-4259-44a7-92b5-28c64b89b735}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\00.For.Static\03.UI\StaticUI\Image">
+      <UniqueIdentifier>{fa11b996-a315-4c09-8ea8-26b4f5e0407c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\00.For.Static\03.UI\DynamicUI\Mission">
+      <UniqueIdentifier>{033bd69b-a79a-4a73-9b69-38f1b7568cb0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -348,8 +369,11 @@
     <ClInclude Include="..\Headers\TalkBox.h">
       <Filter>02.GameObject\00.For.Static\03.UI\TalkBox</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\UI_HpFill.h">
+      <Filter>02.GameObject\00.For.Static\03.UI\DynamicUI\HPFill</Filter>
+    </ClInclude>
     <ClInclude Include="..\Headers\StaticUI.h">
-      <Filter>02.GameObject\00.For.Static\03.UI\StaticUI</Filter>
+      <Filter>02.GameObject\00.For.Static\03.UI\StaticUI\Image</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -482,8 +506,11 @@
     <ClCompile Include="..\Codes\TalkBox.cpp">
       <Filter>02.GameObject\00.For.Static\03.UI\TalkBox</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\UI_HpFill.cpp">
+      <Filter>02.GameObject\00.For.Static\03.UI\DynamicUI\HPFill</Filter>
+    </ClCompile>
     <ClCompile Include="..\Codes\StaticUI.cpp">
-      <Filter>02.GameObject\00.For.Static\03.UI\StaticUI</Filter>
+      <Filter>02.GameObject\00.For.Static\03.UI\StaticUI\Image</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

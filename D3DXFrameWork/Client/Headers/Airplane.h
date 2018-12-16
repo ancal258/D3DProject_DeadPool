@@ -39,11 +39,18 @@ private:
 private:
 	CCamera_Debug*		m_pCamera_Debug = nullptr;
 	CCamera_Minigun*	m_pCamera_Minigun = nullptr;
-
+private:
+	vector<_vec3> 		m_vecPath;
+	_uint				m_iCurrentIndex = 0;
+	_double				m_dlCurrentOffset = 0;
+	_bool				m_isFinish = false;
+	_float				m_fSpeed = 0; // 속도
 private:
 	HRESULT Ready_Component();
 	HRESULT	SetUp_ConstantTable(LPD3DXEFFECT pEffect);
 	HRESULT SetUp_Camera();
+	HRESULT Load_Path(_tchar* pFilePath); // 경로 로드하는 함수
+	_vec3 Bezier4(_vec3 vPoint_1, _vec3 vPoint_2, _vec3 vPoint_3, _vec3 vPoint_4, double dlOffset);
 public:
 	static CAirplane* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone_GameObject();

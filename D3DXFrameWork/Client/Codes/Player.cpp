@@ -39,6 +39,11 @@ _bool CPlayer::Get_IsButtonDown(_uint iIndex)
 	return m_pAnimator->Get_IsButtonDown(iIndex);
 }
 
+_bool CPlayer::Get_IsReservation()
+{
+	return m_pAnimator->Get_IsReservation();
+}
+
 _uint CPlayer::Get_AnimState()
 {
 	return m_pAnimator->Get_AnimState();
@@ -69,7 +74,7 @@ HRESULT CPlayer::Ready_GameObject()
 	if (nullptr == m_pRootMatrix)
 		return E_FAIL;
 	Update_HandMatrix();
-
+	m_iHP = 100;
 	//m_pMeshCom->Set_AnimationSet(SIT_GETUP);
 	D3DXMatrixIdentity(&m_RealMatrix);
 	m_pNavigationCom->Update_LastMatrix(&m_RealMatrix);
@@ -94,6 +99,7 @@ _int CPlayer::Update_GameObject(const _float & fTimeDelta)
 		if (1 == m_iStageNum)
 		{
 			m_pAnimator->Update_Animation_FIELD(fTimeDelta);
+
 		}
 	}
 	m_pTransformCom->Update_Matrix();

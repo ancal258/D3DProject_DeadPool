@@ -169,18 +169,18 @@ HRESULT CBrawler::Ready_Component()
 	m_pColliderCom_Search = (CCollider*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Collider_Sphere");
 	if (FAILED(Add_Component(L"Com_Collider_Search", m_pColliderCom_Search)))
 		return E_FAIL;
-	m_pColliderCom_Search->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(1200, 1200, 1200), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f, 70.f, 0.f));
+	m_pColliderCom_Search->SetUp_Collider(&m_CombinedRootMatrix, &_vec3(1200, 1200, 1200), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f, 70.f, 0.f));
 	
 	m_pColliderCom_Head = (CCollider*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Collider_Sphere");
 	if (FAILED(Add_Component(L"Com_Collider_Head", m_pColliderCom_Head)))
 		return E_FAIL;
-	m_pColliderCom_Head->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(40, 40, 40), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f, 120.f, 0.f));
+	m_pColliderCom_Head->SetUp_Collider(&m_CombinedRootMatrix, &_vec3(40, 40, 40), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f, 120.f, 0.f));
 	m_pColliderMesh[0] = m_pColliderCom_Head->Get_Mesh();
 
 	m_pColliderCom_Body = (CCollider*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Collider_Sphere");
 	if (FAILED(Add_Component(L"Com_Collider_Body", m_pColliderCom_Body)))
 		return E_FAIL;
-	m_pColliderCom_Body->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(70, 70, 70), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f,70.f, 0.f));
+	m_pColliderCom_Body->SetUp_Collider(&m_CombinedRootMatrix, &_vec3(70, 70, 70), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f,70.f, 0.f));
 	m_pColliderMesh[1] = m_pColliderCom_Body->Get_Mesh();
 
 	Safe_Release(pComponent_Manager);
@@ -249,7 +249,7 @@ _int CBrawler::Update_Stage_Field(const _float & fTimeDelta)
 	if (nullptr == pCamera)
 		return -1;
 
-	_float fRadius = 15.f;
+	_float fRadius = 25.f;
 
 	Update_HandMatrix();
 
@@ -261,17 +261,32 @@ _int CBrawler::Update_Stage_Field(const _float & fTimeDelta)
 		else
 			m_isSearch = false;
 
-		// 칼 - 몬스터 Body 충돌.
-		for (size_t i = 1; i < 3; i++)
+		if (true == ((CPlayer*)m_pPlayer[0])->Get_IsReservation()) // 공격이 예약 되어 있을 때 만
 		{
-			if (true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider0")) ||
-				true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider1")) ||
-				true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider2")) ||
-				true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider3")) ||
-				true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider4")))
+			// 칼 - 몬스터 Body 충돌.
+			for (size_t i = 1; i < 3; i++)
 			{
-				m_isDamaged = true;
+
+				if (true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider0")) ||
+					true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider1")) ||
+					true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider2")) ||
+					true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider3")) ||
+					true == m_pColliderCom_Body->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider4")) ||
+					true == m_pColliderCom_Head->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider0")) ||
+					true == m_pColliderCom_Head->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider1")) ||
+					true == m_pColliderCom_Head->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider2")) ||
+					true == m_pColliderCom_Head->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider3")) ||
+					true == m_pColliderCom_Head->Collision_Sphere((const CCollider*)m_pPlayer[i]->Get_ComponentPointer(L"Com_Collider4")))
+				{
+					m_isDamaged = true;
+					m_fDamegedTime = 0.f;
+				}
+
 			}
+			if (m_isDamaged == false)
+				cout << m_iHP << endl;
+			else
+				m_iHP--;
 		}
 	}
 
@@ -288,13 +303,25 @@ _int CBrawler::LastUpdate_Stage_Field(const _float & fTimeDelta)
 {
 	// 첫번째 구체 체크
 	if (TRUE == m_Hit[0])
+	{
+		m_fDamegedTime = 0.f;
 		m_isDamaged = CInput_Device::GetInstance()->Is_MinDist(m_fDist[0]);
+	}
 	if (TRUE == m_Hit[1])
 	{
 		// 두번재 구체 체크 ( 첫번째 구체가 가장 짧은 거리가 아니라면. )
 		if (false == m_isDamaged)
+		{
+			m_fDamegedTime = 0.f;
 			m_isDamaged = CInput_Device::GetInstance()->Is_MinDist(m_fDist[1]);
+		}
 	}
+	//if (TRUE == m_Hit[0] || TRUE == m_Hit[1])
+	//{
+	//	m_Hit[0] = FALSE;
+	//	m_Hit[1] = FALSE;
+	//	m_iHP--;
+	//}
 	m_pTransformCom->Update_Matrix();
 
 	return _int();

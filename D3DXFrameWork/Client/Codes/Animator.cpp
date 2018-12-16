@@ -3,7 +3,7 @@
 #include "Component_Manager.h"
 #include "Input_Device.h"
 #include "Object_Manager.h"
-
+#include "Player.h"
 _USING(Client)
 
 CAnimator::CAnimator(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -29,6 +29,9 @@ HRESULT CAnimator::Ready_Animator(CMesh_Dynamic* pMeshCom, CTransform* pTransfor
 	m_iSceneNum = iSceneNum;
 	m_iState = STATE_SWORD;
 	Ready_Pair();
+	m_pPlayer = (CPlayer*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Player", 0);
+	if (nullptr == m_pPlayer)
+		return E_FAIL;
 	return NOERROR;
 }
 
@@ -41,6 +44,8 @@ void CAnimator::Ready_Pair()
 	//	ANIM_END
 	//pair<_uint, _uint> p2 = make_pair(NOGUN_WALK_F, NOGUN_IDLE00);
 	// APT - Blending 될 애니메이션들
+
+
 	if (0 == m_iSceneNum)
 	{
 		m_vecBlendPair.push_back(make_pair(NOGUN_IDLE00, NOGUN_WALK_F));
@@ -260,6 +265,7 @@ void CAnimator::Update_Animation_FIELD(const _float & fTimeDelta)
 		if (m_isKeyDown[LBUTTON] == false)
 		{
 			m_isKeyDown[LBUTTON] = true;
+			m_pPlayer->Use_Bullet();
 		}
 	}
 	else

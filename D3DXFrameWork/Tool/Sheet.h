@@ -5,6 +5,7 @@
 #include "Page_Animation.h"
 #include "Page_Navigation.h"
 #include "Page_CinemaCam.h"
+#include "Page_AirplanePath.h"
 
 // CSheet
 
@@ -18,8 +19,7 @@ public:
 	void Set_VecPointNav(_vec3* pVecPoint) {
 		m_Page_Navigation.Set_VecPointNav(pVecPoint);
 	}
-	void Add_CamPoint(_vec3 vPoint) {
-		m_Page_CinemaCam.Add_CamPoint(vPoint);	}
+	void Add_CamPoint(_vec3 vPoint);
 public:
 	CSheet();
 	CSheet(UINT nIDCaption, CWnd* pParentWnd = NULL, UINT iSelectPage = 0);
@@ -31,6 +31,7 @@ private:
 	CPage_Animation			m_Page_Animation;
 	CPage_Navigation		m_Page_Navigation;
 	CPage_CinemaCam			m_Page_CinemaCam;
+	CPage_AirplanePath		m_Page_AirplanePath;
 protected:
 	DECLARE_MESSAGE_MAP()
 };

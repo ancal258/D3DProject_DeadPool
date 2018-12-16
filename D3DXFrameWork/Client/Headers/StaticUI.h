@@ -12,7 +12,7 @@ class CShader;
 _END
 
 _BEGIN(Client)
-
+class CPlayer;
 class CStaticUI final : public CGameObject
 {
 private:
@@ -20,13 +20,16 @@ private:
 	explicit CStaticUI(const CStaticUI& rhs);
 	virtual ~CStaticUI() = default;
 public:
-	void Set_Info(_vec2 vPos,_vec2 vScale);
+	void Set_Info(_vec2 vPos, _vec2 vScale);
+	void Set_Info(_vec2 vPos, _vec2 vScale,_float fDegree);
 public:
 	virtual HRESULT Ready_GameObject_Prototype(_uint iKind);
 	virtual HRESULT Ready_GameObject();
 	virtual _int Update_GameObject(const _float& fTimeDelta);
 	virtual _int LastUpdate_GameObject(const _float& fTimeDelta);
 	virtual void Render_GameObject();
+private:
+	void Render_StaticText();
 private:
 	CTransform*			m_pTransformCom = nullptr;
 	CRenderer*			m_pRendererCom = nullptr;
@@ -41,13 +44,15 @@ private:
 	_ulong				m_dwTextureIdx = 0;
 
 private:
+	CPlayer*			m_pPlayer = nullptr;
+private:
 	_float				m_fTimeAcc = 0.f;
 private:
 	HRESULT Ready_Component();
 	HRESULT	SetUp_ConstantTable(LPD3DXEFFECT pEffect);
 private:
 	_float				m_fFrame = 0.f;
-
+	_bool				m_isLoad = false;
 public:
 	static CStaticUI* Create(LPDIRECT3DDEVICE9 pGraphic_Device, _uint iKind);
 	virtual CGameObject* Clone_GameObject();
