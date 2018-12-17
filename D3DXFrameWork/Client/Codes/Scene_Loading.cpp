@@ -74,12 +74,12 @@ HRESULT CScene_Loading::Ready_Scene(_uint iSceneNum)
 	CGameObject* pUI;
 	if (FAILED(Add_Object(SCENE_LOGO, L"Prototype_UI_TalkBox_White", SCENE_LOGO, L"Layer_UI", &pUI)))
 		return E_FAIL;
-	((CTalkBox*)pUI)->Set_Info(_vec2((g_iBackCX >> 1) - 200, 200), L"Hi my friend~  ");
+	((CTalkBox*)pUI)->Set_Info(_vec2((g_iBackCX >> 1) - 200, 200), L"Hi my friend~");
 
 
 	if (FAILED(Add_Object(SCENE_LOGO, L"Prototype_UI_TalkBox_Orange", SCENE_LOGO, L"Layer_UI", &pUI)))
 		return E_FAIL;
-	((CTalkBox*)pUI)->Set_Info(_vec2((g_iBackCX >> 1), 400), L"1234 5678 90aa.   ");
+	((CTalkBox*)pUI)->Set_Info(_vec2((g_iBackCX >> 1), 400), L"1234 5678 90aa.");
 
 	if (FAILED(Add_Object(SCENE_LOGO, L"Prototype_UI_TalkBox_Orange", SCENE_LOGO, L"Layer_UI", &pUI)))
 		return E_FAIL;

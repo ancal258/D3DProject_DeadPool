@@ -53,7 +53,11 @@ _int CStatic_Airplane::Update_GameObject(const _float & fTimeDelta)
 {
 	if (m_fValue >= 360)
 		m_fValue = 0;
-	++m_fValue;
+	m_fValue += 70 * fTimeDelta;
+
+	//if (m_fTimeValue >= 360)
+	//	m_fTimeValue = 0;
+	//m_fTimeValue += fTimeDelta * 2.f;
 
 	_vec3	vUp = _vec3(0, 1, 0);
 	_vec3	vPosition = *m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION);

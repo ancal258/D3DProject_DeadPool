@@ -53,6 +53,8 @@ public:
 		m_fRotate = fRotate;
 		m_fTimeAcc = fTimeAcc;	}
 	_uint Get_AnimState();
+	_uint Get_iState() {
+		return m_iState;	}
 	
 public:
 	void Update_Animation(const _float & fTimeDelta);

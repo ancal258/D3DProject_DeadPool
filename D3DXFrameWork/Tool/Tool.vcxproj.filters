@@ -83,6 +83,9 @@
     <Filter Include="00.View\FormView\Sheet\Page_AirplanePath">
       <UniqueIdentifier>{49cac73b-c6a9-4d95-a041-a43a8a71fd4f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\07.TriggerCube">
+      <UniqueIdentifier>{87294fe4-0dab-4c37-b813-d6bbda5ab904}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -160,6 +163,9 @@
     <ClInclude Include="Page_AirplanePath.h">
       <Filter>00.View\FormView\Sheet\Page_AirplanePath</Filter>
     </ClInclude>
+    <ClInclude Include="TriggerCube.h">
+      <Filter>02.GameObject\07.TriggerCube</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -224,6 +230,9 @@
     </ClCompile>
     <ClCompile Include="Page_AirplanePath.cpp">
       <Filter>00.View\FormView\Sheet\Page_AirplanePath</Filter>
+    </ClCompile>
+    <ClCompile Include="TriggerCube.cpp">
+      <Filter>02.GameObject\07.TriggerCube</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

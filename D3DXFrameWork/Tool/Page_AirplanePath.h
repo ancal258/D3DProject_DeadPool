@@ -8,7 +8,7 @@
 _BEGIN(Engine)
 class CGameObject;
 _END
-
+class CTriggerCube;
 class CPage_AirplanePath : public CPropertyPage
 {
 	DECLARE_DYNAMIC(CPage_AirplanePath)
@@ -39,4 +39,23 @@ public:
 	float m_fY;
 	float m_fZ;
 	afx_msg void OnBnClickedButton6();
+	CListBox m_StringList;
+	CListBox m_ButtonList;
+	CListBox m_TriggerList;
+
+	vector<CString> m_vecSaveString;
+	vector<CString> m_vecSaveButton;
+	vector<CTriggerCube*> m_vecTrigger;
+
+	_uint			m_iIndex = 0;
+
+	CString m_szButton;
+	CString m_szString;
+	afx_msg void OnBnClickedButton16();
+	afx_msg void OnBnClickedButton7();
+	afx_msg void OnBnClickedButton19();
+	afx_msg void OnBnClickedButton20();
+	afx_msg void OnBnClickedButton8();
+	afx_msg void OnLbnSelchangeList3();
+	afx_msg void OnBnClickedButton9();
 };

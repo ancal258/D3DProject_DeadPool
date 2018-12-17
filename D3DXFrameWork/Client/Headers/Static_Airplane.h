@@ -36,6 +36,7 @@ private:
 	CCollider*			m_pColliderCom = nullptr;
 private:
 	_float				m_fValue = 0;
+	_float				m_fTimeValue = 0;
 	_float				m_fSpeed = 0.017f;
 private:
 	HRESULT Ready_Component();

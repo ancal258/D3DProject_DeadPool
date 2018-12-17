@@ -25,6 +25,8 @@ public:
 	virtual HRESULT SetUp_CameraInfo(CAMERADESC CamDesc, PROJDESC ProjDesc);
 	virtual HRESULT SetUp_Target(const CGameObject* pGameObject);
 public:
+	_vec3 Get_CameraEye();
+public:
 	HRESULT Ready_Component();
 	_bool Culling_ToFrustum(CTransform* pTransform, CVIBuffer* pBuffer = nullptr, const _float& fRadius = 0.f);
 	_bool Culling_ToQuadTree(CTransform* pTransform, CVIBuffer* pBuffer = nullptr, const _float& fRadius = 0.f);

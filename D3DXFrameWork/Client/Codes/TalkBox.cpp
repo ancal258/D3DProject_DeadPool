@@ -24,7 +24,7 @@ void CTalkBox::Set_Info(_vec2 vPos, _tchar* pTalkString)
 	lstrcpy(m_szTalk, pTalkString);
 	m_iStrlen = lstrlen(m_szTalk);
 
-	m_fSizeX = 17 * m_iStrlen;
+	m_fSizeX = (15 * m_iStrlen) + 75;
 	m_fSizeY = 100;
 
 }

@@ -58,7 +58,7 @@ _int CDog::Update_GameObject(const _float & fTimeDelta)
 	{
 		m_iIndex = rand() % Dog_InteratctDP;
 	}
-	m_pMeshCom->Play_AnimationSet(fTimeDelta*0.9f);
+	m_pMeshCom->Play_AnimationSet(fTimeDelta);
 
 
 	return _int();

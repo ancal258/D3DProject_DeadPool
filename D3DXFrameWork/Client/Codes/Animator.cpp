@@ -121,7 +121,7 @@ void CAnimator::Update_Animation(const _float & fTimeDelta)
 			m_ArrayAnimState[SIT_GETUP] = true;
 	}
 
-	if (m_pInput_Device->Get_DIKeyState(DIK_UP) & 0x8000)
+	if (m_pInput_Device->Get_DIKeyState(DIK_W) & 0x8000)
 	{
 		m_pMeshCom->Set_AnimationSet(NOGUN_WALK_F);
 		m_pNavigationCom->Move_OnNavigation(m_pTransformCom, 8.7f, fTimeDelta);
@@ -166,7 +166,6 @@ void CAnimator::Update_Animation(const _float & fTimeDelta)
 void CAnimator::Update_Animation_FIELD(const _float & fTimeDelta)
 {
 	m_iState = m_iLastState;
-
 	if (m_pInput_Device->Get_DIKeyState(DIK_Q) & 0x8000)
 	{
 		m_iLastState = STATE_SWORD;
@@ -232,12 +231,56 @@ void CAnimator::Update_Animation_FIELD(const _float & fTimeDelta)
 				m_pNavigationCom->Move_OnNavigation(m_pTransformCom, 0.6f, fTimeDelta);
 
 		}
-		if (m_pInput_Device->Get_DIKeyState(DIK_S) & 0x8000)
+		else if (m_pInput_Device->Get_DIKeyState(DIK_A) & 0x8000)
+		{
+			if (false == m_isJumpLand)
+			{
+				if (m_iState == STATE_AIM)
+				{
+					m_pMeshCom->Set_AnimationSet(AIM_F);
+					m_pNavigationCom->Move_OnNavigation(m_pTransformCom, 4.7f, fTimeDelta);
+					m_iState = AIM_F;
+				}
+				else
+				{
+					m_pMeshCom->Set_AnimationSet(SWORD_RUN_FORWARD);
+					//m_pTransformCom->Go_Straight(7.8f, fTimeDelta);
+					m_pNavigationCom->Move_OnNavigation(m_pTransformCom, 8.7f, fTimeDelta);
+					m_iState = STATE_RUN;
+				}
+			}
+			else
+				m_pNavigationCom->Move_OnNavigation(m_pTransformCom, 0.6f, fTimeDelta);
+
+		}
+		else if (m_pInput_Device->Get_DIKeyState(DIK_D) & 0x8000)
+		{
+			if (false == m_isJumpLand)
+			{
+				if (m_iState == STATE_AIM)
+				{
+					m_pMeshCom->Set_AnimationSet(AIM_F);
+					m_pNavigationCom->Move_OnNavigation(m_pTransformCom, 4.7f, fTimeDelta);
+					m_iState = AIM_F;
+				}
+				else
+				{
+					m_pMeshCom->Set_AnimationSet(SWORD_RUN_FORWARD);
+					//m_pTransformCom->Go_Straight(7.8f, fTimeDelta);
+					m_pNavigationCom->Move_OnNavigation(m_pTransformCom, 8.7f, fTimeDelta);
+					m_iState = STATE_RUN;
+				}
+			}
+			else
+				m_pNavigationCom->Move_OnNavigation(m_pTransformCom, 0.6f, fTimeDelta);
+
+		}
+		else if (m_pInput_Device->Get_DIKeyState(DIK_S) & 0x8000)
 		{
 			if (m_iState != STATE_AIM)
 			{
 				m_pMeshCom->Set_AnimationSet(SWORD_RUN_FORWARD);
-				m_pTransformCom->Go_Straight(-8.7f, fTimeDelta);
+				m_pTransformCom->Go_Straight(8.7f, fTimeDelta);
 				m_iState = STATE_RUN;
 			}
 			else

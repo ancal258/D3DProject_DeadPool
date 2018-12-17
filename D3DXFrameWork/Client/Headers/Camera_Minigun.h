@@ -38,6 +38,7 @@ private:
 	_float			m_fOffsetX = 0.f;
 	_float			m_fOffsetY = 0.f;
 	_float			m_fOffsetZ = 0.f;
+	_vec3			m_vTmpAt;
 private:
 	const CGameObject*	m_pPlayer = nullptr;
 

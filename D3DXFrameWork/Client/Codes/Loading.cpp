@@ -25,7 +25,8 @@
 #include "Minigun.h"
 #include "Prop.h"
 #include "Static_Airplane.h"
-
+#include "BikiniGirl.h"
+#include "Trigger_Cube.h"
 //Effect
 #include "Effect_Mesh.h"
 #include "Effect_RectParticle.h"
@@ -130,16 +131,29 @@ HRESULT CLoading::Loading_Stage_APT()
 	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Dog", SCENE_STAGE, L"Layer_Dog")))
 		return E_FAIL;
 
-	////TEST////
-	if (FAILED(Ready_Effect()))
-		return E_FAIL;
-	////////////////
-
 	lstrcpy(m_szString, L"Layer_StaticUI...");
 	if (FAILED(Ready_Static_Prototype_UI()))
 		return E_FAIL;
 	if (FAILED(Ready_Static_Layer_UI()))
 		return E_FAIL;
+
+	////TEST////
+	if (FAILED(Ready_Effect()))
+		return E_FAIL;
+	//if (FAILED(Load_Trigger_CubeAPT()))
+	//	return E_FAIL;
+
+	CGameObject* pGameObject = nullptr;
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Trigger_Cube", SCENE_STAGE, L"Layer_Trigger",&pGameObject)))
+		return E_FAIL;
+	_vec3 vPos(5.f, 1.f, 5.f);
+	((CTrigger_Cube*)pGameObject)->Set_StateInfo(&vPos);
+	((CTrigger_Cube*)pGameObject)->Add_String(L"Test String 1");
+	((CTrigger_Cube*)pGameObject)->Add_String(L"String Test 2");
+	((CTrigger_Cube*)pGameObject)->Add_String(L"Test 3");
+	((CTrigger_Cube*)pGameObject)->Add_String(L"Happy Happy Happy...");
+
+	////////////////
 
 
 	//for (size_t i = 0; i < 10; i++)
@@ -643,11 +657,10 @@ HRESULT CLoading::Ready_Static_Prototype_Component()
 	// For.Component_Collider_Sphere
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Collider_Sphere", CCollider::Create(Get_Graphic_Device(), CCollider::TYPE_SPHERE))))
 		return E_FAIL;
-
-
 	// For.Component_Picking
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Picking", CPicking::Create(Get_Graphic_Device()))))
 		return E_FAIL;
+
 	Safe_Release(pComponent_Manager);
 
 	return NOERROR;
@@ -699,6 +712,11 @@ HRESULT CLoading::Ready_Static_Prototype_UI()
 		return E_FAIL;
 	// For.Prototype_UI_StaticUI_BulletBack
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_StaticUI_BulletBack", CStaticUI::Create(Get_Graphic_Device(), 12))))
+		return E_FAIL;
+
+
+	// For.Prototype_Trigger_Cube
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Trigger_Cube", CTrigger_Cube::Create(Get_Graphic_Device()))))
 		return E_FAIL;
 
 	return NOERROR;
@@ -1059,6 +1077,9 @@ HRESULT CLoading::Ready_Component_Prototype_SceneFIELD()
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Brawler_ElectricBaton", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/Brawler/WEP/", L"Brawler_ElectricBaton.x"))))
 		return E_FAIL;
 
+	// For.Component_Mesh_BikiniGirl
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_BikiniGirl", CMesh_Dynamic::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/DynamicMesh/BikiniGirl/", L"Girl_All.x"))))
+		return E_FAIL;
 
 
 
@@ -1310,9 +1331,13 @@ HRESULT CLoading::Ready_Stage_Prototype_GameObject_SceneFIELD()
 	// For.GameObject_Brawler01
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Brawler01_2", CBrawler01::Create(Get_Graphic_Device(), 2))))
 		return E_FAIL;
-	// For.GameObject_Brawler01
+	// For.GameObject_Brawler02
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Brawler02", CBrawler02::Create(Get_Graphic_Device()))))
 		return E_FAIL;
+	// For.GameObject_BikiniGirl
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_BikiniGirl", CBikiniGirl::Create(Get_Graphic_Device()))))
+		return E_FAIL;
+
 	// For.GameObject_SkyDom_Night
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_SkyDom_Night", CSkyDom::Create(Get_Graphic_Device(), 0))))
 		return E_FAIL;
@@ -1578,6 +1603,10 @@ HRESULT CLoading::Ready_Layer_Object()
 		if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler02", SCENE_STAGE, L"Layer_Brawler02")))
 			return E_FAIL;
 	}
+
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_BikiniGirl", SCENE_STAGE, L"Layer_BikiniGirl")))
+		return E_FAIL;
+
 	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Static_Airplane", SCENE_STAGE, L"Layer_Airplane_Field")))
 		return E_FAIL;
 	// For.Add_AirPlane
@@ -1701,6 +1730,62 @@ HRESULT CLoading::Load_Event_Cube(const _tchar * pFilePath)
 		((CEvent_Cube*)pCube)->Set_EventTag(pEventTag);
 
 	}
+
+	CloseHandle(hFile);
+
+	return NOERROR;
+}
+
+HRESULT CLoading::Load_Trigger_CubeAPT()
+{
+	if (FAILED(Load_Trigger_Cube(L"../Bin/DataFiles/Trigger_01.dat")))
+		return E_FAIL;
+
+	if (FAILED(Load_Trigger_Cube(L"../Bin/DataFiles/Trigger_02.dat")))
+		return E_FAIL;
+
+	return NOERROR;
+}
+
+HRESULT CLoading::Load_Trigger_Cube(const _tchar * pFilePath)
+{
+	CGameObject* pCube = nullptr;
+	_ulong		dwByte = 0;
+	HANDLE			hFile = CreateFile(pFilePath, GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+	if (0 == hFile)
+		return E_FAIL;
+
+
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Trigger_Cube", SCENE_STAGE, L"Layer_Trigger", &pCube)))
+		return E_FAIL;
+
+
+	_tchar szTmp[128] = L"";
+
+
+	_uint iStringCnt = 0;
+	_vec3 vPoint;
+
+	ReadFile(hFile, &iStringCnt, sizeof(_uint), &dwByte, nullptr);
+
+	for (int i = 0; i < iStringCnt; ++i)
+	{
+
+		ReadFile(hFile, &szTmp, sizeof(_tchar) * 128, &dwByte, nullptr);
+
+		((CTrigger_Cube*)pCube)->Add_String(szTmp);
+	}
+
+	ReadFile(hFile, &szTmp, sizeof(_tchar) * 128, &dwByte, nullptr);
+	((CTrigger_Cube*)pCube)->Add_ButtonString(szTmp);
+
+	ReadFile(hFile, &szTmp, sizeof(_tchar) * 128, &dwByte, nullptr);
+	((CTrigger_Cube*)pCube)->Add_ButtonString(szTmp);
+
+	ReadFile(hFile, &vPoint, sizeof(_vec3), &dwByte, nullptr);
+
+	((CTrigger_Cube*)pCube)->Set_StateInfo(&vPoint);
+
 
 	CloseHandle(hFile);
 

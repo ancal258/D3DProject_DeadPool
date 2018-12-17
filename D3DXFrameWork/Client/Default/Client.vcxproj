@@ -172,6 +172,7 @@
     <ClInclude Include="..\Headers\Animator.h" />
     <ClInclude Include="..\Headers\Back_Loading.h" />
     <ClInclude Include="..\Headers\Back_Logo.h" />
+    <ClInclude Include="..\Headers\BikiniGirl.h" />
     <ClInclude Include="..\Headers\Brawler.h" />
     <ClInclude Include="..\Headers\Brawler01.h" />
     <ClInclude Include="..\Headers\Brawler02.h" />
@@ -209,6 +210,7 @@
     <ClInclude Include="..\Headers\TalkBox.h" />
     <ClInclude Include="..\Headers\Terrain.h" />
     <ClInclude Include="..\Headers\Test.h" />
+    <ClInclude Include="..\Headers\Trigger_Cube.h" />
     <ClInclude Include="..\Headers\UI_CrossHair.h" />
     <ClInclude Include="..\Headers\UI_HPBar.h" />
     <ClInclude Include="..\Headers\UI_HpFill.h" />
@@ -223,6 +225,7 @@
     <ClCompile Include="..\Codes\Animator.cpp" />
     <ClCompile Include="..\Codes\Back_Loading.cpp" />
     <ClCompile Include="..\Codes\Back_Logo.cpp" />
+    <ClCompile Include="..\Codes\BikiniGirl.cpp" />
     <ClCompile Include="..\Codes\Brawler.cpp" />
     <ClCompile Include="..\Codes\Brawler01.cpp" />
     <ClCompile Include="..\Codes\Brawler02.cpp" />
@@ -258,6 +261,7 @@
     <ClCompile Include="..\Codes\TalkBox.cpp" />
     <ClCompile Include="..\Codes\Terrain.cpp" />
     <ClCompile Include="..\Codes\Test.cpp" />
+    <ClCompile Include="..\Codes\Trigger_Cube.cpp" />
     <ClCompile Include="..\Codes\UI_CrossHair.cpp" />
     <ClCompile Include="..\Codes\UI_HPBar.cpp" />
     <ClCompile Include="..\Codes\UI_HpFill.cpp" />

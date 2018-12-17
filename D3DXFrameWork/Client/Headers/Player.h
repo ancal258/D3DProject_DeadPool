@@ -55,6 +55,8 @@ public:
 		return m_iBulletCnt;	}
 	void Use_Bullet() {
 		--m_iBulletCnt;	}
+	void Add_HeadShotPoint() {
+		++m_iHeadShot_Point;}
 public:
 	virtual HRESULT Ready_GameObject_Prototype();
 	virtual HRESULT Ready_GameObject();
@@ -104,6 +106,8 @@ private:
 	_uint				m_iDP_Point = 0;
 	_uint				m_iHeadShot_Point = 0;
 	_uint				m_iBulletCnt = 36;
+private:
+	_vec3				m_vCam, m_vPos;
 private:
 	HRESULT Ready_Component();
 	HRESULT SetUp_ConstantTable(LPD3DXEFFECT pEffect);

@@ -24,6 +24,7 @@
 #include "Player.h"
 #include "CamPoint.h"
 #include "EventCube.h"
+#include "TriggerCube.h"
 #include "NavPoint.h"
 
 #include "Static_Object.h"
@@ -440,6 +441,8 @@ HRESULT CToolView::Ready_GameObject_Prototype_Static()
 	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_CamPoint", CCamPoint::Create(m_pGraphic_Device))))
 		return E_FAIL;
 	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_EventCube", CEventCube::Create(m_pGraphic_Device))))
+		return E_FAIL;
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_TriggerCube", CTriggerCube::Create(m_pGraphic_Device))))
 		return E_FAIL;
 	if (FAILED(CObject_Manager::GetInstance()->Add_Object_Prototype(0, L"Prototype_NavPoint", CNavPoint::Create(m_pGraphic_Device))))
 		return E_FAIL;

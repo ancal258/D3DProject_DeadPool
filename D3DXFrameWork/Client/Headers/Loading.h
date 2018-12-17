@@ -73,6 +73,8 @@ private:
 private:
 	HRESULT Load_Static_Object(const _tchar* pFilePath);
 	HRESULT Load_Event_Cube(const _tchar* pFilePath);
+	HRESULT Load_Trigger_CubeAPT();
+	HRESULT Load_Trigger_Cube(const _tchar* pFilePath);
 private:
 	HRESULT SetUp_CameraMove();
 private:

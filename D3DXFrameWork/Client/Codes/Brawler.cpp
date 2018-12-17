@@ -171,17 +171,18 @@ HRESULT CBrawler::Ready_Component()
 		return E_FAIL;
 	m_pColliderCom_Search->SetUp_Collider(&m_CombinedRootMatrix, &_vec3(1200, 1200, 1200), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f, 70.f, 0.f));
 	
-	m_pColliderCom_Head = (CCollider*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Collider_Sphere");
-	if (FAILED(Add_Component(L"Com_Collider_Head", m_pColliderCom_Head)))
-		return E_FAIL;
-	m_pColliderCom_Head->SetUp_Collider(&m_CombinedRootMatrix, &_vec3(40, 40, 40), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f, 120.f, 0.f));
-	m_pColliderMesh[0] = m_pColliderCom_Head->Get_Mesh();
-
 	m_pColliderCom_Body = (CCollider*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Collider_Sphere");
 	if (FAILED(Add_Component(L"Com_Collider_Body", m_pColliderCom_Body)))
 		return E_FAIL;
-	m_pColliderCom_Body->SetUp_Collider(&m_CombinedRootMatrix, &_vec3(70, 70, 70), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f,70.f, 0.f));
-	m_pColliderMesh[1] = m_pColliderCom_Body->Get_Mesh();
+	m_pColliderCom_Body->SetUp_Collider(&m_CombinedRootMatrix, &_vec3(85, 85, 85), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f,80.f, 0.f));
+	m_pColliderMesh[0] = m_pColliderCom_Body->Get_Mesh();
+
+	m_pColliderCom_Head = (CCollider*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Collider_Sphere");
+	if (FAILED(Add_Component(L"Com_Collider_Head", m_pColliderCom_Head)))
+		return E_FAIL;
+	m_pColliderCom_Head->SetUp_Collider(&m_CombinedRootMatrix, &_vec3(20, 20, 20), &_vec3(0.0f, 0.f, 0.f), &_vec3(20.f, 130.f, -20.f));
+	m_pColliderMesh[1] = m_pColliderCom_Head->Get_Mesh();
+
 
 	Safe_Release(pComponent_Manager);
 
@@ -283,9 +284,9 @@ _int CBrawler::Update_Stage_Field(const _float & fTimeDelta)
 				}
 
 			}
-			if (m_isDamaged == false)
-				cout << m_iHP << endl;
-			else
+			//if (m_isDamaged == false)
+			//	cout << m_iHP << endl;
+			if(true == m_isDamaged)
 				m_iHP--;
 		}
 	}
@@ -314,6 +315,7 @@ _int CBrawler::LastUpdate_Stage_Field(const _float & fTimeDelta)
 		{
 			m_fDamegedTime = 0.f;
 			m_isDamaged = CInput_Device::GetInstance()->Is_MinDist(m_fDist[1]);
+			((CPlayer*)m_pPlayer[0])->Add_HeadShotPoint();
 		}
 	}
 	//if (TRUE == m_Hit[0] || TRUE == m_Hit[1])

@@ -165,7 +165,7 @@ _int CPlayer::LastUpdate_GameObject(const _float & fTimeDelta)
 	vPosition.y = (*(_vec3*)m_RealMatrix.m[3]).y;
 
 
-	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &vPosition);
+	//m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &vPosition);
 	m_pTransformCom->Update_Matrix();
 
 	// 현재 RealMatrix 값과 과거의 Matrix값을 비교 처리
@@ -218,15 +218,19 @@ void CPlayer::Render_GameObject()
 void CPlayer::Render_Axis()
 {
 	_vec3      vPointX[2], vPointY[2], vPointZ[2];
+	_vec3	   vPointCamera[2];
 
 	vPointX[0] = *m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION);
-	vPointX[1] = vPointX[0] + *m_pTransformCom->Get_StateInfo(CTransform::STATE_RIGHT) * 10;
+	vPointX[1] = vPointX[0] + *m_pTransformCom->Get_StateInfo(CTransform::STATE_RIGHT) * 100;
 
 	vPointY[0] = *m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION);
-	vPointY[1] = vPointY[0] + *m_pTransformCom->Get_StateInfo(CTransform::STATE_UP) * 10;
+	vPointY[1] = vPointY[0] + *m_pTransformCom->Get_StateInfo(CTransform::STATE_UP) * 100;
 
 	vPointZ[0] = *m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION);
-	vPointZ[1] = vPointZ[0] + *m_pTransformCom->Get_StateInfo(CTransform::STATE_LOOK) * 10;
+	vPointZ[1] = vPointZ[0] + *m_pTransformCom->Get_StateInfo(CTransform::STATE_LOOK) * 100;
+
+	vPointCamera[0] = *m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION);
+	vPointCamera[1] = vPointCamera[0] + m_vCam * 100;
 
 	LPD3DXLINE            pLine = nullptr;
 	if (FAILED(D3DXCreateLine(Get_Graphic_Device(), &pLine)))
@@ -251,15 +255,19 @@ void CPlayer::Render_Axis()
 		D3DXVec3TransformCoord(&vPointZ[i], &vPointZ[i], &matView);
 		D3DXVec3TransformCoord(&vPointZ[i], &vPointZ[i], &matProj);
 
+		D3DXVec3TransformCoord(&vPointCamera[i], &vPointCamera[i], &matView);
+		D3DXVec3TransformCoord(&vPointCamera[i], &vPointCamera[i], &matProj);
+
 	}
 
-	pLine->SetWidth(2.0f);
+	pLine->SetWidth(5.0f);
 
 	pLine->Begin();
 
-	pLine->DrawTransform(vPointX, 2, &matTransform, D3DXCOLOR(1.f, 0.f, 0.f, 1.f));
+	pLine->DrawTransform(vPointX, 2, &matTransform, D3DXCOLOR(0.f, 0.f, 1.f, 1.f));
 	pLine->DrawTransform(vPointY, 2, &matTransform, D3DXCOLOR(0.f, 1.f, 0.f, 1.f));
-	pLine->DrawTransform(vPointZ, 2, &matTransform, D3DXCOLOR(0.f, 0.f, 1.f, 1.f));
+	pLine->DrawTransform(vPointZ, 2, &matTransform, D3DXCOLOR(1.f, 0.f, 0.f, 1.f));
+	pLine->DrawTransform(vPointCamera, 2, &matTransform, D3DXCOLOR(1.f, 0.f, 1.f, 1.f));
 
 	pLine->End();
 
@@ -314,6 +322,8 @@ HRESULT CPlayer::SetUp_StageInfo(_uint iStage)
 
 void CPlayer::Camera_Update(const _float& fTimeDelta)
 {
+	CInput_Device* pInput_Device = CInput_Device::GetInstance();
+	pInput_Device->AddRef();
 	// Camera SetUp
 	if (FAILED(SetUp_Camera()))
 		return;
@@ -363,24 +373,185 @@ void CPlayer::Camera_Update(const _float& fTimeDelta)
 	}
 	else
 	{
-		if (m_dwMouseMove[0] = CInput_Device::GetInstance()->Get_DIMouseMove(CInput_Device::DIMM_X))
+		if (m_dwMouseMove[0] = pInput_Device->Get_DIMouseMove(CInput_Device::DIMM_X))
 		{
-			if (false == m_pAnimator->Get_IsReservation())
-			{
-				m_pTransformCom->RotationY(D3DXToRadian(m_dwMouseMove[0] * m_fMouseSence), fTimeDelta);
-			}
-			else
-			{
-				m_fRotate = D3DXToRadian(m_dwMouseMove[0] * m_fMouseSence);
-				m_fTimeAcc += m_fRotate * fTimeDelta;
-			}
+			//if (false == m_pAnimator->Get_IsReservation())
+			//{
+			//	m_pTransformCom->RotationY(D3DXToRadian(m_dwMouseMove[0] * m_fMouseSence), fTimeDelta);
+			//}
+			//else
+			//{
+			//	m_fRotate = D3DXToRadian(m_dwMouseMove[0] * m_fMouseSence);
+			//	m_fTimeAcc += m_fRotate * fTimeDelta;
+			//}
 		}
 
-		if (m_dwMouseMove[1] = CInput_Device::GetInstance()->Get_DIMouseMove(CInput_Device::DIMM_Y))
+		if (m_dwMouseMove[1] = pInput_Device->Get_DIMouseMove(CInput_Device::DIMM_Y))
 		{
 			//  m_pTransformCom->RotationX(D3DXToRadian(m_dwMouseMove[1] * m_fMouseSence), fTimeDelta);
 		}
+
+		if (false == m_pAnimator->Get_IsReservation())
+		{
+			if (pInput_Device->Get_DIKeyState(DIK_W) & 0x8000 && pInput_Device->Get_DIKeyState(DIK_D) & 0x8000 &&
+				!(pInput_Device->Get_DIKeyState(DIK_A) & 0x8000) && !(pInput_Device->Get_DIKeyState(DIK_S) & 0x8000))
+			{
+				// Camera의 Eye 포지션
+				_vec3 vCameraEye = ((CCamera_Target*)m_pCamera_Target)->Get_CameraEye();
+				_vec3 vPlayerCross = *m_pTransformCom->Get_StateInfo(CTransform::STATE_LOOK) + *m_pTransformCom->Get_StateInfo(CTransform::STATE_RIGHT) * -1;
+				// Camera->Player 바라보는 벡터.
+				vCameraEye.y = 0;
+				_vec3 vDir = *m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION) - vCameraEye;
+				vDir.y = 0;
+				D3DXVec3Normalize(&vDir, &vDir);
+				D3DXVec3Normalize(&vPlayerCross, &vPlayerCross);
+				_vec3 vCross;
+				D3DXVec3Cross(&vCross, &vDir, &vPlayerCross);
+				if (vCross.y < 0)
+				{
+					if (0.998f >= D3DXVec3Dot(&vDir, &vPlayerCross))
+						m_pTransformCom->RotationY(15, fTimeDelta);
+				}
+				else
+				{
+					if (0.998f >= D3DXVec3Dot(&vDir, &vPlayerCross))
+						m_pTransformCom->RotationY(-15, fTimeDelta);
+				}
+			}
+			else if (pInput_Device->Get_DIKeyState(DIK_W) & 0x8000 && pInput_Device->Get_DIKeyState(DIK_A) & 0x8000 &&
+				!(pInput_Device->Get_DIKeyState(DIK_D) & 0x8000) && !(pInput_Device->Get_DIKeyState(DIK_S) & 0x8000))
+			{
+				// Camera의 Eye 포지션
+				_vec3 vCameraEye = ((CCamera_Target*)m_pCamera_Target)->Get_CameraEye();
+				_vec3 vPlayerCross = *m_pTransformCom->Get_StateInfo(CTransform::STATE_LOOK) + *m_pTransformCom->Get_StateInfo(CTransform::STATE_RIGHT);
+				// Camera->Player 바라보는 벡터.
+				vCameraEye.y = 0;
+				_vec3 vDir = *m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION) - vCameraEye;
+				vDir.y = 0;
+				D3DXVec3Normalize(&vDir, &vDir);
+				D3DXVec3Normalize(&vPlayerCross, &vPlayerCross);
+				_vec3 vCross;
+				D3DXVec3Cross(&vCross, &vDir, &vPlayerCross);
+				if (vCross.y < 0)
+				{
+					if (0.998f >= D3DXVec3Dot(&vDir, &vPlayerCross))
+						m_pTransformCom->RotationY(15, fTimeDelta);
+				}
+				else
+				{
+					if (0.998f >= D3DXVec3Dot(&vDir, &vPlayerCross))
+						m_pTransformCom->RotationY(-15, fTimeDelta);
+				}
+			}
+
+			else if (pInput_Device->Get_DIKeyState(DIK_W) & 0x8000 && !(pInput_Device->Get_DIKeyState(DIK_D) & 0x8000) && !(pInput_Device->Get_DIKeyState(DIK_A) & 0x8000) && !(pInput_Device->Get_DIKeyState(DIK_S) & 0x8000))
+			{
+				// Camera의 Eye 포지션
+				_vec3 vCameraEye = ((CCamera_Target*)m_pCamera_Target)->Get_CameraEye();
+				_vec3 vPlayerLook = *m_pTransformCom->Get_StateInfo(CTransform::STATE_LOOK);
+				// Camera->Player 바라보는 벡터.
+				vCameraEye.y = 0;
+				_vec3 vDir = *m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION) - vCameraEye;
+				vDir.y = 0;
+				D3DXVec3Normalize(&vDir, &vDir);
+				D3DXVec3Normalize(&vPlayerLook, &vPlayerLook);
+				m_vCam = vDir;
+				_vec3 vCross;
+				D3DXVec3Cross(&vCross, &vDir, &vPlayerLook);
+				if (vCross.y < 0)
+				{
+					if (0.998f >= D3DXVec3Dot(&vDir, &vPlayerLook))
+						m_pTransformCom->RotationY(15, fTimeDelta);
+				}
+				else
+				{
+					if (0.998f >= D3DXVec3Dot(&vDir, &vPlayerLook))
+						m_pTransformCom->RotationY(-15, fTimeDelta);
+				}
+			}
+			else if (pInput_Device->Get_DIKeyState(DIK_S) & 0x8000 && !(pInput_Device->Get_DIKeyState(DIK_D) & 0x8000) && !(pInput_Device->Get_DIKeyState(DIK_A) & 0x8000) && !(pInput_Device->Get_DIKeyState(DIK_W) & 0x8000))
+			{
+				// Camera의 Eye 포지션
+				_vec3 vCameraEye = ((CCamera_Target*)m_pCamera_Target)->Get_CameraEye();
+				_vec3 vPlayerLook = *m_pTransformCom->Get_StateInfo(CTransform::STATE_LOOK) * -1;
+				if(15 == m_pAnimator->Get_iState())
+					vPlayerLook = *m_pTransformCom->Get_StateInfo(CTransform::STATE_LOOK);
+
+				// Camera->Player 바라보는 벡터.
+				vCameraEye.y = 0;
+				_vec3 vDir = *m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION) - vCameraEye;
+				vDir.y = 0;
+				D3DXVec3Normalize(&vDir, &vDir);
+				D3DXVec3Normalize(&vPlayerLook, &vPlayerLook);
+				m_vCam = vDir;
+				_vec3 vCross;
+				D3DXVec3Cross(&vCross, &vDir, &vPlayerLook);
+				if (vCross.y < 0)
+				{
+					if (0.998f >= D3DXVec3Dot(&vDir, &vPlayerLook))
+						m_pTransformCom->RotationY(15, fTimeDelta);
+				}
+				else
+				{
+					if (0.998f >= D3DXVec3Dot(&vDir, &vPlayerLook))
+						m_pTransformCom->RotationY(-15, fTimeDelta);
+				}
+			}
+
+
+			else if (pInput_Device->Get_DIKeyState(DIK_D) & 0x8000 && !(pInput_Device->Get_DIKeyState(DIK_W) & 0x8000) && !(pInput_Device->Get_DIKeyState(DIK_A) & 0x8000) && !(pInput_Device->Get_DIKeyState(DIK_S) & 0x8000))
+			{
+				// Camera의 Eye 포지션
+				_vec3 vCameraEye = ((CCamera_Target*)m_pCamera_Target)->Get_CameraEye();
+				_vec3 vPlayerRight = *m_pTransformCom->Get_StateInfo(CTransform::STATE_RIGHT) * -1;
+				// Camera->Player 바라보는 벡터.
+				vCameraEye.y = 0;
+				_vec3 vDir = *m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION) - vCameraEye;
+				vDir.y = 0;
+				D3DXVec3Normalize(&vDir, &vDir);
+				D3DXVec3Normalize(&vPlayerRight, &vPlayerRight);
+				_vec3 vCross;
+				D3DXVec3Cross(&vCross, &vDir, &vPlayerRight);
+				if (vCross.y < 0)
+				{
+					if (0.998f >= D3DXVec3Dot(&vDir, &vPlayerRight))
+						m_pTransformCom->RotationY(15, fTimeDelta);
+				}
+				else
+				{
+					if (0.998f >= D3DXVec3Dot(&vDir, &vPlayerRight))
+						m_pTransformCom->RotationY(-15, fTimeDelta);
+				}
+			}
+
+			else if (pInput_Device->Get_DIKeyState(DIK_A) & 0x8000 && !(pInput_Device->Get_DIKeyState(DIK_D) & 0x8000) && !(pInput_Device->Get_DIKeyState(DIK_W) & 0x8000) && !(pInput_Device->Get_DIKeyState(DIK_S) & 0x8000))
+			{
+				// Camera의 Eye 포지션
+				_vec3 vCameraEye = ((CCamera_Target*)m_pCamera_Target)->Get_CameraEye();
+				_vec3 vPlayerRight = *m_pTransformCom->Get_StateInfo(CTransform::STATE_RIGHT);
+				// Camera->Player 바라보는 벡터.
+				vCameraEye.y = 0;
+				_vec3 vDir = *m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION) - vCameraEye;
+				vDir.y = 0;
+				D3DXVec3Normalize(&vDir, &vDir);
+				D3DXVec3Normalize(&vPlayerRight, &vPlayerRight);
+				_vec3 vCross;
+				D3DXVec3Cross(&vCross, &vDir, &vPlayerRight);
+				if (vCross.y < 0)
+				{
+					if (0.998f >= D3DXVec3Dot(&vDir, &vPlayerRight))
+						m_pTransformCom->RotationY(15, fTimeDelta);
+				}
+				else
+				{
+					if (0.998f >= D3DXVec3Dot(&vDir, &vPlayerRight))
+						m_pTransformCom->RotationY(-15, fTimeDelta);
+				}
+			}
+		}
 	}
+
+	Safe_Release(pInput_Device);
 }
 
 HRESULT CPlayer::SetUp_CameraMove()

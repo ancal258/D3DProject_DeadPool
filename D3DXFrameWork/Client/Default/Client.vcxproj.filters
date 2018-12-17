@@ -223,6 +223,12 @@
     <Filter Include="02.GameObject\00.For.Static\03.UI\DynamicUI\Mission">
       <UniqueIdentifier>{033bd69b-a79a-4a73-9b69-38f1b7568cb0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\06.BikiniGirl">
+      <UniqueIdentifier>{4f4f58ea-f8a4-40dd-be36-4e6dce72dae7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\00.For.Static\04.Trigger">
+      <UniqueIdentifier>{33d009e7-a6ed-4451-a629-2a0bc2be7850}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -375,6 +381,12 @@
     <ClInclude Include="..\Headers\StaticUI.h">
       <Filter>02.GameObject\00.For.Static\03.UI\StaticUI\Image</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\BikiniGirl.h">
+      <Filter>02.GameObject\02.For.Stage\06.BikiniGirl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Trigger_Cube.h">
+      <Filter>02.GameObject\00.For.Static\04.Trigger</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -511,6 +523,12 @@
     </ClCompile>
     <ClCompile Include="..\Codes\StaticUI.cpp">
       <Filter>02.GameObject\00.For.Static\03.UI\StaticUI\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\BikiniGirl.cpp">
+      <Filter>02.GameObject\02.For.Stage\06.BikiniGirl</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Trigger_Cube.cpp">
+      <Filter>02.GameObject\00.For.Static\04.Trigger</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

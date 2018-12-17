@@ -97,78 +97,76 @@ _int CCamera_Minigun::Update_GameObject(const _float & fTimeDelta)
 	//	m_fOffsetY -= 0.001f;
 	//}
 
-	_long		MouseMove = 0;
-	//m_Camera_Desc.vAt = _vec3(m_Camera_Desc.vEye.x - 0.073, m_Camera_Desc.vEye.y - 0.408, m_Camera_Desc.vEye.z + 16.122);
-	_vec3		vLook = m_Camera_Desc.vAt - m_Camera_Desc.vEye;
+	//_long		MouseMove = 0;
+	////m_Camera_Desc.vAt = _vec3(m_Camera_Desc.vEye.x - 0.073, m_Camera_Desc.vEye.y - 0.408, m_Camera_Desc.vEye.z + 16.122);
+	//_vec3		vLook = m_vTmpAt - m_Camera_Desc.vEye;
 
-	if (MouseMove = Get_DIMouseMove(CInput_Device::DIMM_X))
-	{
-		if (MouseMove < 0)
-		{
-			if (m_dwRotAcc[0] > -730)
-			{
-				m_dwRotAcc[0] += MouseMove;
+	//if (MouseMove = Get_DIMouseMove(CInput_Device::DIMM_X))
+	//{
+	//	if (MouseMove < 0)
+	//	{
+	//		if (m_dwRotAcc[0] > -730)
+	//		{
+	//			m_dwRotAcc[0] += MouseMove;
 
-				_matrix		matRot;
-				D3DXMatrixRotationY(&matRot, D3DXToRadian(MouseMove * m_fCamSpeed) * fTimeDelta);
-				D3DXVec3TransformNormal(&vLook, &vLook, &matRot);
-				m_Camera_Desc.vAt = m_Camera_Desc.vEye + vLook;
-			}
-		}
-		else
-		{
-			if (m_dwRotAcc[0] < 553)
-			{
-				m_dwRotAcc[0] += MouseMove;
+	//			_matrix		matRot;
+	//			D3DXMatrixRotationY(&matRot, D3DXToRadian(MouseMove * m_fCamSpeed) * fTimeDelta);
+	//			D3DXVec3TransformNormal(&vLook, &vLook, &matRot);
+	//			m_Camera_Desc.vAt = m_Camera_Desc.vEye + vLook;
+	//		}
+	//	}
+	//	else
+	//	{
+	//		if (m_dwRotAcc[0] < 553)
+	//		{
+	//			m_dwRotAcc[0] += MouseMove;
 
-				_matrix		matRot;
-				D3DXMatrixRotationY(&matRot, D3DXToRadian(MouseMove * m_fCamSpeed) * fTimeDelta);
-				D3DXVec3TransformNormal(&vLook, &vLook, &matRot);
-				m_Camera_Desc.vAt = m_Camera_Desc.vEye + vLook;
-			}
-		}
+	//			_matrix		matRot;
+	//			D3DXMatrixRotationY(&matRot, D3DXToRadian(MouseMove * m_fCamSpeed) * fTimeDelta);
+	//			D3DXVec3TransformNormal(&vLook, &vLook, &matRot);
+	//			m_Camera_Desc.vAt = m_Camera_Desc.vEye + vLook;
+	//		}
+	//	}
 
-	}
-	// -400 + 580
-	if (MouseMove = Get_DIMouseMove(CInput_Device::DIMM_Y))
-	{
-		if (MouseMove < 0)
-		{
-			if (m_dwRotAcc[1] > -400)
-			{
-				m_dwRotAcc[1] += MouseMove;
+	//}
+	//// -400 + 580
+	//if (MouseMove = Get_DIMouseMove(CInput_Device::DIMM_Y))
+	//{
+	//	if (MouseMove < 0)
+	//	{
+	//		if (m_dwRotAcc[1] > -400)
+	//		{
+	//			m_dwRotAcc[1] += MouseMove;
 
-				_vec3		vRight;
-				D3DXVec3Cross(&vRight, &m_Camera_Desc.vAxisY, &vLook);
+	//			_vec3		vRight;
+	//			D3DXVec3Cross(&vRight, &m_Camera_Desc.vAxisY, &vLook);
 
-				_matrix		matRot;
-				D3DXMatrixRotationAxis(&matRot, &vRight, D3DXToRadian(MouseMove * m_fCamSpeed) * fTimeDelta);
+	//			_matrix		matRot;
+	//			D3DXMatrixRotationAxis(&matRot, &vRight, D3DXToRadian(MouseMove * m_fCamSpeed) * fTimeDelta);
 
-				D3DXVec3TransformNormal(&vLook, &vLook, &matRot);
+	//			D3DXVec3TransformNormal(&vLook, &vLook, &matRot);
 
-				m_Camera_Desc.vAt = m_Camera_Desc.vEye + vLook;
-			}
-		}
-		else
-		{
-			if (m_dwRotAcc[1] < 580)
-			{
-				m_dwRotAcc[1] += MouseMove;
+	//			m_Camera_Desc.vAt = m_Camera_Desc.vEye + vLook;
+	//		}
+	//	}
+	//	else
+	//	{
+	//		if (m_dwRotAcc[1] < 580)
+	//		{
+	//			m_dwRotAcc[1] += MouseMove;
 
-				_vec3		vRight;
-				D3DXVec3Cross(&vRight, &m_Camera_Desc.vAxisY, &vLook);
+	//			_vec3		vRight;
+	//			D3DXVec3Cross(&vRight, &m_Camera_Desc.vAxisY, &vLook);
 
-				_matrix		matRot;
-				D3DXMatrixRotationAxis(&matRot, &vRight, D3DXToRadian(MouseMove * m_fCamSpeed) * fTimeDelta);
+	//			_matrix		matRot;
+	//			D3DXMatrixRotationAxis(&matRot, &vRight, D3DXToRadian(MouseMove * m_fCamSpeed) * fTimeDelta);
 
-				D3DXVec3TransformNormal(&vLook, &vLook, &matRot);
+	//			D3DXVec3TransformNormal(&vLook, &vLook, &matRot);
 
-				m_Camera_Desc.vAt = m_Camera_Desc.vEye + vLook;
-			}
-		}
-
-
-	}
+	//			m_Camera_Desc.vAt = m_Camera_Desc.vEye + vLook;
+	//		}
+	//	}
+	//}
 	if (nullptr != m_pFrustumCom)
 		m_pFrustumCom->Update_Frustum(&m_matView, &m_matProj);
 
@@ -186,10 +184,14 @@ _int CCamera_Minigun::LastUpdate_GameObject(const _float & fTimeDelta)
 	}
 	_matrix	matParent = *pTransformCom->Get_WorldMatrix();
 	_vec3 vParentPos = (_vec3)matParent.m[3];
+	_vec3 vParentLook = (_vec3)matParent.m[2];
 	m_Camera_Desc.vEye.x = vParentPos.x + m_fOffsetX;
 	m_Camera_Desc.vEye.y = vParentPos.y + m_fOffsetY;
 	m_Camera_Desc.vEye.z = vParentPos.z - m_fOffsetZ;
-	
+	//vParentLook.z *= 10;
+	//m_vTmpAt = _vec3(m_Camera_Desc.vEye.x - 0.073, m_Camera_Desc.vEye.y - 0.408, m_Camera_Desc.vEye.z + 16.122);
+	m_Camera_Desc.vAt = m_Camera_Desc.vEye + vParentLook;
+
 
 	if (nullptr != m_pFrustumCom)
 		m_pFrustumCom->Update_Frustum(&m_matView, &m_matProj);

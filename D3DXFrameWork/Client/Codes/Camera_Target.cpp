@@ -156,6 +156,11 @@ HRESULT CCamera_Target::SetUp_Target(const CGameObject * pGameObject)
 	return NOERROR;
 }
 
+_vec3 CCamera_Target::Get_CameraEye()
+{
+	return m_Camera_Desc.vEye;
+}
+
 HRESULT CCamera_Target::Ready_Component()
 {
 	CComponent_Manager*		pComponent_Manager = CComponent_Manager::GetInstance();

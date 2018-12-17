@@ -42,6 +42,7 @@ private:
 	virtual HRESULT Ready_Component();
 	HRESULT Update_HandMatrix();
 	HRESULT SetUp_ConstantTable(LPD3DXEFFECT pEffect);
+	void Render_Axis();
 public:
 	static CMinigun* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone_GameObject();

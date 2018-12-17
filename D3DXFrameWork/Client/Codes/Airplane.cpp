@@ -47,7 +47,7 @@ HRESULT CAirplane::Ready_GameObject()
 	m_pTransformCom->Scaling(_vec3(0.01f, 0.01f, 0.01f));
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(41.64, 5.5f, 46.22));
 	m_fSpeed = 10.f;
-	Load_Path(nullptr);
+	Load_Path(L"../Bin/DataFiles/AirplanePoints.dat");
 	return NOERROR;
 }
 
@@ -58,7 +58,6 @@ _int CAirplane::Update_GameObject(const _float & fTimeDelta)
 
 	if (4 * m_iCurrentIndex >= m_vecPath.size())
 	{
-		// 카메라 끝 시점
 		m_dlCurrentOffset = 1;
 		m_isFinish = true;
 	}
