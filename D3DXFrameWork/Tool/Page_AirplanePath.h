@@ -35,4 +35,8 @@ public:
 	CListBox m_PointList;
 	afx_msg void OnBnClickedButton1();
 	afx_msg void OnBnClickedButton2();
+	float m_fX;
+	float m_fY;
+	float m_fZ;
+	afx_msg void OnBnClickedButton6();
 };

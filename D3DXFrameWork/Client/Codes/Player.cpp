@@ -102,6 +102,10 @@ _int CPlayer::Update_GameObject(const _float & fTimeDelta)
 
 		}
 	}
+	if (GetKeyState('N') & 0x80)
+		m_iHP--;
+	else if (GetKeyState('M') & 0x80)
+		m_iHP++;
 	m_pTransformCom->Update_Matrix();
 	Update_HandMatrix();
 

@@ -14,6 +14,7 @@ enum MOUSE_STATE { STATE_DRAWUP, STATE_DRAWDOWN, STATE_TILE1, STATE_TILE2, STATE
 
 
 #include <vector>
+#include <algorithm>
 
 using namespace Tool;
 using namespace std;

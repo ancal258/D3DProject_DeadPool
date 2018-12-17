@@ -229,10 +229,32 @@ HRESULT CAirplane::SetUp_Camera()
 
 HRESULT CAirplane::Load_Path(_tchar * pFilePath)
 {
-	m_vecPath.push_back(_vec3(41.64, 5.5f, 46.22));
-	m_vecPath.push_back(_vec3(45.64, 8.5f, 40.22));
-	m_vecPath.push_back(_vec3(52.64, 12.5f, 56.22));
-	m_vecPath.push_back(_vec3(61.64, 8.5f, 66.22));
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	_ulong		dwByte = 0;
+	HANDLE			hFile = CreateFile(pFilePath, GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0);
+	if (0 == hFile)
+		return E_FAIL;
+
+	for (;;)
+	{
+		_vec3 vPosition;
+
+		ReadFile(hFile, &vPosition, sizeof(_vec3), &dwByte, nullptr);
+
+		if (0 == dwByte)
+		{
+			break;
+		}
+		m_vecPath.push_back(vPosition);
+	}
+
+	CloseHandle(hFile);
+
+
+	//m_vecPath.push_back(_vec3(41.64, 5.5f, 46.22));
+	//m_vecPath.push_back(_vec3(45.64, 8.5f, 40.22));
+	//m_vecPath.push_back(_vec3(52.64, 12.5f, 56.22));
+	//m_vecPath.push_back(_vec3(61.64, 8.5f, 66.22));
 
 	return NOERROR;
 }

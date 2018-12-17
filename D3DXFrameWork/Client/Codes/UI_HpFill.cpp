@@ -56,14 +56,15 @@ HRESULT CUI_HpFill::Ready_GameObject()
 	if (nullptr == m_pPlayer)
 		return E_FAIL;
 
+
 	return NOERROR;
 }
 
 _int CUI_HpFill::Update_GameObject(const _float & fTimeDelta)
 {
-
-	m_pTransformCom->Scaling(m_fSizeX, m_fSizeY, 1.f);
-
+	_float fSizeX = ((float)m_pPlayer->Get_HP() / 100) * m_fSizeX;
+	m_pTransformCom->Scaling(fSizeX, m_fSizeY, 1.f);
+	
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(m_fX - (g_iBackCX >> 1)
 		, (g_iBackCY >> 1) - m_fY, 0.f));
 

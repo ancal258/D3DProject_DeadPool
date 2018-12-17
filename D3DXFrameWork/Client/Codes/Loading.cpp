@@ -36,6 +36,13 @@
 #include "TalkBox.h"
 #include "StaticUI.h"
 
+/*
+헬기,  스테이지2 네비메쉬 설치, 미니건움직임,카메라,
+스테이지3 일부 맵 설치 ,대화 박스(글자 수에 따라 자동으로 스케일) ,폰트,
+메쉬이펙트 하나 실험, UI세팅, 비행기 이동경로 + 툴 , 몬스터 ai 일부 수정
+
+*/
+
 CLoading::CLoading(LPDIRECT3DDEVICE9 pGraphicDev)
 	:m_pGraphic_Device(pGraphicDev)
 	,m_pObject_Manager(CObject_Manager::GetInstance())
@@ -124,8 +131,8 @@ HRESULT CLoading::Loading_Stage_APT()
 		return E_FAIL;
 
 	////TEST////
-	//if (FAILED(Ready_Effect()))
-	//	return E_FAIL;
+	if (FAILED(Ready_Effect()))
+		return E_FAIL;
 	////////////////
 
 	lstrcpy(m_szString, L"Layer_StaticUI...");
@@ -523,16 +530,16 @@ HRESULT CLoading::Ready_Effect()
 	pComponent_Manager->AddRef();
 	// For. Effect_Mesh
 
-	// For.Component_Mesh_EffectSwordHeavy03R
-	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_EffectSwordHeavy03R", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/Effect/Sword/", L"Sword_Heavy_03R.x"))))
-		return E_FAIL;
-	// For.Prototype_EffectSwordHeavy03R
-	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_EffectSwordHeavy03R", CEffect_Mesh::Create(Get_Graphic_Device()))))
-		return E_FAIL;
+	//// For.Component_Mesh_EffectSwordHeavy03R
+	//if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_EffectSwordHeavy03R", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/Effect/Sword/", L"Sword_Heavy_03R.x"))))
+	//	return E_FAIL;
+	//// For.Prototype_EffectSwordHeavy03R
+	//if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_EffectSwordHeavy03R", CEffect_Mesh::Create(Get_Graphic_Device()))))
+	//	return E_FAIL;
 
-	// For.Add_EffectSwordHeavy03R
-	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_EffectSwordHeavy03R", SCENE_STAGE, L"Layer_MeshEffect")))
-		return E_FAIL;
+	//// For.Add_EffectSwordHeavy03R
+	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_EffectSwordHeavy03R", SCENE_STAGE, L"Layer_MeshEffect")))
+	//	return E_FAIL;
 
 
 
