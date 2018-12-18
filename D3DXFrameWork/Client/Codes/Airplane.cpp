@@ -3,6 +3,7 @@
 #include "Component_Manager.h"
 #include "Object_Manager.h"
 #include "Light_Manager.h"
+#include "Input_Device.h"
 #include "Player.h"
 
 
@@ -73,7 +74,9 @@ _int CAirplane::Update_GameObject(const _float & fTimeDelta)
 		++m_iCurrentIndex;
 	}
 
-	return _int();
+	
+
+	return Update_Rotation(fTimeDelta);
 }
 
 _int CAirplane::LastUpdate_GameObject(const _float & fTimeDelta)
@@ -273,6 +276,36 @@ _vec3 CAirplane::Bezier4(_vec3 vPoint_1, _vec3 vPoint_2, _vec3 vPoint_3, _vec3 v
 	vResult.z = OffsetB*vPoint_1.z + 3 * Offset*OffsetA*OffsetA*vPoint_2.z + 3 * Offset*Offset*OffsetA*vPoint_3.z + OffsetC*vPoint_4.z;
 
 	return(vResult);
+}
+
+_int CAirplane::Update_Rotation(const _float & fTimeDelta)
+{
+	CInput_Device* pInput_Devce = CInput_Device::GetInstance();
+	pInput_Devce->AddRef();
+
+	if (pInput_Devce->Get_DIKeyState(DIK_A) & 0x80)
+	{
+		m_pTransformCom->RotationAxis(_vec3(0,1,0),-1, fTimeDelta);
+	}
+
+	if (pInput_Devce->Get_DIKeyState(DIK_D) & 0x80)
+	{
+		m_pTransformCom->RotationAxis(_vec3(0, 1, 0), 1, fTimeDelta);
+	}
+
+	if (pInput_Devce->Get_DIMouseState(CInput_Device::DIM_LBUTTON) & 0x80)
+	{
+		m_pTransformCom->RotationAxis(*m_pTransformCom->Get_StateInfo(CTransform::STATE_RIGHT), -1, fTimeDelta);
+	}
+	if (pInput_Devce->Get_DIMouseState(CInput_Device::DIM_RBUTTON) & 0x80)
+	{
+		m_pTransformCom->RotationAxis(*m_pTransformCom->Get_StateInfo(CTransform::STATE_RIGHT), 1, fTimeDelta);
+	}
+
+
+
+	Safe_Release(pInput_Devce);
+	return _int();
 }
  
 CAirplane * CAirplane::Create(LPDIRECT3DDEVICE9 pGraphic_Device)

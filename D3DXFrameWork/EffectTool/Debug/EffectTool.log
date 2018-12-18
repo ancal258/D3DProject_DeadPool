@@ -1,15 +1,4 @@
-﻿  EffectForm.cpp
-  코드를 생성하고 있습니다...
-  건너뛰고 있습니다... (관련된 변경 내용 없음)
-  ToolEffect.cpp
-  ToolCamera_Effect.cpp
-  ToolBase.cpp
-  Page_MeshEffect.cpp
-  MainFrm.cpp
-  Effect_RectParticle.cpp
-  Effect_Mesh.cpp
-  EffectToolView.cpp
-  EffectTool.cpp
-  EffectSheet.cpp
-  EffectTool.vcxproj -> C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\EffectTool\.\Bin\EffectTool.exe
+﻿  ParentEffect.cpp
+d:\github\d3dproject_deadpool\d3dxframework\effecttool\parenteffect.cpp(47): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  EffectTool.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\EffectTool\.\Bin\EffectTool.exe
   EffectTool.vcxproj -> .\Bin\EffectTool.pdb (Partial PDB)

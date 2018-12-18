@@ -12,6 +12,7 @@ class CCollider;
 _END
 
 _BEGIN(Client)
+class CPlayer;
 class CBikiniGirl final : public CGameObject
 {
 private:
@@ -39,6 +40,8 @@ private:
 	CCollider*			m_pColliderCom = nullptr;
 private:
 	_uint				m_iIndex = 0;
+	_bool				m_isCol = false;
+	CPlayer*			m_pPlayer = nullptr;
 private:
 	HRESULT Ready_Component();
 	HRESULT SetUp_ConstantTable(LPD3DXEFFECT pEffect);

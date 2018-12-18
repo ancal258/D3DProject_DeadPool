@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "ToolEffect.h"
 #include "Component_Manager.h"
-#include "Target_Manager.h"
+#include "ParentEffect.h"
 
 
 CToolEffect::CToolEffect(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -26,16 +26,38 @@ HRESULT CToolEffect::Ready_GameObject()
 	if (FAILED(Ready_Component()))
 		return E_FAIL;
 
-	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(rand() % 20 - 10.0f, 5.f, rand() % 20 - 10));
+	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(rand() % 10 + 10.0f, 5.f, rand() % 10));
 
 	return NOERROR;
 }
+void CToolEffect::Set_EffectInfo(CGameObject* pParent, _float fFrameSpeed, _float fFrameMax, _float fMoveSpeed, _float fSurviveTime, _float fDegreeRange, _vec3 * vSetScale, _vec3 * vSetPos, _vec3 * vDir)
+{
+	m_pParent = pParent;
+
+	m_fFrameSpeed = fFrameSpeed; // 애니메이션 프레임 속도
+	m_fFrameMax = fFrameMax; // 애니메이션 최대 프레임
+	m_fMoveSpeed = fMoveSpeed; // 이동 속도
+	m_fSurviveTime = fSurviveTime; // 생존 시간
+	m_fDegreeRange = fDegreeRange; // 회전되어있는 각도 ( 범위 )
+	m_vSetScale = *vSetScale; // 생성 크기
+	m_vSetPos = *vSetPos; // 생성 위치
+	m_vDir = *vDir; // 움직이는 방향 
+
+	if (m_fDegreeRange != 0)
+		m_fDegreeRange = rand() % (int)m_fDegreeRange;
+	_float fRadian = D3DXToRadian(m_fDegreeRange);
+
+	m_pTransformCom->Scaling(m_vSetScale);
+	m_pTransformCom->Set_AngleZ(fRadian);
+	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &m_vSetPos);
+}
+
 
 _int CToolEffect::Update_GameObject(const _float & fTimeDelta)
 {
-	m_fFrame += 90.0f * 0.02f;
-
-	if (90.0f <= m_fFrame)
+	m_fFrame += m_fFrameSpeed * 0.01f;
+	m_fTimeAcc += 0.01f;
+	if (m_fFrameMax <= m_fFrame)
 		m_fFrame = 0.f;
 
 	Compute_ViewDepth(m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION));
@@ -56,7 +78,7 @@ _int CToolEffect::Update_GameObject(const _float & fTimeDelta)
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_RIGHT, (_vec3*)&matBill.m[0][0]);
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_UP, (_vec3*)&matBill.m[1][0]);
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_LOOK, (_vec3*)&matBill.m[2][0]);
-	//m_pTransformCom->Scaling(10,10,10)
+
 	return _int();
 }
 
@@ -65,7 +87,14 @@ _int CToolEffect::LastUpdate_GameObject(const _float & fTimeDelta)
 	if (nullptr == m_pRendererCom)
 		return -1;
 
+	if(nullptr != m_pParent)
+		m_pTransformCom->Set_ParentMatrix(((CParentEffect*)m_pParent)->Get_ParentMatridx());
+
 	m_pTransformCom->Update_Matrix();
+
+
+	if (m_fSurviveTime <= m_fTimeAcc)
+		Set_Lived(false);
 
 	if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_ALPHA, this)))
 		return -1;
@@ -153,11 +182,10 @@ HRESULT CToolEffect::SetUp_ConstantTable(LPD3DXEFFECT pEffect)
 
 	pEffect->SetMatrix("g_matView", &matView);
 	pEffect->SetMatrix("g_matProj", &matProj);
-
+	pEffect->SetFloat("g_fAlpha", m_fAlpha);
 	m_pTextureCom->SetUp_OnShader(pEffect, "g_DiffuseTexture", _uint(m_fFrame));
 
 
-	CTarget_Manager::GetInstance()->SetUp_OnShader(pEffect, "g_DepthTexture", L"Target_Depth");
 
 	Safe_Release(pEffect);
 

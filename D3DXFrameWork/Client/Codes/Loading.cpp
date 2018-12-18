@@ -156,11 +156,11 @@ HRESULT CLoading::Loading_Stage_APT()
 	////////////////
 
 
-	//for (size_t i = 0; i < 10; i++)
-	//{
-	//	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Effect", SCENE_STAGE, L"Layer_Effect")))
-	//		return E_FAIL;
-	//}
+	for (size_t i = 0; i < 10; i++)
+	{
+		if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Effect", SCENE_STAGE, L"Layer_Effect")))
+			return E_FAIL;
+	}
 
 	//MCIWndClose(m_hVideo);
 	m_isFinish = true;

@@ -70,6 +70,7 @@ BOOL CEffectToolApp::InitInstance()
 
 	CWinApp::InitInstance();
 
+	srand((unsigned int)time(NULL));
 
 	// OLE 라이브러리를 초기화합니다.
 	if (!AfxOleInit())

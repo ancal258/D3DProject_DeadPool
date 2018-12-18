@@ -7,7 +7,7 @@
 #include "Camera_Cinematic.h"
 #include "Camera_Debug.h"
 #include "Camera_Target.h"
-
+#include "Player.h"
 
 _USING(Client)
 
@@ -38,20 +38,29 @@ HRESULT CBikiniGirl::Ready_GameObject()
 	//m_pTransformCom->Go_Straight(0.8,1);
 
 
+	m_pPlayer = (CPlayer*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Player", 0);
+	if (nullptr == m_pPlayer)
+		return E_FAIL;
+
+
 	m_pMeshCom->Set_AnimationSet(m_iIndex);
 	return NOERROR;
 }
 
 _int CBikiniGirl::Update_GameObject(const _float & fTimeDelta)
 {
-	if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_T) & 0x8000)
+
+	if (true == m_pColliderCom->Collision_OBB((const CCollider*)m_pPlayer->Get_ComponentPointer(L"Com_Collider")))
 	{
+		// 이벤트 처리.
 		m_pMeshCom->Set_AnimationSet(STATE_HELP);
+		m_isCol = true;
 	}
 	else
 	{
 		m_pMeshCom->Set_AnimationSet(STATE_IDLE);
 	}
+
 
 	m_pMeshCom->Play_AnimationSet(fTimeDelta);
 
@@ -142,7 +151,7 @@ HRESULT CBikiniGirl::Ready_Component()
 	m_pColliderCom = (CCollider*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Collider_Box");
 	if (FAILED(Add_Component(L"Com_Collider", m_pColliderCom)))
 		return E_FAIL;
-	m_pColliderCom->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(50, 50, 50), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f, 25.f, 0.f));
+	m_pColliderCom->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(100, 100, 100), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f, 25.f, 250.f));
 
 	Safe_Release(pComponent_Manager);
 

@@ -409,13 +409,13 @@ void CPlayer::Camera_Update(const _float& fTimeDelta)
 				D3DXVec3Cross(&vCross, &vDir, &vPlayerCross);
 				if (vCross.y < 0)
 				{
-					if (0.998f >= D3DXVec3Dot(&vDir, &vPlayerCross))
-						m_pTransformCom->RotationY(15, fTimeDelta);
+					if (0.99f >= D3DXVec3Dot(&vDir, &vPlayerCross))
+						m_pTransformCom->RotationY(10.f, fTimeDelta);
 				}
 				else
 				{
-					if (0.998f >= D3DXVec3Dot(&vDir, &vPlayerCross))
-						m_pTransformCom->RotationY(-15, fTimeDelta);
+					if (0.99f >= D3DXVec3Dot(&vDir, &vPlayerCross))
+						m_pTransformCom->RotationY(-10.f, fTimeDelta);
 				}
 			}
 			else if (pInput_Device->Get_DIKeyState(DIK_W) & 0x8000 && pInput_Device->Get_DIKeyState(DIK_A) & 0x8000 &&
@@ -434,13 +434,13 @@ void CPlayer::Camera_Update(const _float& fTimeDelta)
 				D3DXVec3Cross(&vCross, &vDir, &vPlayerCross);
 				if (vCross.y < 0)
 				{
-					if (0.998f >= D3DXVec3Dot(&vDir, &vPlayerCross))
-						m_pTransformCom->RotationY(15, fTimeDelta);
+					if (0.99f >= D3DXVec3Dot(&vDir, &vPlayerCross))
+						m_pTransformCom->RotationY(10, fTimeDelta);
 				}
 				else
 				{
-					if (0.998f >= D3DXVec3Dot(&vDir, &vPlayerCross))
-						m_pTransformCom->RotationY(-15, fTimeDelta);
+					if (0.99f >= D3DXVec3Dot(&vDir, &vPlayerCross))
+						m_pTransformCom->RotationY(-10, fTimeDelta);
 				}
 			}
 
@@ -460,13 +460,13 @@ void CPlayer::Camera_Update(const _float& fTimeDelta)
 				D3DXVec3Cross(&vCross, &vDir, &vPlayerLook);
 				if (vCross.y < 0)
 				{
-					if (0.998f >= D3DXVec3Dot(&vDir, &vPlayerLook))
-						m_pTransformCom->RotationY(15, fTimeDelta);
+					if (0.99f >= D3DXVec3Dot(&vDir, &vPlayerLook))
+						m_pTransformCom->RotationY(10, fTimeDelta);
 				}
 				else
 				{
-					if (0.998f >= D3DXVec3Dot(&vDir, &vPlayerLook))
-						m_pTransformCom->RotationY(-15, fTimeDelta);
+					if (0.99f >= D3DXVec3Dot(&vDir, &vPlayerLook))
+						m_pTransformCom->RotationY(-10, fTimeDelta);
 				}
 			}
 			else if (pInput_Device->Get_DIKeyState(DIK_S) & 0x8000 && !(pInput_Device->Get_DIKeyState(DIK_D) & 0x8000) && !(pInput_Device->Get_DIKeyState(DIK_A) & 0x8000) && !(pInput_Device->Get_DIKeyState(DIK_W) & 0x8000))
@@ -488,13 +488,13 @@ void CPlayer::Camera_Update(const _float& fTimeDelta)
 				D3DXVec3Cross(&vCross, &vDir, &vPlayerLook);
 				if (vCross.y < 0)
 				{
-					if (0.998f >= D3DXVec3Dot(&vDir, &vPlayerLook))
-						m_pTransformCom->RotationY(15, fTimeDelta);
+					if (0.99f >= D3DXVec3Dot(&vDir, &vPlayerLook))
+						m_pTransformCom->RotationY(10, fTimeDelta);
 				}
 				else
 				{
-					if (0.998f >= D3DXVec3Dot(&vDir, &vPlayerLook))
-						m_pTransformCom->RotationY(-15, fTimeDelta);
+					if (0.99f >= D3DXVec3Dot(&vDir, &vPlayerLook))
+						m_pTransformCom->RotationY(-10, fTimeDelta);
 				}
 			}
 
@@ -514,13 +514,13 @@ void CPlayer::Camera_Update(const _float& fTimeDelta)
 				D3DXVec3Cross(&vCross, &vDir, &vPlayerRight);
 				if (vCross.y < 0)
 				{
-					if (0.998f >= D3DXVec3Dot(&vDir, &vPlayerRight))
-						m_pTransformCom->RotationY(15, fTimeDelta);
+					if (0.99f >= D3DXVec3Dot(&vDir, &vPlayerRight))
+						m_pTransformCom->RotationY(10, fTimeDelta);
 				}
 				else
 				{
-					if (0.998f >= D3DXVec3Dot(&vDir, &vPlayerRight))
-						m_pTransformCom->RotationY(-15, fTimeDelta);
+					if (0.99f >= D3DXVec3Dot(&vDir, &vPlayerRight))
+						m_pTransformCom->RotationY(-10, fTimeDelta);
 				}
 			}
 
@@ -539,13 +539,13 @@ void CPlayer::Camera_Update(const _float& fTimeDelta)
 				D3DXVec3Cross(&vCross, &vDir, &vPlayerRight);
 				if (vCross.y < 0)
 				{
-					if (0.998f >= D3DXVec3Dot(&vDir, &vPlayerRight))
-						m_pTransformCom->RotationY(15, fTimeDelta);
+					if (0.99f >= D3DXVec3Dot(&vDir, &vPlayerRight))
+						m_pTransformCom->RotationY(10, fTimeDelta);
 				}
 				else
 				{
-					if (0.998f >= D3DXVec3Dot(&vDir, &vPlayerRight))
-						m_pTransformCom->RotationY(-15, fTimeDelta);
+					if (0.99f >= D3DXVec3Dot(&vDir, &vPlayerRight))
+						m_pTransformCom->RotationY(-10, fTimeDelta);
 				}
 			}
 		}

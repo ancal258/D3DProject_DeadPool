@@ -61,6 +61,9 @@
     <Filter Include="02.GameObject\01. Effect\Effect_RectParticle">
       <UniqueIdentifier>{13c3a1af-ef9a-4817-95b8-7e8735eaf505}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\01. Effect\ToolEffect\ParentEffect">
+      <UniqueIdentifier>{e3b13fd4-44ae-42f4-b825-fbf6222ea4d7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EffectTool.h">
@@ -117,6 +120,9 @@
     <ClInclude Include="Effect_RectParticle.h">
       <Filter>02.GameObject\01. Effect\Effect_RectParticle</Filter>
     </ClInclude>
+    <ClInclude Include="ParentEffect.h">
+      <Filter>02.GameObject\01. Effect\ToolEffect\ParentEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EffectTool.cpp">
@@ -163,6 +169,9 @@
     </ClCompile>
     <ClCompile Include="Effect_RectParticle.cpp">
       <Filter>02.GameObject\01. Effect\Effect_RectParticle</Filter>
+    </ClCompile>
+    <ClCompile Include="ParentEffect.cpp">
+      <Filter>02.GameObject\01. Effect\ToolEffect\ParentEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

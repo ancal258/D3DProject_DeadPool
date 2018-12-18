@@ -51,6 +51,7 @@ private:
 	HRESULT SetUp_Camera();
 	HRESULT Load_Path(_tchar* pFilePath); // 경로 로드하는 함수
 	_vec3 Bezier4(_vec3 vPoint_1, _vec3 vPoint_2, _vec3 vPoint_3, _vec3 vPoint_4, double dlOffset);
+	_int Update_Rotation(const _float& fTimeDelta);
 public:
 	static CAirplane* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone_GameObject();

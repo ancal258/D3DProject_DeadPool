@@ -89,9 +89,9 @@ PS_OUT PS_MAIN(PS_IN In)
 	// 이펙트 픽셀을 그리려고 했던 영역에 이미 그려져 있었든 그 무언가의 깊이.
 	float		fDestZ = vDepthInfo.y * 500.0f;
 
-	vDiffuse.a = vDiffuse.a * saturate(fDestZ - In.vProjPos.w);
-
+	//vDiffuse.a = vDiffuse.a * saturate(fDestZ - In.vProjPos.w);
 	Out.vColor = vDiffuse;
+	Out.vColor.a *= g_fAlpha;
 
 	return Out;
 }

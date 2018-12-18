@@ -24,6 +24,7 @@
 #include "ToolBase.h"
 #include "Effect_Mesh.h"
 #include "Effect_RectParticle.h"
+#include "ParentEffect.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -280,6 +281,9 @@ HRESULT CEffectToolView::Ready_Prototype()
 	// For.Prototype_EffectRectParticle
 	if (FAILED(pObject_Manager->Add_Object_Prototype(0, L"Prototype_EffectRectParticle", CEffect_RectParticle::Create(m_pGraphic_Device))))
 		return E_FAIL;
+	// For.Prototype_ParentEffect
+	if (FAILED(pObject_Manager->Add_Object_Prototype(0, L"Prototype_ExplosionParent", CParentEffect::Create(m_pGraphic_Device, L"Prototype_Explosion"))))
+		return E_FAIL;
 
 	Safe_Release(pObject_Manager);
 	return NOERROR;
@@ -315,12 +319,12 @@ HRESULT CEffectToolView::Layer_Object()
 	if (FAILED(Ready_Layer_Object(L"Prototype_ToolBase", L"Layer_Background", nullptr)))
 		return E_FAIL;
 
-	for (size_t i = 0; i < 10; i++)
-	{
-		if (FAILED(Ready_Layer_Object(L"Prototype_Explosion", L"Layer_Effect", nullptr)))
-			return E_FAIL;
+	//for (size_t i = 0; i < 10; i++)
+	//{
+	//	if (FAILED(Ready_Layer_Object(L"Prototype_Explosion", L"Layer_Effect", nullptr)))
+	//		return E_FAIL;
 
-	}
+	//}
 
 	return NOERROR;
 }
