@@ -31,7 +31,7 @@ public:
 		m_isTransformMode = isTransformMode;
 	}
 public:
-	void Set_StateInfo(_vec3* pRight, _vec3* pUp, _vec3* vLook, _vec3* vPos, _bool isOffCulling);
+	void Set_StateInfo(_vec3* pRight, _vec3* pUp, _vec3* vLook, _vec3* vPos, _bool isOffCulling, _bool isExplosion);
 	void Set_Position(_vec3* pPosition) const;
 	void Set_Scale(_vec3* pScale) const;
 	void Set_PlusPosition(_uint iType, _float & fValue) const;
@@ -61,6 +61,7 @@ private:
 public:
 	_bool				m_isLock = false;
 	_bool				m_isOffCulling = false;
+	_bool				m_isExplosion= true;
 private:
 	HRESULT Ready_Component();
 	HRESULT SetUp_ConstantTable(LPD3DXEFFECT pEffect);

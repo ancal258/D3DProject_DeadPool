@@ -30,17 +30,19 @@ STATIC_OBJECT_INFO CStatic_Object::Get_ObjectInfo()
 	tObjectInfo.vLook = matWorld.m[2];
 	tObjectInfo.vPos = matWorld.m[3];
 	tObjectInfo.isOffCulling = m_isOffCulling;
+	tObjectInfo.isExplosion = m_isExplosion;
 
 	return tObjectInfo;
 }
 
-void CStatic_Object::Set_StateInfo(_vec3 * pRight, _vec3 * pUp, _vec3 * vLook, _vec3 * vPos, _bool isOffCulling)
+void CStatic_Object::Set_StateInfo(_vec3 * pRight, _vec3 * pUp, _vec3 * vLook, _vec3 * vPos, _bool isOffCulling, _bool isExplosion)
 {
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_RIGHT, pRight);
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_UP, pUp);
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_LOOK, vLook);
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, vPos);
 	m_isOffCulling = isOffCulling;
+	m_isExplosion = isExplosion;
 	m_isLock = true;
 }
 

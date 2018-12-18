@@ -44,12 +44,18 @@ void CTrigger_Cube::Create_TalkBox(_tchar * pTalk)
 
 void CTrigger_Cube::Add_String(_tchar * pString)
 {
-	m_vevString.push_back(pString);
+	_tchar *szTmp = new _tchar[128];
+	lstrcpy(szTmp, pString);
+
+	m_vevString.push_back(szTmp);
 }
 
 void CTrigger_Cube::Add_ButtonString(_tchar * pString)
 {
-	m_vecButtonString.push_back(pString);
+	_tchar *szTmp = new _tchar[128];
+	lstrcpy(szTmp, pString);
+
+	m_vecButtonString.push_back(szTmp);
 }
 
 HRESULT CTrigger_Cube::Ready_GameObject_Prototype()
@@ -88,6 +94,7 @@ _int CTrigger_Cube::Update_GameObject(const _float & fTimeDelta)
 			for (auto& TalkBox : m_vTalkBox)
 			{
 				TalkBox->Set_Lived(false);
+				Set_Lived(false);
 			}
 		}
 	}
@@ -196,6 +203,10 @@ void CTrigger_Cube::Free()
 	Safe_Release(m_pTransformCom);
 	Safe_Release(m_pRendererCom);
 	Safe_Release(m_pColliderCom);
+	for (auto& pString : m_vevString)
+		Safe_Delete_Array(pString);
 
+	for (auto& pString : m_vecButtonString)
+		Safe_Delete_Array(pString);
 	CGameObject::Free();
 }

@@ -20,7 +20,7 @@ private:
 	explicit CStatic_Object(const CStatic_Object& rhs);
 	virtual ~CStatic_Object() = default;
 public:
-	void Set_StateInfo(_vec3* pRight, _vec3* pUp, _vec3* vLook, _vec3* vPos, _bool isOffCulling);
+	void Set_StateInfo(_vec3* pRight, _vec3* pUp, _vec3* vLook, _vec3* vPos, _bool isOffCulling, _bool isExplosion);
 	HRESULT SetUp_Radius();
 public:
 	virtual HRESULT Ready_GameObject_Prototype(const _tchar* pComponent_Tag);
@@ -39,6 +39,7 @@ private:
 	// col
 	_bool				m_isCol = false;
 	_bool				m_isOffCulling = false;
+	_bool				m_isExplosion = false;
 	_float				m_fRadius = 0;
 private:
 	HRESULT Ready_Component();

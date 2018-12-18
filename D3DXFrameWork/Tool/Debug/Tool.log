@@ -1,6 +1,7 @@
-﻿  Page_AirplanePath.cpp
-d:\github\d3dproject_deadpool\d3dxframework\tool\campoint.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
-d:\github\d3dproject_deadpool\d3dxframework\tool\triggercube.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
-d:\github\d3dproject_deadpool\d3dxframework\tool\page_airplanepath.cpp(345): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-  Tool.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Tool\.\Bin\Tool.exe
+﻿  Page_Object.cpp
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\page_object.cpp(1701): warning C4805: '==': 연산에 'bool' 형식과 'BOOL' 형식을 함께 사용하는 것은 안전하지 않습니다.
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\page_object.cpp(1714): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\page_object.cpp(1728): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\tool\page_object.cpp(1753): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+  Tool.vcxproj -> C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Tool\.\Bin\Tool.exe
   Tool.vcxproj -> .\Bin\Tool.pdb (Partial PDB)

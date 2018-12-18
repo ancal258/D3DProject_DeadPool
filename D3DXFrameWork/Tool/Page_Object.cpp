@@ -1676,7 +1676,7 @@ void CPage_Object::OnBnClickedButton16() // Load
 				m_MeshListBox.AddString(szMeshName);
 				++iMeshCntArray[MESH_END];
 				((CStatic_Object*)pMesh)->Set_PrototypeTag(pPrototype_Tag);
-				((CStatic_Object*)pMesh)->Set_StateInfo(&ObjectInfo.vRight, &ObjectInfo.vUp, &ObjectInfo.vLook, &ObjectInfo.vPos, ObjectInfo.isOffCulling);
+				((CStatic_Object*)pMesh)->Set_StateInfo(&ObjectInfo.vRight, &ObjectInfo.vUp, &ObjectInfo.vLook, &ObjectInfo.vPos, ObjectInfo.isOffCulling,ObjectInfo.isExplosion);
 			}
 		}
 

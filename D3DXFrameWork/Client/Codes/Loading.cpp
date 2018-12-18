@@ -140,8 +140,8 @@ HRESULT CLoading::Loading_Stage_APT()
 	////TEST////
 	if (FAILED(Ready_Effect()))
 		return E_FAIL;
-	//if (FAILED(Load_Trigger_CubeAPT()))
-	//	return E_FAIL;
+	if (FAILED(Load_Trigger_CubeAPT()))
+		return E_FAIL;
 
 	CGameObject* pGameObject = nullptr;
 	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Trigger_Cube", SCENE_STAGE, L"Layer_Trigger",&pGameObject)))
@@ -1687,7 +1687,7 @@ HRESULT CLoading::Load_Static_Object(const _tchar * pFilePath)
 		lstrcpy(m_szString, ObjectInfo.szPrototype_Tag);
 		if (FAILED(Add_Object(SCENE_STAGE, ObjectInfo.szPrototype_Tag, SCENE_STAGE, L"Layer_Load", &pStatic_Object)))
 			return E_FAIL;
-		((CStatic_Object*)pStatic_Object)->Set_StateInfo(&ObjectInfo.vRight, &ObjectInfo.vUp, &ObjectInfo.vLook, &ObjectInfo.vPos,ObjectInfo.isOffCulling);
+		((CStatic_Object*)pStatic_Object)->Set_StateInfo(&ObjectInfo.vRight, &ObjectInfo.vUp, &ObjectInfo.vLook, &ObjectInfo.vPos, ObjectInfo.isOffCulling, ObjectInfo.isExplosion);
 	}
 
 	CloseHandle(hFile);
@@ -1760,8 +1760,8 @@ HRESULT CLoading::Load_Trigger_Cube(const _tchar * pFilePath)
 		return E_FAIL;
 
 
-	_tchar szTmp[128] = L"";
 
+	_tchar szTmp[128];
 
 	_uint iStringCnt = 0;
 	_vec3 vPoint;
@@ -1770,9 +1770,7 @@ HRESULT CLoading::Load_Trigger_Cube(const _tchar * pFilePath)
 
 	for (int i = 0; i < iStringCnt; ++i)
 	{
-
 		ReadFile(hFile, &szTmp, sizeof(_tchar) * 128, &dwByte, nullptr);
-
 		((CTrigger_Cube*)pCube)->Add_String(szTmp);
 	}
 
