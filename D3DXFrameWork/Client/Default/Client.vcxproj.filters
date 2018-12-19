@@ -229,6 +229,9 @@
     <Filter Include="02.GameObject\00.For.Static\04.Trigger">
       <UniqueIdentifier>{33d009e7-a6ed-4451-a629-2a0bc2be7850}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\00.For.Static\03.UI\StaticUI\BackUI">
+      <UniqueIdentifier>{5a589015-f745-43d9-ad28-6ed8cd1a183a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -387,6 +390,9 @@
     <ClInclude Include="..\Headers\Trigger_Cube.h">
       <Filter>02.GameObject\00.For.Static\04.Trigger</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\StaticBackUI.h">
+      <Filter>02.GameObject\00.For.Static\03.UI\StaticUI\BackUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -529,6 +535,9 @@
     </ClCompile>
     <ClCompile Include="..\Codes\Trigger_Cube.cpp">
       <Filter>02.GameObject\00.For.Static\04.Trigger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\StaticBackUI.cpp">
+      <Filter>02.GameObject\00.For.Static\03.UI\StaticUI\BackUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

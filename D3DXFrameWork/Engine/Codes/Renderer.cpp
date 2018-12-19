@@ -175,6 +175,26 @@ void CRenderer::Render_NoneAlpha()
 	m_RenderList[RENDER_NONEALPHA].clear();
 }
 
+void CRenderer::Render_BackUI()
+{
+	for (auto& pGameObject : m_RenderList[RENDER_BACKUI])
+	{
+		pGameObject->Render_GameObject();
+		Safe_Release(pGameObject);
+	}
+	m_RenderList[RENDER_BACKUI].clear();
+}
+
+void CRenderer::Render_Player()
+{
+	for (auto& pGameObject : m_RenderList[RENDER_PLAYER])
+	{
+		pGameObject->Render_GameObject();
+		Safe_Release(pGameObject);
+	}
+	m_RenderList[RENDER_PLAYER].clear();
+}
+
 _bool Sort(CGameObject * pSour, CGameObject * pDest)
 {
 	return pSour->Get_ViewDepth() > pDest->Get_ViewDepth();
@@ -210,6 +230,8 @@ void CRenderer::Render_Deferred()
 	m_pTarget_Manager->Begin_MRT(L"MRT_Deferred");
 
 	Render_NoneAlpha();
+	Render_BackUI();
+	Render_Player();
 
 	m_pTarget_Manager->End_MRT(L"MRT_Deferred");
 

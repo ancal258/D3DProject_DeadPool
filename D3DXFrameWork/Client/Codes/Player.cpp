@@ -173,7 +173,7 @@ _int CPlayer::LastUpdate_GameObject(const _float & fTimeDelta)
 	// LastMatrix Update
 	m_pNavigationCom->Update_LastMatrix(&m_RealMatrix);
 
-	if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
+	if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_PLAYER, this)))
 		return -1;
 
 	Safe_Release(pObject_Manager);

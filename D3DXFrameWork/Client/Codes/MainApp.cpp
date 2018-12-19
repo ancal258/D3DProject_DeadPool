@@ -49,7 +49,17 @@ _int CMainApp::Update_MainApp(const _float & fTimeDelta)
 	if(nullptr != m_pScene)
 		m_iSceneID = ((CScene_Intro*)m_pScene)->Get_SceneID();
 
-	return m_pManagement->Update_Management(fTimeDelta);
+	_float		fTimeSlow = 1.f;
+
+	if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_O))
+	{
+		fTimeSlow = 1.f;
+	}
+	if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_P))
+		fTimeSlow = 0.1f;
+
+
+	return m_pManagement->Update_Management(fTimeDelta * fTimeSlow);
 }
 
 void CMainApp::Render_MainApp()

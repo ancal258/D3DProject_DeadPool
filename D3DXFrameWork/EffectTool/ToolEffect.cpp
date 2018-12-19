@@ -48,7 +48,7 @@ void CToolEffect::Set_EffectInfo(CGameObject* pParent, _float fFrameSpeed, _floa
 	_float fRadian = D3DXToRadian(m_fDegreeRange);
 
 	m_pTransformCom->Scaling(m_vSetScale);
-	m_pTransformCom->Set_AngleZ(fRadian);
+	//m_pTransformCom->Set_AngleZ(fRadian);
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &m_vSetPos);
 }
 

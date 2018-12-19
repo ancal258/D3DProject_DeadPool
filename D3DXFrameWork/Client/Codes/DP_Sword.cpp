@@ -66,7 +66,7 @@ _int CDP_Sword::LastUpdate_GameObject(const _float & fTimeDelta)
 
 	m_pTransformCom->Update_Matrix();
 
-	if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
+	if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_PLAYER, this)))
 		return -1;
 
 

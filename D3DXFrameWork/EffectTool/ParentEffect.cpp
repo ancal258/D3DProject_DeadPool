@@ -78,7 +78,7 @@ void CParentEffect::Set_EffectInfo(_float fFrameSpeed, _float fFrameMax, _float 
 	m_fCreateTime = fCreateTime;
 
 	m_pTransformCom->Scaling(m_vSetScale);
-	m_pTransformCom->RotationZ(m_fDegreeRange, 1.f);
+	//m_pTransformCom->RotationZ(m_fDegreeRange, 1.f);
 }
 
 

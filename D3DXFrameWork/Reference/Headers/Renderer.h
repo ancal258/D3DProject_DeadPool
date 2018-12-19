@@ -9,7 +9,7 @@ class CTarget_Manager;
 class _ENGINE_DLL CRenderer final : public CComponent
 {
 public:
-	enum RENDERGROUP {RENDER_PRIORITY, RENDER_NONEALPHA, RENDER_ALPHA, RENDER_UI, RENDER_END};
+	enum RENDERGROUP {RENDER_PRIORITY, RENDER_NONEALPHA, RENDER_BACKUI,RENDER_PLAYER, RENDER_ALPHA, RENDER_UI, RENDER_END};
 private:
 	explicit CRenderer(LPDIRECT3DDEVICE9 pGraphic_Device);	
 	virtual ~CRenderer() = default;
@@ -30,6 +30,8 @@ private:
 private:
 	void Render_Priority();
 	void Render_NoneAlpha();
+	void Render_BackUI();
+	void Render_Player();
 	void Render_Alpha();
 	void Render_UI();
 private:

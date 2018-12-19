@@ -36,6 +36,7 @@
 #include "UI_HpFill.h"
 #include "TalkBox.h"
 #include "StaticUI.h"
+#include "StaticBackUI.h"
 
 /*
 헬기,  스테이지2 네비메쉬 설치, 미니건움직임,카메라,
@@ -143,15 +144,16 @@ HRESULT CLoading::Loading_Stage_APT()
 	if (FAILED(Load_Trigger_CubeAPT()))
 		return E_FAIL;
 
-	CGameObject* pGameObject = nullptr;
-	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Trigger_Cube", SCENE_STAGE, L"Layer_Trigger",&pGameObject)))
-		return E_FAIL;
-	_vec3 vPos(5.f, 1.f, 5.f);
-	((CTrigger_Cube*)pGameObject)->Set_StateInfo(&vPos);
-	((CTrigger_Cube*)pGameObject)->Add_String(L"Test String 1");
-	((CTrigger_Cube*)pGameObject)->Add_String(L"String Test 2");
-	((CTrigger_Cube*)pGameObject)->Add_String(L"Test 3");
-	((CTrigger_Cube*)pGameObject)->Add_String(L"Happy Happy Happy...");
+	//CGameObject* pGameObject = nullptr;
+	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Trigger_Cube", SCENE_STAGE, L"Layer_Trigger",&pGameObject)))
+	//	return E_FAIL;
+	//_vec3 vPos(5.f, 1.f, 5.f);
+	//((CTrigger_Cube*)pGameObject)->Set_StateInfo(&vPos);
+	//((CTrigger_Cube*)pGameObject)->Add_String(L"Test String 1");
+	//((CTrigger_Cube*)pGameObject)->Add_String(L"String Test 2");
+	//((CTrigger_Cube*)pGameObject)->Add_String(L"Test 3");
+	//((CTrigger_Cube*)pGameObject)->Add_String(L"Happy Happy Happy...");
+
 
 	////////////////
 
@@ -638,6 +640,10 @@ HRESULT CLoading::Ready_Static_Prototype_Component()
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_UI_StaticUI", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/UI/BackUI/StaticUI_%d.tga", 13))))
 		return E_FAIL;
 
+	// For.Component_Texture_UI_StaticBackUI
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_UI_StaticBackUI", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/UI/Renderer_BackUI/BackUI_%d.png", 1))))
+		return E_FAIL;
+
 	// For.Component_Buffer_Terrain	
 	lstrcpy(m_szString, L"../Bin/Resources/Textures/Terrain/Height.bmp");
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Buffer_Terrain", CBuffer_Terrain::Create(Get_Graphic_Device(), m_szString, 1.f))))
@@ -712,6 +718,10 @@ HRESULT CLoading::Ready_Static_Prototype_UI()
 		return E_FAIL;
 	// For.Prototype_UI_StaticUI_BulletBack
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_StaticUI_BulletBack", CStaticUI::Create(Get_Graphic_Device(), 12))))
+		return E_FAIL;
+
+	// For.Prototype_UI_StaticBackUI_Think
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_StaticBackUI_Think", CStaticBackUI::Create(Get_Graphic_Device(), 0))))
 		return E_FAIL;
 
 
@@ -793,6 +803,11 @@ HRESULT CLoading::Ready_Static_Layer_UI()
 	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_UI_StaticUI_BulletBack", SCENE_STAGE, L"Layer_UI", &pUI)))
 		return E_FAIL;
 	((CStaticUI*)pUI)->Set_Info(_vec2(210, 200), _vec2(150, 36));
+
+	//// BackUI
+	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_UI_StaticBackUI_Think", SCENE_STAGE, L"Layer_UI", &pUI)))
+	//	return E_FAIL;
+	//((CStaticUI*)pUI)->Set_Info(_vec2(g_iBackCX>>1, g_iBackCY>>1), _vec2(g_iBackCX, g_iBackCY));
 
 
 	return NOERROR;
