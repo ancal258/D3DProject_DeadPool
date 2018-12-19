@@ -34,10 +34,10 @@ private:
 private:
 	HRESULT Ready_Component();
 	HRESULT	SetUp_ConstantTable(LPD3DXEFFECT pEffect);
-private:
+public:
 	_float				m_fFrame = 0.f; // 애니메이션의 현재 프레임
-	_float				m_fFrameSpeed = 0.f; // 애니메이션 프레임 속도
-	_float				m_fFrameMax = 0.f; // 애니메이션 최대 프레임
+	_float				m_fFrameSpeed = 90.f; // 애니메이션 프레임 속도
+	_float				m_fFrameMax = 90.f; // 애니메이션 최대 프레임
 	_float				m_fMoveSpeed = 0.f;
 	_float				m_fSurviveTime = 0.f;
 	_float				m_fDegreeRange = 0.f; // 회전되어있는 각도 ( 범위 )

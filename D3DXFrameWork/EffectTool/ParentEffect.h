@@ -37,7 +37,8 @@ private:
 
 private:
 	HRESULT Ready_Component();
-
+public:
+	_ubyte				m_iType = 0;
 private:
 	_float				m_fTimeAcc = 0.f;
 	_float				m_fFrameSpeed = 0.f; // 애니메이션 프레임 속도

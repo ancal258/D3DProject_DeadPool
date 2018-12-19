@@ -16,6 +16,8 @@
 15 NoGun_Walk_R
 16 NoGun_Walk_B
 17 DP_InteractDOG
+18 Phone
+19 PhoneEnd
 
 
 

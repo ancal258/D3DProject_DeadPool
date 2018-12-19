@@ -27,6 +27,7 @@
 #include "Static_Airplane.h"
 #include "BikiniGirl.h"
 #include "Trigger_Cube.h"
+#include "Trigger_BackUI.h"
 //Effect
 #include "Effect_Mesh.h"
 #include "Effect_RectParticle.h"
@@ -144,11 +145,12 @@ HRESULT CLoading::Loading_Stage_APT()
 	if (FAILED(Load_Trigger_CubeAPT()))
 		return E_FAIL;
 
-	//CGameObject* pGameObject = nullptr;
-	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Trigger_Cube", SCENE_STAGE, L"Layer_Trigger",&pGameObject)))
-	//	return E_FAIL;
-	//_vec3 vPos(5.f, 1.f, 5.f);
-	//((CTrigger_Cube*)pGameObject)->Set_StateInfo(&vPos);
+	CGameObject* pGameObject = nullptr;
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Trigger_BackUI", SCENE_STAGE, L"Layer_Trigger",&pGameObject)))
+		return E_FAIL;
+
+	_vec3 vPos(47.3f, 1.f, 19.f);
+	((CTrigger_Cube*)pGameObject)->Set_StateInfo(&vPos);
 	//((CTrigger_Cube*)pGameObject)->Add_String(L"Test String 1");
 	//((CTrigger_Cube*)pGameObject)->Add_String(L"String Test 2");
 	//((CTrigger_Cube*)pGameObject)->Add_String(L"Test 3");
@@ -721,12 +723,15 @@ HRESULT CLoading::Ready_Static_Prototype_UI()
 		return E_FAIL;
 
 	// For.Prototype_UI_StaticBackUI_Think
-	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_StaticBackUI_Think", CStaticBackUI::Create(Get_Graphic_Device(), 0))))
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_StaticBackUI_FakeError", CStaticBackUI::Create(Get_Graphic_Device(), 0))))
 		return E_FAIL;
 
 
 	// For.Prototype_Trigger_Cube
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Trigger_Cube", CTrigger_Cube::Create(Get_Graphic_Device()))))
+		return E_FAIL;
+	// For.Prototype_Trigger_BackUI
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Trigger_BackUI", CTrigger_BackUI::Create(Get_Graphic_Device()))))
 		return E_FAIL;
 
 	return NOERROR;

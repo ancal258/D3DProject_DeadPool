@@ -80,12 +80,9 @@ _int CStaticUI::LastUpdate_GameObject(const _float & fTimeDelta)
 
 	m_pTransformCom->Update_Matrix();
 
-	if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_RETURN) & 0x8000)
-	{
-		m_isLoad = true;
-	}
 
-	if (true == m_isLoad)
+
+	if (true == m_pRendererCom->Get_Trigger())
 		if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_UI, this)))
 			return -1;
 	return _int();

@@ -242,6 +242,7 @@ void CRenderer::Render_Deferred()
 
 void CRenderer::Render_LightAcc()
 {
+
 	if (nullptr == m_pTarget_Manager)
 		return;
 
@@ -251,10 +252,11 @@ void CRenderer::Render_LightAcc()
 
 	// 장치에 Shade타겟을 셋팅한다.
 	m_pTarget_Manager->Begin_MRT(L"MRT_LightAcc");
-
-	m_pTarget_Manager->SetUp_OnShader(pEffect, "g_NormalTexture", L"Target_Normal");
-	m_pTarget_Manager->SetUp_OnShader(pEffect, "g_DepthTexture", L"Target_Depth");
-
+	if (true == m_isTrigger)
+	{
+		m_pTarget_Manager->SetUp_OnShader(pEffect, "g_NormalTexture", L"Target_Normal");
+		m_pTarget_Manager->SetUp_OnShader(pEffect, "g_DepthTexture", L"Target_Depth");
+	}
 	pEffect->Begin(nullptr, 0);
 
 	CLight_Manager::GetInstance()->Render_Light(pEffect);
@@ -279,9 +281,10 @@ void CRenderer::Render_Blend()
 	pEffect->AddRef();
 
 	m_pTarget_Manager->SetUp_OnShader(pEffect, "g_DiffuseTexture", L"Target_Diffuse");
+
 	m_pTarget_Manager->SetUp_OnShader(pEffect, "g_ShadeTexture", L"Target_Shade");
 	m_pTarget_Manager->SetUp_OnShader(pEffect, "g_SpecularTexture", L"Target_Specular");
-	
+
 	pEffect->Begin(nullptr, 0);
 	pEffect->BeginPass(0);
 

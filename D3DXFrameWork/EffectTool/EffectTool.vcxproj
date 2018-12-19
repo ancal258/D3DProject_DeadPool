@@ -198,9 +198,11 @@
     <ClInclude Include="Defines.h" />
     <ClInclude Include="EffectForm.h" />
     <ClInclude Include="EffectSheet.h" />
+    <ClInclude Include="EffectT.h" />
     <ClInclude Include="EffectTool.h" />
     <ClInclude Include="EffectToolDoc.h" />
     <ClInclude Include="EffectToolView.h" />
+    <ClInclude Include="Effect_BloodT.h" />
     <ClInclude Include="Effect_Mesh.h" />
     <ClInclude Include="Effect_RectParticle.h" />
     <ClInclude Include="MainFrm.h" />
@@ -218,9 +220,11 @@
   <ItemGroup>
     <ClCompile Include="EffectForm.cpp" />
     <ClCompile Include="EffectSheet.cpp" />
+    <ClCompile Include="EffectT.cpp" />
     <ClCompile Include="EffectTool.cpp" />
     <ClCompile Include="EffectToolDoc.cpp" />
     <ClCompile Include="EffectToolView.cpp" />
+    <ClCompile Include="Effect_BloodT.cpp" />
     <ClCompile Include="Effect_Mesh.cpp" />
     <ClCompile Include="Effect_RectParticle.cpp" />
     <ClCompile Include="MainFrm.cpp" />

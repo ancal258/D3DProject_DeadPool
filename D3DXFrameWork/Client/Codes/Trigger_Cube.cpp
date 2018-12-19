@@ -99,6 +99,15 @@ _int CTrigger_Cube::Update_GameObject(const _float & fTimeDelta)
 		}
 	}
 
+	if (true == m_pRendererCom->Get_SecondTrigger())
+	{
+		for (auto& TalkBox : m_vTalkBox)
+		{
+			TalkBox->Set_Lived(false);
+			Set_Lived(false);
+		}
+	}
+
 	return _int();
 }
 

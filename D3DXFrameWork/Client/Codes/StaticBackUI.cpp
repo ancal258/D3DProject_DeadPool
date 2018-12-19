@@ -52,12 +52,6 @@ HRESULT CStaticBackUI::Ready_GameObject()
 {
 	if (FAILED(Ready_Component()))
 		return E_FAIL;
-	if (0 == m_dwTextureIdx || 1 == m_dwTextureIdx || 12 == m_dwTextureIdx)
-	{
-		m_pPlayer = (CPlayer*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Player", 0);
-		if (nullptr == m_pPlayer)
-			return E_FAIL;
-	}
 
 	return NOERROR;
 }
@@ -80,14 +74,8 @@ _int CStaticBackUI::LastUpdate_GameObject(const _float & fTimeDelta)
 
 	m_pTransformCom->Update_Matrix();
 
-	if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_RETURN) & 0x8000)
-	{
-		m_isLoad = true;
-	}
-
-	if (true == m_isLoad)
-		if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_BACKUI, this)))
-			return -1;
+	if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_BACKUI, this)))
+		return -1;
 	return _int();
 }
 

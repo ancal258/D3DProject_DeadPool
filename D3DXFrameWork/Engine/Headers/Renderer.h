@@ -18,6 +18,15 @@ public:
 public:
 	HRESULT Ready_Renderer();
 	void Render_Renderer();
+	void Set_Trigger(_bool isTrigger) {
+		m_isTrigger = isTrigger;	}
+	_bool Get_Trigger() {
+		return m_isTrigger;	}
+
+	void Set_SecondTrigger(_bool isTrigger) {
+		m_isSecondTrigger = isTrigger;	}
+	_bool Get_SecondTrigger() {
+		return m_isSecondTrigger;	}
 private:
 	list<CGameObject*>				m_RenderList[RENDER_END];
 	typedef list<CGameObject*>		RENDERLIST;
@@ -27,6 +36,9 @@ private:
 	CShader*						m_pShader_Blend = nullptr;
 	LPDIRECT3DVERTEXBUFFER9			m_pVB = nullptr;
 	LPDIRECT3DINDEXBUFFER9			m_pIB = nullptr;
+private:
+	_bool							m_isTrigger = false;
+	_bool							m_isSecondTrigger = false;
 private:
 	void Render_Priority();
 	void Render_NoneAlpha();

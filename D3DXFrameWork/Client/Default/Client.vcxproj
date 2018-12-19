@@ -211,6 +211,7 @@
     <ClInclude Include="..\Headers\TalkBox.h" />
     <ClInclude Include="..\Headers\Terrain.h" />
     <ClInclude Include="..\Headers\Test.h" />
+    <ClInclude Include="..\Headers\Trigger_BackUI.h" />
     <ClInclude Include="..\Headers\Trigger_Cube.h" />
     <ClInclude Include="..\Headers\UI_CrossHair.h" />
     <ClInclude Include="..\Headers\UI_HPBar.h" />
@@ -263,6 +264,7 @@
     <ClCompile Include="..\Codes\TalkBox.cpp" />
     <ClCompile Include="..\Codes\Terrain.cpp" />
     <ClCompile Include="..\Codes\Test.cpp" />
+    <ClCompile Include="..\Codes\Trigger_BackUI.cpp" />
     <ClCompile Include="..\Codes\Trigger_Cube.cpp" />
     <ClCompile Include="..\Codes\UI_CrossHair.cpp" />
     <ClCompile Include="..\Codes\UI_HPBar.cpp" />

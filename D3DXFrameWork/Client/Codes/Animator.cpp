@@ -32,6 +32,8 @@ HRESULT CAnimator::Ready_Animator(CMesh_Dynamic* pMeshCom, CTransform* pTransfor
 	m_pPlayer = (CPlayer*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Player", 0);
 	if (nullptr == m_pPlayer)
 		return E_FAIL;
+	m_pRenderer = (const CRenderer*)m_pPlayer->Get_ComponentPointer(L"Com_Renderer");
+	m_ArrayAnimState[END_PHONE] = true;
 	return NOERROR;
 }
 
@@ -51,6 +53,8 @@ void CAnimator::Ready_Pair()
 		m_vecBlendPair.push_back(make_pair(NOGUN_IDLE00, NOGUN_WALK_F));
 		m_vecBlendPair.push_back(make_pair(NOGUN_WALK_F, NOGUN_IDLE00));
 		m_vecBlendPair.push_back(make_pair(SIT_GETUP, NOGUN_IDLE00));
+		m_vecBlendPair.push_back(make_pair(CALL_PHONE, END_PHONE));
+		m_vecBlendPair.push_back(make_pair(END_PHONE, NOGUN_IDLE00));
 	}
 	else // FIELD - Blending 될 애니메이션들
 	{
@@ -114,52 +118,80 @@ _uint CAnimator::Get_AnimState()
 
 void CAnimator::Update_Animation(const _float & fTimeDelta)
 {
-	if (m_ArrayAnimState[SIT_GETUP] == false)
-	{
-		m_pMeshCom->Set_AnimationSet(SIT_GETUP);
-		if (true == m_pMeshCom->Is_Finish())
-			m_ArrayAnimState[SIT_GETUP] = true;
-	}
 
-	if (m_pInput_Device->Get_DIKeyState(DIK_W) & 0x8000)
+	if (true == m_ArrayAnimState[END_PHONE])
 	{
-		m_pMeshCom->Set_AnimationSet(NOGUN_WALK_F);
-		m_pNavigationCom->Move_OnNavigation(m_pTransformCom, 8.7f, fTimeDelta);
-	}
-	else if (m_pInput_Device->Get_DIKeyState(DIK_DOWN) & 0x8000)
-	{
-		m_pMeshCom->Set_AnimationSet(NOGUN_WALK_B);
-		m_pTransformCom->Go_Straight(-23.3, fTimeDelta);
-	}
-	else if (m_pInput_Device->Get_DIKeyState(DIK_Q) & 0x8000)
-	{
-		m_pMeshCom->Set_AnimationSet(NOGUN_WALK_FL);
-	}
-	else if (m_pInput_Device->Get_DIKeyState(DIK_E) & 0x8000)
-	{
-		m_pMeshCom->Set_AnimationSet(NOGUN_WALK_FR);
-	}
-	else if (m_pInput_Device->Get_DIKeyState(DIK_R) & 0x8000)
-	{
-		m_iSit = SIT_GETUP;
-	}
-	else if (m_pInput_Device->Get_DIKeyState(DIK_T) & 0x8000)
-	{
-		m_pMeshCom->Set_AnimationSet(INTERACT_DOG);
-	}
-	else
-	{
-		if (m_ArrayAnimState[SIT_GETUP] == true)
+		if (m_ArrayAnimState[SIT_GETUP] == false)
 		{
-			int iIndex = rand() % 6 + 4;
-			m_pMeshCom->Set_AnimationSet(NOGUN_IDLE00);
+			m_pMeshCom->Set_AnimationSet(SIT_GETUP);
+			if (true == m_pMeshCom->Is_Finish())
+				m_ArrayAnimState[SIT_GETUP] = true;
+		}
+
+		if (m_pInput_Device->Get_DIKeyState(DIK_W) & 0x8000)
+		{
+			m_pMeshCom->Set_AnimationSet(NOGUN_WALK_F);
+			m_pNavigationCom->Move_OnNavigation(m_pTransformCom, 8.7f, fTimeDelta);
+		}
+		else if (m_pInput_Device->Get_DIKeyState(DIK_DOWN) & 0x8000)
+		{
+			m_pMeshCom->Set_AnimationSet(NOGUN_WALK_B);
+			m_pTransformCom->Go_Straight(-23.3, fTimeDelta);
+		}
+		else if (m_pInput_Device->Get_DIKeyState(DIK_Q) & 0x8000)
+		{
+			m_pMeshCom->Set_AnimationSet(NOGUN_WALK_FL);
+		}
+		else if (m_pInput_Device->Get_DIKeyState(DIK_E) & 0x8000)
+		{
+			m_pMeshCom->Set_AnimationSet(NOGUN_WALK_FR);
+		}
+		else if (m_pInput_Device->Get_DIKeyState(DIK_R) & 0x8000)
+		{
+			m_iSit = SIT_GETUP;
+		}
+		else if (m_pInput_Device->Get_DIKeyState(DIK_T) & 0x8000)
+		{
+			m_pMeshCom->Set_AnimationSet(INTERACT_DOG);
 		}
 		else
-			m_pMeshCom->Set_AnimationSet(m_iSit);
-		
+		{
+			if (m_ArrayAnimState[SIT_GETUP] == true)
+			{
+				int iIndex = rand() % 6 + 4;
+				m_pMeshCom->Set_AnimationSet(NOGUN_IDLE00);
+			}
+			else
+				m_pMeshCom->Set_AnimationSet(m_iSit);
+		}
 	}
 
+	if (true == const_cast<CRenderer*>(m_pRenderer)->Get_SecondTrigger())
+	{
+		m_ArrayAnimState[END_PHONE] = false;
+	}
 
+	if (false == m_ArrayAnimState[END_PHONE])
+	{
+		if (false == const_cast<CRenderer*>(m_pRenderer)->Get_Trigger()&&
+			false == m_ArrayAnimState[CALL_PHONE])
+		{
+			m_pMeshCom->Set_AnimationSet(CALL_PHONE);
+			if (true == m_pMeshCom->Is_Finish())
+				m_ArrayAnimState[CALL_PHONE] = true;
+		}
+
+		if (m_ArrayAnimState[END_PHONE] == false &&
+			m_ArrayAnimState[CALL_PHONE] == true)
+		{
+			m_pMeshCom->Set_AnimationSet(END_PHONE);
+			if (true == m_pMeshCom->Is_Finish())
+			{
+				const_cast<CRenderer*>(m_pRenderer)->Set_Trigger(true);
+				m_ArrayAnimState[END_PHONE] = true;
+			}
+		}
+	}
 	m_pMeshCom->Play_AnimationSet(fTimeDelta);
 }
 

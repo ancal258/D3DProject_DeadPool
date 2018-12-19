@@ -11,6 +11,7 @@
 
 #include "ToolEffect.h"
 #include "ParentEffect.h"
+#include "Effect_BloodT.h"
 
 // CPage_Effect 대화 상자입니다.
 
@@ -62,12 +63,15 @@ void CPage_Effect::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_EDIT14, m_fDirZ);
 	DDX_Check(pDX, IDC_CHECK1, m_isContinueCreate);
 	DDX_Text(pDX, IDC_EDIT15, m_fCreateTime);
+	DDX_Control(pDX, IDC_LIST2, m_AnimList);
 }
 
 
 BEGIN_MESSAGE_MAP(CPage_Effect, CPropertyPage)
 	ON_BN_CLICKED(IDC_BUTTON1, &CPage_Effect::OnBnClickedButton1)
 	ON_LBN_SELCHANGE(IDC_LIST1, &CPage_Effect::OnLbnSelchangeList1)
+	ON_LBN_SELCHANGE(IDC_LIST2, &CPage_Effect::OnLbnSelchangeList2)
+	ON_BN_CLICKED(IDC_BUTTON10, &CPage_Effect::OnBnClickedButton10)
 END_MESSAGE_MAP()
 
 
@@ -80,14 +84,32 @@ void CPage_Effect::OnBnClickedButton1() // 생성 버튼
 	CMainFrame*		pMainFrame = (CMainFrame*)AfxGetMainWnd();
 	CGameObject*	pMesh = nullptr;
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	if (0 == m_iSelect)
+
+	if (m_iSelect < m_AnimList.GetCount())
 	{
 		if (FAILED(pMainFrame->m_pEffectToolView->Ready_Layer_Object(L"Prototype_ExplosionParent", L"Layer_ParentEffect", &pMesh)))
 			return;
+		((CParentEffect*)pMesh)->m_iType = m_iSelect;
+		m_vecObject.push_back(pMesh);
+
 		_vec3 vScale = _vec3(m_fScale, m_fScale, m_fScale);
 		_vec3 vPos = _vec3(m_fInitX, m_fInitY, m_fInitZ);
 		_vec3 vDir = _vec3(m_fDirX, m_fDirY, m_fDirZ);
-		((CParentEffect*)pMesh)->Set_EffectInfo(m_fFrameSpeed, m_fFrameMax, m_fMoveSpeed, m_fSurviveTime, m_fRotDegree, &vScale, &vPos, &vDir,m_isSettingPos,m_isRandomPos,m_fCreateTime);
+		((CParentEffect*)pMesh)->Set_EffectInfo(m_fFrameSpeed, m_fFrameMax, m_fMoveSpeed, m_fSurviveTime, m_fRotDegree, &vScale, &vPos, &vDir, m_isSettingPos, m_isRandomPos, m_fCreateTime);
+	}
+	else
+	{
+		if (m_iSelect == 0 + m_AnimList.GetCount())
+		{
+			if (FAILED(pMainFrame->m_pEffectToolView->Ready_Layer_Object(L"Prototype_EffectTexture", L"Layer_TextureEffect", &pMesh)))
+				return;
+			m_vecObject.push_back(pMesh);
+
+			_vec3 vScale = _vec3(m_fScale, m_fScale, m_fScale);
+			_vec3 vPos = _vec3(m_fInitX, m_fInitY, m_fInitZ);
+			_vec3 vDir = _vec3(m_fDirX, m_fDirY, m_fDirZ);
+			((CParentEffect*)pMesh)->Set_EffectInfo(m_fFrameSpeed, m_fFrameMax, m_fMoveSpeed, m_fSurviveTime, m_fRotDegree, &vScale, &vPos, &vDir, m_isSettingPos, m_isRandomPos, m_fCreateTime);
+		}
 	}
 }
 
@@ -102,9 +124,10 @@ BOOL CPage_Effect::OnInitDialog()
 	m_isAnimationTexture = true;
 	m_isContinueCreate = TRUE;
 
-	m_TextureList.AddString(L"1. TestExplosion");
+	m_AnimList.AddString(L"1. TestExplosion");
+	m_AnimList.AddString(L"2. BloodAnim");
 
-
+	m_TextureList.AddString(L"1. Blood");
 	UpdateData(0);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
@@ -112,8 +135,43 @@ BOOL CPage_Effect::OnInitDialog()
 }
 
 
-void CPage_Effect::OnLbnSelchangeList1() // ListBox
+void CPage_Effect::OnLbnSelchangeList1() // 단일 텍스쳐
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	m_iSelect = m_TextureList.GetCurSel();
+	m_iSelect = m_TextureList.GetCurSel() + m_AnimList.GetCount();
+	
+	UpdateData(0);
+}
+
+
+void CPage_Effect::OnLbnSelchangeList2() // 애니메이션 시트
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+
+	m_iSelect = m_AnimList.GetCurSel();
+
+	switch (m_iSelect)
+	{
+	case 0:
+		m_fFrameSpeed = 90;
+		m_fFrameMax = 90;
+		break;
+	case 1:
+		m_fFrameSpeed = 24;
+		m_fFrameMax = 24;
+		break;
+	default:
+		break;
+	}
+
+	UpdateData(0);
+
+}
+
+
+void CPage_Effect::OnBnClickedButton10() // Delete All
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	for (auto& pParentEffect : m_vecObject)
+		pParentEffect->Set_Lived(false);
 }

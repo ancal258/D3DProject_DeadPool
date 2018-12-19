@@ -24,6 +24,7 @@
 #include "ToolBase.h"
 #include "Effect_Mesh.h"
 #include "Effect_RectParticle.h"
+#include "Effect_BloodT.h"
 #include "ParentEffect.h"
 
 #ifdef _DEBUG
@@ -238,14 +239,15 @@ HRESULT CEffectToolView::Ready_Component()
 	/////////////////////////////////////////////////////////////////////
 	if (FAILED(pComponent_Manager->Add_Component(0, L"Component_Texture_Effect", CTexture::Create(m_pGraphic_Device, CTexture::TYPE_GENERAL, L"../Client/Bin/Resources/Textures/Explosion/Explosion%d.png", 90))))
 		return E_FAIL;
+	if (FAILED(pComponent_Manager->Add_Component(0, L"Component_Texture_BloodAnim", CTexture::Create(m_pGraphic_Device, CTexture::TYPE_GENERAL, L"../Client/Bin/Resources/Textures/Effect/BloodAnim/Blood_Anim_%d.png", 24))))
+		return E_FAIL;
+	if (FAILED(pComponent_Manager->Add_Component(0, L"Component_Texture_Blood", CTexture::Create(m_pGraphic_Device, CTexture::TYPE_GENERAL, L"../Client/Bin/Resources/Textures/Effect/Blood/blood_4x4_1_subUV_%d.png", 16))))
+		return E_FAIL;
 	if (FAILED(pComponent_Manager->Add_Component(0, L"Component_Texture_Base", CTexture::Create(m_pGraphic_Device, CTexture::TYPE_GENERAL, L"Bin/Textures/BaseTexture.png"))))
 		return E_FAIL;
 
 	// For.Component_Mesh_EffectSwordHeavy03R
 	if (FAILED(pComponent_Manager->Add_Component(0, L"Component_Mesh_EffectSwordHeavy03R", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/Effect/Sword/", L"Sword_Heavy_03R.x"))))
-		return E_FAIL;
-	// For.Component_Texture_Blood
-	if (FAILED(pComponent_Manager->Add_Component(0, L"Component_Texture_Blood", CTexture::Create(m_pGraphic_Device, CTexture::TYPE_GENERAL, L"../Client/Bin/Resources/Textures/Effect/Blood/blood_4x4_1_subUV_%d.png", 16))))
 		return E_FAIL;
 
 
@@ -281,9 +283,14 @@ HRESULT CEffectToolView::Ready_Prototype()
 	// For.Prototype_EffectRectParticle
 	if (FAILED(pObject_Manager->Add_Object_Prototype(0, L"Prototype_EffectRectParticle", CEffect_RectParticle::Create(m_pGraphic_Device))))
 		return E_FAIL;
+	// For.Prototype_EffectBlood
+	if (FAILED(pObject_Manager->Add_Object_Prototype(0, L"Prototype_EffectBlood", CEffect_BloodT::Create(m_pGraphic_Device))))
+		return E_FAIL;
 	// For.Prototype_ParentEffect
 	if (FAILED(pObject_Manager->Add_Object_Prototype(0, L"Prototype_ExplosionParent", CParentEffect::Create(m_pGraphic_Device, L"Prototype_Explosion"))))
 		return E_FAIL;
+
+
 
 	Safe_Release(pObject_Manager);
 	return NOERROR;

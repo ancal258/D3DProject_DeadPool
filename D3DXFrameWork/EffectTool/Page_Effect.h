@@ -4,7 +4,9 @@
 #include "Engine_Defines.h"
 #include "Defines.h"
 // CPage_Effect 대화 상자입니다.
-
+_BEGIN(Engine)
+class CGameObject;
+_END
 class CPage_Effect : public CPropertyPage
 {
 	DECLARE_DYNAMIC(CPage_Effect)
@@ -48,5 +50,9 @@ public:
 	_uint	m_iSelect = 0;
 
 private:
-
+	vector<CGameObject*>	m_vecObject;
+public:
+	CListBox m_AnimList;
+	afx_msg void OnLbnSelchangeList2();
+	afx_msg void OnBnClickedButton10();
 };

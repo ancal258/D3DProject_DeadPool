@@ -8,6 +8,7 @@ class CInput_Device;
 class CMesh_Dynamic;
 class CNavigation;
 class CTransform;
+class CRenderer;
 _END
 
 
@@ -20,6 +21,7 @@ private:
 		SIT_IDLE_BREATH, SIT_IDLE_HANDMOVE, SIT_GETUP, SIT_SITDOWN,
 		NOGUN_IDLE00, NOGUN_IDLE01, NOGUN_IDLE02, NOGUN_IDLE03, NOGUN_IDLE04, NOGUN_IDLE05, NOGUN_IDLE06,
 		NOGUN_WALK_F, NOGUN_WALK_FL, NOGUN_WALK_FR, NOGUN_WALK_L, NOGUN_WALK_R, NOGUN_WALK_B, INTERACT_DOG,
+		CALL_PHONE, END_PHONE,
 		ANIM_END
 	};
 	enum ANIM_FIELD {
@@ -90,6 +92,7 @@ private:
 	CPlayer*			m_pPlayer;
 
 	_bool				m_isKeyDown[KEY_END] = { false };
+	_bool				m_isCalling = false;
 private:
 	list<_uint>			m_ReservationList;
 
@@ -100,7 +103,7 @@ private:
 	_bool				m_isJumpLand = false;
 	_float				*m_fRotate = nullptr;
 	_float				*m_fTimeAcc = nullptr;
-
+	const CRenderer*	m_pRenderer = nullptr;
 public:
 	static CAnimator* Create(LPDIRECT3DDEVICE9 pGraphic_Device,CMesh_Dynamic* pMeshCom, CTransform* pTransformCom, CNavigation* pNavigationCom,_uint iSceneNum);
 protected:

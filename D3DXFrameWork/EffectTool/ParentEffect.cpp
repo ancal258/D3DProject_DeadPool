@@ -3,6 +3,7 @@
 #include "Component_Manager.h"
 #include "Object_Manager.h"
 #include "ToolEffect.h"
+#include "Effect_BloodT.h"
 CParentEffect::CParentEffect(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CGameObject(pGraphic_Device)
 {
@@ -37,15 +38,26 @@ _int CParentEffect::Update_GameObject(const _float & fTimeDelta)
 
 	if (m_fTimeAcc >= m_fCreateTime)
 	{
+	
 		CGameObject* pMesh = nullptr;
-		if (FAILED(CObject_Manager::GetInstance()->Add_Object(0, L"Prototype_Explosion", 0, L"Layer_ToolEffect", &pMesh)))
-			return -1;
 		_vec3 vPos;
 		if (true == m_isSettingPos)
 			vPos = m_vSetPos;
 		if (true == m_isRandomPos)
-			vPos = _vec3(rand() % (int)m_vSetPos.x, rand() % (int)m_vSetPos.y, rand() % (int)m_vSetPos.z);
-		((CToolEffect*)pMesh)->Set_EffectInfo(this, m_fFrameSpeed, m_fFrameMax, m_fMoveSpeed, m_fSurviveTime, m_fDegreeRange, &m_vSetScale, &vPos, &m_vDir);
+			vPos = _vec3(((_float)(rand() % 101) / 100) * m_vSetPos.x, ((_float)(rand() % 101) / 100) * m_vSetPos.y, ((_float)(rand() % 101) / 100) * m_vSetPos.z);
+
+		if (0 == m_iType)
+		{
+			if (FAILED(CObject_Manager::GetInstance()->Add_Object(0, L"Prototype_Explosion", 0, L"Layer_ToolEffect", &pMesh)))
+				return -1;
+			((CToolEffect*)pMesh)->Set_EffectInfo(this, m_fFrameSpeed, m_fFrameMax, m_fMoveSpeed, m_fSurviveTime, m_fDegreeRange, &m_vSetScale, &vPos, &m_vDir);
+		}
+		if (1 == m_iType)
+		{
+			if (FAILED(CObject_Manager::GetInstance()->Add_Object(0, L"Prototype_EffectBlood", 0, L"Layer_ToolEffect", &pMesh)))
+				return -1;
+			((CEffect_BloodT*)pMesh)->Set_EffectInfo(this, m_fFrameSpeed, m_fFrameMax, m_fMoveSpeed, m_fSurviveTime, m_fDegreeRange, &m_vSetScale, &vPos, &m_vDir);
+		}
 
 		m_fTimeAcc = 0.f;
 	}
@@ -78,7 +90,7 @@ void CParentEffect::Set_EffectInfo(_float fFrameSpeed, _float fFrameMax, _float 
 	m_fCreateTime = fCreateTime;
 
 	m_pTransformCom->Scaling(m_vSetScale);
-	//m_pTransformCom->RotationZ(m_fDegreeRange, 1.f);
+	m_pTransformCom->RotationZ(m_fDegreeRange, 1.f);
 }
 
 

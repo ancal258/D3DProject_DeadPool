@@ -232,6 +232,12 @@
     <Filter Include="02.GameObject\00.For.Static\03.UI\StaticUI\BackUI">
       <UniqueIdentifier>{5a589015-f745-43d9-ad28-6ed8cd1a183a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\00.For.Static\04.Trigger\TalkCube">
+      <UniqueIdentifier>{d998b881-d7e5-4c6f-a346-4d5718062040}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\00.For.Static\04.Trigger\BackUICube">
+      <UniqueIdentifier>{ca50a5cd-5f95-4c0f-9cf6-5b5b3bd55dd9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -387,11 +393,14 @@
     <ClInclude Include="..\Headers\BikiniGirl.h">
       <Filter>02.GameObject\02.For.Stage\06.BikiniGirl</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\Trigger_Cube.h">
-      <Filter>02.GameObject\00.For.Static\04.Trigger</Filter>
-    </ClInclude>
     <ClInclude Include="..\Headers\StaticBackUI.h">
       <Filter>02.GameObject\00.For.Static\03.UI\StaticUI\BackUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Trigger_Cube.h">
+      <Filter>02.GameObject\00.For.Static\04.Trigger\TalkCube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Trigger_BackUI.h">
+      <Filter>02.GameObject\00.For.Static\04.Trigger\BackUICube</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -533,11 +542,14 @@
     <ClCompile Include="..\Codes\BikiniGirl.cpp">
       <Filter>02.GameObject\02.For.Stage\06.BikiniGirl</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\Trigger_Cube.cpp">
-      <Filter>02.GameObject\00.For.Static\04.Trigger</Filter>
-    </ClCompile>
     <ClCompile Include="..\Codes\StaticBackUI.cpp">
       <Filter>02.GameObject\00.For.Static\03.UI\StaticUI\BackUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Trigger_Cube.cpp">
+      <Filter>02.GameObject\00.For.Static\04.Trigger\TalkCube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Trigger_BackUI.cpp">
+      <Filter>02.GameObject\00.For.Static\04.Trigger\BackUICube</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

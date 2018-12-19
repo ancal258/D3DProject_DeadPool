@@ -61,7 +61,16 @@
     <Filter Include="02.GameObject\01. Effect\Effect_RectParticle">
       <UniqueIdentifier>{13c3a1af-ef9a-4817-95b8-7e8735eaf505}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\01. Effect\ToolEffect\ParentEffect">
+    <Filter Include="02.GameObject\01. Effect\ToolEffect\AnimEffect">
+      <UniqueIdentifier>{59b9c0d0-3b75-45ce-af1c-49a3f9941e88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\01. Effect\ToolEffect\AnimEffect\ToolEffectTest">
+      <UniqueIdentifier>{1b369bd1-ea18-4ac7-8829-02d75a036f97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\01. Effect\ToolEffect\AnimEffect\Effect_Blood">
+      <UniqueIdentifier>{993aa6d1-9f35-43f0-ae48-fe32b981b9c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\01. Effect\ToolEffect\AnimEffect\ParentEffect">
       <UniqueIdentifier>{e3b13fd4-44ae-42f4-b825-fbf6222ea4d7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -111,9 +120,6 @@
     <ClInclude Include="ToolBase.h">
       <Filter>02.GameObject\00. BaseTexture</Filter>
     </ClInclude>
-    <ClInclude Include="ToolEffect.h">
-      <Filter>02.GameObject\01. Effect\ToolEffect</Filter>
-    </ClInclude>
     <ClInclude Include="Effect_Mesh.h">
       <Filter>02.GameObject\01. Effect\Effect_Mesh</Filter>
     </ClInclude>
@@ -121,7 +127,16 @@
       <Filter>02.GameObject\01. Effect\Effect_RectParticle</Filter>
     </ClInclude>
     <ClInclude Include="ParentEffect.h">
-      <Filter>02.GameObject\01. Effect\ToolEffect\ParentEffect</Filter>
+      <Filter>02.GameObject\01. Effect\ToolEffect\AnimEffect\ParentEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="ToolEffect.h">
+      <Filter>02.GameObject\01. Effect\ToolEffect\AnimEffect\ToolEffectTest</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect_BloodT.h">
+      <Filter>02.GameObject\01. Effect\ToolEffect\AnimEffect\Effect_Blood</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectT.h">
+      <Filter>02.GameObject\01. Effect\ToolEffect\AnimEffect</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -161,9 +176,6 @@
     <ClCompile Include="ToolBase.cpp">
       <Filter>02.GameObject\00. BaseTexture</Filter>
     </ClCompile>
-    <ClCompile Include="ToolEffect.cpp">
-      <Filter>02.GameObject\01. Effect\ToolEffect</Filter>
-    </ClCompile>
     <ClCompile Include="Effect_Mesh.cpp">
       <Filter>02.GameObject\01. Effect\Effect_Mesh</Filter>
     </ClCompile>
@@ -171,7 +183,16 @@
       <Filter>02.GameObject\01. Effect\Effect_RectParticle</Filter>
     </ClCompile>
     <ClCompile Include="ParentEffect.cpp">
-      <Filter>02.GameObject\01. Effect\ToolEffect\ParentEffect</Filter>
+      <Filter>02.GameObject\01. Effect\ToolEffect\AnimEffect\ParentEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="ToolEffect.cpp">
+      <Filter>02.GameObject\01. Effect\ToolEffect\AnimEffect\ToolEffectTest</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect_BloodT.cpp">
+      <Filter>02.GameObject\01. Effect\ToolEffect\AnimEffect\Effect_Blood</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectT.cpp">
+      <Filter>02.GameObject\01. Effect\ToolEffect\AnimEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
