@@ -108,6 +108,7 @@ private:
 	_uint				m_iBulletCnt = 36;
 private:
 	_vec3				m_vCam, m_vPos;
+	_bool				m_isCartoon = false;
 private:
 	HRESULT Ready_Component();
 	HRESULT SetUp_ConstantTable(LPD3DXEFFECT pEffect);

@@ -21,3 +21,12 @@ TV쪽으로 갔을 때 --> 버그창 뜨면서 플레이어 사라졌다가 --> 몇 초 뒤 뿅!
 피튀는거 , 피 연기
 총 쏠 때 튀는거
 폭발하는거 
+
+
+vCamDir = g_vCamPosition - vPoint; 
+
+노멀->카메라 바라보는 벡터.
+vNormal이거
+
+Normalize(vCamDir,vCamDir)
+dot('' , '')

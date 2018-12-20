@@ -61,6 +61,8 @@ PS_OUT PS_MAIN_DIRECTIONAL(PS_IN In)
 	Out.vShade = (g_vLightDiffuse * g_vMtrlDiffuse) * saturate((vShade+ (g_vLightAmbient * g_vMtrlAmbient)));
 	Out.vShade.a = 1.f;
 
+	//Out.vShade = ceil(Out.vShade * 5) / 5.f;
+
 	vector		vReflect = reflect(g_vLightDir, vNormal);
 	vector		vProjPos;
 
