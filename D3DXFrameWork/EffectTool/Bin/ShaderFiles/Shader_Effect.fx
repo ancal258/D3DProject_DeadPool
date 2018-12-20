@@ -137,6 +137,20 @@ PS_OUT PS_MAIN_BLOOD(PS_IN In)
 
 	return Out;
 }
+PS_OUT PS_MAIN_EXPLOSION(PS_IN In)
+{
+	PS_OUT			Out = (PS_OUT)0;
+
+	vector		vDiffuse = tex2D(DiffuseSampler, In.vTexUV);
+
+
+	Out.vColor = vDiffuse;
+	//if(Out.vColor.r == Out.vColor.g && Out.vColor.g == Out.vColor.b)
+	//	Out.vColor.a = 0;
+
+	return Out;
+}
+
 
 
 technique Default_Device
@@ -207,5 +221,17 @@ technique Default_Device
 		VertexShader = compile vs_3_0 VS_MAIN();
 		PixelShader = compile ps_3_0 PS_MAIN_BLOOD();
 	}
+	pass ExplosionEffect_Rendering
+	{
+		cullmode = none;
 
+		AlphaBlendEnable = true;
+		SrcBlend = SrcAlpha;
+		DestBlend = InvSrcAlpha;
+
+		ZWriteEnable = false;
+
+		VertexShader = compile vs_3_0 VS_MAIN();
+		PixelShader = compile ps_3_0 PS_MAIN_EXPLOSION();
+	}
 }

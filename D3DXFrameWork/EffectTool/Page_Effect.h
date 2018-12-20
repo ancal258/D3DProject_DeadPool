@@ -55,4 +55,5 @@ public:
 	CListBox m_AnimList;
 	afx_msg void OnLbnSelchangeList2();
 	afx_msg void OnBnClickedButton10();
+	int m_iCreateCnt;
 };

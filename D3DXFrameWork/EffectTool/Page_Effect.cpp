@@ -37,6 +37,7 @@ CPage_Effect::CPage_Effect()
 	, m_fDirZ(0)
 	, m_isContinueCreate(FALSE)
 	, m_fCreateTime(0)
+	, m_iCreateCnt(0)
 {
 
 }
@@ -64,6 +65,7 @@ void CPage_Effect::DoDataExchange(CDataExchange* pDX)
 	DDX_Check(pDX, IDC_CHECK1, m_isContinueCreate);
 	DDX_Text(pDX, IDC_EDIT15, m_fCreateTime);
 	DDX_Control(pDX, IDC_LIST2, m_AnimList);
+	DDX_Text(pDX, IDC_EDIT7, m_iCreateCnt);
 }
 
 
@@ -95,7 +97,7 @@ void CPage_Effect::OnBnClickedButton1() // 생성 버튼
 		_vec3 vScale = _vec3(m_fScale, m_fScale, m_fScale);
 		_vec3 vPos = _vec3(m_fInitX, m_fInitY, m_fInitZ);
 		_vec3 vDir = _vec3(m_fDirX, m_fDirY, m_fDirZ);
-		((CParentEffect*)pMesh)->Set_EffectInfo(m_fFrameSpeed, m_fFrameMax, m_fMoveSpeed, m_fSurviveTime, m_fRotDegree, &vScale, &vPos, &vDir, m_isSettingPos, m_isRandomPos, m_fCreateTime);
+		((CParentEffect*)pMesh)->Set_EffectInfo(m_fFrameSpeed, m_fFrameMax, m_fMoveSpeed, m_fSurviveTime, m_fRotDegree, &vScale, &vPos, &vDir, m_isSettingPos, m_isRandomPos, m_fCreateTime, m_iCreateCnt);
 	}
 	else
 	{
@@ -108,7 +110,7 @@ void CPage_Effect::OnBnClickedButton1() // 생성 버튼
 			_vec3 vScale = _vec3(m_fScale, m_fScale, m_fScale);
 			_vec3 vPos = _vec3(m_fInitX, m_fInitY, m_fInitZ);
 			_vec3 vDir = _vec3(m_fDirX, m_fDirY, m_fDirZ);
-			((CParentEffect*)pMesh)->Set_EffectInfo(m_fFrameSpeed, m_fFrameMax, m_fMoveSpeed, m_fSurviveTime, m_fRotDegree, &vScale, &vPos, &vDir, m_isSettingPos, m_isRandomPos, m_fCreateTime);
+			((CParentEffect*)pMesh)->Set_EffectInfo(m_fFrameSpeed, m_fFrameMax, m_fMoveSpeed, m_fSurviveTime, m_fRotDegree, &vScale, &vPos, &vDir, m_isSettingPos, m_isRandomPos, m_fCreateTime, m_iCreateCnt);
 		}
 	}
 }
@@ -124,8 +126,9 @@ BOOL CPage_Effect::OnInitDialog()
 	m_isAnimationTexture = true;
 	m_isContinueCreate = TRUE;
 
-	m_AnimList.AddString(L"1. TestExplosion");
+	m_AnimList.AddString(L"1. Test");
 	m_AnimList.AddString(L"2. BloodAnim");
+	m_AnimList.AddString(L"3. Explosion");
 
 	m_TextureList.AddString(L"1. Blood");
 	UpdateData(0);
@@ -160,6 +163,9 @@ void CPage_Effect::OnLbnSelchangeList2() // 애니메이션 시트
 		m_fFrameSpeed = 24;
 		m_fFrameMax = 24;
 		break;
+	case 2:
+		m_fFrameSpeed = 64;
+		m_fFrameMax = 64;
 	default:
 		break;
 	}
@@ -173,5 +179,8 @@ void CPage_Effect::OnBnClickedButton10() // Delete All
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	for (auto& pParentEffect : m_vecObject)
+	{
+		//pParentEffect
 		pParentEffect->Set_Lived(false);
+	}
 }

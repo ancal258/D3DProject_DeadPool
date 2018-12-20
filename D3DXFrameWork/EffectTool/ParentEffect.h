@@ -21,8 +21,8 @@ public:
 
 public:
 	const _matrix& Get_ParentMatridx() const {
-		return m_matParentMatrix;
-	}
+		return m_matParentMatrix;	}
+	void DeleteChild();
 public:
 	virtual HRESULT Ready_GameObject_Prototype(const _tchar*  pProtoTag);
 	virtual HRESULT Ready_GameObject();
@@ -31,7 +31,7 @@ public:
 	virtual void Render_GameObject();
 
 public:
-	void Set_EffectInfo(_float fFrameSpeed, _float fFrameMax, _float fMoveSpeed, _float fSurviveTime, _float fDegreeRange, _vec3* vSetScale, _vec3* vSetPos, _vec3* vDir, _bool isSettingPos,_bool isRandomPos,_float fCreateTime);
+	void Set_EffectInfo(_float fFrameSpeed, _float fFrameMax, _float fMoveSpeed, _float fSurviveTime, _float fDegreeRange, _vec3* vSetScale, _vec3* vSetPos, _vec3* vDir, _bool isSettingPos,_bool isRandomPos,_float fCreateTime, _int iCreateCnt);
 private:
 	CTransform*			m_pTransformCom = nullptr;
 
@@ -50,11 +50,11 @@ private:
 	_vec3				m_vSetPos; // 생성 위치
 	_vec3				m_vDir; // 움직이는 방향 
 	_matrix				m_matParentMatrix;
-
+	_int				m_iCreateCnt = 0;
 	_float				m_fCreateTime = 0.f;
 	_bool				m_isSettingPos = false;
 	_bool				m_isRandomPos = false;
-
+	list<CGameObject*>  m_EffectList;
 	const _tchar*		m_pProtoTag = nullptr;
 
 public:

@@ -19,6 +19,7 @@ public:
 public:
 	HRESULT Add_Light(LPDIRECT3DDEVICE9 pGraphic_Device, const D3DLIGHT9* pLightInfo);
 	HRESULT Clear_Light();
+	HRESULT Delete_Light(_uint iIndex);
 	void Render_Light(LPD3DXEFFECT pEffect);
 private:
 	list<CLight*>				m_LightList;

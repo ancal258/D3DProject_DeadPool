@@ -60,6 +60,21 @@ HRESULT CLight_Manager::Clear_Light()
 	return NOERROR;
 }
 
+HRESULT CLight_Manager::Delete_Light(_uint iIndex)
+{
+	if (m_LightList.size() <= iIndex)
+		return E_FAIL;
+
+	auto	iter = m_LightList.begin();
+
+	for (size_t i = 0; i < iIndex; ++i)
+		++iter;
+	Safe_Release(*iter);
+	m_LightList.erase(iter);
+
+	return NOERROR;
+}
+
 void CLight_Manager::Render_Light(LPD3DXEFFECT pEffect)
 {
 	for (auto& pLight : m_LightList)

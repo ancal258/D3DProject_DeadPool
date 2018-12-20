@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Trigger_BackUI.h"
 #include "Component_Manager.h"
+#include "Light_Manager.h"
 #include "Object_Manager.h"
 #include "StaticBackUI.h"
 #include "Input_Device.h"
@@ -75,6 +76,8 @@ _int CTrigger_BackUI::Update_GameObject(const _float & fTimeDelta)
 	if (true == m_pRendererCom->Get_Trigger())
 	{
 		m_pBackUI->Set_Lived(false);
+		CLight_Manager::GetInstance()->Delete_Light(0);
+		Set_Lived(false);
 		//m_pRendererCom->Set_Trigger(true);
 	}
 

@@ -203,6 +203,7 @@
     <ClInclude Include="EffectToolDoc.h" />
     <ClInclude Include="EffectToolView.h" />
     <ClInclude Include="Effect_BloodT.h" />
+    <ClInclude Include="Effect_ExplosionT.h" />
     <ClInclude Include="Effect_Mesh.h" />
     <ClInclude Include="Effect_RectParticle.h" />
     <ClInclude Include="MainFrm.h" />
@@ -225,6 +226,7 @@
     <ClCompile Include="EffectToolDoc.cpp" />
     <ClCompile Include="EffectToolView.cpp" />
     <ClCompile Include="Effect_BloodT.cpp" />
+    <ClCompile Include="Effect_ExplosionT.cpp" />
     <ClCompile Include="Effect_Mesh.cpp" />
     <ClCompile Include="Effect_RectParticle.cpp" />
     <ClCompile Include="MainFrm.cpp" />

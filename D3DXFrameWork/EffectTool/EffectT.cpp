@@ -82,18 +82,19 @@ _int CEffectT::LastUpdate_GameObject(const _float & fTimeDelta)
 	if (nullptr == m_pRendererCom)
 		return -1;
 
+	if (nullptr != m_pParent)
+		m_pTransformCom->Set_ParentMatrix(((CParentEffect*)m_pParent)->Get_ParentMatridx());
 
-	m_pTransformCom->Update_Matrix();
-
-	_matrix matWorld = *m_pTransformCom->Get_WorldMatrix();
-
+	_vec3 vPos = *m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION);
 	_vec3 vMove = m_vDir * m_fMoveSpeed;
 
-	matWorld.m[3][0] += vMove.x;
-	matWorld.m[3][1] += vMove.y;
-	matWorld.m[3][2] += vMove.z;
+	
+	vPos += vMove;
 
-	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, (_vec3*)&matWorld.m[3][0]);
+	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &vPos);
+
+
+	m_pTransformCom->Update_Matrix();
 
 
 	if (m_fSurviveTime <= m_fTimeAcc)
@@ -104,6 +105,7 @@ _int CEffectT::LastUpdate_GameObject(const _float & fTimeDelta)
 
 	return _int();
 }
+
 
 void CEffectT::Render_GameObject()
 {

@@ -297,6 +297,16 @@ HRESULT CLoading::Ready_LightInfo()
 	D3DLIGHT9			LightInfo;
 	ZeroMemory(&LightInfo, sizeof(D3DLIGHT9));
 
+	// For. Directional 1
+	LightInfo.Type = D3DLIGHT_DIRECTIONAL;
+	LightInfo.Diffuse = D3DXCOLOR(0.9f, 0.9f, 0.9f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.f);
+	LightInfo.Direction = _vec3(1.f, -1.f, 1.f);
+
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
 	// For. Player
 	LightInfo.Type = D3DLIGHT_POINT;
 	LightInfo.Diffuse = D3DXCOLOR(0.7, 0.7f, 0.7f, 1.f);
@@ -310,9 +320,9 @@ HRESULT CLoading::Ready_LightInfo()
 
 	// For. Directional
 	LightInfo.Type = D3DLIGHT_DIRECTIONAL;
-	LightInfo.Diffuse = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.f);
-	LightInfo.Specular = D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.f);
-	LightInfo.Ambient = D3DXCOLOR(0.3f, 0.3f, 0.3f, 1.f);
+	LightInfo.Diffuse = D3DXCOLOR(0.6f, 0.6f, 0.6f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(0.2f, 0.2f, 0.2f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.4f, 0.4f, 0.4f, 1.f);
 	LightInfo.Direction = _vec3(1.f, -1.f, 1.f);
 
 	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))

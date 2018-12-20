@@ -73,6 +73,9 @@
     <Filter Include="02.GameObject\01. Effect\ToolEffect\AnimEffect\ParentEffect">
       <UniqueIdentifier>{e3b13fd4-44ae-42f4-b825-fbf6222ea4d7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\01. Effect\ToolEffect\AnimEffect\Effect_Explosion">
+      <UniqueIdentifier>{5ae65560-ef37-4c71-a9af-f34bcfb7e69e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EffectTool.h">
@@ -138,6 +141,9 @@
     <ClInclude Include="EffectT.h">
       <Filter>02.GameObject\01. Effect\ToolEffect\AnimEffect</Filter>
     </ClInclude>
+    <ClInclude Include="Effect_ExplosionT.h">
+      <Filter>02.GameObject\01. Effect\ToolEffect\AnimEffect\Effect_Explosion</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EffectTool.cpp">
@@ -193,6 +199,9 @@
     </ClCompile>
     <ClCompile Include="EffectT.cpp">
       <Filter>02.GameObject\01. Effect\ToolEffect\AnimEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect_ExplosionT.cpp">
+      <Filter>02.GameObject\01. Effect\ToolEffect\AnimEffect\Effect_Explosion</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
