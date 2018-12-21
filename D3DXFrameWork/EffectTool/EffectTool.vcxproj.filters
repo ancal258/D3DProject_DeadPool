@@ -70,11 +70,14 @@
     <Filter Include="02.GameObject\01. Effect\ToolEffect\AnimEffect\Effect_Blood">
       <UniqueIdentifier>{993aa6d1-9f35-43f0-ae48-fe32b981b9c8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\01. Effect\ToolEffect\AnimEffect\ParentEffect">
-      <UniqueIdentifier>{e3b13fd4-44ae-42f4-b825-fbf6222ea4d7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.GameObject\01. Effect\ToolEffect\AnimEffect\Effect_Explosion">
       <UniqueIdentifier>{5ae65560-ef37-4c71-a9af-f34bcfb7e69e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\01. Effect\ToolEffect\ParentEffect">
+      <UniqueIdentifier>{e3b13fd4-44ae-42f4-b825-fbf6222ea4d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\01. Effect\ToolEffect\TextureEffect">
+      <UniqueIdentifier>{5359b56d-9aab-49d4-81a4-532c29a0b5d6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -130,7 +133,7 @@
       <Filter>02.GameObject\01. Effect\Effect_RectParticle</Filter>
     </ClInclude>
     <ClInclude Include="ParentEffect.h">
-      <Filter>02.GameObject\01. Effect\ToolEffect\AnimEffect\ParentEffect</Filter>
+      <Filter>02.GameObject\01. Effect\ToolEffect\ParentEffect</Filter>
     </ClInclude>
     <ClInclude Include="ToolEffect.h">
       <Filter>02.GameObject\01. Effect\ToolEffect\AnimEffect\ToolEffectTest</Filter>
@@ -189,7 +192,7 @@
       <Filter>02.GameObject\01. Effect\Effect_RectParticle</Filter>
     </ClCompile>
     <ClCompile Include="ParentEffect.cpp">
-      <Filter>02.GameObject\01. Effect\ToolEffect\AnimEffect\ParentEffect</Filter>
+      <Filter>02.GameObject\01. Effect\ToolEffect\ParentEffect</Filter>
     </ClCompile>
     <ClCompile Include="ToolEffect.cpp">
       <Filter>02.GameObject\01. Effect\ToolEffect\AnimEffect\ToolEffectTest</Filter>

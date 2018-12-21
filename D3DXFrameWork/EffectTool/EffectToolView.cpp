@@ -18,6 +18,8 @@
 #include "Object_Manager.h"
 #include "Graphic_Device.h"
 #include "Input_Device.h"
+#include "Timer_Manager.h"
+#include "Frame_Manager.h"
 // GameObject
 #include "ToolEffect.h"
 #include "ToolCamera_Effect.h"
@@ -126,21 +128,32 @@ CEffectToolDoc* CEffectToolView::GetDocument() const // 디버그되지 않은 버전은 �
 void CEffectToolView::OnTimer(UINT_PTR nIDEvent)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
-	if (nIDEvent == MY_TIMER)
+
+	CTimer_Manager* pTimer_Manager = CTimer_Manager::GetInstance();
+
+	CFrame_Manager* pFrame_Manager = CFrame_Manager::GetInstance();
+
+
+	_float		fTimeDelta_Default = pTimer_Manager->Compute_Timer(L"Timer_Default");
+
+	if (true == pFrame_Manager->Permit_Call(L"Frame_60", fTimeDelta_Default))
 	{
-		CObject_Manager::GetInstance()->Update_Object_Manager(0.f);
-		CObject_Manager::GetInstance()->LastUpdate_Object_Manager(0.f);
-		CInput_Device::GetInstance()->Inquire_Input_State();
-
-		m_pGraphic_Device->Clear(0, nullptr, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DXCOLOR(0.f, 0.f, 1.f, 1.f), 1.f, 0);
-		m_pGraphic_Device->BeginScene();
-
-		if (nullptr != m_pRenderer)
-			m_pRenderer->Render_Renderer();
-
-		m_pGraphic_Device->EndScene();
-		m_pGraphic_Device->Present(nullptr, nullptr, 0, nullptr);
+		_float		fTimeDelta_60 = pTimer_Manager->Compute_Timer(L"Timer_60");
+		CObject_Manager::GetInstance()->Update_Object_Manager(fTimeDelta_60);
+		CObject_Manager::GetInstance()->LastUpdate_Object_Manager(fTimeDelta_60);
 	}
+
+
+	CInput_Device::GetInstance()->Inquire_Input_State();
+
+	m_pGraphic_Device->Clear(0, nullptr, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DXCOLOR(0.f, 0.f, 1.f, 1.f), 1.f, 0);
+	m_pGraphic_Device->BeginScene();
+
+	if (nullptr != m_pRenderer)
+		m_pRenderer->Render_Renderer();
+
+	m_pGraphic_Device->EndScene();
+	m_pGraphic_Device->Present(nullptr, nullptr, 0, nullptr);
 
 	CView::OnTimer(nIDEvent);
 }
@@ -150,6 +163,30 @@ void CEffectToolView::OnInitialUpdate()
 {
 	CView::OnInitialUpdate();
 	SetTimer(MY_TIMER, 30, 0);
+
+	CTimer_Manager* pTimer_Manager = CTimer_Manager::GetInstance();
+	if (nullptr == pTimer_Manager)
+		return;
+	pTimer_Manager->AddRef();
+
+	// For.Timer_Default
+	if (FAILED(pTimer_Manager->Add_Timer(L"Timer_Default")))
+		return;
+
+	// For.Timer_60
+	if (FAILED(pTimer_Manager->Add_Timer(L"Timer_60")))
+		return;
+
+	CFrame_Manager* pFrame_Manager = CFrame_Manager::GetInstance();
+	if (nullptr == pFrame_Manager)
+		return;
+	pFrame_Manager->AddRef();
+
+	// For.Frame_60
+	if (FAILED(pFrame_Manager->Add_Frame(L"Frame_60", 200)))
+		return;
+
+
 
 	if (FAILED(CGraphic_Device::GetInstance()->Ready_Graphic_Device(m_hWnd, CGraphic_Device::MODE_WIN, g_iBackCX, g_iBackCY, &m_pGraphic_Device)))
 		return;
@@ -245,6 +282,8 @@ HRESULT CEffectToolView::Ready_Component()
 	if (FAILED(pComponent_Manager->Add_Component(0, L"Component_Texture_Blood", CTexture::Create(m_pGraphic_Device, CTexture::TYPE_GENERAL, L"../Client/Bin/Resources/Textures/Effect/Blood/blood_4x4_1_subUV_%d.png", 16))))
 		return E_FAIL;
 	if (FAILED(pComponent_Manager->Add_Component(0, L"Component_Texture_Explosion", CTexture::Create(m_pGraphic_Device, CTexture::TYPE_GENERAL, L"../Client/Bin/Resources/Textures/Effect/Explosion/8x8_anim_Explosion_%d.tga", 64))))
+		return E_FAIL;
+	if (FAILED(pComponent_Manager->Add_Component(0, L"Component_Texture_ExplosionCloud", CTexture::Create(m_pGraphic_Device, CTexture::TYPE_GENERAL, L"../Client/Bin/Resources/Textures/Effect/ExplosionCloud/4x4_Clouds_Dark_CLR_%d.tga", 16))))
 		return E_FAIL;
 	if (FAILED(pComponent_Manager->Add_Component(0, L"Component_Texture_Base", CTexture::Create(m_pGraphic_Device, CTexture::TYPE_GENERAL, L"Bin/Textures/BaseTexture.png"))))
 		return E_FAIL;

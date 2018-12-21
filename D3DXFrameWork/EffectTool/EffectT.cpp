@@ -38,20 +38,29 @@ void CEffectT::Set_EffectInfo(CGameObject* pParent, _float fFrameSpeed, _float f
 	m_fFrameMax = fFrameMax; // 애니메이션 최대 프레임
 	m_fMoveSpeed = fMoveSpeed; // 이동 속도
 	m_fSurviveTime = fSurviveTime; // 생존 시간
-	m_fDegreeRange = fDegreeRange; // 회전되어있는 각도 ( 범위 )
 	m_vSetScale = *vSetScale; // 생성 크기
 	m_vSetPos = *vSetPos; // 생성 위치
 	m_vDir = *vDir; // 움직이는 방향 
 
+	if(0 != fDegreeRange)
+		m_fDegreeRange = rand() % ((int)fDegreeRange * 2) - fDegreeRange;
+	else
+		m_fDegreeRange = fDegreeRange; // 회전되어있는 각도 ( 범위 )
+
 	m_pTransformCom->Scaling(m_vSetScale);
+
+	_matrix		matRotZ;
+	D3DXMatrixRotationZ(&matRotZ,D3DXToRadian(m_fDegreeRange));
+	D3DXVec3TransformCoord(&m_vDir, &m_vDir, &matRotZ);
+
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &m_vSetPos);
 }
 
 
 _int CEffectT::Update_GameObject(const _float & fTimeDelta)
 {
-	m_fFrame += m_fFrameSpeed * 0.01f;
-	m_fTimeAcc += 0.01f;
+	m_fFrame += m_fFrameSpeed * fTimeDelta;
+	m_fTimeAcc += fTimeDelta;
 	if (m_fFrameMax <= m_fFrame)
 		m_fFrame = 0.f;
 

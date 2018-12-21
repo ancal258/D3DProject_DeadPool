@@ -55,8 +55,8 @@ void CToolEffect::Set_EffectInfo(CGameObject* pParent, _float fFrameSpeed, _floa
 
 _int CToolEffect::Update_GameObject(const _float & fTimeDelta)
 {
-	m_fFrame += m_fFrameSpeed * 0.01f;
-	m_fTimeAcc += 0.01f;
+	m_fFrame += m_fFrameSpeed * fTimeDelta;
+	m_fTimeAcc += fTimeDelta;
 	if (m_fFrameMax <= m_fFrame)
 		m_fFrame = 0.f;
 

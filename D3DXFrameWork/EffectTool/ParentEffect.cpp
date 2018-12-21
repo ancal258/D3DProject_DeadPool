@@ -5,6 +5,15 @@
 #include "ToolEffect.h"
 #include "Effect_BloodT.h"
 #include "Effect_ExplosionT.h"
+
+/*
+이펙트 더 작업해보고
+싸우는거 좀 자연스럽게,,하고
+3번재 스테이지 맵 다 찍고
+스파크? 트레일? 어떻게? 
+
+
+*/
 CParentEffect::CParentEffect(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CGameObject(pGraphic_Device)
 {
@@ -40,7 +49,7 @@ HRESULT CParentEffect::Ready_GameObject()
 
 _int CParentEffect::Update_GameObject(const _float & fTimeDelta)
 {
-	m_fTimeAcc += 0.01f;
+	m_fTimeAcc += fTimeDelta;
 
 
 	if (m_fTimeAcc >= m_fCreateTime)
@@ -52,7 +61,7 @@ _int CParentEffect::Update_GameObject(const _float & fTimeDelta)
 			if (true == m_isSettingPos)
 				vPos = m_vSetPos;
 			if (true == m_isRandomPos)
-				vPos = _vec3(((_float)(rand() % 101) / 100) * m_vSetPos.x, ((_float)(rand() % 101) / 100) * m_vSetPos.y, ((_float)(rand() % 101) / 100) * m_vSetPos.z);
+				vPos = _vec3(((_float)(rand() % 1001) / 1000) * m_vSetPos.x, ((_float)(rand() % 1001) / 1000) * m_vSetPos.y, ((_float)(rand() % 1001) / 1000) * m_vSetPos.z);
 
 			if (0 == m_iType)
 			{
@@ -105,7 +114,6 @@ void CParentEffect::Set_EffectInfo(_float fFrameSpeed, _float fFrameMax, _float 
 	m_fCreateTime = fCreateTime;
 	m_iCreateCnt = iCreateCnt;
 	m_pTransformCom->Scaling(m_vSetScale);
-	m_pTransformCom->RotationZ(m_fDegreeRange, 1.f);
 }
 
 
