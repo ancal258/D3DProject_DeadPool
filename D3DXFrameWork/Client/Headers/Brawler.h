@@ -2,7 +2,6 @@
 
 #include "Defines.h"
 #include "GameObject.h"
-
 _BEGIN(Engine)
 class CTransform;
 class CRenderer;
@@ -38,6 +37,8 @@ protected: // For. Component
 	CShader*			m_pShaderCom = nullptr;
 	CNavigation*		m_pNavigationCom = nullptr;
 	CMesh_Dynamic*      m_pMeshCom = nullptr;
+//protected: // For. Children;
+	CGameObject*			m_pWeapon = nullptr;
 protected: // For. Collider
 	CCollider*			m_pColliderCom = nullptr;
 	CCollider*			m_pColliderCom_Head = nullptr;
@@ -84,9 +85,10 @@ private:
 	LPD3DXMESH				m_pColliderMesh[2] = { nullptr, nullptr };
 	BOOL					m_Hit[2] = { FALSE };
 	_float					m_fDist[2] = { 0 };
-
+	
 private:
 	HRESULT isHitScan();
+	HRESULT CollisionCheck(_float fTimeDelta);
 public:
 	virtual CGameObject* Clone_GameObject() PURE;
 protected:

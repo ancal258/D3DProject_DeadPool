@@ -12,6 +12,9 @@ private:
 
 public:
 	HRESULT Add_Object(CGameObject* pGameObject);
+	HRESULT Clear_Object(CGameObject* pGameObject);
+	list<CGameObject*>* Get_BrawlerList() {
+		return &m_BrawlerList;	}
 	_bool Collision_Chech(CBrawler* pBrawler, _float *pLength);
 
 private:

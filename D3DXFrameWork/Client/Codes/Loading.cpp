@@ -31,6 +31,7 @@
 //Effect
 #include "Effect_Mesh.h"
 #include "Effect_RectParticle.h"
+#include "Effect_FireSpears.h"
 // UI
 #include "UI_CrossHair.h"
 #include "UI_HPBar.h"
@@ -38,6 +39,8 @@
 #include "TalkBox.h"
 #include "StaticUI.h"
 #include "StaticBackUI.h"
+#include "ConcentratedLine.h"
+#include "WhiteBack.h"
 
 /*
 헬기,  스테이지2 네비메쉬 설치, 미니건움직임,카메라,
@@ -151,20 +154,16 @@ HRESULT CLoading::Loading_Stage_APT()
 
 	_vec3 vPos(47.3f, 1.f, 19.f);
 	((CTrigger_Cube*)pGameObject)->Set_StateInfo(&vPos);
-	//((CTrigger_Cube*)pGameObject)->Add_String(L"Test String 1");
-	//((CTrigger_Cube*)pGameObject)->Add_String(L"String Test 2");
-	//((CTrigger_Cube*)pGameObject)->Add_String(L"Test 3");
-	//((CTrigger_Cube*)pGameObject)->Add_String(L"Happy Happy Happy...");
 
 
 	////////////////
 
 
-	for (size_t i = 0; i < 10; i++)
-	{
-		if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Effect", SCENE_STAGE, L"Layer_Effect")))
-			return E_FAIL;
-	}
+	//for (size_t i = 0; i < 10; i++)
+	//{
+	//	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Effect", SCENE_STAGE, L"Layer_Effect")))
+	//		return E_FAIL;
+	//}
 
 	//MCIWndClose(m_hVideo);
 	m_isFinish = true;
@@ -216,6 +215,10 @@ HRESULT CLoading::Loading_Stage_FIELD()
 		return E_FAIL;
 
 	if (FAILED(Load_Static_Object(L"../Bin/DataFiles/StaticObject_Field.dat")))
+		return E_FAIL;
+
+	/* TEST */
+	if (FAILED(Ready_Effect()))
 		return E_FAIL;
 
 	lstrcpy(m_szString, L"Layer_StaticUI...");
@@ -581,13 +584,20 @@ HRESULT CLoading::Ready_Effect()
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_EffectRectParticle", CEffect_RectParticle::Create(Get_Graphic_Device()))))
 		return E_FAIL;
 
-	for (size_t i = 0; i < 10; i++)
-	{
-		if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_EffectRectParticle", SCENE_STAGE, L"Layer_ParticleEffect")))
-			return E_FAIL;
-	}
+	//for (size_t i = 0; i < 10; i++)
+	//{
+	//	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_EffectRectParticle", SCENE_STAGE, L"Layer_ParticleEffect")))
+	//		return E_FAIL;
+	//}
 	// For.Add_EffectRectParticle
 	
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Effect_FireSpears", CEffect_FireSpears::Create(Get_Graphic_Device()))))
+		return E_FAIL;
+
+
+	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Effect_FireSpears", SCENE_STAGE, L"Layer_Effect")))
+	//	return E_FAIL;
+
 
 	Safe_Release(pComponent_Manager);
 	return NOERROR;
@@ -623,6 +633,11 @@ HRESULT CLoading::Ready_Static_Prototype_Component()
 		return E_FAIL;
 
 
+	// For.Component_Texture_ConcentratedEffect
+	lstrcpy(m_szString, L"../Bin/Resources/Textures/Effect/Battle/ConcentratedEffect.png");
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_ConcentratedEffect", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, m_szString))))
+		return E_FAIL;
+
 	// For.Component_Texture_Terrain
 	lstrcpy(m_szString, L"../Bin/Resources/Textures/Terrain/Grass_%d.tga");
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_Terrain", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, m_szString, 4))))
@@ -637,6 +652,11 @@ HRESULT CLoading::Ready_Static_Prototype_Component()
 	// For.Component_Texture_Effect
 	lstrcpy(m_szString, L"../Bin/Resources/Textures/Explosion/Explosion%d.png");
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_Effect", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, m_szString, 90))))
+		return E_FAIL;
+
+	// For.Component_Texture_Effect_FireSpears
+	lstrcpy(m_szString, L"../Bin/Resources/Textures/Effect/FireSpears/FireSpears_CLR_%d.tga");
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_Effect_FireSpears", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, m_szString, 4))))
 		return E_FAIL;
 
 
@@ -743,6 +763,7 @@ HRESULT CLoading::Ready_Static_Prototype_UI()
 	// For.Prototype_Trigger_BackUI
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Trigger_BackUI", CTrigger_BackUI::Create(Get_Graphic_Device()))))
 		return E_FAIL;
+
 
 	return NOERROR;
 }
@@ -1551,6 +1572,21 @@ HRESULT CLoading::Ready_Stage_Prototype_GameObject_SceneFIELD()
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Prop", CProp::Create(Get_Graphic_Device()))))
 		return E_FAIL;
 	//////////////////////////////////////////////////
+
+	//if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Effect_FireSpears", CEffect_FireSpears::Create(Get_Graphic_Device()))))
+	//	return E_FAIL;
+
+	// For.Prototype_ConcentratedLine
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_ConcentratedLine", CConcentratedLine::Create(Get_Graphic_Device()))))
+		return E_FAIL;
+
+	// For.ConcentratedLine
+	CGameObject* pUI;
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_ConcentratedLine", SCENE_STAGE, L"Layer_Test", &pUI)))
+		return E_FAIL;
+	((CConcentratedLine*)pUI)->Set_Info(_vec2(g_iBackCX >> 1, g_iBackCY >> 1), _vec2(g_iBackCX, g_iBackCY));
+
+
 	return NOERROR;
 }
 

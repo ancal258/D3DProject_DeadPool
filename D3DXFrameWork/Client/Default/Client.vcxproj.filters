@@ -244,6 +244,12 @@
     <Filter Include="02.GameObject\00.For.Static\03.UI\SubtitleManager">
       <UniqueIdentifier>{04056e2e-6e25-400e-82cf-ea1b71ea089a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\00.For.Static\03.UI\DynamicUI\ConcentratedEffect">
+      <UniqueIdentifier>{f4b6bfb2-b39a-44a5-858c-576a3db15f7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\03.Effect\03.Effect_FireSpears">
+      <UniqueIdentifier>{bd5a3212-1877-48bb-89d9-f89cf15cdab4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -414,6 +420,12 @@
     <ClInclude Include="..\Headers\SubtitleManager.h">
       <Filter>02.GameObject\00.For.Static\03.UI\SubtitleManager</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\ConcentratedLine.h">
+      <Filter>02.GameObject\00.For.Static\03.UI\DynamicUI\ConcentratedEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Effect_FireSpears.h">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\03.Effect_FireSpears</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -568,6 +580,12 @@
     </ClCompile>
     <ClCompile Include="..\Codes\SubtitleManager.cpp">
       <Filter>02.GameObject\00.For.Static\03.UI\SubtitleManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\ConcentratedLine.cpp">
+      <Filter>02.GameObject\00.For.Static\03.UI\DynamicUI\ConcentratedEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Effect_FireSpears.cpp">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\03.Effect_FireSpears</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

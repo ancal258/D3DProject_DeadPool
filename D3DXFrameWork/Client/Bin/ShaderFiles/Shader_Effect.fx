@@ -147,7 +147,7 @@ technique Default_Device
 
 	pass Alpha_Testing
 	{
-		cullmode = cw;
+		cullmode = none;
 
 		AlphaBlendEnable = true;
 		SrcBlend = SrcAlpha;

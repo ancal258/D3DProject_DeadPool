@@ -114,8 +114,9 @@ _int CPlayer::LastUpdate_GameObject(const _float & fTimeDelta)
 {
 	if (nullptr == m_pRendererCom)
 		return -1;
-	// Ä«Å÷ ·»´õ¸µ ¿¬½À 
-
+	
+	if (nullptr == m_pAnimator)
+		return 1;
 	// °ø°Ý
 	if (true == m_pAnimator->Get_IsFHS())
 	{
@@ -342,6 +343,14 @@ HRESULT CPlayer::SetUp_StageInfo(_uint iStage)
 
 void CPlayer::Camera_Update(const _float& fTimeDelta)
 {
+	if (nullptr == m_pAnimator)
+		return;
+	//if (nullptr == m_pCamera_Debug ||
+	//	nullptr == m_pCamera_Target ||
+	//	nullptr == m_pCamera_Cinematic)
+	//	return;
+
+
 	CInput_Device* pInput_Device = CInput_Device::GetInstance();
 	pInput_Device->AddRef();
 	// Camera SetUp

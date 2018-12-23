@@ -99,4 +99,6 @@ public:
 	afx_msg void OnBnClickedButton2();
 	BOOL m_isOffCulling;
 	afx_msg void OnBnClickedCheck4();
+	afx_msg void OnBnClickedCheck5();
+	BOOL m_isExplosion;
 };

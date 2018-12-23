@@ -35,6 +35,7 @@ CPage_Object::CPage_Object()
 	, m_isTransformMode(FALSE)
 	, m_isLock(FALSE)
 	, m_isOffCulling(FALSE)
+	, m_isExplosion(FALSE)
 {
 
 }
@@ -63,6 +64,7 @@ void CPage_Object::DoDataExchange(CDataExchange* pDX)
 	DDX_Check(pDX, IDC_CHECK2, m_isTransformMode);
 	DDX_Check(pDX, IDC_CHECK3, m_isLock);
 	DDX_Check(pDX, IDC_CHECK4, m_isOffCulling);
+	DDX_Check(pDX, IDC_CHECK5, m_isExplosion);
 }
 
 
@@ -90,6 +92,7 @@ BEGIN_MESSAGE_MAP(CPage_Object, CPropertyPage)
 	ON_BN_CLICKED(IDC_CHECK3, &CPage_Object::OnBnClickedCheck3)
 	ON_BN_CLICKED(IDC_BUTTON2, &CPage_Object::OnBnClickedButton2)
 	ON_BN_CLICKED(IDC_CHECK4, &CPage_Object::OnBnClickedCheck4)
+	ON_BN_CLICKED(IDC_CHECK5, &CPage_Object::OnBnClickedCheck5)
 END_MESSAGE_MAP()
 
 
@@ -107,6 +110,7 @@ void CPage_Object::Set_PickingPoint(_vec3 vPickingPoint)
 		if (true == ((CStatic_Object*)pGameObject)->Get_ClickedObject())
 		{
 			m_isOffCulling = ((CStatic_Object*)(pGameObject))->m_isOffCulling;
+			m_isExplosion = ((CStatic_Object*)(pGameObject))->m_isExplosion;
 		}
 	}
 
@@ -1751,6 +1755,20 @@ void CPage_Object::OnBnClickedCheck4() // OffCulling
 		if (true == ((CStatic_Object*)pGameObject)->Get_ClickedObject())
 		{
 			((CStatic_Object*)(pGameObject))->m_isOffCulling = m_isOffCulling;
+		}
+	}
+}
+
+
+void CPage_Object::OnBnClickedCheck5() // isExplosion
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	UpdateData(1);
+	for (auto& pGameObject : vGameObject)
+	{
+		if (true == ((CStatic_Object*)pGameObject)->Get_ClickedObject())
+		{
+			((CStatic_Object*)(pGameObject))->m_isExplosion = m_isExplosion;
 		}
 	}
 }

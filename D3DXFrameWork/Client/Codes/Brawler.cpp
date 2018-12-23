@@ -3,6 +3,8 @@
 #include "Component_Manager.h"
 #include "Light_Manager.h"
 #include "Object_Manager.h"
+#include "Brawler_Manager.h"
+
 #include "Camera_Target.h"
 #include "Player.h"
 
@@ -41,7 +43,7 @@ HRESULT CBrawler::Ready_GameObject()
 	Update_HandMatrix();
 
 	D3DXMatrixIdentity(&m_RealMatrix);
-
+	CBrawler_Manager::GetInstance()->Add_Object(this);
 	if (1 == m_iStageNum)
 	{
 		for (size_t i = 0; i < 3; i++)
@@ -124,9 +126,12 @@ void CBrawler::CallBackFinish()
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &(_vec3)m_CombinedRootMatrix.m[3]);
 	m_pTransformCom->Update_Matrix();
 	//STATE_DEATH_F, STATE_DEATH_L, STATE_DEATH_LL, STATE_DEATH_R,STATE_DEATH_RL
-	if(4 <= m_iCurrentIndex && m_iCurrentIndex <= 8)
-		m_isDamaged = false;
-
+	if (4 <= m_iCurrentIndex && m_iCurrentIndex <= 8)
+	{
+		m_pWeapon->Set_Lived(false);
+		CBrawler_Manager::GetInstance()->Clear_Object(this);
+		Set_Lived(false);
+	}
 	m_iCurrentIndex = m_iIdleIndex;
 	m_pMeshCom->Set_AnimationSet(m_iIdleIndex);
 	
@@ -302,6 +307,8 @@ _int CBrawler::Update_Stage_Field(const _float & fTimeDelta)
 
 _int CBrawler::LastUpdate_Stage_Field(const _float & fTimeDelta)
 {
+	CollisionCheck(fTimeDelta);
+
 	// 첫번째 구체 체크
 	if (TRUE == m_Hit[0])
 	{
@@ -357,6 +364,27 @@ HRESULT CBrawler::isHitScan()
 	return NOERROR;
 }
 
+HRESULT CBrawler::CollisionCheck(_float fTimeDelta)
+{
+	list<CGameObject*> BrawlerList = *CBrawler_Manager::GetInstance()->Get_BrawlerList();
+	_vec3 vMyPos = _vec3(m_pTransformCom->Get_WorldMatrix()->m[3][0], m_pTransformCom->Get_WorldMatrix()->m[3][1], m_pTransformCom->Get_WorldMatrix()->m[3][2]);
+
+	for (auto& pBrawler : BrawlerList)
+	{
+		_matrix matAnother = *((const CTransform*)pBrawler->Get_ComponentPointer(L"Com_Transform"))->Get_WorldMatrix();
+		_vec3 vAnotherPos = _vec3(matAnother.m[3][0], matAnother.m[3][1], matAnother.m[3][2]);
+		_vec3 vLen = vMyPos - vAnotherPos;
+		if (1 > D3DXVec3Length(&vLen))
+		{
+			D3DXVec3Normalize(&vLen, &vLen);
+			_float fDist = fTimeDelta * 3.1f;
+			m_pTransformCom->Set_PlusPosition(vLen, fDist);
+		}
+	}
+
+	return NOERROR;
+}
+
 HRESULT CBrawler::Update_HandMatrix()
 {
 	if (nullptr == m_pHandMatrix[0] ||
@@ -373,6 +401,7 @@ HRESULT CBrawler::Update_HandMatrix()
 
 void CBrawler::Free()
 {
+
 	Safe_Release(m_pTransformCom);
 	Safe_Release(m_pRendererCom);
 	Safe_Release(m_pShaderCom);

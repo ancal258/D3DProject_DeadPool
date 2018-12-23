@@ -184,12 +184,14 @@
     <ClInclude Include="..\Headers\Camera_Debug.h" />
     <ClInclude Include="..\Headers\Camera_Minigun.h" />
     <ClInclude Include="..\Headers\Camera_Target.h" />
+    <ClInclude Include="..\Headers\ConcentratedLine.h" />
     <ClInclude Include="..\Headers\Constant.h" />
     <ClInclude Include="..\Headers\Defines.h" />
     <ClInclude Include="..\Headers\Dog.h" />
     <ClInclude Include="..\Headers\DP_Gun.h" />
     <ClInclude Include="..\Headers\DP_Sword.h" />
     <ClInclude Include="..\Headers\Effect.h" />
+    <ClInclude Include="..\Headers\Effect_FireSpears.h" />
     <ClInclude Include="..\Headers\Effect_Mesh.h" />
     <ClInclude Include="..\Headers\Effect_RectParticle.h" />
     <ClInclude Include="..\Headers\Event_Cube.h" />
@@ -241,10 +243,12 @@
     <ClCompile Include="..\Codes\Camera_Debug.cpp" />
     <ClCompile Include="..\Codes\Camera_Minigun.cpp" />
     <ClCompile Include="..\Codes\Camera_Target.cpp" />
+    <ClCompile Include="..\Codes\ConcentratedLine.cpp" />
     <ClCompile Include="..\Codes\Dog.cpp" />
     <ClCompile Include="..\Codes\DP_Gun.cpp" />
     <ClCompile Include="..\Codes\DP_Sword.cpp" />
     <ClCompile Include="..\Codes\Effect.cpp" />
+    <ClCompile Include="..\Codes\Effect_FireSpears.cpp" />
     <ClCompile Include="..\Codes\Effect_Mesh.cpp" />
     <ClCompile Include="..\Codes\Effect_RectParticle.cpp" />
     <ClCompile Include="..\Codes\Event_Cube.cpp" />

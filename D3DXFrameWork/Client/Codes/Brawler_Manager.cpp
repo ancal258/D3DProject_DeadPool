@@ -17,6 +17,20 @@ HRESULT CBrawler_Manager::Add_Object(CGameObject * pGameObject)
 	return NOERROR;
 }
 
+HRESULT CBrawler_Manager::Clear_Object(CGameObject * pGameObject)
+{
+	for (auto iter = m_BrawlerList.begin(); iter != m_BrawlerList.end();)
+	{
+		if (*iter == pGameObject)
+		{
+			iter = m_BrawlerList.erase(iter);
+			continue;
+		}
+		++iter;
+	}
+	return NOERROR;
+}
+
 _bool CBrawler_Manager::Collision_Chech(CBrawler * pBrawler, _float *pLength)
 {
 	//for (auto& pGameObject : m_BrawlerList)
@@ -32,4 +46,6 @@ _bool CBrawler_Manager::Collision_Chech(CBrawler * pBrawler, _float *pLength)
 
 void CBrawler_Manager::Free()
 {
+	//for (auto& pGameObject : m_BrawlerList)
+	//	Safe_Release(pGameObject);
 }

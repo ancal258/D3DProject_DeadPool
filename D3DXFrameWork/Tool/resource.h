@@ -75,6 +75,7 @@
 #define IDC_CHECK3                      1041
 #define IDC_CHECK4                      1042
 #define IDC_LIST4                       1043
+#define IDC_CHECK5                      1043
 
 // Next default values for new objects
 // 

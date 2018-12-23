@@ -4,6 +4,7 @@
 #include "Object_Manager.h"
 #include "Light_Manager.h"
 #include "Player.h"
+#include "Effect_FireSpears.h"
 _USING(Client)
 
 CDP_Gun::CDP_Gun(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -48,6 +49,15 @@ _int CDP_Gun::Update_GameObject(const _float & fTimeDelta)
 	else
 		m_isActive = false;
 
+	if (true == (m_pPlayer->Get_IsButtonDown(7)))
+	{
+		CGameObject* pEffect;
+
+		if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Effect_FireSpears", SCENE_STAGE, L"Layer_Effect", &pEffect)))
+			return -1;
+
+		((CEffect_FireSpears*)pEffect)->Set_Position((_vec3)m_pTransformCom->Get_WorldMatrix()->m[3]);
+	}
 
 	return _int();
 }

@@ -30,11 +30,10 @@ HRESULT CBrawler01::Ready_GameObject()
 	if (FAILED(CBrawler::Ready_GameObject()))
 		return E_FAIL;
 
-	CGameObject* pKnife = nullptr;
-	if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Brawler_Knife", SCENE_STAGE, L"Layer_Brawler_Knife",&pKnife)))
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Brawler_Knife", SCENE_STAGE, L"Layer_Brawler_Knife",&m_pWeapon)))
 		return E_FAIL;
-	if(nullptr != pKnife)
-		dynamic_cast<CBrawler_Knife*>(pKnife)->SetUp_ParentPointer(this);
+	if(nullptr != m_pWeapon)
+		dynamic_cast<CBrawler_Knife*>(m_pWeapon)->SetUp_ParentPointer(this);
 
 	m_pTransformCom->Scaling(0.01f, 0.01f, 0.01f);
 	m_pTransformCom->Set_AngleY(D3DXToRadian(rand() % 180));
@@ -231,6 +230,7 @@ CGameObject * CBrawler01::Clone_GameObject()
 
 void CBrawler01::Free()
 {
+
 	Safe_Release(m_pMeshCom);
 
 	CBrawler::Free();

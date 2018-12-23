@@ -146,7 +146,7 @@ HRESULT CCamera_Target::SetUp_Target(const CGameObject * pGameObject)
 	{
 		m_fCameraEyeX = 0.f;
 		m_fCameraEyeY = 3.f;
-		m_fCameraEyeZ = 8.3f;
+		m_fCameraEyeZ = 6.3f;
 		m_fCameraAtX = 0.f;
 		m_fCameraAtY = 5.f;
 		m_fCameraAtZ = 0.f;
