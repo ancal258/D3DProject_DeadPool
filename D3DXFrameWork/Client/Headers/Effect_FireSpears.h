@@ -21,6 +21,8 @@ private:
 	virtual ~CEffect_FireSpears() = default;
 public:
 	void Set_Position(_vec3 vPos);
+	void Set_ParentMatrix(const _matrix* pMatrix) {
+		m_pParentMatrix = pMatrix;	}
 public:
 	virtual HRESULT Ready_GameObject_Prototype();
 	virtual HRESULT Ready_GameObject();
@@ -33,12 +35,14 @@ private:
 	CBuffer_RcTex*		m_pBufferCom = nullptr;
 	CTexture*			m_pTextureCom = nullptr;
 	CShader*			m_pShaderCom = nullptr;
+
+			
 private:
 	HRESULT Ready_Component();
 	HRESULT	SetUp_ConstantTable(LPD3DXEFFECT pEffect);
 private:
 	_float				m_fFrame = 0.f;
-	_matrix				m_matParentMatrix;
+	const _matrix*		m_pParentMatrix;
 public:
 	static CEffect_FireSpears* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone_GameObject();

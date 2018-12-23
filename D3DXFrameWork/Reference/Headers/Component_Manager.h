@@ -7,6 +7,7 @@
 #include "Buffer_RcCol.h"
 #include "Buffer_TextUI.h"
 #include "Buffer_Collider.h"
+#include "Buffer_Trail.h"
 #include "Renderer.h"
 #include "Transform.h"
 #include "Shader.h"

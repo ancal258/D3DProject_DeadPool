@@ -4,6 +4,7 @@
 #include "Object_Manager.h"
 #include "Light_Manager.h"
 #include "Player.h"
+#include "Effect_Trail.h"
 _USING(Client)
 
 CDP_Sword::CDP_Sword(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -37,6 +38,11 @@ HRESULT CDP_Sword::Ready_GameObject()
 	else if(1 == m_iSide)
 		m_pTransformCom->Set_AngleZ(D3DXToRadian(-90.0f));
 
+	CGameObject* pTrail;
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Effect_Trail", SCENE_STAGE, L"Layer_Effect",&pTrail)))
+		return E_FAIL;
+	((CEffect_Trail*)pTrail)->SetUp_Sword(this);
+
 	return NOERROR;
 }
 
@@ -45,6 +51,15 @@ _int CDP_Sword::Update_GameObject(const _float & fTimeDelta)
 	// iIndex == 7 == LBUTTON ( 8 == RBUTTON)
 	//m_isActive = m_pPlayer->Get_IsButtonDown(7);
 	//m_isActive ^= 1;
+	_matrix matWorld = *m_pTransformCom->Get_WorldMatrix();
+	_vec3 vUp = matWorld.m[0];
+	_vec3 vPos = _vec3(matWorld.m[3][0], matWorld.m[3][1], matWorld.m[3][2]);
+
+	_vec3 vBegin, vEnd;
+	vBegin = vPos + vUp * 300;
+	vEnd = vPos + vUp * -5;
+	m_vPointBegin = vBegin;
+	m_vPointEnd = vEnd;
 
 	//		STATE_SWORD, STATE_AIM, STATE_RUN, STATE_NORMAL, STATE_END
 	if (1 != m_pPlayer->Get_AnimState())
@@ -98,10 +113,10 @@ void CDP_Sword::Render_GameObject()
 	Safe_Release(pEffect);
 
 	//m_pColliderCom->Render_Collider();
-	for (size_t i = 0; i < 5; i++)
-	{
-		m_pColliderCom_Sphere[i]->Render_Collider();
-	}
+	//for (size_t i = 0; i < 5; i++)
+	//{
+	//	m_pColliderCom_Sphere[i]->Render_Collider();
+	//}
 }
 
 HRESULT CDP_Sword::Ready_Component()

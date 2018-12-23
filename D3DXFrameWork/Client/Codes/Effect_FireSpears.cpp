@@ -19,6 +19,19 @@ CEffect_FireSpears::CEffect_FireSpears(const CEffect_FireSpears & rhs)
 void CEffect_FireSpears::Set_Position(_vec3 vPos)
 {
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &vPos);
+
+	//D3DXMatrixIdentity(&m_matParentMatrix);
+	//_vec3			vRight, vUp, vLook, vPosition;
+
+	//vRight = *D3DXVec3Normalize(&vRight, (_vec3*)&m_matParentMatrix.m[0][0]) * 0.2f;
+	//vUp = *D3DXVec3Normalize(&vUp, (_vec3*)&m_matParentMatrix.m[1][0]) * 0.2f;
+	//vLook = *D3DXVec3Normalize(&vLook, (_vec3*)&m_matParentMatrix.m[2][0]) * 0.2f;
+	//vPosition = vPos;
+	//memcpy(&m_matParentMatrix.m[0][0], vRight, sizeof(_vec3));
+	//memcpy(&m_matParentMatrix.m[1][0], vUp, sizeof(_vec3));
+	//memcpy(&m_matParentMatrix.m[2][0], vLook, sizeof(_vec3));
+	//memcpy(&m_matParentMatrix.m[3][0], vPosition, sizeof(_vec3));
+
 }
 
 HRESULT CEffect_FireSpears::Ready_GameObject_Prototype()
@@ -36,17 +49,9 @@ HRESULT CEffect_FireSpears::Ready_GameObject()
 
 	// 빌보드 이펙트의 상태 변환을 위해
 	// 부모 행렬을 직접 만들어준다.
-	D3DXMatrixIdentity(&m_matParentMatrix);
 
-	_vec3			vRight, vUp, vLook;
 
-	vRight = *D3DXVec3Normalize(&vRight, (_vec3*)&m_matParentMatrix.m[0][0]) * 0.5f;
-	vUp = *D3DXVec3Normalize(&vUp, (_vec3*)&m_matParentMatrix.m[1][0]) * 0.5f;
-	vLook = *D3DXVec3Normalize(&vLook, (_vec3*)&m_matParentMatrix.m[2][0]) * 1;
 
-	memcpy(&m_matParentMatrix.m[0][0], vRight, sizeof(_vec3));
-	memcpy(&m_matParentMatrix.m[1][0], vUp, sizeof(_vec3));
-	memcpy(&m_matParentMatrix.m[2][0], vLook, sizeof(_vec3));
 
 	return NOERROR;
 }
@@ -79,7 +84,7 @@ _int CEffect_FireSpears::Update_GameObject(const _float & fTimeDelta)
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_RIGHT, (_vec3*)&matBill.m[0][0]);
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_UP, (_vec3*)&matBill.m[1][0]);
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_LOOK, (_vec3*)&matBill.m[2][0]);
-
+	//D3DPT_TRIANGLESTRIP
 	return _int();
 }
 
@@ -88,7 +93,7 @@ _int CEffect_FireSpears::LastUpdate_GameObject(const _float & fTimeDelta)
 	if (nullptr == m_pRendererCom)
 		return -1;
 
-	//m_pTransformCom->Set_ParentMatrix(m_matParentMatrix);
+	//m_pTransformCom->Set_ParentMatrix(*m_pParentMatrix);
 
 	m_pTransformCom->Update_Matrix();
 
@@ -179,7 +184,7 @@ HRESULT CEffect_FireSpears::SetUp_ConstantTable(LPD3DXEFFECT pEffect)
 	pEffect->SetMatrix("g_matView", &matView);
 	pEffect->SetMatrix("g_matProj", &matProj);
 	pEffect->SetFloat("g_fAlpha", 1);
-	m_pTextureCom->SetUp_OnShader(pEffect, "g_DiffuseTexture", _uint(m_fFrame));
+	m_pTextureCom->SetUp_OnShader(pEffect, "g_DiffuseTexture", _uint(0));
 
 
 

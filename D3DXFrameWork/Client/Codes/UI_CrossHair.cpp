@@ -26,13 +26,11 @@ HRESULT CUI_CrossHair::Ready_GameObject_Prototype()
 HRESULT CUI_CrossHair::Ready_GameObject()
 {
 	if (FAILED(Ready_Component()))
-		return E_FAIL;
+		return E_FAIL; 
 
 	const CGameObject* pPlayer = CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Player", 0);
-	if (nullptr == pPlayer)
-		return E_FAIL;
-	
-	m_pPlayer = (CPlayer*)pPlayer;
+	if (nullptr != pPlayer)
+		m_pPlayer = (CPlayer*)pPlayer;
 
 	m_fX = g_iBackCX >> 1;
 	m_fY = g_iBackCY >> 1;
@@ -59,12 +57,24 @@ _int CUI_CrossHair::LastUpdate_GameObject(const _float & fTimeDelta)
 
 	m_pTransformCom->Update_Matrix();
 
-	
-	if (true == m_pPlayer->Get_IsButtonDown(8))
+	// 플레이어가 존재 하면 조건부 에임
+	if (nullptr != m_pPlayer)
+	{
+		if (true == m_pPlayer->Get_IsButtonDown(8))
+		{
+			if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_UI, this)))
+				return -1;
+		}
+	} // 없으면 무조건 에임 ( 비행기 씬 )
+	else
 	{
 		if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_UI, this)))
 			return -1;
 	}
+
+
+
+
 
 	return _int();
 }

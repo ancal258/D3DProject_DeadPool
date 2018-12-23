@@ -21,6 +21,11 @@ CBrawler::CBrawler(const CBrawler & rhs)
 {
 }
 
+void CBrawler::Set_Position(_vec3 vPos)
+{
+	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &vPos);
+}
+
 HRESULT CBrawler::Ready_GameObject_Prototype()
 {
 	return NOERROR;
@@ -115,10 +120,10 @@ void CBrawler::Render_GameObject()
 
 	Safe_Release(pEffect);
 	
-	m_pColliderCom->Render_Collider();
-	m_pColliderCom_Body->Render_Collider();
-	m_pColliderCom_Head->Render_Collider();
-	m_pColliderCom_Search->Render_Collider();
+	//m_pColliderCom->Render_Collider();
+	//m_pColliderCom_Body->Render_Collider();
+	//m_pColliderCom_Head->Render_Collider();
+	//m_pColliderCom_Search->Render_Collider();
 }
 
 void CBrawler::CallBackFinish()
@@ -298,8 +303,9 @@ _int CBrawler::Update_Stage_Field(const _float & fTimeDelta)
 
 	if (false == pCamera->Culling_ToFrustum(m_pTransformCom, nullptr, fRadius))
 	{
-		if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
-			return -1;
+		if(m_fLength < 30.f)
+			if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
+				return -1;
 	}
 
 	return _int();

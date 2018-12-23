@@ -88,6 +88,21 @@
     <Filter Include="02.GameObject\01. Effect\ToolEffect\01. TextureEffect\Effect_BloodMist">
       <UniqueIdentifier>{b7d6d22b-9884-43bc-9a8f-836f4c2a0e24}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\01. Effect\Effect_Mesh\Sword">
+      <UniqueIdentifier>{482dc40b-9dc8-4add-b178-f2d3899b56e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\01. Effect\Effect_Mesh\Effect_GunFlash">
+      <UniqueIdentifier>{f2220ae0-4fb0-4202-b38a-6b9f4856c152}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\01. Effect\Effect_Mesh\Effect_GunCap">
+      <UniqueIdentifier>{ab3d55cb-7c86-4663-97da-933ef41b6b1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\01. Effect\Effect_Mesh\Effect_MinigunFlash">
+      <UniqueIdentifier>{4d2a54a5-c8d0-4a5e-8bf2-4f7fa6e50117}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\01. Effect\Effect_Mesh\Effect_MinigunCap">
+      <UniqueIdentifier>{434af285-6a64-40a4-a778-480535b14b06}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EffectTool.h">
@@ -135,9 +150,6 @@
     <ClInclude Include="ToolBase.h">
       <Filter>02.GameObject\00. BaseTexture</Filter>
     </ClInclude>
-    <ClInclude Include="Effect_Mesh.h">
-      <Filter>02.GameObject\01. Effect\Effect_Mesh</Filter>
-    </ClInclude>
     <ClInclude Include="Effect_RectParticle.h">
       <Filter>02.GameObject\01. Effect\Effect_RectParticle</Filter>
     </ClInclude>
@@ -164,6 +176,15 @@
     </ClInclude>
     <ClInclude Include="Effect_BloodMistT.h">
       <Filter>02.GameObject\01. Effect\ToolEffect\01. TextureEffect\Effect_BloodMist</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect_Mesh.h">
+      <Filter>02.GameObject\01. Effect\Effect_Mesh\Sword</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect_GunCapT.h">
+      <Filter>02.GameObject\01. Effect\Effect_Mesh\Effect_GunCap</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect_GunFlashT.h">
+      <Filter>02.GameObject\01. Effect\Effect_Mesh\Effect_GunFlash</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -203,9 +224,6 @@
     <ClCompile Include="ToolBase.cpp">
       <Filter>02.GameObject\00. BaseTexture</Filter>
     </ClCompile>
-    <ClCompile Include="Effect_Mesh.cpp">
-      <Filter>02.GameObject\01. Effect\Effect_Mesh</Filter>
-    </ClCompile>
     <ClCompile Include="Effect_RectParticle.cpp">
       <Filter>02.GameObject\01. Effect\Effect_RectParticle</Filter>
     </ClCompile>
@@ -232,6 +250,15 @@
     </ClCompile>
     <ClCompile Include="Effect_BloodMistT.cpp">
       <Filter>02.GameObject\01. Effect\ToolEffect\01. TextureEffect\Effect_BloodMist</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect_Mesh.cpp">
+      <Filter>02.GameObject\01. Effect\Effect_Mesh\Sword</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect_GunCapT.cpp">
+      <Filter>02.GameObject\01. Effect\Effect_Mesh\Effect_GunCap</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect_GunFlashT.cpp">
+      <Filter>02.GameObject\01. Effect\Effect_Mesh\Effect_GunFlash</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

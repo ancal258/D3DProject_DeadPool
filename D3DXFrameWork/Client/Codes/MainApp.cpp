@@ -160,6 +160,10 @@ HRESULT CMainApp::Ready_Static_Component()
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STATIC, L"Component_Buffer_RcCol", CBuffer_RcCol::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
+	// For.Component_Buffer_Trail
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STATIC, L"Component_Buffer_Trail", CBuffer_Trail::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
 	// For.Component_Renderer	
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STATIC, L"Component_Renderer", m_pRenderer = CRenderer::Create(m_pGraphic_Device))))
 		return E_FAIL;

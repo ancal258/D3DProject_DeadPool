@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Defines.h"
+#include "afxwin.h"
 _BEGIN(Engine)
 class CGameObject;
 _END
@@ -29,10 +30,14 @@ public:
 	float m_fV;
 
 	CGameObject*	m_pMesh = nullptr;
-
+	_uint			m_iIndex = 0;
 
 	afx_msg void OnBnClickedButton4();
 	afx_msg void OnBnClickedButton6();
 	afx_msg void OnBnClickedButton5();
 	afx_msg void OnBnClickedButton7();
+	CListBox m_PrototypeList;
+	CListBox m_ObjectList;
+	virtual BOOL OnInitDialog();
+	afx_msg void OnLbnSelchangeList2();
 };

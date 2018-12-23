@@ -250,6 +250,21 @@
     <Filter Include="02.GameObject\02.For.Stage\03.Effect\03.Effect_FireSpears">
       <UniqueIdentifier>{bd5a3212-1877-48bb-89d9-f89cf15cdab4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh\Sword_Heavy03">
+      <UniqueIdentifier>{2fc6d8f7-8f51-41cf-ab08-c2634c2af31e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh\Mnigun">
+      <UniqueIdentifier>{d84cda5d-4fe2-4e90-9de0-b9c3901e6ca8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh\Mnigun\Cap">
+      <UniqueIdentifier>{ee6cc95d-53e0-4ad7-9e91-7b6c8b9ccce0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh\Mnigun\Flash">
+      <UniqueIdentifier>{3071ffd3-cd54-4665-be36-7877f5d9c60f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\03.Effect\04.Effect_Trail">
+      <UniqueIdentifier>{562ee96b-506e-49e6-85fe-719437f35beb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -387,9 +402,6 @@
     <ClInclude Include="..\Headers\Effect.h">
       <Filter>02.GameObject\02.For.Stage\03.Effect\00.Effect_Texture</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\Effect_Mesh.h">
-      <Filter>02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh</Filter>
-    </ClInclude>
     <ClInclude Include="..\Headers\Effect_RectParticle.h">
       <Filter>02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle</Filter>
     </ClInclude>
@@ -425,6 +437,15 @@
     </ClInclude>
     <ClInclude Include="..\Headers\Effect_FireSpears.h">
       <Filter>02.GameObject\02.For.Stage\03.Effect\03.Effect_FireSpears</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Effect_Mesh.h">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh\Sword_Heavy03</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Effect_MinigunCap.h">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh\Mnigun\Cap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Effect_Trail.h">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\04.Effect_Trail</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -548,9 +569,6 @@
     <ClCompile Include="..\Codes\Effect.cpp">
       <Filter>02.GameObject\02.For.Stage\03.Effect\00.Effect_Texture</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\Effect_Mesh.cpp">
-      <Filter>02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh</Filter>
-    </ClCompile>
     <ClCompile Include="..\Codes\Effect_RectParticle.cpp">
       <Filter>02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle</Filter>
     </ClCompile>
@@ -586,6 +604,15 @@
     </ClCompile>
     <ClCompile Include="..\Codes\Effect_FireSpears.cpp">
       <Filter>02.GameObject\02.For.Stage\03.Effect\03.Effect_FireSpears</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Effect_Mesh.cpp">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh\Sword_Heavy03</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Effect_MinigunCap.cpp">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh\Mnigun\Cap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Effect_Trail.cpp">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\04.Effect_Trail</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

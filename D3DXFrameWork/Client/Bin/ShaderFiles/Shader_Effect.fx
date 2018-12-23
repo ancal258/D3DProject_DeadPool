@@ -89,9 +89,9 @@ PS_OUT PS_MAIN(PS_IN In)
 	// 이펙트 픽셀을 그리려고 했던 영역에 이미 그려져 있었든 그 무언가의 깊이.
 	float		fDestZ = vDepthInfo.y * 500.0f;
 
-	vDiffuse.a = vDiffuse.a * saturate(fDestZ - In.vProjPos.w);
-
+	//vDiffuse.a = vDiffuse.a * saturate(fDestZ - In.vProjPos.w);
 	Out.vColor = vDiffuse;
+	Out.vColor.a *= g_fAlpha;
 
 	return Out;
 }
@@ -123,6 +123,35 @@ PS_OUT PS_MAIN_AT(PS_IN In)
 	return Out;
 }
 
+PS_OUT PS_MAIN_BLOOD(PS_IN In)
+{
+	PS_OUT			Out = (PS_OUT)0;
+
+	vector		vDiffuse = tex2D(DiffuseSampler, In.vTexUV);
+
+
+	Out.vColor = vDiffuse;
+	Out.vColor.a = saturate(vDiffuse.r + vDiffuse.g + vDiffuse.b);
+	Out.vColor.gb = 0;
+	Out.vColor.a *= g_fAlpha;
+
+	return Out;
+}
+PS_OUT PS_MAIN_EXPLOSION(PS_IN In)
+{
+	PS_OUT			Out = (PS_OUT)0;
+
+	vector		vDiffuse = tex2D(DiffuseSampler, In.vTexUV);
+
+
+	Out.vColor = vDiffuse;
+	//if(Out.vColor.r == Out.vColor.g && Out.vColor.g == Out.vColor.b)
+	//	Out.vColor.a = 0;
+
+	return Out;
+}
+
+
 
 technique Default_Device
 {
@@ -147,7 +176,7 @@ technique Default_Device
 
 	pass Alpha_Testing
 	{
-		cullmode = none;
+		cullmode = cw;
 
 		AlphaBlendEnable = true;
 		SrcBlend = SrcAlpha;
@@ -173,10 +202,36 @@ technique Default_Device
 		AlphaRef = 10;
 
 
-		//ZWriteEnable = true;
+		ZWriteEnable = false;
 
 		VertexShader = compile vs_3_0 VS_MAIN();
 		PixelShader = compile ps_3_0 PS_MAIN_MESH();
 	}
 
+	pass BloodEffect_Rendering
+	{
+		cullmode = none;
+
+		AlphaBlendEnable = true;
+		SrcBlend = SrcAlpha;
+		DestBlend = InvSrcAlpha;
+
+		ZWriteEnable = false;
+
+		VertexShader = compile vs_3_0 VS_MAIN();
+		PixelShader = compile ps_3_0 PS_MAIN_BLOOD();
+	}
+	pass ExplosionEffect_Rendering
+	{
+		cullmode = none;
+
+		AlphaBlendEnable = true;
+		SrcBlend = SrcAlpha;
+		DestBlend = InvSrcAlpha;
+
+		ZWriteEnable = false;
+
+		VertexShader = compile vs_3_0 VS_MAIN();
+		PixelShader = compile ps_3_0 PS_MAIN_EXPLOSION();
+	}
 }

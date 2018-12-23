@@ -206,6 +206,8 @@
     <ClInclude Include="Effect_BloodT.h" />
     <ClInclude Include="Effect_CloudT.h" />
     <ClInclude Include="Effect_ExplosionT.h" />
+    <ClInclude Include="Effect_GunCapT.h" />
+    <ClInclude Include="Effect_GunFlashT.h" />
     <ClInclude Include="Effect_Mesh.h" />
     <ClInclude Include="Effect_RectParticle.h" />
     <ClInclude Include="Effect_TexBloodT.h" />
@@ -232,6 +234,8 @@
     <ClCompile Include="Effect_BloodT.cpp" />
     <ClCompile Include="Effect_CloudT.cpp" />
     <ClCompile Include="Effect_ExplosionT.cpp" />
+    <ClCompile Include="Effect_GunCapT.cpp" />
+    <ClCompile Include="Effect_GunFlashT.cpp" />
     <ClCompile Include="Effect_Mesh.cpp" />
     <ClCompile Include="Effect_RectParticle.cpp" />
     <ClCompile Include="Effect_TexBloodT.cpp" />

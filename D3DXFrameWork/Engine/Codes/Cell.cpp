@@ -137,7 +137,7 @@ void CCell::Render_Cell(LPD3DXLINE pLine)
 	vPoint[3] = m_vPoint[POINT_A];
 
 	_matrix		matView, matProj;
-
+	
 	m_pGraphic_Device->GetTransform(D3DTS_VIEW, &matView);
 	m_pGraphic_Device->GetTransform(D3DTS_PROJECTION, &matProj);
 

@@ -37,11 +37,11 @@ HRESULT CBrawler01::Ready_GameObject()
 
 	m_pTransformCom->Scaling(0.01f, 0.01f, 0.01f);
 	m_pTransformCom->Set_AngleY(D3DXToRadian(rand() % 180));
-	_vec3 vPosition = _vec3(rand() % 16 + 2.8f, 0.f, rand() % 16 + 16.f);
+
 
 	m_iHP = 3;
 
-	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &vPosition);
+	
 
 	CGameObject* pHP_Bar = nullptr;
 	if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_UI_HPBar", SCENE_STAGE, L"Layer_UI", &pHP_Bar)))

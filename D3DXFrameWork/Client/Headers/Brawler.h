@@ -23,6 +23,8 @@ public:
 		return m_CombinedHandMatrix[iSide];
 	}
 public:
+	void Set_Position(_vec3 vPos);
+public:
 	virtual HRESULT Ready_GameObject_Prototype();
 	virtual HRESULT Ready_GameObject();
 	virtual _int Update_GameObject(const _float& fTimeDelta);

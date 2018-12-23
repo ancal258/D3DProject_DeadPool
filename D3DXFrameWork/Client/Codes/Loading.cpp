@@ -32,6 +32,8 @@
 #include "Effect_Mesh.h"
 #include "Effect_RectParticle.h"
 #include "Effect_FireSpears.h"
+#include "Effect_MinigunCap.h"
+#include "Effect_Trail.h"
 // UI
 #include "UI_CrossHair.h"
 #include "UI_HPBar.h"
@@ -599,6 +601,7 @@ HRESULT CLoading::Ready_Effect()
 	//	return E_FAIL;
 
 
+
 	Safe_Release(pComponent_Manager);
 	return NOERROR;
 }
@@ -632,6 +635,9 @@ HRESULT CLoading::Ready_Static_Prototype_Component()
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Shader_Prop", CShader::Create(Get_Graphic_Device(), m_szString))))
 		return E_FAIL;
 
+	// For.Component_Shader_Logo
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Shader_Logo", CShader::Create(Get_Graphic_Device(), L"../Bin/ShaderFiles/Shader_Logo.fx"))))
+		return E_FAIL;
 
 	// For.Component_Texture_ConcentratedEffect
 	lstrcpy(m_szString, L"../Bin/Resources/Textures/Effect/Battle/ConcentratedEffect.png");
@@ -1351,6 +1357,16 @@ HRESULT CLoading::Ready_AIRPLANE()
 		return E_FAIL;
 
 
+	// For. MinigunCap
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(SCENE_STAGE, L"Component_Mesh_MinigunCap", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/Effect/MiniGun/", L"Minigun_Cap.x"))))
+		return E_FAIL;
+	// For.Prototype_MinigunCap
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Effect_MinigunCap", CEffect_MinigunCap::Create(Get_Graphic_Device()))))
+		return E_FAIL;
+	// For.Add_Effect_MinigunCap
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Effect_MinigunCap", SCENE_STAGE, L"Layer_Effect", nullptr)))
+		return E_FAIL;
+
 	return NOERROR;
 }
 
@@ -1364,6 +1380,10 @@ HRESULT CLoading::Ready_UI_SceneAIRPLANE()
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_HPBar", CUI_HPBar::Create(Get_Graphic_Device()))))
 		return E_FAIL;
 
+
+	//GameObject
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_UI_CrossHair", SCENE_STAGE, L"Layer_UI", nullptr)))
+		return E_FAIL;
 
 	return NOERROR;
 }
@@ -1580,6 +1600,10 @@ HRESULT CLoading::Ready_Stage_Prototype_GameObject_SceneFIELD()
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_ConcentratedLine", CConcentratedLine::Create(Get_Graphic_Device()))))
 		return E_FAIL;
 
+	// For. Trail
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Effect_Trail", CEffect_Trail::Create(Get_Graphic_Device()))))
+		return E_FAIL;
+
 	// For.ConcentratedLine
 	CGameObject* pUI;
 	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_ConcentratedLine", SCENE_STAGE, L"Layer_Test", &pUI)))
@@ -1659,16 +1683,40 @@ HRESULT CLoading::Ready_Layer_BackGround(const _tchar * pLayerTag)
 
 HRESULT CLoading::Ready_Layer_Object()
 {
-	for (size_t i = 0; i < 3; i++)
-	{
-		if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01")))
-			return E_FAIL;
-	}
-	for (size_t i = 0; i < 1; i++)
-	{
-		if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler02", SCENE_STAGE, L"Layer_Brawler02")))
-			return E_FAIL;
-	}
+	CGameObject* pBrawler = nullptr;
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
+		return E_FAIL;
+	((CBrawler01*)pBrawler)->Set_Position(_vec3(7.2f,0,27.87f));
+	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
+	//	return E_FAIL;
+	//((CBrawler01*)pBrawler)->Set_Position(_vec3(17.59f,0,31.04f));
+	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
+	//	return E_FAIL;
+	//((CBrawler01*)pBrawler)->Set_Position(_vec3(13.25f,0,20.12f));
+	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
+	//	return E_FAIL;
+	//((CBrawler01*)pBrawler)->Set_Position(_vec3(35.51f,0,37.64f));
+	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
+	//	return E_FAIL;
+	//((CBrawler01*)pBrawler)->Set_Position(_vec3(37.92f,0,34.33f));
+	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
+	//	return E_FAIL;
+	//((CBrawler01*)pBrawler)->Set_Position(_vec3(31.38f,0,4.081f));
+	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
+	//	return E_FAIL;
+	//((CBrawler01*)pBrawler)->Set_Position(_vec3(52.77f,0,7.619f));
+	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
+	//	return E_FAIL;
+	//((CBrawler01*)pBrawler)->Set_Position(_vec3(57.11f,0,9.349f));
+	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
+	//	return E_FAIL;
+	//((CBrawler01*)pBrawler)->Set_Position(_vec3(58.68f, 0, 28.21f));
+
+	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
+	//	return E_FAIL;
+	//((CBrawler01*)pBrawler)->Set_Position(_vec3(200.f, 0, 200.f));
+
+
 
 	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_BikiniGirl", SCENE_STAGE, L"Layer_BikiniGirl")))
 		return E_FAIL;

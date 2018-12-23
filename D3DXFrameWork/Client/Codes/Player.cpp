@@ -80,6 +80,7 @@ HRESULT CPlayer::Ready_GameObject()
 	m_pNavigationCom->Update_LastMatrix(&m_RealMatrix);
 
 
+	Get_Graphic_Device()->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 4);
 
 	return NOERROR;
 }

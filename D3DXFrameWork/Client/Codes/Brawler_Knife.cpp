@@ -84,7 +84,7 @@ void CBrawler_Knife::Render_GameObject()
 
 	Safe_Release(pEffect);
 
-	m_pColliderCom->Render_Collider();
+	//m_pColliderCom->Render_Collider();
 	//for (size_t i = 0; i < 5; i++)
 	//{
 	//	m_pColliderCom_Sphere[i]->Render_Collider();

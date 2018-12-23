@@ -34,18 +34,17 @@ HRESULT CMinigun::Ready_GameObject()
 
 	m_fMouseSence = 8.1f;
 
-	//m_pBoneA = m_pMeshCom->Get_FrameMatrix("L_Misc02_XM");
-	//if (nullptr == m_pBoneA)
-	//	return E_FAIL;
+	m_pHeadMatrix = m_pMeshCom->Get_FrameMatrixByName("L_Misc04_XM");
+	if (nullptr == m_pHeadMatrix)
+		return E_FAIL;
 	//m_pBoneB = m_pMeshCom->Get_FrameMatrix("L_Misc03_XM");
 	//if (nullptr == m_pBoneA)
 	//	return E_FAIL;
 	//m_pBoneC = m_pMeshCom->Get_FrameMatrix("L_Misc04_XM");
 	//if (nullptr == m_pBoneC)
 	//	return E_FAIL;
-
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(160, 100, 60));
-
+	
 
 	//Update_HandMatrix();
 	m_pMeshCom->Set_AnimationSet(0);
@@ -61,6 +60,7 @@ _int CMinigun::Update_GameObject(const _float & fTimeDelta)
 	//D3DXVec3TransformNormal((_vec3*)&m_pBoneA->m[0][0], (_vec3*)&m_pBoneA->m[0][0], &matRotY);
 	//D3DXVec3TransformNormal((_vec3*)&m_pBoneA->m[1][0], (_vec3*)&m_pBoneA->m[1][0], &matRotY);
 	//D3DXVec3TransformNormal((_vec3*)&m_pBoneA->m[2][0], (_vec3*)&m_pBoneA->m[2][0], &matRotY);
+	Update_HeadMatrix();
 
 	if (m_dwMouseMove = CInput_Device::GetInstance()->Get_DIMouseMove(CInput_Device::DIMM_X))
 	{
@@ -315,8 +315,12 @@ CGameObject * CMinigun::Clone_GameObject()
 	return pInstance;
 }
 
-HRESULT CMinigun::Update_HandMatrix()
+HRESULT CMinigun::Update_HeadMatrix()
 {
+	if (nullptr == m_pHeadMatrix)
+		return E_FAIL;
+
+	m_CombinedHeadMatrix = *m_pHeadMatrix * *m_pTransformCom->Get_WorldMatrix();
 
 	return NOERROR;
 }

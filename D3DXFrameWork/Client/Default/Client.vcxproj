@@ -193,7 +193,9 @@
     <ClInclude Include="..\Headers\Effect.h" />
     <ClInclude Include="..\Headers\Effect_FireSpears.h" />
     <ClInclude Include="..\Headers\Effect_Mesh.h" />
+    <ClInclude Include="..\Headers\Effect_MinigunCap.h" />
     <ClInclude Include="..\Headers\Effect_RectParticle.h" />
+    <ClInclude Include="..\Headers\Effect_Trail.h" />
     <ClInclude Include="..\Headers\Event_Cube.h" />
     <ClInclude Include="..\Headers\Loading.h" />
     <ClInclude Include="..\Headers\MainApp.h" />
@@ -250,7 +252,9 @@
     <ClCompile Include="..\Codes\Effect.cpp" />
     <ClCompile Include="..\Codes\Effect_FireSpears.cpp" />
     <ClCompile Include="..\Codes\Effect_Mesh.cpp" />
+    <ClCompile Include="..\Codes\Effect_MinigunCap.cpp" />
     <ClCompile Include="..\Codes\Effect_RectParticle.cpp" />
+    <ClCompile Include="..\Codes\Effect_Trail.cpp" />
     <ClCompile Include="..\Codes\Event_Cube.cpp" />
     <ClCompile Include="..\Codes\Loading.cpp" />
     <ClCompile Include="..\Codes\MainApp.cpp" />

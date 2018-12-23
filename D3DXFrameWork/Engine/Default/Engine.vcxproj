@@ -170,6 +170,7 @@
     <ClInclude Include="..\Headers\Buffer_RcTex.h" />
     <ClInclude Include="..\Headers\Buffer_Terrain.h" />
     <ClInclude Include="..\Headers\Buffer_TextUI.h" />
+    <ClInclude Include="..\Headers\Buffer_Trail.h" />
     <ClInclude Include="..\Headers\Camera.h" />
     <ClInclude Include="..\Headers\Cell.h" />
     <ClInclude Include="..\Headers\Collider.h" />
@@ -220,6 +221,7 @@
     <ClCompile Include="..\Codes\Buffer_RcTex.cpp" />
     <ClCompile Include="..\Codes\Buffer_Terrain.cpp" />
     <ClCompile Include="..\Codes\Buffer_TextUI.cpp" />
+    <ClCompile Include="..\Codes\Buffer_Trail.cpp" />
     <ClCompile Include="..\Codes\Camera.cpp" />
     <ClCompile Include="..\Codes\Cell.cpp" />
     <ClCompile Include="..\Codes\Collider.cpp" />

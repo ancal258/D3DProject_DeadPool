@@ -22,6 +22,11 @@ private:
 	explicit CDP_Sword(const CDP_Sword& rhs);
 	virtual ~CDP_Sword() = default;
 public:
+	_vec3 Get_BeginPoint() {
+		return m_vPointBegin;	}
+	_vec3 Get_EndPoint() {
+		return m_vPointEnd;	}
+public:
 	virtual HRESULT Ready_GameObject_Prototype(_uint iSide);
 	virtual HRESULT Ready_GameObject();
 	virtual _int Update_GameObject(const _float& fTimeDelta);
@@ -37,6 +42,9 @@ private:
 private:
 	CPlayer*			m_pPlayer = nullptr;
 	_uint				m_iSide = 0; // 0 == ÁÂÃø , 1 == ¿ìÃø
+
+	_vec3				m_vPointBegin;
+	_vec3				m_vPointEnd;
 
 private:
 	HRESULT Ready_Component();

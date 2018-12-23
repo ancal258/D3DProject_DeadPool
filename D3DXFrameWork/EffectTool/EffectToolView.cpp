@@ -31,6 +31,8 @@
 #include "Effect_CloudT.h"
 #include "Effect_TexBloodT.h"
 #include "Effect_BloodMistT.h"
+#include "Effect_GunFlashT.h"
+#include "Effect_GunCapT.h"
 #include "ParentEffect.h"
 
 #ifdef _DEBUG
@@ -298,6 +300,23 @@ HRESULT CEffectToolView::Ready_Component()
 		return E_FAIL;
 
 
+	// For.Component_Mesh_GunCap
+	if (FAILED(pComponent_Manager->Add_Component(0, L"Component_Mesh_GunCap", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/Effect/Gun/", L"Gun_Cap.x"))))
+		return E_FAIL;
+
+	// For.Component_Mesh_GunFlash
+	if (FAILED(pComponent_Manager->Add_Component(0, L"Component_Mesh_GunFlash", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/Effect/Gun/", L"Gun_Flash.x"))))
+		return E_FAIL;
+
+	// For.Component_Mesh_MinigunCap
+	if (FAILED(pComponent_Manager->Add_Component(0, L"Component_Mesh_MinigunCap", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/Effect/MiniGun/", L"Minigun_Cap.x"))))
+		return E_FAIL;
+
+	// For.Component_Mesh_MinigunFlash
+	if (FAILED(pComponent_Manager->Add_Component(0, L"Component_Mesh_MinigunFlash", CMesh_Static::Create(m_pGraphic_Device, L"../Client/Bin/Resources/Meshes/Effect/MiniGun/", L"Minigun_Flash.x"))))
+		return E_FAIL;
+
+
 	Safe_Release(pComponent_Manager);
 
 
@@ -345,6 +364,12 @@ HRESULT CEffectToolView::Ready_Prototype()
 		return E_FAIL;
 	// For.Prototype_EffectTexBlood
 	if (FAILED(pObject_Manager->Add_Object_Prototype(0, L"Prototype_EffectBloodMist", CEffect_BloodMistT::Create(m_pGraphic_Device))))
+		return E_FAIL;
+	// For.Prototype_EffectGunFlash
+	if (FAILED(pObject_Manager->Add_Object_Prototype(0, L"Prototype_EffectGunFlash", CEffect_GunFlashT::Create(m_pGraphic_Device))))
+		return E_FAIL;
+	// For.Prototype_EffectGunCap
+	if (FAILED(pObject_Manager->Add_Object_Prototype(0, L"Prototype_EffectGunCap", CEffect_GunCapT::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
 	// For.Prototype_ParentEffect

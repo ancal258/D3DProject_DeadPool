@@ -191,7 +191,7 @@ technique Default_Device
 
 	pass MeshEffect_Rendering
 	{
-		cullmode = none;
+		cullmode = cw;
 
 		//AlphaBlendEnable = true;
 		//SrcBlend = SrcAlpha;
@@ -199,7 +199,7 @@ technique Default_Device
 
 		AlphaTestEnable = true;
 		AlphaFunc = Greater;
-		AlphaRef = 10;
+		AlphaRef = 100;
 
 
 		ZWriteEnable = false;

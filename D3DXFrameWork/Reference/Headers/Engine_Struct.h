@@ -64,6 +64,7 @@ typedef struct tagVertex_Color
 	DWORD				dwColor;
 }VTXCOL;
 
+
 typedef struct tagVertex_ViewPort
 {
 	D3DXVECTOR4			vPosition;

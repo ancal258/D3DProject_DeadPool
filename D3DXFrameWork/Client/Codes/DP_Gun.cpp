@@ -55,9 +55,12 @@ _int CDP_Gun::Update_GameObject(const _float & fTimeDelta)
 
 		if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Effect_FireSpears", SCENE_STAGE, L"Layer_Effect", &pEffect)))
 			return -1;
+		_vec3 vPos = (_vec3)m_pTransformCom->Get_WorldMatrix()->m[3];
+		((CEffect_FireSpears*)pEffect)->Set_Position(vPos);
+		//((CEffect_FireSpears*)pEffect)->Set_ParentMatrix(m_pTransformCom->Get_WorldMatrix());
 
-		((CEffect_FireSpears*)pEffect)->Set_Position((_vec3)m_pTransformCom->Get_WorldMatrix()->m[3]);
 	}
+	
 
 	return _int();
 }

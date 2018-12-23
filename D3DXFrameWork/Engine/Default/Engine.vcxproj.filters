@@ -166,6 +166,9 @@
     <Filter Include="01.Utility\03.For.Component\Component\VIBuffer\Rect_TextUI">
       <UniqueIdentifier>{0427453b-c412-41df-8552-a02bb41841c8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Utility\03.For.Component\Component\VIBuffer\Buffer_Trail">
+      <UniqueIdentifier>{b507f75a-16c7-4bc4-b7dc-4eb84d98ac04}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Headers\Base.h">
@@ -310,6 +313,9 @@
     <ClInclude Include="..\Headers\Buffer_TextUI.h">
       <Filter>01.Utility\03.For.Component\Component\VIBuffer\Rect_TextUI</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\Buffer_Trail.h">
+      <Filter>01.Utility\03.For.Component\Component\VIBuffer\Buffer_Trail</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Codes\Base.cpp">
@@ -434,6 +440,9 @@
     </ClCompile>
     <ClCompile Include="..\Codes\Buffer_TextUI.cpp">
       <Filter>01.Utility\03.For.Component\Component\VIBuffer\Rect_TextUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Buffer_Trail.cpp">
+      <Filter>01.Utility\03.For.Component\Component\VIBuffer\Buffer_Trail</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
