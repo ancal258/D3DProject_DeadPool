@@ -23,10 +23,13 @@ void CTalkBox::Set_Info(_vec2 vPos, _tchar* pTalkString)
 	m_fY = vPos.y;
 	lstrcpy(m_szTalk, pTalkString);
 	m_iStrlen = lstrlen(m_szTalk);
-
 	m_fSizeX = (15 * m_iStrlen) + 75;
 	m_fSizeY = 100;
-
+	if (m_iStrlen == 0)
+	{
+		m_fSizeX = 0;
+		m_fSizeY = 0;
+	}
 }
 
 HRESULT CTalkBox::Ready_GameObject_Prototype(_uint iKind)

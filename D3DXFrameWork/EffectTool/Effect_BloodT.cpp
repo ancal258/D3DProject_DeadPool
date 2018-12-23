@@ -32,6 +32,8 @@ HRESULT CEffect_BloodT::Ready_GameObject()
 
 _int CEffect_BloodT::Update_GameObject(const _float & fTimeDelta)
 {
+	m_fAlpha -= fTimeDelta / m_fSurviveTime;
+
 	return CEffectT::Update_GameObject(fTimeDelta);
 }
 

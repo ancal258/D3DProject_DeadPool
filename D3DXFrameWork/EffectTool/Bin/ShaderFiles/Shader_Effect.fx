@@ -133,7 +133,7 @@ PS_OUT PS_MAIN_BLOOD(PS_IN In)
 	Out.vColor = vDiffuse;
 	Out.vColor.a = saturate(vDiffuse.r + vDiffuse.g + vDiffuse.b);
 	Out.vColor.gb = 0;
-	Out.vColor.a = Out.vColor.r;
+	Out.vColor.a *= g_fAlpha;
 
 	return Out;
 }

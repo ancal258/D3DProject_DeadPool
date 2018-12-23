@@ -2,6 +2,7 @@
 #include "..\Headers\MainApp.h"
 #include "Management.h"
 #include "Input_Device.h"
+#include "SubtitleManager.h"
 #include "Component_Manager.h"
 #include "Font_Manager.h"
 #include "Scene_Logo.h"
@@ -37,6 +38,8 @@ HRESULT CMainApp::Ready_MainApp()
 	//if (FAILED(Ready_Gara()))
 	//	return E_FAIL;
 
+	CSubtitle_Manager::GetInstance()->Ready_Subtitle();
+
 	return NOERROR;
 }
 
@@ -51,11 +54,11 @@ _int CMainApp::Update_MainApp(const _float & fTimeDelta)
 
 	_float		fTimeSlow = 1.f;
 
-	if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_O))
+	if (false == CInput_Device::GetInstance()->Get_SlowMotion())
 	{
 		fTimeSlow = 1.f;
 	}
-	if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_P))
+	if (true == CInput_Device::GetInstance()->Get_SlowMotion())
 		fTimeSlow = 0.1f;
 
 
@@ -287,6 +290,11 @@ void CMainApp::Free()
 	Safe_Release(m_pManagement);
 
 	Safe_Release(m_pRenderer);
-	
+
+	_ulong			dwRefCnt = 0;
+
+	if (dwRefCnt = CSubtitle_Manager::GetInstance()->DestroyInstance())
+		_MSG_BOX("CSubtitle_Manager Release Failed");
+
 	CManagement::Release_Engine();	
 }

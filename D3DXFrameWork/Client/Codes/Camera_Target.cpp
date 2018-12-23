@@ -72,6 +72,13 @@ _int CCamera_Target::LastUpdate_GameObject(const _float & fTimeDelta)
 
 	MouseEvent();
 
+	if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_NUMPAD1))
+		m_Projection_Desc.fFovy -= D3DXToRadian(20*fTimeDelta);
+	else
+	{
+		if (m_Projection_Desc.fFovy <= D3DXToRadian(60))
+			m_Projection_Desc.fFovy += D3DXToRadian(10 * fTimeDelta);
+	}
 	_vec3 vTargetPos = m_pTargetWorldMatrix->m[3];
 	m_Camera_Desc.vEye = vTargetPos;
 	//m_Camera_Desc.vEye.x += 3.f;

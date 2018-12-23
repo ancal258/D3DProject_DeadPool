@@ -35,7 +35,7 @@ HRESULT CDXFont::Render_Font(const _tchar* pString, D3DXCOLOR Color,const _matri
 	RECT		rcRect = { 100 };
 
 	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
-
+	
 	m_pSprite->SetTransform(pMatrix);
 
 	m_pFont->DrawTextW(m_pSprite, pString, lstrlen(pString), &rcRect, DT_NOCLIP, Color);

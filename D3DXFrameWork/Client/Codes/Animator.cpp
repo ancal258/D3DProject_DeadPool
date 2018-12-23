@@ -388,8 +388,39 @@ void CAnimator::Update_Animation_FIELD(const _float & fTimeDelta)
 	m_pMeshCom->Play_AnimationSet(fTimeDelta);
 
 
-
-
+	m_fSlowTime += fTimeDelta;
+	// 집중선 UI 넣으면 더 효과있을듯 ?? 
+	if (m_ReservationList.size() > 0) 
+	{
+		if (*m_ReservationList.begin() == SWORLD_HEAVY_01)
+		{
+			if(m_fSlowTime >= 0.3f && m_fSlowTime < 1.3f)
+				m_isFirstHeavySword = true;
+			if (m_fSlowTime >= 0.75f) // 공격 시작 후 0.75f 초 이후 슬로우모션 및 카툰렌더링 초기화
+			{
+				m_isFirstHeavySword = false;
+			}
+		}
+		else if (*m_ReservationList.begin() == SWORLD_HEAVY_03) // 첫번째 Heavy 공격 or 마지막 Heavy 공격일 때
+		{
+			if (m_fSlowTime >= 0.3f && m_fSlowTime < 1.3f)
+				m_isFirstHeavySword = true;
+			if (m_fSlowTime >= 0.75f) // 공격 시작 후 0.75f 초 이후 슬로우모션 및 카툰렌더링 초기화
+			{
+				m_isFirstHeavySword = false;
+			}
+		}
+		else // 예약은 있으나 다른 공격 모션인 상태에서의 초기화
+		{
+			m_isFirstHeavySword = false;
+			m_fSlowTime = 0.f;
+		}
+	}
+	else // 예약이 없는 상태의 초기화
+	{
+		m_isFirstHeavySword = false;
+		m_fSlowTime = 0.f;
+	}
 }
 
 void CAnimator::Last_Update_Animation_FIELD(const _float & fTimeDelta)

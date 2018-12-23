@@ -28,6 +28,9 @@
 #include "Effect_RectParticle.h"
 #include "Effect_BloodT.h"
 #include "Effect_ExplosionT.h"
+#include "Effect_CloudT.h"
+#include "Effect_TexBloodT.h"
+#include "Effect_BloodMistT.h"
 #include "ParentEffect.h"
 
 #ifdef _DEBUG
@@ -281,6 +284,8 @@ HRESULT CEffectToolView::Ready_Component()
 		return E_FAIL;
 	if (FAILED(pComponent_Manager->Add_Component(0, L"Component_Texture_Blood", CTexture::Create(m_pGraphic_Device, CTexture::TYPE_GENERAL, L"../Client/Bin/Resources/Textures/Effect/Blood/blood_4x4_1_subUV_%d.png", 16))))
 		return E_FAIL;
+	if (FAILED(pComponent_Manager->Add_Component(0, L"Component_Texture_BloodMist", CTexture::Create(m_pGraphic_Device, CTexture::TYPE_GENERAL, L"../Client/Bin/Resources/Textures/Effect/Blood/blood_surface_%d.tga", 2))))
+		return E_FAIL;
 	if (FAILED(pComponent_Manager->Add_Component(0, L"Component_Texture_Explosion", CTexture::Create(m_pGraphic_Device, CTexture::TYPE_GENERAL, L"../Client/Bin/Resources/Textures/Effect/Explosion/8x8_anim_Explosion_%d.tga", 64))))
 		return E_FAIL;
 	if (FAILED(pComponent_Manager->Add_Component(0, L"Component_Texture_ExplosionCloud", CTexture::Create(m_pGraphic_Device, CTexture::TYPE_GENERAL, L"../Client/Bin/Resources/Textures/Effect/ExplosionCloud/4x4_Clouds_Dark_CLR_%d.tga", 16))))
@@ -331,9 +336,21 @@ HRESULT CEffectToolView::Ready_Prototype()
 	// For.Prototype_EffectExplosion
 	if (FAILED(pObject_Manager->Add_Object_Prototype(0, L"Prototype_EffectExplosion", CEffect_ExplosionT::Create(m_pGraphic_Device))))
 		return E_FAIL;
+
+	// For.Prototype_EffectCloud
+	if (FAILED(pObject_Manager->Add_Object_Prototype(0, L"Prototype_EffectCloud", CEffect_CloudT::Create(m_pGraphic_Device))))
+		return E_FAIL;
+	// For.Prototype_EffectTexBlood
+	if (FAILED(pObject_Manager->Add_Object_Prototype(0, L"Prototype_EffectTexBlood", CEffect_TexBloodT::Create(m_pGraphic_Device))))
+		return E_FAIL;
+	// For.Prototype_EffectTexBlood
+	if (FAILED(pObject_Manager->Add_Object_Prototype(0, L"Prototype_EffectBloodMist", CEffect_BloodMistT::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
 	// For.Prototype_ParentEffect
 	if (FAILED(pObject_Manager->Add_Object_Prototype(0, L"Prototype_ExplosionParent", CParentEffect::Create(m_pGraphic_Device, L"Prototype_Explosion"))))
 		return E_FAIL;
+
 
 
 

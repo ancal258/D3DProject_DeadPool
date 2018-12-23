@@ -109,6 +109,8 @@ private:
 private:
 	_vec3				m_vCam, m_vPos;
 	_bool				m_isCartoon = false;
+	_float				m_fCartoonOffset = 1.f;
+	_float				m_fOutlineOffset = 1.f;
 private:
 	HRESULT Ready_Component();
 	HRESULT SetUp_ConstantTable(LPD3DXEFFECT pEffect);

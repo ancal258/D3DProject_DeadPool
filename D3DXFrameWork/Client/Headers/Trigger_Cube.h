@@ -50,6 +50,7 @@ private:
 private:
 	_uint				m_iBoxNum = 0; // 대화상자 번호
 	_float				m_fTimeAcc = 0.f;
+	const _tchar*		m_pSubtitle = nullptr;
 private:
 	HRESULT Ready_Component();
 	HRESULT SetUp_ConstantTable(LPD3DXEFFECT pEffect);

@@ -178,6 +178,7 @@
     <ClInclude Include="..\Headers\Brawler02.h" />
     <ClInclude Include="..\Headers\Brawler_ElectricBaton.h" />
     <ClInclude Include="..\Headers\Brawler_Knife.h" />
+    <ClInclude Include="..\Headers\Brawler_Manager.h" />
     <ClInclude Include="..\Headers\Brawler_TPose.h" />
     <ClInclude Include="..\Headers\Camera_Cinematic.h" />
     <ClInclude Include="..\Headers\Camera_Debug.h" />
@@ -208,6 +209,7 @@
     <ClInclude Include="..\Headers\StaticUI.h" />
     <ClInclude Include="..\Headers\Static_Airplane.h" />
     <ClInclude Include="..\Headers\Static_Object.h" />
+    <ClInclude Include="..\Headers\SubtitleManager.h" />
     <ClInclude Include="..\Headers\TalkBox.h" />
     <ClInclude Include="..\Headers\Terrain.h" />
     <ClInclude Include="..\Headers\Test.h" />
@@ -233,6 +235,7 @@
     <ClCompile Include="..\Codes\Brawler02.cpp" />
     <ClCompile Include="..\Codes\Brawler_ElectricBaton.cpp" />
     <ClCompile Include="..\Codes\Brawler_Knife.cpp" />
+    <ClCompile Include="..\Codes\Brawler_Manager.cpp" />
     <ClCompile Include="..\Codes\Brawler_TPose.cpp" />
     <ClCompile Include="..\Codes\Camera_Cinematic.cpp" />
     <ClCompile Include="..\Codes\Camera_Debug.cpp" />
@@ -261,6 +264,7 @@
     <ClCompile Include="..\Codes\StaticUI.cpp" />
     <ClCompile Include="..\Codes\Static_Airplane.cpp" />
     <ClCompile Include="..\Codes\Static_Object.cpp" />
+    <ClCompile Include="..\Codes\SubtitleManager.cpp" />
     <ClCompile Include="..\Codes\TalkBox.cpp" />
     <ClCompile Include="..\Codes\Terrain.cpp" />
     <ClCompile Include="..\Codes\Test.cpp" />

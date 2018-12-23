@@ -32,6 +32,8 @@ HRESULT CEffect_ExplosionT::Ready_GameObject()
 
 _int CEffect_ExplosionT::Update_GameObject(const _float & fTimeDelta)
 {
+	m_fAlpha -= fTimeDelta / m_fSurviveTime;
+
 	return CEffectT::Update_GameObject(fTimeDelta);
 }
 

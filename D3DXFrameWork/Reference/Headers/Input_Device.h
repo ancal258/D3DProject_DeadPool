@@ -29,6 +29,11 @@ public:
 		return *((_long*)&m_MouseState + eMouseMoveID);
 	}
 
+	_bool Get_SlowMotion() const {
+		return m_isSlowMotion;	}
+	void Set_SlowMotion(_bool isSlowMotion) {
+		m_isSlowMotion = isSlowMotion;	}
+
 public:
 	HRESULT Ready_Input_Device(HINSTANCE hInst, HWND hWnd);
 	HRESULT Inquire_Input_State();
@@ -53,6 +58,8 @@ private:
 private:
 	_byte							m_byKeyState[256] = { 0 };
 	DIMOUSESTATE					m_MouseState;
+private:
+	_bool							m_isSlowMotion = false;
 private:
 	HRESULT SetUp_KeyBoard(HWND hWnd);
 	HRESULT SetUp_Mouse(HWND hWnd);

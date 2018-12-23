@@ -102,10 +102,7 @@ _int CPlayer::Update_GameObject(const _float & fTimeDelta)
 
 		}
 	}
-	if (GetKeyState('N') & 0x80)
-		m_iHP--;
-	else if (GetKeyState('M') & 0x80)
-		m_iHP++;
+
 	m_pTransformCom->Update_Matrix();
 	Update_HandMatrix();
 
@@ -119,11 +116,24 @@ _int CPlayer::LastUpdate_GameObject(const _float & fTimeDelta)
 		return -1;
 	// 카툰 렌더링 연습 
 
-	if (m_pInput_Device->Get_DIKeyState(DIK_NUMPAD1))
+	// 공격
+	if (true == m_pAnimator->Get_IsFHS())
+	{
+		if (m_fCartoonOffset < 5)
+			m_fCartoonOffset += 15 * fTimeDelta;
+		if (m_fOutlineOffset > 0)
+			m_fOutlineOffset -= 3 * fTimeDelta;
+		CInput_Device::GetInstance()->Set_SlowMotion(true);
 		m_isCartoon = true;
-	if (m_pInput_Device->Get_DIKeyState(DIK_NUMPAD2))
+	}
+	// 끝
+	else
+	{
+		m_fCartoonOffset = 1.f;
+		m_fOutlineOffset = 1.f;
+		CInput_Device::GetInstance()->Set_SlowMotion(false);
 		m_isCartoon = false;
-
+	}
 	//
 	CObject_Manager* pObject_Manager = CObject_Manager::GetInstance();
 	if (nullptr == pObject_Manager)
@@ -401,6 +411,7 @@ void CPlayer::Camera_Update(const _float& fTimeDelta)
 			//  m_pTransformCom->RotationX(D3DXToRadian(m_dwMouseMove[1] * m_fMouseSence), fTimeDelta);
 		}
 
+		// 카메라가 바라보는 방향을 기준으로 회전하며 이동하게 된다.
 		if (false == m_pAnimator->Get_IsReservation())
 		{
 			if (pInput_Device->Get_DIKeyState(DIK_W) & 0x8000 && pInput_Device->Get_DIKeyState(DIK_D) & 0x8000 &&
@@ -559,6 +570,9 @@ void CPlayer::Camera_Update(const _float& fTimeDelta)
 				}
 			}
 		}
+
+		
+
 	}
 
 	Safe_Release(pInput_Device);
@@ -656,7 +670,10 @@ HRESULT CPlayer::SetUp_ConstantTable(LPD3DXEFFECT pEffect)
 	pEffect->SetVector("g_vMtrlAmbient", &_vec4(0.3f, 0.3f, 0.3f, 1.f));
 	pEffect->SetVector("g_vMtrlSpecular", &_vec4(1.f, 1.f, 1.f, 1.f));
 	pEffect->SetFloat("g_fPower", 20.f);
+	pEffect->SetFloat("g_fCartoonOffset", m_fCartoonOffset);
+	pEffect->SetFloat("g_fOutlineOffset", m_fOutlineOffset);
 	pEffect->SetBool("g_isCartoon", m_isCartoon);
+
 	D3DXMatrixInverse(&matView, nullptr, &matView);
 	pEffect->SetVector("g_vCamPosition", (_vec4*)&matView.m[3][0]);
 

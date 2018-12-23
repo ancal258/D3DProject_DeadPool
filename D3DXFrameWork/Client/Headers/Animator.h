@@ -51,6 +51,8 @@ public:
 	_bool Get_IsButtonDown(_uint iIndex) {
 		return m_isKeyDown[iIndex];}
 	_bool Get_IsReservation();
+	_bool Get_IsFHS() {
+		return m_isFirstHeavySword;	}
 	void SetUp_MouseRotate(_float *fRotate,_float *fTimeAcc) {
 		m_fRotate = fRotate;
 		m_fTimeAcc = fTimeAcc;	}
@@ -101,8 +103,10 @@ private:
 	_uint				m_iSit = SIT_IDLE_BREATH;
 	_bool				m_isAttackState = false;
 	_bool				m_isJumpLand = false;
+	_bool				m_isFirstHeavySword = false;
 	_float				*m_fRotate = nullptr;
 	_float				*m_fTimeAcc = nullptr;
+	_float				m_fSlowTime = 0.f;
 	const CRenderer*	m_pRenderer = nullptr;
 public:
 	static CAnimator* Create(LPDIRECT3DDEVICE9 pGraphic_Device,CMesh_Dynamic* pMeshCom, CTransform* pTransformCom, CNavigation* pNavigationCom,_uint iSceneNum);

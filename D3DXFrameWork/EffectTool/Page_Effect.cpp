@@ -101,10 +101,11 @@ void CPage_Effect::OnBnClickedButton1() // 생성 버튼
 	}
 	else
 	{
-		if (m_iSelect == 0 + m_AnimList.GetCount())
+		if (m_iSelect >= 0 + m_AnimList.GetCount())
 		{
-			if (FAILED(pMainFrame->m_pEffectToolView->Ready_Layer_Object(L"Prototype_EffectTexture", L"Layer_TextureEffect", &pMesh)))
+			if (FAILED(pMainFrame->m_pEffectToolView->Ready_Layer_Object(L"Prototype_ExplosionParent", L"Layer_TextureEffect", &pMesh)))
 				return;
+			((CParentEffect*)pMesh)->m_iType = m_iSelect;
 			m_vecObject.push_back(pMesh);
 
 			_vec3 vScale = _vec3(m_fScale, m_fScale, m_fScale);
@@ -130,7 +131,9 @@ BOOL CPage_Effect::OnInitDialog()
 	m_AnimList.AddString(L"2. BloodAnim");
 	m_AnimList.AddString(L"3. Explosion");
 
-	m_TextureList.AddString(L"1. Blood");
+	m_TextureList.AddString(L"1. ExplisionCloud");
+	m_TextureList.AddString(L"2. Blood");
+	m_TextureList.AddString(L"3. BloodMist");
 	UpdateData(0);
 
 	return TRUE;  // return TRUE unless you set the focus to a control

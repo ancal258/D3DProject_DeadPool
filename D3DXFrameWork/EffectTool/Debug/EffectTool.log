@@ -1,10 +1,3 @@
-﻿  ToolEffect.cpp
-c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\effecttool\tooleffect.cpp(29): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\effecttool\tooleffect.cpp(47): warning C4244: '=': 'int'에서 'Engine::_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  ParentEffect.cpp
-c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\effecttool\parenteffect.cpp(59): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-  EffectT.cpp
-c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\effecttool\effectt.cpp(29): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  코드를 생성하고 있습니다...
-  EffectTool.vcxproj -> C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\EffectTool\.\Bin\EffectTool.exe
+﻿  Effect_ExplosionT.cpp
+  EffectTool.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\EffectTool\.\Bin\EffectTool.exe
   EffectTool.vcxproj -> .\Bin\EffectTool.pdb (Partial PDB)

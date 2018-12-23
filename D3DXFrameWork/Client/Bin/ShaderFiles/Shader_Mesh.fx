@@ -5,6 +5,8 @@ texture		g_NormalTexture;
 texture		g_SpecularTexture;
 bool		g_isCol;
 bool		g_isCartoon;
+float		g_fCartoonOffset = 1.f;
+float		g_fOutlineOffset = 1.f;
 
 vector		g_vCamPosition = vector(1.f,1.f,1.f,1.f);
 
@@ -206,12 +208,12 @@ PS_OUT PS_MAIN_PLAYER(PS_IN_PLAYER In)
 	{
 		float fOffset = dot(In.vCamDir, In.vNormal);
 
-		Out.vDiffuse = ceil(Out.vDiffuse * 5.0f) / 5.f;
+		Out.vDiffuse = ceil(Out.vDiffuse * g_fCartoonOffset) / g_fCartoonOffset;
 
-		if (fOffset < 0.34f && fOffset > -0.34f)
-			Out.vDiffuse.rgb = 0.f;
+		if (fOffset < 0.43f && fOffset > -0.43f)
+			Out.vDiffuse.rgb = g_fOutlineOffset;
 
-		Out.vNormal = ceil(Out.vNormal * 5.0f) / 5.f;
+		Out.vNormal = ceil(Out.vNormal * g_fCartoonOffset) / g_fCartoonOffset;
 		//Out.vDepth = ceil(Out.vDepth * 5.0f) / 5.f;
 	}
 

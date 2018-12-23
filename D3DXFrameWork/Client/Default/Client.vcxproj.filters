@@ -238,6 +238,12 @@
     <Filter Include="02.GameObject\00.For.Static\04.Trigger\BackUICube">
       <UniqueIdentifier>{ca50a5cd-5f95-4c0f-9cf6-5b5b3bd55dd9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\05.Brawler\Manager">
+      <UniqueIdentifier>{1b654697-dfb7-4d98-ad1a-21bee0d9524a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\00.For.Static\03.UI\SubtitleManager">
+      <UniqueIdentifier>{04056e2e-6e25-400e-82cf-ea1b71ea089a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -402,6 +408,12 @@
     <ClInclude Include="..\Headers\Trigger_BackUI.h">
       <Filter>02.GameObject\00.For.Static\04.Trigger\BackUICube</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\Brawler_Manager.h">
+      <Filter>02.GameObject\02.For.Stage\05.Brawler\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\SubtitleManager.h">
+      <Filter>02.GameObject\00.For.Static\03.UI\SubtitleManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -550,6 +562,12 @@
     </ClCompile>
     <ClCompile Include="..\Codes\Trigger_BackUI.cpp">
       <Filter>02.GameObject\00.For.Static\04.Trigger\BackUICube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Brawler_Manager.cpp">
+      <Filter>02.GameObject\02.For.Stage\05.Brawler\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\SubtitleManager.cpp">
+      <Filter>02.GameObject\00.For.Static\03.UI\SubtitleManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -4,6 +4,8 @@
 #include "Object_Manager.h"
 #include "TalkBox.h"
 #include "Input_Device.h"
+#include "Font_Manager.h"
+#include "SubtitleManager.h"
 #include "Player.h"
 
 CTrigger_Cube::CTrigger_Cube(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -68,7 +70,6 @@ HRESULT CTrigger_Cube::Ready_GameObject()
 	if (FAILED(Ready_Component()))
 		return E_FAIL;
 
-
 	return NOERROR;
 }
 
@@ -84,6 +85,7 @@ _int CTrigger_Cube::Update_GameObject(const _float & fTimeDelta)
 		// 삽입된 문자열의 갯수보다 작을 경우 2초마다 Talk Box를 생성한다.
 		if (m_vevString.size() - 1 >= m_iBoxNum)
 		{
+			m_pSubtitle = CSubtitle_Manager::GetInstance()->Get_Subtitle();
 			Create_TalkBox(m_vevString[m_iBoxNum]);
 			m_fTimeAcc = 0;
 			++m_iBoxNum;
@@ -104,7 +106,7 @@ _int CTrigger_Cube::Update_GameObject(const _float & fTimeDelta)
 		for (auto& TalkBox : m_vTalkBox)
 		{
 			TalkBox->Set_Lived(false);
-			Set_Lived(false);
+			//Set_Lived(false);
 		}
 	}
 
@@ -134,7 +136,7 @@ _int CTrigger_Cube::LastUpdate_GameObject(const _float & fTimeDelta)
 
 	m_pTransformCom->Update_Matrix();
 
-	if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
+	if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_UI, this)))
 		return -1;
 
 	//Safe_Release(pObject_Manager);
@@ -145,6 +147,15 @@ _int CTrigger_Cube::LastUpdate_GameObject(const _float & fTimeDelta)
 void CTrigger_Cube::Render_GameObject()
 {
 	m_pColliderCom->Render_Collider();
+
+	if (true == m_isCol)
+	{
+		_matrix	   matTransform, matScale, matTranslate;
+		D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
+		D3DXMatrixTranslation(&matTranslate, (g_iBackCX >> 1) - 150, 80, 0.f);
+		matTransform = matScale * matTranslate;
+		CFont_Manager::GetInstance()->Render_Font(L"Font_Number", m_pSubtitle, D3DXCOLOR(1.f, 1.f, 1.f, 1.f), &matTransform);
+	}
 }
 
 HRESULT CTrigger_Cube::Ready_Component()

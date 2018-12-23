@@ -202,10 +202,13 @@
     <ClInclude Include="EffectTool.h" />
     <ClInclude Include="EffectToolDoc.h" />
     <ClInclude Include="EffectToolView.h" />
+    <ClInclude Include="Effect_BloodMistT.h" />
     <ClInclude Include="Effect_BloodT.h" />
+    <ClInclude Include="Effect_CloudT.h" />
     <ClInclude Include="Effect_ExplosionT.h" />
     <ClInclude Include="Effect_Mesh.h" />
     <ClInclude Include="Effect_RectParticle.h" />
+    <ClInclude Include="Effect_TexBloodT.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="Page_Effect.h" />
     <ClInclude Include="Page_MeshEffect.h" />
@@ -225,10 +228,13 @@
     <ClCompile Include="EffectTool.cpp" />
     <ClCompile Include="EffectToolDoc.cpp" />
     <ClCompile Include="EffectToolView.cpp" />
+    <ClCompile Include="Effect_BloodMistT.cpp" />
     <ClCompile Include="Effect_BloodT.cpp" />
+    <ClCompile Include="Effect_CloudT.cpp" />
     <ClCompile Include="Effect_ExplosionT.cpp" />
     <ClCompile Include="Effect_Mesh.cpp" />
     <ClCompile Include="Effect_RectParticle.cpp" />
+    <ClCompile Include="Effect_TexBloodT.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="Page_Effect.cpp" />
     <ClCompile Include="Page_MeshEffect.cpp" />

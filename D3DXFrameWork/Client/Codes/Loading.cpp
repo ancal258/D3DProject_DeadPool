@@ -1770,8 +1770,9 @@ HRESULT CLoading::Load_Trigger_CubeAPT()
 {
 	if (FAILED(Load_Trigger_Cube(L"../Bin/DataFiles/Trigger_01.dat")))
 		return E_FAIL;
-
 	if (FAILED(Load_Trigger_Cube(L"../Bin/DataFiles/Trigger_02.dat")))
+		return E_FAIL;
+	if (FAILED(Load_Trigger_Cube(L"../Bin/DataFiles/Trigger_03.dat")))
 		return E_FAIL;
 
 	return NOERROR;

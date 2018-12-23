@@ -61,23 +61,32 @@
     <Filter Include="02.GameObject\01. Effect\Effect_RectParticle">
       <UniqueIdentifier>{13c3a1af-ef9a-4817-95b8-7e8735eaf505}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\01. Effect\ToolEffect\AnimEffect">
+    <Filter Include="02.GameObject\01. Effect\ToolEffect\00. AnimEffect">
       <UniqueIdentifier>{59b9c0d0-3b75-45ce-af1c-49a3f9941e88}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\01. Effect\ToolEffect\AnimEffect\ToolEffectTest">
+    <Filter Include="02.GameObject\01. Effect\ToolEffect\00. AnimEffect\ToolEffectTest">
       <UniqueIdentifier>{1b369bd1-ea18-4ac7-8829-02d75a036f97}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\01. Effect\ToolEffect\AnimEffect\Effect_Blood">
+    <Filter Include="02.GameObject\01. Effect\ToolEffect\00. AnimEffect\Effect_Blood">
       <UniqueIdentifier>{993aa6d1-9f35-43f0-ae48-fe32b981b9c8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\01. Effect\ToolEffect\AnimEffect\Effect_Explosion">
+    <Filter Include="02.GameObject\01. Effect\ToolEffect\00. AnimEffect\Effect_Explosion">
       <UniqueIdentifier>{5ae65560-ef37-4c71-a9af-f34bcfb7e69e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\01. Effect\ToolEffect\ParentEffect">
+    <Filter Include="02.GameObject\01. Effect\ToolEffect\01. TextureEffect">
+      <UniqueIdentifier>{5359b56d-9aab-49d4-81a4-532c29a0b5d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\01. Effect\ToolEffect\01. TextureEffect\Effect_Cloud">
+      <UniqueIdentifier>{318371e7-18c2-446e-9d68-264c7fba0d8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\01. Effect\ToolEffect\99. ParentEffect">
       <UniqueIdentifier>{e3b13fd4-44ae-42f4-b825-fbf6222ea4d7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\01. Effect\ToolEffect\TextureEffect">
-      <UniqueIdentifier>{5359b56d-9aab-49d4-81a4-532c29a0b5d6}</UniqueIdentifier>
+    <Filter Include="02.GameObject\01. Effect\ToolEffect\01. TextureEffect\Effect_Blood">
+      <UniqueIdentifier>{0a3dfcff-57df-412f-a35c-df0973f007e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\01. Effect\ToolEffect\01. TextureEffect\Effect_BloodMist">
+      <UniqueIdentifier>{b7d6d22b-9884-43bc-9a8f-836f4c2a0e24}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -133,19 +142,28 @@
       <Filter>02.GameObject\01. Effect\Effect_RectParticle</Filter>
     </ClInclude>
     <ClInclude Include="ParentEffect.h">
-      <Filter>02.GameObject\01. Effect\ToolEffect\ParentEffect</Filter>
+      <Filter>02.GameObject\01. Effect\ToolEffect\99. ParentEffect</Filter>
     </ClInclude>
     <ClInclude Include="ToolEffect.h">
-      <Filter>02.GameObject\01. Effect\ToolEffect\AnimEffect\ToolEffectTest</Filter>
+      <Filter>02.GameObject\01. Effect\ToolEffect\00. AnimEffect\ToolEffectTest</Filter>
     </ClInclude>
     <ClInclude Include="Effect_BloodT.h">
-      <Filter>02.GameObject\01. Effect\ToolEffect\AnimEffect\Effect_Blood</Filter>
-    </ClInclude>
-    <ClInclude Include="EffectT.h">
-      <Filter>02.GameObject\01. Effect\ToolEffect\AnimEffect</Filter>
+      <Filter>02.GameObject\01. Effect\ToolEffect\00. AnimEffect\Effect_Blood</Filter>
     </ClInclude>
     <ClInclude Include="Effect_ExplosionT.h">
-      <Filter>02.GameObject\01. Effect\ToolEffect\AnimEffect\Effect_Explosion</Filter>
+      <Filter>02.GameObject\01. Effect\ToolEffect\00. AnimEffect\Effect_Explosion</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect_CloudT.h">
+      <Filter>02.GameObject\01. Effect\ToolEffect\01. TextureEffect\Effect_Cloud</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectT.h">
+      <Filter>02.GameObject\01. Effect\ToolEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect_TexBloodT.h">
+      <Filter>02.GameObject\01. Effect\ToolEffect\01. TextureEffect\Effect_Blood</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect_BloodMistT.h">
+      <Filter>02.GameObject\01. Effect\ToolEffect\01. TextureEffect\Effect_BloodMist</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -192,19 +210,28 @@
       <Filter>02.GameObject\01. Effect\Effect_RectParticle</Filter>
     </ClCompile>
     <ClCompile Include="ParentEffect.cpp">
-      <Filter>02.GameObject\01. Effect\ToolEffect\ParentEffect</Filter>
+      <Filter>02.GameObject\01. Effect\ToolEffect\99. ParentEffect</Filter>
     </ClCompile>
     <ClCompile Include="ToolEffect.cpp">
-      <Filter>02.GameObject\01. Effect\ToolEffect\AnimEffect\ToolEffectTest</Filter>
+      <Filter>02.GameObject\01. Effect\ToolEffect\00. AnimEffect\ToolEffectTest</Filter>
     </ClCompile>
     <ClCompile Include="Effect_BloodT.cpp">
-      <Filter>02.GameObject\01. Effect\ToolEffect\AnimEffect\Effect_Blood</Filter>
-    </ClCompile>
-    <ClCompile Include="EffectT.cpp">
-      <Filter>02.GameObject\01. Effect\ToolEffect\AnimEffect</Filter>
+      <Filter>02.GameObject\01. Effect\ToolEffect\00. AnimEffect\Effect_Blood</Filter>
     </ClCompile>
     <ClCompile Include="Effect_ExplosionT.cpp">
-      <Filter>02.GameObject\01. Effect\ToolEffect\AnimEffect\Effect_Explosion</Filter>
+      <Filter>02.GameObject\01. Effect\ToolEffect\00. AnimEffect\Effect_Explosion</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect_CloudT.cpp">
+      <Filter>02.GameObject\01. Effect\ToolEffect\01. TextureEffect\Effect_Cloud</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectT.cpp">
+      <Filter>02.GameObject\01. Effect\ToolEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect_TexBloodT.cpp">
+      <Filter>02.GameObject\01. Effect\ToolEffect\01. TextureEffect\Effect_Blood</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect_BloodMistT.cpp">
+      <Filter>02.GameObject\01. Effect\ToolEffect\01. TextureEffect\Effect_BloodMist</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
