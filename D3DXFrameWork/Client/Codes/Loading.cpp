@@ -35,6 +35,10 @@
 #include "Effect_MinigunCap.h"
 #include "Effect_GunCap.h"
 #include "Effect_Trail.h"
+#include "EffectC.h"
+#include "Parent_Effect.h"
+#include "Effect_CloudDark.h"
+
 // UI
 #include "UI_CrossHair.h"
 #include "UI_HPBar.h"
@@ -562,45 +566,35 @@ HRESULT CLoading::Ready_Effect()
 	if (nullptr == pComponent_Manager)
 		return E_FAIL;
 	pComponent_Manager->AddRef();
-	// For. Effect_Mesh
+	/* For. Texuture Component*/
 
-	//// For.Component_Mesh_EffectSwordHeavy03R
-	//if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_EffectSwordHeavy03R", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/Effect/Sword/", L"Sword_Heavy_03R.x"))))
-	//	return E_FAIL;
-	//// For.Prototype_EffectSwordHeavy03R
-	//if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_EffectSwordHeavy03R", CEffect_Mesh::Create(Get_Graphic_Device()))))
-	//	return E_FAIL;
-
-	//// For.Add_EffectSwordHeavy03R
-	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_EffectSwordHeavy03R", SCENE_STAGE, L"Layer_MeshEffect")))
-	//	return E_FAIL;
-
-
-
-	// For. Particle
-
-	// For.Component_Texture_Blood
-	lstrcpy(m_szString, L"../Bin/Resources/Textures/Effect/Blood/blood_4x4_1_subUV_%d.png");
-	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_Blood", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, m_szString, 16))))
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_Explosion", CTexture::Create(m_pGraphic_Device, CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/Effect/Explosion/8x8_anim_Explosion_%d.tga", 64))))
 		return E_FAIL;
-	// For.Prototype_EffectRectParticle
-	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_EffectRectParticle", CEffect_RectParticle::Create(Get_Graphic_Device()))))
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_ExplosionCloud", CTexture::Create(m_pGraphic_Device, CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/Effect/ExplosionCloud/4x4_Clouds_Dark_CLR_%d.tga", 16))))
+		return E_FAIL;
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_BrightCloud", CTexture::Create(m_pGraphic_Device, CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/Effect/CloudBright/4x4_Smoke_Clouds_TXT_%d.tga", 16))))
 		return E_FAIL;
 
-	//for (size_t i = 0; i < 10; i++)
-	//{
-	//	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_EffectRectParticle", SCENE_STAGE, L"Layer_ParticleEffect")))
-	//		return E_FAIL;
-	//}
-	// For.Add_EffectRectParticle
-	
-	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Effect_FireSpears", CEffect_FireSpears::Create(Get_Graphic_Device()))))
+	/*000000000000000000000000*/
+	/* Effect CloudDark */
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_CloudDark", CEffect_CloudDark::Create(Get_Graphic_Device()))))
+		return E_FAIL;
+	/*------------------*/
+
+
+
+
+	/* Effect Parent */
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Parent_CloudDark", CParent_Effect::Create(Get_Graphic_Device(),L"Prototype_CloudDark"))))
 		return E_FAIL;
 
 
-	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Effect_FireSpears", SCENE_STAGE, L"Layer_Effect")))
-	//	return E_FAIL;
+	CGameObject* pUI;
 
+	// HeadShot Points
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Parent_CloudDark", SCENE_STAGE, L"Layer_Effect", &pUI)))
+		return E_FAIL;
+//	((CParent_Effect*)pUI)->Set_EffectInfo(0,0,0.01f,7,0,&_vec3(3,3,3),&_vec3(10,0,10),&_vec3(2,0,2),&_vec3(0,1,0),false,true,1,5);
 
 
 	Safe_Release(pComponent_Manager);

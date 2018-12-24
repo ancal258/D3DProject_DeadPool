@@ -191,6 +191,8 @@
     <ClInclude Include="..\Headers\DP_Gun.h" />
     <ClInclude Include="..\Headers\DP_Sword.h" />
     <ClInclude Include="..\Headers\Effect.h" />
+    <ClInclude Include="..\Headers\EffectC.h" />
+    <ClInclude Include="..\Headers\Effect_CloudDark.h" />
     <ClInclude Include="..\Headers\Effect_FireSpears.h" />
     <ClInclude Include="..\Headers\Effect_GunCap.h" />
     <ClInclude Include="..\Headers\Effect_Mesh.h" />
@@ -201,6 +203,7 @@
     <ClInclude Include="..\Headers\Loading.h" />
     <ClInclude Include="..\Headers\MainApp.h" />
     <ClInclude Include="..\Headers\Minigun.h" />
+    <ClInclude Include="..\Headers\Parent_Effect.h" />
     <ClInclude Include="..\Headers\Player.h" />
     <ClInclude Include="..\Headers\Prop.h" />
     <ClInclude Include="..\Headers\Scene_AirPlane.h" />
@@ -251,6 +254,8 @@
     <ClCompile Include="..\Codes\DP_Gun.cpp" />
     <ClCompile Include="..\Codes\DP_Sword.cpp" />
     <ClCompile Include="..\Codes\Effect.cpp" />
+    <ClCompile Include="..\Codes\EffectC.cpp" />
+    <ClCompile Include="..\Codes\Effect_CloudDark.cpp" />
     <ClCompile Include="..\Codes\Effect_FireSpears.cpp" />
     <ClCompile Include="..\Codes\Effect_GunCap.cpp" />
     <ClCompile Include="..\Codes\Effect_Mesh.cpp" />
@@ -261,6 +266,7 @@
     <ClCompile Include="..\Codes\Loading.cpp" />
     <ClCompile Include="..\Codes\MainApp.cpp" />
     <ClCompile Include="..\Codes\Minigun.cpp" />
+    <ClCompile Include="..\Codes\Parent_Effect.cpp" />
     <ClCompile Include="..\Codes\Player.cpp" />
     <ClCompile Include="..\Codes\Prop.cpp" />
     <ClCompile Include="..\Codes\Scene_AirPlane.cpp" />

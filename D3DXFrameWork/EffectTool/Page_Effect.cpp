@@ -134,6 +134,7 @@ BOOL CPage_Effect::OnInitDialog()
 	m_TextureList.AddString(L"1. ExplisionCloud");
 	m_TextureList.AddString(L"2. Blood");
 	m_TextureList.AddString(L"3. BloodMist");
+	m_TextureList.AddString(L"4. BrightCloud");
 	UpdateData(0);
 
 	return TRUE;  // return TRUE unless you set the focus to a control

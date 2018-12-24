@@ -33,6 +33,7 @@
 #include "Effect_BloodMistT.h"
 #include "Effect_GunFlashT.h"
 #include "Effect_GunCapT.h"
+#include "Effect_CloudBrightT.h"
 #include "ParentEffect.h"
 
 #ifdef _DEBUG
@@ -292,6 +293,8 @@ HRESULT CEffectToolView::Ready_Component()
 		return E_FAIL;
 	if (FAILED(pComponent_Manager->Add_Component(0, L"Component_Texture_ExplosionCloud", CTexture::Create(m_pGraphic_Device, CTexture::TYPE_GENERAL, L"../Client/Bin/Resources/Textures/Effect/ExplosionCloud/4x4_Clouds_Dark_CLR_%d.tga", 16))))
 		return E_FAIL;
+	if (FAILED(pComponent_Manager->Add_Component(0, L"Component_Texture_BrightCloud", CTexture::Create(m_pGraphic_Device, CTexture::TYPE_GENERAL, L"../Client/Bin/Resources/Textures/Effect/CloudBright/4x4_Smoke_Clouds_TXT_%d.tga", 16))))
+		return E_FAIL;
 	if (FAILED(pComponent_Manager->Add_Component(0, L"Component_Texture_Base", CTexture::Create(m_pGraphic_Device, CTexture::TYPE_GENERAL, L"Bin/Textures/BaseTexture.png"))))
 		return E_FAIL;
 
@@ -358,6 +361,9 @@ HRESULT CEffectToolView::Ready_Prototype()
 
 	// For.Prototype_EffectCloud
 	if (FAILED(pObject_Manager->Add_Object_Prototype(0, L"Prototype_EffectCloud", CEffect_CloudT::Create(m_pGraphic_Device))))
+		return E_FAIL;
+	// For.Prototype_EffectCloud
+	if (FAILED(pObject_Manager->Add_Object_Prototype(0, L"Prototype_EffectCloudBright", CEffect_CloudBrightT::Create(m_pGraphic_Device))))
 		return E_FAIL;
 	// For.Prototype_EffectTexBlood
 	if (FAILED(pObject_Manager->Add_Object_Prototype(0, L"Prototype_EffectTexBlood", CEffect_TexBloodT::Create(m_pGraphic_Device))))

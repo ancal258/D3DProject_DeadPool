@@ -175,9 +175,6 @@
     <Filter Include="02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle">
       <UniqueIdentifier>{c9122e5d-1b98-466c-9a4b-d58f59c56d15}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\Particle_Parent">
-      <UniqueIdentifier>{5396b795-ec4e-4042-87a8-8a186245c3f3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.GameObject\00.For.Static\03.UI">
       <UniqueIdentifier>{130d126b-2840-4bc0-a8b7-7b562981d705}</UniqueIdentifier>
     </Filter>
@@ -244,9 +241,6 @@
     <Filter Include="02.GameObject\00.For.Static\03.UI\DynamicUI\ConcentratedEffect">
       <UniqueIdentifier>{f4b6bfb2-b39a-44a5-858c-576a3db15f7c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\02.For.Stage\03.Effect\03.Effect_FireSpears">
-      <UniqueIdentifier>{bd5a3212-1877-48bb-89d9-f89cf15cdab4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh\Sword_Heavy03">
       <UniqueIdentifier>{2fc6d8f7-8f51-41cf-ab08-c2634c2af31e}</UniqueIdentifier>
     </Filter>
@@ -270,6 +264,18 @@
     </Filter>
     <Filter Include="02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh\Gun\Cap">
       <UniqueIdentifier>{313d1e84-22f6-4274-b8f2-9cccda3f8b5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\03.Effect\99.Effect_Trash">
+      <UniqueIdentifier>{bd5a3212-1877-48bb-89d9-f89cf15cdab4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\00. Effect_CloudDark">
+      <UniqueIdentifier>{78c1a8ae-5f4c-4118-b19c-9e3c37dbf72e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\98. Effect_Parent">
+      <UniqueIdentifier>{47398513-aa78-4071-af07-3382dc5d6e78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\99. Particle_Parent">
+      <UniqueIdentifier>{5396b795-ec4e-4042-87a8-8a186245c3f3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -408,9 +414,6 @@
     <ClInclude Include="..\Headers\Effect.h">
       <Filter>02.GameObject\02.For.Stage\03.Effect\00.Effect_Texture</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\Effect_RectParticle.h">
-      <Filter>02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle</Filter>
-    </ClInclude>
     <ClInclude Include="..\Headers\TalkBox.h">
       <Filter>02.GameObject\00.For.Static\03.UI\TalkBox</Filter>
     </ClInclude>
@@ -442,7 +445,7 @@
       <Filter>02.GameObject\00.For.Static\03.UI\DynamicUI\ConcentratedEffect</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Effect_FireSpears.h">
-      <Filter>02.GameObject\02.For.Stage\03.Effect\03.Effect_FireSpears</Filter>
+      <Filter>02.GameObject\02.For.Stage\03.Effect\99.Effect_Trash</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Effect_Mesh.h">
       <Filter>02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh\Sword_Heavy03</Filter>
@@ -455,6 +458,18 @@
     </ClInclude>
     <ClInclude Include="..\Headers\Effect_GunCap.h">
       <Filter>02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh\Gun\Cap</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Effect_RectParticle.h">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\99.Effect_Trash</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\EffectC.h">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\98. Effect_Parent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Parent_Effect.h">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\99. Particle_Parent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Effect_CloudDark.h">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\00. Effect_CloudDark</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -578,9 +593,6 @@
     <ClCompile Include="..\Codes\Effect.cpp">
       <Filter>02.GameObject\02.For.Stage\03.Effect\00.Effect_Texture</Filter>
     </ClCompile>
-    <ClCompile Include="..\Codes\Effect_RectParticle.cpp">
-      <Filter>02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle</Filter>
-    </ClCompile>
     <ClCompile Include="..\Codes\TalkBox.cpp">
       <Filter>02.GameObject\00.For.Static\03.UI\TalkBox</Filter>
     </ClCompile>
@@ -612,7 +624,7 @@
       <Filter>02.GameObject\00.For.Static\03.UI\DynamicUI\ConcentratedEffect</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Effect_FireSpears.cpp">
-      <Filter>02.GameObject\02.For.Stage\03.Effect\03.Effect_FireSpears</Filter>
+      <Filter>02.GameObject\02.For.Stage\03.Effect\99.Effect_Trash</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Effect_Mesh.cpp">
       <Filter>02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh\Sword_Heavy03</Filter>
@@ -625,6 +637,18 @@
     </ClCompile>
     <ClCompile Include="..\Codes\Effect_GunCap.cpp">
       <Filter>02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh\Gun\Cap</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Effect_RectParticle.cpp">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\99.Effect_Trash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\EffectC.cpp">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\98. Effect_Parent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Parent_Effect.cpp">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\99. Particle_Parent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Effect_CloudDark.cpp">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\00. Effect_CloudDark</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

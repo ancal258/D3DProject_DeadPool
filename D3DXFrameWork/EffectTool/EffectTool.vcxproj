@@ -204,6 +204,7 @@
     <ClInclude Include="EffectToolView.h" />
     <ClInclude Include="Effect_BloodMistT.h" />
     <ClInclude Include="Effect_BloodT.h" />
+    <ClInclude Include="Effect_CloudBrightT.h" />
     <ClInclude Include="Effect_CloudT.h" />
     <ClInclude Include="Effect_ExplosionT.h" />
     <ClInclude Include="Effect_GunCapT.h" />
@@ -232,6 +233,7 @@
     <ClCompile Include="EffectToolView.cpp" />
     <ClCompile Include="Effect_BloodMistT.cpp" />
     <ClCompile Include="Effect_BloodT.cpp" />
+    <ClCompile Include="Effect_CloudBrightT.cpp" />
     <ClCompile Include="Effect_CloudT.cpp" />
     <ClCompile Include="Effect_ExplosionT.cpp" />
     <ClCompile Include="Effect_GunCapT.cpp" />

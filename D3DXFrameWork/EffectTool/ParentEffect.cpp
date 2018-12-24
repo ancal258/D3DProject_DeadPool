@@ -102,10 +102,6 @@ _int CParentEffect::Update_GameObject(const _float & fTimeDelta)
 					return -1;
 				((CEffect_ExplosionT*)pMesh)->Set_EffectInfo(this, m_fFrameSpeed, m_fFrameMax, m_fMoveSpeed, m_fSurviveTime, m_fDegreeRange, &m_vSetScale, &vPos, &m_vDir);
 			}
-
-
-
-
 			// 단일 텍스쳐 이펙트
 			if (3 == m_iType)
 			{
@@ -122,6 +118,12 @@ _int CParentEffect::Update_GameObject(const _float & fTimeDelta)
 			if (5 == m_iType)
 			{
 				if (FAILED(CObject_Manager::GetInstance()->Add_Object(0, L"Prototype_EffectBloodMist", 0, L"Layer_ToolEffect", &pMesh)))
+					return -1;
+				((CEffect_CloudT*)pMesh)->Set_EffectInfo(this, m_fFrameSpeed, m_fFrameMax, m_fMoveSpeed, m_fSurviveTime, m_fDegreeRange, &m_vSetScale, &vPos, &m_vDir);
+			}
+			if (6 == m_iType)
+			{
+				if (FAILED(CObject_Manager::GetInstance()->Add_Object(0, L"Prototype_EffectCloudBright", 0, L"Layer_ToolEffect", &pMesh)))
 					return -1;
 				((CEffect_CloudT*)pMesh)->Set_EffectInfo(this, m_fFrameSpeed, m_fFrameMax, m_fMoveSpeed, m_fSurviveTime, m_fDegreeRange, &m_vSetScale, &vPos, &m_vDir);
 			}

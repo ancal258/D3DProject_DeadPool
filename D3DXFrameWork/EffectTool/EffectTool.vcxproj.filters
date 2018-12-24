@@ -103,6 +103,9 @@
     <Filter Include="02.GameObject\01. Effect\Effect_Mesh\Effect_MinigunCap">
       <UniqueIdentifier>{434af285-6a64-40a4-a778-480535b14b06}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\01. Effect\ToolEffect\01. TextureEffect\Effect_CloudBright">
+      <UniqueIdentifier>{0cd6f5da-e0fb-4a59-97cb-0d05a0e1fb3e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="EffectTool.h">
@@ -186,6 +189,9 @@
     <ClInclude Include="Effect_GunFlashT.h">
       <Filter>02.GameObject\01. Effect\Effect_Mesh\Effect_GunFlash</Filter>
     </ClInclude>
+    <ClInclude Include="Effect_CloudBrightT.h">
+      <Filter>02.GameObject\01. Effect\ToolEffect\01. TextureEffect\Effect_CloudBright</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EffectTool.cpp">
@@ -259,6 +265,9 @@
     </ClCompile>
     <ClCompile Include="Effect_GunFlashT.cpp">
       <Filter>02.GameObject\01. Effect\Effect_Mesh\Effect_GunFlash</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect_CloudBrightT.cpp">
+      <Filter>02.GameObject\01. Effect\ToolEffect\01. TextureEffect\Effect_CloudBright</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
