@@ -134,9 +134,18 @@ _int CBrawler01::Update_Stage_Field(const _float & fTimeDelta)
 	else
 		m_iCurrentIndex = STATE_IDLE;
 
-	if (m_fAttackAcc > 2.f)
+	if (m_fAttackAcc > 1.f)
 	{
 		m_iCurrentIndex = STATE_ATTACK_DEFAULT;
+
+		if (false == m_isCompute)
+		{
+			if (m_fLength < 0.5f)
+			{
+				((CPlayer*)m_pPlayer[0])->Compute_HP(20);
+				m_isCompute = true;
+			}
+		}
 		m_isAttack = true;
 	}
 

@@ -141,6 +141,7 @@ void CBrawler::CallBackFinish()
 	{
 		m_fAttackAcc = 0.f;
 		m_isAttack = false;
+		m_isCompute = false;
 	}
 	m_iCurrentIndex = m_iIdleIndex;
 	m_pMeshCom->Set_AnimationSet(m_iIdleIndex);
@@ -248,8 +249,8 @@ HRESULT CBrawler::SetUp_ConstantTable(LPD3DXEFFECT pEffect)
 void CBrawler::Compute_PlayerDir()
 {
 	_vec3 vPlayerPos = static_cast<_vec3>((dynamic_cast<const CPlayer*>(m_pPlayer[0])->Get_RealMatrix()->m[3]));
-	_vec3 vBrawlerPos = static_cast<_vec3>(m_pTransformCom->Get_WorldMatrix()->m[3]);
-
+	//_vec3 vBrawlerPos = static_cast<_vec3>(m_pTransformCom->Get_WorldMatrix()->m[3]);
+	_vec3 vBrawlerPos = (_vec3)m_CombinedRootMatrix.m[3];
 	m_vPlayerDir = vPlayerPos - vBrawlerPos;
 	m_fLength = D3DXVec3Length(&m_vPlayerDir);
 
@@ -336,12 +337,10 @@ _int CBrawler::LastUpdate_Stage_Field(const _float & fTimeDelta)
 			((CPlayer*)m_pPlayer[0])->Add_HeadShotPoint();
 		}
 	}
-	//if (TRUE == m_Hit[0] || TRUE == m_Hit[1])
-	//{
-	//	m_Hit[0] = FALSE;
-	//	m_Hit[1] = FALSE;
-	//	m_iHP--;
-	//}
+	if (TRUE == m_Hit[0] || TRUE == m_Hit[1])
+	{
+		m_iHP--;
+	}
 	m_pTransformCom->Update_Matrix();
 
 	return _int();

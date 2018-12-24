@@ -116,6 +116,10 @@ _int CStatic_Object::LastUpdate_GameObject(const _float & fTimeDelta)
 					return E_FAIL;
 				((CParent_Effect*)pEffect)->Set_EffectInfo(64, 64, 0.0f, 1.8f, 0, &_vec3(10, 10, 10), &vPos, &_vec3(0.5f, 0.5f, 0.5f), &_vec3(0, 0, 0), false, true, 0.1f, 3, 0.5f);
 
+
+				if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Parent_CloudDark", SCENE_STAGE, L"Layer_Effect", &pEffect)))
+					return E_FAIL;
+				((CParent_Effect*)pEffect)->Set_EffectInfo(0, 0, 0.003f, 7, 0, &_vec3(5, 5, 5), &vPos, &_vec3(1, 0, 1), &_vec3(0, 1, 0), false, true, 0.5f, 5, 3);
 				// Æø¹ß »ý¼º
 				Set_Lived(false);
 

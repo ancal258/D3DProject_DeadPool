@@ -28,6 +28,8 @@ public:
 		return m_isLived; }
 	_int Get_HP() {
 		return m_iHP;}
+	void Compute_HP(_int iDamage) {
+		m_iHP -= iDamage;	}
 	void Set_Lived(_bool isLived) {
 		m_isLived = isLived;}
 	void Set_Active(_bool isActive) {

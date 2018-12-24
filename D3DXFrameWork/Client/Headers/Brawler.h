@@ -72,6 +72,7 @@ protected: // For. AttackCheck
 protected: // For. Attack to Player
 	_bool			m_isAttack = false;
 	_float			m_fAttackAcc = 0.f;
+	_bool			m_isCompute = false;
 
 protected: // For. StageNum
 	_uint		m_iStageNum = 0;
@@ -90,7 +91,6 @@ private:
 	LPD3DXMESH				m_pColliderMesh[2] = { nullptr, nullptr };
 	BOOL					m_Hit[2] = { FALSE };
 	_float					m_fDist[2] = { 0 };
-	
 private:
 	HRESULT isHitScan();
 	HRESULT CollisionCheck(_float fTimeDelta);
