@@ -31,7 +31,7 @@ public:
 	virtual void Render_GameObject();
 
 public:
-	void Set_EffectInfo(_float fFrameSpeed, _float fFrameMax, _float fMoveSpeed, _float fSurviveTime, _float fDegreeRange, _vec3* vSetScale, _vec3* vSetPos, _vec3 * vSetPosRange, _vec3* vDir, _bool isSettingPos,_bool isRandomPos,_float fCreateTime, _int iCreateCnt);
+	void Set_EffectInfo(_float fFrameSpeed, _float fFrameMax, _float fMoveSpeed, _float fSurviveTime, _float fDegreeRange, _vec3* vSetScale, _vec3* vSetPos, _vec3 * vSetPosRange, _vec3* vDir, _bool isSettingPos,_bool isRandomPos,_float fCreateTime, _int iCreateCnt, _float fLiveTime);
 private:
 	CTransform*			m_pTransformCom = nullptr;
 
@@ -39,6 +39,8 @@ private:
 	HRESULT Ready_Component();
 public:
 	_ubyte				m_iType = 0;
+	_float				m_fLiveAcc = 0.f;
+
 private:
 	_float				m_fTimeAcc = 0.f;
 	_float				m_fFrameSpeed = 0.f; // 애니메이션 프레임 속도
@@ -55,6 +57,7 @@ private:
 	_float				m_fCreateTime = 0.f;
 	_bool				m_isSettingPos = false;
 	_bool				m_isRandomPos = false;
+	_float				m_fLiveTime = 0.f;
 	list<CGameObject*>  m_EffectList;
 	const _tchar*		m_pProtoTag = nullptr;
 

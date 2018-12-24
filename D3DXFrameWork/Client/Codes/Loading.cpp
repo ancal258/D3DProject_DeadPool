@@ -38,6 +38,8 @@
 #include "EffectC.h"
 #include "Parent_Effect.h"
 #include "Effect_CloudDark.h"
+#include "Effect_CloudBright.h"
+#include "Effect_Explosion.h"
 
 // UI
 #include "UI_CrossHair.h"
@@ -150,8 +152,8 @@ HRESULT CLoading::Loading_Stage_APT()
 		return E_FAIL;
 
 	////TEST////
-	if (FAILED(Ready_Effect()))
-		return E_FAIL;
+	//if (FAILED(Ready_Effect()))
+	//	return E_FAIL;
 	if (FAILED(Load_Trigger_CubeAPT()))
 		return E_FAIL;
 
@@ -224,8 +226,11 @@ HRESULT CLoading::Loading_Stage_FIELD()
 	if (FAILED(Load_Static_Object(L"../Bin/DataFiles/StaticObject_Field.dat")))
 		return E_FAIL;
 
-	/* TEST */
+	lstrcpy(m_szString, L"Ready_Effect_Prototype...");
 	if (FAILED(Ready_Effect()))
+		return E_FAIL;
+	lstrcpy(m_szString, L"Ready_Layer_Effect...");
+	if (FAILED(Layer_Effect_FIELD()))
 		return E_FAIL;
 
 	lstrcpy(m_szString, L"Layer_StaticUI...");
@@ -288,6 +293,9 @@ HRESULT CLoading::Loading_Stage_AIRPLANE()
 
 	if (FAILED(Load_Static_Object(L"../Bin/DataFiles/StaticObject_Airplane.dat",2)))
 		return E_FAIL;
+	if (FAILED(Ready_Effect()))
+		return E_FAIL;
+
 
 	//lstrcpy(m_szString, L"Layer_StaticUI...");
 	//if (FAILED(Ready_Static_Prototype_UI()))
@@ -579,25 +587,43 @@ HRESULT CLoading::Ready_Effect()
 	/* Effect CloudDark */
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_CloudDark", CEffect_CloudDark::Create(Get_Graphic_Device()))))
 		return E_FAIL;
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_CloudBright", CEffect_CloudBright::Create(Get_Graphic_Device()))))
+		return E_FAIL;
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_CloudExplosion", CEffect_Explosion::Create(Get_Graphic_Device()))))
+		return E_FAIL;
 	/*------------------*/
 
 
 
 
 	/* Effect Parent */
-	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Parent_CloudDark", CParent_Effect::Create(Get_Graphic_Device(),L"Prototype_CloudDark"))))
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Parent_CloudDark", CParent_Effect::Create(Get_Graphic_Device(), L"Prototype_CloudDark"))))
+		return E_FAIL;
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Parent_CloudBright", CParent_Effect::Create(Get_Graphic_Device(), L"Prototype_CloudBright"))))
+		return E_FAIL;
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Parent_Explosion", CParent_Effect::Create(Get_Graphic_Device(), L"Prototype_CloudExplosion"))))
 		return E_FAIL;
 
 
-	CGameObject* pUI;
-
-	// HeadShot Points
-	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Parent_CloudDark", SCENE_STAGE, L"Layer_Effect", &pUI)))
-		return E_FAIL;
-//	((CParent_Effect*)pUI)->Set_EffectInfo(0,0,0.01f,7,0,&_vec3(3,3,3),&_vec3(10,0,10),&_vec3(2,0,2),&_vec3(0,1,0),false,true,1,5);
 
 
 	Safe_Release(pComponent_Manager);
+	return NOERROR;
+}
+
+HRESULT CLoading::Layer_Effect_FIELD()
+{
+
+	CGameObject* pEffect;
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Parent_CloudBright", SCENE_STAGE, L"Layer_Effect", &pEffect)))
+		return E_FAIL;
+	((CParent_Effect*)pEffect)->Set_EffectInfo(0, 0, 0.01f, 7, 0, &_vec3(3, 3, 3), &_vec3(36.66f, 0, 3.69f), &_vec3(1, 0, 1), &_vec3(0, 1, 0), false, true, 1, 7, 0);
+
+
+	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Parent_Explosion", SCENE_STAGE, L"Layer_Effect", &pEffect)))
+	//	return E_FAIL;
+	//((CParent_Effect*)pEffect)->Set_EffectInfo(32, 64, 0.1f, 1.8f, 15, &_vec3(1, 1, 1), &_vec3(18.74f, 0, 5.f), &_vec3(2, 0, 2), &_vec3(0, 1, 0), false, true, 0.01f, 4);
+
 	return NOERROR;
 }
 

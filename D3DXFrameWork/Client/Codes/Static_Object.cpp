@@ -6,6 +6,7 @@
 #include "Player.h"
 
 #include "Camera_Target.h"
+#include "Parent_Effect.h"
 _USING(Client)
 
 CStatic_Object::CStatic_Object(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -109,8 +110,14 @@ _int CStatic_Object::LastUpdate_GameObject(const _float & fTimeDelta)
 			// 面倒 登搁
 			if (true == m_isDamaged)
 			{
-			// 气惯 积己
-			Set_Lived(false);
+				CGameObject* pEffect;
+				_vec3 vPos = *m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION);
+				if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Parent_Explosion", SCENE_STAGE, L"Layer_Effect", &pEffect)))
+					return E_FAIL;
+				((CParent_Effect*)pEffect)->Set_EffectInfo(64, 64, 0.0f, 1.8f, 0, &_vec3(10, 10, 10), &vPos, &_vec3(0.5f, 0.5f, 0.5f), &_vec3(0, 0, 0), false, true, 0.1f, 3, 0.5f);
+
+				// 气惯 积己
+				Set_Lived(false);
 
 
 			}

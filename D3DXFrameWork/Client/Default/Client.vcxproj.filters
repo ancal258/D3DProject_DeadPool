@@ -277,6 +277,12 @@
     <Filter Include="02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\99. Particle_Parent">
       <UniqueIdentifier>{5396b795-ec4e-4042-87a8-8a186245c3f3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\01. Effect_CloudBright">
+      <UniqueIdentifier>{f578ac5e-a9c2-4745-badc-0f7d3b4b08a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\02. Effect_Explosion">
+      <UniqueIdentifier>{3870ee61-9731-4eef-b54c-f4c30df4dfb8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -471,6 +477,12 @@
     <ClInclude Include="..\Headers\Effect_CloudDark.h">
       <Filter>02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\00. Effect_CloudDark</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\Effect_CloudBright.h">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\01. Effect_CloudBright</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Effect_Explosion.h">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\02. Effect_Explosion</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -649,6 +661,12 @@
     </ClCompile>
     <ClCompile Include="..\Codes\Effect_CloudDark.cpp">
       <Filter>02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\00. Effect_CloudDark</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Effect_CloudBright.cpp">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\01. Effect_CloudBright</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Effect_Explosion.cpp">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\02. Effect_Explosion</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

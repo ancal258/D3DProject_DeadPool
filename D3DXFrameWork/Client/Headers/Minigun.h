@@ -8,7 +8,6 @@ class CTransform;
 class CRenderer;
 class CMesh_Dynamic;
 class CShader;
-class CNavigation;
 _END
 
 _BEGIN(Client)
@@ -33,7 +32,6 @@ private: // For. Component
 	CTransform*         m_pTransformCom = nullptr;
 	CRenderer*			m_pRendererCom = nullptr;
 	CShader*			m_pShaderCom = nullptr;
-	CNavigation*		m_pNavigationCom = nullptr;
 	CMesh_Dynamic*      m_pMeshCom = nullptr;
 
 	_float				m_fMouseSence = 0.f;

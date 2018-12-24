@@ -46,7 +46,15 @@ HRESULT CParent_Effect::Ready_GameObject()
 _int CParent_Effect::Update_GameObject(const _float & fTimeDelta)
 {
 	m_fTimeAcc += fTimeDelta;
+	if (m_fLiveTime != 0)
+	{
+		m_fLiveAcc += fTimeDelta;
+		if (m_fLiveAcc >= m_fLiveTime + m_fSurviveTime)
+			Set_Lived(false);
+	}
 
+	if (m_fLiveTime < m_fLiveAcc)
+		return 1;
 
 	if (m_fTimeAcc >= m_fCreateTime)
 	{
@@ -105,7 +113,8 @@ void CParent_Effect::Render_GameObject()
 }
 
 void CParent_Effect::Set_EffectInfo(_float fFrameSpeed, _float fFrameMax, _float fMoveSpeed, _float fSurviveTime, 
-	_float fDegreeRange, _vec3 * vSetScale, _vec3 * vSetPos, _vec3 * vSetPosRange, _vec3 * vDir, _bool isSettingPos, _bool isRandomPos, _float fCreateTime, _int iCreateCnt)
+	_float fDegreeRange, _vec3 * vSetScale, _vec3 * vSetPos, _vec3 * vSetPosRange, _vec3 * vDir, _bool isSettingPos, 
+	_bool isRandomPos, _float fCreateTime, _int iCreateCnt, _float fLiveTime)
 {
 	m_fFrameSpeed = fFrameSpeed;
 	m_fFrameMax = fFrameMax;
@@ -120,6 +129,7 @@ void CParent_Effect::Set_EffectInfo(_float fFrameSpeed, _float fFrameMax, _float
 	m_isRandomPos = isRandomPos;
 	m_fCreateTime = fCreateTime;
 	m_iCreateCnt = iCreateCnt;
+	m_fLiveTime = fLiveTime;
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(m_vSetPos));
 	m_pTransformCom->Scaling(m_vSetScale);
 	

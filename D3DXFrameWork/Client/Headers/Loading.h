@@ -38,6 +38,7 @@ private:
 	HRESULT Loading_Stage_FIELD();
 	HRESULT Loading_Stage_AIRPLANE();
 	HRESULT Ready_Effect();
+	HRESULT Layer_Effect_FIELD();
 	//HRESULT Loading_();
 private:
 	HRESULT Ready_LightInfo();

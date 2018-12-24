@@ -192,7 +192,9 @@
     <ClInclude Include="..\Headers\DP_Sword.h" />
     <ClInclude Include="..\Headers\Effect.h" />
     <ClInclude Include="..\Headers\EffectC.h" />
+    <ClInclude Include="..\Headers\Effect_CloudBright.h" />
     <ClInclude Include="..\Headers\Effect_CloudDark.h" />
+    <ClInclude Include="..\Headers\Effect_Explosion.h" />
     <ClInclude Include="..\Headers\Effect_FireSpears.h" />
     <ClInclude Include="..\Headers\Effect_GunCap.h" />
     <ClInclude Include="..\Headers\Effect_Mesh.h" />
@@ -255,7 +257,9 @@
     <ClCompile Include="..\Codes\DP_Sword.cpp" />
     <ClCompile Include="..\Codes\Effect.cpp" />
     <ClCompile Include="..\Codes\EffectC.cpp" />
+    <ClCompile Include="..\Codes\Effect_CloudBright.cpp" />
     <ClCompile Include="..\Codes\Effect_CloudDark.cpp" />
+    <ClCompile Include="..\Codes\Effect_Explosion.cpp" />
     <ClCompile Include="..\Codes\Effect_FireSpears.cpp" />
     <ClCompile Include="..\Codes\Effect_GunCap.cpp" />
     <ClCompile Include="..\Codes\Effect_Mesh.cpp" />

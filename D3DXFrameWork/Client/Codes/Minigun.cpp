@@ -184,12 +184,7 @@ HRESULT CMinigun::Ready_Component()
 	m_pShaderCom = (CShader*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Shader_Mesh");
 	if (FAILED(Add_Component(L"Com_Shader", m_pShaderCom)))
 		return E_FAIL;
-
-	// For.Com_Navigation
-	m_pNavigationCom = (CNavigation*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Navigation");
-	if (FAILED(Add_Component(L"Com_Navigation", m_pNavigationCom)))
-		return E_FAIL;
-
+	
 	Safe_Release(pComponent_Manager);
 
 	return NOERROR;
@@ -330,7 +325,6 @@ void CMinigun::Free()
 	Safe_Release(m_pTransformCom);
 	Safe_Release(m_pRendererCom);
 	Safe_Release(m_pShaderCom);
-	Safe_Release(m_pNavigationCom);
 	Safe_Release(m_pMeshCom);
 
 	CGameObject::Free();
