@@ -52,6 +52,7 @@ HRESULT CEffect_Trail::Ready_GameObject()
 	// 빌보드 이펙트의 상태 변환을 위해
 	// 부모 행렬을 직접 만들어준다.
 
+
 	return NOERROR;
 }
 
@@ -61,8 +62,7 @@ _int CEffect_Trail::Update_GameObject(const _float & fTimeDelta)
 		nullptr == m_pSword)
 		return -1;
 
-	m_pBufferCom->Add_VertexBuffer(m_pSword->Get_BeginPoint(),m_pSword->Get_EndPoint());	
-
+	//cout << m_pSword->Get_BeginPoint().x << " " << m_pSword->Get_EndPoint().x << endl;
 
 	//if (false == m_isFirst)
 	//{
@@ -98,7 +98,14 @@ _int CEffect_Trail::LastUpdate_GameObject(const _float & fTimeDelta)
 	if (nullptr == m_pRendererCom)
 		return -1;
 
+	m_fTimeAcc += fTimeDelta;
 
+	if (m_fTimeAcc >= 0.01f)
+	{
+		m_fTimeAcc = 0.f;
+		m_pBufferCom->Add_VertexBuffer(m_pSword->Get_BeginPoint(), m_pSword->Get_EndPoint());
+	}
+	//cout << "Sword : " << m_pSword << "|| Buffer : " << m_pBufferCom <<endl;
 
 	m_pTransformCom->Update_Matrix();
 
@@ -124,7 +131,7 @@ void CEffect_Trail::Render_GameObject()
 
 
 	pEffect->Begin(nullptr, 0);
-	pEffect->BeginPass(1);
+	pEffect->BeginPass(0);
 
 	m_pBufferCom->Render_VIBuffer();
 
@@ -158,8 +165,13 @@ HRESULT CEffect_Trail::Ready_Component()
 		return E_FAIL;
 
 	// For.Com_Shader
-	m_pShaderCom = (CShader*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Shader_Logo");
+	m_pShaderCom = (CShader*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Shader_Trail");
 	if (FAILED(Add_Component(L"Com_Shader", m_pShaderCom)))
+		return E_FAIL;
+
+	// For.Com_Texture
+	m_pTextureCom = (CTexture*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Texture_Trail");
+	if (FAILED(Add_Component(L"Com_Texture", m_pTextureCom)))
 		return E_FAIL;
 
 	Safe_Release(pComponent_Manager);
@@ -185,6 +197,7 @@ HRESULT CEffect_Trail::SetUp_ConstantTable(LPD3DXEFFECT pEffect)
 	pEffect->SetMatrix("g_matProj", &matProj);
 	pEffect->SetFloat("g_fAlpha", 1);
 
+	m_pTextureCom->SetUp_OnShader(pEffect, "g_BaseTexture", _uint(0));
 
 
 	Safe_Release(pEffect);

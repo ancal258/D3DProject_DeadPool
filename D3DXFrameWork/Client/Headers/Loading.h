@@ -71,7 +71,7 @@ private:
 	HRESULT Ready_Layer_BackGround_FIELD(const _tchar* pLayerTag); // FIELD 터레인 / 스카이
 	HRESULT Ready_Layer_BackGround_AIRPLANE(const _tchar* pLayerTag); // AIRPLANE 터레인 / 스카이
 private:
-	HRESULT Load_Static_Object(const _tchar* pFilePath);
+	HRESULT Load_Static_Object(const _tchar* pFilePath, _uint iStage = 0);
 	HRESULT Load_Event_Cube(const _tchar* pFilePath);
 	HRESULT Load_Trigger_CubeAPT();
 	HRESULT Load_Trigger_Cube(const _tchar* pFilePath);

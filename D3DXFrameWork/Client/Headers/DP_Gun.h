@@ -21,6 +21,9 @@ private:
 	explicit CDP_Gun(const CDP_Gun& rhs);
 	virtual ~CDP_Gun() = default;
 public:
+	const _matrix& Get_HeadMatrix() const {
+		return m_CombinedHeadMatrix;	}
+public:
 	virtual HRESULT Ready_GameObject_Prototype(_uint iSide);
 	virtual HRESULT Ready_GameObject();
 	virtual _int Update_GameObject(const _float& fTimeDelta);
@@ -37,7 +40,10 @@ private:
 	CPlayer*			m_pPlayer = nullptr;
 	_uint				m_iSide = 0; // 0 == ÁÂÃø , 1 == ¿ìÃø
 private:
+	_matrix            m_CombinedHeadMatrix;
+private:
 	HRESULT Ready_Component();
+	HRESULT Update_HeadMatrix();
 	HRESULT	SetUp_ConstantTable(LPD3DXEFFECT pEffect);
 	HRESULT SetUp_PlayerPointer();
 

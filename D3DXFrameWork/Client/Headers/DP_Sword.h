@@ -41,6 +41,7 @@ private:
 	CCollider*			m_pColliderCom_Sphere[5] = { nullptr , nullptr, nullptr, nullptr };
 private:
 	CPlayer*			m_pPlayer = nullptr;
+	CGameObject*		m_pTrail = nullptr;
 	_uint				m_iSide = 0; // 0 == ÁÂÃø , 1 == ¿ìÃø
 
 	_vec3				m_vPointBegin;

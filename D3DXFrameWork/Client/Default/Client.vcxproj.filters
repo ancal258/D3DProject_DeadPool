@@ -109,9 +109,6 @@
     <Filter Include="02.GameObject\02.For.Stage\05.Brawler">
       <UniqueIdentifier>{efaf370b-72cc-453a-9f01-5af9ea5062b4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\02.For.Stage\05.Brawler\00.Brawler_00">
-      <UniqueIdentifier>{226cbcc8-3d49-4357-b849-d4ef667b4853}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.GameObject\02.For.Stage\05.Brawler\01.Brawler_01">
       <UniqueIdentifier>{4dedbf57-754d-4e07-bf89-2400e4d1bd7d}</UniqueIdentifier>
     </Filter>
@@ -265,6 +262,15 @@
     <Filter Include="02.GameObject\02.For.Stage\03.Effect\04.Effect_Trail">
       <UniqueIdentifier>{562ee96b-506e-49e6-85fe-719437f35beb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\05.Brawler\01.Brawler_01\00.Brawler_00">
+      <UniqueIdentifier>{226cbcc8-3d49-4357-b849-d4ef667b4853}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh\Gun">
+      <UniqueIdentifier>{1bd0dab0-f4f6-46cd-84b3-44544ad2daa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh\Gun\Cap">
+      <UniqueIdentifier>{313d1e84-22f6-4274-b8f2-9cccda3f8b5b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -337,7 +343,7 @@
       <Filter>02.GameObject\02.For.Stage\05.Brawler\01.Brawler_01</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Brawler_TPose.h">
-      <Filter>02.GameObject\02.For.Stage\05.Brawler\00.Brawler_00</Filter>
+      <Filter>02.GameObject\02.For.Stage\05.Brawler\01.Brawler_01\00.Brawler_00</Filter>
     </ClInclude>
     <ClInclude Include="..\Headers\Brawler_ElectricBaton.h">
       <Filter>02.GameObject\02.For.Stage\02.Weapon\01.Brawler_Weapon\Brawler_ElectricBaton</Filter>
@@ -447,6 +453,9 @@
     <ClInclude Include="..\Headers\Effect_Trail.h">
       <Filter>02.GameObject\02.For.Stage\03.Effect\04.Effect_Trail</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\Effect_GunCap.h">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh\Gun\Cap</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -507,7 +516,7 @@
       <Filter>02.GameObject\02.For.Stage\05.Brawler\01.Brawler_01</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Brawler_TPose.cpp">
-      <Filter>02.GameObject\02.For.Stage\05.Brawler\00.Brawler_00</Filter>
+      <Filter>02.GameObject\02.For.Stage\05.Brawler\01.Brawler_01\00.Brawler_00</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Brawler_ElectricBaton.cpp">
       <Filter>02.GameObject\02.For.Stage\02.Weapon\01.Brawler_Weapon\Brawler_ElectricBaton</Filter>
@@ -614,6 +623,9 @@
     <ClCompile Include="..\Codes\Effect_Trail.cpp">
       <Filter>02.GameObject\02.For.Stage\03.Effect\04.Effect_Trail</Filter>
     </ClCompile>
+    <ClCompile Include="..\Codes\Effect_GunCap.cpp">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh\Gun\Cap</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">
@@ -648,6 +660,9 @@
       <Filter>97.ShaderFiles</Filter>
     </FxCompile>
     <FxCompile Include="..\Bin\ShaderFiles\Shader_Prop.fx">
+      <Filter>97.ShaderFiles</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_Trail.fx">
       <Filter>97.ShaderFiles</Filter>
     </FxCompile>
   </ItemGroup>

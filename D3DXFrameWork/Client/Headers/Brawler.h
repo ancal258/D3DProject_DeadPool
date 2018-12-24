@@ -69,6 +69,9 @@ protected: // For. AttackCheck
 	_float			m_fRadian = 0;
 	_float			m_fDamegedTime = 0;
 
+protected: // For. Attack to Player
+	_bool			m_isAttack = false;
+	_float			m_fAttackAcc = 0.f;
 
 protected: // For. StageNum
 	_uint		m_iStageNum = 0;

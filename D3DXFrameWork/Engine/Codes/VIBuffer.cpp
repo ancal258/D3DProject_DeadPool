@@ -24,8 +24,10 @@ CVIBuffer::CVIBuffer(const CVIBuffer & rhs)
 	, m_pVertices(rhs.m_pVertices)
 	, m_pIndices(rhs.m_pIndices)
 {
-	m_pVB->AddRef();
-	m_pIB->AddRef();
+	if(nullptr != m_pVB)
+		m_pVB->AddRef();
+	if(nullptr != m_pIB)
+		m_pIB->AddRef();
 }
 
 HRESULT CVIBuffer::Ready_VIBuffer()

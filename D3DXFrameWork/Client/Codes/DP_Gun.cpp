@@ -4,7 +4,7 @@
 #include "Object_Manager.h"
 #include "Light_Manager.h"
 #include "Player.h"
-#include "Effect_FireSpears.h"
+#include "Effect_GunCap.h"
 _USING(Client)
 
 CDP_Gun::CDP_Gun(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -53,14 +53,12 @@ _int CDP_Gun::Update_GameObject(const _float & fTimeDelta)
 	{
 		CGameObject* pEffect;
 
-		if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Effect_FireSpears", SCENE_STAGE, L"Layer_Effect", &pEffect)))
+		if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Effect_GunCap", SCENE_STAGE, L"Layer_Effect", &pEffect)))
 			return -1;
-		_vec3 vPos = (_vec3)m_pTransformCom->Get_WorldMatrix()->m[3];
-		((CEffect_FireSpears*)pEffect)->Set_Position(vPos);
-		//((CEffect_FireSpears*)pEffect)->Set_ParentMatrix(m_pTransformCom->Get_WorldMatrix());
+		((CEffect_GunCap*)pEffect)->Set_ParentMatrix(m_pTransformCom->Get_WorldMatrix());
 
 	}
-	
+
 
 	return _int();
 }
@@ -75,6 +73,7 @@ _int CDP_Gun::LastUpdate_GameObject(const _float & fTimeDelta)
 
 	m_pTransformCom->Update_Matrix();
 
+	Update_HeadMatrix();
 	if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_PLAYER, this)))
 		return -1;
 
@@ -192,6 +191,14 @@ HRESULT CDP_Gun::Ready_Component()
 
 
 	Safe_Release(pComponent_Manager);
+
+	return NOERROR;
+}
+
+HRESULT CDP_Gun::Update_HeadMatrix()
+{
+
+	m_CombinedHeadMatrix = *m_pTransformCom->Get_WorldMatrix();
 
 	return NOERROR;
 }

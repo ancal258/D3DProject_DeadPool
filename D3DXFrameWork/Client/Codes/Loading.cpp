@@ -33,6 +33,7 @@
 #include "Effect_RectParticle.h"
 #include "Effect_FireSpears.h"
 #include "Effect_MinigunCap.h"
+#include "Effect_GunCap.h"
 #include "Effect_Trail.h"
 // UI
 #include "UI_CrossHair.h"
@@ -281,7 +282,7 @@ HRESULT CLoading::Loading_Stage_AIRPLANE()
 		return E_FAIL;
 	/////////////////////
 
-	if (FAILED(Load_Static_Object(L"../Bin/DataFiles/StaticObject_Airplane.dat")))
+	if (FAILED(Load_Static_Object(L"../Bin/DataFiles/StaticObject_Airplane.dat",2)))
 		return E_FAIL;
 
 	//lstrcpy(m_szString, L"Layer_StaticUI...");
@@ -635,8 +636,8 @@ HRESULT CLoading::Ready_Static_Prototype_Component()
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Shader_Prop", CShader::Create(Get_Graphic_Device(), m_szString))))
 		return E_FAIL;
 
-	// For.Component_Shader_Logo
-	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Shader_Logo", CShader::Create(Get_Graphic_Device(), L"../Bin/ShaderFiles/Shader_Logo.fx"))))
+	// For.Component_Shader_Trail
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Shader_Trail", CShader::Create(Get_Graphic_Device(), L"../Bin/ShaderFiles/Shader_Trail.fx"))))
 		return E_FAIL;
 
 	// For.Component_Texture_ConcentratedEffect
@@ -1302,6 +1303,10 @@ HRESULT CLoading::Ready_Component_Prototype_SceneFIELD()
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_HPBar", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/UI/HPBar/HPBar%d.png", 2))))
 		return E_FAIL;
 
+	// For.Component_Texture_Trail
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_Trail", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/Effect/TrailCLR/sword_trail_clr.tga"))))
+		return E_FAIL;
+
 
 	Safe_Release(pComponent_Manager);
 
@@ -1321,6 +1326,15 @@ HRESULT CLoading::Ready_UI_SceneFIELD()
 
 	//GameObject
 	if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_UI_CrossHair", SCENE_STAGE, L"Layer_UI", nullptr)))
+		return E_FAIL;
+
+
+
+	// For. MinigunCap
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(SCENE_STAGE, L"Component_Mesh_GunCap", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/Effect/Gun/", L"Gun_Cap.x"))))
+		return E_FAIL;
+	// For.Prototype_MinigunCap
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Effect_GunCap", CEffect_GunCap::Create(Get_Graphic_Device()))))
 		return E_FAIL;
 
 	////GameObject
@@ -1780,7 +1794,7 @@ HRESULT CLoading::Ready_Layer_BackGround_AIRPLANE(const _tchar * pLayerTag)
 	return NOERROR;
 }
 
-HRESULT CLoading::Load_Static_Object(const _tchar * pFilePath)
+HRESULT CLoading::Load_Static_Object(const _tchar * pFilePath,_uint iStage)
 {
 
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
@@ -1802,6 +1816,7 @@ HRESULT CLoading::Load_Static_Object(const _tchar * pFilePath)
 		if (FAILED(Add_Object(SCENE_STAGE, ObjectInfo.szPrototype_Tag, SCENE_STAGE, L"Layer_Load", &pStatic_Object)))
 			return E_FAIL;
 		((CStatic_Object*)pStatic_Object)->Set_StateInfo(&ObjectInfo.vRight, &ObjectInfo.vUp, &ObjectInfo.vLook, &ObjectInfo.vPos, ObjectInfo.isOffCulling, ObjectInfo.isExplosion);
+		((CStatic_Object*)pStatic_Object)->Set_Stage(iStage);
 	}
 
 	CloseHandle(hFile);

@@ -19,10 +19,15 @@ private:
 	virtual ~CBuffer_Trail() = default;
 public:
 	HRESULT Ready_VIBuffer();
+	HRESULT Ready_TrailBuffer();
 	HRESULT Add_VertexBuffer(_vec3 vVertexBegin, _vec3 vVertexEnd);
 	virtual void Render_VIBuffer();
 private:
 	vector<_vec3>	m_vecVertex;
+
+	LPDIRECT3DVERTEXBUFFER9				m_pVB_Trail = nullptr;
+	LPDIRECT3DINDEXBUFFER9				m_pIB_Trail = nullptr;
+
 public:
 	static CBuffer_Trail* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CComponent* Clone_Component();

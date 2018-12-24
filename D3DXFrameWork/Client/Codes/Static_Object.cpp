@@ -63,6 +63,9 @@ HRESULT CStatic_Object::Ready_GameObject()
 _int CStatic_Object::Update_GameObject(const _float & fTimeDelta)
 {
 
+	if (FAILED(isHitScan()))
+		return E_FAIL;
+
 	m_isCol = false;
 	return _int();
 }
@@ -71,6 +74,7 @@ _int CStatic_Object::LastUpdate_GameObject(const _float & fTimeDelta)
 {
 	if (nullptr == m_pRendererCom)
 		return -1;
+
 
 	m_pTransformCom->Update_Matrix();
 
@@ -92,25 +96,26 @@ _int CStatic_Object::LastUpdate_GameObject(const _float & fTimeDelta)
 		if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
 			return -1;
 	}
-	//CObject_Manager* pObject_Manager = CObject_Manager::GetInstance();
-	//if (nullptr == pObject_Manager)
-	//	return -1;
 
-	////// OBB충돌 Player & 
+	if (2 == m_iStage)
+	{
+		if (TRUE == m_Hit)
+		{
+			m_isDamaged = CInput_Device::GetInstance()->Is_MinDist(m_fDist);
+		}
 
-	//for (size_t i = 0; i < 3; i++)
-	//{
-	//	const CGameObject* pPlayer = pObject_Manager->Get_ObjectPointer(SCENE_STAGE, L"Layer_Player", i);
-	//	if (nullptr == pPlayer)
-	//		break;
+		if (true == m_isExplosion)
+		{
+			// 충돌 되면
+			if (true == m_isDamaged)
+			{
+			// 폭발 생성
+			Set_Lived(false);
 
-	//	// 디버깅용. 실제론 return true일 때 마다 특정 행동을 취해주자.
-	//	if (true == m_pColliderCom->Collision_OBB((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider")))
-	//	{
-	//		//m_isCol = true;
-	//	}
-	//}
 
+			}
+		}
+	}
 
 	return _int();
 }
@@ -176,6 +181,7 @@ HRESULT CStatic_Object::Ready_Component()
 		return E_FAIL;
 	//_vec3 vTransMore = _vec3(5, 0, 0);
 	m_pColliderCom->SetUp_Collider(m_pMeshCom->Get_MinPoint(), m_pMeshCom->Get_MaxPoint(), m_pTransformCom->Get_WorldMatrix());//, &vTransMore);
+	m_pColliderMesh = m_pColliderCom->Get_Mesh();
 
 	//m_pColliderCom->SetUp_Collider(&_vec3(1.f, 1.f, 1.f), &_vec3(0.f, 0.f, 0.f), &_vec3(0.f, 0.7f, 0.f));
 	//m_pColliderCom->SetUp_Collider(m_pTransformCom->Get_WorldMatrix_NotRot(), &_vec3(1, 1, 1), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f, 0, 0.f));
@@ -220,6 +226,16 @@ HRESULT CStatic_Object::SetUp_ConstantTable(LPD3DXEFFECT pEffect)
 	pEffect->SetBool("g_isCol", m_isCol);
 
 	Safe_Release(pEffect);
+
+	return NOERROR;
+}
+
+HRESULT CStatic_Object::isHitScan()
+{
+	m_Hit = FALSE;
+
+	if (FAILED(CInput_Device::GetInstance()->Picking_ToCollider(m_pColliderMesh, m_pTransformCom, &m_Hit, &m_fDist)))
+		return E_FAIL;
 
 	return NOERROR;
 }

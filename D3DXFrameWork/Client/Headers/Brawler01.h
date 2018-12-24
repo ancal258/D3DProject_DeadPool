@@ -19,6 +19,9 @@ public:
 	virtual _int LastUpdate_GameObject(const _float& fTimeDelta);
 	virtual void Render_GameObject();
 
+
+
+
 private:
 	virtual HRESULT Ready_Component();
 private:

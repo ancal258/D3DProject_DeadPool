@@ -33,15 +33,16 @@ HRESULT CDP_Sword::Ready_GameObject()
 	if (FAILED(SetUp_PlayerPointer()))
 		return E_FAIL;
 
-	if(0 == m_iSide)
+	if (0 == m_iSide)
 		m_pTransformCom->Set_AngleZ(D3DXToRadian(90.0f));
-	else if(1 == m_iSide)
+	else if (1 == m_iSide)
 		m_pTransformCom->Set_AngleZ(D3DXToRadian(-90.0f));
 
-	CGameObject* pTrail;
-	if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Effect_Trail", SCENE_STAGE, L"Layer_Effect",&pTrail)))
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Effect_Trail", SCENE_STAGE, L"Layer_Effect", &m_pTrail)))
 		return E_FAIL;
-	((CEffect_Trail*)pTrail)->SetUp_Sword(this);
+
+	((CEffect_Trail*)m_pTrail)->SetUp_Sword(this);
+
 
 	return NOERROR;
 }
@@ -55,11 +56,19 @@ _int CDP_Sword::Update_GameObject(const _float & fTimeDelta)
 	_vec3 vUp = matWorld.m[0];
 	_vec3 vPos = _vec3(matWorld.m[3][0], matWorld.m[3][1], matWorld.m[3][2]);
 
-	_vec3 vBegin, vEnd;
-	vBegin = vPos + vUp * 300;
-	vEnd = vPos + vUp * -5;
-	m_vPointBegin = vBegin;
-	m_vPointEnd = vEnd;
+	m_vPointBegin = vPos + vUp * 120;
+	m_vPointEnd = vPos + vUp * 10;
+
+	//if (1 == m_iSide)
+	//{
+	//	cout << "LEFT : " << m_pTrail << endl;
+	//	cout << "LEFT : " << vBegin.x << " , " << vBegin.y << " , " << vBegin.z << endl;
+	//}
+	//else
+	//{
+	//	cout << "RIGHT : " << m_pTrail << endl;
+	//	cout << "RIGHT : " << vBegin.x << " , " << vBegin.y << " , " << vBegin.z << endl;
+	//}
 
 	//		STATE_SWORD, STATE_AIM, STATE_RUN, STATE_NORMAL, STATE_END
 	if (1 != m_pPlayer->Get_AnimState())
@@ -136,7 +145,7 @@ HRESULT CDP_Sword::Ready_Component()
 	m_pRendererCom = (CRenderer*)pComponent_Manager->Clone_Component(SCENE_STATIC, L"Component_Renderer");
 	if (FAILED(Add_Component(L"Com_Renderer", m_pRendererCom)))
 		return E_FAIL;
-		
+
 	// For.Com_Mesh
 	m_pMeshCom = (CMesh_Static*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Mesh_Sword");
 	if (FAILED(Add_Component(L"Com_Mesh", m_pMeshCom)))
@@ -149,12 +158,12 @@ HRESULT CDP_Sword::Ready_Component()
 	m_pColliderCom = (CCollider*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Collider_Box");
 	if (FAILED(Add_Component(L"Com_Collider", m_pColliderCom)))
 		return E_FAIL;
-	m_pColliderCom->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(100, 2,1), &_vec3(0.0f, 0.f, 0.f), &_vec3(70.f, 0, 0.f));
+	m_pColliderCom->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(100, 2, 1), &_vec3(0.0f, 0.f, 0.f), &_vec3(70.f, 0, 0.f));
 
 	m_pColliderCom_Sphere[0] = (CCollider*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Collider_Sphere");
 	if (FAILED(Add_Component(L"Com_Collider0", m_pColliderCom_Sphere[0])))
 		return E_FAIL;
-	m_pColliderCom_Sphere[0]->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(30,30,30), &_vec3(0.0f, 0.f, 0.f), &_vec3(30.f, 0, 0.f));
+	m_pColliderCom_Sphere[0]->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(30, 30, 30), &_vec3(0.0f, 0.f, 0.f), &_vec3(30.f, 0, 0.f));
 	m_pColliderCom_Sphere[1] = (CCollider*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Collider_Sphere");
 	if (FAILED(Add_Component(L"Com_Collider1", m_pColliderCom_Sphere[1])))
 		return E_FAIL;
@@ -235,7 +244,7 @@ HRESULT CDP_Sword::SetUp_PlayerPointer()
 	return NOERROR;
 }
 
-CDP_Sword * CDP_Sword::Create(LPDIRECT3DDEVICE9 pGraphic_Device,_uint iSide)
+CDP_Sword * CDP_Sword::Create(LPDIRECT3DDEVICE9 pGraphic_Device, _uint iSide)
 {
 	CDP_Sword*		pInstance = new CDP_Sword(pGraphic_Device);
 

@@ -114,10 +114,6 @@ HRESULT CEffect_Mesh::Ready_Component()
 	if (FAILED(Add_Component(L"Com_Shader", m_pShaderCom)))
 		return E_FAIL;
 
-	// For.Com_Navigation
-	m_pNavigationCom = (CNavigation*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Navigation");
-	if (FAILED(Add_Component(L"Com_Navigation", m_pNavigationCom)))
-		return E_FAIL;
 
 	Safe_Release(pComponent_Manager);
 

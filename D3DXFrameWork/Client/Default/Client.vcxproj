@@ -192,6 +192,7 @@
     <ClInclude Include="..\Headers\DP_Sword.h" />
     <ClInclude Include="..\Headers\Effect.h" />
     <ClInclude Include="..\Headers\Effect_FireSpears.h" />
+    <ClInclude Include="..\Headers\Effect_GunCap.h" />
     <ClInclude Include="..\Headers\Effect_Mesh.h" />
     <ClInclude Include="..\Headers\Effect_MinigunCap.h" />
     <ClInclude Include="..\Headers\Effect_RectParticle.h" />
@@ -251,6 +252,7 @@
     <ClCompile Include="..\Codes\DP_Sword.cpp" />
     <ClCompile Include="..\Codes\Effect.cpp" />
     <ClCompile Include="..\Codes\Effect_FireSpears.cpp" />
+    <ClCompile Include="..\Codes\Effect_GunCap.cpp" />
     <ClCompile Include="..\Codes\Effect_Mesh.cpp" />
     <ClCompile Include="..\Codes\Effect_MinigunCap.cpp" />
     <ClCompile Include="..\Codes\Effect_RectParticle.cpp" />
@@ -304,6 +306,7 @@
     <FxCompile Include="..\Bin\ShaderFiles\Shader_Mesh.fx" />
     <FxCompile Include="..\Bin\ShaderFiles\Shader_Prop.fx" />
     <FxCompile Include="..\Bin\ShaderFiles\Shader_Terrain.fx" />
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_Trail.fx" />
     <FxCompile Include="..\Bin\ShaderFiles\Shader_UI.fx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

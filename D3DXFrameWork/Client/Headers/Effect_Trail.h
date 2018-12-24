@@ -22,7 +22,7 @@ private:
 public:
 	void Set_Position(_vec3 vPos);
 	void SetUp_Sword(CDP_Sword* pGameObject) {
-		m_pSword = pGameObject;	}
+		m_pSword = pGameObject;		}
 public:
 	virtual HRESULT Ready_GameObject_Prototype();
 	virtual HRESULT Ready_GameObject();
@@ -37,18 +37,13 @@ private:
 	CShader*			m_pShaderCom = nullptr;
 
 	CDP_Sword*		m_pSword = nullptr;
-private:
-	//Test
-	_bool				m_isFirst = false;
-	_bool				m_isSecond = false;
-	_bool				m_isThird = false;
+	const _matrix*		m_pParentMatrix;
+	_float			m_fTimeAcc = 0.f;
+
 
 private:
 	HRESULT Ready_Component();
 	HRESULT	SetUp_ConstantTable(LPD3DXEFFECT pEffect);
-private:
-	_float				m_fFrame = 0.f;
-	const _matrix*		m_pParentMatrix;
 public:
 	static CEffect_Trail* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone_GameObject();

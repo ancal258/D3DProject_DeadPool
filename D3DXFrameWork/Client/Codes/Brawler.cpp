@@ -137,6 +137,11 @@ void CBrawler::CallBackFinish()
 		CBrawler_Manager::GetInstance()->Clear_Object(this);
 		Set_Lived(false);
 	}
+	else if (2 == m_iCurrentIndex)
+	{
+		m_fAttackAcc = 0.f;
+		m_isAttack = false;
+	}
 	m_iCurrentIndex = m_iIdleIndex;
 	m_pMeshCom->Set_AnimationSet(m_iIdleIndex);
 	

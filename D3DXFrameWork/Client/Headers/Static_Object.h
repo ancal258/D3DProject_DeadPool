@@ -21,6 +21,8 @@ private:
 	virtual ~CStatic_Object() = default;
 public:
 	void Set_StateInfo(_vec3* pRight, _vec3* pUp, _vec3* vLook, _vec3* vPos, _bool isOffCulling, _bool isExplosion);
+	void Set_Stage(_uint iStage) {
+		m_iStage = iStage;	}
 	HRESULT SetUp_Radius();
 public:
 	virtual HRESULT Ready_GameObject_Prototype(const _tchar* pComponent_Tag);
@@ -41,10 +43,17 @@ private:
 	_bool				m_isOffCulling = false;
 	_bool				m_isExplosion = false;
 	_float				m_fRadius = 0;
+	_uint				m_iStage = 0;
+
+private:
+	LPD3DXMESH				m_pColliderMesh = nullptr;
+	BOOL					m_Hit = FALSE ;
+	_bool					m_isDamaged = false;
+	_float					m_fDist =  0 ;
 private:
 	HRESULT Ready_Component();
 	HRESULT	SetUp_ConstantTable(LPD3DXEFFECT pEffect);
-
+	HRESULT isHitScan();
 public:
 	static CStatic_Object* Create(LPDIRECT3DDEVICE9 pGraphic_Device, const _tchar* pComponent_Tag);
 	virtual CGameObject* Clone_GameObject();

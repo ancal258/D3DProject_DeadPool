@@ -104,10 +104,13 @@ _int CBrawler01::Update_Stage_Field(const _float & fTimeDelta)
 	Compute_PlayerDir();
 	//cout << m_fLength << endl;
 
+	if(m_fLength <= 2.f)
+		m_fAttackAcc += fTimeDelta;
+
 	if (m_iHP <= 0)
 		return 1;
 
-	if (true == m_isSearch && false == m_isDamaged)
+	if (true == m_isSearch && false == m_isDamaged && false == m_isAttack)
 	{
 		if (D3DXVec3Dot(&m_vBrawlerLook, &m_vPlayerDir) < 0.998f)
 		{
@@ -130,6 +133,12 @@ _int CBrawler01::Update_Stage_Field(const _float & fTimeDelta)
 	}
 	else
 		m_iCurrentIndex = STATE_IDLE;
+
+	if (m_fAttackAcc > 2.f)
+	{
+		m_iCurrentIndex = STATE_ATTACK_DEFAULT;
+		m_isAttack = true;
+	}
 
 	return _int();
 }
