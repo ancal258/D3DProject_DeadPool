@@ -14,11 +14,6 @@ _END
 class CItem abstract : public CGameObject
 {
 protected:
-	enum STATE_EVENT
-	{
-		EVENT_CHAIR, EVENT_TV, EVENT_END
-	};
-protected:
 	explicit CItem(LPDIRECT3DDEVICE9 pGraphic_Device);
 	explicit CItem(const CItem& rhs);
 	virtual ~CItem() = default;

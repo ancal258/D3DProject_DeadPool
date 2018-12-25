@@ -11,12 +11,12 @@ class CShader;
 class CCollider;
 _END
 
-class CItem_DPPoint final : public CItem
+class CItem_Bullet final : public CItem
 {
 private:
-	explicit CItem_DPPoint(LPDIRECT3DDEVICE9 pGraphic_Device);
-	explicit CItem_DPPoint(const CItem_DPPoint& rhs);
-	virtual ~CItem_DPPoint() = default;
+	explicit CItem_Bullet(LPDIRECT3DDEVICE9 pGraphic_Device);
+	explicit CItem_Bullet(const CItem_Bullet& rhs);
+	virtual ~CItem_Bullet() = default;
 public:
 	void Set_StateInfo(_vec3 * vPos);
 public:
@@ -29,7 +29,7 @@ public:
 private:
 	HRESULT Ready_Component();
 public:
-	static CItem_DPPoint* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CItem_Bullet* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone_GameObject();
 protected:
 	virtual void Free();

@@ -203,7 +203,9 @@
     <ClInclude Include="..\Headers\Effect_Trail.h" />
     <ClInclude Include="..\Headers\Event_Cube.h" />
     <ClInclude Include="..\Headers\Item.h" />
+    <ClInclude Include="..\Headers\Item_Bullet.h" />
     <ClInclude Include="..\Headers\Item_DPPoint.h" />
+    <ClInclude Include="..\Headers\Item_Taco.h" />
     <ClInclude Include="..\Headers\Loading.h" />
     <ClInclude Include="..\Headers\MainApp.h" />
     <ClInclude Include="..\Headers\Minigun.h" />
@@ -270,7 +272,9 @@
     <ClCompile Include="..\Codes\Effect_Trail.cpp" />
     <ClCompile Include="..\Codes\Event_Cube.cpp" />
     <ClCompile Include="..\Codes\Item.cpp" />
+    <ClCompile Include="..\Codes\Item_Bullet.cpp" />
     <ClCompile Include="..\Codes\Item_DPPoint.cpp" />
+    <ClCompile Include="..\Codes\Item_Taco.cpp" />
     <ClCompile Include="..\Codes\Loading.cpp" />
     <ClCompile Include="..\Codes\MainApp.cpp" />
     <ClCompile Include="..\Codes\Minigun.cpp" />

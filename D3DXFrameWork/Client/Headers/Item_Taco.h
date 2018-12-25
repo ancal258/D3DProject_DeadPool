@@ -11,12 +11,12 @@ class CShader;
 class CCollider;
 _END
 
-class CItem_DPPoint final : public CItem
+class CItem_Taco final : public CItem
 {
 private:
-	explicit CItem_DPPoint(LPDIRECT3DDEVICE9 pGraphic_Device);
-	explicit CItem_DPPoint(const CItem_DPPoint& rhs);
-	virtual ~CItem_DPPoint() = default;
+	explicit CItem_Taco(LPDIRECT3DDEVICE9 pGraphic_Device);
+	explicit CItem_Taco(const CItem_Taco& rhs);
+	virtual ~CItem_Taco() = default;
 public:
 	void Set_StateInfo(_vec3 * vPos);
 public:
@@ -29,7 +29,7 @@ public:
 private:
 	HRESULT Ready_Component();
 public:
-	static CItem_DPPoint* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CItem_Taco* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone_GameObject();
 protected:
 	virtual void Free();

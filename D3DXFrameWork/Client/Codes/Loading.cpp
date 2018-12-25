@@ -30,6 +30,8 @@
 #include "Trigger_BackUI.h"
 // ITEM
 #include "Item_DPPoint.h"
+#include "Item_Bullet.h"
+#include "Item_Taco.h"
 //Effect
 #include "Effect_Mesh.h"
 #include "Effect_RectParticle.h"
@@ -245,7 +247,16 @@ HRESULT CLoading::Loading_Stage_FIELD()
 
 	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Item_DPPoint", SCENE_STAGE, L"Layer_Item", &pItem)))
 		return E_FAIL;
-	((CItem_DPPoint*)pItem)->Set_StateInfo(&_vec3(10, 1.f, 5));
+	((CItem_DPPoint*)pItem)->Set_StateInfo(&_vec3(10, 0.3f, 5));
+
+
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Item_Bullet", SCENE_STAGE, L"Layer_Item", &pItem)))
+		return E_FAIL;
+	((CItem_DPPoint*)pItem)->Set_StateInfo(&_vec3(15, 0.3f, 5));
+
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Item_Taco", SCENE_STAGE, L"Layer_Item", &pItem)))
+		return E_FAIL;
+	((CItem_DPPoint*)pItem)->Set_StateInfo(&_vec3(15, 0.3f, 10));
 
 
 	m_isFinish = true;
@@ -1352,6 +1363,12 @@ HRESULT CLoading::Ready_Component_Prototype_SceneFIELD()
 	// For.Component_Mesh_DPPoint
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_DPPoint", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/Item/", L"DP_Point.x"))))
 		return E_FAIL;
+	// For.Component_Mesh_ItemBullet
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_ItemBullet", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/Item/", L"DP_Bullet.x"))))
+		return E_FAIL;
+	// For.Component_Mesh_ItemTaco
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_ItemTaco", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/Item/", L"DP_Hp.x"))))
+		return E_FAIL;
 
 
 
@@ -1667,6 +1684,12 @@ HRESULT CLoading::Ready_Stage_Prototype_GameObject_SceneFIELD()
 
 	// For. Itme_DPPoint
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Item_DPPoint", CItem_DPPoint::Create(Get_Graphic_Device()))))
+		return E_FAIL;
+	// For. Itme_DPPoint
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Item_Bullet", CItem_Bullet::Create(Get_Graphic_Device()))))
+		return E_FAIL;
+	// For. Itme_DPPoint
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Item_Taco", CItem_Taco::Create(Get_Graphic_Device()))))
 		return E_FAIL;
 
 	// For.ConcentratedLine
