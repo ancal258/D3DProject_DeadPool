@@ -283,6 +283,18 @@
     <Filter Include="02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\02. Effect_Explosion">
       <UniqueIdentifier>{3870ee61-9731-4eef-b54c-f4c30df4dfb8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\00.For.Static\05.Item_Object">
+      <UniqueIdentifier>{766e83d6-c3e9-455c-909f-f67808a3bce2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\00.For.Static\05.Item_Object\Item_DPPoint">
+      <UniqueIdentifier>{1a1cc8a8-c25e-4735-8b5c-a4820154ee88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\00.For.Static\05.Item_Object\Item_Bullet">
+      <UniqueIdentifier>{84c0624a-ea54-488d-897e-936f8e251e90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\00.For.Static\05.Item_Object\Item_Taco">
+      <UniqueIdentifier>{85f78a0c-db2b-4218-afa0-9762d6b84c52}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -483,6 +495,12 @@
     <ClInclude Include="..\Headers\Effect_Explosion.h">
       <Filter>02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\02. Effect_Explosion</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\Item.h">
+      <Filter>02.GameObject\00.For.Static\05.Item_Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Item_DPPoint.h">
+      <Filter>02.GameObject\00.For.Static\05.Item_Object\Item_DPPoint</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -667,6 +685,12 @@
     </ClCompile>
     <ClCompile Include="..\Codes\Effect_Explosion.cpp">
       <Filter>02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\02. Effect_Explosion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Item.cpp">
+      <Filter>02.GameObject\00.For.Static\05.Item_Object</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Item_DPPoint.cpp">
+      <Filter>02.GameObject\00.For.Static\05.Item_Object\Item_DPPoint</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

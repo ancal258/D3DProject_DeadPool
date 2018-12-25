@@ -125,7 +125,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <PrecompiledHeader>Create</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -202,6 +202,8 @@
     <ClInclude Include="..\Headers\Effect_RectParticle.h" />
     <ClInclude Include="..\Headers\Effect_Trail.h" />
     <ClInclude Include="..\Headers\Event_Cube.h" />
+    <ClInclude Include="..\Headers\Item.h" />
+    <ClInclude Include="..\Headers\Item_DPPoint.h" />
     <ClInclude Include="..\Headers\Loading.h" />
     <ClInclude Include="..\Headers\MainApp.h" />
     <ClInclude Include="..\Headers\Minigun.h" />
@@ -267,6 +269,8 @@
     <ClCompile Include="..\Codes\Effect_RectParticle.cpp" />
     <ClCompile Include="..\Codes\Effect_Trail.cpp" />
     <ClCompile Include="..\Codes\Event_Cube.cpp" />
+    <ClCompile Include="..\Codes\Item.cpp" />
+    <ClCompile Include="..\Codes\Item_DPPoint.cpp" />
     <ClCompile Include="..\Codes\Loading.cpp" />
     <ClCompile Include="..\Codes\MainApp.cpp" />
     <ClCompile Include="..\Codes\Minigun.cpp" />

@@ -28,6 +28,8 @@
 #include "BikiniGirl.h"
 #include "Trigger_Cube.h"
 #include "Trigger_BackUI.h"
+// ITEM
+#include "Item_DPPoint.h"
 //Effect
 #include "Effect_Mesh.h"
 #include "Effect_RectParticle.h"
@@ -122,10 +124,10 @@ HRESULT CLoading::Loading_Stage_APT()
 	lstrcpy(m_szString, L"Layer_Camera...");
 	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Debug", L"Layer_Camera",0.25f)))
 		return E_FAIL;
-
+	lstrcpy(m_szString, L"Layer_Camera2...");
 	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Target", L"Layer_Camera", 0.25f)))
 		return E_FAIL;
-
+	lstrcpy(m_szString, L"Layer_Camera3...");
 	if (FAILED(Ready_Layer_Camera(L"GameObject_Camera_Cinematic", L"Layer_Camera",0.25f)))
 		return E_FAIL;
 	SetUp_CameraMove();
@@ -151,9 +153,7 @@ HRESULT CLoading::Loading_Stage_APT()
 	if (FAILED(Ready_Static_Layer_UI()))
 		return E_FAIL;
 
-	////TEST////
-	//if (FAILED(Ready_Effect()))
-	//	return E_FAIL;
+
 	if (FAILED(Load_Trigger_CubeAPT()))
 		return E_FAIL;
 
@@ -164,6 +164,7 @@ HRESULT CLoading::Loading_Stage_APT()
 	_vec3 vPos(47.3f, 1.f, 19.f);
 	((CTrigger_Cube*)pGameObject)->Set_StateInfo(&vPos);
 
+	////TEST////
 
 	////////////////
 
@@ -239,11 +240,30 @@ HRESULT CLoading::Loading_Stage_FIELD()
 	if (FAILED(Ready_Static_Layer_UI()))
 		return E_FAIL;
 
+
+	CGameObject* pItem = nullptr;
+
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Item_DPPoint", SCENE_STAGE, L"Layer_Item", &pItem)))
+		return E_FAIL;
+	((CItem_DPPoint*)pItem)->Set_StateInfo(&_vec3(10, 1.f, 5));
+
+
 	m_isFinish = true;
 	lstrcpy(m_szString, L"Loading Complete");
 
 	return NOERROR;
 }
+
+/*
+
+CGameObject* pItem = nullptr;
+if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Item_DPPoint", CItem_DPPoint::Create(Get_Graphic_Device()))))
+return E_FAIL;
+if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Item_DPPoint", SCENE_STAGE, L"Layer_Item",&pItem)))
+return E_FAIL;
+((CItem_DPPoint*)pItem)->Set_StateInfo(&_vec3(10,0,5));
+
+*/
 
 HRESULT CLoading::Loading_Stage_AIRPLANE()
 {
@@ -614,10 +634,10 @@ HRESULT CLoading::Ready_Effect()
 HRESULT CLoading::Layer_Effect_FIELD()
 {
 
-	CGameObject* pEffect;
-	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Parent_CloudBright", SCENE_STAGE, L"Layer_Effect", &pEffect)))
-		return E_FAIL;
-	((CParent_Effect*)pEffect)->Set_EffectInfo(0, 0, 0.01f, 7, 0, &_vec3(3, 3, 3), &_vec3(36.66f, 0, 3.69f), &_vec3(1, 0, 1), &_vec3(0, 1, 0), false, true, 1, 7, 0);
+	//CGameObject* pEffect;
+	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Parent_CloudBright", SCENE_STAGE, L"Layer_Effect", &pEffect)))
+	//	return E_FAIL;
+	//((CParent_Effect*)pEffect)->Set_EffectInfo(0, 0, 0.01f, 7, 0, &_vec3(3, 3, 3), &_vec3(36.66f, 0, 3.69f), &_vec3(1, 0, 1), &_vec3(0, 1, 0), false, true, 1, 7, 0);
 
 
 	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Parent_Explosion", SCENE_STAGE, L"Layer_Effect", &pEffect)))
@@ -1327,6 +1347,13 @@ HRESULT CLoading::Ready_Component_Prototype_SceneFIELD()
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_Trail", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/Effect/TrailCLR/sword_trail_clr.tga"))))
 		return E_FAIL;
 
+	/////////////////////////////////////////////
+	//For. Item
+	// For.Component_Mesh_DPPoint
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_DPPoint", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/Item/", L"DP_Point.x"))))
+		return E_FAIL;
+
+
 
 	Safe_Release(pComponent_Manager);
 
@@ -1636,6 +1663,10 @@ HRESULT CLoading::Ready_Stage_Prototype_GameObject_SceneFIELD()
 
 	// For. Trail
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Effect_Trail", CEffect_Trail::Create(Get_Graphic_Device()))))
+		return E_FAIL;
+
+	// For. Itme_DPPoint
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Item_DPPoint", CItem_DPPoint::Create(Get_Graphic_Device()))))
 		return E_FAIL;
 
 	// For.ConcentratedLine

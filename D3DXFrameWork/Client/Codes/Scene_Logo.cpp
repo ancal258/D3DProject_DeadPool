@@ -5,7 +5,7 @@
 #include "Scene_Loading.h"
 #include "Management.h"
 #include "Loading.h"
-
+#include "Input_Device.h"
 // UI
 #include "UI_Test.h"
 _USING(Client)
@@ -34,10 +34,23 @@ HRESULT CScene_Logo::Ready_Scene()
 
 _int CScene_Logo::Update_Scene(const _float & fTimeDelta)
 {
-	CInput_Device*	pInput_Device = Get_Input_Device();
+	CInput_Device*	pInput_Device = CInput_Device::GetInstance();
 
 	if (nullptr == pInput_Device)
 		return -1;
+
+	if (GetKeyState('L') & 0x8000)
+	{
+		CScene*		pNewScene = CScene_Loading::Create(Get_Graphic_Device(), SCENE_STAGE);
+		if (nullptr == pNewScene)
+			return -1;
+
+		if (FAILED(CManagement::GetInstance()->SetUp_CurrentScene(pNewScene)))
+			return -1;
+		
+		return 0;
+	}
+
 
 	if (pInput_Device->Get_DIKeyState(DIK_RETURN) & 0x80)
 	{
