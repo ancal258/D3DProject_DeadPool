@@ -15,6 +15,8 @@ _BEGIN(Client)
 class CBrawler abstract : public CGameObject
 {
 protected:
+	enum MOVE_TYPE{	TYPE_FRONT, TYPE_EDGE_L, TYPE_EDGE_R, TYPE_STOP, TYPE_END	};
+protected:
 	explicit CBrawler(LPDIRECT3DDEVICE9 pGraphic_Device);
 	explicit CBrawler(const CBrawler& rhs);
 	virtual ~CBrawler() = default;
@@ -73,6 +75,9 @@ protected: // For. Attack to Player
 	_bool			m_isAttack = false;
 	_float			m_fAttackAcc = 0.f;
 	_bool			m_isCompute = false;
+
+protected: // For. Airplane Stage Move
+	MOVE_TYPE		m_eType = TYPE_FRONT;
 
 protected: // For. StageNum
 	_uint		m_iStageNum = 0;

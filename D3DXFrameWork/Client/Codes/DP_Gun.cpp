@@ -3,8 +3,9 @@
 #include "Component_Manager.h"
 #include "Object_Manager.h"
 #include "Light_Manager.h"
+#include "Input_Device.h"
 #include "Player.h"
-#include "Effect_GunCap.h"
+#include "Effect_GunFlash.h"
 _USING(Client)
 
 CDP_Gun::CDP_Gun(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -49,16 +50,22 @@ _int CDP_Gun::Update_GameObject(const _float & fTimeDelta)
 	else
 		m_isActive = false;
 
-	if (true == (m_pPlayer->Get_IsButtonDown(7)))
+	if (CInput_Device::GetInstance()->Get_DIMouseState(CInput_Device::DIM_LBUTTON) & 0x8000)
 	{
-		CGameObject* pEffect;
+		if (false == m_isClick)
+		{
+			m_isClick = true;
 
-		if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Effect_GunCap", SCENE_STAGE, L"Layer_Effect", &pEffect)))
-			return -1;
-		((CEffect_GunCap*)pEffect)->Set_ParentMatrix(m_pTransformCom->Get_WorldMatrix());
+			CGameObject* pEffect;
+
+			if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Effect_GunFlash", SCENE_STAGE, L"Layer_Effect", &pEffect)))
+				return -1;
+			((CEffect_GunFlash*)pEffect)->Set_ParentMatrix(m_pTransformCom->Get_WorldMatrix());
+		}
 
 	}
-
+	else
+		m_isClick = false;
 
 	return _int();
 }

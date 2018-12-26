@@ -15,6 +15,8 @@ public:
 	const D3DLIGHT9* Get_LightInfo() const {
 		return &m_LightInfo; }
 	void Set_PointInfo(_uint eValue, const _vec3* vPosition);
+	void Set_IsRender(_bool isRender) {
+		m_isRender = isRender;	}
 public:
 	HRESULT Ready_Light(const D3DLIGHT9* pLightInfo);
 	void Render_Light(LPD3DXEFFECT pEffect);
@@ -23,6 +25,8 @@ private:
 	D3DLIGHT9				m_LightInfo;
 	LPDIRECT3DVERTEXBUFFER9	m_pVB = nullptr;
 	LPDIRECT3DINDEXBUFFER9	m_pIB = nullptr;
+
+	_bool					m_isRender = true;
 public:
 	static CLight* Create(LPDIRECT3DDEVICE9 pGraphic_Device, const D3DLIGHT9* pLightInfo);
 protected:

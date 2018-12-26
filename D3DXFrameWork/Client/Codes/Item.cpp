@@ -133,7 +133,7 @@ HRESULT CItem::Ready_Component()
 	m_pColliderCom = (CCollider*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Collider_Box");
 	if (FAILED(Add_Component(L"Com_Collider", m_pColliderCom)))
 		return E_FAIL;
-	m_pColliderCom->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(3, 3, 3), &_vec3(0, 0, 0), &_vec3(0, 5, 0));
+	m_pColliderCom->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(5, 5, 5), &_vec3(0, 0, 0), &_vec3(0, 5, 0));
 
 	Safe_Release(pComponent_Manager);
 

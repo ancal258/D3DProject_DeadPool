@@ -56,7 +56,8 @@ _int CEffect_GunCap::LastUpdate_GameObject(const _float & fTimeDelta)
 	if (nullptr == m_pRendererCom)
 		return -1;
 
-	m_pTransformCom->Set_ParentMatrix(*m_pParentMatrix);
+	if (m_pParentMatrix != nullptr)
+		m_pTransformCom->Set_ParentMatrix(*m_pParentMatrix);
 
 	m_pTransformCom->Update_Matrix();
 	if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_ALPHA, this)))
@@ -190,20 +191,6 @@ CGameObject * CEffect_GunCap::Clone_GameObject()
 	}
 
 	return pInstance;
-}
-
-HRESULT CEffect_GunCap::Update_HandMatrix()
-{
-	if (nullptr == m_pHandMatrix[0] ||
-		nullptr == m_pHandMatrix[1] ||
-		nullptr == m_pRootMatrix)
-		return E_FAIL;
-
-	m_CombinedHandMatrix[0] = *m_pHandMatrix[0] * *m_pTransformCom->Get_WorldMatrix();
-	m_CombinedHandMatrix[1] = *m_pHandMatrix[1] * *m_pTransformCom->Get_WorldMatrix();
-	m_CombinedRootMatrix = *m_pRootMatrix * *m_pTransformCom->Get_WorldMatrix();
-
-	return NOERROR;
 }
 
 void CEffect_GunCap::Free()

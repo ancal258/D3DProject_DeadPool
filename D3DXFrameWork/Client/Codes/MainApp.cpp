@@ -12,15 +12,7 @@
 #include "Camera_Cinematic.h"
 #include "Camera_Minigun.h"
 #include "Test.h"
-/*
-릴리즈빌드
-Item 3종 추가
-몬스터 AI 일부 수정
-스테이지3 폭발 이펙트, 총구
-검 트레일
-비행기씬 레이캐스트, 툴 객체에 isExplosion +- 처리 
-공격 슬로우모션 + 셸쉐이딩 순차적으로 바뀜
-*/
+
 
 _USING(Client)
 

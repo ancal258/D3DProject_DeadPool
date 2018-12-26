@@ -18,9 +18,6 @@ private:
 	explicit CEffect_GunCap(const CEffect_GunCap& rhs);
 	virtual ~CEffect_GunCap() = default;
 public:
-	const _matrix& Get_HandMatrix(_uint iSide) const {
-		return m_CombinedHandMatrix[iSide];
-	}
 
 	void Set_ParentMatrix(const _matrix* pMatrix) {
 		m_pParentMatrix = pMatrix;	}
@@ -37,18 +34,12 @@ private: // For. Component
 	CShader*			m_pShaderCom = nullptr;
 	CMesh_Static*	    m_pMeshCom = nullptr;
 
-	const _matrix*		m_pParentMatrix;
+	const _matrix*		m_pParentMatrix = nullptr;
 
 	_float				m_fTimeAcc = 0;
-private:
-	_matrix             m_CombinedHandMatrix[2];
-	const _matrix*      m_pHandMatrix[2] = { nullptr };
-	_matrix            m_CombinedRootMatrix;
-	const _matrix*      m_pRootMatrix = nullptr;
-	_matrix				m_RealMatrix;
+
 private:
 	virtual HRESULT Ready_Component();
-	HRESULT Update_HandMatrix();
 	HRESULT SetUp_ConstantTable(LPD3DXEFFECT pEffect);
 public:
 	static CEffect_GunCap* Create(LPDIRECT3DDEVICE9 pGraphic_Device);

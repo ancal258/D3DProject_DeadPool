@@ -223,7 +223,7 @@ technique Default_Device
 	}
 	pass ExplosionEffect_Rendering
 	{
-		cullmode = none;
+		cullmode = ccw;
 
 		AlphaBlendEnable = true;
 		SrcBlend = SrcAlpha;

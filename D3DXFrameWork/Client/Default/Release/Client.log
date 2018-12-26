@@ -1,8 +1,28 @@
-﻿  MainApp.cpp
+﻿  Brawler.cpp
+  Brawler01.cpp
+  Brawler02.cpp
+..\Codes\Brawler02.cpp(39): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Brawler_ElectricBaton.cpp
+  Brawler_Knife.cpp
+  Brawler_Manager.cpp
+  Brawler_TPose.cpp
+..\Codes\Brawler_TPose.cpp(39): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Loading.cpp
+D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Event_Cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Trigger_Cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Trigger_BackUI.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+d:\github\d3dproject_deadpool\d3dxframework\client\headers\Item.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+..\Codes\Loading.cpp(361): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(501): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(511): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(563): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(573): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(1699): warning C4244: '인수': 'const unsigned int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+..\Codes\Loading.cpp(1975): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   코드를 생성하고 있습니다.
   0 of 2074 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     315 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
-  Client.vcxproj -> C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Default\..\Bin\Client.exe
+  Client.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Default\..\Bin\Client.exe
   Client.vcxproj -> ..\Bin\Client.pdb (Full PDB)

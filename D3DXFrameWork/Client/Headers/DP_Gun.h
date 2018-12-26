@@ -39,6 +39,7 @@ private:
 private:
 	CPlayer*			m_pPlayer = nullptr;
 	_uint				m_iSide = 0; // 0 == ÁÂÃø , 1 == ¿ìÃø
+	_bool				m_isClick = false;
 private:
 	_matrix            m_CombinedHeadMatrix;
 private:

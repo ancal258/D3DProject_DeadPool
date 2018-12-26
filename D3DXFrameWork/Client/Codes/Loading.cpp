@@ -38,6 +38,7 @@
 #include "Effect_FireSpears.h"
 #include "Effect_MinigunCap.h"
 #include "Effect_GunCap.h"
+#include "Effect_GunFlash.h"
 #include "Effect_Trail.h"
 #include "EffectC.h"
 #include "Parent_Effect.h"
@@ -438,6 +439,19 @@ HRESULT CLoading::Ready_LightInfo_FIELD()
 {
 	D3DLIGHT9			LightInfo;
 	ZeroMemory(&LightInfo, sizeof(D3DLIGHT9));
+
+	// For. Gun
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.913f, 0.058f, 1.f);
+	//LightInfo.Diffuse = D3DXCOLOR(1.f,0, 1.f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 1.f, 0.f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.5f, 0.0f, 1.f);
+	LightInfo.Position = _vec3(0,0,0);
+	LightInfo.Range = 1.0f;
+
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
 
 	LightInfo.Type = D3DLIGHT_DIRECTIONAL;
 	//LightInfo.Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.f);
@@ -1394,11 +1408,19 @@ HRESULT CLoading::Ready_UI_SceneFIELD()
 
 
 
-	// For. MinigunCap
+	// For. GunCap
 	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(SCENE_STAGE, L"Component_Mesh_GunCap", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/Effect/Gun/", L"Gun_Cap.x"))))
 		return E_FAIL;
 	// For.Prototype_MinigunCap
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Effect_GunCap", CEffect_GunCap::Create(Get_Graphic_Device()))))
+		return E_FAIL;
+
+	// For. GunFlash
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(SCENE_STAGE, L"Component_Mesh_GunFlash", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/Effect/MiniGun/", L"Minigun_Flash.x"))))
+		return E_FAIL;
+	if (FAILED(CComponent_Manager::GetInstance()->Add_Component(SCENE_STAGE, L"Component_Mesh_GunFlash2", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/Effect/Gun/", L"Gun_Flash.x"))))
+		return E_FAIL;
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Effect_GunFlash", CEffect_GunFlash::Create(Get_Graphic_Device()))))
 		return E_FAIL;
 
 	////GameObject

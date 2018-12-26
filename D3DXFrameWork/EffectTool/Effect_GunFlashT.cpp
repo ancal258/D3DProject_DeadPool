@@ -38,6 +38,7 @@ _int CEffect_GunFlashT::Update_GameObject(const _float & fTimeDelta)
 {
 	m_fU += m_fSpeed_U * g_fTimeDelta;
 	m_fV += m_fSpeed_V * g_fTimeDelta;
+	m_pTransformCom->RotationZ(45, fTimeDelta);
 
 	m_pTransformCom->Update_Matrix();
 
@@ -72,7 +73,7 @@ void CEffect_GunFlashT::Render_GameObject()
 		return;
 
 	pEffect->Begin(nullptr, 0);
-	pEffect->BeginPass(2);
+	pEffect->BeginPass(4);
 
 	m_pMeshCom->Render_Mesh(pEffect);
 

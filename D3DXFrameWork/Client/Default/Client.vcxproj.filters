@@ -295,6 +295,9 @@
     <Filter Include="02.GameObject\00.For.Static\05.Item_Object\Item_Taco">
       <UniqueIdentifier>{85f78a0c-db2b-4218-afa0-9762d6b84c52}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh\Gun\Flash">
+      <UniqueIdentifier>{628458d5-02b8-4143-ab02-17f348a65cc2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -507,6 +510,9 @@
     <ClInclude Include="..\Headers\Item_Taco.h">
       <Filter>02.GameObject\00.For.Static\05.Item_Object\Item_Taco</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\Effect_GunFlash.h">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh\Gun\Flash</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -703,6 +709,9 @@
     </ClCompile>
     <ClCompile Include="..\Codes\Item_Taco.cpp">
       <Filter>02.GameObject\00.For.Static\05.Item_Object\Item_Taco</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Effect_GunFlash.cpp">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh\Gun\Flash</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

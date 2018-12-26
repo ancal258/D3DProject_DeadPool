@@ -286,16 +286,20 @@ _bool CQuadTree::LevelofDetail()
 {
 	_vec3		vCamPosition;
 
+	// 장치에 저장해둔 View행렬의 역행렬을 구해서 Camera의 World위치를 구한다.
 	_matrix		matView;
 	m_pGraphic_Device->GetTransform(D3DTS_VIEW, &matView);
 	D3DXMatrixInverse(&matView, nullptr, &matView);
 
 	memcpy(&vCamPosition, &matView.m[3][0], sizeof(_vec3));
 
+	// 카메라와 정점 사이의 거리를 구한다.
 	_float		fCamDistance = D3DXVec3Length(&(vCamPosition - m_pVerticesPos[m_iCenter]));
 
+	// 쿼드트리의 현재 Index 사각형의 Width를 구한다.
 	_float		fWidth = D3DXVec3Length(&(m_pVerticesPos[m_iCorner[CORNER_RT]] - m_pVerticesPos[m_iCorner[CORNER_LT]]));
 
+	// 일정 거리만큼 떨어져 있으면 세분화하지 않는다.
 	if (fCamDistance * 0.2f >= fWidth)
 		return true;
 

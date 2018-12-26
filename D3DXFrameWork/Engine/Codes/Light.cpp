@@ -68,6 +68,9 @@ HRESULT CLight::Ready_Light(const D3DLIGHT9 * pLightInfo)
 
 void CLight::Render_Light(LPD3DXEFFECT pEffect)
 {
+	if (false == m_isRender)
+		return;
+
 	_uint			iPassIdx = 0;
 
 	if (D3DLIGHT_DIRECTIONAL == m_LightInfo.Type)

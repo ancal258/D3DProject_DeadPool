@@ -348,6 +348,27 @@ _int CBrawler::LastUpdate_Stage_Field(const _float & fTimeDelta)
 
 _int CBrawler::Update_Stage_Airplane(const _float & fTimeDelta)
 {
+	if (m_eType == TYPE_FRONT)
+	{
+
+	}
+	else if (m_eType == TYPE_EDGE_L)
+	{
+
+	}
+	else if (m_eType == TYPE_EDGE_R)
+	{
+
+	}
+	else if (m_eType == TYPE_STOP)
+	{
+
+	}
+	else
+	{
+
+	}
+
 	return _int();
 }
 
