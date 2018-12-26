@@ -1,3 +1,58 @@
-﻿  Scene_Logo.cpp
-  Client.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Default\..\Bin\Client.exe
+﻿  Item.cpp
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\headers\item.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+  Event_Cube.cpp
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\headers\event_cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+  Effect_Trail.cpp
+  Effect_RectParticle.cpp
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\codes\effect_rectparticle.cpp(32): warning C4244: '=': 'int'에서 'Engine::_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Effect_MinigunCap.cpp
+  Effect_Mesh.cpp
+  Effect_GunCap.cpp
+  Effect_FireSpears.cpp
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\codes\effect_firespears.cpp(47): warning C4305: '인수': 'double'에서 'const Engine::_float'(으)로 잘립니다.
+  Effect_Explosion.cpp
+  Effect_CloudDark.cpp
+  Effect_CloudBright.cpp
+  EffectC.cpp
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\codes\effectc.cpp(29): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Effect.cpp
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\codes\effect.cpp(29): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Dog.cpp
+  DP_Sword.cpp
+  DP_Gun.cpp
+  ConcentratedLine.cpp
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\codes\concentratedline.cpp(179): warning C4244: '인수': 'const unsigned int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Camera_Target.cpp
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\codes\camera_target.cpp(50): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\codes\camera_target.cpp(51): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Camera_Minigun.cpp
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\codes\camera_minigun.cpp(67): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\codes\camera_minigun.cpp(68): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Camera_Debug.cpp
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\codes\camera_debug.cpp(51): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\codes\camera_debug.cpp(52): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Camera_Cinematic.cpp
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\codes\camera_cinematic.cpp(101): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\codes\camera_cinematic.cpp(102): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\codes\camera_cinematic.cpp(103): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Brawler_TPose.cpp
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\codes\brawler_tpose.cpp(39): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Brawler_Manager.cpp
+  Brawler_Knife.cpp
+  Brawler_ElectricBaton.cpp
+  Brawler02.cpp
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\codes\brawler02.cpp(39): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Brawler01.cpp
+  Brawler.cpp
+  BikiniGirl.cpp
+  Back_Logo.cpp
+  Back_Loading.cpp
+  Animator.cpp
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\codes\animator.cpp(139): warning C4305: '인수': 'double'에서 'const Engine::_float'(으)로 잘립니다.
+  Airplane.cpp
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\codes\airplane.cpp(49): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\codes\airplane.cpp(274): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\codes\airplane.cpp(275): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+c:\users\jk\desktop\d3dproject_deadpool\d3dxframework\client\codes\airplane.cpp(276): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Client.vcxproj -> C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Default\..\Bin\Client.exe
   Client.vcxproj -> ..\Bin\Client.pdb (Full PDB)
