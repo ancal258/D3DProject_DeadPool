@@ -1,4 +1,14 @@
-﻿  Brawler.cpp
+﻿  Airplane.cpp
+..\Codes\Airplane.cpp(49): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Airplane.cpp(274): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+..\Codes\Airplane.cpp(275): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+..\Codes\Airplane.cpp(276): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Animator.cpp
+..\Codes\Animator.cpp(139): warning C4305: '인수': 'double'에서 'const Engine::_float'(으)로 잘립니다.
+  Back_Loading.cpp
+  Back_Logo.cpp
+  BikiniGirl.cpp
+  Brawler.cpp
   Brawler01.cpp
   Brawler02.cpp
 ..\Codes\Brawler02.cpp(39): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
@@ -7,22 +17,109 @@
   Brawler_Manager.cpp
   Brawler_TPose.cpp
 ..\Codes\Brawler_TPose.cpp(39): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Camera_Debug.cpp
+..\Codes\Camera_Debug.cpp(51): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+..\Codes\Camera_Debug.cpp(52): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Camera_Minigun.cpp
+..\Codes\Camera_Minigun.cpp(67): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+..\Codes\Camera_Minigun.cpp(68): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Camera_Target.cpp
+..\Codes\Camera_Target.cpp(50): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+..\Codes\Camera_Target.cpp(51): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  ConcentratedLine.cpp
+..\Codes\ConcentratedLine.cpp(179): warning C4244: '인수': 'const unsigned int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Dog.cpp
+  DP_Gun.cpp
+D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Effect_GunFlash.h(43): warning C4244: '초기화 중': 'float'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  DP_Sword.cpp
+  Effect.cpp
+..\Codes\Effect.cpp(29): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  컴파일하고 있습니다...
+  EffectC.cpp
+..\Codes\EffectC.cpp(30): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Effect_CloudBright.cpp
+  Effect_CloudDark.cpp
+  Effect_Explosion.cpp
+  Effect_FireSpears.cpp
+..\Codes\Effect_FireSpears.cpp(47): warning C4305: '인수': 'double'에서 'const Engine::_float'(으)로 잘립니다.
+  Effect_GunCap.cpp
+  Effect_GunFlash.cpp
+D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Effect_GunFlash.h(43): warning C4244: '초기화 중': 'float'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+..\Codes\Effect_GunFlash.cpp(38): warning C4244: '인수': 'int'에서 'const Engine::_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Effect_Mesh.cpp
+  Effect_MinigunCap.cpp
+  Effect_RectParticle.cpp
+..\Codes\Effect_RectParticle.cpp(32): warning C4244: '=': 'int'에서 'Engine::_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Effect_Trail.cpp
+  Event_Cube.cpp
+D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Event_Cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+  Item.cpp
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\../Headers/Item.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+  Item_Bullet.cpp
+d:\github\d3dproject_deadpool\d3dxframework\client\headers\Item.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+  Item_DPPoint.cpp
+d:\github\d3dproject_deadpool\d3dxframework\client\headers\Item.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+  Item_Taco.cpp
+d:\github\d3dproject_deadpool\d3dxframework\client\headers\Item.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
   Loading.cpp
 D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Event_Cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
 D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Trigger_Cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
 D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Trigger_BackUI.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
 d:\github\d3dproject_deadpool\d3dxframework\client\headers\Item.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
-..\Codes\Loading.cpp(361): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(501): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(511): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(563): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(573): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(1699): warning C4244: '인수': 'const unsigned int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-..\Codes\Loading.cpp(1975): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Effect_GunFlash.h(43): warning C4244: '초기화 중': 'float'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+..\Codes\Loading.cpp(362): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(515): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(525): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(577): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(587): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(1721): warning C4244: '인수': 'const unsigned int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+..\Codes\Loading.cpp(1997): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  MainApp.cpp
+  Minigun.cpp
+  Parent_Effect.cpp
+..\Codes\Parent_Effect.cpp(63): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+..\Codes\Parent_Effect.cpp(70): warning C4244: '=': 'int'에서 'Engine::_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+..\Codes\Parent_Effect.cpp(71): warning C4244: '=': 'int'에서 'Engine::_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  컴파일하고 있습니다...
+  Player.cpp
+..\Codes\Player.cpp(732): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  Prop.cpp
+  Scene_AirPlane.cpp
+  Scene_Field.cpp
+  Scene_Intro.cpp
+  Scene_Loading.cpp
+  Scene_Logo.cpp
+  Scene_Stage.cpp
+  SkyDom.cpp
+  StaticBackUI.cpp
+..\Codes\StaticBackUI.cpp(169): warning C4244: '인수': 'const unsigned int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  StaticUI.cpp
+..\Codes\StaticUI.cpp(213): warning C4244: '인수': 'const unsigned int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Static_Airplane.cpp
+  Static_Object.cpp
+  TalkBox.cpp
+..\Codes\TalkBox.cpp(26): warning C4244: '=': 'Engine::_uint'에서 'Engine::_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+..\Codes\TalkBox.cpp(170): warning C4244: '인수': 'const unsigned int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Terrain.cpp
+  Test.cpp
+  Trigger_BackUI.cpp
+D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Trigger_BackUI.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+..\Codes\Trigger_BackUI.cpp(31): warning C4244: '인수': 'const unsigned int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Trigger_Cube.cpp
+D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Trigger_Cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+..\Codes\Trigger_Cube.cpp(151): warning C4805: '==': 연산에 'bool' 형식과 'BOOL' 형식을 함께 사용하는 것은 안전하지 않습니다.
+  UI_CrossHair.cpp
+..\Codes\UI_CrossHair.cpp(160): warning C4244: '인수': 'const unsigned int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  UI_HPBar.cpp
+  컴파일하고 있습니다...
+  UI_HpFill.cpp
+..\Codes\UI_HpFill.cpp(180): warning C4244: '인수': 'const unsigned int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  UI_Test.cpp
+..\Codes\UI_Test.cpp(138): warning C4244: '인수': 'const unsigned int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   코드를 생성하고 있습니다.
-  0 of 2074 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    315 functions had inline decision re-evaluated but remain unchanged
+  78 of 2089 functions ( 3.7%) were compiled, the rest were copied from previous compilation.
+    16 functions were new in current compilation
+    276 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
   Client.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Default\..\Bin\Client.exe
   Client.vcxproj -> ..\Bin\Client.pdb (Full PDB)

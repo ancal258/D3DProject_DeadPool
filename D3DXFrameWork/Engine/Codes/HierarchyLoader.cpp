@@ -51,7 +51,6 @@ STDMETHODIMP CHierarchyLoader::CreateMeshContainer(LPCSTR Name, CONST D3DXMESHDA
 		D3DDECL_END() // this macro is needed as the last item!
 	};
 
-
 	D3DXMESHCONTAINER_DERIVED* pNewMeshContainer_Derived = new D3DXMESHCONTAINER_DERIVED;
 	ZeroMemory(pNewMeshContainer_Derived, sizeof(D3DXMESHCONTAINER_DERIVED));
 	//*ppNewMeshContainer = pNewMeshContainer_Derived;
@@ -84,11 +83,12 @@ STDMETHODIMP CHierarchyLoader::CreateMeshContainer(LPCSTR Name, CONST D3DXMESHDA
 	//	if (FAILED(pTempMesh->CloneMeshFVF(pTempMesh->GetOptions(), dwFVF , m_pGraphic_Device, &pNewMeshContainer_Derived->MeshData.pMesh)))
 	//		return E_FAIL;
 	//}
+
 	if (FAILED(pTempMesh->CloneMesh(pTempMesh->GetOptions(), Element, m_pGraphic_Device, &pNewMeshContainer_Derived->MeshData.pMesh)))
 		return E_FAIL;
-	if (FAILED(D3DXComputeNormals(pNewMeshContainer_Derived->MeshData.pMesh, pNewMeshContainer_Derived->pAdjacency)))
-		return E_FAIL;
-	D3DXComputeTangent(pNewMeshContainer_Derived->MeshData.pMesh, 0, 1, D3DX_DEFAULT, TRUE, NULL);
+
+	D3DXComputeNormals(pNewMeshContainer_Derived->MeshData.pMesh, pNewMeshContainer_Derived->pAdjacency);
+	D3DXComputeTangent(pNewMeshContainer_Derived->MeshData.pMesh, 0, 0, 0, 0, pNewMeshContainer_Derived->pAdjacency);
 
 	Safe_Release(pTempMesh);
 	
@@ -157,7 +157,7 @@ STDMETHODIMP CHierarchyLoader::CreateMeshContainer(LPCSTR Name, CONST D3DXMESHDA
 		return E_FAIL;
 	
 	pNewMeshContainer_Derived->pSkinInfo->SetDeclaration(Element);
-	D3DXComputeTangent(pNewMeshContainer_Derived->pMesh_Original, 0, 1, D3DX_DEFAULT, TRUE, NULL);
+
 	*ppNewMeshContainer = pNewMeshContainer_Derived;
 
 

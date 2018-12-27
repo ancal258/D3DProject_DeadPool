@@ -2,6 +2,7 @@
 #include "../Headers/EffectC.h"
 #include "Component_Manager.h"
 #include "Parent_Effect.h"
+#include "Target_Manager.h"
 
 
 CEffectC::CEffectC(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -172,6 +173,7 @@ HRESULT CEffectC::SetUp_ConstantTable(LPD3DXEFFECT pEffect)
 	pEffect->SetMatrix("g_matProj", &matProj);
 	pEffect->SetFloat("g_fAlpha", m_fAlpha);
 	m_pTextureCom->SetUp_OnShader(pEffect, "g_DiffuseTexture", _uint(m_fFrame));
+	CTarget_Manager::GetInstance()->SetUp_OnShader(pEffect, "g_DepthTexture", L"Target_Depth");
 
 
 

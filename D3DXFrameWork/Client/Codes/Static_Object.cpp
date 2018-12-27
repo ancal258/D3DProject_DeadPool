@@ -4,6 +4,7 @@
 #include "Object_Manager.h"
 #include "Light_Manager.h"
 #include "Player.h"
+#include "Airplane.h"
 
 #include "Camera_Target.h"
 #include "Parent_Effect.h"
@@ -57,6 +58,8 @@ HRESULT CStatic_Object::Ready_GameObject()
 		return E_FAIL;
 	//m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(20, 10, 20));
 	//m_pTransformCom->Scaling(_vec3(5, 5, 5));
+	m_pAirplane = CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Airplane", 0);
+
 	m_fRadius = 550.f;
 	return NOERROR;
 }
@@ -84,18 +87,46 @@ _int CStatic_Object::LastUpdate_GameObject(const _float & fTimeDelta)
 		return -1;
 
 
-	if (false == m_isOffCulling)
+	if (nullptr != m_pAirplane)
 	{
-		if (false == pCamera->Culling_ToFrustum(m_pTransformCom, nullptr, m_fRadius))
+		_vec3 vAirplanePos = static_cast<_vec3>((dynamic_cast<const CAirplane*>(m_pAirplane)->Get_WorldMatrix()->m[3]));
+		_vec3 vMyPos = *m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION);
+		//_vec3 vBrawlerPos = static_cast<_vec3>(m_pTransformCom->Get_WorldMatrix()->m[3]);
+		_vec3 vDir = vAirplanePos - vMyPos;
+		_float fLength = D3DXVec3Length(&vDir);
+
+
+		if (true == m_isOffCulling)
 		{
+
 			if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
 				return -1;
+		}
+		else
+		{
+			if (fLength < 110)
+			{
+
+				if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
+					return -1;
+			}
 		}
 	}
 	else
 	{
-		if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
-			return -1;
+		if (false == m_isOffCulling)
+		{
+			if (false == pCamera->Culling_ToFrustum(m_pTransformCom, nullptr, m_fRadius))
+			{
+				if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
+					return -1;
+			}
+		}
+		else
+		{
+			if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
+				return -1;
+		}
 	}
 
 	if (2 == m_iStage)

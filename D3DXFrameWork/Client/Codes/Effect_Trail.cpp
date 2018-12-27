@@ -3,7 +3,7 @@
 #include "Component_Manager.h"
 #include "Object_Manager.h"
 #include "DP_Sword.h"
-
+#include "Input_Device.h"
 _USING(Client)
 
 CEffect_Trail::CEffect_Trail(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -99,11 +99,16 @@ _int CEffect_Trail::LastUpdate_GameObject(const _float & fTimeDelta)
 		return -1;
 
 	m_fTimeAcc += fTimeDelta;
-
-	if (m_fTimeAcc >= 0.01f)
-	{
-		m_fTimeAcc = 0.f;
+	if(false == CInput_Device::GetInstance()->Get_SlowMotion())
 		m_pBufferCom->Add_VertexBuffer(m_pSword->Get_BeginPoint(), m_pSword->Get_EndPoint());
+	else
+	{
+		if (m_fTimeAcc >= 0.01f)
+		{
+			m_pBufferCom->Add_VertexBuffer(m_pSword->Get_BeginPoint(), m_pSword->Get_EndPoint());
+
+			m_fTimeAcc = 0.f;
+		}
 	}
 	//cout << "Sword : " << m_pSword << "|| Buffer : " << m_pBufferCom <<endl;
 

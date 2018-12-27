@@ -196,7 +196,7 @@ PS_OUT PS_MAIN(PS_IN In)
 
 	vector		vDiffuse = tex2D(DiffuseSampler, In.vTexUV);
 	float3		vNormalTex = tex2D(NormalSampler, In.vTexUV);
-	vNormalTex = float3((vNormalTex.xyz - 0.5) * 2.f);
+	vNormalTex = (vNormalTex.xyz - 0.5f) * 2.f;
 	float3x3 matWorld;
 	matWorld[0] = In.vRight;
 	matWorld[1] = In.vUp;
@@ -205,7 +205,7 @@ PS_OUT PS_MAIN(PS_IN In)
 
 	Out.vDiffuse = vDiffuse;
 	//Out.vNormal = vector(In.vNormal.xyz * 0.5f + 0.5f, 0.f);
-	Out.vNormal = vector((vRealNormal.xyz + 1) * 0.5f,0);
+	Out.vNormal = vector((vRealNormal.xyz * 0.5f) + 0.5f, 0);
 	//Out.vDiffuse.gb = Out.vDiffuse.gb * (1.3 - g_isCol);
 
 	Out.vDepth = vector(In.vProjPos.z / In.vProjPos.w, In.vProjPos.w / 500.0f, 0.f, 0.f);

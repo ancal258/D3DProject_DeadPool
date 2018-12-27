@@ -20,7 +20,7 @@ HRESULT CBuffer_Trail::Ready_TrailBuffer()
 {
 	// For.Vertex Buffer
 	m_iStride = sizeof(VTXTEX);
-	m_iNumVertices = 8;
+	m_iNumVertices = 16;
 	m_dwVtxFVF = D3DFVF_XYZ | D3DFVF_TEX1;
 
 	// For. Vector
@@ -33,11 +33,19 @@ HRESULT CBuffer_Trail::Ready_TrailBuffer()
 	m_vecVertex.push_back(_vec3(-5, -5, 0.f));
 	m_vecVertex.push_back(_vec3(5, 5, 0.f));
 	m_vecVertex.push_back(_vec3(5, -5, 0.f));
+	m_vecVertex.push_back(_vec3(-5, 5, 0.f));
+	m_vecVertex.push_back(_vec3(-5, -5, 0.f));
+	m_vecVertex.push_back(_vec3(5, 5, 0.f));
+	m_vecVertex.push_back(_vec3(5, -5, 0.f));
+	m_vecVertex.push_back(_vec3(-5, 5, 0.f));
+	m_vecVertex.push_back(_vec3(-5, -5, 0.f));
+	m_vecVertex.push_back(_vec3(5, 5, 0.f));
+	m_vecVertex.push_back(_vec3(5, -5, 0.f));
 
 
 	// For.Index Buffer
 	m_iPolygonSize = sizeof(POLYGON16);
-	m_iNumPolygons = 6;
+	m_iNumPolygons = 14;
 	m_IndicesFormat = D3DFMT_INDEX16;
 
 	LPDIRECT3DDEVICE9	pGraphic_Device = Get_Graphic_Device();
@@ -65,22 +73,46 @@ HRESULT CBuffer_Trail::Ready_TrailBuffer()
 	pVertices[1].vTexUV = _vec2(0.f, 1.f);
 
 	pVertices[2].vPosition = m_vecVertex[2];
-	pVertices[2].vTexUV = _vec2(0.33f, 0.f);
+	pVertices[2].vTexUV = _vec2(0.166f, 0.f);
 
 	pVertices[3].vPosition = m_vecVertex[3];
-	pVertices[3].vTexUV = _vec2(0.33f, 1.f);
+	pVertices[3].vTexUV = _vec2(0.166f, 1.f);
 
 	pVertices[4].vPosition = m_vecVertex[4];
-	pVertices[4].vTexUV = _vec2(0.66f, 0.f);
+	pVertices[4].vTexUV = _vec2(0.332, 0.f);
 
 	pVertices[5].vPosition = m_vecVertex[5];
-	pVertices[5].vTexUV = _vec2(0.66f, 1.f);
+	pVertices[5].vTexUV = _vec2(0.332, 1.f);
 
 	pVertices[6].vPosition = m_vecVertex[6];
-	pVertices[6].vTexUV = _vec2(1.0f, 0.f);
+	pVertices[6].vTexUV = _vec2(0.498, 0.f);
 
 	pVertices[7].vPosition = m_vecVertex[7];
-	pVertices[7].vTexUV = _vec2(1.0f, 1.f);
+	pVertices[7].vTexUV = _vec2(0.498, 1.f);
+
+	pVertices[8].vPosition = m_vecVertex[8];
+	pVertices[8].vTexUV = _vec2(0.664, 0.f);
+
+	pVertices[9].vPosition = m_vecVertex[9];
+	pVertices[9].vTexUV = _vec2(0.664, 1.f);
+
+	pVertices[10].vPosition = m_vecVertex[10];
+	pVertices[10].vTexUV = _vec2(0.83, 0.f);
+
+	pVertices[11].vPosition = m_vecVertex[11];
+	pVertices[11].vTexUV = _vec2(0.83, 1.f);
+
+	pVertices[12].vPosition = m_vecVertex[12];
+	pVertices[12].vTexUV = _vec2(0.996, 0.f);
+
+	pVertices[13].vPosition = m_vecVertex[13];
+	pVertices[13].vTexUV = _vec2(0.996, 1.f);
+
+	pVertices[14].vPosition = m_vecVertex[14];
+	pVertices[14].vTexUV = _vec2(1.0f, 0.f);
+
+	pVertices[15].vPosition = m_vecVertex[15];
+	pVertices[15].vTexUV = _vec2(1.0f, 1.f);
 
 	m_pVB_Trail->Unlock();
 
@@ -112,6 +144,38 @@ HRESULT CBuffer_Trail::Ready_TrailBuffer()
 	pIndices[5]._2 = 5;
 	pIndices[5]._3 = 7;
 
+	pIndices[6]._1 = 8;
+	pIndices[6]._2 = 6;
+	pIndices[6]._3 = 7;
+
+	pIndices[7]._1 = 8;
+	pIndices[7]._2 = 7;
+	pIndices[7]._3 = 9;
+
+	pIndices[8]._1 = 10;
+	pIndices[8]._2 = 8;
+	pIndices[8]._3 = 9;
+
+	pIndices[9]._1 = 10;
+	pIndices[9]._2 = 9;
+	pIndices[9]._3 = 11;
+
+	pIndices[10]._1 = 12;
+	pIndices[10]._2 = 10;
+	pIndices[10]._3 = 11;
+
+	pIndices[11]._1 = 12;
+	pIndices[11]._2 = 11;
+	pIndices[11]._3 = 13;
+
+	pIndices[12]._1 = 14;
+	pIndices[12]._2 = 12;
+	pIndices[12]._3 = 13;
+
+	pIndices[13]._1 = 14;
+	pIndices[13]._2 = 13;
+	pIndices[13]._3 = 15;
+
 	m_pIB_Trail->Unlock();
 
 	return NOERROR;
@@ -119,7 +183,7 @@ HRESULT CBuffer_Trail::Ready_TrailBuffer()
 
 HRESULT CBuffer_Trail::Add_VertexBuffer(_vec3 vVertexBegin, _vec3 vVertexEnd)
 {
-	if (m_vecVertex.size() == 8)
+	if (m_vecVertex.size() == 16)
 	{
 		m_vecVertex.erase(m_vecVertex.begin());
 		m_vecVertex.erase(m_vecVertex.begin());
@@ -139,22 +203,46 @@ HRESULT CBuffer_Trail::Add_VertexBuffer(_vec3 vVertexBegin, _vec3 vVertexEnd)
 	pVertices[1].vTexUV = _vec2(0.f, 1.f);
 
 	pVertices[2].vPosition = m_vecVertex[2];
-	pVertices[2].vTexUV = _vec2(0.33f, 0.f);
+	pVertices[2].vTexUV = _vec2(0.166f, 0.f);
 
 	pVertices[3].vPosition = m_vecVertex[3];
-	pVertices[3].vTexUV = _vec2(0.33f, 1.f);
+	pVertices[3].vTexUV = _vec2(0.166f, 1.f);
 
 	pVertices[4].vPosition = m_vecVertex[4];
-	pVertices[4].vTexUV = _vec2(0.66f, 0.f);
+	pVertices[4].vTexUV = _vec2(0.332, 0.f);
 
 	pVertices[5].vPosition = m_vecVertex[5];
-	pVertices[5].vTexUV = _vec2(0.66f, 1.f);
+	pVertices[5].vTexUV = _vec2(0.332, 1.f);
 
 	pVertices[6].vPosition = m_vecVertex[6];
-	pVertices[6].vTexUV = _vec2(1.0f, 0.f);
+	pVertices[6].vTexUV = _vec2(0.498, 0.f);
 
 	pVertices[7].vPosition = m_vecVertex[7];
-	pVertices[7].vTexUV = _vec2(1.0f, 1.f);
+	pVertices[7].vTexUV = _vec2(0.498, 1.f);
+
+	pVertices[8].vPosition = m_vecVertex[8];
+	pVertices[8].vTexUV = _vec2(0.664, 0.f);
+
+	pVertices[9].vPosition = m_vecVertex[9];
+	pVertices[9].vTexUV = _vec2(0.664, 1.f);
+
+	pVertices[10].vPosition = m_vecVertex[10];
+	pVertices[10].vTexUV = _vec2(0.83, 0.f);
+
+	pVertices[11].vPosition = m_vecVertex[11];
+	pVertices[11].vTexUV = _vec2(0.83, 1.f);
+
+	pVertices[12].vPosition = m_vecVertex[12];
+	pVertices[12].vTexUV = _vec2(0.996, 0.f);
+
+	pVertices[13].vPosition = m_vecVertex[13];
+	pVertices[13].vTexUV = _vec2(0.996, 1.f);
+
+	pVertices[14].vPosition = m_vecVertex[14];
+	pVertices[14].vTexUV = _vec2(1.0f, 0.f);
+
+	pVertices[15].vPosition = m_vecVertex[15];
+	pVertices[15].vTexUV = _vec2(1.0f, 1.f);
 
 	m_pVB_Trail->Unlock();
 

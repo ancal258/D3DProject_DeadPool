@@ -32,10 +32,23 @@ CMesh_Static::CMesh_Static(const CMesh_Static & rhs)
 		{ 0, 32, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TANGENT, 0 },
 		D3DDECL_END() // this macro is needed as the last item!
 	};
-	//D3DXComputeTangent(m_pMesh,)
-	//
+	
 	rhs.m_pMesh->CloneMesh(rhs.m_pMesh->GetOptions(), Element, Get_Graphic_Device(), &m_pMesh);
-	D3DXComputeTangent(m_pMesh, 0, 1, D3DX_DEFAULT, TRUE, NULL);
+
+	LPDWORD pAdjacency = new DWORD[m_pMesh->GetNumFaces() * 3];
+
+	m_pMesh->GenerateAdjacency(0.0001f, pAdjacency);
+	D3DXComputeNormals(m_pMesh, pAdjacency);
+	D3DXComputeTangent(m_pMesh, 0, 0, 0, 0, pAdjacency);
+
+	//D3DXComputeTangentFrameEx(m_pMesh,
+	//	D3DDECLUSAGE_POSITION, 0,
+	//	D3DDECLUSAGE_NORMAL, 0,
+	//	D3DDECLUSAGE_TEXCOORD, 0,
+	//	D3DDECLUSAGE_TANGENT, 0,
+	//	D3DXTANGENT_GENERATE_IN_PLACE,
+	//	pAdjacency, 0.01f, 0.25f, 0.01f,
+	//	NULL, NULL);
 
 
 	m_ppTextures = new LPDIRECT3DTEXTURE9[m_dwNumSubset];

@@ -36,7 +36,6 @@ private:
 	CMesh_Static*		m_pMeshCom = nullptr;	
 	CShader*			m_pShaderCom = nullptr;
 	CCollider*			m_pColliderCom = nullptr;
-
 	const _tchar*		m_pComponent_Tag = nullptr;
 	// col
 	_bool				m_isCol = false;
@@ -44,6 +43,8 @@ private:
 	_bool				m_isExplosion = false;
 	_float				m_fRadius = 0;
 	_uint				m_iStage = 0;
+private:
+	const CGameObject*	m_pAirplane = nullptr;
 
 private:
 	LPD3DXMESH				m_pColliderMesh = nullptr;
