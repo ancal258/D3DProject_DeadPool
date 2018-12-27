@@ -9,7 +9,7 @@ CMesh_Static::CMesh_Static(LPDIRECT3DDEVICE9 pGraphic_Device)
 
 CMesh_Static::CMesh_Static(const CMesh_Static & rhs)
 	: CComponent(rhs)
-	, m_pMesh(rhs.m_pMesh)
+	//, m_pMesh(rhs.m_pMesh)
 	, m_pAdjacency(rhs.m_pAdjacency)
 	, m_pMaterials(rhs.m_pMaterials)
 	, m_dwNumSubset(rhs.m_dwNumSubset)
@@ -19,21 +19,48 @@ CMesh_Static::CMesh_Static(const CMesh_Static & rhs)
 {
 	m_pAdjacency->AddRef();
 	m_pMaterials->AddRef();
-	m_pMesh->AddRef();
+	//m_pMesh->AddRef();
+
+	// D3DVERTEXELEMENT9 : 정점의 FVF정보 하나를 담기위한 구조체.
+	//D3DVERTEXELEMENT9			Element[MAX_FVF_DECL_SIZE];
+	//ZeroMemory(&Element, sizeof(D3DVERTEXELEMENT9) * MAX_FVF_DECL_SIZE);
+	D3DVERTEXELEMENT9 Element[] =
+	{
+		{ 0, 0, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+		{ 0, 12, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL, 0 },
+		{ 0, 24, D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
+		{ 0, 32, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TANGENT, 0 },
+		D3DDECL_END() // this macro is needed as the last item!
+	};
+	//D3DXComputeTangent(m_pMesh,)
+	//
+	rhs.m_pMesh->CloneMesh(rhs.m_pMesh->GetOptions(), Element, Get_Graphic_Device(), &m_pMesh);
+	D3DXComputeTangent(m_pMesh, 0, 1, D3DX_DEFAULT, TRUE, NULL);
+
 
 	m_ppTextures = new LPDIRECT3DTEXTURE9[m_dwNumSubset];
 	memcpy(m_ppTextures, rhs.m_ppTextures, sizeof(LPDIRECT3DTEXTURE9) * m_dwNumSubset);
-
 	for (size_t i = 0; i < m_dwNumSubset; ++i)
 		m_ppTextures[i]->AddRef();
 
+	if (nullptr != rhs.m_ppTexturesNorm)
+	{
+		m_ppTexturesNorm = new LPDIRECT3DTEXTURE9[m_dwNumSubset];
+		memcpy(m_ppTexturesNorm, rhs.m_ppTexturesNorm, sizeof(LPDIRECT3DTEXTURE9) * m_dwNumSubset);
+
+		for (size_t i = 0; i < m_dwNumSubset; ++i)
+		{
+			if(nullptr != m_ppTexturesNorm[i])
+				m_ppTexturesNorm[i]->AddRef();
+		}
+	}
 }
 
 
 HRESULT CMesh_Static::Ready_Mesh(const _tchar * pFilePath, const _tchar * pFileName)
 {
 	_tchar			szFullPath[MAX_PATH] = L"";
-
+	m_pFilePath = pFilePath;
 	lstrcpy(szFullPath, pFilePath);
 	lstrcat(szFullPath, pFileName);
 
@@ -52,7 +79,9 @@ HRESULT CMesh_Static::Ready_Mesh(const _tchar * pFilePath, const _tchar * pFileN
 
 	m_ppTextures = new LPDIRECT3DTEXTURE9[m_dwNumSubset];
 	ZeroMemory(m_ppTextures, sizeof(LPDIRECT3DTEXTURE9) * m_dwNumSubset);
-
+	
+	m_ppTexturesNorm = new LPDIRECT3DTEXTURE9[m_dwNumSubset];
+	ZeroMemory(m_ppTexturesNorm, sizeof(LPDIRECT3DTEXTURE9) * m_dwNumSubset);
 	// 받아온 텍스쳐 이름으로 실제 사용할 수 있는 텍스쳐정보를 생성한다.
 	for (size_t i = 0; i < m_dwNumSubset; ++i)
 	{
@@ -66,8 +95,14 @@ HRESULT CMesh_Static::Ready_Mesh(const _tchar * pFilePath, const _tchar * pFileN
 		lstrcpy(szFullPath, pFilePath);
 		lstrcat(szFullPath, szFileName);
 
-		if (FAILED(D3DXCreateTextureFromFile(Get_Graphic_Device(), szFullPath, &m_ppTextures[i])))
-			return E_FAIL;
+		Load_Texture(szFileName, L"X", &m_ppTextures[i]);
+		Load_Texture(szFileName, L"Y", &m_ppTexturesNorm[i]);
+
+		//if (FAILED(D3DXCreateTextureFromFile(Get_Graphic_Device(), szFullPath, &m_ppTextures[i])))
+		//	return E_FAIL;
+
+		//if (FAILED(D3DXCreateTextureFromFile(Get_Graphic_Device(), szFullPath, &m_ppTexturesNorm[i])))
+		//	return E_FAIL;
 	}
 
 	void*		pVertices = nullptr;
@@ -84,6 +119,11 @@ HRESULT CMesh_Static::Ready_Mesh(const _tchar * pFilePath, const _tchar * pFileN
 	return NOERROR;
 }
 
+HRESULT CMesh_Static::Clone_Mesh()
+{
+	return NOERROR;
+}
+
 HRESULT CMesh_Static::Set_Texture_OnShader(LPD3DXEFFECT pEffect, const char * pConstantName, const _ulong & iSubset)
 {
 	if (nullptr == pEffect ||
@@ -94,6 +134,20 @@ HRESULT CMesh_Static::Set_Texture_OnShader(LPD3DXEFFECT pEffect, const char * pC
 		return E_FAIL;
 
 	pEffect->SetTexture(pConstantName, m_ppTextures[iSubset]);
+
+	return NOERROR;
+}
+
+HRESULT CMesh_Static::Set_TextureNorm_OnShader(LPD3DXEFFECT pEffect, const char * pConstantName, const _ulong & iSubset)
+{
+	if (nullptr == pEffect ||
+		nullptr == m_ppTextures)
+		return E_FAIL;
+
+	if (m_dwNumSubset <= iSubset)
+		return E_FAIL;
+
+	pEffect->SetTexture(pConstantName, m_ppTexturesNorm[iSubset]);
 
 	return NOERROR;
 }
@@ -163,6 +217,9 @@ void CMesh_Static::Render_Mesh(LPD3DXEFFECT pEffect)
 	{
 		pEffect->SetTexture("g_DiffuseTexture", m_ppTextures[i]);
 
+		if(nullptr != m_ppTexturesNorm[i])
+			pEffect->SetTexture("g_NormalTexture", m_ppTexturesNorm[i]);
+
 		pEffect->CommitChanges();
 
 		m_pMesh->DrawSubset(i);
@@ -185,6 +242,41 @@ HRESULT CMesh_Static::Picking_ToMesh(const _vec3 * pRayPos, const _vec3 * pRayDi
 	return NOERROR;
 }
 
+HRESULT CMesh_Static::Load_Texture(const _tchar * pFileName, const _tchar * pTextureKey, LPDIRECT3DTEXTURE9 * ppTexture)
+{
+	_tchar			szFullPath[MAX_PATH] = L"";
+	ZeroMemory(szFullPath, sizeof(_tchar) * MAX_PATH);
+
+	_tchar			szFileName[MAX_PATH] = L"";
+	lstrcpy(szFileName, pFileName);
+
+	_int iLength = lstrlen(szFileName);
+
+	for (_int i = 0; i < iLength + 1; i++)
+	{
+		if (szFileName[i] == L'.')
+		{
+			for (_int j = i; j >= 0; --j)
+			{
+				if (szFileName[j] == 'X')
+				{
+					szFileName[j] = *pTextureKey;
+
+					break;
+				}
+			}
+			break;
+		}
+	}
+
+	lstrcpy(szFullPath, m_pFilePath);
+	lstrcat(szFullPath, szFileName);
+
+	D3DXCreateTextureFromFile(Get_Graphic_Device(), szFullPath, ppTexture);
+
+	return NOERROR;
+}
+
 CMesh_Static * CMesh_Static::Create(LPDIRECT3DDEVICE9 pGraphic_Device, const _tchar * pFilePath, const _tchar * pFileName)
 {
 	CMesh_Static*		pInstance = new CMesh_Static(pGraphic_Device);
@@ -200,7 +292,15 @@ CMesh_Static * CMesh_Static::Create(LPDIRECT3DDEVICE9 pGraphic_Device, const _tc
 
 CComponent * CMesh_Static::Clone_Component()
 {
-	return new CMesh_Static(*this);
+	CMesh_Static*		pInstance = new CMesh_Static(*this);
+
+	if (FAILED(pInstance->Clone_Mesh()))
+	{
+		_MSG_BOX("CMesh_Static Cloned Failed");
+		Safe_Release(pInstance);
+	}
+
+	return pInstance;
 }
 
 void CMesh_Static::Free()
@@ -213,6 +313,12 @@ void CMesh_Static::Free()
 		Safe_Release(m_ppTextures[i]);
 
 	Safe_Delete_Array(m_ppTextures);
+
+
+	for (size_t i = 0; i < m_dwNumSubset; ++i)
+		Safe_Release(m_ppTexturesNorm[i]);
+
+	Safe_Delete_Array(m_ppTexturesNorm);
 
 	if (false == is_Clone())
 	{

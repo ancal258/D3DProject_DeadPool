@@ -42,6 +42,16 @@ STDMETHODIMP CHierarchyLoader::CreateMeshContainer(LPCSTR Name, CONST D3DXMESHDA
 	//pSkinInfo : 메쉬 덩어리(피부)로 할 수 있는 일들의 함수들? --> 스키닝(뼈에 살을 붙입니다.)을 할 시에 없는 피부를 입혀준다. (애니메이션 시 늘어난 피부를 채워준다.)
 	// 뼈에 붙어야 하는 메쉬들에 대한 추가적인 기능들
 
+	D3DVERTEXELEMENT9 Element[] =
+	{
+		{ 0, 0, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+		{ 0, 12, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL, 0 },
+		{ 0, 24, D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
+		{ 0, 32, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TANGENT, 0 },
+		D3DDECL_END() // this macro is needed as the last item!
+	};
+
+
 	D3DXMESHCONTAINER_DERIVED* pNewMeshContainer_Derived = new D3DXMESHCONTAINER_DERIVED;
 	ZeroMemory(pNewMeshContainer_Derived, sizeof(D3DXMESHCONTAINER_DERIVED));
 	//*ppNewMeshContainer = pNewMeshContainer_Derived;
@@ -59,21 +69,26 @@ STDMETHODIMP CHierarchyLoader::CreateMeshContainer(LPCSTR Name, CONST D3DXMESHDA
 	pNewMeshContainer_Derived->pAdjacency = new _ulong[pTempMesh->GetNumFaces() * 3];
 	memcpy(pNewMeshContainer_Derived->pAdjacency, pAdjacency, sizeof(_ulong) * pTempMesh->GetNumFaces() * 3);
 
-	_ulong dwFVF = pTempMesh->GetFVF(); // 실제 이 메쉬에 있는 정점들의 FVF 정보를 싹 얻어온다.
-	if (false == (dwFVF & D3DFVF_NORMAL)) // Normal이 존재하니?
-	{
-		if (FAILED(pTempMesh->CloneMeshFVF(pTempMesh->GetOptions(), dwFVF | D3DFVF_NORMAL, m_pGraphic_Device, &pNewMeshContainer_Derived->MeshData.pMesh)))
-			return E_FAIL;
-		// Normal이 없는 메쉬에 NORMAL을 추가해 복사한 뒤, 원래 객체에 대입해준다.
+	//_ulong dwFVF = pTempMesh->GetFVF(); // 실제 이 메쉬에 있는 정점들의 FVF 정보를 싹 얻어온다.
+	//if (false == (dwFVF & D3DFVF_NORMAL)) // Normal이 존재하니?
+	//{
+	//	if (FAILED(pTempMesh->CloneMeshFVF(pTempMesh->GetOptions(), dwFVF | D3DFVF_NORMAL, m_pGraphic_Device, &pNewMeshContainer_Derived->MeshData.pMesh)))
+	//		return E_FAIL;
+	//	// Normal이 없는 메쉬에 NORMAL을 추가해 복사한 뒤, 원래 객체에 대입해준다.
 
-		if (FAILED(D3DXComputeNormals(pNewMeshContainer_Derived->MeshData.pMesh, pNewMeshContainer_Derived->pAdjacency)))
-			return E_FAIL;
-	}
-	else
-	{
-		if (FAILED(pTempMesh->CloneMeshFVF(pTempMesh->GetOptions(), dwFVF , m_pGraphic_Device, &pNewMeshContainer_Derived->MeshData.pMesh)))
-			return E_FAIL;
-	}
+	//	if (FAILED(D3DXComputeNormals(pNewMeshContainer_Derived->MeshData.pMesh, pNewMeshContainer_Derived->pAdjacency)))
+	//		return E_FAIL;
+	//}
+	//else
+	//{
+	//	if (FAILED(pTempMesh->CloneMeshFVF(pTempMesh->GetOptions(), dwFVF , m_pGraphic_Device, &pNewMeshContainer_Derived->MeshData.pMesh)))
+	//		return E_FAIL;
+	//}
+	if (FAILED(pTempMesh->CloneMesh(pTempMesh->GetOptions(), Element, m_pGraphic_Device, &pNewMeshContainer_Derived->MeshData.pMesh)))
+		return E_FAIL;
+	if (FAILED(D3DXComputeNormals(pNewMeshContainer_Derived->MeshData.pMesh, pNewMeshContainer_Derived->pAdjacency)))
+		return E_FAIL;
+	D3DXComputeTangent(pNewMeshContainer_Derived->MeshData.pMesh, 0, 1, D3DX_DEFAULT, TRUE, NULL);
 
 	Safe_Release(pTempMesh);
 	
@@ -99,8 +114,8 @@ STDMETHODIMP CHierarchyLoader::CreateMeshContainer(LPCSTR Name, CONST D3DXMESHDA
 			MultiByteToWideChar(CP_ACP, 0, pMaterials[i].pTextureFilename, strlen(pMaterials[i].pTextureFilename),
 				szFileName, MAX_PATH);
 
-			Load_Texture(szFileName, L"D", &pNewMeshContainer_Derived->pTextures[i].pDiffuse);
-			Load_Texture(szFileName, L"N", &pNewMeshContainer_Derived->pTextures[i].pNormal);
+			Load_Texture(szFileName, L"X", &pNewMeshContainer_Derived->pTextures[i].pDiffuse);
+			Load_Texture(szFileName, L"Y", &pNewMeshContainer_Derived->pTextures[i].pNormal);
 			Load_Texture(szFileName, L"S", &pNewMeshContainer_Derived->pTextures[i].pSpecular);
 		}
 	} 
@@ -133,14 +148,19 @@ STDMETHODIMP CHierarchyLoader::CreateMeshContainer(LPCSTR Name, CONST D3DXMESHDA
 	}
 	
 	// D3DVERTEXELEMENT9 : 정점의 FVF정보 하나를 담기위한 구조체.
-	D3DVERTEXELEMENT9			Element[MAX_FVF_DECL_SIZE];
-	ZeroMemory(&Element, sizeof(D3DVERTEXELEMENT9) * MAX_FVF_DECL_SIZE);
-	pNewMeshContainer_Derived->MeshData.pMesh->GetDeclaration(Element);
+	//D3DVERTEXELEMENT9			Element[MAX_FVF_DECL_SIZE];
+	//ZeroMemory(&Element, sizeof(D3DVERTEXELEMENT9) * MAX_FVF_DECL_SIZE);
+	//pNewMeshContainer_Derived->MeshData.pMesh->GetDeclaration(Element);
 
+	
 	if (FAILED(pNewMeshContainer_Derived->MeshData.pMesh->CloneMesh(pNewMeshContainer_Derived->MeshData.pMesh->GetOptions(), Element, m_pGraphic_Device, &pNewMeshContainer_Derived->pMesh_Original)))
 		return E_FAIL;
-
+	
+	pNewMeshContainer_Derived->pSkinInfo->SetDeclaration(Element);
+	D3DXComputeTangent(pNewMeshContainer_Derived->pMesh_Original, 0, 1, D3DX_DEFAULT, TRUE, NULL);
 	*ppNewMeshContainer = pNewMeshContainer_Derived;
+
+
 	return NOERROR;
 }
 
@@ -242,7 +262,7 @@ HRESULT CHierarchyLoader::Load_Texture(const _tchar* pFileName, const _tchar * p
 		{
 			for (_int j = i; j >= 0; --j)
 			{
-				if (szFileName[j] == 'D')
+				if (szFileName[j] == 'X')
 				{
 					szFileName[j] = *pTextureKey;
 

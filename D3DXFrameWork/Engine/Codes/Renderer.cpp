@@ -150,8 +150,8 @@ void CRenderer::Render_Renderer()
 	Render_UI();
 
 #ifdef _DEBUG
-	//m_pTarget_Manager->Render_DebugBuffer(L"MRT_Deferred");
-	//m_pTarget_Manager->Render_DebugBuffer(L"MRT_LightAcc");
+	m_pTarget_Manager->Render_DebugBuffer(L"MRT_Deferred");
+	m_pTarget_Manager->Render_DebugBuffer(L"MRT_LightAcc");
 #endif
 }
 

@@ -19,12 +19,18 @@ sampler DiffuseSampler = sampler_state
 	mipfilter = linear;
 };
 
+sampler NormalSampler = sampler_state
+{
+	texture = g_NormalTexture;
+};
+
 
 struct VS_IN // 변환을 거치기전(정점버퍼에 선언된) 정점의 정보를 담기위한 구조체.
 {
 	float3	vPosition : POSITION;
 	float3	vNormal : NORMAL;
 	float2	vTexUV : TEXCOORD0;
+	float3	vTangent : TANGENT;
 };
 
 struct VS_OUT // 변환(월드, 뷰, 투영행렬)을 거친 정점의 정보
@@ -33,6 +39,9 @@ struct VS_OUT // 변환(월드, 뷰, 투영행렬)을 거친 정점의 정보
 	float4	vNormal : NORMAL;
 	float2	vTexUV : TEXCOORD0;
 	float4	vProjPos : TEXCOORD1;
+	float3	vRight : TEXCOORD2;
+	float3	vUp	: TEXCOORD3;
+	float3	vLook : TEXCOORD4;
 };
 
 struct VS_OUT_SKY // 변환(월드, 뷰, 투영행렬)을 거친 정점의 정보
@@ -50,6 +59,9 @@ struct VS_OUT_PLAYER // 변환(월드, 뷰, 투영행렬)을 거친 정점의 정보
 	float2	vTexUV : TEXCOORD0;
 	float4	vProjPos : TEXCOORD1;
 	float4	vCamDir : TEXCOORD2;
+	float3	vRight : TEXCOORD3;
+	float3	vUp	: TEXCOORD4;
+	float3	vLook : TEXCOORD5;
 };
 VS_OUT VS_MAIN(VS_IN In)
 {
@@ -64,8 +76,13 @@ VS_OUT VS_MAIN(VS_IN In)
 	Out.vPosition = mul(vector(In.vPosition, 1.f), matWVP);
 
 	vector		vWorldNormal = mul(vector(In.vNormal, 0.f), g_matWorld);
-
+	float3		vWorldNormal2 = mul(vector(In.vNormal, 0.f), g_matWorld);
+	float3		vWorldTangent = mul(vector(In.vTangent, 0.f), g_matWorld);
+	float3		vWorldBinormal = cross(vWorldNormal, vWorldTangent);
 	Out.vNormal = normalize(vWorldNormal);
+	Out.vLook = normalize(vWorldNormal2);
+	Out.vRight = normalize(vWorldTangent);
+	Out.vUp = normalize(vWorldBinormal);
 
 	Out.vTexUV = In.vTexUV;
 
@@ -113,7 +130,13 @@ VS_OUT_PLAYER VS_MAIN_PLAYER(VS_IN In)
 	vector		vWorldNormal = mul(vector(In.vNormal, 0.f), g_matWorld);
 	vector		vCamDir = g_vCamPosition - mul(vector(In.vPosition, 1.f), g_matWorld);
 
+	float3		vWorldNormal2 = mul(vector(In.vNormal, 0.f), g_matWorld);
+	float3		vWorldTangent = mul(vector(In.vTangent, 0.f), g_matWorld);
+	float3		vWorldBinormal = cross(vWorldNormal, vWorldTangent);
 	Out.vNormal = normalize(vWorldNormal);
+	Out.vLook = normalize(vWorldNormal2);
+	Out.vRight = normalize(vWorldTangent);
+	Out.vUp = normalize(vWorldBinormal);
 
 	Out.vTexUV = In.vTexUV;
 
@@ -130,7 +153,9 @@ struct PS_IN // 픽셀의 정보를 담기위한 구조체.
 	float4	vNormal : NORMAL;
 	float2	vTexUV : TEXCOORD0;
 	float4	vProjPos : TEXCOORD1;
-
+	float3	vRight : TEXCOORD2;
+	float3	vUp	: TEXCOORD3;
+	float3	vLook : TEXCOORD4;
 };
 
 struct PS_IN_SKY // 픽셀의 정보를 담기위한 구조체.
@@ -148,6 +173,9 @@ struct PS_IN_PLAYER // 변환(월드, 뷰, 투영행렬)을 거친 정점의 정보
 	float2	vTexUV : TEXCOORD0;
 	float4	vProjPos : TEXCOORD1;
 	float4	vCamDir : TEXCOORD2;
+	float3	vRight : TEXCOORD3;
+	float3	vUp	: TEXCOORD4;
+	float3	vLook : TEXCOORD5;
 };
 
 struct PS_OUT
@@ -167,10 +195,17 @@ PS_OUT PS_MAIN(PS_IN In)
 	PS_OUT			Out = (PS_OUT)0;
 
 	vector		vDiffuse = tex2D(DiffuseSampler, In.vTexUV);
+	float3		vNormalTex = tex2D(NormalSampler, In.vTexUV);
+	vNormalTex = float3((vNormalTex.xyz - 0.5) * 2.f);
+	float3x3 matWorld;
+	matWorld[0] = In.vRight;
+	matWorld[1] = In.vUp;
+	matWorld[2] = In.vLook;
+	float3 vRealNormal = mul(vNormalTex, matWorld);
 
 	Out.vDiffuse = vDiffuse;
-	Out.vNormal = vector(In.vNormal.xyz * 0.5f + 0.5f, 0.f);
-
+	//Out.vNormal = vector(In.vNormal.xyz * 0.5f + 0.5f, 0.f);
+	Out.vNormal = vector((vRealNormal.xyz + 1) * 0.5f,0);
 	//Out.vDiffuse.gb = Out.vDiffuse.gb * (1.3 - g_isCol);
 
 	Out.vDepth = vector(In.vProjPos.z / In.vProjPos.w, In.vProjPos.w / 500.0f, 0.f, 0.f);
@@ -195,10 +230,19 @@ PS_OUT PS_MAIN_PLAYER(PS_IN_PLAYER In)
 	PS_OUT			Out = (PS_OUT)0;
 
 	vector		vDiffuse = tex2D(DiffuseSampler, In.vTexUV);
+	float3		vNormalTex = tex2D(NormalSampler, In.vTexUV);
+	vNormalTex = float3((vNormalTex.xyz - 0.5) * 2.f);
+	float3x3 matWorld;
+	matWorld[0] = In.vRight;
+	matWorld[1] = In.vUp;
+	matWorld[2] = In.vLook;
+	float3 vRealNormal = mul(vNormalTex, matWorld);
+
+	//Out.vNormal = vector(In.vNormal.xyz * 0.5f + 0.5f, 0.f);
+	Out.vNormal = vector((vRealNormal.xyz + 1) * 0.5f, 0);
+
 
 	Out.vDiffuse =vDiffuse;
-
-	Out.vNormal = vector(In.vNormal.xyz * 0.5f + 0.5f, 0.f);
 
 	//Out.vDiffuse.gb = Out.vDiffuse.gb * (1.3 - g_isCol);
 
