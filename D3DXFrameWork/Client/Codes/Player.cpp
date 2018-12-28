@@ -441,12 +441,12 @@ void CPlayer::Camera_Update(const _float& fTimeDelta)
 				if (vCross.y < 0)
 				{
 					if (0.99f >= D3DXVec3Dot(&vDir, &vPlayerCross))
-						m_pTransformCom->RotationY(10.f, fTimeDelta);
+						m_pTransformCom->RotationY(5.f, fTimeDelta);
 				}
 				else
 				{
 					if (0.99f >= D3DXVec3Dot(&vDir, &vPlayerCross))
-						m_pTransformCom->RotationY(-10.f, fTimeDelta);
+						m_pTransformCom->RotationY(-5.f, fTimeDelta);
 				}
 			}
 			else if (pInput_Device->Get_DIKeyState(DIK_W) & 0x8000 && pInput_Device->Get_DIKeyState(DIK_A) & 0x8000 &&

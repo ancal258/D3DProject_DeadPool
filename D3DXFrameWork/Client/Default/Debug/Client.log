@@ -1,4 +1,12 @@
-﻿  EffectC.cpp
-d:\github\d3dproject_deadpool\d3dxframework\client\codes\effectc.cpp(30): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Client.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Default\..\Bin\Client.exe
+﻿C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\ShaderFiles\Shader_Mesh.fx(79,10-65): warning X3206: implicit truncation of vector type
+C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\ShaderFiles\Shader_Mesh.fx(80,10-66): warning X3206: implicit truncation of vector type
+C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\ShaderFiles\Shader_Mesh.fx(81,27-60): warning X3206: 'cross': implicit truncation of vector type
+C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\ShaderFiles\Shader_Mesh.fx(133,10-65): warning X3206: implicit truncation of vector type
+C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\ShaderFiles\Shader_Mesh.fx(134,10-66): warning X3206: implicit truncation of vector type
+C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\ShaderFiles\Shader_Mesh.fx(135,27-60): warning X3206: 'cross': implicit truncation of vector type
+C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\ShaderFiles\Shader_Mesh.fx(239,10-53): warning X3206: implicit truncation of vector type
+FXC : warning X4717: Effects deprecated for D3DCompiler_47
+  
+  compilation object save succeeded; see C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\Shader_Mesh.cso
+  Client.vcxproj -> C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Default\..\Bin\Client.exe
   Client.vcxproj -> ..\Bin\Client.pdb (Full PDB)

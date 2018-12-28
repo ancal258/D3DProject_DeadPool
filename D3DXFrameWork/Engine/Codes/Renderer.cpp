@@ -42,6 +42,10 @@ HRESULT CRenderer::Ready_Renderer()
 	// 디퍼드 렌더링을 위한 렌더타겟 정보를 생성한다.
 
 
+	// For.Target_Shadow : 포어둬로 그림자를 그리는 객체들의 깊이를 저장.
+	if (FAILED(m_pTarget_Manager->Add_Target(pGraphic_Device, L"Target_Shadow", ViewPort.Width, ViewPort.Height, D3DFMT_A32B32G32R32F, D3DXCOLOR(0.f, 0.f, 0.f, 1.f))))
+		return E_FAIL;
+
 	// For. Target_Diffuse : 디퍼드로 그리는 객체들의 픽셀 색상을 저장.
 	if (FAILED(m_pTarget_Manager->Add_Target(pGraphic_Device, L"Target_Diffuse", ViewPort.Width, ViewPort.Height, D3DFMT_A8R8G8B8, D3DXCOLOR(0.f, 0.f, 0.f, 0.f))))
 		return E_FAIL;
@@ -73,8 +77,13 @@ HRESULT CRenderer::Ready_Renderer()
 		return E_FAIL;
 	if (FAILED(m_pTarget_Manager->Ready_DebugBuffer(L"Target_Specular", ViewPort.Width - 200.f, 200.f, 200.f, 200.f)))
 		return E_FAIL;
+	if (FAILED(m_pTarget_Manager->Ready_DebugBuffer(L"Target_Shadow", ViewPort.Width - 200.f, 400.f, 200.f, 200.f)))
+		return E_FAIL;
 #endif
 
+	// For. MRT_Shadow
+	if (FAILED(m_pTarget_Manager->Add_MRT(L"MRT_Shadow", L"Target_Shadow")))
+		return E_FAIL;
 
 	// For. MRT_Deferred
 	if (FAILED(m_pTarget_Manager->Add_MRT(L"MRT_Deferred", L"Target_Diffuse")))
@@ -165,6 +174,16 @@ void CRenderer::Render_Priority()
 	m_RenderList[RENDER_PRIORITY].clear();
 }
 
+void CRenderer::Render_Shadow()
+{
+	for (auto& pGameObject : m_RenderList[RENDER_SHADOW])
+	{
+		pGameObject->Render_GameObject();
+		Safe_Release(pGameObject);
+	}
+	m_RenderList[RENDER_SHADOW].clear();
+}
+
 void CRenderer::Render_NoneAlpha()
 {
 	for (auto& pGameObject : m_RenderList[RENDER_NONEALPHA])
@@ -226,7 +245,15 @@ void CRenderer::Render_Deferred()
 {
 	if (nullptr == m_pTarget_Manager)
 		return;
+	// For. Shadow
+	m_pTarget_Manager->Begin_MRT(L"MRT_Shadow");
 
+	Render_Shadow();
+
+	m_pTarget_Manager->End_MRT(L"MRT_Shadow");
+
+
+	// For. GameObject
 	m_pTarget_Manager->Begin_MRT(L"MRT_Deferred");
 
 	Render_NoneAlpha();
@@ -235,8 +262,9 @@ void CRenderer::Render_Deferred()
 
 	m_pTarget_Manager->End_MRT(L"MRT_Deferred");
 
-	Render_LightAcc();
 
+	// For. Light
+	Render_LightAcc();
 	Render_Blend();
 }
 

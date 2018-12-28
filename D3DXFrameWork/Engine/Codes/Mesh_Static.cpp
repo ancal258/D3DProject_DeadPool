@@ -35,11 +35,11 @@ CMesh_Static::CMesh_Static(const CMesh_Static & rhs)
 	
 	rhs.m_pMesh->CloneMesh(rhs.m_pMesh->GetOptions(), Element, Get_Graphic_Device(), &m_pMesh);
 
-	LPDWORD pAdjacency = new DWORD[m_pMesh->GetNumFaces() * 3];
+	//LPDWORD pAdjacency = new DWORD[m_pMesh->GetNumFaces() * 3];
 
-	m_pMesh->GenerateAdjacency(0.0001f, pAdjacency);
-	D3DXComputeNormals(m_pMesh, pAdjacency);
-	D3DXComputeTangent(m_pMesh, 0, 0, 0, 0, pAdjacency);
+	//m_pMesh->GenerateAdjacency(0.0001f, pAdjacency);
+	D3DXComputeNormals(m_pMesh, (DWORD*)m_pAdjacency->GetBufferPointer());
+	D3DXComputeTangent(m_pMesh, 0, 0, 0, 0, (DWORD*)m_pAdjacency->GetBufferPointer());
 
 	//D3DXComputeTangentFrameEx(m_pMesh,
 	//	D3DDECLUSAGE_POSITION, 0,

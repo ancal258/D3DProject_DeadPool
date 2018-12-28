@@ -195,13 +195,19 @@ PS_OUT PS_MAIN(PS_IN In)
 	PS_OUT			Out = (PS_OUT)0;
 
 	vector		vDiffuse = tex2D(DiffuseSampler, In.vTexUV);
-	float3		vNormalTex = tex2D(NormalSampler, In.vTexUV);
-	vNormalTex = (vNormalTex.xyz - 0.5f) * 2.f;
+	vector		vNormalTex = tex2D(NormalSampler, In.vTexUV);
+	float3		vNormalMap;// = (vNormalTex.xyz - 0.5f) * 2.f;
+
+	vNormalMap.x = vDiffuse.a;
+	vNormalMap.y = vNormalTex.a;
+	vNormalMap.z = 0;//1 - vNormalTex.y;
+	vNormalMap = (vNormalMap.xyz - 0.5f) * 2.f;
+
 	float3x3 matWorld;
 	matWorld[0] = In.vRight;
 	matWorld[1] = In.vUp;
 	matWorld[2] = In.vLook;
-	float3 vRealNormal = mul(vNormalTex, matWorld);
+	float3 vRealNormal = mul(vNormalMap, matWorld);
 
 	Out.vDiffuse = vDiffuse;
 	//Out.vNormal = vector(In.vNormal.xyz * 0.5f + 0.5f, 0.f);
@@ -238,8 +244,8 @@ PS_OUT PS_MAIN_PLAYER(PS_IN_PLAYER In)
 	matWorld[2] = In.vLook;
 	float3 vRealNormal = mul(vNormalTex, matWorld);
 
-	//Out.vNormal = vector(In.vNormal.xyz * 0.5f + 0.5f, 0.f);
-	Out.vNormal = vector((vRealNormal.xyz + 1) * 0.5f, 0);
+	Out.vNormal = vector(In.vNormal.xyz * 0.5f + 0.5f, 0.f);
+	//Out.vNormal = vector((vRealNormal.xyz + 1) * 0.5f, 0);
 
 
 	Out.vDiffuse =vDiffuse;
