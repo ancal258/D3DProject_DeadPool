@@ -12,13 +12,16 @@
 #include "Player.h"
 #include "DP_Sword.h"
 #include "DP_Gun.h"
+#include "DP_Phone.h"
 #include "Static_Object.h"
 #include "Event_Cube.h"
 #include "Effect.h"
 #include "Dog.h"
 #include "Brawler01.h"
 #include "Brawler02.h"
+#include "Brawler03.h"
 #include "Brawler_Knife.h"
+#include "Brawler_Solution.h"
 #include "Brawler_ElectricBaton.h"
 #include "SkyDom.h"
 #include "Airplane.h"
@@ -28,6 +31,7 @@
 #include "BikiniGirl.h"
 #include "Trigger_Cube.h"
 #include "Trigger_BackUI.h"
+#include "MissionCube.h"
 // ITEM
 #include "Item_DPPoint.h"
 #include "Item_Bullet.h"
@@ -149,6 +153,10 @@ HRESULT CLoading::Loading_Stage_APT()
 	//Dog
 	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Dog", SCENE_STAGE, L"Layer_Dog")))
 		return E_FAIL;
+	//Phone
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Phone", SCENE_STAGE, L"Layer_Phone")))
+		return E_FAIL;
+
 
 	lstrcpy(m_szString, L"Layer_StaticUI...");
 	if (FAILED(Ready_Static_Prototype_UI()))
@@ -259,6 +267,10 @@ HRESULT CLoading::Loading_Stage_FIELD()
 		return E_FAIL;
 	((CItem_DPPoint*)pItem)->Set_StateInfo(&_vec3(15, 0.3f, 10));
 
+	CGameObject* pGameObject = nullptr;
+	CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_MissionCube", SCENE_STAGE, L"Layer_Mission", &pGameObject);
+	((CMissionCube*)pGameObject)->Set_StateInfo(&_vec3(5.f, 0.f, 5.f));
+
 
 	m_isFinish = true;
 	lstrcpy(m_szString, L"Loading Complete");
@@ -320,6 +332,10 @@ HRESULT CLoading::Loading_Stage_AIRPLANE()
 
 	lstrcpy(m_szString, L"Layer_UI...");
 	if (FAILED(Ready_UI_SceneAIRPLANE()))
+		return E_FAIL;
+
+	lstrcpy(m_szString, L"Layer_Brawler...");
+	if (FAILED(Ready_Layer_Object_Airplane()))
 		return E_FAIL;
 	/////////////////////
 
@@ -835,6 +851,9 @@ HRESULT CLoading::Ready_Static_Prototype_UI()
 	// For.Prototype_Trigger_BackUI
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Trigger_BackUI", CTrigger_BackUI::Create(Get_Graphic_Device()))))
 		return E_FAIL;
+	// For.Prototype_Trigger_BackUI
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_MissionCube", CMissionCube::Create(Get_Graphic_Device()))))
+		return E_FAIL;
 
 
 	return NOERROR;
@@ -1030,6 +1049,9 @@ HRESULT CLoading::Ready_Stage_Prototype_GameObject_SceneAPT()
 	// For.GameObject_Effect
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Effect", CEffect::Create(Get_Graphic_Device()))))
 		return E_FAIL;
+	// For.GameObject_Effect
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Phone", CDP_Phone::Create(Get_Graphic_Device(),1))))
+		return E_FAIL;
 
 	return NOERROR;
 }
@@ -1144,6 +1166,9 @@ HRESULT CLoading::Ready_Componet_Prototype_SceneAPT()
 	// For.Component_Mesh_Player
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Player", CMesh_Dynamic::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/DynamicMesh/PlayerXFile/", L"DP_APT_00.x"))))
 		return E_FAIL;
+	// For.Component_Mesh_Phone
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Phone", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/APT/", L"DeadPool_Phone.x"))))
+		return E_FAIL;
 	Safe_Release(pComponent_Manager);
 
 	return NOERROR;
@@ -1193,8 +1218,14 @@ HRESULT CLoading::Ready_Component_Prototype_SceneFIELD()
 	// For.Component_Mesh_Brawler02
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Brawler02", CMesh_Dynamic::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/DynamicMesh/Brawler/Brawler02/", L"Brawler02.x"))))
 		return E_FAIL;
+	// For.Component_Mesh_Brawler02
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Brawler03", CMesh_Dynamic::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/DynamicMesh/Brawler/Brawler03/", L"Brawler03.x"))))
+		return E_FAIL;
 	// For.Component_Mesh_Brawler_Knife
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Brawler_Knife", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/Brawler/WEP/", L"Brawler_Knife.x"))))
+		return E_FAIL;
+	// For.Component_Mesh_Brawler_Solution
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Brawler_Solution", CMesh_Dynamic::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/Brawler/WEP/", L"TheSolution.x"))))
 		return E_FAIL;
 	// For.Component_Mesh_Brawler_ElectricBaton
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Mesh_Brawler_ElectricBaton", CMesh_Static::Create(Get_Graphic_Device(), L"../Bin/Resources/Meshes/StaticMesh/DeadPoolMesh/Brawler/WEP/", L"Brawler_ElectricBaton.x"))))
@@ -1403,7 +1434,7 @@ HRESULT CLoading::Ready_UI_SceneFIELD()
 
 
 	//GameObject
-	if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_UI_CrossHair", SCENE_STAGE, L"Layer_UI", nullptr)))
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_UI_CrossHair", SCENE_STAGE, L"Layer_UI_CrossHair", nullptr)))
 		return E_FAIL;
 
 
@@ -1479,11 +1510,19 @@ HRESULT CLoading::Ready_UI_SceneAIRPLANE()
 	// For.Prototype_UI_HPBar
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_HPBar", CUI_HPBar::Create(Get_Graphic_Device()))))
 		return E_FAIL;
+	// For.Prototype_UI_StaticUI_inkStroke3
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_StaticUI_AirPlane", CStaticUI::Create(Get_Graphic_Device(), 13))))
+		return E_FAIL;
 
 
 	//GameObject
-	if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_UI_CrossHair", SCENE_STAGE, L"Layer_UI", nullptr)))
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_UI_CrossHair", SCENE_STAGE, L"Layer_UI_CrossHair", nullptr)))
 		return E_FAIL;
+	//GameObject
+	CGameObject* pUI = nullptr;
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_UI_StaticUI_AirPlane", SCENE_STAGE, L"Layer_UI_DeadpoolPoint", &pUI)))
+		return E_FAIL;
+	((CStaticUI*)pUI)->Set_Info(_vec2((g_iBackCX >> 1), 100), _vec2(256, 42));
 
 	return NOERROR;
 }
@@ -1501,6 +1540,9 @@ HRESULT CLoading::Ready_Stage_Prototype_GameObject_SceneFIELD()
 		return E_FAIL;
 	// For.GameObject_Brawler01
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Brawler01_2", CBrawler01::Create(Get_Graphic_Device(), 2))))
+		return E_FAIL;
+	// For.GameObject_Brawler01
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Brawler03", CBrawler03::Create(Get_Graphic_Device()))))
 		return E_FAIL;
 	// For.GameObject_Brawler02
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Brawler02", CBrawler02::Create(Get_Graphic_Device()))))
@@ -1533,6 +1575,9 @@ HRESULT CLoading::Ready_Stage_Prototype_GameObject_SceneFIELD()
 		return E_FAIL;
 	// For.GameObject_Brawler_Knife
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Brawler_Knife", CBrawler_Knife::Create(Get_Graphic_Device()))))
+		return E_FAIL;
+	// For.GameObject_Brawler_Knife
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Brawler_Solution", CBrawler_Solution::Create(Get_Graphic_Device()))))
 		return E_FAIL;
 	// For.GameObject_Brawler_ElectricBaton
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Brawler_ElectricBaton", CBrawler_ElectricBaton::Create(Get_Graphic_Device()))))
@@ -1797,9 +1842,9 @@ HRESULT CLoading::Ready_Layer_Object()
 	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
 		return E_FAIL;
 	((CBrawler01*)pBrawler)->Set_Position(_vec3(7.2f,0,27.87f));
-	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
-	//	return E_FAIL;
-	//((CBrawler01*)pBrawler)->Set_Position(_vec3(17.59f,0,31.04f));
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
+		return E_FAIL;
+	((CBrawler01*)pBrawler)->Set_Position(_vec3(17.59f,0,31.04f));
 	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
 	//	return E_FAIL;
 	//((CBrawler01*)pBrawler)->Set_Position(_vec3(13.25f,0,20.12f));
@@ -1840,6 +1885,18 @@ HRESULT CLoading::Ready_Layer_Object()
 
 	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler_TPose", SCENE_STAGE, L"Layer_Brawler_TPose")))
 	//	return E_FAIL;
+	return NOERROR;
+}
+
+HRESULT CLoading::Ready_Layer_Object_Airplane()
+{
+
+	CGameObject* pBrawler = nullptr;
+
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler03", SCENE_STAGE, L"Layer_Brawler03", &pBrawler)))
+		return E_FAIL;
+	((CBrawler03*)pBrawler)->Set_Position(_vec3(50.f, 3.7f, 95.f));
+
 	return NOERROR;
 }
 
@@ -1916,6 +1973,8 @@ HRESULT CLoading::Load_Static_Object(const _tchar * pFilePath,_uint iStage)
 	}
 
 	CloseHandle(hFile);
+
+
 
 	return NOERROR;
 }

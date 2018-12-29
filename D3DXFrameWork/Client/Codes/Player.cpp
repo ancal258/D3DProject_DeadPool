@@ -49,6 +49,13 @@ _uint CPlayer::Get_AnimState()
 	return m_pAnimator->Get_AnimState();
 }
 
+void CPlayer::Plus_HP(_uint i)
+{
+	m_iHP += i;
+	if (m_iHP > 100)
+		m_iHP = 100;
+}
+
 HRESULT CPlayer::Ready_GameObject_Prototype()
 {
 	return NOERROR;
@@ -321,7 +328,7 @@ HRESULT CPlayer::SetUp_StageInfo(_uint iStage)
 		m_pTransformCom->Set_AngleY(D3DXToRadian(48));
 		m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(16.0f, 0.f, 13.73f));
 	}
-
+	 
 	if (1 == m_iStageNum)
 	{
 		m_pTransformCom->Scaling(0.01f, 0.01f, 0.01f);

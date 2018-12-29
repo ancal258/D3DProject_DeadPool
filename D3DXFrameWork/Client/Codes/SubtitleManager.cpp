@@ -35,6 +35,21 @@ const _tchar * CSubtitle_Manager::Get_Subtitle()
 	return m_vecSubtitle[m_iCurrentIndex++];
 }
 
+void CSubtitle_Manager::Ready_Mission()
+{
+	m_vecMission.push_back(L"固记 1");
+	m_vecMission.push_back(L"固记 2");
+	m_vecMission.push_back(L"固记 3");
+	m_vecMission.push_back(L"固记 4");
+	m_vecMission.push_back(L"固记 5");
+	m_vecMission.push_back(L"固记 6");
+}
+
+const _tchar * CSubtitle_Manager::Get_Mission()
+{
+	return m_vecMission[m_iMissionIndex++];
+}
+
 void CSubtitle_Manager::Free()
 {
 	//for (auto& Subtitle : m_vecSubtitle)

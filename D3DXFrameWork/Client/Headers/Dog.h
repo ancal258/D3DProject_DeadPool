@@ -44,6 +44,7 @@ private:
 	CCollider*			m_pColliderCom = nullptr;
 private:
 	_uint				m_iIndex = 0;
+	const CGameObject*	m_pGameObject = nullptr;
 private:
 	HRESULT Ready_Component();
 	HRESULT SetUp_ConstantTable(LPD3DXEFFECT pEffect);

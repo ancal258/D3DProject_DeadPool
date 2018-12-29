@@ -88,6 +88,7 @@ _int CBikiniGirl::LastUpdate_GameObject(const _float & fTimeDelta)
 
 void CBikiniGirl::Render_GameObject()
 {
+
 	if (nullptr == m_pMeshCom ||
 		nullptr == m_pShaderCom)
 		return;

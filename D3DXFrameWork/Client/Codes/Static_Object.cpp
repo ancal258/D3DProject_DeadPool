@@ -154,7 +154,7 @@ _int CStatic_Object::LastUpdate_GameObject(const _float & fTimeDelta)
 				// Æø¹ß »ý¼º
 				Set_Lived(false);
 
-
+				((CAirplane*)m_pAirplane)->Plus_DestroyPoint();
 			}
 		}
 	}

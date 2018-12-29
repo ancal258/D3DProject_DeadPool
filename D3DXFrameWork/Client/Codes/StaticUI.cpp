@@ -4,6 +4,7 @@
 #include "Font_Manager.h"
 #include "Input_Device.h"
 #include "Player.h"
+#include "Airplane.h"
 #include "Object_Manager.h"
 _USING(Client)
 
@@ -41,6 +42,12 @@ void CStaticUI::Set_Info(_vec2 vPos, _vec2 vScale, _float fDegree)
 	m_pTransformCom->Set_AngleZ(D3DXToRadian(fDegree));
 }
 
+void CStaticUI::Set_Mission(const _tchar * pMission)
+{
+	int a = m_dwTextureIdx;
+	lstrcpy(m_szMission, pMission);
+}
+
 HRESULT CStaticUI::Ready_GameObject_Prototype(_uint iKind)
 {
 	m_dwTextureIdx = iKind;
@@ -58,7 +65,15 @@ HRESULT CStaticUI::Ready_GameObject()
 		if (nullptr == m_pPlayer)
 			return E_FAIL;
 	}
+	if (13 == m_dwTextureIdx)
+	{
+		m_pAirplane = (CAirplane*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Airplane", 0);
+		if (nullptr == m_pAirplane)
+			return E_FAIL;
 
+		m_dwTextureIdx = 2;
+		m_dwSaveIdx = 13;
+	}
 	return NOERROR;
 }
 
@@ -93,6 +108,14 @@ void CStaticUI::Render_GameObject()
 	if (nullptr == m_pBufferCom ||
 		nullptr == m_pShaderCom)
 		return;
+
+	// 2번 인덱스일 경우 (13번인덱스일경우도 2이기 때문에 Save도 검사)
+	if (2 == m_dwTextureIdx && 0 == m_dwSaveIdx)
+	{
+		if (0 == lstrlen(m_szMission))
+			return;
+	}
+
 
 	LPD3DXEFFECT pEffect = m_pShaderCom->Get_EffectHandle();
 	if (nullptr == pEffect)
@@ -152,7 +175,24 @@ void CStaticUI::Render_StaticText()
 		wsprintf(m_szDP_BulletCnt, L"%d", m_pPlayer->Get_BulletCnt());
 		CFont_Manager::GetInstance()->Render_Font(L"Font_Number", m_szDP_BulletCnt, D3DXCOLOR(1.f, 0.54f, 0.f, 1.f), &matTransform);
 	}
-
+	else if (2 == m_dwTextureIdx)
+	{
+		_matrix	   matTransform, matScale, matTranslate;
+		D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
+		D3DXMatrixTranslation(&matTranslate, (g_iBackCX >> 1) - 150, 80, 0.f);
+		matTransform = matScale * matTranslate;
+		CFont_Manager::GetInstance()->Render_Font(L"Font_Number", m_szMission, D3DXCOLOR(1.f, 1.f, 1.f, 1.f), &matTransform);
+		if (13 == m_dwSaveIdx)
+		{
+			_matrix	   matTransform, matScale, matTranslate;
+			D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
+			D3DXMatrixTranslation(&matTranslate, (g_iBackCX >> 1) - 150, 80, 0.f);
+			matTransform = matScale * matTranslate;
+			_tchar m_szDP_BulletCnt[MAX_PATH] = L"";
+			wsprintf(m_szDP_BulletCnt, L"Destroy Point : %d", m_pAirplane->Get_DestroyPoint());
+			CFont_Manager::GetInstance()->Render_Font(L"Font_Number", m_szDP_BulletCnt, D3DXCOLOR(1.f, 0.54f, 0.f, 1.f), &matTransform);
+		}
+	}
 
 }
 

@@ -4,6 +4,8 @@
 #include "Input_Device.h"
 #include "Object_Manager.h"
 #include "Player.h"
+#include "MissionCube.h"
+#include "DP_Phone.h"
 _USING(Client)
 
 CAnimator::CAnimator(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -189,6 +191,14 @@ void CAnimator::Update_Animation(const _float & fTimeDelta)
 			{
 				const_cast<CRenderer*>(m_pRenderer)->Set_Trigger(true);
 				m_ArrayAnimState[END_PHONE] = true;
+
+				CGameObject* pGameObject = nullptr;
+				CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_MissionCube", SCENE_STAGE, L"Layer_Mission", &pGameObject);
+				_vec3 vPos = *m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION);
+				((CMissionCube*)pGameObject)->Set_StateInfo(&vPos);
+
+				pGameObject = const_cast<CGameObject*>(CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Phone", 0));
+				((CDP_Phone*)pGameObject)->Set_Active(false);
 			}
 		}
 	}

@@ -20,7 +20,8 @@ public:
 	virtual void Render_GameObject();
 
 
-
+private:
+	_float	m_fAtkTime = 0.f;
 
 private:
 	virtual HRESULT Ready_Component();
@@ -30,6 +31,7 @@ private:
 
 	virtual _int Update_Stage_Airplane(const _float& fTimeDelta);
 	virtual _int LastUpdate_Stage_Airplane(const _float& fTimeDelta);
+
 private:
 	void Set_DeathIndex();
 public:

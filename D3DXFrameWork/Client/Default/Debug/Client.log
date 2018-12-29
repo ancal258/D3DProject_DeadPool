@@ -1,12 +1,18 @@
-﻿C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\ShaderFiles\Shader_Mesh.fx(79,10-65): warning X3206: implicit truncation of vector type
-C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\ShaderFiles\Shader_Mesh.fx(80,10-66): warning X3206: implicit truncation of vector type
-C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\ShaderFiles\Shader_Mesh.fx(81,27-60): warning X3206: 'cross': implicit truncation of vector type
-C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\ShaderFiles\Shader_Mesh.fx(133,10-65): warning X3206: implicit truncation of vector type
-C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\ShaderFiles\Shader_Mesh.fx(134,10-66): warning X3206: implicit truncation of vector type
-C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\ShaderFiles\Shader_Mesh.fx(135,27-60): warning X3206: 'cross': implicit truncation of vector type
-C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\ShaderFiles\Shader_Mesh.fx(239,10-53): warning X3206: implicit truncation of vector type
-FXC : warning X4717: Effects deprecated for D3DCompiler_47
-  
-  compilation object save succeeded; see C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\Shader_Mesh.cso
-  Client.vcxproj -> C:\Users\JK\Desktop\D3DProject_DeadPool\D3DXFrameWork\Client\Default\..\Bin\Client.exe
+﻿  Loading.cpp
+d:\github\d3dproject_deadpool\d3dxframework\client\headers\event_cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+d:\github\d3dproject_deadpool\d3dxframework\client\headers\trigger_cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+d:\github\d3dproject_deadpool\d3dxframework\client\headers\trigger_backui.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+d:\github\d3dproject_deadpool\d3dxframework\client\headers\missioncube.h(26): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+d:\github\d3dproject_deadpool\d3dxframework\client\headers\item.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+d:\github\d3dproject_deadpool\d3dxframework\client\headers\effect_gunflash.h(43): warning C4244: '초기화 중': 'float'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(378): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(531): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(541): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(593): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(603): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(1766): warning C4244: '인수': 'const unsigned int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(2056): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  Brawler03.cpp
+d:\github\d3dproject_deadpool\d3dxframework\client\headers\missioncube.h(26): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+  Client.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Default\..\Bin\Client.exe
   Client.vcxproj -> ..\Bin\Client.pdb (Full PDB)

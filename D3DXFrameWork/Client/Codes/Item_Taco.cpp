@@ -48,6 +48,18 @@ _int CItem_Taco::Update_GameObject(const _float & fTimeDelta)
 
 _int CItem_Taco::LastUpdate_GameObject(const _float & fTimeDelta)
 {
+	if (true == m_isCol)
+	{
+		const CGameObject* pPlayer = CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Player", 0);
+		if (nullptr == pPlayer)
+			return -1;
+
+		((CPlayer*)pPlayer)->Plus_HP(30);
+		Set_Lived(false);
+
+		m_pTransformCom->Update_Matrix();
+	}
+
 	return CItem::LastUpdate_GameObject(fTimeDelta);
 }
 

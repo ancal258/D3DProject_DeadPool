@@ -298,6 +298,18 @@
     <Filter Include="02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh\Gun\Flash">
       <UniqueIdentifier>{628458d5-02b8-4143-ab02-17f348a65cc2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\00.For.Static\04.Trigger\MissionCube">
+      <UniqueIdentifier>{c9c7ea2b-eedb-40cf-928d-5b3fc5990760}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\02.Weapon\00.DP_Weapon\DP_Phone">
+      <UniqueIdentifier>{49f2a90e-7a71-41ac-9ab7-4f740db4735f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\05.Brawler\03.Brawler_03">
+      <UniqueIdentifier>{bb733723-56d3-4e9f-8713-6ad1f17d0962}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\02.Weapon\01.Brawler_Weapon\Brawler_Solution">
+      <UniqueIdentifier>{9fc7f156-dc3b-4bb6-9f19-ffd3af2b2a64}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -513,6 +525,18 @@
     <ClInclude Include="..\Headers\Effect_GunFlash.h">
       <Filter>02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh\Gun\Flash</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\MissionCube.h">
+      <Filter>02.GameObject\00.For.Static\04.Trigger\MissionCube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\DP_Phone.h">
+      <Filter>02.GameObject\02.For.Stage\02.Weapon\00.DP_Weapon\DP_Phone</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Brawler03.h">
+      <Filter>02.GameObject\02.For.Stage\05.Brawler\03.Brawler_03</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Brawler_Solution.h">
+      <Filter>02.GameObject\02.For.Stage\02.Weapon\01.Brawler_Weapon\Brawler_Solution</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -712,6 +736,18 @@
     </ClCompile>
     <ClCompile Include="..\Codes\Effect_GunFlash.cpp">
       <Filter>02.GameObject\02.For.Stage\03.Effect\01.Effect_Mesh\Gun\Flash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\MissionCube.cpp">
+      <Filter>02.GameObject\00.For.Static\04.Trigger\MissionCube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\DP_Phone.cpp">
+      <Filter>02.GameObject\02.For.Stage\02.Weapon\00.DP_Weapon\DP_Phone</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Brawler03.cpp">
+      <Filter>02.GameObject\02.For.Stage\05.Brawler\03.Brawler_03</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Brawler_Solution.cpp">
+      <Filter>02.GameObject\02.For.Stage\02.Weapon\01.Brawler_Weapon\Brawler_Solution</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

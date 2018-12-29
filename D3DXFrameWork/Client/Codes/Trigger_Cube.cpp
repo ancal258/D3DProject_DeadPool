@@ -28,14 +28,14 @@ void CTrigger_Cube::Create_TalkBox(_tchar * pTalk)
 	CGameObject* pUI;
 	if (0 == m_iKind)
 	{
-		if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_UI_TalkBox_White", SCENE_LOGO, L"Layer_UI", &pUI)))
+		if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_UI_TalkBox_White", SCENE_LOGO, L"Layer_Trigger", &pUI)))
 			return;
 		((CTalkBox*)pUI)->Set_Info(_vec2((g_iBackCX >> 1) - 250, 200 + 100 * m_fOffsetY), pTalk);
 		++m_iKind;
 	}
 	else if (1 == m_iKind)
 	{
-		if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_UI_TalkBox_Orange", SCENE_LOGO, L"Layer_UI", &pUI)))
+		if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_UI_TalkBox_Orange", SCENE_LOGO, L"Layer_Trigger", &pUI)))
 			return;
 		((CTalkBox*)pUI)->Set_Info(_vec2((g_iBackCX >> 1) - 50, 300 + 100 * (m_fOffsetY - 1)), pTalk);
 		--m_iKind;

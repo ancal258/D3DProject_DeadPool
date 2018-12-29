@@ -39,6 +39,7 @@ HRESULT CMainApp::Ready_MainApp()
 	//	return E_FAIL;
 
 	CSubtitle_Manager::GetInstance()->Ready_Subtitle();
+	CSubtitle_Manager::GetInstance()->Ready_Mission();
 
 	return NOERROR;
 }

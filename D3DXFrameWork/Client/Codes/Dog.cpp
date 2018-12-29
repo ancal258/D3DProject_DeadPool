@@ -7,6 +7,7 @@
 #include "Camera_Cinematic.h"
 #include "Camera_Debug.h"
 #include "Camera_Target.h"
+#include "MissionCube.h"
 
 
 _USING(Client)
@@ -48,6 +49,15 @@ _int CDog::Update_GameObject(const _float & fTimeDelta)
 	if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_T) & 0x8000)
 	{
 		m_pMeshCom->Set_AnimationSet(Dog_InteratctDP);
+		if (nullptr == m_pGameObject)
+		{
+			m_pGameObject = CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Mission", 0);
+			((CMissionCube*)m_pGameObject)->Set_MissionClear();
+
+			CGameObject* pGameObject = nullptr;
+			CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_MissionCube", SCENE_STAGE, L"Layer_Mission", &pGameObject);
+			((CMissionCube*)pGameObject)->Set_StateInfo(&_vec3(17.52,0,38.82));
+		}
 	}
 	else
 	{

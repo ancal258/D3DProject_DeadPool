@@ -176,9 +176,11 @@
     <ClInclude Include="..\Headers\Brawler.h" />
     <ClInclude Include="..\Headers\Brawler01.h" />
     <ClInclude Include="..\Headers\Brawler02.h" />
+    <ClInclude Include="..\Headers\Brawler03.h" />
     <ClInclude Include="..\Headers\Brawler_ElectricBaton.h" />
     <ClInclude Include="..\Headers\Brawler_Knife.h" />
     <ClInclude Include="..\Headers\Brawler_Manager.h" />
+    <ClInclude Include="..\Headers\Brawler_Solution.h" />
     <ClInclude Include="..\Headers\Brawler_TPose.h" />
     <ClInclude Include="..\Headers\Camera_Cinematic.h" />
     <ClInclude Include="..\Headers\Camera_Debug.h" />
@@ -189,6 +191,7 @@
     <ClInclude Include="..\Headers\Defines.h" />
     <ClInclude Include="..\Headers\Dog.h" />
     <ClInclude Include="..\Headers\DP_Gun.h" />
+    <ClInclude Include="..\Headers\DP_Phone.h" />
     <ClInclude Include="..\Headers\DP_Sword.h" />
     <ClInclude Include="..\Headers\Effect.h" />
     <ClInclude Include="..\Headers\EffectC.h" />
@@ -210,6 +213,7 @@
     <ClInclude Include="..\Headers\Loading.h" />
     <ClInclude Include="..\Headers\MainApp.h" />
     <ClInclude Include="..\Headers\Minigun.h" />
+    <ClInclude Include="..\Headers\MissionCube.h" />
     <ClInclude Include="..\Headers\Parent_Effect.h" />
     <ClInclude Include="..\Headers\Player.h" />
     <ClInclude Include="..\Headers\Prop.h" />
@@ -248,9 +252,11 @@
     <ClCompile Include="..\Codes\Brawler.cpp" />
     <ClCompile Include="..\Codes\Brawler01.cpp" />
     <ClCompile Include="..\Codes\Brawler02.cpp" />
+    <ClCompile Include="..\Codes\Brawler03.cpp" />
     <ClCompile Include="..\Codes\Brawler_ElectricBaton.cpp" />
     <ClCompile Include="..\Codes\Brawler_Knife.cpp" />
     <ClCompile Include="..\Codes\Brawler_Manager.cpp" />
+    <ClCompile Include="..\Codes\Brawler_Solution.cpp" />
     <ClCompile Include="..\Codes\Brawler_TPose.cpp" />
     <ClCompile Include="..\Codes\Camera_Cinematic.cpp" />
     <ClCompile Include="..\Codes\Camera_Debug.cpp" />
@@ -259,6 +265,7 @@
     <ClCompile Include="..\Codes\ConcentratedLine.cpp" />
     <ClCompile Include="..\Codes\Dog.cpp" />
     <ClCompile Include="..\Codes\DP_Gun.cpp" />
+    <ClCompile Include="..\Codes\DP_Phone.cpp" />
     <ClCompile Include="..\Codes\DP_Sword.cpp" />
     <ClCompile Include="..\Codes\Effect.cpp" />
     <ClCompile Include="..\Codes\EffectC.cpp" />
@@ -280,6 +287,7 @@
     <ClCompile Include="..\Codes\Loading.cpp" />
     <ClCompile Include="..\Codes\MainApp.cpp" />
     <ClCompile Include="..\Codes\Minigun.cpp" />
+    <ClCompile Include="..\Codes\MissionCube.cpp" />
     <ClCompile Include="..\Codes\Parent_Effect.cpp" />
     <ClCompile Include="..\Codes\Player.cpp" />
     <ClCompile Include="..\Codes\Prop.cpp" />

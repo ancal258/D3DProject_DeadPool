@@ -51,10 +51,17 @@ public:
 		return m_iDP_Point;	}
 	_uint Get_HeadSHot_Point() {
 		return m_iHeadShot_Point;	}
+	void Plus_DP_Point(_uint i) {
+		m_iDP_Point += i;}
 	_uint Get_BulletCnt() {
-		return m_iBulletCnt;	}
+		return m_iBulletCnt;}
 	void Use_Bullet() {
 		--m_iBulletCnt;	}
+	void Plus_Bullet(_uint i) {
+		m_iBulletCnt += i;
+	}
+	void Plus_HP(_uint i);
+
 	void Add_HeadShotPoint() {
 		++m_iHeadShot_Point;}
 public:
@@ -104,8 +111,8 @@ private:
 	// Point
 private:
 	_uint				m_iDP_Point = 0;
-	_uint				m_iHeadShot_Point = 0;
 	_uint				m_iBulletCnt = 36;
+	_uint				m_iHeadShot_Point = 0;
 private:
 	_vec3				m_vCam, m_vPos;
 	_bool				m_isCartoon = false;

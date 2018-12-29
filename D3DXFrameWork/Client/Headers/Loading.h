@@ -67,6 +67,7 @@ private:
 	HRESULT Ready_Layer_BackGround(const _tchar* pLayerTag); // APT 터레인 실제 사용하기위한 객체 생성.
 
 	HRESULT Ready_Layer_Object();
+	HRESULT Ready_Layer_Object_Airplane();
 
 	HRESULT Ready_Layer_Player_FIELD(const _tchar* pLayerTag); // FIELD 플레이어 / 칼
 	HRESULT Ready_Layer_BackGround_FIELD(const _tchar* pLayerTag); // FIELD 터레인 / 스카이

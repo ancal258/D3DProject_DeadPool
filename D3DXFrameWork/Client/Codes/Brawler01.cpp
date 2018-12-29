@@ -40,11 +40,11 @@ HRESULT CBrawler01::Ready_GameObject()
 
 
 	m_iHP = 3;
-
+	m_fAtkTime = rand() % 5;
 	
 
 	CGameObject* pHP_Bar = nullptr;
-	if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_UI_HPBar", SCENE_STAGE, L"Layer_UI", &pHP_Bar)))
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_UI_HPBar", SCENE_STAGE, L"Layer_UI_HP", &pHP_Bar)))
 		return E_FAIL;
 	if (nullptr != pHP_Bar)
 		dynamic_cast<CUI_HPBar*>(pHP_Bar)->Set_Position(this);
@@ -134,7 +134,8 @@ _int CBrawler01::Update_Stage_Field(const _float & fTimeDelta)
 	else
 		m_iCurrentIndex = STATE_IDLE;
 
-	if (m_fAttackAcc > 1.f)
+
+	if (m_fAttackAcc > 1.f + m_fAtkTime * 0.5f)
 	{
 		m_iCurrentIndex = STATE_ATTACK_DEFAULT;
 

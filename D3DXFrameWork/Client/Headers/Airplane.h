@@ -24,6 +24,10 @@ private:
 public:
 	void Set_StateInfo(_vec3* pRight, _vec3* pUp, _vec3* vLook, _vec3* vPos);
 	const _matrix* Get_WorldMatrix() const;
+	_uint Get_DestroyPoint() {
+		return m_iDestroyPoint;	}
+	void Plus_DestroyPoint() {
+		m_iDestroyPoint += 100;	}
 public:
 	virtual HRESULT Ready_GameObject_Prototype();
 	virtual HRESULT Ready_GameObject();
@@ -45,6 +49,7 @@ private:
 	_double				m_dlCurrentOffset = 0;
 	_bool				m_isFinish = false;
 	_float				m_fSpeed = 0; // ¼Óµµ
+	_uint				m_iDestroyPoint = 0;
 private:
 	HRESULT Ready_Component();
 	HRESULT	SetUp_ConstantTable(LPD3DXEFFECT pEffect);

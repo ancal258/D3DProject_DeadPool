@@ -6,6 +6,7 @@
 #include "StaticBackUI.h"
 #include "Input_Device.h"
 #include "Player.h"
+#include "DP_Phone.h"
 
 CTrigger_BackUI::CTrigger_BackUI(LPDIRECT3DDEVICE9 pGraphic_Device)
 	:CGameObject(pGraphic_Device)
@@ -71,8 +72,13 @@ _int CTrigger_BackUI::Update_GameObject(const _float & fTimeDelta)
 		return 0;
 
 	if (m_fTimeAcc > 4.f)
-		m_pRendererCom->Set_SecondTrigger(false);
+	{
+		CGameObject* pGameObject = nullptr;
+		pGameObject = const_cast<CGameObject*>(CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Phone", 0));
+		((CDP_Phone*)pGameObject)->Set_Active(true);
 
+		m_pRendererCom->Set_SecondTrigger(false);
+	}
 	if (true == m_pRendererCom->Get_Trigger())
 	{
 		m_pBackUI->Set_Lived(false);

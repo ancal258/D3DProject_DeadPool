@@ -43,30 +43,26 @@ _int CItem::Update_GameObject(const _float & fTimeDelta)
 {
 	m_pTransformCom->RotationY(5, fTimeDelta);
 
+	if (false == m_isCol)
+	{
+		const CGameObject* pPlayer = CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Player", 0);
+		if (nullptr == pPlayer)
+			return -1;
+
+		if (true == m_pColliderCom->Collision_OBB((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider")))
+		{
+			m_isCol = true;
+
+		}
+	}
+
 	return _int();
 }
 
 _int CItem::LastUpdate_GameObject(const _float & fTimeDelta)
 {
 
-
-
-	const CGameObject* pPlayer = CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Player", 0);
-	if (nullptr == pPlayer)
-		return -1;
-
 	// 디버깅용. 실제론 return true일 때 마다 특정 행동을 취해주자.
-
-	if (false == m_isCol)
-	{
-		if (true == m_pColliderCom->Collision_OBB((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider")))
-		{
-			m_isCol = true;
-			//((CPlayer*)pPlayer)->Set_EventTag(m_pEventTag);
-			Set_Lived(false);
-		}
-	}
-
 
 	m_pTransformCom->Update_Matrix();
 

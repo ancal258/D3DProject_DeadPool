@@ -13,6 +13,7 @@ _END
 
 _BEGIN(Client)
 class CPlayer;
+class CAirplane;
 class CStaticUI final : public CGameObject
 {
 private:
@@ -22,6 +23,7 @@ private:
 public:
 	void Set_Info(_vec2 vPos, _vec2 vScale);
 	void Set_Info(_vec2 vPos, _vec2 vScale,_float fDegree);
+	void Set_Mission(const _tchar* pMission);
 public:
 	virtual HRESULT Ready_GameObject_Prototype(_uint iKind);
 	virtual HRESULT Ready_GameObject();
@@ -40,11 +42,14 @@ private:
 	_float				m_fX = 0, m_fY = 0;
 	_float				m_fSizeX = 0, m_fSizeY = 0;
 	_tchar				m_szTalk[MAX_PATH] = { 0 };
+	_tchar				m_szMission[MAX_PATH] = { 0 };
 	_uint				m_iStrlen = 0;
 	_ulong				m_dwTextureIdx = 0;
+	_uint				m_dwSaveIdx = 0;
 
 private:
 	CPlayer*			m_pPlayer = nullptr;
+	CAirplane*			m_pAirplane = nullptr;
 private:
 	_float				m_fTimeAcc = 0.f;
 private:
