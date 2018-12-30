@@ -105,13 +105,6 @@ void CTerrain::Render_GameObject()
 
 	pEffect->Begin(nullptr, 0);
 
-	static _uint	iPass = 1;
-
-	if (GetKeyState(VK_NUMPAD0) & 0x8000)	
-		iPass = 0;
-	
-	else if (GetKeyState(VK_NUMPAD1) & 0x8000)
-		iPass = 1;
 
 	pEffect->BeginPass(0);
 

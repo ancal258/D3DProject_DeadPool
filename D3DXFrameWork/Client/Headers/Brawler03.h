@@ -36,6 +36,8 @@ private:
 	CMesh_Dynamic*      m_pMeshCom = nullptr;
 	CShader*			m_pShaderCom = nullptr;
 	CCollider*			m_pColliderCom = nullptr;
+	CGameObject*		m_pWeapon = nullptr;
+
 private:
 	_uint				m_iIndex = 0;
 	_float				m_fAngle = 210;
@@ -46,6 +48,10 @@ private:
 	_matrix            m_CombinedRootMatrix;
 	const _matrix*      m_pRootMatrix = nullptr;
 	_matrix				m_RealMatrix;
+private:
+	LPD3DXMESH				m_pColliderMesh = nullptr;
+	BOOL					m_Hit = FALSE;
+	_float					m_fDist =  0;
 private:
 	HRESULT Ready_Component();
 	HRESULT SetUp_ConstantTable(LPD3DXEFFECT pEffect);

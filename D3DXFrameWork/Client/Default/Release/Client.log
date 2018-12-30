@@ -1,8 +1,45 @@
-﻿  Brawler_Solution.cpp
+﻿  Brawler03.cpp
+D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\MissionCube.h(26): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+  Brawler_Solution.cpp
+  Loading.cpp
+D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Event_Cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Trigger_Cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Trigger_BackUI.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\AutoWall_Cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\MissionCube.h(26): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+d:\github\d3dproject_deadpool\d3dxframework\client\headers\Item.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Effect_GunFlash.h(43): warning C4244: '초기화 중': 'float'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+..\Codes\Loading.cpp(380): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(533): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(543): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(595): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(605): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(616): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(686): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(696): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(706): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(716): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(726): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(736): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(746): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(756): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(766): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(776): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(1935): warning C4244: '인수': 'const unsigned int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+..\Codes\Loading.cpp(2046): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(2051): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(2083): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(2088): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(2093): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(2099): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(2105): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(2111): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(2117): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Loading.cpp(2283): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   코드를 생성하고 있습니다.
-  1 of 2163 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+  13 of 2217 functions ( 0.6%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    310 functions had inline decision re-evaluated but remain unchanged
+    106 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
   Client.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Default\..\Bin\Client.exe
   Client.vcxproj -> ..\Bin\Client.pdb (Full PDB)

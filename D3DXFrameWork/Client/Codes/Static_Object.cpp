@@ -7,6 +7,7 @@
 #include "Airplane.h"
 
 #include "Camera_Target.h"
+#include "Camera_Minigun.h"
 #include "Parent_Effect.h"
 _USING(Client)
 
@@ -31,6 +32,12 @@ void CStatic_Object::Set_StateInfo(_vec3* pRight, _vec3* pUp, _vec3* vLook, _vec
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, vPos);
 	m_isOffCulling = isOffCulling;
 	m_isExplosion = isExplosion;
+}
+void CStatic_Object::Set_StateInfo(_vec3 * vPos, _vec3 vScale, _float fDegree, _bool isOffCulling, _bool isExplosion)
+{
+	m_pTransformCom->Scaling(vScale);
+	m_pTransformCom->RotationY(D3DXToRadian(fDegree), 1.f);
+	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, vPos);
 }
 HRESULT CStatic_Object::SetUp_Radius()
 {
@@ -82,13 +89,15 @@ _int CStatic_Object::LastUpdate_GameObject(const _float & fTimeDelta)
 
 	m_pTransformCom->Update_Matrix();
 
-	CCamera_Target*	pCamera = (CCamera_Target*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Camera", 1);
-	if (nullptr == pCamera)
-		return -1;
+
 
 
 	if (nullptr != m_pAirplane)
 	{
+		CCamera_Minigun*	pCamera = (CCamera_Minigun*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Camera", 1);
+		if (nullptr == pCamera)
+			return -1;
+
 		_vec3 vAirplanePos = static_cast<_vec3>((dynamic_cast<const CAirplane*>(m_pAirplane)->Get_WorldMatrix()->m[3]));
 		_vec3 vMyPos = *m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION);
 		//_vec3 vBrawlerPos = static_cast<_vec3>(m_pTransformCom->Get_WorldMatrix()->m[3]);
@@ -106,14 +115,20 @@ _int CStatic_Object::LastUpdate_GameObject(const _float & fTimeDelta)
 		{
 			if (fLength < 110)
 			{
-
-				if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
-					return -1;
+				if (false == pCamera->Culling_ToFrustum(m_pTransformCom, nullptr, m_fRadius))
+				{
+					if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
+						return -1;
+				}
 			}
 		}
 	}
 	else
 	{
+		CCamera_Target*	pCamera = (CCamera_Target*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Camera", 1);
+		if (nullptr == pCamera)
+			return -1;
+
 		if (false == m_isOffCulling)
 		{
 			if (false == pCamera->Culling_ToFrustum(m_pTransformCom, nullptr, m_fRadius))

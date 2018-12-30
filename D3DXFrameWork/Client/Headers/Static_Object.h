@@ -21,6 +21,7 @@ private:
 	virtual ~CStatic_Object() = default;
 public:
 	void Set_StateInfo(_vec3* pRight, _vec3* pUp, _vec3* vLook, _vec3* vPos, _bool isOffCulling, _bool isExplosion);
+	void Set_StateInfo(_vec3* vPos, _vec3 vScale, _float fDegree ,_bool isOffCulling, _bool isExplosion);
 	void Set_Stage(_uint iStage) {
 		m_iStage = iStage;	}
 	HRESULT SetUp_Radius();

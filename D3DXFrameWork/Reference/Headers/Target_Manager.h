@@ -19,10 +19,8 @@ public:
 	HRESULT End_MRT(const _tchar* pMRTTag);
 	HRESULT SetUp_OnShader(LPD3DXEFFECT pEffect, const char* pConstantName, const _tchar* pTargetTag);
 	CTarget* Find_Target(const _tchar* pTargetTag);
-#ifdef _DEBUG
 	HRESULT Ready_DebugBuffer(const _tchar* pTargetTag, const _float& fStartX, const _float& fStartY, const _float& fSizeX, const _float& fSizeY);
 	void Render_DebugBuffer(const _tchar* pMRTTag);
-#endif
 private:
 	map<const _tchar*, CTarget*>				m_mapTarget;
 	typedef map<const _tchar*, CTarget*>		MAPTARGET;

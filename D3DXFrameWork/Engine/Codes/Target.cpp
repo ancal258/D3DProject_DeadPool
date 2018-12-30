@@ -85,7 +85,6 @@ HRESULT CTarget::Clear_Target()
 	return NOERROR;
 }
 
-#ifdef _DEBUG
 
 HRESULT CTarget::Ready_DebugBuffer(const _float & fStartX, const _float & fStartY, const _float & fSizeX, const _float & fSizeY)
 {
@@ -142,7 +141,6 @@ void CTarget::Render_DebugBuffer()
 	m_pGraphic_Device->SetIndices(m_pIB);
 	m_pGraphic_Device->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 4, 0, 2);
 }
-#endif
 
 CTarget * CTarget::Create(LPDIRECT3DDEVICE9 pGraphic_Device, const _uint & iWidth, const _uint & iHeight, D3DFORMAT eFormat, D3DXCOLOR ClearColor)
 {
@@ -159,10 +157,8 @@ CTarget * CTarget::Create(LPDIRECT3DDEVICE9 pGraphic_Device, const _uint & iWidt
 
 void CTarget::Free()
 {
-#ifdef _DEBUG
 	Safe_Release(m_pVB);
 	Safe_Release(m_pIB);
-#endif
 
 	Safe_Release(m_pTarget_Surface);
 	Safe_Release(m_pTarget_Texture);

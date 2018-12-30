@@ -310,6 +310,15 @@
     <Filter Include="02.GameObject\02.For.Stage\02.Weapon\01.Brawler_Weapon\Brawler_Solution">
       <UniqueIdentifier>{9fc7f156-dc3b-4bb6-9f19-ffd3af2b2a64}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\00.For.Static\03.UI\DynamicUI\BloodFace">
+      <UniqueIdentifier>{9634343f-7795-408e-9483-db23e5c23ced}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\00.For.Static\01.Static_Object\Static_AutoWall">
+      <UniqueIdentifier>{6977a823-db46-42aa-9acb-913c94aa8caf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\00.For.Static\04.Trigger\AutoWallCube">
+      <UniqueIdentifier>{7b763653-e5c8-4945-8a8e-b5b5e7189e2f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -537,6 +546,15 @@
     <ClInclude Include="..\Headers\Brawler_Solution.h">
       <Filter>02.GameObject\02.For.Stage\02.Weapon\01.Brawler_Weapon\Brawler_Solution</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\BloodFace.h">
+      <Filter>02.GameObject\00.For.Static\03.UI\DynamicUI\BloodFace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Static_AutoWall.h">
+      <Filter>02.GameObject\00.For.Static\01.Static_Object\Static_AutoWall</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\AutoWall_Cube.h">
+      <Filter>02.GameObject\00.For.Static\04.Trigger\AutoWallCube</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -748,6 +766,15 @@
     </ClCompile>
     <ClCompile Include="..\Codes\Brawler_Solution.cpp">
       <Filter>02.GameObject\02.For.Stage\02.Weapon\01.Brawler_Weapon\Brawler_Solution</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\BloodFace.cpp">
+      <Filter>02.GameObject\00.For.Static\03.UI\DynamicUI\BloodFace</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Static_AutoWall.cpp">
+      <Filter>02.GameObject\00.For.Static\01.Static_Object\Static_AutoWall</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\AutoWall_Cube.cpp">
+      <Filter>02.GameObject\00.For.Static\04.Trigger\AutoWallCube</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

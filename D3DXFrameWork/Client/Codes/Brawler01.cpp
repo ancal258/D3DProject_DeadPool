@@ -4,6 +4,7 @@
 #include "Object_Manager.h"
 #include "Brawler_Knife.h"
 #include "UI_HPBar.h"
+#include "BloodFace.h"
 #include "Player.h"
 CBrawler01::CBrawler01(LPDIRECT3DDEVICE9 pGraphic_Device)
 	:CBrawler(pGraphic_Device)
@@ -36,7 +37,9 @@ HRESULT CBrawler01::Ready_GameObject()
 		dynamic_cast<CBrawler_Knife*>(m_pWeapon)->SetUp_ParentPointer(this);
 
 	m_pTransformCom->Scaling(0.01f, 0.01f, 0.01f);
-	m_pTransformCom->Set_AngleY(D3DXToRadian(rand() % 180));
+	
+	if(1 == m_iStageNum)
+		m_pTransformCom->Set_AngleY(D3DXToRadian(rand() % 180));
 
 
 	m_iHP = 3;
@@ -144,6 +147,8 @@ _int CBrawler01::Update_Stage_Field(const _float & fTimeDelta)
 			if (m_fLength < 0.5f)
 			{
 				((CPlayer*)m_pPlayer[0])->Compute_HP(20);
+				CBloodFace*	pUI = (CBloodFace*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_UI_BloodFace", 0);
+				pUI->Set_Alpha();
 				m_isCompute = true;
 			}
 		}
@@ -184,10 +189,24 @@ _int CBrawler01::LastUpdate_Stage_Field(const _float & fTimeDelta)
 }
 _int CBrawler01::Update_Stage_Airplane(const _float & fTimeDelta)
 {
+	//if (m_isActive == true)
+	//{
+		m_pTransformCom->Go_Straight(4.2f, fTimeDelta);
+		m_iCurrentIndex = STATE_RUN_F;
+
+		m_pMeshCom->Set_AnimationSet(m_iCurrentIndex);
+		m_pMeshCom->Play_AnimationSet(fTimeDelta);
+
+	//}
 	return _int();
 }
 _int CBrawler01::LastUpdate_Stage_Airplane(const _float & fTimeDelta)
 {
+	if (true == m_isDamaged)
+	{
+		Set_DeathIndex();
+		m_iCurrentIndex = m_iDeathIndex;
+	}
 	return _int();
 }
 void CBrawler01::Set_DeathIndex()

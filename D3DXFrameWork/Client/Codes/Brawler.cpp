@@ -6,6 +6,7 @@
 #include "Brawler_Manager.h"
 
 #include "Camera_Target.h"
+#include "Camera_Minigun.h"
 #include "Player.h"
 
 _USING(Client)
@@ -24,6 +25,11 @@ CBrawler::CBrawler(const CBrawler & rhs)
 void CBrawler::Set_Position(_vec3 vPos)
 {
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &vPos);
+}
+
+void CBrawler::Set_Rotation(_float fDegree)
+{
+	m_pTransformCom->Set_AngleY(D3DXToRadian(fDegree));
 }
 
 HRESULT CBrawler::Ready_GameObject_Prototype()
@@ -73,13 +79,20 @@ _int CBrawler::Update_GameObject(const _float & fTimeDelta)
 
 
 	if (1 == m_iStageNum)
+	{
 		CBrawler::Update_Stage_Field(fTimeDelta);
+		if (FAILED(isHitScan()))
+			return E_FAIL;
+	}
 	else if (2 == m_iStageNum)
+	{
 		CBrawler::Update_Stage_Airplane(fTimeDelta);
+		if (FAILED(isHitScanAirplane()))
+			return E_FAIL;
+	}
 
 
-	if (FAILED(isHitScan()))
-		return E_FAIL;
+
 	return _int();
 }
 
@@ -348,25 +361,18 @@ _int CBrawler::LastUpdate_Stage_Field(const _float & fTimeDelta)
 
 _int CBrawler::Update_Stage_Airplane(const _float & fTimeDelta)
 {
-	if (m_eType == TYPE_FRONT)
-	{
+	CCamera_Minigun*	pCamera = (CCamera_Minigun*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Camera", 1);
+	if (nullptr == pCamera)
+		return -1;
 
-	}
-	else if (m_eType == TYPE_EDGE_L)
-	{
+	_float fRadius = 25.f;
+	Update_HandMatrix();
 
-	}
-	else if (m_eType == TYPE_EDGE_R)
-	{
 
-	}
-	else if (m_eType == TYPE_STOP)
+	if (false == pCamera->Culling_ToFrustum(m_pTransformCom, nullptr, fRadius))
 	{
-
-	}
-	else
-	{
-
+		if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
+			return -1;
 	}
 
 	return _int();
@@ -374,6 +380,29 @@ _int CBrawler::Update_Stage_Airplane(const _float & fTimeDelta)
 
 _int CBrawler::LastUpdate_Stage_Airplane(const _float & fTimeDelta)
 {
+	// 첫번째 구체 체크
+	if (TRUE == m_Hit[0])
+	{
+		m_fDamegedTime = 0.f;
+		m_isDamaged = CInput_Device::GetInstance()->Is_MinDist(m_fDist[0]);
+	}
+	if (TRUE == m_Hit[1])
+	{
+		// 두번재 구체 체크 ( 첫번째 구체가 가장 짧은 거리가 아니라면. )
+		if (false == m_isDamaged)
+		{
+			m_fDamegedTime = 0.f;
+			m_isDamaged = CInput_Device::GetInstance()->Is_MinDist(m_fDist[1]);
+			((CPlayer*)m_pPlayer[0])->Add_HeadShotPoint();
+		}
+	}
+	if (TRUE == m_Hit[0] || TRUE == m_Hit[1])
+	{
+		m_iHP--;
+	}
+
+	m_pTransformCom->Update_Matrix();
+
 	return _int();
 }
 
@@ -392,6 +421,20 @@ HRESULT CBrawler::isHitScan()
 		if (FAILED(CInput_Device::GetInstance()->Picking_ToCollider(m_pColliderMesh[1], m_pTransformCom, &m_Hit[1], &m_fDist[1])))
 			return E_FAIL;
 	}
+	return NOERROR;
+}
+
+HRESULT CBrawler::isHitScanAirplane()
+{
+	m_Hit[0] = FALSE;
+	m_Hit[1] = FALSE;
+
+	if (FAILED(CInput_Device::GetInstance()->Picking_ToCollider(m_pColliderMesh[0], m_pTransformCom, &m_Hit[0], &m_fDist[0])))
+		return E_FAIL;
+
+	if (FAILED(CInput_Device::GetInstance()->Picking_ToCollider(m_pColliderMesh[1], m_pTransformCom, &m_Hit[1], &m_fDist[1])))
+		return E_FAIL;
+
 	return NOERROR;
 }
 

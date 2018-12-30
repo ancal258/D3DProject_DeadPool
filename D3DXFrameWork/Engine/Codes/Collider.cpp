@@ -314,6 +314,8 @@ _bool CCollider::Collision_Sphere(const CCollider * pTargetCollider)
 
 void CCollider::Render_Collider()
 {
+#ifdef _DEBUG
+
 	if (nullptr == m_pMesh)
 		return;
 
@@ -349,6 +351,7 @@ void CCollider::Render_Collider()
 	pEffect->End();
 
 	Safe_Release(pGraphic_Device);
+#endif
 }
 
 HRESULT CCollider::Create_BoundingBox()

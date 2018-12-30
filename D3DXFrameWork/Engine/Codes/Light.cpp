@@ -71,6 +71,12 @@ void CLight::Render_Light(LPD3DXEFFECT pEffect)
 	if (false == m_isRender)
 		return;
 
+	if (true == m_isUpDown)
+	{
+
+	}
+
+
 	_uint			iPassIdx = 0;
 
 	if (D3DLIGHT_DIRECTIONAL == m_LightInfo.Type)

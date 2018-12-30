@@ -4,9 +4,7 @@
 #include "Object_Manager.h"
 #include "Light_Manager.h"
 #include "Input_Device.h"
-#include "Camera_Cinematic.h"
-#include "Camera_Debug.h"
-#include "Camera_Target.h"
+#include "Camera_Minigun.h"
 #include "MissionCube.h"
 #include "Brawler_Solution.h"
 
@@ -53,12 +51,11 @@ HRESULT CBrawler03::Ready_GameObject()
 	if (nullptr == m_pRootMatrix)
 		return E_FAIL;
 	Update_HandMatrix();
-	CGameObject* pWeapon = nullptr;
 
-	if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Brawler_Solution", SCENE_STAGE, L"Layer_Brawler_Solution", &pWeapon)))
+	if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Brawler_Solution", SCENE_STAGE, L"Layer_Brawler_Solution", &m_pWeapon)))
 		return E_FAIL;
-	if (nullptr != pWeapon)
-		dynamic_cast<CBrawler_Solution*>(pWeapon)->SetUp_ParentPointer(this);
+	if (nullptr != m_pWeapon)
+		dynamic_cast<CBrawler_Solution*>(m_pWeapon)->SetUp_ParentPointer(this);
 
 	m_pMeshCom->Set_AnimationSet(0);
 	return NOERROR;
@@ -66,6 +63,12 @@ HRESULT CBrawler03::Ready_GameObject()
 
 _int CBrawler03::Update_GameObject(const _float & fTimeDelta)
 {
+
+	m_Hit = FALSE;
+
+	if (FAILED(CInput_Device::GetInstance()->Picking_ToCollider(m_pColliderMesh, m_pTransformCom, &m_Hit, &m_fDist)))
+		return -1;
+
 	Update_HandMatrix();
 
 	m_pMeshCom->Set_AnimationSet(0);
@@ -82,35 +85,28 @@ _int CBrawler03::LastUpdate_GameObject(const _float & fTimeDelta)
 		return -1;
 
 
-	//if (GetKeyState(VK_UP) & 0x8000)
-	//{
-	//	_float m_fValue = 0.1f;
-	//	m_pTransformCom->Set_PlusPosition(1, m_fValue);
-	//	cout << m_pTransformCom->Get_WorldMatrix()->m[3][1] << endl;
-	//}
-	//if (GetKeyState(VK_DOWN) & 0x8000)
-	//{
-	//	_float m_fValue = -0.1f;
-	//	m_pTransformCom->Set_PlusPosition(1, m_fValue);
-	//	cout << m_pTransformCom->Get_WorldMatrix()->m[3][1] << endl;
-	//}
-	//if (GetKeyState(VK_LEFT) & 0x8000)
-	//{
-	//	_float m_fValue = -0.1f;
-	//	m_pTransformCom->Set_PlusPosition(0, m_fValue);
-	//}
-	//if (GetKeyState(VK_RIGHT) & 0x8000)
-	//{
-	//	_float m_fValue = 0.1f;
-	//	m_pTransformCom->Set_PlusPosition(0, m_fValue);
-	//}
 
+
+	if (TRUE == m_Hit)
+	{
+		if (true == CInput_Device::GetInstance()->Is_MinDist(m_fDist))
+		{
+			// ÇÇ ÀÌÆåÆ®
+			m_pWeapon->Set_Lived(false);
+			Set_Lived(false);
+		}
+	}
+	
 	m_pTransformCom->Update_Matrix();
 
-
-	if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
+	CCamera_Minigun*	pCamera = (CCamera_Minigun*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_Camera", 1);
+	if (nullptr == pCamera)
 		return -1;
-
+	if (false == pCamera->Culling_ToFrustum(m_pTransformCom, nullptr, 150.f))
+	{
+		if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_NONEALPHA, this)))
+			return -1;
+	}
 
 	return _int();
 }
@@ -181,6 +177,7 @@ HRESULT CBrawler03::Ready_Component()
 	if (FAILED(Add_Component(L"Com_Collider", m_pColliderCom)))
 		return E_FAIL;
 	m_pColliderCom->SetUp_Collider(m_pTransformCom->Get_WorldMatrix(), &_vec3(50, 140, 50), &_vec3(0.0f, 0.f, 0.f), &_vec3(0.f, 70.f, 0.f));
+	m_pColliderMesh = m_pColliderCom->Get_Mesh();
 	Safe_Release(pComponent_Manager);
 
 	return NOERROR;

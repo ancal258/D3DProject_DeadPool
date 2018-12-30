@@ -170,9 +170,11 @@
   <ItemGroup>
     <ClInclude Include="..\Headers\Airplane.h" />
     <ClInclude Include="..\Headers\Animator.h" />
+    <ClInclude Include="..\Headers\AutoWall_Cube.h" />
     <ClInclude Include="..\Headers\Back_Loading.h" />
     <ClInclude Include="..\Headers\Back_Logo.h" />
     <ClInclude Include="..\Headers\BikiniGirl.h" />
+    <ClInclude Include="..\Headers\BloodFace.h" />
     <ClInclude Include="..\Headers\Brawler.h" />
     <ClInclude Include="..\Headers\Brawler01.h" />
     <ClInclude Include="..\Headers\Brawler02.h" />
@@ -227,6 +229,7 @@
     <ClInclude Include="..\Headers\StaticBackUI.h" />
     <ClInclude Include="..\Headers\StaticUI.h" />
     <ClInclude Include="..\Headers\Static_Airplane.h" />
+    <ClInclude Include="..\Headers\Static_AutoWall.h" />
     <ClInclude Include="..\Headers\Static_Object.h" />
     <ClInclude Include="..\Headers\SubtitleManager.h" />
     <ClInclude Include="..\Headers\TalkBox.h" />
@@ -246,9 +249,11 @@
   <ItemGroup>
     <ClCompile Include="..\Codes\Airplane.cpp" />
     <ClCompile Include="..\Codes\Animator.cpp" />
+    <ClCompile Include="..\Codes\AutoWall_Cube.cpp" />
     <ClCompile Include="..\Codes\Back_Loading.cpp" />
     <ClCompile Include="..\Codes\Back_Logo.cpp" />
     <ClCompile Include="..\Codes\BikiniGirl.cpp" />
+    <ClCompile Include="..\Codes\BloodFace.cpp" />
     <ClCompile Include="..\Codes\Brawler.cpp" />
     <ClCompile Include="..\Codes\Brawler01.cpp" />
     <ClCompile Include="..\Codes\Brawler02.cpp" />
@@ -301,6 +306,7 @@
     <ClCompile Include="..\Codes\StaticBackUI.cpp" />
     <ClCompile Include="..\Codes\StaticUI.cpp" />
     <ClCompile Include="..\Codes\Static_Airplane.cpp" />
+    <ClCompile Include="..\Codes\Static_AutoWall.cpp" />
     <ClCompile Include="..\Codes\Static_Object.cpp" />
     <ClCompile Include="..\Codes\SubtitleManager.cpp" />
     <ClCompile Include="..\Codes\TalkBox.cpp" />

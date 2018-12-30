@@ -101,7 +101,6 @@ HRESULT CTarget_Manager::SetUp_OnShader(LPD3DXEFFECT pEffect, const char * pCons
 	return NOERROR;
 }
 
-#ifdef _DEBUG
 HRESULT CTarget_Manager::Ready_DebugBuffer(const _tchar * pTargetTag, const _float & fStartX, const _float & fStartY, const _float & fSizeX, const _float & fSizeY)
 {
 	CTarget*	pTarget = Find_Target(pTargetTag);
@@ -127,7 +126,6 @@ void CTarget_Manager::Render_DebugBuffer(const _tchar * pMRTTag)
 	}
 }
 
-#endif
 
 CTarget * CTarget_Manager::Find_Target(const _tchar * pTargetTag)
 {

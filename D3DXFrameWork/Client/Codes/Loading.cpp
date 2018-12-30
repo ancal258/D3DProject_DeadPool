@@ -31,7 +31,9 @@
 #include "BikiniGirl.h"
 #include "Trigger_Cube.h"
 #include "Trigger_BackUI.h"
+#include "AutoWall_Cube.h"
 #include "MissionCube.h"
+#include "Static_AutoWall.h"
 // ITEM
 #include "Item_DPPoint.h"
 #include "Item_Bullet.h"
@@ -59,7 +61,7 @@
 #include "StaticBackUI.h"
 #include "ConcentratedLine.h"
 #include "WhiteBack.h"
-
+#include "BloodFace.h"
 /*
 헬기,  스테이지2 네비메쉬 설치, 미니건움직임,카메라,
 스테이지3 일부 맵 설치 ,대화 박스(글자 수에 따라 자동으로 스케일) ,폰트,
@@ -365,9 +367,9 @@ HRESULT CLoading::Ready_LightInfo()
 
 	// For. Directional 1
 	LightInfo.Type = D3DLIGHT_DIRECTIONAL;
-	LightInfo.Diffuse = D3DXCOLOR(0.9f, 0.9f, 0.9f, 1.f);
+	LightInfo.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.f);
 	LightInfo.Specular = D3DXCOLOR(0.0f, 0.0f, 0.0f, 1.f);
-	LightInfo.Ambient = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.f);
 	LightInfo.Direction = _vec3(1.f, -1.f, 1.f);
 
 	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
@@ -471,10 +473,10 @@ HRESULT CLoading::Ready_LightInfo_FIELD()
 
 	LightInfo.Type = D3DLIGHT_DIRECTIONAL;
 	//LightInfo.Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.f);
-	LightInfo.Diffuse = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.f);
+	LightInfo.Diffuse = D3DXCOLOR(0.6f, 0.6f, 0.6f, 1.f);
 	LightInfo.Specular = D3DXCOLOR(0.1f, 0.1f, 0.1f, 0.5f);
 	//LightInfo.Ambient = D3DXCOLOR(0.4f, 0.4f, 0.4f, 1.f);
-	LightInfo.Ambient = D3DXCOLOR(0.3f, 0.3f, 0.3f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.4f, 0.4f, 0.4f, 1.f);
 	LightInfo.Direction = _vec3(1.f, -1.f, 1.f);
 
 	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
@@ -606,6 +608,55 @@ HRESULT CLoading::Ready_LightInfo_FIELD()
 		return E_FAIL;
 
 
+	// For. Lamp_BIG
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.45f, 0.40f, 1.f);
+	LightInfo.Position = _vec3(59.52, 5.f, 14.94f);
+	LightInfo.Range = 11.0f;
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
+	// For. Lamp_BIG
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.45f, 0.40f, 1.f);
+	LightInfo.Position = _vec3(76.64f, 5.f, 51.01f);
+	LightInfo.Range = 7.0f;
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
+	// For. Lamp_BIG
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.45f, 0.40f, 1.f);
+	LightInfo.Position = _vec3(76.64f, 5.f, 60.34f);
+	LightInfo.Range = 7.f;
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
+	// For. Lamp_BIG
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.45f, 0.40f, 1.f);
+	LightInfo.Position = _vec3(59.30f, 5.f, 61.10f);
+	LightInfo.Range = 7.f;
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
+	// For. Lamp_BIG
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.45f, 0.40f, 1.f);
+	LightInfo.Position = _vec3(58.86f, 5.f,50.53f);
+	LightInfo.Range = 7.f;
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
 
 	return NOERROR;
 }
@@ -617,12 +668,113 @@ HRESULT CLoading::Ready_LightInfo_AIRPLANE()
 
 	LightInfo.Type = D3DLIGHT_DIRECTIONAL;
 	//LightInfo.Diffuse = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.f);
-	LightInfo.Diffuse = D3DXCOLOR(0.9f, 0.9f, 0.9f, 1.f);
-	LightInfo.Specular = D3DXCOLOR(0.6f, 0.6f, 0.6f, 0.5f);
+	LightInfo.Diffuse = D3DXCOLOR(0.7f, 0.7f, 0.7f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(0.4f, 0.4f, 0.4f, 0.5f);
 	//LightInfo.Ambient = D3DXCOLOR(0.4f, 0.4f, 0.4f, 1.f);
 	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.5f, 0.5f, 1.f);
 	LightInfo.Direction = _vec3(1.f, -1.f, 1.f);
 
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
+
+	// For. Lamp_BIG
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.45f, 0.40f, 1.f);
+	LightInfo.Position = _vec3(26.60, 5.f, 90.17);
+	LightInfo.Range = 7.f;
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
+	// For. Lamp_BIG
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.45f, 0.40f, 1.f);
+	LightInfo.Position = _vec3(62.52, 5.f, 93.58);
+	LightInfo.Range = 7.f;
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
+	// For. Lamp_BIG
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.45f, 0.40f, 1.f);
+	LightInfo.Position = _vec3(106.4, 5.f, 120.7);
+	LightInfo.Range = 7.f;
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
+	// For. Lamp_BIG
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.45f, 0.40f, 1.f);
+	LightInfo.Position = _vec3(95.7, 5.f, 155.0);
+	LightInfo.Range = 7.f;
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
+	// For. Lamp_BIG
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.45f, 0.40f, 1.f);
+	LightInfo.Position = _vec3(85.87, 5.f, 156.3);
+	LightInfo.Range = 7.f;
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
+	// For. Lamp_BIG
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.45f, 0.40f, 1.f);
+	LightInfo.Position = _vec3(94.29, 5.f, 213.9);
+	LightInfo.Range = 7.f;
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
+	// For. Lamp_BIG
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.45f, 0.40f, 1.f);
+	LightInfo.Position = _vec3(77.77, 5.f, 232.9);
+	LightInfo.Range = 7.f;
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
+	// For. Lamp_BIG
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.45f, 0.40f, 1.f);
+	LightInfo.Position = _vec3(69.12, 5.f, 233.4);
+	LightInfo.Range = 7.f;
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
+	// For. Lamp_BIG
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.45f, 0.40f, 1.f);
+	LightInfo.Position = _vec3(17.33, 5.f, 225.7);
+	LightInfo.Range = 7.f;
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
+	// For. Lamp_BIG
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.45f, 0.40f, 1.f);
+	LightInfo.Position = _vec3(17.55, 5.f, 214.2);
+	LightInfo.Range = 7.f;
 	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
 		return E_FAIL;
 
@@ -763,6 +915,9 @@ HRESULT CLoading::Ready_Static_Prototype_Component()
 	// For.Component_Texture_UI_StaticBackUI
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_UI_StaticBackUI", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/UI/Renderer_BackUI/BackUI_%d.png", 1))))
 		return E_FAIL;
+	// For.Component_Texture_UI_StaticBackUI
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_UI_BloodFace", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/UI/BloodFace/BloodFace.png"))))
+		return E_FAIL;
 
 	// For.Component_Buffer_Terrain	
 	lstrcpy(m_szString, L"../Bin/Resources/Textures/Terrain/Height.bmp");
@@ -854,6 +1009,9 @@ HRESULT CLoading::Ready_Static_Prototype_UI()
 	// For.Prototype_Trigger_BackUI
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_MissionCube", CMissionCube::Create(Get_Graphic_Device()))))
 		return E_FAIL;
+	// For.Prototype_BloodFace
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_BloodFace", CBloodFace::Create(Get_Graphic_Device()))))
+		return E_FAIL;
 
 
 	return NOERROR;
@@ -931,6 +1089,10 @@ HRESULT CLoading::Ready_Static_Layer_UI()
 		return E_FAIL;
 	((CStaticUI*)pUI)->Set_Info(_vec2(210, 200), _vec2(150, 36));
 
+	// BloodFace
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_BloodFace", SCENE_STAGE, L"Layer_UI_BloodFace", &pUI)))
+		return E_FAIL;
+	
 	//// BackUI
 	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_UI_StaticBackUI_Think", SCENE_STAGE, L"Layer_UI", &pUI)))
 	//	return E_FAIL;
@@ -1638,6 +1800,9 @@ HRESULT CLoading::Ready_Stage_Prototype_GameObject_SceneFIELD()
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_GWN_Wall01", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_GWN_Wall01"))))
 		return E_FAIL;
 	// For.Prototype_
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_AutoWall", CStatic_AutoWall::Create(m_pGraphic_Device, L"Component_Mesh_GWN_Wall01"))))
+		return E_FAIL;
+	// For.Prototype_
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_GWN_Wall02", CStatic_Object::Create(m_pGraphic_Device, L"Component_Mesh_GWN_Wall02"))))
 		return E_FAIL;
 	// For.Prototype_
@@ -1735,6 +1900,10 @@ HRESULT CLoading::Ready_Stage_Prototype_GameObject_SceneFIELD()
 		return E_FAIL;
 	// For.GameObject_Helicopter
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Prop", CProp::Create(Get_Graphic_Device()))))
+		return E_FAIL;
+
+	// For.Prototype_AutoWall_Cube
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_AutoWall_Cube", CAutoWall_Cube::Create(Get_Graphic_Device()))))
 		return E_FAIL;
 	//////////////////////////////////////////////////
 
@@ -1871,10 +2040,25 @@ HRESULT CLoading::Ready_Layer_Object()
 	//	return E_FAIL;
 	//((CBrawler01*)pBrawler)->Set_Position(_vec3(200.f, 0, 200.f));
 
+	CGameObject* pGameObject = nullptr;
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_AutoWall", SCENE_STAGE, L"Layer_AutoWall", &pGameObject)))
+		return E_FAIL;
+	((CStatic_AutoWall*)pGameObject)->Set_StateInfo(&_vec3(76.15f, 0.f, 30.54f), &_vec3(0.017, 0.0125, 0.017), 90, false, false);
+	((CStatic_AutoWall*)pGameObject)->Set_Stage(-1);
 
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_AutoWall", SCENE_STAGE, L"Layer_AutoWall", &pGameObject)))
+		return E_FAIL;
+	((CStatic_AutoWall*)pGameObject)->Set_StateInfo(&_vec3(80.35f, 0.f, 30.54f), &_vec3(0.017, 0.0125, 0.017), 270, false, false);
+	((CStatic_AutoWall*)pGameObject)->Set_Stage(1);
+
+	
 
 	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_BikiniGirl", SCENE_STAGE, L"Layer_BikiniGirl")))
 		return E_FAIL;
+
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_AutoWall_Cube", SCENE_STAGE, L"Layer_AutoWallCube",&pGameObject)))
+		return E_FAIL;
+	((CAutoWall_Cube*)pGameObject)->Set_StateInfo(&_vec3(78.7f, 0.f, 29.11f));
 
 	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Static_Airplane", SCENE_STAGE, L"Layer_Airplane_Field")))
 		return E_FAIL;
@@ -1893,10 +2077,53 @@ HRESULT CLoading::Ready_Layer_Object_Airplane()
 
 	CGameObject* pBrawler = nullptr;
 
+	lstrcpy(m_szString, L"Brawler_0...");
 	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler03", SCENE_STAGE, L"Layer_Brawler03", &pBrawler)))
 		return E_FAIL;
-	((CBrawler03*)pBrawler)->Set_Position(_vec3(50.f, 3.7f, 95.f));
+	((CBrawler03*)pBrawler)->Set_Position(_vec3(52.53, 3.7f, 116.2));
 
+	lstrcpy(m_szString, L"Brawler_1...");
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler03", SCENE_STAGE, L"Layer_Brawler03", &pBrawler)))
+		return E_FAIL;
+	((CBrawler03*)pBrawler)->Set_Position(_vec3(58.10, 3.7f, 115.1));
+
+	lstrcpy(m_szString, L"Brawler_2...");
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler03", SCENE_STAGE, L"Layer_Brawler03", &pBrawler)))
+		return E_FAIL;
+	((CBrawler03*)pBrawler)->Set_Position(_vec3(63.26, 3.7f, 118.8));
+
+
+	lstrcpy(m_szString, L"Brawler_3...");
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler03", SCENE_STAGE, L"Layer_Brawler03", &pBrawler)))
+		return E_FAIL;
+	((CBrawler03*)pBrawler)->Set_Position(_vec3(91.45, 0, 154.9));
+
+
+	lstrcpy(m_szString, L"Brawler_4...");
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler03", SCENE_STAGE, L"Layer_Brawler03", &pBrawler)))
+		return E_FAIL;
+	((CBrawler03*)pBrawler)->Set_Position(_vec3(93.23, 0, 157.7));
+
+
+	lstrcpy(m_szString, L"Brawler_5...");
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler03", SCENE_STAGE, L"Layer_Brawler03", &pBrawler)))
+		return E_FAIL;
+	((CBrawler03*)pBrawler)->Set_Position(_vec3(89.91, 0, 159.3));
+
+
+	lstrcpy(m_szString, L"Brawler_...");
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler03", SCENE_STAGE, L"Layer_Brawler03", &pBrawler)))
+		return E_FAIL;
+	((CBrawler03*)pBrawler)->Set_Position(_vec3(96.93, 0, 159.5));
+
+
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_2", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
+		return E_FAIL;
+	((CBrawler01*)pBrawler)->Set_Position(_vec3(25, 3.7f, 25));
+	((CBrawler01*)pBrawler)->Set_Rotation(90);
+	//((CBrawler01*)pBrawler)->S
+
+	
 	return NOERROR;
 }
 

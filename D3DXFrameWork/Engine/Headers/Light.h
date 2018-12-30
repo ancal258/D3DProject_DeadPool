@@ -27,6 +27,7 @@ private:
 	LPDIRECT3DINDEXBUFFER9	m_pIB = nullptr;
 
 	_bool					m_isRender = true;
+	_bool					m_isUpDown = false;
 public:
 	static CLight* Create(LPDIRECT3DDEVICE9 pGraphic_Device, const D3DLIGHT9* pLightInfo);
 protected:

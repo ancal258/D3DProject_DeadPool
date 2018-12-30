@@ -1,6 +1,6 @@
 
 matrix		g_matWorld, g_matView, g_matProj;
-
+float		g_fAlpha = 1.f;
 texture		g_DiffuseTexture;
 
 sampler DiffuseSampler = sampler_state
@@ -96,7 +96,20 @@ PS_OUT PS_MAIN_BACKUI(PS_IN In)
 	return Out;
 }
 
+PS_OUT PS_MAIN_ALPHA(PS_IN In)
+{
+	PS_OUT			Out = (PS_OUT)0;
 
+	float2 vTexUV = In.vTexUV;
+
+	vTexUV.x = 1 - vTexUV.x;
+	vector		vDiffuse = tex2D(DiffuseSampler, vTexUV);
+
+	Out.vColor = vDiffuse;
+	Out.vColor.a = vDiffuse.a * g_fAlpha;
+
+	return Out;
+}
 
 technique Default_Device
 {
@@ -145,6 +158,20 @@ technique Default_Device
 
 		VertexShader = compile vs_3_0 VS_MAIN();
 		PixelShader = compile ps_3_0 PS_MAIN_BACKUI();
+	}
+
+	pass ALPHA_Rendering
+	{
+		cullmode = cw;
+
+		AlphaBlendEnable = true;
+		SrcBlend = SrcAlpha;
+		DestBlend = InvSrcAlpha;
+
+		ZEnable = false;
+
+		VertexShader = compile vs_3_0 VS_MAIN();
+		PixelShader = compile ps_3_0 PS_MAIN_ALPHA();
 	}
 
 }
