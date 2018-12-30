@@ -2,6 +2,7 @@
 
 #include "GameObject.h"
 #include "Target_Manager.h"
+#include "Target.h"
 #include "Light_Manager.h"
 #include "Shader.h"
 
@@ -66,6 +67,14 @@ HRESULT CRenderer::Ready_Renderer()
 	if (FAILED(m_pTarget_Manager->Add_Target(pGraphic_Device, L"Target_Specular", ViewPort.Width, ViewPort.Height, D3DFMT_A16B16G16R16F, D3DXCOLOR(0.f, 0.f, 0.f, 0.f))))
 		return E_FAIL;
 
+	// For.Target_Specular : 디퍼드로 그리는 객체들의 픽셀 블룸상태를 저장.
+	if (FAILED(m_pTarget_Manager->Add_Target(pGraphic_Device, L"Target_Bloom", ViewPort.Width, ViewPort.Height, D3DFMT_A8R8G8B8, D3DXCOLOR(0.f, 0.f, 0.f, 0.f))))
+		return E_FAIL;
+
+	// For.Target_Specular : 디퍼드로 그리는 객체들의 픽셀 조합된 색체 저장.
+	if (FAILED(m_pTarget_Manager->Add_Target(pGraphic_Device, L"Target_Color", ViewPort.Width, ViewPort.Height, D3DFMT_A8R8G8B8, D3DXCOLOR(0.f, 0.f, 0.f, 0.f))))
+		return E_FAIL;
+
 #ifdef _DEBUG
 	if (FAILED(m_pTarget_Manager->Ready_DebugBuffer(L"Target_Diffuse", 0.f, 0.f, 200.f, 200.f)))
 		return E_FAIL;
@@ -79,11 +88,21 @@ HRESULT CRenderer::Ready_Renderer()
 		return E_FAIL;
 	if (FAILED(m_pTarget_Manager->Ready_DebugBuffer(L"Target_Shadow", ViewPort.Width - 200.f, 400.f, 200.f, 200.f)))
 		return E_FAIL;
+	if (FAILED(m_pTarget_Manager->Ready_DebugBuffer(L"Target_Color", ViewPort.Width - 200.f, 400.f, 200.f, 200.f)))
+		return E_FAIL;
+	if (FAILED(m_pTarget_Manager->Ready_DebugBuffer(L"Target_Bloom", ViewPort.Width - 200.f, 600.f, 200.f, 200.f)))
+		return E_FAIL;
 #endif
 
 	// For. MRT_Shadow
 	if (FAILED(m_pTarget_Manager->Add_MRT(L"MRT_Shadow", L"Target_Shadow")))
 		return E_FAIL;
+
+	if (FAILED(m_pTarget_Manager->Add_MRT(L"MRT_Bloom", L"Target_Bloom")))
+		return E_FAIL;
+	if (FAILED(m_pTarget_Manager->Add_MRT(L"MRT_Bloom", L"Target_Color")))
+		return E_FAIL;
+
 
 	// For. MRT_Deferred
 	if (FAILED(m_pTarget_Manager->Add_MRT(L"MRT_Deferred", L"Target_Diffuse")))
@@ -161,6 +180,7 @@ void CRenderer::Render_Renderer()
 #ifdef _DEBUG
 	m_pTarget_Manager->Render_DebugBuffer(L"MRT_Deferred");
 	m_pTarget_Manager->Render_DebugBuffer(L"MRT_LightAcc");
+	m_pTarget_Manager->Render_DebugBuffer(L"MRT_Bloom");
 #endif
 }
 
@@ -308,12 +328,13 @@ void CRenderer::Render_Blend()
 
 	pEffect->AddRef();
 
+	m_pTarget_Manager->Begin_MRT(L"MRT_Bloom");
 	m_pTarget_Manager->SetUp_OnShader(pEffect, "g_DiffuseTexture", L"Target_Diffuse");
-
 	m_pTarget_Manager->SetUp_OnShader(pEffect, "g_ShadeTexture", L"Target_Shade");
 	m_pTarget_Manager->SetUp_OnShader(pEffect, "g_SpecularTexture", L"Target_Specular");
 
 	pEffect->Begin(nullptr, 0);
+
 	pEffect->BeginPass(0);
 
 	pGraphic_Device->SetStreamSource(0, m_pVB, 0, sizeof(VTXVIEWPORT));
@@ -322,8 +343,24 @@ void CRenderer::Render_Blend()
 	pGraphic_Device->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 4, 0, 2);
 
 	pEffect->EndPass();
-	pEffect->End();
+	m_pTarget_Manager->End_MRT(L"MRT_Bloom");
 
+
+
+	m_pTarget_Manager->SetUp_OnShader(pEffect, "g_BloomTexture", L"Target_Bloom");
+	m_pTarget_Manager->SetUp_OnShader(pEffect, "g_ColorTexture", L"Target_Color");
+	pEffect->CommitChanges();
+	pEffect->BeginPass(1);
+
+	pGraphic_Device->SetStreamSource(0, m_pVB, 0, sizeof(VTXVIEWPORT));
+	pGraphic_Device->SetFVF(D3DFVF_XYZRHW | D3DFVF_TEX1);
+	pGraphic_Device->SetIndices(m_pIB);
+	pGraphic_Device->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, 0, 0, 4, 0, 2);
+
+	pEffect->EndPass();
+
+
+	pEffect->End();
 	Safe_Release(pGraphic_Device);
 	Safe_Release(pEffect);
 

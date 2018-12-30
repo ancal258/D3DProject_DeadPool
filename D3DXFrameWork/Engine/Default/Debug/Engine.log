@@ -1,2 +1,5 @@
-﻿  Engine.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Engine\Default\..\Bin\Engine.dll
+﻿FXC : warning X4717: Effects deprecated for D3DCompiler_47
+  
+  compilation object save succeeded; see D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Engine\Bin\Shader_Blend.cso
+  Engine.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Engine\Default\..\Bin\Engine.dll
   Engine.vcxproj -> ..\Bin\Engine.pdb (Full PDB)

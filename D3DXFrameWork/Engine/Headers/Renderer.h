@@ -6,6 +6,7 @@ _BEGIN(Engine)
 class CShader;
 class CGameObject;
 class CTarget_Manager;
+class CTarget;
 class _ENGINE_DLL CRenderer final : public CComponent
 {
 public:
@@ -36,6 +37,9 @@ private:
 	CShader*						m_pShader_Blend = nullptr;
 	LPDIRECT3DVERTEXBUFFER9			m_pVB = nullptr;
 	LPDIRECT3DINDEXBUFFER9			m_pIB = nullptr;
+
+	CTarget*						m_pBloom_Target = nullptr;
+	CTarget*						m_pColor_Target = nullptr;
 private:
 	_bool							m_isTrigger = false;
 	_bool							m_isSecondTrigger = false;

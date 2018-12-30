@@ -32,7 +32,81 @@ sampler SpecularSampler = sampler_state
 	mipfilter = linear;
 };
 
+texture			g_BloomTexture;
+
+sampler BloomSampler = sampler_state
+{
+	texture = g_BloomTexture;
+	minfilter = linear;
+	magfilter = linear;
+	mipfilter = linear;
+};
+
+texture			g_ColorTexture;
+
+sampler ColorSampler = sampler_state
+{
+	texture = g_ColorTexture;
+	minfilter = linear;
+	magfilter = linear;
+	mipfilter = linear;
+};
+
 vector			g_vLightDir;
+
+
+float2 rcpres = { 0.001280, 0.000768};
+
+float2 PixelKernelH[13] =
+{
+	{ -6, 0 },
+	{ -5, 0 },
+	{ -4, 0 },
+	{ -3, 0 },
+	{ -2, 0 },
+	{ -1, 0 },
+	{ 0, 0 },
+	{ 1, 0 },
+	{ 2, 0 },
+	{ 3, 0 },
+	{ 4, 0 },
+	{ 5, 0 },
+	{ 6, 0 },
+};
+
+float2 PixelKernelV[13] =
+{
+	{ 0, -6 },
+	{ 0, -5 },
+	{ 0, -4 },
+	{ 0, -3 },
+	{ 0, -2 },
+	{ 0, -1 },
+	{ 0,  0 },
+	{ 0,  1 },
+	{ 0,  2 },
+	{ 0,  3 },
+	{ 0,  4 },
+	{ 0,  5 },
+	{ 0,  6 },
+};
+
+float BlurWeights[13] =
+{
+	0.002216,
+	0.008764,
+	0.026995,
+	0.064759,
+	0.120985,
+	0.176033,
+	0.199471,
+	0.176033,
+	0.120985,
+	0.064759,
+	0.026995,
+	0.008764,
+	0.002216,
+};
 
 
 struct PS_IN // 픽셀의 정보를 담기위한 구조체.
@@ -44,6 +118,7 @@ struct PS_IN // 픽셀의 정보를 담기위한 구조체.
 struct PS_OUT
 {
 	vector	vColor : COLOR0;
+	vector	vColor2 : COLOR1;
 };
 
 PS_OUT PS_MAIN(PS_IN In)
@@ -55,7 +130,29 @@ PS_OUT PS_MAIN(PS_IN In)
 	vector		vSpecular = tex2D(SpecularSampler, In.vTexUV);
 
 	Out.vColor = vDiffuse * saturate(vShade) + vSpecular;
+	Out.vColor2 = vector(0.9f, 0.9f, 0.9f, 1);
+	return Out;
+}
 
+float4 PS_MAIN_LAST(float2 vTexUV : TEXCOORD) : COLOR
+{
+	float4			Out = (float4)0;
+
+	vector		vColor1 = tex2D(BloomSampler, vTexUV);
+
+	vColor1 = pow(vColor1, 32);
+	float4	vColor2 = -0.84;
+
+	for (int iIndex = 0; iIndex < 13; ++iIndex)
+	{
+		vColor2 += tex2D(BloomSampler, vTexUV + (PixelKernelH[iIndex] * rcpres)) * BlurWeights[iIndex];
+		vColor2 += tex2D(BloomSampler, vTexUV + (PixelKernelV[iIndex] * rcpres)) * BlurWeights[iIndex];
+	}
+	//vColor2 *= 0.48f;
+
+	vector		vColor3 = tex2D(ColorSampler, vTexUV);
+
+	Out = vColor1 + vColor2 + vColor3;
 	return Out;
 }
 
@@ -71,4 +168,10 @@ technique Default_Device
 		VertexShader = NULL;
 		PixelShader = compile ps_3_0 PS_MAIN();
 	}	
+
+	pass Last_Rendering
+	{
+		VertexShader = NULL;
+		PixelShader = compile ps_3_0 PS_MAIN_LAST();
+	}
 }

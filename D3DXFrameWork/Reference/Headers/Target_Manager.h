@@ -18,6 +18,7 @@ public:
 	HRESULT Begin_MRT(const _tchar* pMRTTag);
 	HRESULT End_MRT(const _tchar* pMRTTag);
 	HRESULT SetUp_OnShader(LPD3DXEFFECT pEffect, const char* pConstantName, const _tchar* pTargetTag);
+	CTarget* Find_Target(const _tchar* pTargetTag);
 #ifdef _DEBUG
 	HRESULT Ready_DebugBuffer(const _tchar* pTargetTag, const _float& fStartX, const _float& fStartY, const _float& fSizeX, const _float& fSizeY);
 	void Render_DebugBuffer(const _tchar* pMRTTag);
@@ -29,7 +30,6 @@ private:
 	map<const _tchar*, list<CTarget*>>			m_mapMRT;
 	typedef map<const _tchar*, list<CTarget*>>	MAPMRT;
 private:
-	CTarget* Find_Target(const _tchar* pTargetTag);
 	list<CTarget*>* Find_MRT(const _tchar* pMRTTag);
 protected:
 	virtual void Free();
