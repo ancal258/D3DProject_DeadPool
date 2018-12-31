@@ -181,6 +181,12 @@ void CRenderer::Render_Renderer()
 		m_pTarget_Manager->Render_DebugBuffer(L"MRT_LightAcc");
 		m_pTarget_Manager->Render_DebugBuffer(L"MRT_Bloom");
 	}
+	if (GetKeyState(VK_NUMPAD2) & 0x8000)
+	{
+		m_isOffBloom = true;
+	}
+	else
+		m_isOffBloom = false;
 }
 
 void CRenderer::Render_Priority()
@@ -326,7 +332,7 @@ void CRenderer::Render_Blend()
 		return;
 
 	pEffect->AddRef();
-	if (true == m_isTrigger)
+	if (true == m_isTrigger && false == m_isOffBloom)
 	{
 		m_pTarget_Manager->Begin_MRT(L"MRT_Bloom");
 		m_pTarget_Manager->SetUp_OnShader(pEffect, "g_DiffuseTexture", L"Target_Diffuse");
@@ -349,6 +355,7 @@ void CRenderer::Render_Blend()
 
 		m_pTarget_Manager->SetUp_OnShader(pEffect, "g_BloomTexture", L"Target_Bloom");
 		m_pTarget_Manager->SetUp_OnShader(pEffect, "g_ColorTexture", L"Target_Color");
+		pEffect->SetFloat("g_rcPresMul", m_fOffsetBloom);
 		pEffect->CommitChanges();
 		pEffect->BeginPass(1);
 

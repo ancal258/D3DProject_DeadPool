@@ -4,6 +4,8 @@
 #include "Scene_Loading.h"
 #include "Management.h"
 #include "Loading.h"
+#include "Object_Manager.h"
+#include "FadeOutUI.h"
 
 _USING(Client)
 
@@ -27,6 +29,18 @@ _int CScene_Stage::Update_Scene(const _float & fTimeDelta)
 		return -1;
 
 	if (pInput_Device->Get_DIKeyState(DIK_L) & 0x80)
+	{
+		m_isButton = true;
+		CFadeOutUI* pFadeOut = (CFadeOutUI*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_UI_FadeOut", 0);
+		pFadeOut->Set_EndStage();
+	}
+	if (true == m_isButton)
+	{
+		CFadeOutUI* pFadeOut = (CFadeOutUI*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_UI_FadeOut", 0);
+		if (true == pFadeOut->Get_EndFadeOut())
+			m_isNext = true;
+	}
+	if (true == m_isNext)
 	{
 		CScene*		pNewScene = CScene_Loading::Create(Get_Graphic_Device(), SCENE_FIELD);
 		if (nullptr == pNewScene)

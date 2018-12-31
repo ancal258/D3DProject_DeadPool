@@ -21,6 +21,8 @@ private: // Frame
 	_float						m_fTimeAcc = 0.f;
 	_tchar						m_szFPS[128] = L"";
 	CLoading*					m_pLoading = nullptr;
+	_bool						m_isNext = false;
+	_bool						m_isButton = false;
 
 public:
 	static CScene_Stage* Create(LPDIRECT3DDEVICE9 pGraphic_Device);

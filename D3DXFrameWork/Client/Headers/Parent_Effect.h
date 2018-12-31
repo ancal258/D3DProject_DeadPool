@@ -58,6 +58,7 @@ private:
 	_bool				m_isSettingPos = false;
 	_bool				m_isRandomPos = false;
 	_float				m_fLiveTime = 0.f;
+	_bool				m_isOneTimes = false;
 	list<CGameObject*>  m_EffectList;
 	const _tchar*		m_pProtoTag = nullptr;
 

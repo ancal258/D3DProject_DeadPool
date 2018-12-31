@@ -51,17 +51,22 @@
 #include "Effect_CloudDark.h"
 #include "Effect_CloudBright.h"
 #include "Effect_Explosion.h"
+#include "Effect_BloodExplosion.h"
+#include "Effect_BloodSplat.h"
+#include "Effect_BloodCloud.h"
 
 // UI
 #include "UI_CrossHair.h"
 #include "UI_HPBar.h"
 #include "UI_HpFill.h"
+#include "UI_DamageFont.h"
 #include "TalkBox.h"
 #include "StaticUI.h"
 #include "StaticBackUI.h"
 #include "ConcentratedLine.h"
 #include "WhiteBack.h"
 #include "BloodFace.h"
+#include "FadeOutUI.h"
 /*
 헬기,  스테이지2 네비메쉬 설치, 미니건움직임,카메라,
 스테이지3 일부 맵 설치 ,대화 박스(글자 수에 따라 자동으로 스케일) ,폰트,
@@ -253,21 +258,10 @@ HRESULT CLoading::Loading_Stage_FIELD()
 	if (FAILED(Ready_Static_Layer_UI()))
 		return E_FAIL;
 
-
-	CGameObject* pItem = nullptr;
-
-	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Item_DPPoint", SCENE_STAGE, L"Layer_Item", &pItem)))
+	if (FAILED(Load_Trigger_Cube(L"../Bin/DataFiles/Trigger_04.dat")))
 		return E_FAIL;
-	((CItem_DPPoint*)pItem)->Set_StateInfo(&_vec3(10, 0.3f, 5));
 
 
-	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Item_Bullet", SCENE_STAGE, L"Layer_Item", &pItem)))
-		return E_FAIL;
-	((CItem_DPPoint*)pItem)->Set_StateInfo(&_vec3(15, 0.3f, 5));
-
-	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Item_Taco", SCENE_STAGE, L"Layer_Item", &pItem)))
-		return E_FAIL;
-	((CItem_DPPoint*)pItem)->Set_StateInfo(&_vec3(15, 0.3f, 10));
 
 	CGameObject* pGameObject = nullptr;
 	CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_MissionCube", SCENE_STAGE, L"Layer_Mission", &pGameObject);
@@ -795,7 +789,12 @@ HRESULT CLoading::Ready_Effect()
 		return E_FAIL;
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_BrightCloud", CTexture::Create(m_pGraphic_Device, CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/Effect/CloudBright/4x4_Smoke_Clouds_TXT_%d.tga", 16))))
 		return E_FAIL;
-
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_BloodExplosion", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/Effect/Blood_Explode/Blood_Explode_%d.tga", 16))))
+		return E_FAIL;
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_BloodSplat", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/Effect/Blood_Splat/BloodSplat_%d.tga", 16))))
+		return E_FAIL;
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_BloodCloud", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, L"../Bin/Resources/Textures/Effect/CloudBlood/4x4_Smoke_Clouds_TXT_%d.tga", 16))))
+		return E_FAIL;
 	/*000000000000000000000000*/
 	/* Effect CloudDark */
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_CloudDark", CEffect_CloudDark::Create(Get_Graphic_Device()))))
@@ -803,6 +802,12 @@ HRESULT CLoading::Ready_Effect()
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_CloudBright", CEffect_CloudBright::Create(Get_Graphic_Device()))))
 		return E_FAIL;
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_CloudExplosion", CEffect_Explosion::Create(Get_Graphic_Device()))))
+		return E_FAIL;
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_BloodExplosion", CEffect_BloodExplosion::Create(Get_Graphic_Device()))))
+		return E_FAIL;
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_BloodSplat", CEffect_BloodSplat::Create(Get_Graphic_Device()))))
+		return E_FAIL;
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_BloodCloud", CEffect_BloodCloud::Create(Get_Graphic_Device()))))
 		return E_FAIL;
 	/*------------------*/
 
@@ -816,6 +821,12 @@ HRESULT CLoading::Ready_Effect()
 		return E_FAIL;
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Parent_Explosion", CParent_Effect::Create(Get_Graphic_Device(), L"Prototype_CloudExplosion"))))
 		return E_FAIL;
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Parent_BloodExplosion", CParent_Effect::Create(Get_Graphic_Device(), L"Prototype_BloodExplosion"))))
+		return E_FAIL;
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Parent_BloodSplat", CParent_Effect::Create(Get_Graphic_Device(), L"Prototype_BloodSplat"))))
+		return E_FAIL;
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Parent_BloodCloud", CParent_Effect::Create(Get_Graphic_Device(), L"Prototype_BloodCloud"))))
+		return E_FAIL;
 
 
 
@@ -827,10 +838,36 @@ HRESULT CLoading::Ready_Effect()
 HRESULT CLoading::Layer_Effect_FIELD()
 {
 
-	//CGameObject* pEffect;
-	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Parent_CloudBright", SCENE_STAGE, L"Layer_Effect", &pEffect)))
-	//	return E_FAIL;
-	//((CParent_Effect*)pEffect)->Set_EffectInfo(0, 0, 0.01f, 7, 0, &_vec3(3, 3, 3), &_vec3(36.66f, 0, 3.69f), &_vec3(1, 0, 1), &_vec3(0, 1, 0), false, true, 1, 7, 0);
+	CGameObject* pEffect;
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Parent_CloudBright", SCENE_STAGE, L"Layer_Effect", &pEffect)))
+		return E_FAIL;
+	((CParent_Effect*)pEffect)->Set_EffectInfo(0, 0, 0.01f, 7, 0, &_vec3(3, 3, 3), &_vec3(36.66f, 0, 3.69f), &_vec3(1, 0, 1), &_vec3(0, 1, 0), false, true, 1, 7, 0);
+
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Parent_CloudBright", SCENE_STAGE, L"Layer_Effect", &pEffect)))
+		return E_FAIL;
+	((CParent_Effect*)pEffect)->Set_EffectInfo(0, 0, 0.01f, 6, 0, &_vec3(3, 3, 3), &_vec3(10.42f, 0, 37.05f), &_vec3(1, 0, 1), &_vec3(0, 1, 0), false, true, 1, 7, 0);
+
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Parent_CloudBright", SCENE_STAGE, L"Layer_Effect", &pEffect)))
+		return E_FAIL;
+	((CParent_Effect*)pEffect)->Set_EffectInfo(0, 0, 0.01f, 7, 0, &_vec3(3, 3, 3), &_vec3(44.12f, 1, 41.37f), &_vec3(1, 0, 1), &_vec3(0, 1, 0), false, true, 1, 7, 0);
+
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Parent_CloudBright", SCENE_STAGE, L"Layer_Effect", &pEffect)))
+		return E_FAIL;
+	((CParent_Effect*)pEffect)->Set_EffectInfo(0, 0, 0.01f, 7, 0, &_vec3(3, 3, 3), &_vec3(43.75f, 1, 39.36f), &_vec3(1, 0, 1), &_vec3(0, 1, 0), false, true, 1, 7, 0);
+
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Parent_CloudBright", SCENE_STAGE, L"Layer_Effect", &pEffect)))
+		return E_FAIL;
+	((CParent_Effect*)pEffect)->Set_EffectInfo(0, 0, 0.01f, 7, 0, &_vec3(3, 3, 3), &_vec3(72.02f, 1, 14.27f), &_vec3(1, 0, 1), &_vec3(0, 1, 0), false, true, 1, 7, 0);
+
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Parent_CloudBright", SCENE_STAGE, L"Layer_Effect", &pEffect)))
+		return E_FAIL;
+	((CParent_Effect*)pEffect)->Set_EffectInfo(0, 0, 0.01f, 7, 0, &_vec3(3, 3, 3), &_vec3(71.62f, 1, 10.69f), &_vec3(1, 0, 1), &_vec3(0, 1, 0), false, true, 1, 7, 0);
+
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Parent_CloudBright", SCENE_STAGE, L"Layer_Effect", &pEffect)))
+		return E_FAIL;
+	((CParent_Effect*)pEffect)->Set_EffectInfo(0, 0, 0.007f, 4, 0, &_vec3(2, 2, 2), &_vec3(48.96f, 0, 11.26f), &_vec3(1, 0, 1), &_vec3(0, 1, 0), false, true, 1, 5, 0);
+
+
 
 
 	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Parent_Explosion", SCENE_STAGE, L"Layer_Effect", &pEffect)))
@@ -894,10 +931,21 @@ HRESULT CLoading::Ready_Static_Prototype_Component()
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_Effect", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, m_szString, 90))))
 		return E_FAIL;
 
+	// For.Component_Texture_Effect
+	lstrcpy(m_szString, L"../Bin/Resources/Textures/Effect/DamageFont/Num%d.png");
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_DamageFont", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, m_szString, 10))))
+		return E_FAIL;
+
+	// For.Component_Texture_FadeOut
+	lstrcpy(m_szString, L"../Bin/Resources/Textures/Effect/FadeOut/FadeOut.png");
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_FadeOut", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, m_szString))))
+		return E_FAIL;
+
 	// For.Component_Texture_Effect_FireSpears
 	lstrcpy(m_szString, L"../Bin/Resources/Textures/Effect/FireSpears/FireSpears_CLR_%d.tga");
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_Effect_FireSpears", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, m_szString, 4))))
 		return E_FAIL;
+
 
 
 	// For.Component_Texture_UI_CrossHair
@@ -994,7 +1042,6 @@ HRESULT CLoading::Ready_Static_Prototype_UI()
 	// For.Prototype_UI_StaticUI_BulletBack
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_StaticUI_BulletBack", CStaticUI::Create(Get_Graphic_Device(), 12))))
 		return E_FAIL;
-
 	// For.Prototype_UI_StaticBackUI_Think
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_StaticBackUI_FakeError", CStaticBackUI::Create(Get_Graphic_Device(), 0))))
 		return E_FAIL;
@@ -1011,6 +1058,9 @@ HRESULT CLoading::Ready_Static_Prototype_UI()
 		return E_FAIL;
 	// For.Prototype_BloodFace
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_BloodFace", CBloodFace::Create(Get_Graphic_Device()))))
+		return E_FAIL;
+	// For.Prototype_FadeOut
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_FadeOut", CFadeOutUI::Create(Get_Graphic_Device()))))
 		return E_FAIL;
 
 
@@ -1091,6 +1141,10 @@ HRESULT CLoading::Ready_Static_Layer_UI()
 
 	// BloodFace
 	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_BloodFace", SCENE_STAGE, L"Layer_UI_BloodFace", &pUI)))
+		return E_FAIL;
+
+	// FadeOut
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_FadeOut", SCENE_STAGE, L"Layer_UI_FadeOut", &pUI)))
 		return E_FAIL;
 	
 	//// BackUI
@@ -1594,6 +1648,37 @@ HRESULT CLoading::Ready_UI_SceneFIELD()
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_HPBar", CUI_HPBar::Create(Get_Graphic_Device()))))
 		return E_FAIL;
 
+	// For.Prototype_UI_DamageFont
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_DamageFont0", CUI_DamageFont::Create(Get_Graphic_Device(),0))))
+		return E_FAIL;
+	// For.Prototype_UI_DamageFont
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_DamageFont1", CUI_DamageFont::Create(Get_Graphic_Device(), 1))))
+		return E_FAIL;
+	// For.Prototype_UI_DamageFont
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_DamageFont2", CUI_DamageFont::Create(Get_Graphic_Device(), 2))))
+		return E_FAIL;
+	// For.Prototype_UI_DamageFont
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_DamageFont3", CUI_DamageFont::Create(Get_Graphic_Device(), 3))))
+		return E_FAIL;
+	// For.Prototype_UI_DamageFont
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_DamageFont4", CUI_DamageFont::Create(Get_Graphic_Device(), 4))))
+		return E_FAIL;
+	// For.Prototype_UI_DamageFont
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_DamageFont5", CUI_DamageFont::Create(Get_Graphic_Device(), 5))))
+		return E_FAIL;
+	// For.Prototype_UI_DamageFont
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_DamageFont6", CUI_DamageFont::Create(Get_Graphic_Device(), 6))))
+		return E_FAIL;
+	// For.Prototype_UI_DamageFont
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_DamageFont7", CUI_DamageFont::Create(Get_Graphic_Device(), 7))))
+		return E_FAIL;
+	// For.Prototype_UI_DamageFont
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_DamageFont8", CUI_DamageFont::Create(Get_Graphic_Device(), 8))))
+		return E_FAIL;
+	// For.Prototype_UI_DamageFont
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_UI_DamageFont9", CUI_DamageFont::Create(Get_Graphic_Device(), 9))))
+		return E_FAIL;
+
 
 	//GameObject
 	if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_UI_CrossHair", SCENE_STAGE, L"Layer_UI_CrossHair", nullptr)))
@@ -2014,31 +2099,31 @@ HRESULT CLoading::Ready_Layer_Object()
 	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
 		return E_FAIL;
 	((CBrawler01*)pBrawler)->Set_Position(_vec3(17.59f,0,31.04f));
-	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
-	//	return E_FAIL;
-	//((CBrawler01*)pBrawler)->Set_Position(_vec3(13.25f,0,20.12f));
-	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
-	//	return E_FAIL;
-	//((CBrawler01*)pBrawler)->Set_Position(_vec3(35.51f,0,37.64f));
-	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
-	//	return E_FAIL;
-	//((CBrawler01*)pBrawler)->Set_Position(_vec3(37.92f,0,34.33f));
-	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
-	//	return E_FAIL;
-	//((CBrawler01*)pBrawler)->Set_Position(_vec3(31.38f,0,4.081f));
-	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
-	//	return E_FAIL;
-	//((CBrawler01*)pBrawler)->Set_Position(_vec3(52.77f,0,7.619f));
-	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
-	//	return E_FAIL;
-	//((CBrawler01*)pBrawler)->Set_Position(_vec3(57.11f,0,9.349f));
-	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
-	//	return E_FAIL;
-	//((CBrawler01*)pBrawler)->Set_Position(_vec3(58.68f, 0, 28.21f));
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
+		return E_FAIL;
+	((CBrawler01*)pBrawler)->Set_Position(_vec3(13.25f,0,20.12f));
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
+		return E_FAIL;
+	((CBrawler01*)pBrawler)->Set_Position(_vec3(35.51f,0,37.64f));
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
+		return E_FAIL;
+	((CBrawler01*)pBrawler)->Set_Position(_vec3(37.92f,0,34.33f));
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
+		return E_FAIL;
+	((CBrawler01*)pBrawler)->Set_Position(_vec3(31.38f,0,4.081f));
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
+		return E_FAIL;
+	((CBrawler01*)pBrawler)->Set_Position(_vec3(52.77f,0,7.619f));
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
+		return E_FAIL;
+	((CBrawler01*)pBrawler)->Set_Position(_vec3(57.11f,0,9.349f));
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
+		return E_FAIL;
+	((CBrawler01*)pBrawler)->Set_Position(_vec3(58.68f, 0, 28.21f));
 
-	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
-	//	return E_FAIL;
-	//((CBrawler01*)pBrawler)->Set_Position(_vec3(200.f, 0, 200.f));
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler01_1", SCENE_STAGE, L"Layer_Brawler01", &pBrawler)))
+		return E_FAIL;
+	((CBrawler01*)pBrawler)->Set_Position(_vec3(200.f, 0, 200.f));
 
 	CGameObject* pGameObject = nullptr;
 	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_AutoWall", SCENE_STAGE, L"Layer_AutoWall", &pGameObject)))
@@ -2065,6 +2150,79 @@ HRESULT CLoading::Ready_Layer_Object()
 	// For.Add_AirPlane
 	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Prop", SCENE_STAGE, L"Layer_Airplane_Field")))
 		return E_FAIL;
+
+
+	CGameObject* pItem = nullptr;
+
+	// For. DP Point
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Item_DPPoint", SCENE_STAGE, L"Layer_Item", &pItem)))
+		return E_FAIL;
+	((CItem_DPPoint*)pItem)->Set_StateInfo(&_vec3(20.89f, 0.3f, 7.364));
+
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Item_DPPoint", SCENE_STAGE, L"Layer_Item", &pItem)))
+		return E_FAIL;
+	((CItem_DPPoint*)pItem)->Set_StateInfo(&_vec3(20.89f, 0.3f, 8.864));
+
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Item_DPPoint", SCENE_STAGE, L"Layer_Item", &pItem)))
+		return E_FAIL;
+	((CItem_DPPoint*)pItem)->Set_StateInfo(&_vec3(20.89f, 0.3f, 10.364));
+
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Item_DPPoint", SCENE_STAGE, L"Layer_Item", &pItem)))
+		return E_FAIL;
+	((CItem_DPPoint*)pItem)->Set_StateInfo(&_vec3(17.26f, 0.3f, 33.9f));
+
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Item_DPPoint", SCENE_STAGE, L"Layer_Item", &pItem)))
+		return E_FAIL;
+	((CItem_DPPoint*)pItem)->Set_StateInfo(&_vec3(17.96f, 0.3f, 33.9f));
+
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Item_DPPoint", SCENE_STAGE, L"Layer_Item", &pItem)))
+		return E_FAIL;
+	((CItem_DPPoint*)pItem)->Set_StateInfo(&_vec3(18.66f, 0.3f, 33.9f));
+
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Item_DPPoint", SCENE_STAGE, L"Layer_Item", &pItem)))
+		return E_FAIL;
+	((CItem_DPPoint*)pItem)->Set_StateInfo(&_vec3(19.36f, 0.3f, 33.9f));
+
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Item_DPPoint", SCENE_STAGE, L"Layer_Item", &pItem)))
+		return E_FAIL;
+	((CItem_DPPoint*)pItem)->Set_StateInfo(&_vec3(36.42f, 0.3f, 34.97f));
+
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Item_DPPoint", SCENE_STAGE, L"Layer_Item", &pItem)))
+		return E_FAIL;
+	((CItem_DPPoint*)pItem)->Set_StateInfo(&_vec3(50.77f, 0.3f, 24.24f));
+
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Item_DPPoint", SCENE_STAGE, L"Layer_Item", &pItem)))
+		return E_FAIL;
+	((CItem_DPPoint*)pItem)->Set_StateInfo(&_vec3(53.26f, 0.3f, 10.22f));
+
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Item_DPPoint", SCENE_STAGE, L"Layer_Item", &pItem)))
+		return E_FAIL;
+	((CItem_DPPoint*)pItem)->Set_StateInfo(&_vec3(66.28f, 0.3f, 15.04f));
+
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Item_DPPoint", SCENE_STAGE, L"Layer_Item", &pItem)))
+		return E_FAIL;
+	((CItem_DPPoint*)pItem)->Set_StateInfo(&_vec3(72.48f, 0.3f, 16.93f));
+
+	//For Bullet
+
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Item_Bullet", SCENE_STAGE, L"Layer_Item", &pItem)))
+		return E_FAIL;
+	((CItem_DPPoint*)pItem)->Set_StateInfo(&_vec3(26.91f, 0.3f, 5.830f));
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Item_Bullet", SCENE_STAGE, L"Layer_Item", &pItem)))
+		return E_FAIL;
+	((CItem_DPPoint*)pItem)->Set_StateInfo(&_vec3(35.14f, 0.3f, 39.74f));
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Item_Bullet", SCENE_STAGE, L"Layer_Item", &pItem)))
+		return E_FAIL;
+	((CItem_DPPoint*)pItem)->Set_StateInfo(&_vec3(72.72f, 0.3f, 6.751f));
+
+	// For HP
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Item_Taco", SCENE_STAGE, L"Layer_Item", &pItem)))
+		return E_FAIL;
+	((CItem_DPPoint*)pItem)->Set_StateInfo(&_vec3(33.27f, 0.3f, 11.47f));
+	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Item_Taco", SCENE_STAGE, L"Layer_Item", &pItem)))
+		return E_FAIL;
+	((CItem_DPPoint*)pItem)->Set_StateInfo(&_vec3(70.44f, 0.3f, 6.699f));
+
 
 
 	//if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_Brawler_TPose", SCENE_STAGE, L"Layer_Brawler_TPose")))

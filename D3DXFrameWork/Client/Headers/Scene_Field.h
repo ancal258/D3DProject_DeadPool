@@ -20,6 +20,8 @@ private: // Frame
 	_ulong						m_dwRenderCnt = 0;
 	_float						m_fTimeAcc = 0.f;
 	_tchar						m_szFPS[128] = L"";
+	_bool						m_isNext = false;
+	_bool						m_isButton = false;
 public:
 	static CScene_Field* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 protected:

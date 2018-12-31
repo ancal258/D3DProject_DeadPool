@@ -234,7 +234,8 @@ void CPlayer::Render_GameObject()
 
 	Safe_Release(pEffect);
 
-	//m_pNavigationCom->Render_Navigation();
+	if(m_pInput_Device->Get_DIKeyState(DIK_NUMPAD0) & 0x80)
+		m_pNavigationCom->Render_Navigation();
 
 	//m_pColliderCom->Render_Collider();
 

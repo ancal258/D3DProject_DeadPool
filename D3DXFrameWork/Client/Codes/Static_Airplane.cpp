@@ -45,7 +45,7 @@ HRESULT CStatic_Airplane::Ready_GameObject()
 	m_pTransformCom->Scaling(_vec3(0.01f, 0.01f, 0.01f));
 	m_pTransformCom->Set_AngleZ(D3DXToRadian(-18));
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(68.1f, 5.5f, 55.18f));
-
+	m_fSpeed = 1.17f;
 	return NOERROR;
 }
 
@@ -62,13 +62,13 @@ _int CStatic_Airplane::Update_GameObject(const _float & fTimeDelta)
 	_vec3	vUp = _vec3(0, 1, 0);
 	_vec3	vPosition = *m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION);
 	// 현재 포지션 * 스피드 * cos(Value) 선형 운동
-	vPosition += vUp * m_fSpeed * cosf(D3DXToRadian(m_fValue));
+	vPosition += vUp * m_fSpeed * cosf(D3DXToRadian(m_fValue)) * fTimeDelta;
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &vPosition);
 
 	_vec3	vFoward = _vec3(1, 0, 0);
 	vPosition = *m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION);
 	// 현재 포지션 * 스피드 * cos(Value) 선형 운동
-	vPosition += vFoward * m_fSpeed * cosf(D3DXToRadian(m_fValue + 90));
+	vPosition += vFoward * m_fSpeed * cosf(D3DXToRadian(m_fValue + 90)) * fTimeDelta;
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &vPosition);
 
 	// 회전 // 추가적인 회전, -2~2

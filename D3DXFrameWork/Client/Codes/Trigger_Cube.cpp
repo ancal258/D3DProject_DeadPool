@@ -80,7 +80,7 @@ _int CTrigger_Cube::Update_GameObject(const _float & fTimeDelta)
 	if (false == m_isCol)
 		return 0;
 
-	if (m_fTimeAcc > 2.f)
+	if (m_fTimeAcc > 2.5f)
 	{
 		// 삽입된 문자열의 갯수보다 작을 경우 2초마다 Talk Box를 생성한다.
 		if (m_vevString.size() - 1 >= m_iBoxNum)
@@ -89,6 +89,7 @@ _int CTrigger_Cube::Update_GameObject(const _float & fTimeDelta)
 			Create_TalkBox(m_vevString[m_iBoxNum]);
 			m_fTimeAcc = 0;
 			++m_iBoxNum;
+			m_isDeadPoolTalk ^= 1;
 		}
 		// 문자열이 모두 소비된 경우 모든 상자를 지운다.
 		else
@@ -154,7 +155,10 @@ void CTrigger_Cube::Render_GameObject()
 		D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
 		D3DXMatrixTranslation(&matTranslate, (g_iBackCX >> 1) - 150, 80, 0.f);
 		matTransform = matScale * matTranslate;
-		CFont_Manager::GetInstance()->Render_Font(L"Font_Number", m_pSubtitle, D3DXCOLOR(1.f, 1.f, 1.f, 1.f), &matTransform);
+		if(false == m_isDeadPoolTalk)
+			CFont_Manager::GetInstance()->Render_Font(L"Font_Number", m_pSubtitle, D3DXCOLOR(1.f, 1.f, 1.f, 1.f), &matTransform);
+		else
+			CFont_Manager::GetInstance()->Render_Font(L"Font_Number", m_pSubtitle, D3DXCOLOR(1.f, 0.5f, 0.f, 1.f), &matTransform);
 	}
 }
 

@@ -1,4 +1,37 @@
-﻿LINK : warning C4727: 타임스탬프가 동일한 d:\github\d3dproject_deadpool\d3dxframework\tool\release\tool.pch PCH가 d:\github\d3dproject_deadpool\d3dxframework\tool\release\eventcube.obj 및 d:\github\d3dproject_deadpool\d3dxframework\tool\release\campoint.obj에 있습니다.  첫 번째 PCH를 사용합니다.
+﻿  CamPoint.cpp
+d:\github\d3dproject_deadpool\d3dxframework\tool\CamPoint.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+CamPoint.cpp(105): warning C4805: '==': 연산에 'bool' 형식과 'BOOL' 형식을 함께 사용하는 것은 안전하지 않습니다.
+  EventCube.cpp
+d:\github\d3dproject_deadpool\d3dxframework\tool\EventCube.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+EventCube.cpp(105): warning C4805: '==': 연산에 'bool' 형식과 'BOOL' 형식을 함께 사용하는 것은 안전하지 않습니다.
+  NavPoint.cpp
+d:\github\d3dproject_deadpool\d3dxframework\tool\NavPoint.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+NavPoint.cpp(110): warning C4805: '==': 연산에 'bool' 형식과 'BOOL' 형식을 함께 사용하는 것은 안전하지 않습니다.
+  Page_Animation.cpp
+Page_Animation.cpp(152): warning C4244: '인수': 'DOUBLE'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+Page_Animation.cpp(156): warning C4244: '인수': 'DOUBLE'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Page_Object.cpp
+Page_Object.cpp(1705): warning C4805: '==': 연산에 'bool' 형식과 'BOOL' 형식을 함께 사용하는 것은 안전하지 않습니다.
+Page_Object.cpp(1718): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+Page_Object.cpp(1732): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+Page_Object.cpp(1757): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+Page_Object.cpp(1771): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+  Page_Terrain.cpp
+  Player.cpp
+  Static_Object.cpp
+  ToolTerrain.cpp
+d:\github\d3dproject_deadpool\d3dxframework\tool\NavPoint.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+ToolTerrain.cpp(314): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+ToolTerrain.cpp(316): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  ToolView.cpp
+d:\github\d3dproject_deadpool\d3dxframework\tool\CamPoint.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+d:\github\d3dproject_deadpool\d3dxframework\tool\EventCube.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+d:\github\d3dproject_deadpool\d3dxframework\tool\TriggerCube.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+d:\github\d3dproject_deadpool\d3dxframework\tool\NavPoint.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+  TriggerCube.cpp
+d:\github\d3dproject_deadpool\d3dxframework\tool\TriggerCube.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+TriggerCube.cpp(112): warning C4805: '==': 연산에 'bool' 형식과 'BOOL' 형식을 함께 사용하는 것은 안전하지 않습니다.
+LINK : warning C4727: 타임스탬프가 동일한 d:\github\d3dproject_deadpool\d3dxframework\tool\release\tool.pch PCH가 d:\github\d3dproject_deadpool\d3dxframework\tool\release\eventcube.obj 및 d:\github\d3dproject_deadpool\d3dxframework\tool\release\campoint.obj에 있습니다.  첫 번째 PCH를 사용합니다.
 LINK : warning C4727: 타임스탬프가 동일한 d:\github\d3dproject_deadpool\d3dxframework\tool\release\tool.pch PCH가 d:\github\d3dproject_deadpool\d3dxframework\tool\release\form.obj 및 d:\github\d3dproject_deadpool\d3dxframework\tool\release\campoint.obj에 있습니다.  첫 번째 PCH를 사용합니다.
 LINK : warning C4727: 타임스탬프가 동일한 d:\github\d3dproject_deadpool\d3dxframework\tool\release\tool.pch PCH가 d:\github\d3dproject_deadpool\d3dxframework\tool\release\mainfrm.obj 및 d:\github\d3dproject_deadpool\d3dxframework\tool\release\campoint.obj에 있습니다.  첫 번째 PCH를 사용합니다.
 LINK : warning C4727: 타임스탬프가 동일한 d:\github\d3dproject_deadpool\d3dxframework\tool\release\tool.pch PCH가 d:\github\d3dproject_deadpool\d3dxframework\tool\release\navpoint.obj 및 d:\github\d3dproject_deadpool\d3dxframework\tool\release\campoint.obj에 있습니다.  첫 번째 PCH를 사용합니다.

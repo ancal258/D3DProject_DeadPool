@@ -3,8 +3,8 @@
 #include "Component_Manager.h"
 #include "Scene_Loading.h"
 #include "Management.h"
-
-
+#include "Object_Manager.h"
+#include "FadeOutUI.h"
 _USING(Client)
 
 CScene_Field::CScene_Field(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -27,6 +27,23 @@ _int CScene_Field::Update_Scene(const _float & fTimeDelta)
 		return -1;
 
 	if (pInput_Device->Get_DIKeyState(DIK_L) & 0x80)
+	{
+
+	}
+
+	if (pInput_Device->Get_DIKeyState(DIK_L) & 0x80)
+	{
+		m_isButton = true;
+		CFadeOutUI* pFadeOut = (CFadeOutUI*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_UI_FadeOut", 0);
+		pFadeOut->Set_EndStage();
+	}
+	if (true == m_isButton)
+	{
+		CFadeOutUI* pFadeOut = (CFadeOutUI*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_UI_FadeOut", 0);
+		if (true == pFadeOut->Get_EndFadeOut())
+			m_isNext = true;
+	}
+	if (true == m_isNext)
 	{
 		CScene*		pNewScene = CScene_Loading::Create(Get_Graphic_Device(), SCENE_AIRPLANE);
 		if (nullptr == pNewScene)

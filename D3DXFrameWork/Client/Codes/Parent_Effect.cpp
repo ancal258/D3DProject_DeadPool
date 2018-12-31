@@ -58,45 +58,51 @@ _int CParent_Effect::Update_GameObject(const _float & fTimeDelta)
 
 	if (m_fTimeAcc >= m_fCreateTime)
 	{
-		CGameObject* pMesh = nullptr;
-		_vec3 vPos;
-		for (size_t i = 0; i < m_iCreateCnt; i++)
+		if (m_isOneTimes == false)
 		{
-			if (true == m_isSettingPos)
-				vPos = _vec3(0,0,0);
-			if (true == m_isRandomPos)
+			CGameObject* pMesh = nullptr;
+			_vec3 vPos;
+			for (size_t i = 0; i < m_iCreateCnt; i++)
 			{
-				_float iPlusMinus[2];
-				iPlusMinus[0] = rand() % 2;
-				iPlusMinus[1] = rand() % 2;
-				if (iPlusMinus[0] == 0)
-					iPlusMinus[0] = 0.5f;
-				else
-					iPlusMinus[0] = -0.5f;
+				if (true == m_isSettingPos)
+					vPos = _vec3(0, 0, 0);
+				if (true == m_isRandomPos)
+				{
+					_float iPlusMinus[2];
+					iPlusMinus[0] = rand() % 2;
+					iPlusMinus[1] = rand() % 2;
+					if (iPlusMinus[0] == 0)
+						iPlusMinus[0] = 0.5f;
+					else
+						iPlusMinus[0] = -0.5f;
 
-				if (iPlusMinus[1] == 0)
-					iPlusMinus[1] = 0.5f;
-				else
-					iPlusMinus[1] = -0.5f;
+					if (iPlusMinus[1] == 0)
+						iPlusMinus[1] = 0.5f;
+					else
+						iPlusMinus[1] = -0.5f;
 
-				vPos = _vec3(((_float)(rand() % 1001) / 1000) * m_vSetPosRange.x, ((_float)(rand() % 1001) / 1000) * m_vSetPosRange.y, ((_float)(rand() % 1001) / 1000) * m_vSetPosRange.z);
-				vPos.x *= iPlusMinus[0];
-				vPos.z *= iPlusMinus[1];
-				//vPos = _vec3(m_vSetScale.x / m_vSetScale.x, m_vSetScale.y / m_vSetScale.y, m_vSetScale.z / m_vSetScale.z);
+					vPos = _vec3(((_float)(rand() % 1001) / 1000) * m_vSetPosRange.x, ((_float)(rand() % 1001) / 1000) * m_vSetPosRange.y, ((_float)(rand() % 1001) / 1000) * m_vSetPosRange.z);
+					vPos.x *= iPlusMinus[0];
+					vPos.z *= iPlusMinus[1];
+					//vPos = _vec3(m_vSetScale.x / m_vSetScale.x, m_vSetScale.y / m_vSetScale.y, m_vSetScale.z / m_vSetScale.z);
+				}
+
+				// 애니메이션 텍스쳐 이펙트
+
+				// 생성 시간마다 계속 생성.
+				if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, m_pProtoTag, SCENE_STAGE, L"Layer_Effect", &pMesh)))
+					return -1;
+				((CEffectC*)pMesh)->Set_EffectInfo(this, m_fFrameSpeed, m_fFrameMax, m_fMoveSpeed, m_fSurviveTime, m_fDegreeRange, &m_vSetScale, &vPos, &m_vDir);
+
+				m_EffectList.push_back(pMesh);
 			}
+			m_fTimeAcc = 0.f;
 
-			// 애니메이션 텍스쳐 이펙트
-
-
-			// 생성 시간마다 계속 생성.
-			if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, m_pProtoTag, SCENE_STAGE, L"Layer_Effect", &pMesh)))
-				return -1;
-			((CEffectC*)pMesh)->Set_EffectInfo(this, m_fFrameSpeed, m_fFrameMax, m_fMoveSpeed, m_fSurviveTime, m_fDegreeRange, &m_vSetScale, &vPos, &m_vDir);
-
-
-			m_EffectList.push_back(pMesh);
+			if (m_fCreateTime == 0)
+			{
+				m_isOneTimes = true;
+			}
 		}
-		m_fTimeAcc = 0.f;
 	}
 	return _int();
 }

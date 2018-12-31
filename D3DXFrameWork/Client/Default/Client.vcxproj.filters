@@ -319,6 +319,24 @@
     <Filter Include="02.GameObject\00.For.Static\04.Trigger\AutoWallCube">
       <UniqueIdentifier>{7b763653-e5c8-4945-8a8e-b5b5e7189e2f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\00.For.Static\03.UI\DynamicUI\FadeOut">
+      <UniqueIdentifier>{e240c8f9-9e30-4d6c-a3ad-f7612d862db1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\98.UI\DamageFont">
+      <UniqueIdentifier>{8f678acd-6253-4a9a-a28c-4bed41491138}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\98.UI\DamageFont\DamageParent">
+      <UniqueIdentifier>{8a9d251e-2599-4f53-9f31-f73257311697}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\03. Effect_BloodExplosion">
+      <UniqueIdentifier>{eb17c169-fc44-4709-a22b-a2d75517d357}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\04. Effect_BloodSplat">
+      <UniqueIdentifier>{fd20294f-d125-4540-86ab-6ed042d6c4e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\05. Effect_BloodCloud">
+      <UniqueIdentifier>{1b0e2a6b-4068-497e-9c23-d782f1a19c73}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -555,6 +573,24 @@
     <ClInclude Include="..\Headers\AutoWall_Cube.h">
       <Filter>02.GameObject\00.For.Static\04.Trigger\AutoWallCube</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\FadeOutUI.h">
+      <Filter>02.GameObject\00.For.Static\03.UI\DynamicUI\FadeOut</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\UI_DamageFont.h">
+      <Filter>02.GameObject\02.For.Stage\98.UI\DamageFont</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\DamageParent.h">
+      <Filter>02.GameObject\02.For.Stage\98.UI\DamageFont\DamageParent</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Effect_BloodExplosion.h">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\03. Effect_BloodExplosion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Effect_BloodSplat.h">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\04. Effect_BloodSplat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Headers\Effect_BloodCloud.h">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\05. Effect_BloodCloud</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -775,6 +811,24 @@
     </ClCompile>
     <ClCompile Include="..\Codes\AutoWall_Cube.cpp">
       <Filter>02.GameObject\00.For.Static\04.Trigger\AutoWallCube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\FadeOutUI.cpp">
+      <Filter>02.GameObject\00.For.Static\03.UI\DynamicUI\FadeOut</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\UI_DamageFont.cpp">
+      <Filter>02.GameObject\02.For.Stage\98.UI\DamageFont</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\DamageParent.cpp">
+      <Filter>02.GameObject\02.For.Stage\98.UI\DamageFont\DamageParent</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Effect_BloodExplosion.cpp">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\03. Effect_BloodExplosion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Effect_BloodSplat.cpp">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\04. Effect_BloodSplat</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Effect_BloodCloud.cpp">
+      <Filter>02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\05. Effect_BloodCloud</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

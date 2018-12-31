@@ -8,7 +8,8 @@
 #include "Camera_Target.h"
 #include "Camera_Minigun.h"
 #include "Player.h"
-
+#include "UI_DamageFont.h"
+#include "Parent_Effect.h"
 _USING(Client)
 
 CBrawler::CBrawler(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -209,7 +210,7 @@ HRESULT CBrawler::Ready_Component()
 	m_pColliderCom_Head = (CCollider*)pComponent_Manager->Clone_Component(SCENE_STAGE, L"Component_Collider_Sphere");
 	if (FAILED(Add_Component(L"Com_Collider_Head", m_pColliderCom_Head)))
 		return E_FAIL;
-	m_pColliderCom_Head->SetUp_Collider(&m_CombinedRootMatrix, &_vec3(20, 20, 20), &_vec3(0.0f, 0.f, 0.f), &_vec3(20.f, 130.f, -20.f));
+	m_pColliderCom_Head->SetUp_Collider(&m_CombinedRootMatrix, &_vec3(35, 35, 35), &_vec3(0.0f, 0.f, 0.f), &_vec3(20.f, 130.f, -20.f));
 	m_pColliderMesh[1] = m_pColliderCom_Head->Get_Mesh();
 
 
@@ -315,8 +316,36 @@ _int CBrawler::Update_Stage_Field(const _float & fTimeDelta)
 			}
 			//if (m_isDamaged == false)
 			//	cout << m_iHP << endl;
-			if(true == m_isDamaged)
+			if (true == m_isDamaged)
+			{
 				m_iHP--;
+
+				CGameObject* pEffect;
+				_vec3 vPos = (_vec3)m_pTransformCom->Get_WorldMatrix()->m[3];
+				vPos.y += 1.f;
+				if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Parent_BloodExplosion", SCENE_STAGE, L"Layer_Effect", &pEffect)))
+					return E_FAIL;
+				((CParent_Effect*)pEffect)->Set_EffectInfo(16, 16, 0, 1.f, 0, &_vec3(3, 3, 3), &vPos, &_vec3(1, 0, 1), &_vec3(0, 0, 0), true, false, 0.f, 1, 1);
+
+				if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Parent_BloodSplat", SCENE_STAGE, L"Layer_Effect", &pEffect)))
+					return E_FAIL;
+				((CParent_Effect*)pEffect)->Set_EffectInfo(0, 0, 0, 1.f, 0, &_vec3(2, 2, 2), &vPos, &_vec3(1, 0, 1), &_vec3(0, 0, 0), false, true, 0.f, 4, 1);
+
+				if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Parent_BloodCloud", SCENE_STAGE, L"Layer_Effect", &pEffect)))
+					return E_FAIL;
+				((CParent_Effect*)pEffect)->Set_EffectInfo(0, 0, 0.007, 1.f, 0, &_vec3(2, 2, 2), &vPos, &_vec3(1, 0, 1), &_vec3(0, 1, 0), false, true, 0.f, 4, 1);
+
+				//CGameObject* pHP_Bar = nullptr;
+				//if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_UI_DamageFont1", SCENE_STAGE, L"Layer_UI_HP", &pHP_Bar)))
+				//	return E_FAIL;
+				//if (nullptr != pHP_Bar)
+				//	dynamic_cast<CUI_DamageFont*>(pHP_Bar)->Set_Position(this, 0);
+				//if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_UI_DamageFont7", SCENE_STAGE, L"Layer_UI_HP", &pHP_Bar)))
+				//	return E_FAIL;
+				//if (nullptr != pHP_Bar)
+				//	dynamic_cast<CUI_DamageFont*>(pHP_Bar)->Set_Position(this, 1);
+
+			}
 		}
 	}
 
@@ -353,6 +382,21 @@ _int CBrawler::LastUpdate_Stage_Field(const _float & fTimeDelta)
 	if (TRUE == m_Hit[0] || TRUE == m_Hit[1])
 	{
 		m_iHP--;
+
+		CGameObject* pEffect;
+		_vec3 vPos = (_vec3)m_pTransformCom->Get_WorldMatrix()->m[3];
+		vPos.y += 1.f;
+		if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Parent_BloodExplosion", SCENE_STAGE, L"Layer_Effect", &pEffect)))
+			return E_FAIL;
+		((CParent_Effect*)pEffect)->Set_EffectInfo(16, 16, 0, 1.f, 0, &_vec3(3, 3, 3), &vPos, &_vec3(1, 0, 1), &_vec3(0, 0, 0), true, false, 0.f, 1, 1);
+
+		if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Parent_BloodSplat", SCENE_STAGE, L"Layer_Effect", &pEffect)))
+			return E_FAIL;
+		((CParent_Effect*)pEffect)->Set_EffectInfo(0, 0, 0, 1.f, 0, &_vec3(2, 2, 2), &vPos, &_vec3(1, 0, 1), &_vec3(0, 0, 0), false, true, 0.f, 4, 1);
+
+		if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Parent_BloodCloud", SCENE_STAGE, L"Layer_Effect", &pEffect)))
+			return E_FAIL;
+		((CParent_Effect*)pEffect)->Set_EffectInfo(0, 0, 0.007, 1.f, 0, &_vec3(2, 2, 2), &vPos, &_vec3(1, 0, 1), &_vec3(0, 1, 0), false, true, 0.f, 4, 1);
 	}
 	m_pTransformCom->Update_Matrix();
 
@@ -399,6 +443,21 @@ _int CBrawler::LastUpdate_Stage_Airplane(const _float & fTimeDelta)
 	if (TRUE == m_Hit[0] || TRUE == m_Hit[1])
 	{
 		m_iHP--;
+
+		CGameObject* pEffect;
+		_vec3 vPos = (_vec3)m_pTransformCom->Get_WorldMatrix()->m[3];
+		vPos.y += 1.f;
+		if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Parent_BloodExplosion", SCENE_STAGE, L"Layer_Effect", &pEffect)))
+			return E_FAIL;
+		((CParent_Effect*)pEffect)->Set_EffectInfo(16, 16, 0, 1.f, 0, &_vec3(3, 3, 3), &vPos, &_vec3(1, 0, 1), &_vec3(0, 0, 0), true, false, 0.f, 1, 1);
+
+		if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Parent_BloodSplat", SCENE_STAGE, L"Layer_Effect", &pEffect)))
+			return E_FAIL;
+		((CParent_Effect*)pEffect)->Set_EffectInfo(0, 0, 0, 1.f, 0, &_vec3(2, 2, 2), &vPos, &_vec3(1, 0, 1), &_vec3(0, 0, 0), false, true, 0.f, 4, 1);
+
+		if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Parent_BloodCloud", SCENE_STAGE, L"Layer_Effect", &pEffect)))
+			return E_FAIL;
+		((CParent_Effect*)pEffect)->Set_EffectInfo(0, 0, 0.007, 1.f, 0, &_vec3(2, 2, 2), &vPos, &_vec3(1, 0, 1), &_vec3(0, 1, 0), false, true, 0.f, 4, 1);
 	}
 
 	m_pTransformCom->Update_Matrix();

@@ -56,7 +56,8 @@ vector			g_vLightDir;
 
 
 float2 rcpres = { 0.001280, 0.000768};
-
+float g_rcPresMul = 1.f;
+//float2 rcpres = { 0.002580, 0.003368};
 float2 PixelKernelH[13] =
 {
 	{ -6, 0 },
@@ -140,7 +141,6 @@ float4 PS_MAIN_LAST(float2 vTexUV : TEXCOORD) : COLOR
 	float4			Out = (float4)0;
 
 	vector		vColor1 = tex2D(BloomSampler, vTexUV);
-
 	vColor1 = pow(vColor1, 32);
 	float4	vColor2 = -0.84;
 
@@ -153,7 +153,7 @@ float4 PS_MAIN_LAST(float2 vTexUV : TEXCOORD) : COLOR
 
 	vector		vColor3 = tex2D(ColorSampler, vTexUV);
 
-	Out = vColor1 + vColor2 + vColor3;
+	Out = (vColor1 + vColor2 + vColor3) * g_rcPresMul;
 	return Out;
 }
 

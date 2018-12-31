@@ -190,6 +190,7 @@
     <ClInclude Include="..\Headers\Camera_Target.h" />
     <ClInclude Include="..\Headers\ConcentratedLine.h" />
     <ClInclude Include="..\Headers\Constant.h" />
+    <ClInclude Include="..\Headers\DamageParent.h" />
     <ClInclude Include="..\Headers\Defines.h" />
     <ClInclude Include="..\Headers\Dog.h" />
     <ClInclude Include="..\Headers\DP_Gun.h" />
@@ -197,6 +198,9 @@
     <ClInclude Include="..\Headers\DP_Sword.h" />
     <ClInclude Include="..\Headers\Effect.h" />
     <ClInclude Include="..\Headers\EffectC.h" />
+    <ClInclude Include="..\Headers\Effect_BloodCloud.h" />
+    <ClInclude Include="..\Headers\Effect_BloodExplosion.h" />
+    <ClInclude Include="..\Headers\Effect_BloodSplat.h" />
     <ClInclude Include="..\Headers\Effect_CloudBright.h" />
     <ClInclude Include="..\Headers\Effect_CloudDark.h" />
     <ClInclude Include="..\Headers\Effect_Explosion.h" />
@@ -208,6 +212,7 @@
     <ClInclude Include="..\Headers\Effect_RectParticle.h" />
     <ClInclude Include="..\Headers\Effect_Trail.h" />
     <ClInclude Include="..\Headers\Event_Cube.h" />
+    <ClInclude Include="..\Headers\FadeOutUI.h" />
     <ClInclude Include="..\Headers\Item.h" />
     <ClInclude Include="..\Headers\Item_Bullet.h" />
     <ClInclude Include="..\Headers\Item_DPPoint.h" />
@@ -238,6 +243,7 @@
     <ClInclude Include="..\Headers\Trigger_BackUI.h" />
     <ClInclude Include="..\Headers\Trigger_Cube.h" />
     <ClInclude Include="..\Headers\UI_CrossHair.h" />
+    <ClInclude Include="..\Headers\UI_DamageFont.h" />
     <ClInclude Include="..\Headers\UI_HPBar.h" />
     <ClInclude Include="..\Headers\UI_HpFill.h" />
     <ClInclude Include="..\Headers\UI_Test.h" />
@@ -268,12 +274,16 @@
     <ClCompile Include="..\Codes\Camera_Minigun.cpp" />
     <ClCompile Include="..\Codes\Camera_Target.cpp" />
     <ClCompile Include="..\Codes\ConcentratedLine.cpp" />
+    <ClCompile Include="..\Codes\DamageParent.cpp" />
     <ClCompile Include="..\Codes\Dog.cpp" />
     <ClCompile Include="..\Codes\DP_Gun.cpp" />
     <ClCompile Include="..\Codes\DP_Phone.cpp" />
     <ClCompile Include="..\Codes\DP_Sword.cpp" />
     <ClCompile Include="..\Codes\Effect.cpp" />
     <ClCompile Include="..\Codes\EffectC.cpp" />
+    <ClCompile Include="..\Codes\Effect_BloodCloud.cpp" />
+    <ClCompile Include="..\Codes\Effect_BloodExplosion.cpp" />
+    <ClCompile Include="..\Codes\Effect_BloodSplat.cpp" />
     <ClCompile Include="..\Codes\Effect_CloudBright.cpp" />
     <ClCompile Include="..\Codes\Effect_CloudDark.cpp" />
     <ClCompile Include="..\Codes\Effect_Explosion.cpp" />
@@ -285,6 +295,7 @@
     <ClCompile Include="..\Codes\Effect_RectParticle.cpp" />
     <ClCompile Include="..\Codes\Effect_Trail.cpp" />
     <ClCompile Include="..\Codes\Event_Cube.cpp" />
+    <ClCompile Include="..\Codes\FadeOutUI.cpp" />
     <ClCompile Include="..\Codes\Item.cpp" />
     <ClCompile Include="..\Codes\Item_Bullet.cpp" />
     <ClCompile Include="..\Codes\Item_DPPoint.cpp" />
@@ -315,6 +326,7 @@
     <ClCompile Include="..\Codes\Trigger_BackUI.cpp" />
     <ClCompile Include="..\Codes\Trigger_Cube.cpp" />
     <ClCompile Include="..\Codes\UI_CrossHair.cpp" />
+    <ClCompile Include="..\Codes\UI_DamageFont.cpp" />
     <ClCompile Include="..\Codes\UI_HPBar.cpp" />
     <ClCompile Include="..\Codes\UI_HpFill.cpp" />
     <ClCompile Include="..\Codes\UI_Test.cpp" />

@@ -4,6 +4,7 @@
 #include "Object_Manager.h"
 #include "Brawler_Knife.h"
 #include "UI_HPBar.h"
+#include "UI_DamageFont.h"
 #include "BloodFace.h"
 #include "Player.h"
 CBrawler01::CBrawler01(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -46,11 +47,7 @@ HRESULT CBrawler01::Ready_GameObject()
 	m_fAtkTime = rand() % 5;
 	
 
-	CGameObject* pHP_Bar = nullptr;
-	if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_UI_HPBar", SCENE_STAGE, L"Layer_UI_HP", &pHP_Bar)))
-		return E_FAIL;
-	if (nullptr != pHP_Bar)
-		dynamic_cast<CUI_HPBar*>(pHP_Bar)->Set_Position(this);
+
 
 	m_iIdleIndex = STATE_IDLE;
 	m_pMeshCom->RegistCallbackFunc(bind(&CBrawler::CallBackFinish, this));
@@ -172,6 +169,7 @@ _int CBrawler01::LastUpdate_Stage_Field(const _float & fTimeDelta)
 		
 		if (m_fDamegedTime > 0.7f)
 			m_isDamaged = false;
+
 		//Set_DeathIndex();
 		//m_iCurrentIndex = m_iDeathIndex;
 	}

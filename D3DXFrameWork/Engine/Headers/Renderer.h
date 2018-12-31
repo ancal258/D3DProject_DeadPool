@@ -42,7 +42,9 @@ private:
 	CTarget*						m_pColor_Target = nullptr;
 private:
 	_bool							m_isTrigger = false;
+	_bool							m_isOffBloom = false;
 	_bool							m_isSecondTrigger = false;
+	_float							m_fOffsetBloom = 1.f;
 private:
 	void Render_Priority();
 	void Render_Shadow();
