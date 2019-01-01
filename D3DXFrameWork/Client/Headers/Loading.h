@@ -77,6 +77,7 @@ private:
 	HRESULT Load_Event_Cube(const _tchar* pFilePath);
 	HRESULT Load_Trigger_CubeAPT();
 	HRESULT Load_Trigger_Cube(const _tchar* pFilePath);
+	HRESULT Ready_Sound();
 private:
 	HRESULT SetUp_CameraMove();
 private:

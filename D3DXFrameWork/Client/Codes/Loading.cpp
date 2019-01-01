@@ -2,6 +2,7 @@
 #include "..\Headers\Loading.h"
 #include "Component_Manager.h"
 #include "Light_Manager.h"
+#include "Sound_Manager.h"
 #include "Management.h"
 #include "Scene_Field.h"
 #include "Camera_Debug.h"
@@ -67,6 +68,7 @@
 #include "WhiteBack.h"
 #include "BloodFace.h"
 #include "FadeOutUI.h"
+
 /*
 헬기,  스테이지2 네비메쉬 설치, 미니건움직임,카메라,
 스테이지3 일부 맵 설치 ,대화 박스(글자 수에 따라 자동으로 스케일) ,폰트,
@@ -116,6 +118,8 @@ HRESULT CLoading::Ready_Loading(SCENEID eSceneID)
 HRESULT CLoading::Loading_Stage_APT()
 {
 	//SetWindowText(g_hWnd, L"Loading...");
+	if (FAILED(Ready_Sound()))
+		return E_FAIL;
 
 	if (FAILED(Ready_LightInfo()))
 		return E_FAIL;
@@ -2456,6 +2460,55 @@ HRESULT CLoading::Load_Trigger_Cube(const _tchar * pFilePath)
 
 
 	CloseHandle(hFile);
+
+	return NOERROR;
+}
+
+HRESULT CLoading::Ready_Sound()
+{
+	//For. Resource_Sound
+	//BackGround - 0번
+	if (FAILED(CSound_Manager::GetInstance()->Add_SoundWaveFile(L"../Bin/Resources/Sound/Stage1_bgm1.wav")))
+		return E_FAIL;
+	//BackGround - 1번
+	if (FAILED(CSound_Manager::GetInstance()->Add_SoundWaveFile(L"../Bin/Resources/Sound/Stage1_bgm2.wav")))
+		return E_FAIL;
+	//BackGround - 2번
+	if (FAILED(CSound_Manager::GetInstance()->Add_SoundWaveFile(L"../Bin/Resources/Sound/Stage2_bgm.wav")))
+		return E_FAIL;
+	//BackGround - 3번
+	if (FAILED(CSound_Manager::GetInstance()->Add_SoundWaveFile(L"../Bin/Resources/Sound/Stage3_bgm.wav")))
+		return E_FAIL;
+	//BackGround - 4번
+	if (FAILED(CSound_Manager::GetInstance()->Add_SoundWaveFile(L"../Bin/Resources/Sound/Left_Attack1.wav")))
+		return E_FAIL;
+	//BackGround - 5번
+	if (FAILED(CSound_Manager::GetInstance()->Add_SoundWaveFile(L"../Bin/Resources/Sound/Left_Attack2.wav")))
+		return E_FAIL;
+	//BackGround - 6번
+	if (FAILED(CSound_Manager::GetInstance()->Add_SoundWaveFile(L"../Bin/Resources/Sound/Left_Attack3.wav")))
+		return E_FAIL;
+	//BackGround - 8번
+	if (FAILED(CSound_Manager::GetInstance()->Add_SoundWaveFile(L"../Bin/Resources/Sound/Right_Attack1.wav")))
+		return E_FAIL;
+	//BackGround - 8번
+	if (FAILED(CSound_Manager::GetInstance()->Add_SoundWaveFile(L"../Bin/Resources/Sound/Right_Attack2.wav")))
+		return E_FAIL;
+	//BackGround - 9번
+	if (FAILED(CSound_Manager::GetInstance()->Add_SoundWaveFile(L"../Bin/Resources/Sound/Right_Attack3.wav")))
+		return E_FAIL;
+	//BackGround - 10번
+	if (FAILED(CSound_Manager::GetInstance()->Add_SoundWaveFile(L"../Bin/Resources/Sound/Fire_Bullet.wav")))
+		return E_FAIL;
+	//BackGround - 11번
+	if (FAILED(CSound_Manager::GetInstance()->Add_SoundWaveFile(L"../Bin/Resources/Sound/Explosion0.wav")))
+		return E_FAIL;
+	//BackGround - 12번
+	if (FAILED(CSound_Manager::GetInstance()->Add_SoundWaveFile(L"../Bin/Resources/Sound/Explosion1.wav")))
+		return E_FAIL;
+	//BackGround - 13번
+	if (FAILED(CSound_Manager::GetInstance()->Add_SoundWaveFile(L"../Bin/Resources/Sound/Explosion2.wav")))
+		return E_FAIL;
 
 	return NOERROR;
 }

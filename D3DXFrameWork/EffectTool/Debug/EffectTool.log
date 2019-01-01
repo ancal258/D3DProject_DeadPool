@@ -1,20 +1,4 @@
-﻿FXC : warning X4717: Effects deprecated for D3DCompiler_47
-  
-  compilation object save succeeded; see D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\EffectTool\Bin\Shader_Collider.cso
-FXC : warning X4717: Effects deprecated for D3DCompiler_47
-  
-  compilation object save succeeded; see D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\EffectTool\Bin\Shader_Effect.cso
-FXC : warning X4717: Effects deprecated for D3DCompiler_47
-  
-  compilation object save succeeded; see D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\EffectTool\Bin\Shader_Mesh.cso
-FXC : warning X4717: Effects deprecated for D3DCompiler_47
-  
-  compilation object save succeeded; see D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\EffectTool\Bin\Shader_Prop.cso
-  EffectT.cpp
-d:\github\d3dproject_deadpool\d3dxframework\effecttool\effectt.cpp(29): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  코드를 생성하고 있습니다...
-  컴파일하고 있습니다...
-  ToolEffect.cpp
+﻿  ToolEffect.cpp
 d:\github\d3dproject_deadpool\d3dxframework\effecttool\tooleffect.cpp(29): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 d:\github\d3dproject_deadpool\d3dxframework\effecttool\tooleffect.cpp(47): warning C4244: '=': 'int'에서 'Engine::_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   ToolBase.cpp
@@ -34,6 +18,11 @@ d:\github\d3dproject_deadpool\d3dxframework\effecttool\effect_rectparticle.cpp(3
   Effect_BloodT.cpp
   Effect_BloodMistT.cpp
   EffectToolView.cpp
+  EffectTool.cpp
+  EffectT.cpp
+d:\github\d3dproject_deadpool\d3dxframework\effecttool\effectt.cpp(29): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  EffectSheet.cpp
+  EffectForm.cpp
   코드를 생성하고 있습니다...
   LINK : .\Bin\EffectTool.exe을(를) 찾을 수 없거나 마지막 증분 링크에 의해 빌드되지 않았습니다. 전체 링크를 수행하고 있습니다.
   EffectTool.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\EffectTool\.\Bin\EffectTool.exe

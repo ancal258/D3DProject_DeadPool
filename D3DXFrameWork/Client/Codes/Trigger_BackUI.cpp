@@ -7,7 +7,7 @@
 #include "Input_Device.h"
 #include "Player.h"
 #include "DP_Phone.h"
-
+#include "Sound_Manager.h"
 CTrigger_BackUI::CTrigger_BackUI(LPDIRECT3DDEVICE9 pGraphic_Device)
 	:CGameObject(pGraphic_Device)
 {
@@ -83,6 +83,7 @@ _int CTrigger_BackUI::Update_GameObject(const _float & fTimeDelta)
 	{
 		m_pBackUI->Set_Lived(false);
 		CLight_Manager::GetInstance()->Delete_Light(0);
+		CSound_Manager::GetInstance()->SoundPlay(1, 1);
 		Set_Lived(false);
 		//m_pRendererCom->Set_Trigger(true);
 	}
@@ -112,6 +113,7 @@ _int CTrigger_BackUI::LastUpdate_GameObject(const _float & fTimeDelta)
 			m_pRendererCom->Set_SecondTrigger(true);
 			Create_BackUI();
 
+			CSound_Manager::GetInstance()->SoundStop(0);
 		}
 	}
 

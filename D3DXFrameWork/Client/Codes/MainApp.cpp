@@ -4,6 +4,7 @@
 #include "Input_Device.h"
 #include "SubtitleManager.h"
 #include "Component_Manager.h"
+#include "Sound_Manager.h"
 #include "Font_Manager.h"
 #include "Scene_Logo.h"
 #include "Scene_Intro.h"
@@ -128,6 +129,9 @@ HRESULT CMainApp::Ready_Default_Setting(CGraphic_Device::WINMODE eMode, const _u
 	//if (FAILED(CFont_Manager::GetInstance()->Add_Font(m_pGraphic_Device, L"Font_NotoBB", FW_THIN, L"Noto Sans CJK KR")))
 	//	return E_FAIL;
 	
+	if (FAILED(CSound_Manager::GetInstance()->Ready_Sound_Manager()))
+		return E_FAIL;
+
 	// For.Management
 	if (nullptr == m_pManagement)
 		return E_FAIL;

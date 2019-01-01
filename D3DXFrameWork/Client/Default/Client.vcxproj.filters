@@ -337,6 +337,9 @@
     <Filter Include="02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\05. Effect_BloodCloud">
       <UniqueIdentifier>{1b0e2a6b-4068-497e-9c23-d782f1a19c73}</UniqueIdentifier>
     </Filter>
+    <Filter Include="96.Sound">
+      <UniqueIdentifier>{be3cad7a-6ea0-4e40-9fb1-ea88be57b3cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -591,6 +594,9 @@
     <ClInclude Include="..\Headers\Effect_BloodCloud.h">
       <Filter>02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\05. Effect_BloodCloud</Filter>
     </ClInclude>
+    <ClInclude Include="..\Headers\Sound_Manager.h">
+      <Filter>96.Sound</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -829,6 +835,9 @@
     </ClCompile>
     <ClCompile Include="..\Codes\Effect_BloodCloud.cpp">
       <Filter>02.GameObject\02.For.Stage\03.Effect\02.Effect_Particle\05. Effect_BloodCloud</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Codes\Sound_Manager.cpp">
+      <Filter>96.Sound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

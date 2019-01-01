@@ -153,7 +153,7 @@ void CTrigger_Cube::Render_GameObject()
 	{
 		_matrix	   matTransform, matScale, matTranslate;
 		D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
-		D3DXMatrixTranslation(&matTranslate, (g_iBackCX >> 1) - 150, 80, 0.f);
+		D3DXMatrixTranslation(&matTranslate, (g_iBackCX >> 1) - 150, 30, 0.f);
 		matTransform = matScale * matTranslate;
 		if(false == m_isDeadPoolTalk)
 			CFont_Manager::GetInstance()->Render_Font(L"Font_Number", m_pSubtitle, D3DXCOLOR(1.f, 1.f, 1.f, 1.f), &matTransform);

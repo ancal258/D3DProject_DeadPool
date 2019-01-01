@@ -5,6 +5,7 @@
 #include "Scene_Stage.h"
 #include "Scene_Field.h"
 #include "Scene_AirPlane.h"
+#include "Sound_Manager.h"
 #include "Management.h"
 #include "Loading.h"
 #include "Font_Manager.h"
@@ -116,6 +117,9 @@ _int CScene_Loading::Update_Scene(const _float & fTimeDelta)
 				return -1;
 			if (FAILED(CManagement::GetInstance()->SetUp_CurrentScene(pNewScene)))
 				return -1;
+
+			CSound_Manager::GetInstance()->SoundPlay(0, 0); // 앞 : 사운드 순서 , 뒤 : 0 1번 재생, 1 무한 재생
+
 		}
 
 		if (SCENE_FIELD == m_iSceneNum)
@@ -125,6 +129,8 @@ _int CScene_Loading::Update_Scene(const _float & fTimeDelta)
 				return -1;
 			if (FAILED(CManagement::GetInstance()->SetUp_CurrentScene(pNewScene)))
 				return -1;
+			CSound_Manager::GetInstance()->SoundStop(1);
+			CSound_Manager::GetInstance()->SoundPlay(2,1);
 		}
 
 		if (SCENE_AIRPLANE == m_iSceneNum)
@@ -134,6 +140,8 @@ _int CScene_Loading::Update_Scene(const _float & fTimeDelta)
 				return -1;
 			if (FAILED(CManagement::GetInstance()->SetUp_CurrentScene(pNewScene)))
 				return -1;
+			CSound_Manager::GetInstance()->SoundStop(2);
+			CSound_Manager::GetInstance()->SoundPlay(3, 1);
 		}
 
 

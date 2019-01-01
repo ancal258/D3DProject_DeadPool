@@ -2,6 +2,7 @@
 #include "..\Headers\Scene_Stage.h"
 #include "Component_Manager.h"
 #include "Scene_Loading.h"
+#include "Sound_Manager.h"
 #include "Management.h"
 #include "Loading.h"
 #include "Object_Manager.h"

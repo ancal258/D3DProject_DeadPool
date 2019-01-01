@@ -3,6 +3,7 @@
 #include "Component_Manager.h"
 #include "Input_Device.h"
 #include "Object_Manager.h"
+#include "Sound_Manager.h"
 #include "Player.h"
 #include "MissionCube.h"
 #include "DP_Phone.h"
@@ -207,6 +208,8 @@ void CAnimator::Update_Animation(const _float & fTimeDelta)
 
 void CAnimator::Update_Animation_FIELD(const _float & fTimeDelta)
 {
+
+
 	m_iState = m_iLastState;
 	if (m_pInput_Device->Get_DIKeyState(DIK_Q) & 0x8000)
 	{
@@ -217,6 +220,13 @@ void CAnimator::Update_Animation_FIELD(const _float & fTimeDelta)
 			m_isKeyDown[Q] = true;
 			_uint iAdd = CheckSwordLight();
 			Input_Push_Back(SWORLD_LIGHT_01 + iAdd);
+
+			if (*m_ReservationList.begin() == SWORLD_LIGHT_01)
+				CSound_Manager::GetInstance()->SoundPlay(4, 0);
+			if (*m_ReservationList.begin() == SWORLD_LIGHT_02)
+				CSound_Manager::GetInstance()->SoundPlay(5, 0);
+			if (*m_ReservationList.begin() == SWORLD_LIGHT_03)
+				CSound_Manager::GetInstance()->SoundPlay(6, 0);
 		}
 	}
 	else
@@ -231,6 +241,13 @@ void CAnimator::Update_Animation_FIELD(const _float & fTimeDelta)
 			m_isKeyDown[E] = true;
 			_uint iAdd = CheckSwordHeavy();
 			Input_Push_Back(SWORLD_HEAVY_01 + iAdd);
+
+			if (*m_ReservationList.begin() == SWORLD_HEAVY_01)
+				CSound_Manager::GetInstance()->SoundPlay(7, 0);
+			if (*m_ReservationList.begin() == SWORLD_HEAVY_02)
+				CSound_Manager::GetInstance()->SoundPlay(8, 0);
+			if (*m_ReservationList.begin() == SWORLD_HEAVY_03)
+				CSound_Manager::GetInstance()->SoundPlay(9, 0);
 		}
 	}
 	else
@@ -351,6 +368,7 @@ void CAnimator::Update_Animation_FIELD(const _float & fTimeDelta)
 		{
 			m_isKeyDown[LBUTTON] = true;
 			m_pPlayer->Use_Bullet();
+			CSound_Manager::GetInstance()->SoundPlay(10, 0);
 		}
 	}
 	else
@@ -391,15 +409,15 @@ void CAnimator::Update_Animation_FIELD(const _float & fTimeDelta)
 	else
 	{
 		m_isAttackState = true;
-
+		
 		m_pMeshCom->Set_AnimationSet(*m_ReservationList.begin());
+
 	}
 
 	m_pMeshCom->Play_AnimationSet(fTimeDelta);
 
 
 	m_fSlowTime += fTimeDelta;
-	// 집중선 UI 넣으면 더 효과있을듯 ?? 
 	if (m_ReservationList.size() > 0) 
 	{
 		if (*m_ReservationList.begin() == SWORLD_HEAVY_01)

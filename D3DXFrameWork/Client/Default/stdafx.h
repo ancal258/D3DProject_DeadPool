@@ -17,5 +17,15 @@
 #include <memory.h>
 #include <tchar.h>
 
-
 // TODO: 프로그램에 필요한 추가 헤더는 여기에서 참조합니다.
+
+#include <mmsystem.h>
+#include <dsound.h>
+
+#pragma comment (lib, "d3d9.lib")
+#pragma comment (lib, "d3dx9.lib")
+#pragma comment(lib,"dsound.lib")
+#pragma comment(lib,"dxguid.lib")
+#pragma comment(lib,"Winmm.lib")
+
+

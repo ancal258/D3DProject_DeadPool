@@ -5,7 +5,7 @@
 #include "Light_Manager.h"
 #include "Player.h"
 #include "Airplane.h"
-
+#include "Sound_Manager.h"
 #include "Camera_Target.h"
 #include "Camera_Minigun.h"
 #include "Parent_Effect.h"
@@ -167,6 +167,10 @@ _int CStatic_Object::LastUpdate_GameObject(const _float & fTimeDelta)
 					return E_FAIL;
 				((CParent_Effect*)pEffect)->Set_EffectInfo(0, 0, 0.003f, 7, 0, &_vec3(5, 5, 5), &vPos, &_vec3(1, 0, 1), &_vec3(0, 1, 0), false, true, 0.5f, 5, 3);
 				// Æø¹ß »ý¼º
+
+				_uint	iIndex = 11 + rand() % 3;
+
+				CSound_Manager::GetInstance()->SoundPlay(iIndex, 0);
 				Set_Lived(false);
 
 				((CAirplane*)m_pAirplane)->Plus_DestroyPoint();
