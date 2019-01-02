@@ -1,46 +1,10 @@
-﻿  Loading.cpp
-D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Event_Cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
-D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Trigger_Cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
-D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Trigger_BackUI.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
-D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\AutoWall_Cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+﻿  Brawler03.cpp
 D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\MissionCube.h(26): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
-d:\github\d3dproject_deadpool\d3dxframework\client\headers\Item.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
-D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Effect_GunFlash.h(43): warning C4244: '초기화 중': 'float'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-..\Codes\Loading.cpp(378): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(531): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(541): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(593): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(603): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(614): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(684): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(694): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(704): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(714): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(724): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(734): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(744): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(754): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(764): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(774): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(2024): warning C4244: '인수': 'const unsigned int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-..\Codes\Loading.cpp(2135): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(2140): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(2164): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(2168): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(2172): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(2245): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(2250): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(2255): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(2261): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(2267): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(2273): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(2279): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
-..\Codes\Loading.cpp(2445): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-  Static_Object.cpp
+..\Codes\Brawler03.cpp(107): warning C4305: '인수': 'double'에서 'Engine::_float'(으)로 잘립니다.
   코드를 생성하고 있습니다.
-  4 of 2367 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+  1 of 2356 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    183 functions had inline decision re-evaluated but remain unchanged
+    171 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
   Client.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Default\..\Bin\Client.exe
   Client.vcxproj -> ..\Bin\Client.pdb (Full PDB)

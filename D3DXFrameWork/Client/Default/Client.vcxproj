@@ -226,7 +226,6 @@
     <ClInclude Include="..\Headers\Prop.h" />
     <ClInclude Include="..\Headers\Scene_AirPlane.h" />
     <ClInclude Include="..\Headers\Scene_Field.h" />
-    <ClInclude Include="..\Headers\Scene_Intro.h" />
     <ClInclude Include="..\Headers\Scene_Loading.h" />
     <ClInclude Include="..\Headers\Scene_Logo.h" />
     <ClInclude Include="..\Headers\Scene_Stage.h" />
@@ -310,7 +309,6 @@
     <ClCompile Include="..\Codes\Prop.cpp" />
     <ClCompile Include="..\Codes\Scene_AirPlane.cpp" />
     <ClCompile Include="..\Codes\Scene_Field.cpp" />
-    <ClCompile Include="..\Codes\Scene_Intro.cpp" />
     <ClCompile Include="..\Codes\Scene_Loading.cpp" />
     <ClCompile Include="..\Codes\Scene_Logo.cpp" />
     <ClCompile Include="..\Codes\Scene_Stage.cpp" />

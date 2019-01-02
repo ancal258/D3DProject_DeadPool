@@ -31,7 +31,7 @@ void CSubtitle_Manager::Ready_Subtitle()
 	m_vecSubtitle.push_back(L"뭐 아무튼 당장 고쳐놔.");
 	// 비키니걸
 	m_vecSubtitle.push_back(L"도와주세요!!!");
-	m_vecSubtitle.push_back(L"넌 왜 여기 같혀 있는 거야");
+	m_vecSubtitle.push_back(L"넌 왜 여기 갇혀 있는 거야");
 	m_vecSubtitle.push_back(L"모르겠어요... 눈을 뜨니...");
 	m_vecSubtitle.push_back(L"심의에 걸릴까봐 안되겠다. 미안");
 	m_vecSubtitle.push_back(L"... ... 심의?");

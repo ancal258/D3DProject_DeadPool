@@ -7,7 +7,7 @@
 #include "Camera_Minigun.h"
 #include "MissionCube.h"
 #include "Brawler_Solution.h"
-
+#include "Parent_Effect.h"
 _USING(Client)
 
 CBrawler03::CBrawler03(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -91,6 +91,21 @@ _int CBrawler03::LastUpdate_GameObject(const _float & fTimeDelta)
 	{
 		if (true == CInput_Device::GetInstance()->Is_MinDist(m_fDist))
 		{
+			CGameObject* pEffect;
+			_vec3 vPos = (_vec3)m_pTransformCom->Get_WorldMatrix()->m[3];
+			vPos.y += 1.f;
+			if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Parent_BloodExplosion", SCENE_STAGE, L"Layer_Effect", &pEffect)))
+				return E_FAIL;
+			((CParent_Effect*)pEffect)->Set_EffectInfo(16, 16, 0, 1.f, 0, &_vec3(3, 3, 3), &vPos, &_vec3(1, 0, 1), &_vec3(0, 0, 0), true, false, 0.f, 1, 1);
+
+			if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Parent_BloodSplat", SCENE_STAGE, L"Layer_Effect", &pEffect)))
+				return E_FAIL;
+			((CParent_Effect*)pEffect)->Set_EffectInfo(0, 0, 0, 1.f, 0, &_vec3(2, 2, 2), &vPos, &_vec3(1, 0, 1), &_vec3(0, 0, 0), false, true, 0.f, 4, 1);
+
+			if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Parent_BloodCloud", SCENE_STAGE, L"Layer_Effect", &pEffect)))
+				return E_FAIL;
+			((CParent_Effect*)pEffect)->Set_EffectInfo(0, 0, 0.007, 1.f, 0, &_vec3(2, 2, 2), &vPos, &_vec3(1, 0, 1), &_vec3(0, 1, 0), false, true, 0.f, 4, 1);
+
 			// ÇÇ ÀÌÆåÆ®
 			m_pWeapon->Set_Lived(false);
 			Set_Lived(false);

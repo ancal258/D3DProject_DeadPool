@@ -26,11 +26,11 @@ private:
 	CManagement*				m_pManagement = nullptr;
 	LPDIRECT3DDEVICE9			m_pGraphic_Device = nullptr;
 	CRenderer*					m_pRenderer = nullptr;
+	HWND				m_hVideo = 0;
 
 private:
 	CScene*						m_pScene = nullptr;
 	_bool						m_isFinish = false;
-
 	_uint						m_iSceneID = 0;
 private:
 	HRESULT Ready_Default_Setting(CGraphic_Device::WINMODE eMode, const _uint& iBackCX, const _uint& iBackCY);	

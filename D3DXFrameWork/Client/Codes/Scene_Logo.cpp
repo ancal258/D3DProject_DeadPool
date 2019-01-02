@@ -19,6 +19,15 @@ CScene_Logo::CScene_Logo(LPDIRECT3DDEVICE9 pGraphic_Device)
 HRESULT CScene_Logo::Ready_Scene()
 {
 
+	//m_hVideo = MCIWndCreate(g_hWnd, 0, WS_VISIBLE | WS_CHILD | MCIWNDF_NOPLAYBAR, L"../Bin/Resources/Video/Marvel Intro HD.wmv");
+	//if (0 == m_hVideo)
+	//	return E_FAIL;
+
+	//MoveWindow(m_hVideo, 0, 0, g_iBackCX, g_iBackCY, FALSE);
+	//SetWindowPos(m_hVideo, HWND_TOPMOST, 0, 0, g_iBackCX, g_iBackCY, SWP_NOZORDER);
+
+	//MCIWndPlay(m_hVideo);
+
 	if (FAILED(Ready_Logo_Prototype_Component()))
 		return E_FAIL;
 
@@ -27,6 +36,7 @@ HRESULT CScene_Logo::Ready_Scene()
 
 	if (FAILED(Ready_Layer_BackGround(L"Layer_BackGround")))
 		return E_FAIL;
+
 
 
 	return NOERROR;
@@ -39,21 +49,10 @@ _int CScene_Logo::Update_Scene(const _float & fTimeDelta)
 	if (nullptr == pInput_Device)
 		return -1;
 
-	if (GetKeyState('L') & 0x8000)
-	{
-		CScene*		pNewScene = CScene_Loading::Create(Get_Graphic_Device(), SCENE_STAGE);
-		if (nullptr == pNewScene)
-			return -1;
-
-		if (FAILED(CManagement::GetInstance()->SetUp_CurrentScene(pNewScene)))
-			return -1;
-		
-		return 0;
-	}
-
-
 	if (pInput_Device->Get_DIKeyState(DIK_RETURN) & 0x80)
 	{
+		MCIWndClose(m_hVideo);
+
 		CScene*		pNewScene = CScene_Loading::Create(Get_Graphic_Device(),SCENE_STAGE);
 		if (nullptr == pNewScene)
 			return -1;

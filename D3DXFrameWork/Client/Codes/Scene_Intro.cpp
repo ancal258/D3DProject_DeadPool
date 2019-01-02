@@ -17,14 +17,14 @@ CScene_Intro::CScene_Intro(LPDIRECT3DDEVICE9 pGraphic_Device)
 HRESULT CScene_Intro::Ready_Scene()
 {
 
-	m_hVideo = MCIWndCreate(g_hWnd, 0, WS_VISIBLE | WS_CHILD | MCIWNDF_NOPLAYBAR, L"../Bin/Resources/Video/Marvel Intro HD.wmv");
-	if (0 == m_hVideo)
-		return E_FAIL;
+	//m_hVideo = MCIWndCreate(g_hWnd, 0, WS_VISIBLE | WS_CHILD | MCIWNDF_NOPLAYBAR, L"../Bin/Resources/Video/Marvel Intro HD.wmv");
+	//if (0 == m_hVideo)
+	//	return E_FAIL;
 
-	MoveWindow(m_hVideo, 0, 0, g_iBackCX, g_iBackCY, FALSE);
-	SetWindowPos(m_hVideo, HWND_TOPMOST, 0, 0, g_iBackCX, g_iBackCY, SWP_NOZORDER);
+	//MoveWindow(m_hVideo, 0, 0, g_iBackCX, g_iBackCY, FALSE);
+	//SetWindowPos(m_hVideo, HWND_TOPMOST, 0, 0, g_iBackCX, g_iBackCY, SWP_NOZORDER);
 
-	MCIWndPlay(m_hVideo);
+	//MCIWndPlay(m_hVideo);
 
 
 	return NOERROR;

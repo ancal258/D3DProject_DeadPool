@@ -7,7 +7,6 @@
 #include "Sound_Manager.h"
 #include "Font_Manager.h"
 #include "Scene_Logo.h"
-#include "Scene_Intro.h"
 #include "Camera_Debug.h"
 #include "Camera_Target.h"
 #include "Camera_Cinematic.h"
@@ -51,8 +50,6 @@ _int CMainApp::Update_MainApp(const _float & fTimeDelta)
 		return -1;
 
 	CInput_Device::GetInstance()->Inquire_Input_State();	
-	if(nullptr != m_pScene)
-		m_iSceneID = ((CScene_Intro*)m_pScene)->Get_SceneID();
 
 	_float		fTimeSlow = 1.f;
 
@@ -72,21 +69,20 @@ void CMainApp::Render_MainApp()
 	if (nullptr == m_pGraphic_Device ||
 		nullptr == m_pRenderer)
 		return;
-	if (SCENE_INTRO != m_iSceneID)
-	{
-		m_pGraphic_Device->Clear(0, nullptr, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DXCOLOR(0.f, 0.f, 1.f, 1.f), 1.f, 0);
-		m_pGraphic_Device->BeginScene();
 
-		// 진짜 객체들을 출력.
-		m_pRenderer->Render_Renderer();
+	m_pGraphic_Device->Clear(0, nullptr, D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER | D3DCLEAR_STENCIL, D3DXCOLOR(0.f, 0.f, 1.f, 1.f), 1.f, 0);
+	m_pGraphic_Device->BeginScene();
+
+	// 진짜 객체들을 출력.
+	m_pRenderer->Render_Renderer();
 
 
-		// 각씬에서 필요한 디버깅적 요소정도만 출력.
-		m_pManagement->Render_Management();
+	// 각씬에서 필요한 디버깅적 요소정도만 출력.
+	m_pManagement->Render_Management();
 
-		m_pGraphic_Device->EndScene();
-		m_pGraphic_Device->Present(nullptr, nullptr, 0, nullptr);
-	}
+	m_pGraphic_Device->EndScene();
+	m_pGraphic_Device->Present(nullptr, nullptr, 0, nullptr);
+
 
 
 }
@@ -185,8 +181,8 @@ HRESULT CMainApp::Ready_Static_Component()
 
 	Safe_Release(pComponent_Manager);	
 
-	/*m_pGraphic_Device->SetSamplerState(0, D3DSAMP_ADDRESSU, D3DTADDRESS_CLAMP);
-	m_pGraphic_Device->SetSamplerState(0, D3DSAMP_ADDRESSV, D3DTADDRESS_CLAMP);*/
+	//m_pGraphic_Device->SetSamplerState(0, D3DSAMP_ADDRESSU, D3DTADDRESS_CLAMP);
+	//m_pGraphic_Device->SetSamplerState(0, D3DSAMP_ADDRESSV, D3DTADDRESS_CLAMP);
 
 
 	return NOERROR;
@@ -226,9 +222,6 @@ HRESULT CMainApp::Ready_Start_Scene(SCENEID eID)
 	{
 	case SCENE_LOGO:
 		m_pScene = CScene_Logo::Create(m_pGraphic_Device);
-		break;
-	case SCENE_INTRO:
-		m_pScene = CScene_Intro::Create(m_pGraphic_Device);
 		break;
 	}
 

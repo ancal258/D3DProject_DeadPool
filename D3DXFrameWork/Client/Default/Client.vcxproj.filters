@@ -64,9 +64,6 @@
     <Filter Include="01.Scene\99.Loading">
       <UniqueIdentifier>{e6adbf55-65f3-4412-81fe-d3cc9fd29457}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Scene\00.Scene_Intro">
-      <UniqueIdentifier>{6a6ee42b-37bb-4161-b71f-fbe41fafd9e5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01.Scene\01.Scene_Logo">
       <UniqueIdentifier>{a2d9847b-8bf7-463e-9373-e9246864ea2d}</UniqueIdentifier>
     </Filter>
@@ -387,9 +384,6 @@
     <ClInclude Include="..\Headers\Loading.h">
       <Filter>01.Scene\99.Loading</Filter>
     </ClInclude>
-    <ClInclude Include="..\Headers\Scene_Intro.h">
-      <Filter>01.Scene\00.Scene_Intro</Filter>
-    </ClInclude>
     <ClInclude Include="..\Headers\Event_Cube.h">
       <Filter>02.GameObject\00.For.Static\02.Event_Cube</Filter>
     </ClInclude>
@@ -628,9 +622,6 @@
     </ClCompile>
     <ClCompile Include="..\Codes\Loading.cpp">
       <Filter>01.Scene\99.Loading</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Codes\Scene_Intro.cpp">
-      <Filter>01.Scene\00.Scene_Intro</Filter>
     </ClCompile>
     <ClCompile Include="..\Codes\Event_Cube.cpp">
       <Filter>02.GameObject\00.For.Static\02.Event_Cube</Filter>

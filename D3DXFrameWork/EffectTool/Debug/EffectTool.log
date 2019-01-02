@@ -1,29 +1,15 @@
-﻿  ToolEffect.cpp
-d:\github\d3dproject_deadpool\d3dxframework\effecttool\tooleffect.cpp(29): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\github\d3dproject_deadpool\d3dxframework\effecttool\tooleffect.cpp(47): warning C4244: '=': 'int'에서 'Engine::_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  ToolBase.cpp
-  ParentEffect.cpp
-d:\github\d3dproject_deadpool\d3dxframework\effecttool\parenteffect.cpp(60): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-d:\github\d3dproject_deadpool\d3dxframework\effecttool\parenteffect.cpp(67): warning C4244: '=': 'int'에서 'Engine::_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-d:\github\d3dproject_deadpool\d3dxframework\effecttool\parenteffect.cpp(68): warning C4244: '=': 'int'에서 'Engine::_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Effect_TexBloodT.cpp
-  Effect_RectParticle.cpp
-d:\github\d3dproject_deadpool\d3dxframework\effecttool\effect_rectparticle.cpp(30): warning C4244: '=': 'int'에서 'Engine::_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  Effect_Mesh.cpp
-  Effect_GunFlashT.cpp
-  Effect_GunCapT.cpp
-  Effect_ExplosionT.cpp
-  Effect_CloudT.cpp
-  Effect_CloudBrightT.cpp
-  Effect_BloodT.cpp
-  Effect_BloodMistT.cpp
-  EffectToolView.cpp
-  EffectTool.cpp
-  EffectT.cpp
-d:\github\d3dproject_deadpool\d3dxframework\effecttool\effectt.cpp(29): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  EffectSheet.cpp
-  EffectForm.cpp
-  코드를 생성하고 있습니다...
+﻿FXC : warning X4717: Effects deprecated for D3DCompiler_47
+  
+  compilation object save succeeded; see D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\EffectTool\Bin\Shader_Collider.cso
+FXC : warning X4717: Effects deprecated for D3DCompiler_47
+  
+  compilation object save succeeded; see D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\EffectTool\Bin\Shader_Effect.cso
+FXC : warning X4717: Effects deprecated for D3DCompiler_47
+  
+  compilation object save succeeded; see D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\EffectTool\Bin\Shader_Mesh.cso
+FXC : warning X4717: Effects deprecated for D3DCompiler_47
+  
+  compilation object save succeeded; see D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\EffectTool\Bin\Shader_Prop.cso
   LINK : .\Bin\EffectTool.exe을(를) 찾을 수 없거나 마지막 증분 링크에 의해 빌드되지 않았습니다. 전체 링크를 수행하고 있습니다.
   EffectTool.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\EffectTool\.\Bin\EffectTool.exe
   EffectTool.vcxproj -> .\Bin\EffectTool.pdb (Partial PDB)
