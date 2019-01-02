@@ -8,6 +8,7 @@
 #include "MissionCube.h"
 #include "Brawler_Solution.h"
 #include "Parent_Effect.h"
+#include "Sound_Manager.h"
 _USING(Client)
 
 CBrawler03::CBrawler03(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -105,7 +106,7 @@ _int CBrawler03::LastUpdate_GameObject(const _float & fTimeDelta)
 			if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_Parent_BloodCloud", SCENE_STAGE, L"Layer_Effect", &pEffect)))
 				return E_FAIL;
 			((CParent_Effect*)pEffect)->Set_EffectInfo(0, 0, 0.007, 1.f, 0, &_vec3(2, 2, 2), &vPos, &_vec3(1, 0, 1), &_vec3(0, 1, 0), false, true, 0.f, 4, 1);
-
+			CSound_Manager::GetInstance()->SoundPlay(20, 0);
 			// ÇÇ ÀÌÆåÆ®
 			m_pWeapon->Set_Lived(false);
 			Set_Lived(false);

@@ -3,6 +3,7 @@
 #include "Component_Manager.h"
 #include "Light_Manager.h"
 #include "Object_Manager.h"
+#include "Sound_Manager.h"
 #include "Brawler_Manager.h"
 
 #include "Camera_Target.h"
@@ -335,6 +336,7 @@ _int CBrawler::Update_Stage_Field(const _float & fTimeDelta)
 					return E_FAIL;
 				((CParent_Effect*)pEffect)->Set_EffectInfo(0, 0, 0.007, 1.f, 0, &_vec3(2, 2, 2), &vPos, &_vec3(1, 0, 1), &_vec3(0, 1, 0), false, true, 0.f, 4, 1);
 
+				CSound_Manager::GetInstance()->SoundPlay(18, 0);
 				//CGameObject* pHP_Bar = nullptr;
 				//if (FAILED(CObject_Manager::GetInstance()->Add_Object(SCENE_STAGE, L"Prototype_UI_DamageFont1", SCENE_STAGE, L"Layer_UI_HP", &pHP_Bar)))
 				//	return E_FAIL;

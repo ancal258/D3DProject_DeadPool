@@ -315,7 +315,6 @@ _bool CCollider::Collision_Sphere(const CCollider * pTargetCollider)
 void CCollider::Render_Collider()
 {
 #ifdef _DEBUG
-
 	if (nullptr == m_pMesh)
 		return;
 

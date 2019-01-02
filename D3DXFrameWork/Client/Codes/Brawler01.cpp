@@ -2,6 +2,7 @@
 #include "..\Headers\Brawler01.h"
 #include "Component_Manager.h"
 #include "Object_Manager.h"
+#include "Sound_Manager.h"
 #include "Brawler_Knife.h"
 #include "UI_HPBar.h"
 #include "UI_DamageFont.h"
@@ -144,6 +145,7 @@ _int CBrawler01::Update_Stage_Field(const _float & fTimeDelta)
 			if (m_fLength < 0.5f)
 			{
 				((CPlayer*)m_pPlayer[0])->Compute_HP(20);
+				CSound_Manager::GetInstance()->SoundPlay(19, 0);
 				CBloodFace*	pUI = (CBloodFace*)CObject_Manager::GetInstance()->Get_ObjectPointer(SCENE_STAGE, L"Layer_UI_BloodFace", 0);
 				pUI->Set_Alpha();
 				m_isCompute = true;
@@ -164,7 +166,9 @@ _int CBrawler01::LastUpdate_Stage_Field(const _float & fTimeDelta)
 		if (m_fDamegedTime < 0.3f)
 		{
 			_float fDist = fTimeDelta * -5.1f;
-			m_pTransformCom->Set_PlusPosition(m_vPlayerDir, fDist);
+			_vec3 vBack = *m_pTransformCom->Get_StateInfo(CTransform::STATE_LOOK);
+			D3DXVec3Normalize(&vBack, &vBack);
+			m_pTransformCom->Set_PlusPosition(vBack, fDist);
 		}
 		
 		if (m_fDamegedTime > 0.7f)

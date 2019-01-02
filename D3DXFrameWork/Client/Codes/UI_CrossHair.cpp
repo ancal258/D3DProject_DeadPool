@@ -3,7 +3,7 @@
 #include "Component_Manager.h"
 #include "Object_Manager.h"
 #include "Player.h"
-
+#include "Input_Device.h"
 _USING(Client)
 
 CUI_CrossHair::CUI_CrossHair(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -68,8 +68,12 @@ _int CUI_CrossHair::LastUpdate_GameObject(const _float & fTimeDelta)
 	} // 없으면 무조건 에임 ( 비행기 씬 )
 	else
 	{
-		if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_UI, this)))
-			return -1;
+		if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_RETURN))
+			m_isEnter = true;
+
+		if(true == m_isEnter)
+			if (FAILED(m_pRendererCom->Add_Render_Group(CRenderer::RENDER_UI, this)))
+				return -1;
 	}
 
 

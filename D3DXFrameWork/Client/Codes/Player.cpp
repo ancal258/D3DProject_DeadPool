@@ -385,6 +385,16 @@ void CPlayer::Camera_Update(const _float& fTimeDelta)
 			m_pCamera_Cinematic->Set_IsCameraOn(false);
 		}
 
+		if (1 == m_iStageNum)
+		{
+			if (m_pInput_Device->Get_DIKeyState(DIK_RETURN) & 0x8000)
+			{
+				m_Camera_State = CAMERA_TARGET;
+				m_pCamera_Debug->Set_IsCameraOn(false);
+				m_pCamera_Target->Set_IsCameraOn(true);
+				m_pCamera_Cinematic->Set_IsCameraOn(false);
+			}
+		}
 		if (CAMERA_CINEMATIC == m_Camera_State)
 		{
 			if (true == m_pCamera_Cinematic->Get_Finish())

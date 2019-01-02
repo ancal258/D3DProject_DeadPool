@@ -152,13 +152,13 @@ void CTrigger_Cube::Render_GameObject()
 	if (true == m_isCol)
 	{
 		_matrix	   matTransform, matScale, matTranslate;
-		D3DXMatrixScaling(&matScale, 1.f, 1.f, 1.f);
-		D3DXMatrixTranslation(&matTranslate, (g_iBackCX >> 1) - 150, 30, 0.f);
+		D3DXMatrixScaling(&matScale, 1.2f, 1.2f, 1.2f);
+		D3DXMatrixTranslation(&matTranslate, (g_iBackCX >> 1) - 150, 25, 0.f);
 		matTransform = matScale * matTranslate;
 		if(false == m_isDeadPoolTalk)
 			CFont_Manager::GetInstance()->Render_Font(L"Font_Number", m_pSubtitle, D3DXCOLOR(1.f, 1.f, 1.f, 1.f), &matTransform);
 		else
-			CFont_Manager::GetInstance()->Render_Font(L"Font_Number", m_pSubtitle, D3DXCOLOR(1.f, 0.5f, 0.f, 1.f), &matTransform);
+			CFont_Manager::GetInstance()->Render_Font(L"Font_Number", m_pSubtitle, D3DXCOLOR(1.0f, 0.5f, 0.f, 1.f), &matTransform);
 	}
 }
 

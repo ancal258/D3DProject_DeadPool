@@ -31,7 +31,9 @@ private:
 	CBuffer_RcTex*		m_pBufferCom = nullptr;
 	CTexture*			m_pTextureCom = nullptr;
 	CShader*			m_pShaderCom = nullptr;
+
 private:
+	_bool				m_isEnter = false;
 	_float				m_fX, m_fY;
 	_float				m_fSizeX, m_fSizeY;
 	_ulong				m_dwTextureIdx = 0;

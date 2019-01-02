@@ -1,10 +1,86 @@
-﻿  Collider.cpp
-..\Codes\Collider.cpp(367): warning C4244: '인수': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿FXC : warning X4717: Effects deprecated for D3DCompiler_47
+  
+  compilation object save succeeded; see D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Engine\Bin\Shader_Blend.cso
+FXC : warning X4717: Effects deprecated for D3DCompiler_47
+  
+  compilation object save succeeded; see D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Engine\Bin\Shader_Collider.cso
+FXC : warning X4717: Effects deprecated for D3DCompiler_47
+  
+  compilation object save succeeded; see D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Engine\Bin\Shader_LightAcc.cso
+  AnimationCtrl.cpp
+  Base.cpp
+  Buffer_Collider.cpp
+  Buffer_RcCol.cpp
+  Buffer_RcTex.cpp
+  Buffer_Terrain.cpp
+..\Codes\Buffer_Terrain.cpp(175): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+..\Codes\Buffer_Terrain.cpp(177): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+..\Codes\Buffer_Terrain.cpp(200): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+..\Codes\Buffer_Terrain.cpp(202): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  Buffer_TextUI.cpp
+  Buffer_Trail.cpp
+..\Codes\Buffer_Trail.cpp(82): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Buffer_Trail.cpp(85): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Buffer_Trail.cpp(88): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Buffer_Trail.cpp(91): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Buffer_Trail.cpp(94): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Buffer_Trail.cpp(97): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Buffer_Trail.cpp(100): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Buffer_Trail.cpp(103): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Buffer_Trail.cpp(106): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Buffer_Trail.cpp(109): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Buffer_Trail.cpp(212): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Buffer_Trail.cpp(215): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Buffer_Trail.cpp(218): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Buffer_Trail.cpp(221): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Buffer_Trail.cpp(224): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Buffer_Trail.cpp(227): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Buffer_Trail.cpp(230): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Buffer_Trail.cpp(233): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Buffer_Trail.cpp(236): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+..\Codes\Buffer_Trail.cpp(239): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+  Camera.cpp
+  Cell.cpp
+  Collider.cpp
+..\Codes\Collider.cpp(366): warning C4244: '인수': 'float'에서 'UINT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Component.cpp
+  Component_Manager.cpp
+  DXFont.cpp
+  Font_Manager.cpp
+  Frame.cpp
+  Frame_Manager.cpp
+  Frustum.cpp
+  GameObject.cpp
+  Graphic_Device.cpp
+  컴파일하고 있습니다...
+  HierarchyLoader.cpp
+..\Codes\HierarchyLoader.cpp(243): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.10240.0\ucrt\string.h(119): note: 'strcpy' 선언을 참조하십시오.
+  Input_Device.cpp
+  Layer.cpp
+  Light.cpp
+  Light_Manager.cpp
+  Management.cpp
+  Mesh_Dynamic.cpp
+  Mesh_Static.cpp
+  Navigation.cpp
+  Object_Manager.cpp
+  Picking.cpp
+  QuadTree.cpp
+  Renderer.cpp
+  Scene.cpp
+  Shader.cpp
+  Target.cpp
+  Target_Manager.cpp
+  Texture.cpp
+  Timer.cpp
+  Timer_Manager.cpp
+  컴파일하고 있습니다...
+  Transform.cpp
+  VIBuffer.cpp
      ..\Bin\Engine.lib 라이브러리 및 ..\Bin\Engine.exp 개체를 생성하고 있습니다.
   코드를 생성하고 있습니다.
-  0 of 2970 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  All 2970 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   코드를 생성했습니다.
   Engine.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Engine\Default\..\Bin\Engine.dll
   Engine.vcxproj -> ..\Bin\Engine.pdb (Full PDB)

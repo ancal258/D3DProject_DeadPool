@@ -131,7 +131,7 @@ PS_OUT PS_MAIN(PS_IN In)
 	vector		vSpecular = tex2D(SpecularSampler, In.vTexUV);
 
 	Out.vColor = vDiffuse * saturate(vShade) + vSpecular;
-	Out.vColor2 = (Out.vColor * 1.2f) + 0.6f;
+	Out.vColor2 = (Out.vColor * 1.2f) + 0.65f;
 	Out.vColor2.a = 1.f;
 	return Out;
 }

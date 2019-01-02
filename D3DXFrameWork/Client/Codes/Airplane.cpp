@@ -47,7 +47,7 @@ HRESULT CAirplane::Ready_GameObject()
 		return E_FAIL;
 	m_pTransformCom->Scaling(_vec3(0.01f, 0.01f, 0.01f));
 	m_pTransformCom->Set_StateInfo(CTransform::STATE_POSITION, &_vec3(41.64, 5.5f, 46.22));
-	m_fSpeed = 10.f;
+	m_fSpeed = 15.f;
 	m_pRendererCom->Set_Trigger(true);
 	Load_Path(L"../Bin/DataFiles/AirplanePoints.dat");
 	return NOERROR;

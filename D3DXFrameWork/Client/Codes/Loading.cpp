@@ -265,6 +265,9 @@ HRESULT CLoading::Loading_Stage_FIELD()
 	if (FAILED(Load_Trigger_Cube(L"../Bin/DataFiles/Trigger_04.dat")))
 		return E_FAIL;
 
+	lstrcpy(m_szString, L"Event Cube...");
+	if (FAILED(Load_Event_Cube(L"../Bin/DataFiles/EventCube_Field.dat")))
+		return E_FAIL;
 
 
 	CGameObject* pGameObject = nullptr;
@@ -651,7 +654,17 @@ HRESULT CLoading::Ready_LightInfo_FIELD()
 	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
 	LightInfo.Specular = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
 	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.45f, 0.40f, 1.f);
-	LightInfo.Position = _vec3(58.86f, 5.f,50.53f);
+	LightInfo.Position = _vec3(58.86f, 5.f, 50.53f);
+	LightInfo.Range = 7.f;
+	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
+		return E_FAIL;
+
+	// For. Lamp_BIG
+	LightInfo.Type = D3DLIGHT_POINT;
+	LightInfo.Diffuse = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Specular = D3DXCOLOR(1.f, 0.89f, 0.52f, 1.f);
+	LightInfo.Ambient = D3DXCOLOR(0.5f, 0.45f, 0.40f, 1.f);
+	LightInfo.Position = _vec3(75.68f, 5.f, 17.47f);
 	LightInfo.Range = 7.f;
 	if (FAILED(CLight_Manager::GetInstance()->Add_Light(Get_Graphic_Device(), &LightInfo)))
 		return E_FAIL;
@@ -927,6 +940,11 @@ HRESULT CLoading::Ready_Static_Prototype_Component()
 	// For.Component_Texture_Filter
 	lstrcpy(m_szString, L"../Bin/Resources/Textures/Terrain/Filter.bmp");
 	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_Filter", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, m_szString))))
+		return E_FAIL;
+
+	// For.Component_Texture_TalkBar
+	lstrcpy(m_szString, L"../Bin/Resources/Textures/UI/TalkBar.tga");
+	if (FAILED(pComponent_Manager->Add_Component(SCENE_STAGE, L"Component_Texture_TalkBar", CTexture::Create(Get_Graphic_Device(), CTexture::TYPE_GENERAL, m_szString))))
 		return E_FAIL;
 
 
@@ -2017,6 +2035,10 @@ HRESULT CLoading::Ready_Stage_Prototype_GameObject_SceneFIELD()
 	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Item_Taco", CItem_Taco::Create(Get_Graphic_Device()))))
 		return E_FAIL;
 
+	// For.GameObject_Event_Cube
+	if (FAILED(Add_Object_Prototype(SCENE_STAGE, L"Prototype_Event_Cube", CEvent_Cube::Create(Get_Graphic_Device()))))
+		return E_FAIL;
+
 	// For.ConcentratedLine
 	CGameObject* pUI;
 	if (FAILED(Add_Object(SCENE_STAGE, L"Prototype_ConcentratedLine", SCENE_STAGE, L"Layer_Test", &pUI)))
@@ -2520,6 +2542,15 @@ HRESULT CLoading::Ready_Sound()
 		return E_FAIL;
 	//BackGround - 17번
 	if (FAILED(CSound_Manager::GetInstance()->Add_SoundWaveFile(L"../Bin/Resources/Sound/Item3_DPPoint.wav")))
+		return E_FAIL;
+	//BackGround - 18번
+	if (FAILED(CSound_Manager::GetInstance()->Add_SoundWaveFile(L"../Bin/Resources/Sound/Sword_Death1.wav")))
+		return E_FAIL;
+	//BackGround - 19번
+	if (FAILED(CSound_Manager::GetInstance()->Add_SoundWaveFile(L"../Bin/Resources/Sound/Sword_Death2.wav")))
+		return E_FAIL;
+	//BackGround - 20번
+	if (FAILED(CSound_Manager::GetInstance()->Add_SoundWaveFile(L"../Bin/Resources/Sound/Minigun_Death.wav")))
 		return E_FAIL;
 
 	return NOERROR;
