@@ -4,6 +4,7 @@
 #include "Object_Manager.h"
 #include "Input_Device.h"
 #include "Light_Manager.h"
+#include "Sound_Manager.h"
 #include "Player.h"
 
 CItem_Bullet::CItem_Bullet(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -55,6 +56,7 @@ _int CItem_Bullet::LastUpdate_GameObject(const _float & fTimeDelta)
 			return -1;
 
 		((CPlayer*)pPlayer)->Plus_Bullet(rand() % 20 + 5);
+		CSound_Manager::GetInstance()->SoundPlay(15, 0);
 		Set_Lived(false);
 
 		m_pTransformCom->Update_Matrix();

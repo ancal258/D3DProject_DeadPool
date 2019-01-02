@@ -2509,6 +2509,18 @@ HRESULT CLoading::Ready_Sound()
 	//BackGround - 13번
 	if (FAILED(CSound_Manager::GetInstance()->Add_SoundWaveFile(L"../Bin/Resources/Sound/Explosion2.wav")))
 		return E_FAIL;
+	//BackGround - 14번
+	if (FAILED(CSound_Manager::GetInstance()->Add_SoundWaveFile(L"../Bin/Resources/Sound/Fire_Minigun.wav")))
+		return E_FAIL;
+	//BackGround - 15번
+	if (FAILED(CSound_Manager::GetInstance()->Add_SoundWaveFile(L"../Bin/Resources/Sound/Item1_Bullet.wav")))
+		return E_FAIL;
+	//BackGround - 16번
+	if (FAILED(CSound_Manager::GetInstance()->Add_SoundWaveFile(L"../Bin/Resources/Sound/Item2_Taco.wav")))
+		return E_FAIL;
+	//BackGround - 17번
+	if (FAILED(CSound_Manager::GetInstance()->Add_SoundWaveFile(L"../Bin/Resources/Sound/Item3_DPPoint.wav")))
+		return E_FAIL;
 
 	return NOERROR;
 }

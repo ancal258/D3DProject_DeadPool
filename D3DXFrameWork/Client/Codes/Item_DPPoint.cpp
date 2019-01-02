@@ -4,6 +4,7 @@
 #include "Object_Manager.h"
 #include "Input_Device.h"
 #include "Light_Manager.h"
+#include "Sound_Manager.h"
 #include "Player.h"
 
 CItem_DPPoint::CItem_DPPoint(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -55,6 +56,7 @@ _int CItem_DPPoint::LastUpdate_GameObject(const _float & fTimeDelta)
 			return -1;
 
 		((CPlayer*)pPlayer)->Plus_DP_Point((rand() % 100) * 10 + 10);
+		CSound_Manager::GetInstance()->SoundPlay(17, 0);
 		Set_Lived(false);
 
 		m_pTransformCom->Update_Matrix();

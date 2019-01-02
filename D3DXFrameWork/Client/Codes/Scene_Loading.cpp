@@ -129,7 +129,8 @@ _int CScene_Loading::Update_Scene(const _float & fTimeDelta)
 				return -1;
 			if (FAILED(CManagement::GetInstance()->SetUp_CurrentScene(pNewScene)))
 				return -1;
-			CSound_Manager::GetInstance()->SoundStop(1);
+			for (size_t i = 0; i < 2; i++)
+				CSound_Manager::GetInstance()->SoundStop(i);
 			CSound_Manager::GetInstance()->SoundPlay(2,1);
 		}
 
@@ -140,7 +141,9 @@ _int CScene_Loading::Update_Scene(const _float & fTimeDelta)
 				return -1;
 			if (FAILED(CManagement::GetInstance()->SetUp_CurrentScene(pNewScene)))
 				return -1;
-			CSound_Manager::GetInstance()->SoundStop(2);
+			for (size_t i = 0; i < 3; i++)
+				CSound_Manager::GetInstance()->SoundStop(i);
+			
 			CSound_Manager::GetInstance()->SoundPlay(3, 1);
 		}
 

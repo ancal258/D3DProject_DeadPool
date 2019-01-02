@@ -1,3 +1,64 @@
-﻿  Scene_Logo.cpp
+﻿  Client.cpp
+  Trigger_BackUI.cpp
+d:\github\d3dproject_deadpool\d3dxframework\client\headers\trigger_backui.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\trigger_backui.cpp(32): warning C4244: '인수': 'const unsigned int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Scene_Logo.cpp
+  Scene_Loading.cpp
+  Minigun.cpp
+  MainApp.cpp
+  Loading.cpp
+d:\github\d3dproject_deadpool\d3dxframework\client\headers\event_cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+d:\github\d3dproject_deadpool\d3dxframework\client\headers\trigger_cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+d:\github\d3dproject_deadpool\d3dxframework\client\headers\trigger_backui.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+d:\github\d3dproject_deadpool\d3dxframework\client\headers\autowall_cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+d:\github\d3dproject_deadpool\d3dxframework\client\headers\missioncube.h(26): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+d:\github\d3dproject_deadpool\d3dxframework\client\headers\item.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+d:\github\d3dproject_deadpool\d3dxframework\client\headers\effect_gunflash.h(43): warning C4244: '초기화 중': 'float'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(378): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(531): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(541): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(593): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(603): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(614): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(684): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(694): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(704): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(714): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(724): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(734): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(744): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(754): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(764): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(774): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(2024): warning C4244: '인수': 'const unsigned int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(2135): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(2140): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(2164): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(2168): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(2172): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(2245): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(2250): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(2255): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(2261): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(2267): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(2273): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(2279): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\loading.cpp(2445): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+  Item_Taco.cpp
+d:\github\d3dproject_deadpool\d3dxframework\client\headers\item.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\item_taco.cpp(52): warning C4805: '==': 연산에 'bool' 형식과 'BOOL' 형식을 함께 사용하는 것은 안전하지 않습니다.
+  Item_DPPoint.cpp
+d:\github\d3dproject_deadpool\d3dxframework\client\headers\item.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\item_dppoint.cpp(52): warning C4805: '==': 연산에 'bool' 형식과 'BOOL' 형식을 함께 사용하는 것은 안전하지 않습니다.
+  Item_Bullet.cpp
+d:\github\d3dproject_deadpool\d3dxframework\client\headers\item.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\item_bullet.cpp(52): warning C4805: '==': 연산에 'bool' 형식과 'BOOL' 형식을 함께 사용하는 것은 안전하지 않습니다.
+  Effect_MinigunCap.cpp
+  Camera_Minigun.cpp
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\camera_minigun.cpp(67): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\camera_minigun.cpp(68): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Brawler03.cpp
+d:\github\d3dproject_deadpool\d3dxframework\client\headers\missioncube.h(26): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+d:\github\d3dproject_deadpool\d3dxframework\client\codes\brawler03.cpp(107): warning C4305: '인수': 'double'에서 'Engine::_float'(으)로 잘립니다.
   Client.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Default\..\Bin\Client.exe
   Client.vcxproj -> ..\Bin\Client.pdb (Full PDB)

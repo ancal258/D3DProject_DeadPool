@@ -3,6 +3,7 @@
 #include "Component_Manager.h"
 #include "Light_Manager.h"
 #include "Object_Manager.h"
+#include "Sound_Manager.h"
 #include "Airplane.h"
 #include "Input_Device.h"
 _USING(Client)
@@ -117,6 +118,16 @@ _int CMinigun::LastUpdate_GameObject(const _float & fTimeDelta)
 	_vec3 vTest = *m_pTransformCom->Get_StateInfo(CTransform::STATE_POSITION);
 	m_pTransformCom->Update_Matrix();
 
+	m_fTimeAcc += fTimeDelta;
+	if (m_fTimeAcc > 0.1f && m_isSoundOff == false)
+	{
+		CSound_Manager::GetInstance()->SoundPlay(14, 0);
+		m_fTimeAcc = 0.f;
+	}
+	if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_NUMPAD4) & 0x80)
+		m_isSoundOff = true;
+	if (CInput_Device::GetInstance()->Get_DIKeyState(DIK_RETURN) & 0x80)
+		m_isSoundOff = false;
 
 
 	m_pMeshCom->Set_AnimationSet(0);

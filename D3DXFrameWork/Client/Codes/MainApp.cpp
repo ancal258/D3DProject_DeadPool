@@ -41,6 +41,8 @@ HRESULT CMainApp::Ready_MainApp()
 	CSubtitle_Manager::GetInstance()->Ready_Subtitle();
 	CSubtitle_Manager::GetInstance()->Ready_Mission();
 
+	ShowCursor(false);
+
 	return NOERROR;
 }
 

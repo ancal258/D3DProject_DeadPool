@@ -83,7 +83,6 @@ _int CTrigger_BackUI::Update_GameObject(const _float & fTimeDelta)
 	{
 		m_pBackUI->Set_Lived(false);
 		CLight_Manager::GetInstance()->Delete_Light(0);
-		CSound_Manager::GetInstance()->SoundPlay(1, 1);
 		Set_Lived(false);
 		//m_pRendererCom->Set_Trigger(true);
 	}
@@ -106,6 +105,7 @@ _int CTrigger_BackUI::LastUpdate_GameObject(const _float & fTimeDelta)
 	{
 		if (true == m_pColliderCom->Collision_OBB((const CCollider*)pPlayer->Get_ComponentPointer(L"Com_Collider")))
 		{
+
 			// 이벤트 처리.
 			m_isCol = true;
 			m_fTimeAcc = 0.f;

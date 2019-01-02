@@ -38,7 +38,8 @@ private: // For. Component
 	_long				m_dwMouseMove = 0;
 	_long				m_dwMouseAcc[2] = { 0 };
 	_float				m_fTimeDelta = 0.f;
-
+	_float				m_fTimeAcc = 0.f;
+	_bool				m_isSoundOff = true;
 private:
 	_matrix            m_CombinedHeadMatrix;
 	const _matrix*      m_pHeadMatrix = nullptr;

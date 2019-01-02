@@ -3,6 +3,7 @@
 #include "Component_Manager.h"
 #include "Object_Manager.h"
 #include "Light_Manager.h"
+#include "Sound_Manager.h"
 #include "Player.h"
 #include "Effect_Trail.h"
 _USING(Client)
@@ -54,6 +55,11 @@ _int CDP_Phone::LastUpdate_GameObject(const _float & fTimeDelta)
 		return -1;
 	if (m_isActive == false)
 		return 0;
+
+	if(CSound_Manager::GetInstance()->SoundPlaying(1) == false)
+		CSound_Manager::GetInstance()->SoundPlay(1, 1);
+
+
 	m_pTransformCom->Set_ParentMatrix(m_pPlayer->Get_HandMatrix(m_iSide));
 
 	m_pTransformCom->Update_Matrix();
