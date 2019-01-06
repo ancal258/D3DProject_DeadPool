@@ -78,7 +78,7 @@ void CScene_Field::Render_Scene()
 		m_dwRenderCnt = 0;
 		m_fTimeAcc = 0.f;
 	}
-	SetWindowText(g_hWnd, m_szFPS);
+	//SetWindowText(g_hWnd, m_szFPS);
 }
 
 

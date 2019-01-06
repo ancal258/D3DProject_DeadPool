@@ -1,34 +1,34 @@
 ﻿FXC : warning X4717: Effects deprecated for D3DCompiler_47
   
-  compilation object save succeeded; see D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\Shader_Collider.cso
+  compilation object save succeeded; see C:\Users\Administrator\Desktop\D3D 시연회_안종구_최종(v_2)\Client\Bin\Shader_Collider.cso
 FXC : warning X4717: Effects deprecated for D3DCompiler_47
   
-  compilation object save succeeded; see D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\Shader_Effect.cso
+  compilation object save succeeded; see C:\Users\Administrator\Desktop\D3D 시연회_안종구_최종(v_2)\Client\Bin\Shader_Effect.cso
 FXC : warning X4717: Effects deprecated for D3DCompiler_47
   
-  compilation object save succeeded; see D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\Shader_Logo.cso
-D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\ShaderFiles\Shader_Mesh.fx(79,10-65): warning X3206: implicit truncation of vector type
-D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\ShaderFiles\Shader_Mesh.fx(80,10-66): warning X3206: implicit truncation of vector type
-D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\ShaderFiles\Shader_Mesh.fx(81,27-60): warning X3206: 'cross': implicit truncation of vector type
-D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\ShaderFiles\Shader_Mesh.fx(133,10-65): warning X3206: implicit truncation of vector type
-D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\ShaderFiles\Shader_Mesh.fx(134,10-66): warning X3206: implicit truncation of vector type
-D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\ShaderFiles\Shader_Mesh.fx(135,27-60): warning X3206: 'cross': implicit truncation of vector type
-D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\ShaderFiles\Shader_Mesh.fx(239,10-53): warning X3206: implicit truncation of vector type
+  compilation object save succeeded; see C:\Users\Administrator\Desktop\D3D 시연회_안종구_최종(v_2)\Client\Bin\Shader_Logo.cso
+C:\Users\Administrator\Desktop\D3D ??��????��??����(v_2)\Client\Bin\ShaderFiles\Shader_Mesh.fx(79,10-65): warning X3206: implicit truncation of vector type
+C:\Users\Administrator\Desktop\D3D ??��????��??����(v_2)\Client\Bin\ShaderFiles\Shader_Mesh.fx(80,10-66): warning X3206: implicit truncation of vector type
+C:\Users\Administrator\Desktop\D3D ??��????��??����(v_2)\Client\Bin\ShaderFiles\Shader_Mesh.fx(81,27-60): warning X3206: 'cross': implicit truncation of vector type
+C:\Users\Administrator\Desktop\D3D ??��????��??����(v_2)\Client\Bin\ShaderFiles\Shader_Mesh.fx(133,10-65): warning X3206: implicit truncation of vector type
+C:\Users\Administrator\Desktop\D3D ??��????��??����(v_2)\Client\Bin\ShaderFiles\Shader_Mesh.fx(134,10-66): warning X3206: implicit truncation of vector type
+C:\Users\Administrator\Desktop\D3D ??��????��??����(v_2)\Client\Bin\ShaderFiles\Shader_Mesh.fx(135,27-60): warning X3206: 'cross': implicit truncation of vector type
+  compilation object save succeeded; see C:\Users\Administrator\Desktop\D3D 시연회_안종구_최종(v_2)\Client\Bin\Shader_Mesh.cso
+C:\Users\Administrator\Desktop\D3D ??��????��??����(v_2)\Client\Bin\ShaderFiles\Shader_Mesh.fx(239,10-53): warning X3206: implicit truncation of vector type
 FXC : warning X4717: Effects deprecated for D3DCompiler_47
   
-  compilation object save succeeded; see D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\Shader_Mesh.cso
 FXC : warning X4717: Effects deprecated for D3DCompiler_47
   
-  compilation object save succeeded; see D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\Shader_Prop.cso
+  compilation object save succeeded; see C:\Users\Administrator\Desktop\D3D 시연회_안종구_최종(v_2)\Client\Bin\Shader_Prop.cso
 FXC : warning X4717: Effects deprecated for D3DCompiler_47
   
-  compilation object save succeeded; see D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\Shader_Terrain.cso
+  compilation object save succeeded; see C:\Users\Administrator\Desktop\D3D 시연회_안종구_최종(v_2)\Client\Bin\Shader_Terrain.cso
 FXC : warning X4717: Effects deprecated for D3DCompiler_47
   
-  compilation object save succeeded; see D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\Shader_Trail.cso
+  compilation object save succeeded; see C:\Users\Administrator\Desktop\D3D 시연회_안종구_최종(v_2)\Client\Bin\Shader_Trail.cso
 FXC : warning X4717: Effects deprecated for D3DCompiler_47
   
-  compilation object save succeeded; see D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Bin\Shader_UI.cso
+  compilation object save succeeded; see C:\Users\Administrator\Desktop\D3D 시연회_안종구_최종(v_2)\Client\Bin\Shader_UI.cso
   stdafx.cpp
   Airplane.cpp
 ..\Codes\Airplane.cpp(49): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
@@ -36,10 +36,10 @@ FXC : warning X4717: Effects deprecated for D3DCompiler_47
 ..\Codes\Airplane.cpp(276): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 ..\Codes\Airplane.cpp(277): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Animator.cpp
-D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\MissionCube.h(26): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+C:\Users\Administrator\Desktop\D3D 시연회_안종구_최종(v_2)\Client\Headers\MissionCube.h(26): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
 ..\Codes\Animator.cpp(142): warning C4305: '인수': 'double'에서 'const Engine::_float'(으)로 잘립니다.
   AutoWall_Cube.cpp
-D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\AutoWall_Cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+C:\Users\Administrator\Desktop\D3D 시연회_안종구_최종(v_2)\Client\Headers\AutoWall_Cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
   Back_Loading.cpp
   Back_Logo.cpp
   BikiniGirl.cpp
@@ -55,7 +55,7 @@ D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\AutoWall_Cube.h(25): 
   Brawler02.cpp
 ..\Codes\Brawler02.cpp(39): warning C4244: '인수': 'int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Brawler03.cpp
-D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\MissionCube.h(26): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+C:\Users\Administrator\Desktop\D3D 시연회_안종구_최종(v_2)\Client\Headers\MissionCube.h(26): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
 ..\Codes\Brawler03.cpp(108): warning C4305: '인수': 'double'에서 'Engine::_float'(으)로 잘립니다.
   Brawler_ElectricBaton.cpp
   Brawler_Knife.cpp
@@ -81,10 +81,10 @@ D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\MissionCube.h(26): wa
 ..\Codes\ConcentratedLine.cpp(179): warning C4244: '인수': 'const unsigned int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   DamageParent.cpp
   Dog.cpp
-D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\MissionCube.h(26): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+C:\Users\Administrator\Desktop\D3D 시연회_안종구_최종(v_2)\Client\Headers\MissionCube.h(26): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
 ..\Codes\Dog.cpp(59): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
   DP_Gun.cpp
-D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Effect_GunFlash.h(43): warning C4244: '초기화 중': 'float'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\Desktop\D3D 시연회_안종구_최종(v_2)\Client\Headers\Effect_GunFlash.h(43): warning C4244: '초기화 중': 'float'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   DP_Phone.cpp
   DP_Sword.cpp
   Effect.cpp
@@ -101,7 +101,7 @@ D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Effect_GunFlash.h(43)
 ..\Codes\Effect_FireSpears.cpp(47): warning C4305: '인수': 'double'에서 'const Engine::_float'(으)로 잘립니다.
   Effect_GunCap.cpp
   Effect_GunFlash.cpp
-D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Effect_GunFlash.h(43): warning C4244: '초기화 중': 'float'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\Desktop\D3D 시연회_안종구_최종(v_2)\Client\Headers\Effect_GunFlash.h(43): warning C4244: '초기화 중': 'float'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 ..\Codes\Effect_GunFlash.cpp(38): warning C4244: '인수': 'int'에서 'const Engine::_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Effect_Mesh.cpp
   Effect_MinigunCap.cpp
@@ -110,29 +110,29 @@ D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Effect_GunFlash.h(43)
   컴파일하고 있습니다...
   Effect_Trail.cpp
   Event_Cube.cpp
-D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Event_Cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+C:\Users\Administrator\Desktop\D3D 시연회_안종구_최종(v_2)\Client\Headers\Event_Cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
   FadeOutUI.cpp
 ..\Codes\FadeOutUI.cpp(63): warning C4244: '인수': 'const unsigned int'에서 'const Engine::_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 ..\Codes\FadeOutUI.cpp(192): warning C4244: '인수': 'const unsigned int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Item.cpp
-d:\github\d3dproject_deadpool\d3dxframework\client\codes\../Headers/Item.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+c:\users\administrator\desktop\d3d 시연회_안종구_최종(v_2)\client\codes\../Headers/Item.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
   Item_Bullet.cpp
-d:\github\d3dproject_deadpool\d3dxframework\client\headers\Item.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+c:\users\administrator\desktop\d3d 시연회_안종구_최종(v_2)\client\headers\Item.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
 ..\Codes\Item_Bullet.cpp(52): warning C4805: '==': 연산에 'bool' 형식과 'BOOL' 형식을 함께 사용하는 것은 안전하지 않습니다.
   Item_DPPoint.cpp
-d:\github\d3dproject_deadpool\d3dxframework\client\headers\Item.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+c:\users\administrator\desktop\d3d 시연회_안종구_최종(v_2)\client\headers\Item.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
 ..\Codes\Item_DPPoint.cpp(52): warning C4805: '==': 연산에 'bool' 형식과 'BOOL' 형식을 함께 사용하는 것은 안전하지 않습니다.
   Item_Taco.cpp
-d:\github\d3dproject_deadpool\d3dxframework\client\headers\Item.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+c:\users\administrator\desktop\d3d 시연회_안종구_최종(v_2)\client\headers\Item.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
 ..\Codes\Item_Taco.cpp(52): warning C4805: '==': 연산에 'bool' 형식과 'BOOL' 형식을 함께 사용하는 것은 안전하지 않습니다.
   Loading.cpp
-D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Event_Cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
-D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Trigger_Cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
-D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Trigger_BackUI.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
-D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\AutoWall_Cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
-D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\MissionCube.h(26): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
-d:\github\d3dproject_deadpool\d3dxframework\client\headers\Item.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
-D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Effect_GunFlash.h(43): warning C4244: '초기화 중': 'float'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Administrator\Desktop\D3D 시연회_안종구_최종(v_2)\Client\Headers\Event_Cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+C:\Users\Administrator\Desktop\D3D 시연회_안종구_최종(v_2)\Client\Headers\Trigger_Cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+C:\Users\Administrator\Desktop\D3D 시연회_안종구_최종(v_2)\Client\Headers\Trigger_BackUI.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+C:\Users\Administrator\Desktop\D3D 시연회_안종구_최종(v_2)\Client\Headers\AutoWall_Cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+C:\Users\Administrator\Desktop\D3D 시연회_안종구_최종(v_2)\Client\Headers\MissionCube.h(26): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+c:\users\administrator\desktop\d3d 시연회_안종구_최종(v_2)\client\headers\Item.h(22): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+C:\Users\Administrator\Desktop\D3D 시연회_안종구_최종(v_2)\Client\Headers\Effect_GunFlash.h(43): warning C4244: '초기화 중': 'float'에서 'Engine::_uint'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 ..\Codes\Loading.cpp(381): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
 ..\Codes\Loading.cpp(534): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
 ..\Codes\Loading.cpp(544): warning C4305: '인수': 'double'에서 'FLOAT'(으)로 잘립니다.
@@ -166,7 +166,7 @@ D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Effect_GunFlash.h(43)
   MainApp.cpp
   Minigun.cpp
   MissionCube.cpp
-D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\MissionCube.h(26): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+C:\Users\Administrator\Desktop\D3D 시연회_안종구_최종(v_2)\Client\Headers\MissionCube.h(26): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
   Parent_Effect.cpp
 ..\Codes\Parent_Effect.cpp(65): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
 ..\Codes\Parent_Effect.cpp(72): warning C4244: '=': 'int'에서 'Engine::_float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
@@ -200,10 +200,10 @@ D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\MissionCube.h(26): wa
   Terrain.cpp
   Test.cpp
   Trigger_BackUI.cpp
-D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Trigger_BackUI.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+C:\Users\Administrator\Desktop\D3D 시연회_안종구_최종(v_2)\Client\Headers\Trigger_BackUI.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
 ..\Codes\Trigger_BackUI.cpp(32): warning C4244: '인수': 'const unsigned int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Trigger_Cube.cpp
-D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Trigger_Cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
+C:\Users\Administrator\Desktop\D3D 시연회_안종구_최종(v_2)\Client\Headers\Trigger_Cube.h(25): warning C4800: 'BOOL': 'true' 또는 'false'로 bool 값을 강제하고 있습니다(성능 경고).
 ..\Codes\Trigger_Cube.cpp(152): warning C4805: '==': 연산에 'bool' 형식과 'BOOL' 형식을 함께 사용하는 것은 안전하지 않습니다.
   UI_CrossHair.cpp
 ..\Codes\UI_CrossHair.cpp(164): warning C4244: '인수': 'const unsigned int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
@@ -215,7 +215,9 @@ D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Headers\Trigger_Cube.h(25): w
 ..\Codes\UI_Test.cpp(138): warning C4244: '인수': 'const unsigned int'에서 'FLOAT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Client.cpp
   코드를 생성하고 있습니다.
-  All 2357 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  2357 of 2357 functions (100.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
-  Client.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Client\Default\..\Bin\Client.exe
+  Client.vcxproj -> C:\Users\Administrator\Desktop\D3D 시연회_안종구_최종(v_2)\Client\Default\..\Bin\Client.exe
   Client.vcxproj -> ..\Bin\Client.pdb (Full PDB)

@@ -53,7 +53,7 @@ PS_OUT PS_MAIN(PS_IN In)
 	float2 vTexUV = In.vTexUV;
 
 	Out.vColor = tex2D(BaseSampler, vTexUV);
-	Out.vColor.r *= 0.1f;
+	Out.vColor.b *= 0.1f;
 	Out.vColor.g *= 0.1f;
 	Out.vColor.a = 1 - (Out.vColor.a + 0.2f);
 	return Out;

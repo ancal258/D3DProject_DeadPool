@@ -1,12 +1,12 @@
 ﻿FXC : warning X4717: Effects deprecated for D3DCompiler_47
   
-  compilation object save succeeded; see D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Engine\Bin\Shader_Blend.cso
+  compilation object save succeeded; see C:\Users\Administrator\Desktop\D3D 시연회_안종구_최종(v_2)\Engine\Bin\Shader_Blend.cso
 FXC : warning X4717: Effects deprecated for D3DCompiler_47
   
-  compilation object save succeeded; see D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Engine\Bin\Shader_Collider.cso
+  compilation object save succeeded; see C:\Users\Administrator\Desktop\D3D 시연회_안종구_최종(v_2)\Engine\Bin\Shader_Collider.cso
 FXC : warning X4717: Effects deprecated for D3DCompiler_47
   
-  compilation object save succeeded; see D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Engine\Bin\Shader_LightAcc.cso
+  compilation object save succeeded; see C:\Users\Administrator\Desktop\D3D 시연회_안종구_최종(v_2)\Engine\Bin\Shader_LightAcc.cso
   AnimationCtrl.cpp
   Base.cpp
   Buffer_Collider.cpp
@@ -80,7 +80,9 @@ FXC : warning X4717: Effects deprecated for D3DCompiler_47
   VIBuffer.cpp
      ..\Bin\Engine.lib 라이브러리 및 ..\Bin\Engine.exp 개체를 생성하고 있습니다.
   코드를 생성하고 있습니다.
-  All 2970 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  2970 of 2970 functions (100.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   코드를 생성했습니다.
-  Engine.vcxproj -> D:\gitHub\D3DProject_DeadPool\D3DXFrameWork\Engine\Default\..\Bin\Engine.dll
+  Engine.vcxproj -> C:\Users\Administrator\Desktop\D3D 시연회_안종구_최종(v_2)\Engine\Default\..\Bin\Engine.dll
   Engine.vcxproj -> ..\Bin\Engine.pdb (Full PDB)
